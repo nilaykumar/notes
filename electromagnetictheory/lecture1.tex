@@ -1,0 +1,101 @@
+\section{Lecture 1}
+
+\subsection{Radiation from a moving charge}
+
+Given a particle trajectory $\vec{S}(t)$, we wish to examine the (fully relativistic case) of radiation from a moving charge in the radiation zone. Let us define:
+\begin{align*}
+    \vec{\beta(t)}&=\frac{\vec{v}(t)}{c}\\
+    \kappa(t)&=1-\hat{r}\cdot \vec{\beta}(t)\\
+    \nm{Detection time}&=t\\
+    \nm{Retarded time} &= t'=t-\frac{r}{c}+\frac{\hat{r}\cdot\vec{S}(t')}{c}\\
+\end{align*}
+Note that this yields $t'$ as a function of $t, r, \theta, \phi$. Although this can be hard to solve,there is a theorem that for $v/c\leq1$ there is only one solution
+for $t'$. There is then the \textbf{Lienard-Wiechert radiation field}, along with the power emitted/detected:
+\begin{align*}
+    \vec{E}(\vec{x}, t)&=\frac{q}{r c^2}\frac{\hat{r}\times\left[ \left( \hat{r}-\vec{\beta}(t') \right)\times \vec{a}(t') \right]}{\left( 1-\hat{r}\cdot\vec{\beta}(t') \right)^3}\\
+    \frac{dP(t)}{d\Omega}=\frac{d^2\mathcal{E}}{dt d\Omega}&=\frac{\nm{energy detected}}{\nm{(detection time)(solid angle)}}\\
+    \frac{dP'(t')}{d\Omega}=\frac{d^2\mathcal{E}}{dt' d\Omega}&=\frac{\nm{energy emitted}}{\nm{(emission time)(solid angle)}}\\
+    \frac{d^2\mathcal{E}}{dt d\Omega}&=\frac{d^2\mathcal{E}}{dt'd\Omega}\left( \frac{dt'}{dt} \right)
+\end{align*}
+Since t is defined relative to $t'$ as above, we can find that
+\begin{align*}
+    \frac{dt}{dt'}=1-\hat{r}\cdot\frac{\dot{\vec{S}}(t')}{c}=\kappa(t')
+\end{align*}
+Thus, we arrive at the result
+\begin{equation*}
+    \frac{dP'(t')}{d\Omega}=\frac{dP(t)}{d\Omega}\kappa(t')
+\end{equation*}
+Furthermore, we have that
+\begin{align*}
+    \frac{dP(t)}{d\Omega}=r^2(\vec{S}\cdot\hat{r})=\frac{cr^2}{4\pi}\vec{E}\cdot\vec{E}=\frac{q^2}{4\pi c^3}\frac{\big|\hat{r}\times\left[ (\hat{r}-\vec{\beta}(t'))\times\vec{a}(t') \right]\big|^2}{\kappa^6(t')}
+\end{align*}
+Thus we reach our final result that
+\begin{align*}
+    \frac{dP'(t')}{d\Omega}=\frac{q^2}{4\pi c^3}\frac{\big|\hat{r}\times\left[ (\hat{r}-\vec{\beta}(t'))\times\vec{a}(t') \right]\big|^2}{\kappa^5(t')}
+\end{align*}
+
+In the non-relativistic limit, we have
+\begin{align*}
+    \frac{v}{c}&\ll1\\
+    \kappa&\approx 1\\
+    (\hat{r}-\vec{\beta})&=\hat{r}\\
+    \vec{E}(\vec{x}, t)=\frac{q}{rc^2}&\left[ \hat{r}\times\left( \hat{r}\times \vec{a}(t') \right) \right]
+\end{align*}
+where the last equation is evaluated at $t=t'$. We now have:
+\begin{align*}
+    \frac{dP'(t')}{d\Omega}&=\frac{dP(t)}{d\Omega}\\
+    &=\frac{q^2}{4\pi c^3}\big|\hat{r}\times\left( \hat{r} \times \vec{a} \right)\big|\\
+    &=\frac{q^2}{4\pi c^3}\big|\vec{a}\big|^2\sin^2\Theta
+\end{align*}
+i.e. the power emitted is precisely the power detected. We then have that
+\begin{equation*}
+    P(t)=\int \frac{dP(t)}{d\Omega} d\Omega=\frac{2q^2}{3c^2}\big|\vec{a}\big|^2
+\end{equation*}
+which is the \textbf{Larmor formula}.
+
+Let us now do a relativistically correct example. Let the velocity be parallel or antiparallel to the acceleration. Let us choose the velocity to be along the $\hat{z}$ direction and
+thus the acceleration to go as either $\hat{z}$ or $-\hat{z}$. Note that $\vec{\beta}\times\vec{a}=0$ and $\kappa=1-\hat{r}\cdot\vec{\beta}=1-\frac{v}{c}\cos\theta$. With these, we can now write the
+power emitted per solid angle.
+\begin{align*}
+    \frac{dP'(t')}{d\Omega}&=\frac{q^2}{4\pi c^3}\frac{\big|\hat{r}\times(\hat{r}\times \vec{a})\big|^2}{\left( 1-\frac{v}{c}\cos\theta \right)^5}\\
+    %=\frac{q^2}{4\pi c^3}\frac{|\vec{a}|^2\sin^2\theta}{\left( 1-\frac{v}{c}\cos\theta \right)^5}\\
+    &=\frac{q^2\big|\vec{a}(t')\big|^2\sin^2\theta}{4\pi c^3\left( 1-\frac{v(t')}{c}\cos\theta \right)^5}
+\end{align*}
+Of course, this formula is independent of $\phi$, as there is azimuthal symmetry in the way we set up the velocity and acceleration.
+For the exact result, $\frac{dP'(t')}{d\Omega}$ is a maximum when $\theta=\theta_{\rm max}$, with
+\begin{equation*}
+    \cos\theta_{\rm max}=\frac{1}{3\beta}\left[ \sqrt{1+15\beta^2}-1 \right]
+\end{equation*}
+For the non-relativistic case, with $\beta\ll1$, it turns out that the cosine goes to zero and $\theta_{\rm max}=\pi/2$. For the highly relativistic case, on the other hand, (after expanding in powers of
+$\gamma^{-1}$) we can find that $\theta_{\rm max}\approx 1/2\gamma$.
+If we integrate over the $4\pi$ solid angle to compute the total power emitted (left as an exercise), we find that
+\begin{align*}
+    P'(t')=\frac{2q^2}{3c^3}\big|\vec{a}\big|^2\gamma^6,
+\end{align*}
+which is the relativistic generalization of the Larmor formula for this example.
+
+Let us now move on to the case where $\vec{a}\perp\vec{v}$. Let the velocity be along $\hat{z}$ and the acceleration be along $\hat{x}$. It is clear that this set up breaks azimuthal symmetry,
+and thus we will obtain an answer dependent on both $\theta$ and $\phi$. We still have that $\kappa=1-v/c \cos\theta$, with
+\begin{align*}
+    \frac{dP'(t')}{d\Omega}&=\frac{q^2}{4\pi c^3}\frac{\big|\hat{r}\times\left( (\hat{r}-\vec{\beta})\times \vec{a}\right)\big|^2}{\left( 1-\frac{v}{c}\cos\theta \right)^5}\\
+    &=\frac{q^2}{4\pi c^3}\frac{\big|(\hat{r}-\vec{\beta})(\vec{a}\cdot \hat{r})-\vec{a}(\hat{r}\cdot(\hat{r}-\vec{\beta}))\big|^2}{\left( 1-\frac{v}{c}\cos\theta \right)^5}\\
+    &=\frac{q^2}{4\pi c^3}\frac{\big|(r-\beta)|\vec{a}|\sin\theta\cos\phi-\vec{a}\kappa\big|^2}{\left( 1-\frac{v}{c}\cos\theta \right)^5}\\
+    &=\frac{q^2\big|\vec{a}(t')\big|^2}{4\pi c^3}\frac{\left[ 1-\frac{\sin^2\theta\cos^2\theta}{\gamma^2(1-\beta\cos\theta)^2} \right]}{\left(1-\beta\cos\theta\right)^3}
+\end{align*}
+where we have used the triple vector product identity. In the highly relativistic case, this formula shows that the radiation peaks in the forward direction about $\theta=\pi/2$,
+unlike for the previous example, where the radiation directly forward was zero (due to the $\sin^2\theta$ in the numerator). Note that this case is what we call \textbf{synchrotron radiation},
+as the particle is undergoing circular motion in
+the $xz$ plane. In this sense, for the highly relativistic particle in a synchrotron, there is radiation observed roughly tangentially to the circle (roughly, due to the non-trivial
+$\phi$ dependence -- there is a slight tilt inwards, towards $\vec{a}$). The angular spread in this radiation is of order $1/\gamma$. This is the so-called \textbf{flashlight effect}.
+This is the cause of the ``blue ominous light'' that one hopes not to be detecting by eye; one would see quick flashes of light in short succession, all of which are identical. Of course, one has
+to distinguish between the emitted and the detected radiation, but this is the rough idea.
+
+\subsection{Frequency distribution of detected radiation}
+
+Suppose we have a particle moving in some fashion, localized in a finite region of space. We arbitrarily choose an origin in this region, and enclose the region in a detector. Furthermore,
+let us place a frequency filter in front of our detector that allows detection of one frequency in range $[\omega,\omega+d\omega]$. What we wish to do is to Fourier analyze
+$\vec{E}(\vec{x}, t)$ in the time variable.
+\begin{align*}
+    \vec{E}(\vec{x}, t)=\int_{-\infty}^{\infty} \frac{d\omega}{\sqrt{2\pi}} e^{-i\omega t}\vec{E}_\omega(\vec{x})
+\end{align*}
+Unfortunately, we are out of time, so we shall continue this topic next lecture.
