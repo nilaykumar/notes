@@ -1,0 +1,185 @@
+\subsection{Essential singularities}
+
+\begin{remark}
+    Note that the function
+    \begin{align*}
+        f(z)=e^{1/z}
+    \end{align*}
+    has an essential singularity at 0.
+\end{remark}
+
+\begin{thm}[Casorati-Weierstrass]
+    If $f$ is analytic in $A=D(z_0;r)\backslash\left\{ z_0 \right\}$ and has an essential singularity at $z_0$ then $f(A)$ is dense
+    in $\mathbb{C}$. I.e. $f(A)$ intersects every disc in $\mathbb{C}$.
+\end{thm}
+
+\begin{proof}
+    Let us proceed by contradiction. Suppose that we can find a disc $D(w;\delta)$ such that $|f(z)-w|\geq\delta$ for all $0<|z-z_0|<r$.
+    Consider the function $g(z)=1/(f(z)-w)$. $g$ is analytic in $A$ and $|g|\leq 1/\delta$ in $A$. Hence, by Riemann's theorem, $z_0$ is a 
+    removable singularity of $g$. If $g(z_0)\neq0$ then
+    \[f(z)=\frac{1}{g(z)}+w\]
+    which implies that $f$ is analytic at $z_0$, which is a contradiction.
+    If $g(z_0)$ \textit{is} zero, things are a little more complicated. We can write
+    \begin{align*}
+        g(z)=(z-z_0)^nh(z)
+    \end{align*}
+    where $h$ is analytic and non-zero at $z_0$. Note, then
+    \begin{align*}
+        (z-z_0)^nh(z)=\frac{1}{f(z)-w}\\
+        f(z)-w=\frac{1/h(z)}{(z-z_0)^n},
+    \end{align*}
+    which is a pole. This is a contradiction, and we are done.
+\end{proof}
+
+\begin{thm}[Picard's big theorem]
+    In any neighborhood of an essential singularity, the function takes all values in the complex plane infinitely often, with possibly one exception.
+\end{thm}
+
+\section{Meromorphic functions}
+
+\begin{definition}
+    We call the function $f$ \textbf{meromorhphic} in a domain $D$ if $f$ is analytic in $D$ except at isolated poles.
+\end{definition}
+
+\begin{remark}
+    Quotients of meromorhphic functions are meromorhphic functions provided that the denominators are not identically zero.
+\end{remark}
+
+\begin{ex}
+    $1/\sin z$ is analytic in $\mathbb{C}$ except at isolated poles $z=k\pi$ with integral $k$. Consequently, $1/\sin z$ is meromorhphic on $\mathbb{C}$.
+\end{ex}
+
+\begin{ex}
+    Let $R(z)$ be a rational function
+    \begin{align*}
+        R(z)=\frac{P(z)}{Q(z)}=\frac{a\prod_{j=1}^n (z-z_j)^{m_j}}{b\prod_{k=1}^p(z-\omega_k)^{n_k}}
+    \end{align*}
+    where $P, Q$ are polynomials with no common zeros. $R$ is meromorhpic in $\mathbb{C}$. It has a pole order $n_k$ at $\omega_k$ and zeros of order
+    $m_j$ at $z_j$.
+\end{ex}
+
+\subsection{Singularities at infinity}
+
+Let $f$ be analytic in $\left\{ z:|z|>M \right\}$. This is a little difficult to work with, so consider instead the function $F(z)=f(1/z)$.
+This function is clearly analytic in the annulus $A=\left\{ z:0<|z|<1/M \right\}$.
+If $F$ has a removable singularity or a pole or an essential singularity at 0, then we say that $f(z)$ has said \textbf{singularity at infinity}.
+Why have we done this? We see no singularities originally and are trying to make trouble for ourselves! Well, many functions in mathematics have
+a finite number of singularities, and it sometimes easier to concentrate on those, but nothing else, as those points can contain a lot of information
+about the function. Indeed, sometimes you can use singularities to solve problems that don't involve singularities. Here is an example:
+\begin{thm}
+    Suppose $f$ is entire, and maps any unbounded sequence to an unbounded sequence. Then $f$ is a polynomial.
+\end{thm}
+\begin{proof}
+    There are three cases. The first case is that $f$ has a removable singularity at infinity. If this is the case, then $f$ is bounded at infinity.
+    In other words, there exists a number $K>0$ such that $|f(z)|\leq K$ for all $|z|\geq R$. By the maximum principle, $|f(z)|\leq K$ for all $z$.
+    But if $f$ is entire and bounded, it must be a constant. A constant function cannot map an unbounded sequence to and unbounded sequence, and thus $f$
+    cannot have a removable singularity.
+
+    It could be that $f$ has an essential singularity at infinity. Take $\omega\in\mathbb{C}$. By Carosati-Weierstrass, there is a sequence $\left\{ z_k \right\}$
+    with $|z_k|\ra\infty$ with $f(z_k)\in D$ for all $k$. This is not possible because the hypothesis asserts that $\left\{ f(z_k) \right\}$ is unbounded.
+
+    The last case is that $f$ has a pole at infinity. Then, $F(z)=f(1/z)$ has a pole at 0. The Laurent expansion at 0 yields
+    \begin{align*}
+        F(z)&=f(1/z)=\frac{a_{-n}}{z^n}+\frac{a_{-n+1}}{z^{n-1}}+\cdots+\frac{a_{-1}}{z}+a_0+a_1z+\cdots\\
+        f(z)&=a_{-n}z^n+a_{-n+1}z^{n-1}+\cdots+a_{-1}z+a_0+\frac{a_1}{z}+\frac{a_2}{z^2}+\cdots
+    \end{align*}
+    Note however, that as $f$ is entire, the terms with powers of $z^{-1}$ must vanish, and we are left with $f$ being a polynomial.
+\end{proof}
+
+\begin{definition}
+    The \textbf{extended complex plane} is the union of the complex plane and the point $\infty$.
+\end{definition}
+
+\begin{definition}
+    A function $f$ is \textbf{meromorphic on the extended complex plane} if $f$ is meromorphic and $g$ has a removable singularity or a pole at $\infty$.
+\end{definition}
+
+\begin{thm}
+    If $f$ is meromorphic in the extended complex plane, then $f$ must be a rational function.
+\end{thm}
+\begin{proof}
+    The proof is available in the book. However, the basic idea is just to kill off all of $f$'s zeros and poles.
+\end{proof}
+
+\section{Residues}
+
+\begin{definition}
+    When $z_0$ is a pole of $f$ and
+    \begin{align*}
+        f(z)=\sum_{k=-\infty}^\infty a_k(z-z_0)^k
+    \end{align*}
+    in $A=\left\{ z:0<|z-z_0|<r \right\}$, the coefficient $a_{-1}$ is called the \textbf{residue} of $f$ at the pole $z_0$.
+    Many notations are common, but we will denote residues by
+    \begin{align*}
+        a_{-1}=\res_{z_0} f(z).
+    \end{align*}
+\end{definition}
+
+\begin{remark}
+    In the principal part of $f$ at $z_0$, $P(z)=\sum_{-n}^{-1}a_k(z-z_0)^k$,
+    all the terms will have antiderivatives except for the $a_{-1}$ term.
+\end{remark}
+
+\subsection{Computation of residues}
+
+One method of computing a residue is straight from the Laurent expansion,
+\begin{align*}
+    a_k=\frac{1}{2\pi i}\int_{|z-z_0|=R} \frac{f(z) dz}{(z-z_0)^{k+1}}
+\end{align*}
+which yields
+\begin{align*}
+    \res_{z_0}f(z)=\frac{1}{2\pi i}\int_{|z-z_0|=R}f(z)dz.
+\end{align*}
+
+If however, we know that $f(z)$ has a simple pole at $z_0$ (i.e. a pole of order 1), we can write
+\[f(z)=\frac{a_{-1}}{z-z_0}+a_0+a_1(z-z_0)+\dots\]
+and thus the residue is found simply by computing the limit
+\[\res_{z_0}f(z)=\lim_{z\ra z_0}(z-z_0)f(z)\]
+
+Functions with poles of higher order, $n$, are a little bit trickier,
+\begin{align*}
+    f(z)&=\frac{a_{-n}}{(z-z_0)^n}+\dots+\frac{a_{-1}}{z-z_0}+a_0+a_1(z-z_0)+\dots\\
+    (z-z_0)^nf(z)&=a_{-n}+\dots a_{-1}(z-z_0)(z-z_0)^{n-1}+a_0(z-z_0)^n+a_1(z-z_0)^{n+1}+\dots
+\end{align*}
+To isolate $a_{-1}$ we now must take $n-1$ derivatives to get rid of the negative $n$ terms, and \textit{then} take a limit to get rid
+of the positive $n$ terms:
+\begin{align*}
+    \res_{z_0} f(z)=\frac{1}{(n-1)!}\lim_{z\ra z_0}\left( \frac{d}{dz} \right)^{n-1}\left( (z-z_0)^nf(z) \right).
+\end{align*}
+
+Let us do a few examples before we state the main theorem concerning residues.
+\begin{ex}
+    \begin{align*}
+        \res_{-i}\frac{1}{1+z^2}=\lim_{z\ra -i}(z+i)\frac{1}{(z+i)(z-i)}=-\frac{1}{2 i}
+    \end{align*}
+    as the singularity is obviously a pole or order 1 (upon factoring the denominator).
+\end{ex}
+
+\begin{ex}
+    \begin{align*}
+        \res_{-i}\frac{1}{(1+z^2)^2}&=\frac{1}{(2-1)!}\lim_{z\ra -i}\frac{d}{dz}\frac{(z+i)^2}{(1+z^2)^2}=\lim_{z\ra -i}\frac{d}{dz}\frac{1}{(z-i)^2}\\
+        &=\frac{-2}{(-2i)^3}=-\frac{1}{4i}
+    \end{align*}
+\end{ex}
+
+\begin{thm}[Residue theorem]
+    Suppose $f$ is analytic in an open set $\Omega$ containing a piecewise smooth closed curve $\gamma$ and its interior $D$ except for the poles at $z_1\dots z_n$ in $D$.
+    Then,
+    \begin{equation*}
+        \int_\gamma f(z) dz = 2\pi i \sum_{k=1}^N \res_{z_k} f(z)
+    \end{equation*}
+\end{thm}
+\begin{proof}
+    The proof is quite simple; first we let $D_\varepsilon$ be the domain $D$ with the usual small keyhole shapes that connect the boundary of $D$ to small discs, $D_j$, about
+    the poles. We take the limit where the width of the keyholes goes to zero and we are left only left with circular paths about the poles in the negative sense, and the
+    path $D$ in the positive sense. By Cauchy's theorem, since the function is analytic when the poles are excluded,
+    \begin{align*}
+        0&=\int_{\gamma-\cup_{j=1}^N\partial D_j} f(z) dz\\
+        &=\int_\gamma f(z) dz - \sum_{j=1}^N \int_{\partial D_j} f(z) dz.
+    \end{align*}
+    But the second term can be expressed via the residue, as the other terms in the Laurent expansion of $f$ vanish under integration, as remarked earlier, so
+    \begin{align*}
+        0=\int_\gamma f(z) \; dz - 2\pi i \sum_{j=1}^N \res_{z_j} f(z),
+    \end{align*}
+    and we are done.
+\end{proof}

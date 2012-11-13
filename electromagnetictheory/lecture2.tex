@@ -1,0 +1,106 @@
+\section{Lecture 2}
+
+\subsection{Frequency distribution of detected radiation}
+
+Suppose we have some setup of localized sources (antennas, point particles, etc.) with an origin defined appropriately. The field points that we will deal
+with will lie on the surface of our ``detector,'' where the area $da$ is perpendicular to $\hat{r}$. In addition, our detector will have a frequency filter
+to detect only a small band of $\omega$. Of course $\pm\omega$ are indistinguishable, as we have no origin in time. What we will do is Fourier transform in
+time (but not in space). The quantities of interest are
+\begin{align*}
+    \vec{j}(\vec{x},t)=\int_{-\infty}^\infty \frac{d\omega}{\sqrt{2\pi}}e^{-i\omega t}\vec{j}_\omega(\vec{x})\\
+    \vec{A}(\vec{x},t)=\int_{-\infty}^\infty \frac{d\omega}{\sqrt{2\pi}}e^{-i\omega t}\vec{A}_\omega(\vec{x})\\
+    \vec{E}(\vec{x},t)=\int_{-\infty}^\infty \frac{d\omega}{\sqrt{2\pi}}e^{-i\omega t}\vec{E}_\omega(\vec{x})
+\end{align*}
+with
+\begin{align*}
+    \vec{j}_\omega=\int_{-\infty}^\infty \frac{dt}{\sqrt{2\pi}}e^{+i\omega t}\vec{j}(\vec{x},t)
+\end{align*}
+We wish to find the Fourier transform of the vector potential in the radiation zone,
+\begin{align*}
+    A(x,t)&=\frac{1}{c}\int d^3x' j(x,t'=t-\frac{r}{c}+\frac{\hat{r}\cdot\vec{x}'}{c})\\
+    A(x,t)&=\int_{-\infty}^\infty \frac{d\omega}{\sqrt{2\pi}}e^{-i\omega t}\left[ \frac{e^{ikr}}{r}\frac{1}{c}\int d^3x' e^{-ik\hat{r}\cdot \vec{x}'} j_\omega(x') \right]
+\end{align*}
+so we have
+\begin{align*}
+    \vec{A}_\omega(\vec{x})=\frac{e^{ikr}}{r}\frac{1}{c}\int d^3x' j_\omega(x) e^{ik\hat{r}\cdot\vec{x}'}
+\end{align*}
+Recall that in the radiation zone,
+\begin{align*}
+    \vec{E}(\vec{x},t)=\frac{1}{c}\hat{r}\times\left[ \hat{r}\times\frac{\partial A}{\partial t} \right]
+\end{align*}
+so
+\begin{align*}
+    E_\omega(x)=-i\omega \frac{1}{c}\left\{ \hat{r}\times\left[ \hat{r}\times A_\omega(x) \right] \right\}.
+\end{align*}
+Note  that the Fourier components of both the electric field and the vector potential go as $e^{ikr}/r$. Let us now examine the power detected per unit
+solid angle,
+\begin{align*}
+    \frac{dP(t)}{d\Omega}=\frac{d^2\mathcal{E}}{dt d\Omega}=\frac{c}{4\pi}E(x,t)\cdot E(x,t) r^2
+\end{align*}
+To determine the frequency accurately, one needs to have an infinite time interval for detection. The total energy detected per unit solid angle is thus
+\begin{align*}
+    \frac{d\mathcal{E}}{d\Omega}&=\int_{0\infty}^\infty \frac{dP(t)}{d\Omega}dt\\
+    &=\int_{-\infty}^\infty \frac{c}{4\pi}E(x,t)\cdot E(x,t) r^2.
+\end{align*}
+Let us recall Parsevals theorem - the electric field squared in $\omega$-space becomes
+\begin{align*}
+    \int_{-\infty}^\infty \frac{d\omega}{\sqrt{2\pi}}e^{-i\omega t}E_\omega(x) \cdot \int_{-\infty}^\infty \frac{d\omega'}{\sqrt{2\pi}}e^{-i\omega' t}E_{\omega'}(x)
+\end{align*}
+which includes cross-terms in terms of $\omega$ and $\omega'$. We end up with
+\begin{align*}
+    \frac{d\mathcal{E}}{d\Omega}&=\frac{c}{4\pi}r^2\int d\omega d\omega' E_\omega(x) \cdot E_{\omega}(x) \int_{-\infty}^\infty \frac{dt}{2\pi} e^{-i(\omega+\omega')t}\\
+    &=\frac{cr^2}{4\pi}\int_{-\infty}^\infty d\omega E_\omega(x)\cdot E_{-\omega}{x}\\
+    &=\frac{cr^2}{4\pi}\int_{-\infty}^\infty d\omega |E_\omega(x)|^2=\frac{cr^2}{4\pi}\int d\omega |E_{-\omega}(x)|^2\\
+    &=\frac{cr^2}{2\pi}\int_{-\infty}^\infty  d\omega |E_\omega(x)|^2
+\end{align*}
+where we have used the reality condition that $E_\omega^*(x)=E_{-\omega}(x)$. If we now place a frequency filter, we will select out only a certain frequency
+interval and thus we have
+\begin{align*}
+    \frac{\nm{energy detected}}{\nm{(freq. interval)(solid angle)}}=\frac{d^2\mathcal{E}}{d\omega d\Omega}=\frac{c}{2\pi}r^2|E_\omega(x)|^2
+\end{align*}
+Incidentally, in semiclassical quantum radiation theory, one can use the fact that the energy of a single photon is given by $\hbar \omega$. Therefore
+\begin{align*}
+    \frac{\nm{avg. number of photons detected}}{\nm{(frequency)(solid angle)}}=\frac{d^2N}{d\omega d\Omega}=\frac{1}{\hbar\omega}\frac{d^2\mathcal{E}}{d\omega d\Omega}
+\end{align*}
+%Note that Jackson calls $d^\mathcal{E}/d\omega d\Omega=dI/d\omega d\Omega$.
+Let's do two examples.
+
+\begin{ex}
+    Suppose we are given a tiny antenna at the origin with
+    \begin{align*}
+        \vec{j}(\vec{x},t)=j_0 \hat{z}\delta^3(x)\Theta(t)e^{-\alpha t}
+    \end{align*}
+    One can compute the Fourier components of $\vec{j}$ to be
+    FIX ME
+    %\begin{align*}
+    %    \vec{j}_\omega(\vec{x})&=\int_0^\infty\frac{dt}{\sqrt{2\pi} e^{+i\omegat}j_0\hat{z}\delta^3(x)e^{-\alpha t}\\
+    %    &=-\frac{j_0\hat{z}}{\sqrt{2\pi}}\delta^3(x)\frac{1}{i\omega-\alpha}
+    %\end{align*}
+    The components of the vector potential and the electric field are then written
+    \begin{align*}
+        A_\omega(x)&=\frac{e^{ikr}}{cr}\frac{j_0\hat{r}}{\sqrt{2\pi}}\frac{1}{\alpha-i\omega}\\
+        E_\omega(x)&=-\frac{i\omega}{c}\hat{r}\times\left( \hat{r}\times A_\omega(x) \right)=-\frac{i\omega}{c^2}\frac{e^{ikr}}{\sqrt{2\pi}}\left[ \hat{r}\times\left( \hat{r}\times\hat{z} \right) \right]\frac{1}{\alpha-i\omega}
+    \end{align*}
+    We then have that
+    \begin{align*}
+        \frac{d^2\mathcal{E}}{d\omega d\Omega}&=\frac{c}{2\pi}r^2|E_\omega(x)|^2\\
+        &=\frac{c}{2\pi}\frac{\omega^2}{c^4}\frac{j_0^2}{2\pi}|\hat{r}\times\left( \hat{r}\times\hat{z} \right)|^2 \frac{1}{\alpha^2+\omega^2}\\
+        &=\frac{j_0^2\sin^2\theta}{4\pi^2c^3}\frac{\omega^2}{\alpha^2+\omega^2}
+    \end{align*}
+    When plotted as a function of $\omega$, it is clear that
+    \begin{align*}
+        \frac{d\mathcal{E}}{d\Omega}=\int_0^\infty d\omega \frac{d^2\mathcal{E}}{d\omega d\Omega}\;\nm{diverges}
+    \end{align*}
+    This is an ultraviolet divergence, which is due to the sudden jump in $j$ at $t=0$, which implies an infinite amount of energy radiated.
+\end{ex}
+
+\begin{ex}
+    Let us now deal with bremsstrahlung (breaking radiation). We have a particle moving at a constant velocity $\vec{v}$ for $t<0$. However,
+    we have a target placed that suddenly stops the particle, through which we get radiation.
+    \begin{align*}
+        \vec{j}(\vec{x},t)&=\Theta(-t) ev\hat{z}\delta^3(\vec{x}-vt\hat{z})\\
+        \vec{j}_\omega(\vec{x})&=\int_{-\infty}^0\frac{dt}{\sqrt{2\pi}}e v \hat{z} \delta^3(\vec{x}-vt\hat{z})e^{+i\omega t}
+    \end{align*}
+    Supress the urge to perform the time integral immediately, no matter how strong it may be. We would now compute the Fourier components of the vector potential and the field, but
+    at this point, the author was hungry and got lunch instead.
+\end{ex}

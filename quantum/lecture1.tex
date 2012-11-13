@@ -1,0 +1,77 @@
+\section{Anharmonic Oscillator}
+% read M. Blau 3.4, 3.5
+% kleinert ch 2
+\subsection{Thermal paths and quantum statistical mechanics}
+
+Recall the partition function from statistical mechanics,
+\begin{align*}
+    Z_T(\beta=\frac{1}{T})&=\tr(e^{-\beta\hat{H}})=e^{-\beta F(\beta)}\\
+    F&=-T\log Z(\beta)
+\end{align*}
+In quantum mechanics, we have
+\begin{align*}
+    \hat{U}(t)=e^{-i\hat{H}t/\hbar}=\sum_{n,s}e^{-i\hat{H}t/\hbar}|E_n,s\rangle\langle E_n,s|=\sum_{n,s}e^{-i\hat{H}t/\hbar}\mathcal{P}_n\\
+\end{align*}
+and we define similar to statistical mechanics,
+\begin{align*}
+    Z_{\rm QM}(t)&=\tr \hat{U}(t)=\sum_n g_ne^{-iE_nt/\hbar}\\
+    &=\int dx\;\langle x| \hat{U}(t) | x \rangle\\
+    &= \int dx \; K(x, t; x, 0)
+\end{align*}
+Recall that
+\begin{align*}
+    K(x_2,t_2;x_1,t_1)&=\sum_{n,s}e^{-iE_n (t_2-t_1)/\hbar}\psi_{ns}(x_2)\psi^*_{ns}(x_1)\\
+\end{align*}
+
+Let us work with the simple harmonic oscillator. The partition function now becomes
+\begin{align*}
+    Z_{\rm QM}^{\rm SHO}(\Delta t)&=\int_{-\infty}^\infty dx\; \sqrt{\frac{m\omega}{2\pi i \hbar \sin\omega \Delta t}}\exp\left(\frac{i}{\hbar}\left( \frac{m\omega}{\sin\omega\Delta t} \right)2x^2\left( \cos\omega\Delta t - 1 \right)\right)\\
+    &=\sqrt{\frac{m\omega}{2\pi i \hbar \sin\omega\Delta t}}\left( i\pi \frac{2\hbar\sin\omega\Delta t}{2m\omega(\cos\omega\Delta t -1) } \right)\\
+    &=\frac{1}{2a\sin\frac{\omega\Delta t}{2}}=e^{-i\omega\Delta t/2}\left( \frac{1}{1-e^{-i\omega\Delta t}} \right)\\
+    &=e^{-i\omega\Delta t/2}\sum_{n=0}^\infty e^{-in\omega \Delta t}=\sum_n g_ne^{-iE_n^{\rm HO}\Delta t/\hbar}
+\end{align*}
+This can be extended to the $D$-dimensional harmonic oscillator very simply as the integrals over each dimension decouple and we are left with the simple relation:
+\begin{align*}
+    Z_{\rm QM}^{\rm D(HO)}=\left( Z_{\rm QM}^{\rm HO} \right)^D
+\end{align*}
+
+Note that we can relate the thermal partition function to the quantum mechanical one as follows:
+\begin{align*}
+    Z_T(\beta =+i\Delta t/\hbar)=Z_{\rm QM}(\Delta t=-i\hbar \beta)
+\end{align*}
+The thermal dynamics is thus a complex analytic continuation of quantum mechanical evolution. This corresponds to a \textbf{Wick rotation}. If we Wick rotate $Z_{\rm QM}^{\rm SHO}$, for example,
+we will recover the statistcal mechanics partition function.
+
+\subsection{Time lattice approximation}
+If we have an anharmonic oscillator $V(x(t))$ the action is given by
+\begin{align*}
+    S[x(t)]&=\frac{m}{2}\int_{t_1}^{t_2} d\tau\;\left( \dot{x}^2-\frac{2}{m}V(X(t)) \right)\\
+    S[x=x_{\rm cl}+y]&=S_{\rm cl}+\frac{m}{2}\int_{t_1}^{t_2}d\tau\;\left( \dot{y}^2-\frac{2}{m}\frac{1}{2}V''\left(x_{\rm cl}(t)\right)y^2 \right) + \dots=\omega^2_{\rm cl}\\
+    \delta S^{(2)}&= -\frac{m}{2}\int_{t_1}^{t_2} d\tau\;y(\tau)\left( \frac{d^2}{d\tau^2}+\omega_{\rm cl}^2(\tau) \right)y(\tau)
+\end{align*}
+But how the hell do we evaluate this integral? We make the time lattice approximation where we discretize time with lattice spacing $a$.
+The frequencies are trivially $\omega(\tau_n)=\omega_n$, and of course
+$y_0=y_{N+1}=0$ with
+\begin{align*}
+    y(t)&=\begin{pmatrix}y_N\\\vdots\\y_1\end{pmatrix}\\
+         y(\tau)\hat{D}y(\tau)&=y_iM_{nj}y_j
+\end{align*}
+where $\hat{D}$ is the differential operator present in the integral above and $M$ can be found to be a tri-diagonal matrix (by simple discretization). It turns out, then that we
+can compute the path integral prefactor
+\begin{align*}
+    \mathcal{A}_{\rm AHO}&=\left( \frac{m}{2\pi i \hbar a} \right)^{N+\frac{1}{2}}\int dy_1\dots dy_N\; e^{\frac{im}{2\hbar a}y_iM_{ij}y_j}\\
+    &=\left(\frac{m}{2\pi i \hbar a}\right)^{1/2}\left( \frac{1}{\det M} \right)^{1/2}.
+\end{align*}
+Depending on the dimension of the problem, we can express the determinant as a recursion relation involving determinants for the lower dimensional problems (Kleiner 2.189),
+\begin{align*}
+    (d_{N+1}-2d_N+d_{N-1})+a^2\omega_{N+1}d_N=0
+\end{align*}
+After some black magic, one reaches $d_N=C_+(1+ia\omega)^N+C_-(1-ia\omega)^N$, which, in the limit of the lattice spacing getting finer and finer, yields
+\begin{align*}
+    d_\infty=C_+ e^{i\omega\Delta t}+ C_{-}e^{-i\omega\Delta t}
+\end{align*}
+To recover the free propogator, we must have $ad_N\ra\Delta t$ as $\omega\ra 0$ in the denominator.
+This implies that $C_+=-C_-=1/2i\omega$, and we have essentially solved the problem by reducing the computation of the path integral prefactor to
+the computation of an infinite-dimensional determinant.
+
+\subsection{Van Vleck approximation}
