@@ -1,0 +1,83 @@
+\documentclass{mathnotes}
+
+\title{Notes on Topological and Differentiable Manifolds}
+\author{Nilay Kumar}
+\date {}
+
+\begin{document}
+
+\maketitle
+
+\section{Elementary Topology}
+
+Let us begin with the definition of a topology:
+\begin{defn}
+    A \textbf{topology} on a set $X$ is a collection $\mathcal{T}$ of subsets of $X$, called \textbf{open sets},
+    satisfying the following properties:
+    \begin{enumerate}
+        \item $X$ and $\varnothing$ are elements of $\mathcal{T}$.
+        \item $\mathcal{T}$ is closed under finite intersections: If $U_1\dots U_n\in\mathcal{T}$, then their intersection
+            $U_1\cap\dots\cap U_n$ is in $\mathcal{T}$.
+        \item $\mathcal{T}$ is closed under arbitrary unions: If $U_1\dots U_n\dots$ is any (finite or infinite) collection
+            of elements of $\mathcal{T}$, then their union $\cup_\alpha U_\alpha$ is in $\mathcal{T}$.
+    \end{enumerate}
+    A pair $(X,\mathcal{T}$) consisting of a set $X$ and a topology $\mathcal{T}$ on $X$ is called a \textbf{topological space}.
+    The elements of a topological space are usually called its \textbf{points}.
+\end{defn}
+
+\begin{defn}
+    If $X$ is a topological space and $q\in X$, a \textbf{neighborhood} of $q$ is just an open set containing $q$. More generally, a neigborhood
+    of a subset $K\subset X$ is an open set containing $K$.
+\end{defn}
+
+\begin{defn}
+    If $X$ is a topological space and $\left\{ q_i \right\}$ is any sequence of points in $X$, we say that the sequence \textbf{converges} to $q\in X$, and
+    $q$ is the \textbf{limit} of the sequence, if for every neighborhood $U$ of $q$ there exists $N$ such that $q_i\in U$ for all $i\geq N$. We denote this as
+    $q_i\ra q$ or $\lim_{i\ra\infty}q_i=q$.
+\end{defn}
+
+\begin{exmp}
+    Let $Y$ be a trivial topological space (i.e. the only open sets are $X$ and $\varnothing$). Each point has only 1
+    neighborhood: $X$ itself. Thus, any sequence can be entirely contained in the neighborhood $X$, and consequently, any sequence
+    converges to any point in $X$.
+\end{exmp}
+
+\begin{exmp}
+    Let $X$ be a discrete topological space (i.e. all every subset of $X$ is open). Take any sequence of points $\left\{ q_i \right\}$.
+    If the sequence converges to $q$, every open set containing $q$ must contain all but a finite elements of the sequence. By virtue of
+    the discrete topology, there exists an open set that contains only $q$. Obviously, then, there must exist an $N$ such that
+    $q_i=q$ for all $i\geq N$. Consequently, the only convergent sequences in $X$ are the ones that are ``eventually constant.''
+\end{exmp}
+
+\begin{defn}
+    If $X$ and $Y$ are topological spaces, a map $f:X\ra Y$ is said to be \textbf{continuous} if for every open set
+    $U\subset Y$, $f^{-1}(U)$ is open in $X$.
+\end{defn}
+
+\begin{lem}
+    Let $X, Y, Z$ be topological spaces.
+    \begin{enumerate}
+        \item Any constant map $f:X\ra Y$ is continuous.
+        \item The identity map $\id: X\ra X$ is continuous.
+        \item If $f: X\ra Y$ is continuous, so is the restriction of $f$ to any open subset of $X$.
+        \item If $f: X\ra Y$ and $g:Y \ra Z$ are continuous, so is their composition $g \circ f: X\ra Z$.
+    \end{enumerate}
+\end{lem}
+\begin{proof}
+    Let us begin with the constant map. Suppose $f$ maps $X$ to the constant $\lambda\in Y$. We wish to show
+    that the preimage of $f$ of every open set $U$ in $Y$ is open. There are two cases: $U$ either does or does not contain
+    $\lambda$. If it does, $f^{-1}(U)=X$; otherwise, $f^{-1}(U)=\varnothing.$ As both $X$ and $\varnothing$ are open sets,
+    $f$ is continuous.
+
+    The continuity of the identity map follows trivially from the fact that $\id$ maps any open set back to the same open set.
+
+    To prove the third statement, take any open set $U$ in $Y$. $U$ can be written as a union of points in and outside
+    $f(V)\subset Y$: $U=U_i\cup U_o$. We want to show that $g^{-1}(U)$ is open in $V$. Since $g^{-1}(U_o)=\varnothing$, which is open,
+    and $g^{-1}(U_i)\subset V$ and is open in $X$ by the continuity of $f$, $g^{-1}(U_o\cup U_i)=g^{-1}(U_o)\cup g^{-1}(U_i)$ is open in $V$.
+
+    To prove the fourth statement, it suffices to show that $(g\circ f)^{-1}(U)$, with $U\subset Z$ open, is open in $X$.
+    First note that $(g\circ f)^{-1}(U)=f^{-1}(g^{-1}(U))$. Since $g$ is continuous, $g^{-1}(U)$ is an open set in $Y$.
+    Similarly, $f^{-1}$ of an open set in $Y$ is open in $X$ as $f$ is continuous, and we are done.
+\end{proof}
+
+\end{document}

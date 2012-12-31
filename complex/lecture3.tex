@@ -1,0 +1,162 @@
+\section{Applications of the residue theorem}
+
+\begin{thm}[The argument principle]
+   Suppose $f$ is meromorphic in an open set $\Omega$ containing a piecewise smooth, closed curve $\gamma$ and its interior $D$. 
+   If $f$ has no poles and never vanishes on $\gamma$, then
+   \begin{align*}
+       \frac{1}{2\pi i}\int_\gamma \frac{f'(z)}{f(z)}dz=\nm{(\# of zeros of $f$ in $D$) - (\# of poles of $f$ in $D$)}
+   \end{align*}
+\end{thm}
+\begin{proof}
+    Observe first that if $f$ has a zero of order $n$ at $z_0\in\Omega$ then
+    \[\res_{z_0}\frac{f'}{f}=n.\]
+    This is because we can write $f(z)=(z-z_0)^ng(z)$ where $g$ is analytic and non-zero in a neighborhood of $z_0$ and so
+    \begin{align*}
+        f'(z)=n(z-z_0)^{n-1}g(z)+(z-z_0)^ng'(z)\\
+        \frac{f'(z)}{f(z)}=\frac{n}{z-z_0}+\frac{g'(z)}{g(z)}.
+    \end{align*}
+    Also note that if $f$ has a pole at $z_1\in D$ of order $n$ then
+    \[\res_{z_1}\frac{f'}{f}=-n.\]
+    Why? Because $f(z)=(z-z_1)^{-n}h(z)$ where $h$ is analytic in a neighborhood $V_1$ of $z_1$ and $h(z)\neq0$ in $V_1$. Taking the derivative as above and dividing by
+    $f$, we find the residue easily.
+
+    By the residue theorem, we find that
+    \begin{align*}
+        \frac{1}{2\pi}\int_\gamma \frac{f'(z)}{f(z)}dz=\sum_{z_k\in D} \res_{z_k}\frac{f'}{f}
+    \end{align*}
+    is simply the difference in the number of zeros and the number of poles by these two observations.
+\end{proof}
+
+Why the argument principle? Well suppose
+\begin{align*}
+    \frac{f'(z)}{f(z)}=\frac{d}{dz}\log f(z)\\
+\end{align*}
+We have that 
+\begin{align*}
+    f(z)=|f(z)|e^{i\arg f(z) }\\
+    \log f(z)=\log|f(z)|+i\arg f(z)
+\end{align*}
+and so
+\begin{align*}
+    \frac{f'(z)}{f(z)}=\frac{d}{dz}\log |f(z)| + i \frac{d}{dz}\arg f(z)\\
+    \nm{LHS}\approx \frac{1}{2\pi i} i \arg f(\gamma(b))-\arg f(\gamma(a))\\
+    =\frac{1}{2\pi}\left( f(\gamma(b))-f(\gamma(a)) \right)
+\end{align*}
+This is very rough as we haven't formally defined logarithms, etc. but this is to get a basic idea.
+
+\begin{thm}[Rouch\'{e}'s theorem]
+    Suppose $f$ and $g$ are analytic on an open set $\Omega$ containing a piecewise smooth closed curve $\gamma$ and its interior, $D$.
+    If $|g(z)|<|f(z)|$ for all $z\in\gamma$, then $f$ and $f+g$ have the same number of zeros in $D$.
+\end{thm}
+
+\begin{proof}
+    For each $t\in[0,1]$ we define
+    \begin{align*}
+        f_t(z)=f(z)+tg(z).
+    \end{align*}
+    Let $n_t$ be the number of zeros of $f_t$ in $D$. We want to show that $n_0=n_1\in\mathbb{Z}$. It suffices to show that $n_t$ is a
+    continuous function. This is because any continuous integer-valued function must be constant.
+
+    The argument principle gives us that 
+    \begin{align*}
+        n_t&=\frac{1}{2\pi i}\int_\gamma\frac{f_t'(z)}{f_t(z)} dz
+    \end{align*}
+    By out assumption, $f_t(z)\geq|f(z)|-t|g(z)|\geq|f(z)|-|g(z)|>0$. Therefore,
+    \begin{align*}
+        F(t,z)=\frac{f_t'(z)}{f_t(z)}:[0,1]\times\gamma\ra \mathbb{C}
+    \end{align*}
+    is a continuous function of $t$ and $z$ on $\gamma$, and so the above integral must be continuous as well, and we are done.
+\end{proof}
+
+Let us prove the fundamental theorem of algebra (again).
+\begin{thm}[Fundamental theorem of algebra]
+    Let
+    \begin{align*}
+        P(z)=z^n+a_{n-1}z^{n-1}+\cdots+a_0.
+    \end{align*}
+    $P$ has $n$ roots in $\mathbb{C}$.
+\end{thm}
+\begin{proof}
+    Let us choose
+    \begin{align*}
+        f(z)=z^n\\
+        g(z)=a_{n-1}z^{n-1}+\cdots+a_0
+    \end{align*}
+    What is $\gamma$ in Rouch\'{e}'s theorem? Well take a large circle $\gamma=\partial D(0;R)$ where $R=|a_{n-1}|+|a_{n-2}|+\cdots+|a_0| + 10$.
+    We claim that $|f(z)=R^n>|g(z)|$ on $\gamma$.
+    \begin{align*}
+        |g(z)|\leq |a_0|+|a_1||z|+|a_2||z|^2+\cdots+|a{n-1}||z|^{n-1}\\
+        \leq R^{n-1}(|a_0|+|a_1|+\cdots+|a_{n-1})\\
+        < R^{n-1} R=R^n=|f(z)|.
+    \end{align*}
+    If we now apply Rouch\'{e}'s theorem, we are done.
+\end{proof}
+
+
+\begin{ex}
+    How many roots does the equation $P(z)=z^7-2z^5+6z^3-z+1=0$ have in the disc $|z|<1$. Clearly, we must choose $\gamma=\partial D(0;1)$. Let
+    \begin{align*}
+        f(z)=6z^3,\nm{with}|f(z)|=6\\
+        g(z)=z^7-2z^5-z+1
+    \end{align*}
+    and
+    \begin{align*}
+        |g(z)|\leq |z|^7+2|z|^5+|z|+1=5<|f(z)|=6
+    \end{align*}
+    By Rouch\'{e}'s theorem,
+    the number of zeroes of $P(z)$ in $|z|<1$ equals the number of zeros of $f=6z^3$ in the same region, which is 3.
+\end{ex}
+
+\subsection{Applications of the residue theorem to definite integration}
+\begin{ex}
+    \begin{align*}
+        \int_0^{2\pi}R(\cos\theta,\sin\theta) d\theta
+    \end{align*}
+    where $R$ is a rational function of $\cos\theta, \sin\theta$.
+
+    Note that $z=e^{i\theta}$, $0\leq\theta2\pi$ yields $\cos\theta=\Re(z)=\frac{z+\bar{z}}{2}=\frac{z+1/z}{2}$ and $\sin\theta=\Im(z)=\frac{z-1/z}{2i}$
+    and $dz=izd\theta$ so we have
+    \begin{align*}
+        \int_{|z|=1}R\left(\frac{z+1/z}{2},\frac{z-1/z}{2i}\right) dz=2\pi i \res_{|z_k|<1} R\left( \frac{z+1/z}{2}, \frac{z-1/z}{2i} \right)\cdot \frac{1}{iz}
+    \end{align*}
+    Let us apply this to the integral
+    \begin{align*}
+        \int_0^{2\pi} \frac{d\theta}{(a+\cos\theta)^2} \nm{with} a>1\\
+    \end{align*}
+    We have that
+    \begin{align*}
+        R(\cos\theta,\sin\theta)=\frac{1}{(a+\cos\theta)^2}\\
+        R\left( \frac{z+1/z}{2},\frac{z-1/z}{2i} \right)=\left( \frac{z+1/z}{2}+a \right)^2=\frac{4z^2}{(z^2+2az+1)^2}
+    \end{align*}
+    The integral then becomes
+    \begin{align*}
+        \int_0^{2\pi} \frac{d\theta}{(a+\cos\theta)^2}=2\pi \sum_{|z_k|<1}\res_{z_k}\frac{4z}{(z^2+2az+1)^2}
+    \end{align*}
+    We now have to find the residues of this. The two poles are located at $-a\pm\sqrt{a^2-1}$, by the quadratic formula, with the $+$ one actually in the unit disc. Note
+    that it is a second order pole due to the square, so we have by using the methods (involving limits, etc.) outlined last lecture, that 
+    \begin{align*}
+        I=8\pi \lim_{z\ra z_2}\frac{-(z_1+z}{(z-z_1)^3}=\frac{2\pi a}{(a^2-1)^{3/2}}
+    \end{align*}
+\end{ex}
+
+%\begin{ex}
+%    Suppose we have an integral of the form
+%    \begin{align*}
+%        \int_{\infty}^\infty \frac{P(x)}{Q(x)} dx
+%    \end{align*}
+%    where $P,Q$ are polynomials with $\deg Q-\deg P \geq 2$ and $Q(z)\neq0$ for all $x$ real. Under these conditions, it is true that
+%    \begin{align*}
+%        \lim_{R_1 \ra \infty}_{R_2\ra\infty}\int_{-R_1}^{R_1} \frac{P(x)}{Q(x)} dx=\lim_{R\ra \infty}\int_{-R}^{R}\frac{P(x)}{Q(x)}dx
+%    \end{align*}
+%    and then some more shit but then we have
+%    
+%
+%    
+%\end{ex}
+
+\begin{ex}
+    The commented code above should yield
+    \begin{align*}
+        \int_{-\infty}^\infty \frac{P(x)}{Q(x)}dx=2\pi i\sum_{\Im(z_k)>0}\res\frac{P}{Q}
+    \end{align*}
+\end{ex}
