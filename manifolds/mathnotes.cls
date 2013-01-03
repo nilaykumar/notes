@@ -18,6 +18,7 @@
 \newtheorem{thm}{Theorem}
 \newtheorem{lem}[thm]{Lemma}
 \newtheorem{cor}[thm]{Corollary}
+\newtheorem{exc}{Exercise}
 
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}

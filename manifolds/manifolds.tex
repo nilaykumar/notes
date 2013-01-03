@@ -80,4 +80,76 @@ Let us begin with the definition of a topology:
     Similarly, $f^{-1}$ of an open set in $Y$ is open in $X$ as $f$ is continuous, and we are done.
 \end{proof}
 
+\begin{lem}[Local Criterion for Continuity]
+    A map $f:X\ra Y$ between topological spaces is continuous if and only if each point of $X$ has a neighborhood on which
+    (the restriction of) $f$ is continuous.
+\end{lem}
+\begin{proof}
+    If $f$ is continuous, each point of $X$ a neighborhood on which $f$ is continuous; namely, $X$ itself.
+    
+    To prove the converse, suppose that each point of $X$ has a neighborhood on which $f$ is continuous - we wish to show that for any
+    open set $U\subset Y,$ $f^{-1}(U)$ is open in $X$. By continuity at each point, we know that any point $x\in f^{-1}(U)$ has a neighborhood
+    $V_x$ on which $f$ is continuous. In other words, $(f|_{V_x})^{-1}(U)=f^{-1}(U)\cap V_x$ is open in $X$ and is contained in $f^{-1}(U)$.
+    As $f^{-1}(U)$ is the union of such sets for all $V_x$, and these sets are open, it follows that $f^{-1}(U)$ is open, and we are done.
+\end{proof}
+
+\begin{defn}
+    If $X$ and $Y$ are topological spaces, a \textbf{homeomorphism} from $X$ to $Y$ is defined to be a continuous bijective map
+    $\phi:X\ra Y$ with continuous inverse. If there exists a homeomorphism betwee $X$ and $Y$, we say that $X$ and $Y$ are \textbf{homeomorphic}
+    or \textbf{topologically equivalent}. Sometimes this is abbreviated $X\approx Y$.
+\end{defn}
+
+\begin{exc}
+    Show that homeomorphisms are an equivalence relation.
+\end{exc}
+\begin{proof}
+    To show that homeomorphisms are an equivalence relation, we show
+    \begin{itemize}
+        \item $X\approx X$: The identity map $\id$ is a homeomorphism from $X$ to $X$.
+        \item $X\approx Y \implies Y\approx X$: There exists a homeomorphism from $X$ to $Y$. Its inverse is clearly
+            a homeomorphism from $Y$ to $X$.
+        \item $X\approx Y \nm{and} Y\approx Z \implies X\approx Z$: As the composition of two homeomorphisms is also a homeomorphism
+            (from elementary set theory), the homeomorphism from $X$ to $Z$ is simply the composition of the homeomorphisms
+            from $Y$ to $Z$ and from $X$ to $Y$, respectively.
+    \end{itemize}
+\end{proof}
+
+\begin{exmp}
+    Any open ball in $\mathbb{R}^n$ is homeomorphic to any other open ball. The homeomorphism can be constructed simply by
+    composition translations $x\mapsto x+x_0$ and dilations $x\mapsto cx$. This shows that size is not a topological property.
+\end{exmp}
+
+\begin{exmp}
+    If $\mathbb{B}^n$ is the open unit ball, we can define $F:\mathbb{B}^n\ra \mathbb{R}^n$ by
+    \[y=F(x)=\frac{x}{1-|x|^2}.\]
+    The inverse is given by
+    \[x=F^{-1}(y)=\frac{2y}{1+\sqrt{1+4|y|^2}}.\]
+    As both are continuous and bijective, $F$ is a homeomorphism, so $\mathbb{R}^n$ is homeomorphic to $\mathbb{B}^n$. This
+    shows that boundedness is not a topological property.
+\end{exmp}
+
+\begin{exmp}
+    Take the surface of the unit sphere in $\mathbb{R}^3$ and the surface of the cube of side 2, centered at the origin. There exists
+    a homeomorphism between these two surfaces,
+    \[\phi(x,y,z)=\frac{(x,y,z)}{\sqrt{x^2+y^2+z^2}}\]
+    whose inverse is given by
+    \[\phi^{-1}(x,y,z)=\frac{(x,y,z)}{\max(|x|,|y|,|z|)}.\]
+    Thus, corners are not a topological property either.
+\end{exmp}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \end{document}
