@@ -137,6 +137,50 @@ Let us begin with the definition of a topology:
     Thus, corners are not a topological property either.
 \end{exmp}
 
+\begin{exmp}
+    Now for an example of a continuous bijection that is not a homeomorphism by failure of its inverse to be continuous.
+    Let $X$ be the interval $[0,1)\subset \mathbb{R}$, and let $\mathbb{S}^1$ denote the unit circle in $\mathbb{R}^2$
+    (both with the Euclidean metric topologies). Define a map $a:X\ra \mathbb{S}^1$ by $a(t)=(\cos 2\pi t, \sin 2\pi t)$.
+    It is clear that the map is continuous and bijective. The inverse, however, is not continuous. To see why, take any
+    neighborhood of the point $(1,0)$ - the inverse of $a$ on this neighborhood will inevitably contain the point $0\in[0,1).$
+    Thus the preimage of open sets is not necessarily open, and thus $a^{-1}$ is not continuous.
+\end{exmp}
+
+\begin{defn}
+    A map $f:X\ra Y$ is said to be an \textbf{open map} if for any open set $U\subset X$, the image set $f(U)$ is open in $Y$.
+    A map can be open but not continuous, continuous but not open, both, or neither.
+\end{defn}
+
+\begin{defn}
+    We say that a continuous map $f:X\ra Y$ between topological spaces is a \textbf{local homeomorphism} if every point
+    $x\in X$ has a neighborhood $U\subset X$ such that $f(U)$ is an open subset of $Y$ and $f|_U:U\ra f(U)$ is a homeomorphism.
+\end{defn}
+
+\begin{exc}
+    Show that:
+    \begin{enumerate}
+        \item every local homeomorphism is an open map.
+        \item every homeomorphism is a local homeomorphism.
+        \item a bijective continuous open map is a homeomorphism.
+        \item a bijective local homeomorphism is a homeomorphism.
+    \end{enumerate}
+\end{exc}
+\begin{proof}
+    \hspace{1mm} 
+    \begin{enumerate}
+        \item Take any open set $U\in X$. For every $x\in U$, there exists some neighborhood $V=U_x\cap U$
+            of $x$ for which the local homeomorphism $f(V)$ is open. Note that $U$ is the union of all such $V$ (for various $x$)
+            and thus $f(U)$ is the union of all $f(V)$, and as the union of open sets must be an open set, $f(U)$ must be open.
+            Consequently, $f$ is an open map.
+        \item Take $f$ to be a homeomorphism from $X$ to $Y$. $f$ is trivially a local homeomorphism; the neighborhood needed by
+            the definition is simply $X$ itself.
+        \item Let $f$ be a bijective, continuous, open map. To show that $f$ is a homeomorphism, we must show that $f^{-1}$
+            is a continuous map. In other words, we must show that the preimage of $f$ on open sets of $Y$ are open
+            sets in $X$. This is true as $f$ is open and bijective: open sets in $X$ are taken to open sets in $Y$ (open), and
+            all open sets in $Y$ are images of open sets in $X$ (bijective).
+        \item Let $f$ be a bijective local homeomorphism. 
+    \end{enumerate}
+\end{proof}
 
 
 
