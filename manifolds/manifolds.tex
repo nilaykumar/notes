@@ -178,11 +178,17 @@ Let us begin with the definition of a topology:
             is a continuous map. In other words, we must show that the preimage of $f$ on open sets of $Y$ are open
             sets in $X$. This is true as $f$ is open and bijective: open sets in $X$ are taken to open sets in $Y$ (open), and
             all open sets in $Y$ are images of open sets in $X$ (bijective).
-        \item Let $f$ be a bijective local homeomorphism. 
+        \item Let us first show that any local homeomorphism $f$ from $X$ to $Y$ is continuous. Take any open set $V\subset Y$
+            whose preimage under $f$ we call $U$. We wish to show that $U$ is open. Take any point $y\in V$.
+            For any $x\in f^{-1}(y)$, there is a neighborhood $M_x\subset X$ of $x$ that is homeomorphic to a
+            neighborhood $N_y$ of $y$ in $Y$.  This implies that $U_x=M_x\cap U$ is homeomorphic to $V_y=N_y\cap V$.
+            Take the union of all the sets $U_x$ for every $x$ in the preimage of $y$ and call this $W_y$.
+            Note that the preimage of $V$ is the union of all such $W_y$ for $y\in V$. This union is open, and we are done.\\
+            Now it remains to show that the inverse of $f$ (that exists via bijectivity) is continuous.
+            Let $U\subset X$ be open and $V=(f^{-1})^{-1}(U)=f(U)$.  We wish to show that $V$ is open.
+            This follows trivially from the fact that $f$ is an open map, and we are done.
     \end{enumerate}
 \end{proof}
-
-
 
 
 
