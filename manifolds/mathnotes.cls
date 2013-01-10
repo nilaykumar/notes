@@ -12,6 +12,8 @@
 \newcommand{\fa}[0]{\;\forall}
 \DeclareMathOperator{\length}{length}
 \DeclareMathOperator{\res}{Res}
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\Ext}{Ext}
 \DeclareMathOperator{\id}{Id}
 
 \theoremstyle{plain}

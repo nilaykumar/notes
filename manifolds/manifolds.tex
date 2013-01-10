@@ -190,8 +190,96 @@ Let us begin with the definition of a topology:
     \end{enumerate}
 \end{proof}
 
+\pagebreak
 
+Up until now, we have worked with topological spaces defined through open sets. There is a complementary notion that is just
+as important.
 
+\begin{defn}
+    A subset $F$ of a topological space $X$ is said to be \textbf{closed} if its complement $X\setminus F$ is open.
+    It follows immediately from the definition of topological spaces that
+    \begin{enumerate}
+        \item $X$ and $\varnothing$ are closed.
+        \item Finite unions of closed sets are closed.
+        \item Arbitrary intersections of closed sets are closed.
+    \end{enumerate}
+    A topology on a set $X$ can be defined by describing the collection of closed sets, as long as they satisfy these three
+    properties; the open sets are then just those sets whose complements are closed.
+\end{defn}
+
+\begin{exmp}[Closed Sets]
+    \hspace{1mm}
+    \begin{itemize}
+        \item Any closed interval $[a, b]\subset \mathbb{R}$ is a closed set, as are the half-infinite closed intervals
+            $[a,\infty)$ and $(-\infty, b]$.
+        \item Any closed ball in a metric space is a closed set.
+        \item Every subset of a discrete space is closed.
+    \end{itemize}
+\end{exmp}
+
+It is important to not that closed is \textit{not} the same as ``not open,'' as sets can be both open and closed
+(such as $X, \varnothing$), or neither open nor closed, such as $[0,1)\subset\mathbb{R}$.
+
+\begin{lem}
+    A map between topological spaces is continuous if and only if the inverse image of every closed set is closed.
+\end{lem}
+\begin{proof}
+    Assume $f:X\ra Y$ is continuous. Given $V\subset Y$ is closed, and its preimage under $f$ is $U\subset X$, we want to show
+    that $U$ is closed. By definition, $Y\setminus V$ is open, and as by continuity of $f$, we have that its preimage $X\setminus U$
+    is open. Thus, again by definition of closed sets, $U$ must be closed.
+
+    Now assume that $f:X\ra Y$ is such that the preimage of any closed set $Y$ is a closed set in $X$. Take an open set $V\subset Y$ whose
+    preimage under $f$ is $U\subset X$. The preimage of $Y\setminus V$ is, of course $X\setminus U$, which are both closed. Since
+    $X\setminus U$ is closed, $U$ must be open, and we are done.
+\end{proof}
+
+\begin{defn}
+    Given any set $A\subset X$, we define several related sets as follows. The \textbf{closure} of $A$ in $X$, denoted by $\bar{A}$,
+    is the set
+    \[\bar{A}=\bigcap\left\{ B\subset X:B\supset A \nm{and} B \nm{is closed in} X \right\}.\]
+    The \textbf{interior} of $A$, written $\Int A$ is
+    \[\Int A=\bigcup \left\{ C\subset X:C\subset A \nm{and} C \nm{is open in} X \right\}.\]
+    It is obvious that $\bar{A}$ is closed and $\Int A$ is open. In words, $\bar{A}$ is the ``smallest closed set containing $A$,''
+    and $\Int A$ is ``the largest open set contained in $A$.''
+    We also define the \textbf{exterior} of $A$, written $\Ext A$, as
+    \[\Ext A=X\setminus \bar{A},\]
+    and the \textbf{boundary} of $A$, written $\partial A$, as
+    \[\partial A=X\setminus\left( \Int A \cup \Ext A \right)\]
+\end{defn}
+
+It follows from the definitions that for any subset $A\subset X$, the whole space $X$ is equal to the disjoint union of $\Int A, \Ext A,$
+and $\partial A$. The set $A$ always contains all of its interior points and none of its exterior points, and may contain all, some, or none
+of its boundary points.
+
+\begin{lem}
+    Let $X$ be a topological space and $A\subset X$ any subset.
+    \begin{enumerate}
+        \item A point $q$ is in the interior of $A$ if and only if $q$ has a neighborhood contained in $A$.
+        \item A point $q$ is in the exterior of $A$ if and only if $q$ has a neighborhood contained in $X\setminus A$.
+        \item A point $q$ is in the boundary of $A$ if and only if $q$ every neighborhood of $q$ contains both a point of
+            $A$ and a point of $X\setminus A$.
+        \item $\Int A$ and $\Ext A$ are open in $X$, while $\partial A$ is closed in $X$.
+        \item $A$ is open if and only if $A=\Int A$.
+        \item $A$ is closed if and only if it contains all its boundary points, which is true if and only if $A=\Int U\cup\partial A$.
+        \item $A=\bar{A}\cup\partial A=\Int A\cup\partial A$.
+    \end{enumerate}
+\end{lem}
+\begin{proof}
+    Left to the reader.
+\end{proof}
+
+\begin{defn}
+    Given a topological space $X$ and a set $A\subset X$, we say that a point $q\in X$ is a \textbf{limit point} of $A$ if every neighborhood
+    of $q$ contains a point of $A$ other than $q$ (which may or may not itself be in $A$). If we let $X=\mathbb{R}$ and $A=\left\{ 1/n \right\}_{n=1}^\infty$,
+    for example, then 0 is the only limit point of $A$.
+\end{defn}
+
+\begin{exc}
+    Show that a set $A$ in a topological space is closed if and only if contains all of its limit points.
+\end{exc}
+\begin{proof}
+    
+\end{proof}
 
 
 
