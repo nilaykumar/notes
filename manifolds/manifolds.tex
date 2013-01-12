@@ -278,8 +278,47 @@ of its boundary points.
     Show that a set $A$ in a topological space is closed if and only if contains all of its limit points.
 \end{exc}
 \begin{proof}
-    
+    It is clear from the previous lemma that every boundary point is also a limit point. In addition, it is clear that no limit point
+    can also be outside of $A$.  If $A$ is closed, it must contain its boundary, and thus, since it contains its interior and its
+    boundary, it contains all of its limit points. Conversely, if $A$ contains all of its limit points, it contains its boundary,
+    and is closed.
 \end{proof}
+
+\begin{defn}
+    A subset $A$ of a topological space $X$ is said to be \textbf{dense} in $X$ if $\bar{A}=X$.
+\end{defn}
+
+\begin{exc}
+    Show that a subset $A\subset X$ is dense if and only if every nonempty open set in $X$ contains a point of $A$.
+\end{exc}
+\begin{proof}
+    Suppose every nonempty open set in $X$ contains a point of $A$. Every neighborhood of every point of $X$ must then contain a point
+    of $A$, and thus every point in $X$ must be a limit point of $A$. $\bar{A}=\Int{A}\cup\partial A$ contains all of its limit points,
+    and thus $X=\bar{A}$ and $A$ is dense in $X$.
+
+    Conversely, suppose that $A$ is dense in $X$. Then, $\bar{A}=X$, i.e. $X$ is equal to the union of the interior and the boundary
+    of $A$. Any point in the interior or the boundary of a set has the property that all of it neighborhoods contain a point in the interior.
+    Thus, since any open set in $X$ is a neighborhood of any point in $X$, any open set in $X$ must contain a point of $A$.
+\end{proof}
+
+\begin{defn}
+    A map $f:X\ra Y$ is said to be \textbf{closed} if it takes closed sets in $X$ to closed sets in $Y$.
+\end{defn}
+
+\begin{exc}
+    Show that a bijective continuous map is a homeomorphism if and only if it is open if and only if it is closed.
+\end{exc}
+\begin{proof}
+    Suppose $f$ is a bijective continuous open map. We want to show that the inverse $f^{-1}$ is continuous: the preimage of open sets in $X$ under
+    $f^{-1}$ (i.e. the image of $f$) must be open. Since $f$ is open, we are done. Conversely, if $f$ is a homeomorphism, $f$ must be bijective
+    and continuous. It remains to show that $f$ is an open map. This follows from the fact that $f^{-1}$ is continuous, similar to above.
+
+    Suppose $f$ is a bijective continuous closed map. We want to show that the inverse $f^{-1}$ is continuous: the preimage of closed sets in $X$ under
+    $f^{-1}$ (i.e. the image of $f$) must be closed (by the definition of continuity in terms of closed sets). Since $f$ is closed, we are done.
+    Conversely, if $f$ is a homeomorphism, $f$ must be bijective and continuous. It remains to show that $f$ is an closed map. This follows from
+    the fact that $f^{-1}$ is continuous, similar to above, using the definition in terms of closed sets.
+\end{proof}
+
 
 
 
