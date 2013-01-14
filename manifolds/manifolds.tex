@@ -394,7 +394,7 @@ there exists $B\in\mathcal{B}$ such that $x\in B\subset U.$
     respect to $\mathcal{B}$.
     \begin{itemize}
         \item We wish to show that for each point in any open set $U$ in the metric space $M$, there exists an open ball in $U$
-            that contains the point. Any ball with radius small enought such that $B\subset U$ will do the trick, and we are done.
+            that contains the point. Any ball with radius small enough such that $B\subset U$ will do the trick, and we are done.
         \item The collection of open sets forming the discrete topology $X$ is the power set $\mathcal{P}(X)$. It is clear that for every
             such open set $U$, for all $x\in U$, there is a basis set in $U$ containing $x$: namely, $x$'s one-point basis set.
         \item The collection of open sets forming the trivial topology $X$ is simply $\left\{ X,\varnothing \right\}$. The given $\mathcal{B}$
@@ -422,6 +422,8 @@ there exists $B\in\mathcal{B}$ such that $x\in B\subset U.$
     of $q$.
 \end{defn}
 
+The following lemma shows that the ``open subset'' in the definition can be replaced by open ball, or $\mathbb{R}^n$.
+
 \begin{lem}
     A topological space $M$ is locally Euclidean of dimension $n$ if and only if either of the following properties holds:
     \begin{itemize}
@@ -430,6 +432,155 @@ there exists $B\in\mathcal{B}$ such that $x\in B\subset U.$
     \end{itemize}
 \end{lem}
 
+\begin{proof}
+    As $\mathbb{R}^n$ is a Euclidean space, it immediately follows that if $M$ is locally Euclidean of dimension $n$, one of the
+    above two conditions must hold. For the converse proof, first note that the above two conditions are equivalent, as we
+    showed earlier that any open ball in $\mathbb{R}^n$ is homeomorphic to $\mathbb{R}^n$. Thus, we need only prove the first
+    condition.
+
+    Take any point $q\in M$ and let $U$ be a neighborhood of $q$ that admits a homeomorphism $\phi: U\ra V$, where $V$ is an open
+    subset of $\mathbb{R}^n$. Since $V$ is open, there must be some open ball $B$ around $\phi(q)$ that is contained in $V$.
+    Therefore, $\phi^{-1}(B)$ is a neighborhood of $q$ homeomorphic to an open ball in $\mathbb{R}^n$, and we are done.
+\end{proof}
+
+\begin{defn}
+    If $M$ is locally Euclidean of dimension $n$, a homeomorphism from an open subset $U\subset M$ to an open subset of $\mathbb{R}^n$
+    is called a \textbf{coordinate chart} on $U$. We will call any open subset of $M$ that is homeomorphic to a ball in $\mathbb{R}^n$
+    a \textbf{Euclidean ball} in $M$. The previous lemma shows that every point in a locally Euclidean space has a Euclidean ball
+    neighborhood.
+\end{defn}
+
+Note that the definition of locally Euclidean spaces makes sense even if $n=0$. Since $\mathbb{R}^0$ is by convention a single point,
+the second condition of the previous lemma (that $M$ is locally homeomorphic to the whole $\mathbb{R}^n$) implies that a space
+can be locally Euclidean of dimension 0 if and only if each point has a neighborhood that is homeomorphic to a one-point space. In
+other words: if and only if the space is discrete.
+
+\begin{defn}
+    A topological space $X$ is said to be a \textbf{Hausdorff space} if given any pair of distinct points $q_1, q_2\in X$, there
+    exist neighborhoods $U_1$ of $q_1$ and $U_2$ of $q_2$ with $U_1\cap U_2=\varnothing$.
+\end{defn}
+
+Note that any open subset of a Hausdorff space is Hausdorff.
+
+\begin{lem}
+    Let $X$ be a Hausdorff space.
+    \begin{enumerate}
+        \item Every one-point set in $X$ is closed.
+        \item If a sequence $\left\{ x_i \right\}$ in $X$ converges to a limit $x\in X$, the limit is unique.
+    \end{enumerate}
+\end{lem}
+
+\begin{proof}
+    For the first part, take any one-point set $\left\{ q \right\}\in X$. For any $p\neq q$, we are assured that there exist
+    disjoint neighborhoods $U_p$ of $q$ and $V_p$ of $p$. The complement of the one-point set is $X\setminus \left\{q\right\}$, which can be
+    expressed as the union of the open sets $V_p$ for every $p\in X\setminus\left\{ q \right\}$.
+
+    To prove that the limits are unique, first assume for the sake of contradiction that the sequence converges to both $x$ and $x'$.
+    By the Hausdorff property, there exist disjoint neighborhoods $U$ of $x$ and $U'$ of $x'$. By definition of convergence, there
+    exist $N, N'$ such that $i\geq N$ implies $x_i\in U$ and $i\geq N'$ implies $x_i\in U'$. But since $U$ and $U'$ must be disjoint,
+    we reach a contradiction for when $i$ is greater than both $N$ and $N'$.
+\end{proof}
+
+\begin{exc}
+    Show that the only Hausdorff topology on a finite set is the discrete topology.
+\end{exc}
+
+\begin{proof}
+    Suppose we have a finite, discrete topology $X$. It is clear that $X$ is Hausdorff, as each point's one-point subset satisfies
+    the Hausdorff condition of disjoint subsets.
+
+    Suppose we have a finite, Hausdorff topology $X$. We wish to show that $X$ is the discrete topology. By the Hausdorff property
+    and the above lemma, we know that every one-point set in $X$ is closed. Consequently, for each point $q\in X$, the set
+    $X\setminus \left\{ q \right\}$ must be open. Label the points in $X$ as $\left\{ x_1\cdots x_n \right\}$ and take the open subset
+    $U=X\setminus \left\{ x_1 \right\}=\left\{ x_2\cdots x_n \right\}$. For each point in $U$, $q$, define $ _q=X\setminus \left\{ q \right\}$,
+    which are all open. Note that the point $x_1$ is a member of $V_q$ for all $q\in U$. Since $V_q$ are open, it must be that $\bigcap_q V_q$
+    is open as well, and contains \textit{only} $x_1$ (by virtue of how $V_q$ was defined in terms of complements; drawing a picture of a
+    set with 3 elements is a good way to visualize this). Thus, since $x_1$ was arbitrarily chosen in $X$, every one-point set in $X$ is open;
+    clearly, then, $X$ is a discrete topology.
+\end{proof}
+
+\begin{defn}
+    We say that a topological space is \textbf{second countable} if it admits a countable basis.
+\end{defn}
+
+\begin{defn}
+    If $X$ is a topological space and $q\in X$, a collection $\mathcal{B}_q$ of neighborhoods of $q$ is called a \textbf{neighborhood basis}
+    at $q$ if every neighborhood of $q$ contains some $B\in \mathcal{B}_q$. $X$ is said to be \textbf{first countable} if there exists a 
+    countable neighborhood basis at each point.
+\end{defn}
+
+\begin{cor}
+    Second countability implies first countability.
+\end{cor}
+
+\begin{proof}
+    Second countability states that there exists a countable basis for $X$. The collection of basis open sets containing any point $q\in X$
+    is, of course, a countable neighborhood basis for $q$.
+\end{proof}
+
+\begin{defn}
+    If $X$ is any topological space, a collection $\mathcal{U}$ of subsets of $X$ is said to \textbf{cover} $X$, or be a cover of $X$, if every point
+    in $X$ is in one of the sets of $\mathcal{U}$. An \textbf{open cover} is a collection of open sets that covers $X$. Given any cover $\mathcal{U}$, a
+    \textbf{subcover} of $\mathcal{U}$ is a subset of $\mathcal{U}$ that is still a cover.
+\end{defn}
+
+\begin{lem}
+    If $X$ is a second countable space, every open cover of $X$ has a countable subcover.
+\end{lem}
+
+\begin{proof}
+    Let $\mathcal{B}$ be a countable basis for $X$, and let $\mathcal{U}$ be an arbitrary open cover of $X$. Let $\mathcal{B}'$ denote the subset
+    of $\mathcal{B}$ consisting of those basis sets that are entirly contained in some element of $\mathcal{U}$. As a subset of a countable set
+    is countable, $\mathcal{B}'$ must be a countable set. For each element $B\in \mathcal{B}'$, choose an element $U_b\in \mathcal{U}$ such that
+    $B\subset U_B$. The collection $\left\{ U_B:B\in\mathcal{B}' \right\}$ is a countable subset of $\mathcal{U}$. Now we want to show that it
+    covers $X$, and we will be done.
+
+    Choose $x\in X$ arbitrary. Then $x\in U_0$ for some open $U_0\in\mathcal{U}$, as $\mathcal{U}$ is an open cover. By the basis criterion, we
+    know that there is some $B\in\mathcal{B}$ such that $x\in B\subset U_0$. Thus $B\in\mathcal{B}'$, and there exists a set $U_B\in\mathcal{U}'$
+    such that $x\in B\subset U_B$. This shows that $\mathcal{U}'$ is a cover.
+\end{proof}
+
+Any open subset $U$ of a second countable space $X$ is second countable: starting with a countable basis for $X$, simply throw away all the
+elements of the basis that do not lie in $U$; then it is easy to check that the remaining basis sets form a countable basis for the topology
+of $U$.
+
+\begin{defn}
+    An \textbf{$n$-dimensional topological manifold} is a second countable Hausdorff space that is locally Euclidean of dimension $n$.
+\end{defn}
+
+The most obvious example of an $n$-manifold is $\mathbb{R}^n$ itself. More generally, and open subset of $\mathbb{R}^n$ - or in fact of
+any $n$-manifold - is again an $n$-manifold, as the next lemma shows.
+
+\begin{lem}
+    Any open subset of an $n$-manifold is an $n$-manifold.
+\end{lem}
+
+\begin{proof}
+    Let $M$ be an $n$-manifold, and let $V$ be an open subset of $M$. Any $q\in V$ has a neighborhood (in $M$) that is homeomorphic to an
+    open subset of $\mathbb{R}^n$; the intersection of that neighborhood with $V$ is still open, still homeomorphic to an open subset of $\mathbb{R}^n$,
+    and lies in $V$, so $V$ is locally Euclidean. Since any open subset of a Hausdorff space is Hausdorff and any open subset of a second countable
+    space is second countable, $V$ is an $n$-manifold.
+\end{proof}
+
+\begin{defn}
+    An $n$-dimensional \textbf{manifold with boundary} is a second countable Hausdorff space in which every point has a neighborhood
+    homeomorphic to an open subset of the $n$-dimensional upper half space
+    $\mathbb{H}^n=\left\{ \left( x_1,\cdots,x_n \right)\in\mathbb{R}^n:x_n\geq 0\right\}$. Just as in the case of manifolds, we will
+    call any homeomorphism from an open subset $U$ of $M$ to an open subset of $\mathbb{H}^n$ a \textbf{chart} on $U$.
+\end{defn}
+
+The upper half space $\mathbb{H}^n$ is of course a manifold with boundary, as is any closed interval in $\mathbb{R}$, any closed
+disk in $\mathbb{R}^2$, or in fact a closed ball in any Euclidean space.
+
+\begin{defn}
+    The boundary of $\mathbb{H}^n$ in $\mathbb{R}^n$ is the set of points where $x_n=0.$ If $M$ is a manifold with boundary, a point that is
+    in the inverse image $\partial\mathbb{H}^n$ under some chart is called a \textbf{boundary point} of $M$, and a point that is in the
+    inverse image of $\Int \mathbb{H}^n$ is called an \textbf{interior point}. The \textbf{boundary} of $M$ (the set of all of its boundary
+    points) is denoted by $\partial M$; similarly, its \textbf{interior} is denoted by $\Int M$.
+\end{defn}
+
+Since any open ball in $\mathbb{R}^n$ is homeomorphic to an open subset of $\mathbb{H}^n$, an $n$-manifold is automatically an $n$-manifold with
+boundary (with empty boundary), but the converse is not true: a manifold with boundary is a manifold if and only if its boundary is empty.
 
 
 
