@@ -1,0 +1,103 @@
+\documentclass{mathnotes}
+
+\title{Notes on Differentiable Manifolds}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\setcounter{section}{-1}
+
+\section{Administrativia}
+
+Recommended textbooks:
+\begin{itemize}
+    \item John Lee: \textit{Introduction to Smooth Manifolds} (2012)
+    \item Spivak: \textit{Differential Geometry: A Comprehensive Introduction}
+    \item L. Tu: \textit{An Introduction to Manifolds} (2008 E-book available)
+\end{itemize}
+
+Problem sets will be assigned every one/two weeks through email. Some homework problems will be taken from Lee (second edition).
+There will most likely be two midterms and a final, all in-class.
+
+\section{Introduction}
+
+\begin{defn}
+    A function $f$ defined on $\mathbb{R}^n$ is $C^k$ for a positive integer $k$ if $\frac{\partial^k f}{\partial x_{i_1}\cdots\partial x_{i_l}}$ 
+    exists and is continuous for any positive integer $l\leq k$, where $1\leq i_1\cdots i_l\leq n$. $f$ is $C^\infty$ if it is $C^k$ for any positive
+    integer $k$.
+\end{defn}
+
+\begin{exmp}
+    $f(x)=x^{1/3}$ for $x\in\mathbb{R}$ is $C^0$ but not $C^1$.
+\end{exmp}
+
+\begin{exmp}
+    $f(x)=x^{1/3}+k$ for $x\in\mathbb{R}$ is $C^k$ but not $C^{k+1}$, for $k\geq 1$.
+\end{exmp}
+
+\begin{defn}
+    A \textbf{coordinate chart} $(U,\phi)$ on a topological space $X$ is an open set $U\subset X$ together with a map $\phi:U\ra \mathbb{R}^n$
+    such that $\phi$ is a homeomorphism onto $\phi(U)$, an open set in $\mathbb{R}^n$. In other words, $(U,\phi)$ gives each $p\in U$ a
+    coordinate.
+\end{defn}
+
+\begin{exmp}
+    Let $S^2=\left\{ (x,y,z) | x^2+y^2+z^2=1 \right\}\subset \mathbb{R}^3$. Let $U=\left\{ z>0 \right\}\cap S^2$ be the upper hemisphere.
+    $x, y, z$ are not good coordinates in that they are not free - they are constrained to the surface. Note that if we define $\phi:U\ra\mathbb{R}^2$
+    such that it takes $(x,y,z)\ra(x,y)$, we have a projection map and we now have free coordinates ($z$ can be computed). This is a
+    \textbf{graphical coordinate chart}. We can work similarly with the lower hemisphere. But what about the equator? We can build similar charts
+    for the equator by projecting onto different planes. It is clear, however, that to cover every point, we will need a total of 6 graphical charts to cover $S^2$.
+
+    This is nice because we can now do calculus on the open sets that $\phi$ maps us to in Euclidean space.
+\end{exmp}
+
+\begin{exmp}[Stereographic projection of $S^2$]
+    Use a different model for $S^2$. Consider $\left\{ (x,y,z) | x^2+y^2+(z-\frac{1}{2})^2=\frac{1}{4} \right\}\subset\mathbb{R}^3$, the sphere of radius $1/2$
+    centered at $(0,0,\frac{1}{2})$. Note that the south pole's coordinates are $(0,0,0)$ and the north pole's are $(0,0,1)$. Imagine that there is a light source
+    at the north pole, which projects through the sphere onto the $xy$-plane. If the line hits the point $(x,y,z)$ on the sphere, we can solve for the point at
+    which it hits the $xy$-plane. The line is given by $(0,0,1)+t(x,y,z-1)$ for $t\in\mathbb{R}$. Solving this for where $z=0$ yields $t=\frac{1}{1-z}$.
+    The point is then $(0,0,1)+\frac{1}{1-z}(x,y,z-1)=(\frac{x}{1-z},\frac{y}{1-z},0)$. This gives a coordinate chart $(U,\phi)$ with $U=S-\left\{ (0,0,1) \right\}$
+    (as the chart is undefined there) and $\phi:U\ra \mathbb{R}^2$ that maps $(x,y,z)\ra(\frac{x}{1-z},\frac{y}{1-z})$.
+    
+    In order to cover the south pole as well, we can perform stereographic projection from the south pole onto $z=1$ plane. The corresponding line is now
+    given by $(0,0,0)+t(x,y,z)$ which has $z=1$ for $t=\frac{1}{z}$, and the corresponding point is $(\frac{x}{z},\frac{y}{z},1)$. This gives us a $(V,\psi)$
+    where $V=S-\left\{ (0,0,0) \right\}$ with $\psi:V\ra\mathbb{R}^2$ mapping $(x,y,z)\ra(\frac{x}{z},\frac{y}{z})$.
+\end{exmp}
+
+\begin{exmp}
+    Let $X$ be the set of all lines on $\mathbb{R}^2$. $X$ is a topological space (check this!). Take the set $U=\left\{ \nm{lines of the form} y=mx+c \right\}$,
+    which is the collection of all non-vertical lines. To cover the vertical lines, we can have $V=\left\{ \nm{lines of the form}x=\bar{m}y+\bar{c} \right\}$,
+    the collection of all non-horizontal lines. We now define $\phi:U\ra\mathbb{R}^2$ that maps $y=mx+c\ra(m,c)$ and $\psi:V\ra\mathbb{R}^2$ that maps
+    $x=\bar{m}y+\bar{c}\ra(\bar{m},\bar{c})$.
+\end{exmp}
+
+Notice that for this example and the stereographic projection example, there are instances where the charts overlap. For the sake of consistency, we want
+the coordinate charts to be compatible with one another. For example, a function that is differentiable in one chart should be differentiable in the other
+as well.
+
+\begin{defn}
+    Given a coordinate chart $(U,\phi)$ and a function $f$ defined on $U$, we can consider $f\circ \phi^{-1}$ as a function on $\phi(U)$ and differentiate
+    $f\circ \phi^{-1}$. Suppose $(V,\psi)$ is another coordinate chart and that $U\cap V\neq \varnothing$. Now we can consider $f\circ\psi^{-1}$ as a function
+    to do calculus with. Now the question is: is $f\circ \phi^{-1}$ differentiable the same as $f\circ\psi^{-1}$ differentiable? This should be the case!
+    We are considering a function on an abstract space, and the coordinates should respect properties such as differentiablity. So let us write
+    $f\circ\psi^{-1}\circ(\psi\circ\phi^{-1})$, which is differentiable if the term in the parentheses is differentiable. We can do the same, but with
+    $\phi$ and $\psi$ switched. Thus, we want to make sure that both $\psi\circ\phi^{-1}$ and $\phi\circ\psi^{-1}$ are differentiable. These are called
+    \textbf{transition maps} of these coordinate charts. Two coordinate charts are \textbf{smoothly compatible} if their transition maps are diffeomorphisms
+    (or if, trivially, they don't intersect).
+\end{defn}
+
+Returning to the previous manifold of lines, suppose we have a line labeled by $(m,c)$ with $m\neq 0$. This can be expressed in the other chart as
+$(m^{-1},-m^{-1}c)$. It turns out, that for $m\neq 0$, these transition maps are differentiable. For the stereographic projection of $S^2$, it is the same,
+just a little trickier.
+
+\begin{defn}
+    An atlas $\mathcal{A}$ for a topological space $X$ is a collection of coordinate charts that cover $X$ such that any two charts in $\mathcal{A}$
+    are smoothly compatible.
+\end{defn}
+
+
+\end{document}
