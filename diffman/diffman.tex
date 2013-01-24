@@ -87,7 +87,7 @@ as well.
     $f\circ\psi^{-1}\circ(\psi\circ\phi^{-1})$, which is differentiable if the term in the parentheses is differentiable. We can do the same, but with
     $\phi$ and $\psi$ switched. Thus, we want to make sure that both $\psi\circ\phi^{-1}$ and $\phi\circ\psi^{-1}$ are differentiable. These are called
     \textbf{transition maps} of these coordinate charts. Two coordinate charts are \textbf{smoothly compatible} if their transition maps are diffeomorphisms
-    (or if, trivially, they don't intersect).
+    (or if, trivially, they don't intersect). These diffeomorphisms are from $\phi(U\cap V)$ to $\psi(U\cap V)$ or vice versa.
 \end{defn}
 
 Returning to the previous manifold of lines, suppose we have a line labeled by $(m,c)$ with $m\neq 0$. This can be expressed in the other chart as
@@ -95,9 +95,88 @@ $(m^{-1},-m^{-1}c)$. It turns out, that for $m\neq 0$, these transition maps are
 just a little trickier.
 
 \begin{defn}
-    An atlas $\mathcal{A}$ for a topological space $X$ is a collection of coordinate charts that cover $X$ such that any two charts in $\mathcal{A}$
+    An \textbf{atlas} $\mathcal{A}$ for a topological space $X$ is a collection of coordinate charts that covers $X$ such that any two charts in $\mathcal{A}$
     are smoothly compatible.
 \end{defn}
 
+\begin{exmp}
+    Take the set of all lines through the origin in $\mathbb{R}^3$. Since only the direction matters, each line might be represented by a non-zero vector.
+    This is the same as the quotient space $\mathbb{R}^3\setminus \left\{ (0,0,0) \right\}/\sim$ with $(x_1,x_2,x_3)\sim\lambda (x_1,x_2,x_3)$. Thus it is equipped
+    with the quotient topology; i.e.$\Pi: \mathbb{R}^3\ \left\{ (0,0,0) \right\}\to \mathbb{R}\mathbb{P}^2$ is continuous. We use $\left[ x_1 x_2 x_3 \right]$ to
+    denote the equivalence class of $\left( x_1, x_2, x_3 \right)$. On the open set (check this) $U_1=\left\{ x_1\neq 0 \right\}$, we can use the coordinate chart
+    $\phi_1:U_1\to\mathbb{R}^2$ that takes $(x_1,x_2,x_3)\to\left( x_2/x_1, x_3/x_1 \right)$. However, we have not covered the whole set, so we repeat this process
+    for $x_2\neq0$ and $x_3\neq 0$. We claim that this set of charts is an atlas. It is obvious that these charts covers the space. We must now check that the
+    transition maps are smoothly compatible. For example, we must check that $\phi_2\circ\phi_1^{-1}$ is a diffeomorphism. For $\left[ x_1,x_2,x_3 \right]\in U_1\cap V_2$,
+    it's clear that $\phi_2\circ\phi_1^{-1}(x_2/x_1,x_3/x_1)=(x_1/x_2,x_3/x_2)$. To show that this is a diffeomorphism, we choose coordinates $(u,v)$ on $\mathbb{R}^2$
+    and write the function in terms of these coordinates: $u=x_2/x_1$ and $v=x_3/x_1$. We know that $x_1\neq 0,x_2\neq 0$ because of our domain. Thus,
+    $\phi_2\circ\phi_1^{-1}=(1/u,v/u)$. Again, by our domains, $u\neq 0$, and thus this map is differentiable. The inverse is found by writing $(1/u,v/u)$ as $(p, q)$
+    which yields $(u,v)=(1/p,q/p)$ which is differentiable as well. One can check that this map is also one-to-one and onto, and we are done.
+\end{exmp}
+
+In general, it turns ou that $\mathbb{RP}^n$ requires $n+1$ coordinate charts.
+
+\begin{defn}
+    Two atlases are compatible (or equivalent) if their union is another atlas.
+\end{defn}
+
+\begin{defn}
+    A \textbf{differentiable (smooth) structure} on a topological space $X$ is an equivalence class of atlases (a maximal atlas).
+\end{defn}
+
+\begin{exmp}
+    Take the curve $\mathcal{C}:y=x^{\frac{1}{3}}$ in $\mathbb{R}^2$. Recall that this curve has a vertical tangent at $x=0$. This curve has the subspace topology.
+    We can consider the graphical coordinate charts $\phi_1:(x,y)\to x$ and take $U_1=\mathcal{C}$. We can define an atlas $\mathcal{A}_1=\left\{ \left( U_1,\phi_1 \right) \right\}$.
+    We can also take $\phi_2:(x,y)\to y$ and $\mathcal{A}_1=\left\{ (U_2,\phi_2) \right\}$. Are these equivalent? Consider the height function $h$ on $\mathcal{C}$ (the $y$
+    coordinate). Consider $h\circ\phi_1^{-1}(x)=x^{\frac{1}{3}}$. Consider instead $h\circ\phi_2^{-1}(y)=y$. But $h$ is only differentiable on the second chart!
+    Thus these atlases are not equivalent.
+\end{exmp}
+
+\begin{exmp}
+    Take the real line. $f(x)=x^{1/3}$ is not differentiable. Suppose we make a new coordinate system that assigns each point its cubic root. The points, of course go home
+    all happy, but now $f$ is differentiable!
+\end{exmp}
+
+In order to define what a ``smooth manifold'' we must impose global topological conditions to rid ourselves of certain pathological examples.
+
+\begin{defn}
+    A topological space $X$ is \textbf{Hausdorff} if any two points can be separated by disjoint open sets; i.e. $\forall p,q\in X$, there exist $U,v$ open such that
+    $p\in U, q\in V$ and $U\cap V=\varnothing$.
+\end{defn}
+
+\begin{defn}
+    A topological space $X$ is \textbf{second countable} if it has a countable basis of open sets.
+\end{defn}
+
+Recall that a basis $\mathcal{B}$ is a subset of the collection of all open sets such that any open set can be written as a union of members of $\mathcal{B}$.
+
+\begin{exmp}
+    Note that $\mathbb{R}^n$ is second countable because we can take a basis $\mathcal{B}$ that is the collection of all open balls
+    with rational centers and rational radii. Additionally, it is clear that $\mathbb{R}^n$ is Hausdorff.
+\end{exmp}
+
+Note that a subspace of a Hausdorff, second-countable topological space is itself Hausdorff and second countable. Thus any subset of $\mathbb{R}^n$ is
+Hausdorff and second countable. Pathological spaces:
+\begin{itemize}
+    \item the disjoint union of uncountably many copies of $\mathbb{R}$ is not second countable.
+    \item a real line with two origins is not Hausdorff.
+\end{itemize}
+
+\begin{defn}
+    A \textbf{differentiable/smooth manifold} is a Hausdorff, second countable topological space with a smooth (differentiable) structure.
+\end{defn}
+
+\begin{exmp}
+    Suppose $U\subset\mathbb{R}^n$ is open with $F:U\to\mathbb{R}^m$ that is $C^\infty$. The graph of $F$ is
+    $\Gamma=\left\{ (x,y) | x\in U, y=F(x) \right\}\subset\mathbb{R}^n\times\mathbb{R}^m$
+    is a differentiable manifold. $\Gamma$ is Hausdorff and second countable because $\Gamma\subset\mathbb{R}^{n+m}$. We can take $\mathcal{A}=\left\{ (\Gamma, \Pi) \right\}$
+    where $\Pi:\Gamma\to U$ maps $(x,F(x))\to x$ (check that this is a homeomorphism).
+\end{exmp}
+
+\begin{exmp}
+    Take $S^2=\left\{ (x,y,z) | x^2+y^2+z^2=1 \right\}\subset\mathbb{R}^3$. This is Hausdorff and second countable. We can take 6 graphical coordinate charts
+    $\left\{ x>0 \right\},\left\{ x<0 \right\},\left\{ y>0 \right\},\left\{ y<0 \right\},\left\{ z>0 \right\},\left\{ z<0 \right\}$.
+\end{exmp}
+
+In general, though, what about $\left\{ x | F(x)=c \right\}\subset \mathbb{R}^n$? 
 
 \end{document}
