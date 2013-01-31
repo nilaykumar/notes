@@ -30,4 +30,55 @@ There will be 6 to 8 homework sets and a final project. There will be a review s
     \item \textbf{Time permitting:} General relativity; quantum Monte Carlo
 \end{itemize}
 
+\section{Back recurrence}
+
+The Bessel functions are solutions to a partial differential equation in cylindrical coordinates. They satisfy the following recurrence relation:
+\[J_{n+1}(x)=\frac{2n}{x}J_n(x)-J_{n-1}(x)\]
+where $n$ is an integer and $x$ is real. Does knowing $J_0(x)$ and $J_1(x)$ allow you to know $J_n(x)$ for $n\geq 2$?
+
+Let us write this relation as a 2 component vector
+\begin{align*}
+\left(\begin{array}{c}
+    J_n\\
+    J_{n+1}
+\end{array}\right)
+=
+\left(
+\begin{array}[]{cc}
+    0 & 1\\
+    -1 & \frac{2n}{x}
+\end{array}
+\right)
+\left( 
+\begin{array}{c}
+    J_{n-1}\\
+    J_{n}
+\end{array}\right)
+\end{align*}
+What are the eigenvalues of this matrix?
+\begin{align*}
+    \left|\begin{array}[]{cc}
+        -\lambda & 1\\
+        -1 & \frac{2n}{x}-\lambda
+    \end{array}\right|=0
+\end{align*}
+which leads to
+\[\lambda=\frac{n}{x}\pm\sqrt{\frac{n^2}{x^2}-1}.\]
+If $\frac{n}{x}>1$, then $\lambda_+>1$ and $\lambda_-<1$. Note that if we apply this recurrence relation $m$ times,
+we will have $\lambda_+$ exponentially growing and $\lambda_-$ exponentially decaying. Note also that the Bessel and Neumann functions
+are known to exponentially decay and grow respectively. So if we start with a $\tilde{J}_0(x)$ and $\tilde{J}_1(x)$ to some machine precision,
+we know that these can be written as
+\begin{align*}
+    \tilde{J}_0(x)= \alpha J_{0}(x)+\beta N_0(x)\\
+    \tilde{J}_1(x)= \alpha J_{1}(x)+\beta N_1(x)
+\end{align*}
+From this, we can determine $\alpha$ and $\beta$. As we iterate, however, the Neumann functions will dominate over the Bessel functions - i.e. we have
+numerical instability, as the Bessel function will get lost in the noise.
+
+If we iterate backwards, however, with some random choice of the precision numbers, the resulting quantity will essentially be $\alpha J_0(x)$, as the
+growing term will be supressed by the back-recurrence. We can make an algorithm out of this using
+\[1=J_0(x)+J_2(x)+J_4(x)+\cdots\]
+which determines the constant $\alpha$. We are putting complete garbage in... and getting good results out!
+
+
 \end{document}

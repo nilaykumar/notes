@@ -1,0 +1,339 @@
+\documentclass{mathnotes}
+
+\usepackage{fullpage}
+
+\title{Quantum Field Theory PSET 1}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+
+The matrix element of the propogator from $(\mathbf{x_1}, t_1)$ to $(\mathbf{x_2}, t_2)$:
+\begin{align*}
+    \mathcal{P}=\langle \mathbf{x_2} | e^{-i H (t_2-t_1)} | \mathbf{x_1} \rangle &=\int d^3\mathbf{k}\; \langle \mathbf{x_2} | \mathbf{k} \rangle
+    \langle \mathbf{k} | e^{-iH(t_2-t_1)} | \mathbf{x_1} \rangle
+\end{align*}
+Taking $\langle \mathbf{k} | \mathbf{x_i}\rangle=\mathcal{N}e^{i\mathbf{k}\cdot\mathbf{x_i}}$, we have
+\begin{align*}
+    \mathcal{P}&=|\mathcal{N}|^2 \int d^3\mathbf{k}\; e^{i\mathbf{k}\cdot (\mathbf{x_2}-\mathbf{x_1})} e^{-i\omega_k(t_2-t_1)}\\
+    &=|\mathcal{N}|^2\int_0^\infty dk\; k^2\int_0^{\pi} d\theta\; \sin\theta \int_0^\pi d\phi\; e^{ik\Delta x}e^{-i\omega_k\Delta t}\\
+    &=-2\pi|\mathcal{N}|^2\int_0^\infty dk\;k^2\int_0^\pi d(\cos\theta) e^{ik\Delta x}e^{-i\omega_k\Delta t} \\ 
+    &=\frac{2\pi i}{\Delta x}|\mathcal{N}|^2\int_{-\infty}^\infty dk\; ke^{ik\Delta x}e^{-i\Delta t\sqrt{|\mathbf{k}|^2+m^2}}
+\end{align*}
+where we have taken $\mathbf{\Delta x}$ to point in the $\hat{\mathbf{z}}$ direction and expanded the triple integral in spherical coordinates. In addition, we define
+$\omega_k=\sqrt{|\mathbf{k}|^2+m^2}$. If we choose to evaluate this integral in the complex plane, it is important to note that there is a subtlety with the branch cut along the imaginary
+axis. Namely, as we go from the first quadrant to the second quadrant in $\mathbb{C}$, $\omega_k$ changes discontinuously. To see this, take a slightly real $k=iz+\epsilon$.
+If $z<m$, then there is no problem. However, as we will be taking a contour that extends to infinity, we must consider the case $z>m$. In this case,
+on the right of the axis, the square root gives us $\omega_k=\sqrt{m^2+2iz\epsilon-z^2}$, which goes as $i\sqrt{z^2-m^2}$ for $\epsilon\to 0$ (because $\theta/2=\pi/2$).
+On the other hand, to the left of the axis, the square root goes as $-i\sqrt{z^2-m^2}$, as now $\theta/2=-\pi/2$ due to the definition of the square root function with the
+branch cut along the negative real axis. Thus, $\omega_k$ is discontinuous over the imaginary axis for $\nm{Im}z>m$, and we must be careful in proceeding with contour integration.
+
+If we choose our contour to go along the real line (from $-\infty\to\infty$) and then along a quarter-circle in the first quadrant that comes down to the right of $z=m$, passes
+under, and then goes back out in order to ``finish'' the semicircle. As there are no singularities enclosed inside the contour, our integral over this contour must be zero.
+Consequently, the value of the integral over the real line must be the negative of that of the integral over the rest of the contour. The integral that remains, then, is
+\begin{align*}
+    \mathcal{P}=\frac{2\pi}{i\Delta x}|\mathcal{N}|^2\left(\int_\infty^m d(iz)\; iz e^{-z\Delta x}e^{-\sqrt{z^2-m^2}\Delta t}+
+    \int_m^{\infty} d(iz)\; iz e^{-z\Delta x}e^{+\sqrt{z^2-m^2}\Delta t}\right)
+\end{align*}
+Reversing the order of integration of the first integral, we find that 
+\begin{align*}
+    \mathcal{P}=\frac{4\pi i}{\Delta x}|\mathcal{N}|^2\int_\infty^m dz\; z e^{-z\Delta x}\sinh\left(-\sqrt{z^2-m^2}\Delta t\right)
+\end{align*}
+That this integral is positive definite for arbitrary $\Delta x,\Delta t$ is quite worrying from a relativistic viewpoint, and pushes us towards quantum field theory.
+
+\subsection*{Problem 2}
+
+The Lorentz-invariant integral becomes
+\begin{align*}
+    \int \frac{d^4k}{(2\pi)^4}2\pi\delta\left( k^2+m^2 \right)\Theta\left( k^0>0 \right)=\int \frac{d^4k}{(2\pi)^4}2\pi\delta\left(-(k^0)^2+|\mathbf{k}|^2+m^2 \right)\Theta\left( k^0>0 \right)
+\end{align*}
+To simplify this integral, note that we have a delta function composed with a function of $k^0$. This can be evaluated using the identity
+\begin{align*}
+    \delta\left(-(k^0)^2+|\mathbf{k}|^2+m^2\right)=\frac{\delta\left( k^0-\omega_k\right)}{2\omega_k}
+\end{align*}
+that collapses the above integral:
+\begin{align*}
+    \int\frac{d^4k}{(2\pi)^4}2\pi\frac{\delta(k^0-\omega_k)}{2\omega_k}\Theta(k^0>0)=\int\frac{d^3k}{(2\pi)^32\omega_k}.
+\end{align*}
+
+\subsection*{Problem 3}
+
+Given a Lagrangian density of the form $\mathcal{L}=\mathcal{L}(\phi,\partial_\mu\phi)$, and the expression for the action
+\begin{align*}
+    S[\phi, \partial_\mu\phi]=\int d^4x\; \mathcal{L}(\phi,\partial_\mu\phi).
+\end{align*}
+In analogy to classical mechanics, we use the principle of least action and require that $\delta S=0$ for any first-order variation $\delta \phi$ in the scalar field. 
+By Taylor expanding to first order in $\delta\phi$, we find that
+\begin{align*}
+    \delta S&=S[\phi+\delta\phi,\partial_\mu(\phi+\delta\phi)]-S[\phi,\partial_\mu\phi]\\
+    &=\int d^4x\; \mathcal{L}(\phi+\delta\phi,\partial_\mu(\phi+\delta\phi)) - \mathcal{L}(\phi,\partial_\mu\phi)\\
+    &=\int d^4x\; \frac{\partial\mathcal{L}}{\partial\phi}\delta\phi + \frac{\partial\mathcal{L}}{\partial(\partial_\mu\phi)}\partial_\mu(\delta\phi) 
+\end{align*}
+Integrating the second term by parts, we can factor out the variation on $\phi$. Note also that the surface term vanishes if we, as usual, require $\delta\phi$ to vanish
+at our set endpoints in spacetime. The variation in action must be zero:
+\begin{align*}
+    \delta S=\int d^4x\;\left( \frac{\partial \mathcal{L}}{\partial\phi}-\frac{\partial}{\partial x^\mu}\frac{\partial\mathcal{L}}{\partial(\partial_\mu\phi)} \right)\delta\phi=0
+\end{align*}
+which leads to the Euler-Lagrange equations of motion for the scalar field,
+\begin{align*}
+    \frac{\partial \mathcal{L}}{\partial\phi}-\frac{\partial}{\partial x^\mu}\frac{\partial\mathcal{L}}{\partial(\partial_\mu\phi)}=0.
+\end{align*}
+
+\subsection*{Problem 4}
+
+Given the constraint on Lorentz transformations,
+\begin{align*}
+    \eta_{\mu\nu}\tensor{\Lambda}{^\mu_\alpha}\tensor{\Lambda}{^\nu_\beta}=\eta_{\alpha\beta}.
+\end{align*}
+Multiplying both sides by $\eta^{\gamma\alpha}$ and summing over $\alpha$, we have 
+\begin{align*}
+    \eta^{\gamma\alpha}\eta_{\mu\nu}\tensor{\Lambda}{^\mu_\alpha}\tensor{\Lambda}{^\nu_\beta}&=\eta^{\gamma\alpha}\eta_{\alpha\beta}\\
+    \eta^{\gamma\alpha}\tensor{\Lambda}{_\nu_\alpha}\tensor{\Lambda}{^\nu_\beta}&=\tensor{\delta}{^\gamma_\beta}\\
+    \tensor{\Lambda}{_\nu^\gamma}\tensor{\Lambda}{^\nu_\beta}&=\tensor{\delta}{^\gamma_\beta}
+\end{align*}
+Note that this requires that the inverse of any Lorentz transformation to be the transpose of a Lorentz transformation.
+
+Let us check that this is indeed the case for an arbitrary boost and an arbitrary rotation. Take first a boost of the form
+\begin{align*}
+    \tensor{\Lambda}{^\alpha_\mu}\leftrightarrow\left(\begin{array}{cccc}
+        \gamma & -v\gamma & 0 & 0\\
+        -v\gamma & \gamma & 0 & 0\\
+        0 & 0 & 1 & 0\\
+        0 & 0 & 0 & 1
+    \end{array}\right),
+\end{align*}
+where the indicies have been chosen such that a 4-vector $x$ transforms as $x'^{\alpha}=\tensor{\Lambda}{^\alpha_\mu}x^\mu$. Note that if we raise and lower the indices,
+and then take the transpose, we get
+\begin{align*}
+    \tensor{\Lambda}{_\alpha^\mu}\leftrightarrow\left(\begin{array}{cccc}
+        \gamma & v\gamma & 0 & 0\\
+        v\gamma & \gamma & 0 & 0\\
+        0 & 0 & 1 & 0\\
+        0 & 0 & 0 & 1
+    \end{array}\right)\\
+    \tensor{\Lambda}{^\mu_\alpha}\leftrightarrow\left(\begin{array}{cccc}
+        \gamma & v\gamma & 0 & 0\\
+        v\gamma & \gamma & 0 & 0\\
+        0 & 0 & 1 & 0\\
+        0 & 0 & 0 & 1
+    \end{array}\right)
+\end{align*}
+The velocities now appear with no negatives signs - after raising/lowering and transposing, we reach the inverse of our original boost, as desired. It
+is straightforward to show that these steps hold for any arbitrary boost. Next, take a rotation and perform the same steps:
+\begin{align*}
+    \tensor{\Lambda}{^\alpha_\mu}\leftrightarrow\left(\begin{array}{cccc}
+        1 & 0 & 0 & 0\\
+        0 & \cos\theta & \sin\theta & 0\\
+        0 & -\sin\theta & \cos\theta & 0\\
+        0 & 0 & 0 & 1
+    \end{array}\right)\\
+    \tensor{\Lambda}{_\alpha^\mu}\leftrightarrow\left(\begin{array}{cccc}
+        1 & 0 & 0 & 0\\
+        0 & \cos\theta & \sin\theta & 0\\
+        0 & -\sin\theta & \cos\theta & 0\\
+        0 & 0 & 0 & 1
+    \end{array}\right)\\
+    \tensor{\Lambda}{^\mu_\alpha}\leftrightarrow\left(\begin{array}{cccc}
+        1 & 0 & 0 & 0\\
+        0 & \cos\theta & -\sin\theta & 0\\
+        0 & \sin\theta & \cos\theta & 0\\
+        0 & 0 & 0 & 1
+    \end{array}\right)
+\end{align*}
+and we again reach the inverse, as desired.
+
+
+\subsection*{Problem 5}
+
+Given the commutation relations for the creation and annihilation operators, $[a_{\mathbf{k}},a^\dagger_{\mathbf{k}'}]=(2\pi)^32\omega_k\delta(\mathbf{k}-\mathbf{k}'),$
+and the expressions for the scalar field and its derivative,
+\begin{align*}
+    \phi(x)&=\int\frac{d^3k}{(2\pi)^32\omega_k}\left( a_\mathbf{k}e^{ik\cdot x} + a^\dagger_\mathbf{k}e^{-ik\cdot x} \right)\\
+    \dot{\phi}(x)&=i\int\frac{d^3k}{(2\pi)^32}\left(-a_\mathbf{k}e^{ik\cdot x} + a^\dagger_\mathbf{k}e^{-ik\cdot x} \right)
+\end{align*}
+we can find the commutation relations for the fields:
+\begin{align*}
+    [\phi(t,\mathbf{x}),\dot{\phi}(t,\mathbf{x}')]=i\int \frac{d^3k d^3k'}{(2\pi)^64\omega_k}&\left( a_\mathbf{k}e^{ik\cdot x} + a^\dagger_\mathbf{k}e^{-ik\cdot x} \right)
+    \left( -a_\mathbf{k'}e^{ik'\cdot x'} + a^\dagger_\mathbf{k'}e^{-ik'\cdot x'} \right)\\
+    -&\left(-a_\mathbf{k'}e^{ik'\cdot x'} + a^\dagger_\mathbf{k'}e^{-ik'\cdot x'} \right)
+    \left(a_\mathbf{k}e^{ik\cdot x} + a^\dagger_\mathbf{k}e^{-ik\cdot x} \right)
+\end{align*}
+Collecting/cancelling terms and making use of the the commutation relations for $a$, we find that
+\begin{align*}
+    [\phi(t,\mathbf{x}),\dot{\phi}(t,\mathbf{x}')]&=i\int \frac{d^3k d^3k'}{(2\pi)^64\omega_k}\;[a_\mathbf{k},a^\dagger_{\mathbf{k'}}]e^{i(k\cdot x-k'\cdot x')}
+    - [a^\dagger_{\mathbf{k}},a_{\mathbf{k}'}]e^{i(k'\cdot x'-k\cdot x)}\\
+    &=i\int \frac{d^3k d^3k'}{(2\pi)^32}\;\delta(\mathbf{k}-\mathbf{k}')e^{i(k\cdot x-k'\cdot x')}+\delta(\mathbf{k}'-\mathbf{k})e^{i(k'\cdot x'-k\cdot x)}\\
+    &=i\int \frac{d^3k}{(2\pi)^32}\;e^{ik\cdot(x-x')}+e^{ik\cdot(x'-x)}=i\delta(\mathbf{x}-\mathbf{x}'),
+\end{align*}
+as desired.
+
+\subsection*{Problem 6}
+
+If we take the Hamiltonian
+\begin{align*}
+    H=\int d^3x \left( \frac{1}{2}(\partial_t\phi)^2+\frac{1}{2}(\nabla\phi)^2+\frac{1}{2}m^2\phi^2 \right)
+\end{align*}
+and insert the expression for $\phi(t, \mathbf{x})$ in terms of the creation and annihilation operators, we find
+\begin{align*}
+    H&=-\frac{1}{2}\int \frac{d^3xd^3kd^3k'}{(2\pi)^64}\left(-a_\mathbf{k}e^{ik\cdot x}+a^\dagger_\mathbf{k}e^{-ik\cdot x} \right)\left(-a_\mathbf{k'}e^{ik'\cdot x}+a^\dagger_\mathbf{k'}e^{-ik'\cdot x} \right)\\
+    &-\frac{1}{2}\int \frac{d^3xd^3kd^3k'}{(2\pi)^64\omega_k\omega_{k'}}\mathbf{k}\cdot\mathbf{k}'\left(a_\mathbf{k}e^{ik\cdot x}-a^\dagger_\mathbf{k}e^{-ik\cdot x} \right)\left(a_\mathbf{k'}e^{ik'\cdot x}-a^\dagger_\mathbf{k'}e^{-ik'\cdot x} \right)\\
+    &+\frac{1}{2}\int \frac{d^3xd^3kd^3k'}{(2\pi)^64\omega_k\omega_{k'}}m^2\left(a_\mathbf{k}e^{ik\cdot x}+a^\dagger_\mathbf{k}e^{-ik\cdot x} \right)\left(a_\mathbf{k'}e^{ik'\cdot x}+a^\dagger_\mathbf{k'}e^{-ik'\cdot x} \right)
+\end{align*}
+To get through this dreadfully algebraic mess, note first that all ``pure'' terms (involving only $a$ or only $a^\dagger$) appear with a plus sign in front, and all ``mixed'' terms appear with
+a minus sign in front. Additionally, it should be clear that after writing out each term in these integrals, we can integrate over $x$ to obtain delta functions that either look like
+$\delta(k+k')$ or $\delta(k-k')$, for pure and mixed terms respectively. This is great, because that means we can factor out from these pure terms $-\omega_k^2+|\mathbf{k}|^2+m^2=0$. Thus,
+the pure terms vanish, and only the mixed ones remain, and that too, with a factor of $\omega_k^2+|\mathbf{k}|^2+m^2=2\omega_k^2$. We are now left with
+\begin{align*}
+    H=\frac{1}{2}\int \frac{d^3k}{(2\pi)^32\omega_k}\left( a^\dagger_\mathbf{k}a_\mathbf{k} +a_\mathbf{k}a^\dagger_\mathbf{k} \right)\omega_k,
+\end{align*}
+which can further be simplified via the commutation relations for the creation/annihilation operators,
+\begin{align*}
+    H=\int \frac{d^3k}{(2\pi)^32\omega_k}\left( a^\dagger_\mathbf{k}a_\mathbf{k} +(2\pi)^3\omega_k\delta^3(0)\right)\omega_k.
+\end{align*}
+The second term in the integral is simply an overall shift to the energy of the system, and as we care only for differences in energy, we are free to replace it as we choose. Thus,
+in analogy to the harmonic oscillator, we finally write the Hamiltonian as
+\begin{align*}
+    H=\int \frac{d^3k}{(2\pi)^32\omega_k}\left( a^\dagger_\mathbf{k}a_\mathbf{k} +\frac{1}{2}\right)\omega_k.
+\end{align*}
+
+\subsection*{Problem 7}
+
+Consider a complex scalar field $\phi$ with the Lagrangian density
+\begin{align*}
+    \mathcal{L}=-\partial^\mu\phi^\dagger\partial_\mu\phi - m^2\phi^\dagger\phi + \Omega_0.
+\end{align*}
+To obtain the equations of motion for $\phi^\dagger$, we take the Euler-Lagrange equation for $\phi$,
+\begin{align*}
+    \frac{\partial \mathcal{L}}{\partial\phi}-\frac{\partial}{\partial x^\mu}\frac{\partial\mathcal{L}}{\partial(\partial_\mu\phi)}&=0\\
+    -m^2\phi^\dagger+\partial_\mu\partial^\mu\phi^\dagger&=0
+\end{align*}
+and to obtain the equations of motion for $\phi$, we take the Euler-Lagrange equation for $\phi^\dagger$,
+\begin{align*}
+    \frac{\partial \mathcal{L}}{\partial\phi^\dagger}-\frac{\partial}{\partial x^\mu}\frac{\partial\mathcal{L}}{\partial(\partial_\mu\phi^\dagger)}&=0\\
+    -m^2\phi+\partial_\mu\partial^\mu\phi&=0.
+\end{align*}
+Thus both $\phi$ and $\phi^\dagger$ obey the Klein-Gordon equation. The conjugate momenta to each of these fields is found in the usual way,
+\begin{align*}
+    \Pi_{\phi}&=\frac{\partial\mathcal{L}}{\partial\dot{\phi}}=\dot{\phi}^\dagger\\
+    \Pi_{\phi^\dagger}&=\frac{\partial\mathcal{L}}{\partial\dot{\phi^\dagger}}=\dot{\phi}
+\end{align*}
+The Hamiltonian density is thus given
+\begin{align*}
+    \mathcal{H}&=\Pi_\phi \dot{\phi}+\Pi_{\phi^\dagger}\dot{\phi}^\dagger-\mathcal{L}\\
+    &=2\dot{\phi}^\dagger\dot{\phi}+\partial^\mu\phi^\dagger\partial_\mu\phi + m^2\phi^\dagger\phi - \Omega_0\\
+    &=\dot{\phi}^\dagger\dot{\phi}+\nabla\phi^\dagger\cdot\nabla\phi+m^2\phi^\dagger\phi-\Omega_0\\
+    &=\Pi_{\phi}\Pi_{\phi^\dagger}+\nabla\phi^\dagger\cdot\nabla\phi+m^2\phi^\dagger\phi-\Omega_0
+\end{align*}
+If we Fourier expand,
+\begin{align*}
+    \phi(x)&=\int \frac{d^3k}{(2\pi)^32\omega_k}\left( a_\mathbf{k}e^{ik\cdot x}+b^\dagger_\mathbf{k}e^{-ik\cdot x} \right)\\
+    \phi^\dagger(x)&=\int \frac{d^3k}{(2\pi)^32\omega_k}\left( a_\mathbf{k}^\dagger e^{-ik\cdot x}+b_\mathbf{k}e^{ik\cdot x} \right)\\
+    \dot{\phi}(x)&=i\int \frac{d^3k}{(2\pi)^32}\left( -a_\mathbf{k}e^{ik\cdot x}+b^\dagger_\mathbf{k}e^{-ik\cdot x} \right)\\
+    \dot{\phi}^\dagger(x)&=i\int \frac{d^3k}{(2\pi)^32}\left(a_\mathbf{k}^\dagger e^{-ik\cdot x}+b_\mathbf{k}e^{ik\cdot x} \right)
+\end{align*}
+We can express the two sets of creation/annihilation operators in terms of the fields:
+\begin{align*}
+    \int d^3x e^{-ik'\cdot x}\phi(x)&=\int \frac{d^3k d^3x}{(2\pi)^32\omega_k}\left( a_\mathbf{k}e^{i(k-k')\cdot x}+b^\dagger_\mathbf{k}e^{-i(k+k')\cdot x} \right)\\
+    &=\int\frac{d^3k}{2\omega_k}\left( a_{\mathbf{k}}\delta^3(\mathbf{k}-\mathbf{k}')e^{-i(\omega_k-\omega_{k'})t}
+    +b_\mathbf{k}^\dagger\delta^3(\mathbf{k}+\mathbf{k}')e^{i(\omega_k+\omega_{k'})t}\right)\\
+    &=\frac{1}{2\omega_{k'}}a_{\mathbf{k}'}+\frac{1}{2\omega_{k'}}b^\dagger_{-\mathbf{k}'}e^{2i\omega_{k'}t}\\
+    \int d^3x e^{-ik'\cdot x}\dot{\phi}(x)&=i\int \frac{d^3k d^3x}{(2\pi)^32}\left(-a_\mathbf{k}e^{i(k-k')\cdot x}+b^\dagger_\mathbf{k}e^{-i(k+k')\cdot x} \right)\\
+    &=i\int\frac{d^3k}{2}\left(-a_{\mathbf{k}}\delta^3(\mathbf{k}-\mathbf{k}')e^{-i(\omega_k-\omega_{k'})t}
+    +b_\mathbf{k}^\dagger\delta^3(\mathbf{k}+\mathbf{k}')e^{i(\omega_k+\omega_{k'})t}\right)\\
+    &=-\frac{i}{2}a_{\mathbf{k}'}+\frac{i}{2}b^\dagger_{-\mathbf{k}'}e^{2i\omega_{k'}t}
+\end{align*}
+for $\phi$. The associated expression for $\phi^\dagger$ is found similarly:
+\begin{align*}
+    \int d^3x e^{ik'\cdot x}\phi^\dagger(x)&=\int \frac{d^3k d^3x}{(2\pi)^32\omega_k}\left( a^\dagger_\mathbf{k}e^{i(k'-k)\cdot x}+b_\mathbf{k}e^{i(k'+k)\cdot x} \right)\\
+    &=\int\frac{d^3k}{2\omega_k}\left( a^\dagger_{\mathbf{k}}\delta^3(\mathbf{k}'-\mathbf{k})e^{-i(\omega_{k'}-\omega_{k})t}
+    +b_\mathbf{k}\delta^3(\mathbf{k'}+\mathbf{k})e^{-i(\omega_{k'}+\omega_{k})t}\right)\\
+    &=\frac{1}{2\omega_{k'}}a^\dagger_{\mathbf{k}'}+\frac{1}{2\omega_{k'}}b_{-\mathbf{k}'}e^{-2i\omega_{k'}t}\\
+    \int d^3x e^{ik'\cdot x}\dot{\phi}^\dagger(x)&=-\frac{i}{2}a^\dagger_{\mathbf{k}'}+\frac{i}{2}b_{-\mathbf{k}'}e^{-2i\omega_{k'}t}
+\end{align*}
+Combining these results, we can solve for the creation/annihilation operators in terms of the scalar fields and their canonically conjugate momenta:
+\begin{align*}
+    a_{\mathbf{k}}&=\int d^3x\; e^{-ik\cdot x}\left( i\Pi_{\phi^\dagger}+\omega_k\phi(x) \right)\\
+    a^\dagger_{\mathbf{k}}&=\int d^3x\; e^{ik\cdot x}\left( -i\Pi_{\phi}+\omega_k\phi^\dagger(x) \right)\\
+    b_{\mathbf{k}}&=\int d^3x\; e^{-ik\cdot x}\left( i\Pi_{\phi} + \omega_k\phi^\dagger(x) \right)\\
+    b_{\mathbf{k}}^\dagger&=\int d^3x\; e^{ik\cdot x}\left( -i\Pi_{\phi^\dagger} + \omega_k\phi(x) \right)
+\end{align*}
+
+If we now assume the canonical commutation relations for the fields and their conjugate momenta,
+\begin{align*}
+    [\phi(x),\Pi_{\phi}(x')]&=i\delta(x-x')\\
+    [\phi^\dagger(x),\Pi_{\phi^\dagger}(x')]&=i\delta(x-x')\\
+    [\phi(x),\Pi_{\phi^\dagger}(x')]&=0\\
+    [\phi^\dagger(x),\Pi_{\phi}(x')]&=0\\
+\end{align*}
+we can use the above expressions for the creation/annihilation operators to compute commutators. First note that by the third commutation relation above, it follows
+trivially that
+\begin{align*}
+    [a_{\mathbf{k}},b^\dagger_{\mathbf{k}'}]&=0\\
+    [a^\dagger_{\mathbf{k}},b_{\mathbf{k}'}]&=0.
+\end{align*}
+Less obvious is
+\begin{align*}
+    [a_{\mathbf{k}}, a^\dagger_{\mathbf{k}'}]=&\int d^3x d^3x'\;e^{i(k'\cdot x'-k\cdot x)}\\
+    &\left((i\Pi_{\phi^\dagger}(x')+\omega_{k}\phi(x))( -i\Pi_{\phi}(x)+\omega_{k'}\phi^\dagger(x'))-( -i\Pi_{\phi}(x)+\omega_{k'}\phi^\dagger(x'))(i\Pi_{\phi^\dagger}(x')+\omega_k\phi(x))\right)\\
+    =&\int d^3xd^3x'\;e^{i(k'\cdot x' - k\cdot x)} \left( -i\omega_k\phi(x)\Pi_{\phi}(x') + i\omega_{k'}\Pi_{\phi^\dagger}(x)\phi^\dagger(x')+i\omega_k\Pi_{\phi}(x')\phi(x)-i\omega_{k'}\phi^\dagger(x')\Pi_{\phi^\dagger}(x)\right)\\
+    =&\int d^3xd^3x'\;e^{i(k'\cdot x'-k\cdot x)} \left( i\omega_{k'}[ \Pi_{\phi^\dagger}(x),\phi^\dagger(x') ] +i\omega_k [ \Pi_{\phi}(x'),\phi(x) ] \right)\\
+    =&\int d^3xd^3x'\;(\omega_k+\omega_{k'})\delta(x-x')e^{i(k'\cdot x'-k\cdot x)}=(2\pi)^32\omega_k\delta(k-k'),
+\end{align*}
+and very similarly,
+\begin{align*}
+    [b_{\mathbf{k}}, b^\dagger_{\mathbf{k}'}]=&(2\pi)^32\omega_k\delta(k-k').
+\end{align*}
+
+The Hamiltonian can now be expressed in terms of these operators:
+\begin{align*}
+    H=&\int d^3x\;\mathcal{H}=\int d^3x\;\dot{\phi}^\dagger(x)\dot{\phi}(x)+\nabla\phi^\dagger(x)\cdot\nabla\phi(x)+m^2\phi^\dagger(x)\phi(x)-\Omega_0\\
+    =&-\int \frac{d^3xd^3kd^3k'}{(2\pi)^64}\;\left(-a_\mathbf{k}e^{ik\cdot x}+b^\dagger_\mathbf{k}e^{-ik\cdot x}\right)\left( a_\mathbf{k'}^\dagger e^{-ik'\cdot x}+b_\mathbf{k'}e^{ik'\cdot x} \right)\\
+    &+\int \frac{d^3xd^3kd^3k'}{(2\pi)^64\omega_k\omega_{k'}}\mathbf{k}\cdot\mathbf{k}'\left( a^\dagger_\mathbf{k}a_{\mathbf{k}'}e^{i(k-k')\cdot x}+b_\mathbf{k}b^\dagger_{\mathbf{k}'}e^{-i(k-k')\cdot x} -b_\mathbf{k}a_{\mathbf{k}'}e^{i(k+k')\cdot x}-a^\dagger_\mathbf{k} b^\dagger_{\mathbf{k}'}e^{-i(k+k')\cdot x}\right)\\
+    &+\int\frac{d^3xd^3kd^3k'}{(2\pi)^64\omega_k\omega_{k'}}m^2\left(a^\dagger_\mathbf{k}a_{\mathbf{k}'}e^{i(k-k')\cdot x}+b_\mathbf{k}b^\dagger_{\mathbf{k}'}e^{-i(k-k')\cdot x} +b_\mathbf{k}a_{\mathbf{k}'}e^{i(k+k')\cdot x}+a^\dagger_\mathbf{k} b^\dagger_{\mathbf{k}'}e^{-i(k+k')\cdot x} \right)\\
+    &-\Omega_0
+\end{align*}
+Note that the mixed terms have signs such that (upon delta-function collapse) they yield $\omega_k^2-|\mathbf{k}|^2-m^2$; i.e. they vanish. The other terms, on the other hand, yield
+$\omega_k^2+|\mathbf{k}|^2+m^2=2\omega_k^2$, and the Hamiltonian becomes:
+\begin{align*}
+    H&=-\Omega_0+\int \frac{d^3k}{(2\pi)^32\omega_k}\left( a_\mathbf{k}^\dagger a_\mathbf{k}+b_\mathbf{k}b^\dagger_\mathbf{k} \right)\omega_k\\
+    &=-\Omega_0+\int d^3k\;\omega_k\delta(0)+\int \frac{d^3k}{(2\pi)^32\omega_k}\left( a_\mathbf{k}^\dagger a_\mathbf{k}+b^\dagger_\mathbf{k} b_\mathbf{k}\right)\omega_k
+\end{align*}
+As we would like the ground state energy of the system to be zero, we simply require that $\Omega_0=\int d^3k\;\omega_k\delta(0)$.
+
+Returning to the equations of motion, if we define $j^\mu\equiv i(\phi\partial^\mu\phi^\dagger-\phi^\dagger\partial^\mu\phi)$. If we take the four-divergence, we find that
+\begin{align*}
+    \partial_\mu j^\mu&=i\left( \partial_\mu\phi\partial^\mu\phi^\dagger+\phi\partial_\mu\partial^\mu\phi^\dagger-\partial_\mu\phi^\dagger\partial^\mu\phi-\phi^\dagger\partial_\mu\partial^\mu\phi \right)\\
+    &=i\left( \phi\partial_\mu\partial^\mu\phi^\dagger-\phi^\dagger\partial_\mu\partial^\mu\phi \right)\\
+    &=i\left( m^2\phi\phi^\dagger - m^2\phi^\dagger\phi \right)\\
+    &=0
+\end{align*}
+Splitting up the components of this conservation law, we find
+\begin{align*}
+    \partial_t\left( \int_V d^3x\;j^0 \right)=-\int_{\partial V}d\mathbf{S}\cdot \mathbf{j}
+\end{align*}
+and if we define $Q=\int_Vd^3\;j^0$, and use the fact that
+\begin{align*}
+    j^0&=i\left( \phi\partial^0\phi^\dagger-\phi^\dagger\partial^0\phi \right)\\
+    &=i\left( \phi^\dagger\dot{\phi}-\phi\dot{\phi}^\dagger \right),
+\end{align*}
+we will find that
+\begin{align*}
+    Q=-\int\frac{d^3xd^3kd^3k'}{(2\pi)^64}\left( \frac{1}{\omega_k}(a_\mathbf{k}^\dagger e^{-ik\cdot x}+b_\mathbf{k}e^{ik\cdot x})(-a_{\mathbf{k}'}e^{ik'\cdot x}+b_{\mathbf{k}'}^\dagger e^{-ik'\cdot x})\right.\\
+    \left.-\frac{1}{\omega_k}(a_\mathbf{k}e^{ik\cdot x}+b_{\mathbf{k}}e^{-ik\cdot x})(a^\dagger_{\mathbf{k}'}e^{-ik'\cdot x}+b_{\mathbf{k}'}e^{ik'\cdot x}) \right),
+\end{align*}
+which, by almost exactly the same tedious algebra from the rest of this problem set, yields
+\begin{align*}
+    Q=\int\frac{d^3k}{(2\pi)^32\omega_k}(a^\dagger_\mathbf{k}a_\mathbf{k}-b^\dagger_\mathbf{k}b_\mathbf{k}).
+\end{align*}
+
+Finally, note that in our complex scalar free field theory, there is no overall factor of $1/2$, as there is in the Lagrangian density of the real theory. If this factor \textit{were}, in fact,
+present, the Hamiltonian of the complex field theory would change as well, and the energy eigenvalues of the Hamiltonian would be off by a factor of 2 - we'd get $\omega_k/2$ instead of
+$\omega_k$, for example.
+
+
+\end{document}

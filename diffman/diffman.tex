@@ -23,6 +23,8 @@ Recommended textbooks:
 Problem sets will be assigned every one/two weeks through email. Some homework problems will be taken from Lee (second edition).
 There will most likely be two midterms and a final, all in-class.
 
+Office hours are on Fridays from 11am to 12pm.
+
 \section{Introduction}
 
 \begin{defn}
@@ -173,10 +175,74 @@ Hausdorff and second countable. Pathological spaces:
 \end{exmp}
 
 \begin{exmp}
-    Take $S^2=\left\{ (x,y,z) | x^2+y^2+z^2=1 \right\}\subset\mathbb{R}^3$. This is Hausdorff and second countable. We can take 6 graphical coordinate charts
-    $\left\{ x>0 \right\},\left\{ x<0 \right\},\left\{ y>0 \right\},\left\{ y<0 \right\},\left\{ z>0 \right\},\left\{ z<0 \right\}$.
+    Take $S^2=\left\{ (x,y,z) | x^2+y^2+z^2=1 \right\}\subset\mathbb{R}^3$. This is Hausdorff and second countable. We can take the 6 graphical coordinate charts
+    $\left\{ x>0 \right\},\left\{ x<0 \right\},\left\{ y>0 \right\},\left\{ y<0 \right\},\left\{ z>0 \right\},\left\{ z<0 \right\}$, with the appropriate homeomorphisms
+    (projections, in this case) to map from hemispheres to the planes ``below'' them. Take for example the maps $\phi_1,\phi_2$ that map from the upper and lower hemispheres
+    to the x-y plane respectively. Also, take $\phi_3$ to be the map for $\left\{ y>0 \right\}$ to the x-z plane. Then, on $U_1\cap U_1$ we have that
+    $\phi_3\circ\phi_1^{-1}:(x,y)\to(x,z)=\sqrt{1-x^2-y^2}$. Clearly this is differentiable as long as $z\neq0$. Indeed, all the charts turn out to be smoothly compatible, and
+    we have a manifold. This manifold is what we call a \textbf{level set} of $F(x,y,z)=x^2+y^2+z^2$.
 \end{exmp}
 
-In general, though, what about $\left\{ x | F(x)=c \right\}\subset \mathbb{R}^n$? 
+In general, though, what about $\left\{ x | F(x)=c \right\}\subset \mathbb{R}^n$? Is it a manifold? (Indeed, it turns out that a set of equations $F_i(x_1\cdots x_m)=c_n$
+has solutions that often form a manifold.)
+
+Note: take $U\subset\mathbb{R}^n$ open. Take $F:U\to\mathbb{R}$ continuous for any $c\in\mathbb{R}$. Then, $F^{-1}(c)$ is a closed subset of $U$. In fact, $F^{-1}$ is always
+Hausdorff and second countable as a subset of $\mathbb{R}^n$. When is $F^[-1](c)$ a differentiable manifold? Let us first ask: when can we solve one variable
+in terms of the others? In other words, given $F(x,y,z)=c$, can we write, for example, $z=f(x,y)$?
+
+\begin{exmp}
+    Suppose $F$ is linear: $F(x,y,z)=ax+by+dz$. On $F(x,y,z)$, we can solve $x$ in terms of $y,z$ as long as $a=\frac{\partial F}{\partial x}\neq 0$.
+\end{exmp}
+
+\begin{thm}[Implicit function theorem]
+    Suppose $U$ is open in $\mathbb{R}^n$ and $F:U\to\mathbb{R}$. Suppose $F(a)=c$, with $a\in U$, and $\frac{\partial F}{\partial x^n}(a)\neq 0$.
+    Then, there exists a neighborhood $V$ of $a$ and a unique function $f(x_1\cdots x_{n-1})$ such that $\frac{\partial F}{\partial x_n}\neq0$ on $V$ and
+    \begin{enumerate}
+        \item $V\cap F^{-1}(c)=V\cap\left\{ (x_1\cdots x_{n-1}) | x_n=f(x_1\cdots x_{n} \right\}$
+        \item $\frac{\partial f}{\partial x_i}=-\frac{\partial F}{\partial x_i}/\frac{\partial F}{\partial x_n}$ for $i=1\cdots n-1$
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    Go over this in your own time/past notes.
+\end{proof}
+
+\begin{thm}
+    Suppose $F:\mathbb{R}^n\to\mathbb{R}$ is $C^\infty$. Take $c\in\mathbb{R}$ and $F^{-1}\neq \varnothing$ and suppose $\nabla F(x)\neq0$ for all $x\in F^{-1}(c)$. $c$ is called
+    a \textbf{regular value} of $f$. Then, $F^{-1}(c)$ is an $(n-1)$ dimensional smooth manifold.
+\end{thm}
+\begin{proof}
+    $F^{-1}(c)$ is Hausdorff and second countable. Now we wish to produce a differentiable structure. Consider $\tilde{U}_i=\left\{ \frac{\partial F}{\partial x_i}\neq0 \right\}\cap F^{-1}(c)$.
+    $U_i$ is open in $F^{-1}(c)$ and $F^{-1}(c)\subset\cup_{i=1}^nU_i$ by the assumption that the gradient is nonzero on $F^{-1}(c)$. For each point $a\in U_i$, by the
+    implicit function theorem, there exists a neighborhood $U_a$ of $a$ (may assume $U_a\subset U_i$ by taking an intersection) such that $U_a\cap F^{-1}(c)$ is the graph
+    of a function $\left\{ x_i=f_i(x_1\cdots x_{i+1}\cdots x_n) \right\}$ and this $f_i$ is unique.
+
+    We take the collection of all these $U_a$ $a\in F^{-1}(c)$ as coordinate charts. When two coordinate charts overlap, if they belong to the same $U_i$, by uniqueness
+    of $f_i$ the transition map must be the identity map. But when two coordinate charts overlap but belong to different $U_i$, the transition maps consist 
+    going from one projection to another (or unprojecting), which is simply a matter of dropping (or adding back) certain $x_i$. Since, by the implicit function theorem, 
+    we may write $x_i$ smoothly in terms of the other coordinates, the transition maps are smooth.
+\end{proof}
+
+For $F(x,y,z)=x^2+y^2+z^2$, the gradient is $\nabla F=(2x, 2y, 2z)$. Thus, the sphere is a differentiable manifold as the choice of $c=1$ yields a gradient
+that is not the zero vector.
+
+Remark (invariance of dimension): If a smooth manifold is connected, then any coordinate chart is homeomorphic to an open subset of $\mathbb{R}^n$ for a fixed $n$, this $n$ is called
+the dimension of the manifold.
+
+\begin{thm}
+    Take $U$ open in $\mathbb{R}^{n+m}$ and $F:U\to\mathbb{R}^m$ smooth. Let $c\in\mathbb{R}^m$ and $F^{-1}(c)\neq\varnothing$. Suppose that for all $a\in F^{-1}(c)$,
+    $DF_a:\mathbb{R}^{n+m}\to\mathbb{R}^m$ is of rank $m$ (full rank). Then, $F^{-1}(c)$ is a $n$ dimensional smooth manifold and $c$ is called a \textbf{regular value}
+    of $F$. Recall that $DF_a$ is simply the $m\times(n+m)$ matrix of partial derivatives of $F_i$. The corresponding implicity function theorem says that if
+    the determinant of the $m\times m$ submatrix of $DF_a$ is not zero, then $x_1\cdots x_m$ can be locally solved in terms of $x_{m+1}\cdots x_{m+n}$.
+\end{thm}
+
+\begin{exmp}
+Let's look at the simple case $m=3$, $n=2$:
+\begin{align*}
+F_1(x_1,x_2,x_3)=a_{11}x_1+a_{12}x_2+a_{13}x_3
+F_2(x_1,x_2,x_3)=a_{21}x_1+a_{22}x_2+a_{23}x_3
+\end{align*}
+It's clear that if the $2\times2$ left submatrix has non-zero determinant, and we set $F_1=c_1,F_2=c_2$, we will be able to solve for $x_3$ in terms of $x_1,x_2$.
+\end{exmp}
+
 
 \end{document}
