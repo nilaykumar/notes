@@ -244,5 +244,103 @@ F_2(x_1,x_2,x_3)=a_{21}x_1+a_{22}x_2+a_{23}x_3
 It's clear that if the $2\times2$ left submatrix has non-zero determinant, and we set $F_1=c_1,F_2=c_2$, we will be able to solve for $x_3$ in terms of $x_1,x_2$.
 \end{exmp}
 
+(January 31, 2012)
+\begin{defn}
+    Let $M$ be a smooth manifold. $f:M\to\mathbb{R}$ is a differentiable ($C^\infty$) function if for all $p\in M$ there exists a coordinate chart 
+    $(U,\phi)$ containing $p$ such that $f\circ \phi^{-1}$ is $C^\infty$ on $\phi(U)$. Note that there is no ambiguity in terms of overlap of charts,
+    as a smooth manifold's charts are smoothly compatible.
+\end{defn}
+
+\begin{defn}
+    Let $M, N$ be smooth manifolds. A map $F:M\to N$ is a \textbf{smooth map} if for any point $p\in M$, there exists a coordinate chart $(U,\phi$ containing
+    $p$ and a coordinate chart $(V,\psi)$ containing $F(p)$, such that $F(U)\subset V$ and $\psi\circ F\circ \phi^{-1}:\phi(U)\to\mathbb{R}^m$ is smooth.
+    Check that this definition is well-defined.
+\end{defn}
+
+\begin{defn}
+    $F:M\to N$ is a \textbf{diffeomorphism} if both $F$ and $F^{-1}$ are differentiable.
+\end{defn}
+
+\begin{exmp}
+    There are two different differentiable structures on $\mathbb{R}$. One of these simply consists of the atlas $\left\{ (\mathbb{R},\id) \right\}$. However,
+    we can also use $\left\{ (\mathbb{R},\psi(x)=x^3) \right\}$. These are different because the cubic root function, for example, is differentiable only under
+    the second structure. Now consider $F$ from the first to the second structure, $F$ being the cubic root function. We claim that both $\psi\circ F\circ \id^{-1}$
+    and $\id\circ F^{-1}\circ \psi^{-1}$ are identity functions. Thus $F$, by the definitions above, is a diffeomorphism between these two differentiable manifolds.
+    These two differentiable structures are equivalent under diffeomorphism.
+\end{exmp}
+
+Consider the vector space (over $\mathbb{R}$) of smooth functions of $M$. What constitutes this vector space? Can we, for example, approximate a characteristic
+function by smooth functions? Furthermore, suppose we are given $k$ points on $M$ - is there a smooth function that has a given value at each of these points?
+Note that if we can find this, by taking $k$ to infinity, and setting all but one of the given values to 0, we will have shown that the vector space is infinite
+dimensional.
+
+\begin{defn}
+    A function $f$ is \textbf{real analytic} at a point $p$ if $f$ is equal to its Taylor expansion at $p$ in a neighborhood of $p$.
+\end{defn}
+
+\begin{thm}
+    If an analytic function is zero on an open set, it is zero everywhere as long as $M$ is connected.
+\end{thm}
+Note that this theorem shows that analytic functions could not be used to approximate a characteristic functions, as they have to be zero in some open set.
+
+Thankfully, there are smooth functions that are not analytic. Take, for example,
+\begin{align*}
+    f(x)=\left\{
+        \begin{array}{lr}
+            e^{-\frac{1}{t}} & t>0\\
+            0 & t\leq 0
+        \end{array}
+    \right.
+\end{align*}
+One can show that $f^{n}(0)=0$ for any positive integer $n$, which means that the Taylor series of $f$ at $t=0$ is identically zero but $f$ is ``not''
+the zero function in any neighborhood of $t=0$. One can show (via, say, l'Hopital)
+\begin{align*}
+    f'(0)=\lim_{t\to 0}\frac{f(t)-f(0)}{t}=\lim_{t\to 0}\frac{e^{-1/t}}{t}=0
+\end{align*}
+and repeat this for any higher derivatives.
+
+\begin{lem}[Existence of cut-off and bump functions]
+\end{lem}
+
+\begin{defn}
+    The support of a function is defined to be
+    \[\nm{supp}(g)=\overline{\left\{ x | g(x) \neq0 \right\}}\]
+\end{defn}
+
+\begin{thm}[Existence of partition of unity]
+    Let $M$ be a smooth manifold and $\mathcal{O}$ is an open cover of $M$. Then there exist $C^\infty$ functions $\phi_\alpha:M\to[0,1]$ for
+    $\alpha\in A$ (where $A$ is an index set) such that
+    \begin{enumerate}
+        \item The set of supports $\left\{ \nm{supp}\phi_\alpha \right\}_{\alpha\in A}$ is locally finite. In other words, for any point $p\in M$, there
+            exists a neighborhood of $p$ that intersects a finite number of $\nm{supp}\phi_\alpha$.
+        \item $\sum_\alpha\phi_\alpha(p)=1$ for all $p\in M$
+        \item For all $\alpha\in A$, there exists $U\in\mathcal{O}$ such that $\nm{supp}\phi_\alpha\in U$.
+    \end{enumerate}
+\end{thm}
+We will not prove this, as it is rather long and difficult. However, this theorem is important as it will allow us to move from talking about local
+properties to global properties.
+
+\begin{exmp}
+    \[\mathbb{R}=(-\infty,2.5)\cup(0.5,\infty)\]
+    Take $\phi_1(t)=\frac{f(2-t)}{f(2-t)+f(t-1)}$ and $\phi_2(t)=\frac{f(t-1)}{f(2-t)+f(t-1)}$. These satisfy the above theorem, as there are a finite number of them,
+    they clearly add up to 1, and each one's support is contained in a different set of the open cover.
+\end{exmp}
+
+\begin{thm}
+Suppose $A$ is a closed subset and $U$ is an open subset of $M$ with $A\subset U$. Then there exists a smooth bump function $\psi:M\to\mathbb{R}$,
+$0\leq\psi\leq1$ such that $\psi\equiv 1$ on $A$ and $\nm{supp}\psi\subset U$.
+\end{thm}
+\begin{proof}
+    Let $U_0=I$, $U_1=M\setminus A$. Then, $\left\{ U_1,U_2 \right\}$ is an open cover, and there exist $\psi_\alpha$ partition of unity. $\nm{supp}\psi_\alpha\subset U$
+    or $\nm{supp}\psi_\alpha\subset M\setminus A$ for each $\alpha$. Consider $\psi_1=\sum_{\nm{supp}\psi_\alpha\subset M\setminus A}\psi_\alpha$. Then, $\psi_1\equiv 0$
+    on $A$. Claim: $\psi_0=1-\psi_1$ is the desired function, as $\psi_0\equiv0$ on $A$. On the other hand, $\psi_0=\sum_{\nm{supp}\psi_\alpha\subset U}\psi_\alpha$,
+    meaning $\nm{supp}\psi_0\subset U$.
+\end{proof}
+
+\begin{thm}
+    Suppose $A\subset U\subset M$ with $A$ closed and $U$ open and $f:A\to \mathbb{R}$ is a function that can be extended to a smooth function in a neighborhood of $A$.
+    Then, there exists a smooth function $\tilde{f}:M\to\mathbb{R}$, such that $tilde{f}|_A=f|_A$ and $\nm{supp}\tilde{f}\subset U$.
+\end{thm}
+The proof of this theorem is very similar to that of the above theorem, and will likely be in a future homework.
 
 \end{document}
