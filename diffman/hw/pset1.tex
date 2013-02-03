@@ -1,0 +1,227 @@
+\documentclass{mathnotes}
+
+
+\title{Introduction to Differentiable Manifolds}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+
+The line that goes through $(0,0,1)$ and $(x,y,z)\in\mathbb{S}^2$ is given by $(0,0,1)+t(x,y,z-1)$ for $t\in\mathbb{R}$.
+This line intersects the $z=-1$ plane when $1+t(z-1)=-1$, i.e. $t=-\frac{2}{z-1}$. Therefore,
+\begin{align*}
+    (0,0,1)-\frac{2}{z-1}(x,y,z-1)=(0,0,1)+(\frac{2x}{1-z},\frac{2y}{1-z},-1).
+\end{align*}
+
+The line that goes through $(0,0,-1)$ and $(x,y,z)\in\mathbb{S}^2$ is given by $(0,0,-1)+t(x,y,z+1)$ for $t\in\mathbb{R}$.
+This line intersects the $z=1$ plane when $-1+t(z+1)=1$, i.e. $t=\frac{2}{z+1}$. Therefore,
+\begin{align*}
+    (0,0,-1)+\frac{2}{z+1}(x,y,z+1)=(0,0,-1)+(\frac{2x}{1+z},\frac{2y}{1+z},1).
+\end{align*}
+
+Given the map $\psi\circ\phi^{-1}\left(\frac{2x}{1-z},\frac{2y}{1-z}\right)=\left( \frac{2x}{1+z},\frac{2y}{1+z} \right)$, defined for $\left(\frac{2x}{1-z},\frac{2y}{1-z}\right)\in\mathbb{R}^2-\left\{ \left( 0,0 \right) \right\}=\phi(U\cap V)$,
+we can show that this transition map is smooth by taking
+\[u=\frac{2x}{1-z} \nm{and} v=\frac{2y}{1-z}.\]
+We then solve for $x,y$ in terms of $u,v$
+\[x=\frac{u(1-z)}{2} \nm{and} y=\frac{v(1-z)}{2},\]
+and insert these into the equation of constraint,
+\begin{align*}
+    x^2+y^2+z^2=1\\
+    u^2(1-z)^2+v^2(1-z^2)+4z^2=4\\
+    (u^2+v^2+4)z^2-2(u^2+v^2)z+(u^2+v^2-4)=0,
+\end{align*}
+which by the quadratic equation,
+\begin{align*}
+    z&=\frac{2(u^2+v^2)\pm\sqrt{4(u^2+v^2)^2-4(u^2+v^2+4)(u^2+v^2-4)}}{2(u^2+v^2+4)}\\
+    &=\frac{u^2+v^2\pm4}{u^2+v^2+4}=\frac{u^2+v^2-4}{u^2+v^2+4}
+\end{align*}
+where we have dropped the impossible case $z=1$. Inserting this value for $z$ back into the expressions for $x,y$, we find
+\begin{align*}
+    x=\frac{4u}{u^2+v^2+4} \nm{and} y=\frac{4v}{u^2+v^2+4}.
+\end{align*}
+To determine what $u, v$ are mapped to, we insert $(x,y,z)$ into the values output by the transition map, and get as desired, 
+\begin{align}
+    (u,v)\to\left(\frac{4u}{u^2+v^2},\frac{4v}{u^2+v^2}\right).
+    \label{eq:1}
+\end{align}
+
+To find the inverse transition map $\phi\circ\psi^{-1}$, we may simply insert $(\alpha,\beta)$ on the right hand side of Eq.~(\ref{eq:1}), and
+solve for $u, v$:
+\begin{align*}
+    \alpha=\frac{4u}{u^2+v^2} \nm{and} \beta=\frac{4v}{u^2+v^2}.
+\end{align*}
+First note that $\frac{\alpha}{\beta}=\frac{u}{v}$. Additionally,
+\begin{align*}
+    u^2\alpha-4u-v^2\alpha=0\\
+    \left( \alpha+\frac{\beta^2}{\alpha} \right)u^2-4u=0\\
+    u\left( u(\alpha+\frac{\beta^2}{\alpha})-4 \right)=0
+\end{align*}
+which yields (ignoring $u,v,=0$ as above)
+\begin{align*}
+    u=\frac{4\alpha}{\alpha^2+\beta^2} \nm{and} v=\frac{4\beta}{\alpha^2+\beta^2}.
+\end{align*}
+Thus, it is clear that these two charts are smoothly compatible, as the transition functions are diffeomorphisms (compositions of smooth functions that are well-behaved).
+
+\subsection*{Problem 2}
+
+Let $\mathfrak{U}_1$ be the atlas consisting of the above stereographic projections and $\mathfrak{U}_2$ be the atlas consisting of the 6
+graphical coordinate charts. To show that $\mathfrak{U}_1\cup\mathfrak{U}_2$ is an atlas, we must check that all of the charts are smoothly compatible with each other.
+Note, however, that due to the symmetry of the problem, we have to only two cases: one of the stereographic projections against the $z>0$ chart and any one other
+graphical coordinate chart. This is justified because the cases for the two different stereographic projections are identical, because the $z<0$ chart case is identical
+to that of $z>0$ (except without the restriction on the south pole that is placed on the north) and because the projection treats
+all the ``other'' 4 charts functionally equivalent (since the sign in front of $z$ does not change). 
+
+Let us first consider the case of the transition map between the north-pole stereographic projection and the $z>0$ chart, $\psi\circ\phi^{-1}$. The expressions
+for $x,y$ in terms of the stereographic $u,v$ are identical to those above - the only thing that changes is the image:
+\begin{align*}
+    \psi\circ\phi^{-1}\left( \frac{2x}{1-z},\frac{2y}{1-z} \right)= (x,y).
+\end{align*}
+which, in terms of $u,v$ is simply (from earlier),
+\begin{align*}
+    \psi\circ\phi^{-1}\left( u,v \right)=\left(\frac{4u}{u^2+v^2+4},\frac{4v}{u^2+v^2+4}\right).
+\end{align*}
+This map's inverse is obviously
+\begin{align*}
+    \phi\circ\psi^{-1}\left( x,y \right)=\left( \frac{2x}{1-z},\frac{2y}{1-z} \right).
+\end{align*}
+As both the transition map and its inverse are smooth, these maps are smoothly compatible.
+
+Now let us choose one other chart; namely, the $y>0$ chart. Thus we have:
+\begin{align*}
+    \psi\circ\phi^{-1}\left( \frac{2x}{1-z},\frac{2y}{1-z} \right)=(x,z).
+\end{align*}
+Using the same definitions of $u, v$ as above, we can write
+\begin{align*}
+    \psi\circ\phi^{-1}\left( u, v \right)=\left(\frac{4u}{u^2+v^2+4},\frac{u^2+v^2-4}{u^2+v^2+4}\right).
+\end{align*}
+Again, this map's inverse is obvious:
+\begin{align*}
+    \phi\circ\psi^{-1}(x,z)=\left( \frac{2x}{1-z},\frac{2y}{1-z} \right).
+\end{align*}
+Since the map and it's inverse are clearly smooth (we again don't worry about $z=1$ as we are dealing with the stereographic projection from the north pole), these
+transition maps are smoothly compatible. Consequently, we have shown that the stereographic atlas and the graphical atlas of $\mathbb{S}^2$ are equivalent/compatible.
+
+\subsection*{Problem 3}
+
+Let $\sim$ be the equivalence relation on $X=\mathbb{C}^{n+1}\setminus\left\{ 0 \right\}$ with $z\sim \lambda z$, for any $z\in X$ and $\lambda\in\mathbb{C}\setminus\left\{ 0 \right\}$. Let
+$\mathbb{C}\mathbb{P}^n=X\setminus\sim$ denote the set of equivalence classes and define the projection $\pi: X\to\mathbb{C}\mathbb{P}^n$ as the map that
+takes each element of $X$ to its equivalence class - i.e. the map that takes points in $X$ to the linear subspace that they span.
+We declare, in the usual way, that a subset $U\subset\mathbb{C}\mathbb{P}^n$ be open if and only if $\pi^{-1}(U)$ is open in $X$. Under $\pi$, then, $\mathbb{C}\mathbb{P}^n$ forms a quotient space.
+
+We can construct an atlas for $\mathbb{C}\mathbb{P}^n$ almost exactly as we did for the real case. Consider the open set $U_i=\left\{z\in X \big| |z_i|>0 \right\}$. Then, $V_i=\pi(U_i)$ is open.
+We define the map $\phi_i:U_i\to\mathbb{C}^n$ by
+\begin{align*}
+    \phi_i(z)=\phi_i(z_1, \ldots, z_{n+1})=\left( \frac{z^1}{z_i}, \ldots, \frac{z^{i-1}}{z_i}, \frac{z^{i+1}}{z_i}, \ldots,\frac{z^{n+1}}{z_i}\right).
+\end{align*}
+Note that the map $\phi_i\circ\pi:X\to\mathbb{C}^n$ is essentially just a projection from $\mathbb{C}^{n+1}$ to $\mathbb{C}^n$, and is thus continuous. By the characteristic
+property of quotient maps, then, $\phi_i$ is continuous. As the inverse is given by
+\begin{align*}
+    \phi_i^{-1}(z^1, \ldots, z^n)=[z^1, \ldots, z^{i-1}, 1, z^i, \ldots, z^n],
+\end{align*}
+which is clearly continuous as well, $\phi_i$ is a homeomorphism. To show that $\left\{ (U_i,\phi_i) \right\}$ forms an atlas, we must show that the transition maps are
+smoothly compatible. Take, without loss of generality, $i>j$, so
+\begin{align*}
+    \phi_j\circ\phi_i^{-1}(z^1, \ldots, z^n)=\left( \frac{z^1}{z^j}, \ldots, \frac{z^{j-1}}{z^j}, \frac{z^{j+1}}{z^j} \ldots, \frac{z^{i-1}}{z^j}, \frac{1}{z^j}, \frac{z^{i+1}}{z^j}, \ldots, \frac{z^n}{z^j}  \right).
+\end{align*}
+Since these charts overlap where $z^i\neq0, z^j\neq 0$, this transition map is smooth and its inverse is as well. Thus, in general, the transition maps
+are diffeomorphisms, and $\mathbb{C}\mathbb{P}^n$ forms a smooth manifold.
+
+\subsection*{Problem 4}
+
+Let $X$ be the set of all points $(x,y)\in\mathbb{R}^2$ such that $y=\pm 1$, and let $M$ be the quotient of $X$ by the equivalence relation generated
+by $(x,-1)\sim(x,1)$ for all $x\neq 0$. The open sets of the quotient topology are those whose preimages $\pi^{-1}(U)$ are open in $X$. Note that this means
+that there exist open sets in $M$ that contain two, one, or zero of the two origins (the appropriate unions of open sets in $X$ are easily found). Let us first show that $M$
+is locally Euclidean. Let $U_1$ be the open set that contains all of $M$ but one of the origins, and let $U_2$ be the open set that contains all of $M$ but the other origin.
+Then, $\mathcal{U}=\left\{ U_1, U_2 \right\}$ is an open cover of $M$.
+Furthermore, it should be obvious that each of the open sets in this cover is homeomorphic to $\mathbb{R}$;
+in other words, any open subset of the line of two origins that contains only one origin is homeomorphic to an open set in the $\mathbb{R}$. Consequently,
+$M$ is locally Euclidean.
+
+We can show second countability fairly easily - each of the two open sets in the open cover $\mathcal{U}$ of $M$ has a countable basis. Obviously, the union of these two
+bases is also countable, and generates the space, and we are done.
+
+$M$, however, fails to be Hausdorff. Take, for example, the two origins. Every pair of open sets that each contain one of these origins will have points in common; i.e.
+any open set around each origin will always contain points on the ``line,'' which is shared.
+
+\subsection*{Problem 5}
+
+Let $X$ be the disjoint union of uncountably many copies of $\mathbb{R}$. Note that the collection of the copies of $\mathbb{R}$ forms an open cover $\mathcal{U}$ of $X$.
+Each set in $\mathcal{U}$ is clearly homeomorphic to $\mathbb{R}$, which makes $X$ locally Euclidean. Furthermore, $X$ must be Hausdorff, simply because it is the
+disjoint union of Hausdorff spaces. It should also be clear that $X$ is not second countable, as each copy of $\mathbb{R}$ has a countably number of basis sets,
+but the disjoint union of uncountably many copies has an uncountably infinite number of basis sets.
+
+\subsection*{Problem 6}
+
+The map $\tilde{P}([x])=[P(x)]$ takes a line in $\mathbb{R}\mathbb{P}^n$, takes a point $x\in\mathbb{R}^{n+1}\setminus\left\{ 0 \right\}$ on said line, transforms it smoothly according to $P$
+to a point $P(x)\in\mathbb{R}^{k+1}\setminus\left\{ 0 \right\}$, and then returns the line generated by $P(x)$. We must be careful to check that this process is independent of the $x$ chosen
+from $[x]$. If we take the point $\lambda x$ instead of $x$, we will be left with $[\lambda^d P(x)]$, which  is simply $[P(x)]$. 
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[description/.style={fill=white,inner sep=2pt}]
+            \matrix (m) [matrix of math nodes, row sep=3em,
+            column sep=2.5em, text height=1.5ex, text depth=0.25ex]
+            { \mathbb{R}^{n+1} & & \mathbb{R}^{k+1} \\
+            \mathbb{R}\mathbb{P}^n & & \mathbb{R}\mathbb{P}^k \\ };
+            \path[->,font=\scriptsize]
+            (m-1-1) edge node[auto] {$ P $} (m-1-3)
+            (m-1-1) edge node[left] {$ \pi_1 $} (m-2-1)
+            (m-1-3) edge node[auto] {$ \pi_2 $} (m-2-3)
+            (m-2-1) edge node[auto] {$ \tilde{P} $} (m-2-3);
+    \end{tikzpicture}
+\end{figure}
+
+
+This can also be seen from the diagram above. For the map to be well-defined, we must have $\tilde{P}(\pi_1(x))=\pi_2(P(x))$ for any $x\in \mathbb{R}^{n+1}$.
+Starting with the left-hand side, we find
+\begin{align*}
+    \tilde{P}([x])=[P(x)],
+\end{align*}
+which is exactly equal to $\pi_2(P(x))$ and we are done.
+
+Now it remains to show that the map $\tilde{P}$ is smooth. To do this, we must move down and examine $\tilde{P}$ in subsets of $\mathbb{R}^n$ and $\mathbb{R}^k$.
+By definition, $\tilde{P}$ is smooth if $\psi\circ\tilde{P}\circ\phi^{-1}:\mathbb{R}^n\to\mathbb{R}^k$ is smooth. To do this, we take $U_j\subset\mathbb{R}\mathbb{P}^n$,
+and $V_i\subset\mathbb{R}\mathbb{P}^n$, which are mapped to subsets of Euclidean spaces by the charts $\phi_j$ and $\psi_i$ respectively. Note that these subsets and
+charts are chosen in the usual way they are for projective spaces ($x_j\neq 0$, etc.). This is visualized in the diagram below.
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[description/.style={fill=white,inner sep=2pt}]
+            \matrix (m) [matrix of math nodes, row sep=3em,
+            column sep=2.5em, text height=1.5ex, text depth=0.25ex]
+            { \mathbb{R}\mathbb{P}^n & & \mathbb{R}\mathbb{P}^k \\
+             \phi_j(U_j) & & \psi_i(V_i) \\ };
+            \path[->,font=\scriptsize]
+            (m-1-1) edge node[auto] {$ \tilde{P} $} (m-1-3)
+            (m-2-1) edge node[left] {$ \phi_j^{-1} $} (m-1-1)
+            (m-1-3) edge node[auto] {$ \psi_i $} (m-2-3);
+    \end{tikzpicture}
+\end{figure}
+Take a point
+\[\left( \frac{x_1}{x_j},\cdots,\frac{x_{j-1}}{x_j},\frac{x_{j+1}}{x_j},\cdots,\frac{x_{n+1}}{x_j}\right)\in U_j.\]
+This point is mapped by $\phi^{-1}$
+to the equivalence class of points (i.e. the line)
+\[\left[x_1,\cdots,x_{j-1},1,x_{j+1},\cdots,x_{n+1}\right]\in\mathbb{R}\mathbb{P}^n.\]
+After $\tilde{P}$ acts on this equivalence class, we have, by definition of $\tilde{P}$'s action, we get
+\[\left[P(x)=P\left(x_1,\cdots,x_{j-1},1,x_{j+1},\cdots,
+x_{n+1}\right)\right]\in\mathbb{R}\mathbb{P}^k.\]
+Suppose this falls into the $i$th chart in $\mathbb{R}\mathbb{P}^k$; we take $\psi_i$ of this line, which yields
+\[\left(\frac{P_1(x)}{P_i(x)},\cdots,\frac{P_j(x)}{P_i(x)},\cdots,\frac{P_{i-1}(x)}{P_i(x)},\frac{P_{i-1}(x)}{P_i(x)},\cdots,\frac{P_{k+1}(x)}{P_i(x)}\right)\in \psi_i(V_i).\]
+To determine whether this series
+of compositions is smooth, we must first rewrite the image in terms of $u_i=\frac{x_i}{x_j}$ (the input), with $i=1,\cdots, n+1$ using the property $P(\lambda x)=\lambda^dP(x)$ (for
+$\lambda\neq 0$).
+We then have
+\begin{align*}
+    \psi_i\circ\tilde{P}\circ\phi^{-1}_j&\left( u_1,\cdots,u_{j-1},u_{j+1},\cdots,u_{n+1} \right)\\
+    =&\left(\frac{P_1(x_ju)}{P_i(x_ju)},\cdots,\frac{P_j(x_ju)}{P_i(x_ju)},\cdots,\frac{P_{i-1}(x_ju)}{P_i(x_ju)},\frac{P_{i-1}(x_ju)}{P_i(x_ju)},\cdots,\frac{P_{k+1}(x_ju)}{P_i(x_ju)}\right)\\
+    =&\left(\frac{P_1(u)}{P_i(u)},\cdots,\frac{P_j(u)}{P_i(u)},\cdots,\frac{P_{i-1}(u)}{P_i(u)},\frac{P_{i-1}(u)}{P_i(u)},\cdots,\frac{P_{k+1}(u)}{P_i(u)}\right),
+\end{align*}
+which is clearly a smooth map, by the smoothness of $P$.
+
+
+\end{document}
