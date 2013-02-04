@@ -1,0 +1,116 @@
+\documentclass{../mathnotes}
+
+\title{Representations of Finite Groups}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Actions of groups on sets}
+
+\begin{defn}
+    Let $G$ be a group, and let $X$ be a set. An \textbf{action} of $G$ on $X$ is a map from the Cartesian product $G\times X$ to $X$ sending
+    $(g,x)$ to $gx$ and satisfying the following two conditions:
+    \begin{align}
+        gh\cdot x=g\cdot hx \nm{and} 1\cdot x = x 
+        \label{eq:actioncond}
+    \end{align}
+    for all $g,h\in G$ and $x\in X$. Here 1 is the identity element of $G$.
+\end{defn}
+
+\begin{thm}
+    Given an action of $G$ on $X$, each of the maps $\pi_g: x\to gx$ from $X$ to $X$ is a permutation of $X$ (i.e. a bijection from $X$ to $X$),
+    and the map $g\to\pi_g$ is a homomorphism from $G$ to $S_X$, the symmetric group of all permutations of $X$.
+
+    Conversely, given any homomorphism $\pi:g\to\pi_g$ from $G$ to $S_x$ we get an action of $G$ on $X$ by putting $gx=\pi_g(x)$ for $g\in G,x\in X$.
+\end{thm}
+\begin{proof}
+    The conditions on group actions in Eq.~(\ref{eq:actioncond}) yield
+    \begin{align}
+        \label{eq:actionhomo1}
+        \pi_{gh}(x)&=\pi_g(\pi_h(x)) \nm{and} \pi_1(x)=x\\
+        \pi_{gh}&=\pi_g\circ\pi_h \nm{and} \pi_1=\id_X
+        \label{eq:actionhomo2}
+    \end{align}
+    for all $g,h\in G$ and $x\in X$. It follows, then, that
+    \begin{align*}
+        \pi_g\circ\pi_g^{-1}=\id_X
+    \end{align*}
+    for all $g\in G$, which implies that each $\pi_g$ is surjective and each $\pi_g^{-1}$ is injective. Replacing $g$ by $g^{-1}$, it follows
+    that each $\pi_g$ is bijective, i.e. each $\pi_g\in S_x$. Eq.~(\ref{eq:actionhomo1}) shows that $\pi:g\to\pi_g$ is a homomorphism from $G$ to $S_X$.
+    
+    For the converse, note that each homomorphism $\pi:g\to \pi_g$ from $G$ to $S_X$ satisfies Eq.~(\ref{eq:actionhomo2}), i.e. Eq.~(\ref{eq:actionhomo1}).
+    Putting $gx=\pi_g(x)$, we clearly get an action of $G$ on $X$.
+\end{proof}
+
+\begin{rem}
+    In short, an action of $G$ on $X$ ``is'' a homomorphism $\pi: G\to S_X$.
+\end{rem}
+
+\begin{defn}
+    Given an action of a group $G$ on a set $X$, for each $x\in X$, $Gx=\left\{ gx:g\in G \right\}$ is the \textbf{orbit} of $x$ and
+    $G_x=\left\{ g\in G:gx=x \right\}$ is the \textbf{stabilizer} of $x$.
+\end{defn}
+
+\begin{exc}
+    Prove that for each action of $G$ on $X$ and $x, x_1, x_2\in X$,
+    \begin{enumerate}
+        \item $x\in Gx$
+        \item either $Gx_1\cap Gx_2=\varnothing$ or $Gx_1=Gx_2$
+    \end{enumerate}
+\end{exc}
+\begin{proof}
+    To prove the first, simply note that the identity in $G$ takes $x$ to itself, so $1\cdot x=x$ is in $Gx$.
+
+    For the second, we have two cases - $Gx_1$ and $Gx_2$ have either some or no points in common. If they have no points in common, they are disjoint.
+    Otherwise, if there are some points in common, we have
+    \begin{align}
+        gx_1=hx_2
+        \label{eq:ex1}
+    \end{align}
+    for at least one pair $g,h\in G$. To show that $Gx_1=Gx_2$, let us show that $Gx_1\subset Gx_2$ and $Gx_2\subset Gx_1$. Multiplying both sides by $g^{-1}$, we have
+    \begin{align*}
+        x_1=g^{-1}hx_2.
+    \end{align*}
+    If we now act on both sides with any $k\in G$, we get
+    \begin{align*}
+        kx_1=kg^{-1}hx_2.
+    \end{align*}
+    Since the right side of this equation is some element of $Gx_2$, we have shown that any element of the orbit of $x_1$ is an element in $Gx_2$; in other words,
+    $Gx_1\subset Gx_2$. To show that $Gx_2\subset Gx_1$, we simply multiply both sides of Eq.~(\ref{eq:ex1}) by $h^{-1}$ and proceed in a similar fashion as above.
+    Consequently, either the two orbits share points, in which case they are identically equal, or they do not, i.e. they are disjoint, and we are done.
+\end{proof}
+
+\begin{thm}
+    For each action of a group $G$ on a set $X$, the disjoint orbits \textbf{partition} $X$, i.e. the orbits are nonempty, pairwise disjoint, and they cover $X$.
+\end{thm}
+\begin{proof}
+    This follows from both parts of the previous exercise.
+\end{proof}
+
+\begin{thm}
+    For each action of a group $G$ on a set $X$, each stabilizer is a subgroup of a $G$, and for each $x$ there is a bijection $Gx\to G/G_x$ from the orbit
+    of $x$ to the set of left cosets of $G_x$ in $G$.
+\end{thm}
+\begin{cor}
+    For each action of a finite group $G$ on a set $X$, and each $x\in X$, we have $|Gx|=(G:G_x)$, i.e. the size of the orbit of $x$ is the index of the stabilizer
+    of $x$.
+\end{cor}
+\begin{proof}
+    First, let us show that $G_x$ is a subgroup of $G$. Then, for $g,h\in G_x$, we know that $gx=x$ and $hx=x$
+    \begin{align*}
+        gh\cdot x=g\cdot hx=gx=x,
+    \end{align*}
+    which means $gh\in G_x$. Note also that the inverse of $g\in G_x$ is also in $G_x$:
+    \begin{align*}
+        g^{-1}x=g^{-1}\cdot gx=g^{-1}g\cdot x=1\cdot x=x.
+    \end{align*}
+    Finally, the identity element is obviously in $G_x$, since $1x=x$.
+
+    To prove the existence of the bijection, we take $x\in X$ and $g,g'\in G$,
+\end{proof}
+
+\end{document}

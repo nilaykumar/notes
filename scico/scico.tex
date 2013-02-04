@@ -38,22 +38,22 @@ where $n$ is an integer and $x$ is real. Does knowing $J_0(x)$ and $J_1(x)$ allo
 
 Let us write this relation as a 2 component vector
 \begin{align*}
-\left(\begin{array}{c}
-    J_n\\
-    J_{n+1}
-\end{array}\right)
-=
-\left(
-\begin{array}[]{cc}
-    0 & 1\\
-    -1 & \frac{2n}{x}
-\end{array}
-\right)
-\left( 
-\begin{array}{c}
-    J_{n-1}\\
-    J_{n}
-\end{array}\right)
+    \left(\begin{array}{c}
+        J_n\\
+        J_{n+1}
+    \end{array}\right)
+    =
+    \left(
+    \begin{array}[]{cc}
+        0 & 1\\
+        -1 & \frac{2n}{x}
+    \end{array}
+    \right)
+    \left( 
+    \begin{array}{c}
+        J_{n-1}\\
+        J_{n}
+    \end{array}\right)
 \end{align*}
 What are the eigenvalues of this matrix?
 \begin{align*}
@@ -80,5 +80,166 @@ growing term will be supressed by the back-recurrence. We can make an algorithm 
 \[1=J_0(x)+J_2(x)+J_4(x)+\cdots\]
 which determines the constant $\alpha$. We are putting complete garbage in... and getting good results out!
 
+\section{High school trigonometry}
+
+Recall, last class we discussed the IEEE 754 standards for floating point numbers. First, there are the single precision numbers ($10^{\pm 38}$, 7 bits precision) and
+double precision numbers ($10^{\pm308}$, 14 bits precision). We saw that the recurrence relation for Bessel functions is unstable to forward recurrence (i.e. fixing
+$x$ and calculating higher order Bessel functions for that $x$), but is stable to back recurrence! This was because of the presence of both an exponentially growing
+and decaying solution to the recurrence formula. 
+
+Another example that concerns finite precision arithmetic is the following. Consider $\cos\left( (m+1)x \right)=2\cos(x)\cos(mx)-\cos\left( (m-1)x \right)$.
+From $\cos(x)$, then, we might try to compute $\cos(Nx)$:
+\begin{align*}
+    \cos(2x)&=\cos(x)-1\\
+    \cos(3x)&=2\cos(x)\cos(2x)-\cos(x)\\
+    \cos(4x)&=2\cos(x)\cos(3x)-\cos(2x)
+\end{align*}
+Consequently, we can write
+\begin{align*}
+    \left(\begin{array}[]{c}
+        \cos(mx)\\
+        \cos\left( (m+1)x \right)
+    \end{array}\right)
+    =
+    \left(\begin{array}[]{cc}
+        0 & 1\\
+        -1 & 2\cos(x)
+    \end{array}\right)
+    \left(
+    \begin{array}[]{c}
+        \cos\left( (m-1)x \right)\\
+        \cos(mx)
+    \end{array}
+    \right)
+\end{align*}
+The eigenvalues of this matrix are found via the secular equation to be
+\begin{align*}
+    \lambda&=\cos(x)\pm i|\sin(x)|
+\end{align*}
+Here, the magnitude of the eigenvalues is one, which is what one might expect for trigonometric functions. Thus, this recurrence relation looks much more 
+stable than that of the Bessel functions; there are no exponentially growing/decaying solutions in the exact arithmetic. The question remains: is this an
+accurate way of computing $\cos\left( Nx \right)$ from $\cos(x)$? In other words, how accurately is $|\lambda|=1$ represented in finite precision arithmetic?
+\begin{align*}
+    \cos(Nx)&=\cos(N\arccos(c))\\
+    c&\equiv \cos(x)
+\end{align*}
+How much would a small error in $\cos(x)$ affect $\cos(Nx)$? Well, take the floating point approximation to $\cos(x)$,
+\[\tilde{c}=(1+\varepsilon)\cos(x).\]
+Since
+\begin{align*}
+    \frac{d\cos(Nx)}{dc}=\sin(Nx)\left( N\frac{dx}{dc} \right)=\frac{N\sin(Nx)}{\sin(x)},
+\end{align*}
+we can write
+\begin{align*}
+    \Delta\cos(Nx)\sim\frac{d\cos(Nx)}{dc}\Delta c=\frac{N\sin(Nx)}{\sin(x)}\varepsilon,
+\end{align*}
+which suggests the size of the error given the initial uncertainty in $c$. Notice that this error is not uniform in the particular $x$ that we are examining.
+Indeed, if one were trying to develop a good algorithm to compute $\cos(Nx)$, it would have to return $\cos(Nx)$ with essentially constant accuracy. In this case,
+it seems that if one starts with a small $x$, and iterates many times, the error would grow quite large.
+
+\begin{exmp}
+    Using double precision values for $\cos(x)$ and double precision iteration, with $x=10^{-6}$ and $N=10^5$, one obtains using the above method,
+    \begin{align*}
+        \nm{recurrence: } 0.99500\mathbf{3695}\\
+        \nm{MATLAB: } 0.99500\mathbf{4165}
+    \end{align*}
+    Recall that via double precision, the accuracy of input was to the order of 13 digits or so, but the output is accurate only to about 6 digits. Again, this
+    is completely due to the finite-precision errors in $|\lambda|\approx 1$.
+\end{exmp}
+
+\section{Ordinary differential equations}
+
+\subsection{Euler method}
+
+Consider a very general case:
+\begin{align*}
+    \frac{dy^{(i)}}{dt}=g^{(i)}\left(y^{(j)}(t)\right)
+\end{align*}
+Note that a lot of physics is second-order -- this can be dealt with by choosing $y^{(1)}=x$ and $y^{(2)}=\frac{dx}{dt}$, which yields $2N$ linear differential
+equations. When dealing with such a system of differential equations, one first discretizes the equation in time,
+\begin{align*}
+    \frac{dy^{(i)}}{dt}=\frac{y^{(i)}_{n+1}-y^{(i)}_n}{t_{n+1}-t_n}=g^{(i)}\left( y^{(i)}_n,t_n \right).
+\end{align*}
+This discretization right away suggests the simple (but fairly poor) \textbf{Euler method}:
+\begin{align*}
+    y^{(i)}_{n+1}=y^{(i)}_n+\tau g^{(i)}\left( y^{(j)}_nt_n \right)
+\end{align*}
+This integrator is, of course, accurate to $O(\tau^2)^2$ per iteration, and thus, after $N$ iterations, of order $O(N\tau^2)$. Since, quite generically, one
+wants to use $N\sim1/\tau$, the Euler method has an $O(\tau)$ error, even in exact arithmetic.
+
+\begin{exmp}[Harmonic oscillator]
+    Let us take $m=1$:
+    \begin{align*}
+        \frac{d^2x}{dt^2}=-\omega_0^2 x,\\
+    \end{align*}
+    which, after defining
+    \begin{align*}
+        y^{(1)}=x\\
+        y^{(2)}=\frac{dx}{dt},
+    \end{align*}
+    becomes
+    \begin{align*}
+        \frac{dy^{(1)}}{dt}=\frac{dx}{dt}=y^{(2)}\\
+        \frac{dy^{(2)}}{dt}=-\omega_0^2 y^{(1)}.
+    \end{align*}
+    In matrix notation,
+    \begin{align*}
+        \frac{d}{dt}
+        \left(
+        \begin{array}[]{c}
+            y^{(1)}\\
+            y^{(2)}
+        \end{array}
+        \right)=
+        \left( 
+        \begin{array}[]{cc}
+            0 & 1\\
+            -\omega_0^2 & 0
+        \end{array}
+        \right)
+        \left( 
+        \begin{array}[]{c}
+            y^{(1)}\\
+            y^{(2)}
+        \end{array}
+        \right)
+    \end{align*}
+    We can thus write
+    \begin{align*}
+        y^{(i)}_{n+1}=y_n^{(i)}+\tau M^{ij}y_n^{(i)}=
+        \left( 
+        \begin{array}[]{cc}
+            1 & \tau\\
+            -\tau\omega_0^2 & 1
+        \end{array}
+        \right)
+        \left( 
+        \begin{array}[]{c}
+            y^{(1)}\\
+            y^{(2)}
+        \end{array}
+        \right)
+    \end{align*}
+    Again, we have a linear recurrence relation, and so we ask for the eigenvalues of $M$. The secular equation yields
+    \begin{align*}
+        \lambda_{\pm}=1\pm\sqrt{-\omega_0^2\tau^2}=1\pm i\omega_0\tau.
+    \end{align*}
+Note that the magnitude of both eigenvalues is more than one, so the Euler method is exponentially unstable for simple harmonic oscillation.
+Indeed, one tends to get oscillatory solutions bounded by a \textit{growing} envelope. Of course, the smaller we choose our time step, $\tau$,
+the slower this envelope will grow, but it will grow nonetheless. Another possible improvement would be to Taylor expand to a higher order.
+\end{exmp}
+
+\subsection{Implicit method}
+\begin{align*}
+    \frac{y_{n+1}^{(i)}-y_n^{(i)}}{t_{n+1}-t_n}=g^{(i)}\left( y_{n+1},t_{n+1} \right)\\
+    y_{n+1}^{(i)}=y_n^{(i)}+\tau g^{(i)}\left( y_{n+1},t_{n+1} \right)
+\end{align*}
+For simple harmonic motion, $g_{n+1}^{(i)}=M^{ij}y_{n+1}^{(i)}$ and $y_{n+1}=\left( \frac{1}{1-\tau M} \right)y_n$.
+The eigenvalues of this matrix look like 
+\begin{align*}
+    \lambda_{\pm}=\frac{1\pm i\omega_0 \tau}{1+\omega_0^2\tau^2}<1
+\end{align*}
+which will give a \textit{decreasing} envelope! Both the Euler method and the implicit method, unfortunately seem to destroy all our basic ideas of
+conservation of energy, etc.
 
 \end{document}
