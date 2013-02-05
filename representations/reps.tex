@@ -113,4 +113,56 @@
     To prove the existence of the bijection, we take $x\in X$ and $g,g'\in G$,
 \end{proof}
 
+** FINISH **
+
+Let us define some notation:
+\begin{itemize}
+    \item $U, V, W, \cdots$ are finite dimensional complex vector spaces, briefly spaces;
+    \item $\mathcal{L}(V,W)$ is the space of all linear maps $T: V\to W$;
+    \item $\mathcal{E}(V)=\mathcal{L}(V,V)$ is the space of all \textbf{endomorphisms} of $V$, i.e. linear maps $T:V\to V$
+    \item $\mathcal{G}(V)=\mathcal{E}(V)^\star$ is the group of all bijective endomorphisms of $V$
+\end{itemize}
+
+\begin{defn}
+    A \textbf{representation} of a group $G$ on a space $V$ is a homomorphism $R:G\to\mathcal{G}(V)$. Sometimes we write simply $gv$ for $R(g)v,$ for $g\in G, v\in V$.
+    Equivalently, a representation of a group $G$ on a space $V$ is an action of $G$ on $V$ for which $v\to gv$ is linear, for each $g\in G$.
+\end{defn}
+
+\begin{thm}
+    Let $R$ and $S$ be representations of a group $G$ on spaces $V$ and $W$. Then we get a representation of $R\square S$ of $G$ on $\mathcal{L}(V,W)$, by putting
+    \begin{align*}
+        (R\square S)(g)T=S(g)TR(g^{-1})
+    \end{align*}
+    for $g\in G,T\in\mathcal{L}(V,W)$.
+\end{thm}
+\begin{proof}
+    Since representations are in particular actions, $G$ acts on $\mathcal{M}(V,W)$ via
+    \begin{align*}
+        T^g=S(g)TR(g^{-1})
+    \end{align*}
+    for $g\in G, T\in\mathcal{M}(V,W)$.
+    ** FINISH **
+\end{proof}
+
+\begin{defn}
+    Given representations of $G$ on spaces $V$ and $W$, a linear map $T:V\to W$ is \textbf{stable} if it is in $\mathcal{L}(V,W)^G$, i.e. if
+    $gTv=Tgv$ for all $g\in G, v\in V$.
+\end{defn}
+
+\begin{defn}
+    A representation $G$ on a space $V\neq 0$ is \textbf{irreducible} if the only stable subspaces of $V$ are 0 and $V$.
+\end{defn}
+
+\begin{lem}[Schur's Lemma]
+    Given irreducible representations of $G$ on spaces $V$ and $W$, each nonzero stable linear map $T:V\to W$ is bijective.
+\end{lem}
+\begin{proof}
+    Let $T\in\mathcal{L}(V,W)^G$. By ** FINISH ** Theorem C in section 2, the image $TV$ is a stable subspace of $W$ (since $V$ is a stable subspace of $V$),
+    and the kernel $T^{-1}(0)$ is a stable subspace of $V$ (since 0 is a stable subspace of $W$). By the irreducibility of the representations on $V$ and $W$,
+    \begin{align*}
+        TV=0\nm{or}W\\
+        \nm{and} T^{-1}0=0 \nm{or} V
+    \end{align*}
+\end{proof}
+
 \end{document}
