@@ -1,4 +1,4 @@
-\documentclass{mathnotes}
+\documentclass{../mathnotes}
 
 \title{Notes on Differentiable Manifolds}
 \author{Nilay Kumar}
@@ -246,7 +246,7 @@ It's clear that if the $2\times2$ left submatrix has non-zero determinant, and w
 
 (January 31, 2012)
 \begin{defn}
-    Let $M$ be a smooth manifold. $f:M\to\mathbb{R}$ is a differentiable ($C^\infty$) function if for all $p\in M$ there exists a coordinate chart 
+    Let $M$ be a smooth manifold. $f:M\to\mathbb{R}$ is a \textbf{smooth function} if for all $p\in M$ there exists a coordinate chart 
     $(U,\phi)$ containing $p$ such that $f\circ \phi^{-1}$ is $C^\infty$ on $\phi(U)$. Note that there is no ambiguity in terms of overlap of charts,
     as a smooth manifold's charts are smoothly compatible.
 \end{defn}
@@ -320,6 +320,8 @@ and repeat this for any higher derivatives.
 We will not prove this, as it is rather long and difficult. However, this theorem is important as it will allow us to move from talking about local
 properties to global properties.
 
+** FINISH : cutoff/bump functions **
+
 \begin{exmp}
     \[\mathbb{R}=(-\infty,2.5)\cup(0.5,\infty)\]
     Take $\phi_1(t)=\frac{f(2-t)}{f(2-t)+f(t-1)}$ and $\phi_2(t)=\frac{f(t-1)}{f(2-t)+f(t-1)}$. These satisfy the above theorem, as there are a finite number of them,
@@ -339,8 +341,143 @@ $0\leq\psi\leq1$ such that $\psi\equiv 1$ on $A$ and $\nm{supp}\psi\subset U$.
 
 \begin{thm}
     Suppose $A\subset U\subset M$ with $A$ closed and $U$ open and $f:A\to \mathbb{R}$ is a function that can be extended to a smooth function in a neighborhood of $A$.
-    Then, there exists a smooth function $\tilde{f}:M\to\mathbb{R}$, such that $tilde{f}|_A=f|_A$ and $\nm{supp}\tilde{f}\subset U$.
+    Then, there exists a smooth function $\tilde{f}:M\to\mathbb{R}$, such that $\tilde{f}|_A=f|_A$ and $\nm{supp}\tilde{f}\subset U$.
 \end{thm}
 The proof of this theorem is very similar to that of the above theorem, and will likely be in a future homework.
+
+
+\section{Tangent spaces}
+
+(February 5, 2013)
+
+\begin{exmp}
+    Let $F:\mathbb{R}^n\to \mathbb{R}$ be smooth and $c\in\mathbb{R}$ be a regular value of $f$. The tangent space of $f^{-1}(c)$ at $a\in f^{-1}(c)$
+    is the $(n-1)$ dimensional affine space passing through $a$ and orthogonal to $\nabla f(a)$. The formula for the tangent space, in this case,
+    is simply $\nabla f\cdot (x-a)$. For the case of $S^2$, for example, we have $(x_0,y_0,z_0)\cdot(x-x_0,y-y_0,z-z_0)=0$.
+\end{exmp}
+
+Note that here, the manifold and its tangent space are embedded in an ambient Euclidean space, but we want to be able to discuss tangent spaces ``in vacua,''
+so to speak. First, recall that we can view directional derivatives as tangent vectors.
+
+\begin{defn}
+    Given $v\in\mathbb{R}^n$ and a smooth function defined near $a$, we define the \textbf{directional derivative} of $f$ at $a$ in the direction of $v$ to be:
+    \begin{align*}
+        D_v|_a f=\frac{d}{dt}|_{t=0}f(a+tv)=\sum_{i=1}v_i\frac{d}{dx^i}|_a f
+    \end{align*}
+    In other words, $D_v|_a$ assigns a number to each smooth function. In this sense, the directional derivative lives in the dual space, because when we
+    consider them as operators, they form a vector space that is spanned by $\frac{d}{dx^i}|_a$. Note that for $v=0$, the operator will always return 0. 
+\end{defn}
+
+To define tangent spaces intrinsically, we will have to extract certain abstract properties of these directional derivatives.
+
+\begin{defn}
+    $X$ is a \textbf{derivation} at $a$ if $X$ is a linear map $C^\infty(\mathbb{R}^n)\to\mathbb{R}$ that satisfies:
+    \begin{itemize}
+        \item $X(cf)=cX(f)$
+        \item $X(f+g)=X(f)+X(g)$
+        \item $X(fg)=f(a)X(g)+X(f)g(a)$
+    \end{itemize}
+    for $f,g\in C^\infty(\mathbb{R})^n$. This definition can easily be extended to manifolds.
+\end{defn}
+
+\begin{rem}
+    A directional derivative at $a$ is a derivation at $a$. Additionally, the set of derivations at $a$ forms a real vector space:
+    \begin{itemize}
+        \item $(cX)(f)=c(Xf)$
+        \item $(X_1+X_2)(f)=X_1(f)+X_2(f)$
+        \item the zero element is the zero map from $C^\infty(\mathbb{R}^n)\to\mathbb{R}$
+    \end{itemize}
+\end{rem}
+
+It is not quite obvious that the vector space of derivations is indeed finite-dimensional, as the space of directional derivatives is.
+
+\begin{thm}
+    The vector space of directional derivatives at $a$ and the vector space of derivations at $a$ are isomorphic as real vector spaces.
+\end{thm}
+
+We will need two lemmas to prove this theorem.
+
+\begin{rem}
+    In fact, only the local behavior of a smooth function near $a$ ``matters.'' We should define a derivation as a linear map from the space of germs of
+    functions at $a$.
+\end{rem}
+
+\begin{defn}
+    A \textbf{germ} of a function at $a\in\mathbb{R}^n$ is a pair $(f,U)$ with $a\in U$, such that $f$ is differentiable in $U$. We define also an equivalence
+    relation $(f,U)\sim(g,V)$ if $f\equiv g$ on $U\cap V$.
+\end{defn}
+
+\begin{lem}
+    Let $c$ denote a constant function with value $c$. Then we have $X(c)=0$ for any derivation.
+\end{lem}
+\begin{proof}
+    Using linearity and the third property,
+    \begin{align*}
+        X(c)=cX(1) = cX(1\cdot 1)=c\left( 1X(1)+1X(1)=2cX(1) \right)
+    \end{align*}
+    This property is true only for 0, and we are done.
+\end{proof}
+
+\begin{lem}
+    Suppose $f$ is differentiable in a neighborhood $U$ of $a$, then there exists an $\varepsilon>0$ such that $B_a(\varepsilon)\subset U$
+    and differentiable functions $g_i$ in $B_a(\varepsilon)$ such that
+    \begin{align*}
+        f(x)=f(a)+\sum_{i=1}^ng_i(x)(x^i-a^i)
+    \end{align*}
+    in $B_a(\varepsilon)$ and
+    \begin{align*}
+        g_i(a)=\frac{\partial}{\partial x^i}|_a f
+    \end{align*}
+\end{lem}
+
+\begin{rem}
+    Note that in the one-dimensional case, $f(x)=f(a)+(x-a)g(x)$ and $g(a)=f'(a)$,
+    \begin{align*}
+        g(x) = 
+        \left\{
+            \begin{array}{lr}
+                \frac{f(x)-f(a)}{x-a} & : g\neq a\\
+                f'(a) & : x=a
+            \end{array}
+        \right.
+    \end{align*}
+\end{rem}
+
+Now we prove the theorem.
+
+\begin{proof}
+    Any directional derivative is a derivation, so if suffices to prove the inclusion map from the space of derivatives to the space of derivations is an isomorphism.
+    This map is linear (exercise), so now we prove that the map is injective and surjective.
+    
+    If $\sum_{i=1}^n v_i\frac{\partial}{\partial x^i}|_a f=0$ for any $f\in C^\infty(\mathbb{R}^n)$, we want $v_i=0$ to show that the nullspace is zero.
+    Note that here we can use the fact that $\frac{\partial x^j}{\partial x^i}=\delta^{ij}$: take $f=x^j$, which will give us precisely $v_j=0$ for each $j$.
+    Thus, this map is injective.
+
+    If a derivation $X$ corresponds to a directional derivative $\sum_{i=1}^nv_i\frac{\partial}{\partial x^i}|_a$, what are the $v_i$'s? In this case, again in analogy
+    to typical vector spaces, we want $X(x^j)=\sum_{i=1}^nv_i\frac{\partial}{\partial x^i}|_ax^j=v_j$. Consequently, take $\sum_{i=1}^n X(x^i)\frac{\partial}{\partial x^i}|_a$
+    and we claim $X=\sum_{i=1}^n X(x^i)\frac{\partial}{\partial x^i}|_a$ as derivations, or $X(f)=\sum_{i=1}^n X(x^i)\frac{\partial}{\partial x^i}|_af$ for any
+    $f\in C^\infty(\mathbb{R}^n)$. We apply the second of the above lemmas and the product rule, and write $f$ in the corresponding form
+    \begin{align*}
+        X(f)&=X\left(f(a)+\sum_{i=1}^n g_i(x)(x^i-a^i)\right)=\sum_{i=1}^n X\left(g_i(x)(x^i-a^i)\right)\\
+        &=\sum_{i=1}^n g_i(a)X(x^i-a^i) =\sum_{i=1}^nX(x^i)\frac{\partial}{\partial x^i}|_a f
+    \end{align*}
+\end{proof}
+
+\begin{defn}
+    Let $M$ be a smooth manifold and $p\in M$. The \textbf{tangent space} of $M$ at $p$, $T_pM$, is the vector space of all derivations at $p$.
+    Recall that $X:C^\infty(M)\to\mathbb{R}$ is linear and $X(fg)=f(p)X(g)+g(p)X(f)$.
+\end{defn}
+
+\begin{rem}
+    Suppose $F:M\to N$ is differentiable and $f: N\to \mathbb{R}$ is a differentiable function. Then we can \textbf{pullback} $f$ by $F$:
+    \begin{align*}
+        F^*(f)=f\circ F
+    \end{align*}
+    Suppose $X\in T_pM$ is a derivation. Then we can \textbf{pushforward} $X$ by $F$. $F_*(X)$ is a derivation at $F(p)$ so $F_*(X)\in T_{F(p)}N$.
+    Then,
+    \begin{align*}
+        F_*(X)(f)=X(F^*f)=X(f\circ F)
+    \end{align*}
+\end{rem}
 
 \end{document}

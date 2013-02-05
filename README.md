@@ -7,6 +7,7 @@ There will inevitably be mistakes and formatting issues and stuff -- I'm not the
 Note: there are only a few lectures worth of complex notes. Additionally, topology/ contains my self-taught notes on very basic topology.
 
 TODO:
-* Fill in missing representation theory lectures, do the exercises
+* Fill in missing parts of the manifolds lectures on bump/cutoff functions
 * Start TeXing algebra II lectures
 
+* Fill in missing representation theory lectures, do the exercises
