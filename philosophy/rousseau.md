@@ -4,18 +4,26 @@ Notes on: Rousseau's *Discourse on the Origin of Inequality* and *On the Social 
 ## Raw notes ##
 
 * Two kinds of inequality: natural/physical and moral/political
-* Humans, stripped of all "artificialities" share traits with animals, but are much better *organized*
+* Humans, stripped of all "artificialities" share traits with animals, but are much better organized
 * Man is able to learn much better than animals; this is why man is more successful at survival
 * There is a distinct difference between "savage man" and man in a state of nature
     * the state of nature is purely philosophical and may never have actually existed
 * Animals operate on pure instinct, whereas humans are "free" of nature's yoke (again, to learn)
-* Humans thus have "free will" and a capacity for *perfectibility* (progress throughout life)
+* Humans thus have "free will" and a capacity for **perfectibility** (progress throughout life)
 * Humans reason only when possessed with a desire for knowledge that originates from a need to be satisfied
     * those in the state of nature are never in this situation
 * As humans in the state of nature are as a whole, rather solitary, how would knowledge even have passed through the species?
 * Languages likely could not have formed until humans settled into stable communities, after having left the state of nature
 * Since humans in nature are solitary, relationships are fleeting, not, as Aristotle might say, a political animal
-* In the state of nature, in some sense, virtue and vice are meaningless
+* In the state of nature, in some sense, virtue and vice are meaningless; men are not miserable in any sense of the term
+    * misery, depression, etc. comes about only in society
+* Man has no idea of right and wrong, good or bad; thus, man in the state of nature is neither good nor evil
+* Man in the state of nature is filled with **amour propre**, the desire for self-preservation
+* Amour propre is tempered by an "innate repugnance to seeing his fellowmen suffer" - **pity**
+    * Pity is so universal that even animals show it
+* It is reason that often blocks out pity, philosophy that persuades him to rationalize
+    * Pity takes the place of laws, etc. in the state of nature
+* This hypothethical seems to suggest that even "natural" inequality has negligible effect in the state of nature
 
 ## My questions ##
 

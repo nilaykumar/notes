@@ -478,6 +478,116 @@ Now we prove the theorem.
     \begin{align*}
         F_*(X)(f)=X(F^*f)=X(f\circ F)
     \end{align*}
+    In other words, $F_*$ takes the derivation on $T_pM$ to a derivation on $T_{F(p)}N$ that can act on a function on $N$.
 \end{rem}
+
+(February 7, 2013)
+
+Recall for $\mathbb{R}^n$, $T_p\mathbb{R}^n$ is the real space spanned by $\frac{\partial}{\partial x^i}|_p$. For a coordinate chart $(U,\phi)$ on $M$, we can
+identify $U$ with $\phi(U)$ and take $\frac{\partial}{\partial x^i}|_{\phi(p)}$ as a basis for $T_pM$. Check the textbook for how this is done precisely via
+pushforwards (partial derivatives are pushed forward from the tangent space of the Euclidean space to derivations on the tangent space of the manifold).
+
+What if two coordinate charts $(U,\phi)$ and $(V,\psi)$ overlap?
+\begin{align*}
+    \tilde{x}^j=(\psi\circ\phi^{-1})^j(x^1,\cdots,x^n)
+\end{align*}
+Take, for example a point in $\mathbb{R}^2$ -- one can choose polar coordinates and cartesian coordinates. For a given point, we can simply relate these coordinates
+by the usual $x=r\cos\theta$ and $y=r\sin\theta$. The partial derivatives of the coordinates can be written via the chain easily
+\begin{align*}
+    \frac{\partial}{\partial x}=\frac{\partial r}{\partial x}\frac{\partial}{\partial r} + \frac{\partial \theta}{\partial x}\frac{\partial}{\partial \theta}
+\end{align*}
+and similarly for $\frac{\partial}{\partial y}$. In general, it should be clear that
+\begin{align*}
+    \frac{\partial}{\partial x^i}|_p=\frac{\partial (\psi\circ\phi^{-1})^j}{\partial x^i}\frac{\partial}{\partial \tilde{x}^j}|_p,
+\end{align*}
+where we have used the Einstein summation convention.
+
+Let us now consider in more detail pushforwards of derivations. Take $F:\mathbb{R}^n\to\mathbb{R}^m$ differentiable. If $g:\mathbb{R}^m\to\mathbb{R}$
+and $X$ is a derivation at $p\in\mathbb{R}^n$, we consider the pushforward $F_*X$, which is a derivation at $F(p)\in \mathbb{R}^m$ that operates of $g$.
+In terms of local coordinates, what is $F_*(\frac{\partial}{\partial x^i}|_p)$? If $x^\alpha$ and $y^\alpha$ are our coordinates on $\mathbb{R}^n$ and $\mathbb{R}^m$
+respectively, $y^\alpha=F^\alpha(x^1\cdots x^n)$
+\begin{align*}
+    F_*(\frac{\partial}{\partial x^i}|_p)(g)&=\frac{\partial}{\partial x^i}|_pg(F)=\frac{\partial}{\partial x^i}|_pg\left(F^1(x)\cdots F^m(x)\right)\\
+    &=\frac{\partial g}{\partial y^\alpha}\left( F(p) \right)\frac{\partial F^\alpha}{\partial x^i}|p
+\end{align*}
+and so we write
+\begin{align*}
+    F_*(\frac{\partial}{\partial x^i}|_p)=\frac{\partial F^\alpha}{\partial x^i}|_p\frac{\partial }{\partial y^\alpha}|_{F(p)}
+\end{align*}
+Now we see more concretely, with the coordinates, how the pushforward takes derivations in the tangent space of one manifold the the tangent space of another.
+
+\section{Tangent bundles}
+
+So now we have at each point, a vector space of the same dimension as the base manifold. Now consider putting all of these tangent spaces together.
+
+\begin{defn}
+    The \textbf{tangent bundle} $TM$ of a manifold $M$ is, as a set, the disjoint union of all the tangent spaces $T_pM$ of $M$:
+    \begin{align*}
+        TM=\coprod_{p\in M}T_pM
+    \end{align*}
+\end{defn}
+
+Naturally, as $TM$ is a set defined based off of a manifold, the question arises: what is the topology of $TM$?
+
+Consider $T\mathbb{R}$; with each point on the line, we associate another,
+tangent, line. One can do this in many ways. On $\mathbb{R}^2$ one can construct a topology from the following metric:
+\begin{align*}
+    d\left( (x_0,y_0),(x_1,y_1) \right)=|y_0|+|x_0-x_1|+|y_1|
+\end{align*}
+In this topology, distances are defined by projecting down to the x-axis, moving along it, and then moving back up. This is analogous to how one might
+define a topology on lines intersecting $\mathbb{R}$, since the tangent spaces can't naturally ``talk'' to each other: one projects down to the base space,
+moves along, and then goes to the second tangent space. Incidentally, it turns out that $T\mathbb{R}=\mathbb{R}^2$ quite naturally.
+
+\begin{exmp}
+    Take $S^2=\left\{ (x,y,z) | x^2+y^2+z^2=1 \right\}$. The tangent space at a point consists of all vectors orthogonal to the sphere at that point.
+    Therefore,
+    \begin{align*}
+        TS^2=\left\{ (x,y,z,u,v,w)\subset \mathbb{R}^6|x^2+y^2+z^2=1 \nm{and} xu+yv+zw=0 \right\},
+    \end{align*}
+    where the second equation enforces the orthogonality. One can check that this is a differentiable manifold of dimension 4 by viewing it as a level set in
+    $\mathbb{R}^6$ with two constraints (at a regular value).
+
+    More generally, if $c$ is a regular value of $f$, $f^{-1}(c)\subset\mathbb{R}^n$,
+    \begin{align*}
+        T(f^{-1}(c))=\left\{ (a,x)|a\in f^{-1}(c) \nm{and} \nabla f(a)\cdot x=0 \right\}\subset \mathbb{R}^{2n},
+    \end{align*}
+    which can be shown to be a differentiable manifold.
+\end{exmp}
+
+Note, however, that this approach has a disadvantage: we required the sphere to be embedded in Euclidean space, which is not necessarily always the case.
+We must find a more intrinsic definition of the tangent bundle, which is independent of the embedding.
+
+First note that there is always a canonical projection map $\pi:TM\to M$. We wish to define a differentiable structure on $TM$ such that the projection is
+differentiable (topologically, one could simply make this map continuous and $TM$ would have a pullback topology).
+
+\begin{thm}
+    Let $M$ be an n-dimensional differentiable manifold. There exists a natural differentiable structure on $TM$ 
+    such that $TM$ is a $(2n)$-dimensional smooth manifold and that the projection map $\pi:TM\to M$ is differentiable.
+\end{thm}
+\begin{proof}
+    It is left as an exercise to show that this structure will be Hausdorff and second-countable. Suppose $(U,\phi)$ is a coordinate chart on $M$
+    and $x^i$, $i=1\cdots n$ are coordinates on $U$ (more accurately, on $\phi(U)$). Take $\left( \pi^{-1}(U),\tilde{\phi} \right)$ as a coordinate chart
+    for $TM$. Any element in $\pi^{-1}(U)$ is a derivation at $p\in U$. But any derivation at $p$ is of the form $v^i\frac{\partial}{\partial x^i}|_p$,
+    and so
+    \begin{align*}
+        v^i\frac{\partial}{\partial x^i}|_p\xrightarrow{\tilde{\phi}}\left( x^1(p)\cdots x^n(p),v^1 \cdots v^n \right)\in \phi(U)\times\mathbb{R}^n.
+    \end{align*}
+    In other words, we give 2 coordinates: the first is of the base manifold and the second set are coordinates on the tangent space, so
+    $\tilde{\phi}:\pi^{-1}(U)\to\phi(U)\times \mathbb{R}^n\subset\mathbb{R}^{2n}$. We must now make sure that the transition maps 
+    are smoothly compatible, i.e. that $\tilde{\psi}\circ\tilde{\phi}^{-1}$ is a smooth map. Suppose we have $\tilde{x}^j$ coordinates on $\psi(V)$.
+    Then,
+    \begin{align*}
+        \tilde{\phi}^{-1}\left( x^1(p)\cdots x^n(p),v^1\cdots v^n \right)&=v^i\frac{\partial}{\partial x^i}|_p
+        =v^i\frac{\partial \tilde{x}^j}{\partial x^i}\frac{\partial}{\partial \tilde{x}^j}|_p,
+    \end{align*}
+    so we have two different expressions for this derivation, depending on which chart we are in. Now let us compute:
+    \begin{align*}
+        \psi\circ\tilde{\phi}^{-1}\left( x^1\cdots x^n,v^1\cdots v^n \right)=\tilde{\psi}\left(v^i\frac{\partial \tilde{x}^j}{\partial x^i}\frac{\partial}{\partial \tilde{x}^j}|_p  \right)\\
+        =\left( \tilde{x}^1\cdots \tilde{x}^n,v^i\frac{\partial \tilde{x}^1}{\partial x^i}\cdots v^i\frac{\partial \tilde{x}^n}{\partial x^i} \right)
+    \end{align*}
+    Now it suffices to show that this is a $C^\infty$ map from an open set of $\mathbb{R}^{2n}$ to $\mathbb{R}^{2n}$. Note carefully that the $\tilde{x}$ are functions of $x$
+    coordinates; but $\tilde{x}$ is smooth (because it originates from the transition map of the base manifold and because it is independent of $v^i$). The second set
+    of coordinates is smooth because it's linear in the $v^i$ and because, again, $\tilde{x}$ is smooth.
+\end{proof}
 
 \end{document}
