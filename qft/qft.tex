@@ -1,0 +1,115 @@
+\documentclass{../mathnotes}
+
+\title{Quantum Field Theory I}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Path integral formulation of field theory}
+
+Recall, last time we wrote down
+\begin{align*}
+    \langle 0|T\hat{\phi}(x_1)\hat{\phi}(2_2)|0\rangle = \frac{\int D\phi\; e^{iS}\phi(x_1)\phi(x_2)}{\int D\phi\;e^{iS}}
+\end{align*}
+Note carefully that we have operators on the LHS, but functions on the RHS. Additionally, the action above has no external source $J$
+(we will use $S_J$ to denote the case with the source). For example, for a free theory, we have
+\begin{align*}
+    S=\int d^4 x\;-\frac{1}{2}(\partial \phi)^2-\frac{1}{2}m^2\phi^2
+\end{align*}
+whereas with a source we have:
+\begin{align*}
+    S=\int d^4 x\;-\frac{1}{2}(\partial \phi)^2-\frac{1}{2}m^2\phi^2+J\phi
+\end{align*}
+Additionally, we will often take the normalization of our path integration measure to be such that $\langle 0|0\rangle=1=\int D\phi\; e^{iS}$.
+Finally, we will often use the shorthand:
+\begin{align*}
+    \langle 0|T\hat{\phi}(x_1)\hat{\phi}(2_2)|0\rangle=\langle \phi_1 \phi_2\rangle.
+\end{align*}
+
+We have already worked out what such a two-point correlation function looks like for free theory. First note that
+\begin{align*}
+    e^{iS}=\exp\left(-\frac{1}{2}\int d^4x\;i\phi\left( -\square+m^2 \right)\phi\right),
+\end{align*}
+which led to
+\begin{align*}
+    \langle \phi_1\phi_2\rangle=-i\Delta(x_1-x_2)=-i\Delta_{12},
+\end{align*}
+where $\Delta_{12}$ is the Green's function that satisfies the Klein-Gordon equation
+\begin{align*}
+    \left( -\square_{x_1}+m^2 \right)\Delta(x_1-x_2)=\delta^{(4)}(x_1-x_2)
+\end{align*}
+
+\begin{rem}
+    Note that
+    \begin{align*}
+        \int d^nx e^{-\frac{1}{2}x^TMx}=(2\pi)^{n/2}\frac{1}{\sqrt{\left( \det M \right)}}=(2\pi)^{n/2}\sqrt{\det M^{-1}}
+    \end{align*}
+    and
+    \begin{align*}
+        \int D\phi e^{iS}=(2\pi)^{n/2} \sqrt{\left( \det -i\Delta \right)}
+    \end{align*}
+    We usually absorb $J$ into the definition of $D\phi$, as mentioned earlier (in regards to normalization).
+\end{rem}
+
+Let us actually compute this Green's function. First, we added an $-i\varepsilon$ (the sign is important) to the Klein-Gordon operator to
+make the path integral converge (and to project onto the ground state of the system), and, then in Fourier space, we try
+\begin{align*}
+    \Delta(x_1-x_2)=\int \frac{d^4k}{(2\pi)^4}f(k)e^{ik\cdot (x_1-x_2)}
+\end{align*}
+Consequently, we have
+\begin{align*}
+    \left( \square_{x_1}+m^2+i\varepsilon \right)\Delta(x_1-x_2)=\int \frac{d^4k}{(2\pi)^4}(k^2+m^2-i\varepsilon)f(k)e^{ik\cdot (x_1-x_2)},
+\end{align*}
+which we want to be equal to $\delta^{(4)}(x_1-x_2)$. We conclude, then, that
+\begin{align*}
+    \Delta(x_1-x_2)=\int\frac{d^4k}{(2\pi)^4}\frac{e^{ik\cdot(x_1-x_2)}}{k^2+m^2-i\varepsilon}.
+\end{align*}
+In this integral, $k^0$ is integrated over; i.e. $k^0$ need not equal $\sqrt{\mathbf{k}^2+m^2}$. We immediately encounter problems if
+we attempt to compute this integral - if the $i\varepsilon$ were not present, there'd be certain values of $k^0$ that would lead
+to singularities as we integrate. Thankfully, the $i\varepsilon$ makes the integral well-defined. We factorize the denominator as:
+$\left( k^0+\sqrt{\mathbf{k}^2+m^2-i\varepsilon} \right)\left( k^0-\sqrt{\mathbf{k}^2+m^2-i\varepsilon} \right)$. Since we consider $\varepsilon$
+to be a small positive number, we can expand the square roots, making the denominator:
+$\left( k^0+\sqrt{\mathbf{k}^2+m^2}-i\varepsilon' \right)\left( k^0-\sqrt{\mathbf{k}^2+m^2}-i\varepsilon' \right)$,
+where $\varepsilon'$ is just another small positive number. In fact, we'll just be sloppy and keep following this number as $\varepsilon$.
+
+What does this factorization tell us about the location of the integrand's poles? Let us focus on the $dk^0$ integral first. Let us consider $k^0$ as
+a complex number (because of the $i\varepsilon$). The integral runs over the entire real line. Using the abbreviation $\omega_k=\sqrt{\mathbf{k}^2+m^2}$,
+we find that we have poles at $\omega_k-i\varepsilon$ and $-\omega_k+i\varepsilon$ (i.e. second and fourth quadrants). In this sense, the
+$i\varepsilon$ prescription has eased our integration, as there are no poles physically on our contour of integration. We perform the contour integral
+over the southern hemisphere; hopefully the integral along the arc will vanish. Now, take a point on this contour that is a distance $r$ away from the origin.
+This point is $r\cos\theta-ir\sin\theta$. At some point we will take $r\to\infty$ but let us not do so just yet.
+
+Inserting this point into the exponential in the numerator yields
+\begin{align*}
+    e^{-i(r\cos\theta-ir\sin\theta)(t_1-t_2)+i\mathbf{k}\cdot (\mathbf{x}_1-\mathbf{x}_2)},
+\end{align*}
+which has a part that oscillates and one that doesn't. The non-oscillating part yields $e^{-r\sin\theta(t_1-t_2)}$. Consequently, as $r\to\infty$,
+as long as $t_1>t_2$, we are guaranteed that the integral over the arc will go to zero. Therefore, if $t_1>t_2$ we must integrate over the southern
+hemisphere, but if $t_1<t_2$, we must integrate over the northen hemisphere. This is nice, as we seem to be getting some sense of time-ordering from
+this integral: a different pole is picked up based on which contour is actually taken. We now write
+\begin{align*}
+    \Delta(x_1-x_2)&=\Theta(t_1>t_2)(-2\pi i)\int\frac{d^3k}{(2\pi)^4}\frac{e^{-i\omega_k(t_1-t_2)+i\mathbf{k}\cdot(\mathbf{x}_1-\mathbf{x}_2)}}{-2\omega_k}\\
+    &+\Theta(t_2>t_1)(2\pi i)\int\frac{d^3k}{(2\pi)^4}\frac{e^{i\omega_k(t_1-t_2)+i\mathbf{k}\cdot(\mathbf{x}_1-\mathbf{x}_2)}}{2\omega_k},
+\end{align*}
+which yields our Green's function. We rewrite, now, changing the sign of the integration variable in the second integral,
+\begin{align*}
+    \langle\phi_1\phi_2\rangle=-i\Delta(x_1-x_2)&=\Theta(t_1>t_2)\int\frac{d^3k}{(2\pi)^32\omega_k}e^{-i\omega_k(t_1-t_2)+i\mathbf{k}\cdot(\mathbf{x}_1-\mathbf{x}_2)}\\
+    &+\Theta(t_2>t_1)\int\frac{d^3k}{(2\pi)^32\omega_k}e^{i\omega_k(t_1-t_2)-i\mathbf{k}\cdot(\mathbf{x}_1-\mathbf{x}_2)},
+\end{align*}
+which we can also write, now assuming that $k^0=\omega_k$, i.e. we are on-shell:
+\begin{align*}
+    \langle\phi_1\phi_2\rangle=-i\Delta(x_1-x_2)&=\Theta(t_1>t_2)\int\frac{d^3k}{(2\pi)^32\omega_k}e^{ik\cdot(x_1-x_2}\\
+    &+\Theta(t_2>t_1)\int\frac{d^3k}{(2\pi)^32\omega_k}e^{ik\cdot(x_1-x_2)},
+\end{align*}
+and we have computed the two-point correlation function for our free scalar field theory.
+
+The fact that we have the two step functions of time should be very gratifying, as the LHS has explicit time ordering, by definition of the two-point
+correlation function. It is a non-trivial check to compare this against the canonical quantization method that uses $\hat{a}_k,\hat{a}_k^\dagger$.
+One must insert $\phi$ as an integral over momentum of these two operators to get agreement.
+
+
+\end{document}
