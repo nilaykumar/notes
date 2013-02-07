@@ -1,13 +1,16 @@
 notes
 =====
 
-These are my live-TeX'd (and occasionally later edited) lecture notes for some of the courses that I'm taking/have taken.
-There will inevitably be mistakes and formatting issues and stuff -- I'm not the best TeX-er in the universe, so please point mistakes out to me!
+This repository is an eclectic collection of my notes on various subjects, taken either live during lecture, or typed up offline.
+Most of these are woefully incomplete and contain only a few lectures. Indeed, the only *real* notes, in any sense, are live-TeX'd in
+Prof. Mu-Tao Wang's differentiable manifolds course, stored in "diffman/".
 
-Note: there are only a few lectures worth of complex notes. Additionally, topology/ contains my self-taught notes on very basic topology.
+Disclaimer: there are most certainly mistakes littered throughout these notes. If you notice something untoward, please let me know!
 
-TODO:
+TODO soon:
 * Fill in missing parts of the manifolds lectures on bump/cutoff functions
-* Start TeXing algebra II lectures
 
-* Fill in missing representation theory lectures, do the exercises
+TODO later (i.e. summer break):
+* Work through the representation theory notes and TeX them up
+* Add in diagrams for manifolds via TikZ at the end of the semester
+* TeX up algebra II lectures (offline: Friedman is rather unstructured)
