@@ -9,7 +9,7 @@
 
 \maketitle
 
-\section{Path integral formulation of field theory}
+\section{Free scalar field two-point correlation function}
 
 Recall, last time we wrote down
 \begin{align*}
@@ -109,7 +109,87 @@ and we have computed the two-point correlation function for our free scalar fiel
 
 The fact that we have the two step functions of time should be very gratifying, as the LHS has explicit time ordering, by definition of the two-point
 correlation function. It is a non-trivial check to compare this against the canonical quantization method that uses $\hat{a}_k,\hat{a}_k^\dagger$.
-One must insert $\phi$ as an integral over momentum of these two operators to get agreement.
+One must insert $\phi$ as an integral over momentum of these two operators to get agreement. Notice that when $t_1=t_2$, the two integrands will
+be equal, so we simply add the two.
 
+Classically, one integrates over the product of Green's functions and the source to solve for the field \textit{after} the source appears.
+Our Green's function is quite odd in that regardless of whether we are before or after the source, we have non-zero support. In this sense,
+this is a half-retarded half-advanced solution; what is called a \textbf{Feynman Green's function}. This raises the question of causality, and we
+will at some point show that causality is implied by $[\hat{\phi}_1,\hat{\phi}_2]=0$ for the points 1 and 2 spacelike separated.
+
+Recall that 
+\begin{align*}
+    \langle \phi_1 \cdots \phi_m\rangle&=\frac{\int D\phi\;e^{iS}\phi_1\cdots\phi_m}{\int D\phi\;e^{iS}}.
+\end{align*}
+We can always use Wick pairings to simplify these integrals in free theory. For odd $m$, we had $\langle \phi_1\cdots\phi_m$, but for $m$ even,
+we have, for example,
+\begin{align*}
+    \langle \phi_1\phi_2\phi_3\phi_4 \rangle=\langle\phi_1\phi_2\rangle\langle\phi_3\phi_4\rangle+\langle\phi_1\phi_3\rangle\langle\phi_2\phi_4\rangle+\langle\phi_1\phi_4\rangle\langle\phi_2\phi_3\rangle
+\end{align*}
+Physically speaking, the fact that this disappears for $m$ odd is because the path integral integrand is odd when sone flips signs (only true for
+sourceless theory).
+
+Let us now consider turning on $J$. In other words,
+\begin{align*}
+    S_J=\int d^4x -\frac{1}{2}(\partial\phi)^2-\frac{1}{2}m^2\phi^2+J\phi
+\end{align*}
+and the path integral will be
+\begin{align*}
+    Z[J]=\int D\phi\;e^{iS_J}
+\end{align*}
+with the normalization that $Z[0]=1=\langle 0|0\rangle$ with no source. This function is called the \textbf{generating function} of the n-point functions because
+when we take functional derivatives we get
+\begin{align*}
+    \frac{\delta Z[J]}{\delta iJ(x_1)}=\int D\phi\;\phi(x_1)e^{iS_J}
+\end{align*}
+where we implicity assume $\frac{\delta J(x)}{\delta J(x_1)}=\delta(x-x_1)$. If we evaluate this derivative at $J=0$, we find
+\begin{align*}
+    \frac{\partial Z[J]}{\delta iJ(x_1)}|_{J=0}&=\int D\phi\;\phi(x_1)e^{iS}=\langle\phi(x_1)\rangle=0\\
+    \frac{\delta^mZ[J]}{\delta iJ_m \cdots \delta iJ_1}|_{J=0}&=\langle \phi_1 \cdots \phi_m \rangle.
+\end{align*}
+Note that the order of the functional derivatives does not matter! Of course, for free theory, we don't need this machinery at all,
+but instead, becomes useful for interacting theories. Let us write down this function regardless. First recall the Gaussian integral
+\begin{align*}
+    \frac{\int d^nx e^{-\frac{1}{2}x^TMx+J^Tx}}{\int d^nx e^{-\frac{1}{2}x^TMx}}=e^{\frac{1}{2}J^TM^{-1}J},
+\end{align*}
+which suggests
+\begin{align*}
+    Z[J]=\exp\left( \frac{i}{2}\int d^4x d^4y\;J_x \Delta_{xy}J_y\right)
+\end{align*}
+One can take functional derivatives to check that this does indeed yield the $n$-point correlation functions.
+
+\section{Energy arising from a static source}
+
+So far we have primarily focused on formalism -- let's now try to do some physics. Let's try to calculate the energy of a static source $J(\mathbf{x})$.
+Let us try to solve the classical problem:
+\begin{align*}
+    J_x&=\left( -\square_x+m^2 \right)\phi_x\\
+    \phi_x&=\int d^4x'\;J(\mathbf{x}') \int \frac{d^4k}{(2\pi)^4}\frac{e^{ik\cdot(x-x')}}{k^2+m^2}
+\end{align*}
+Note that we have dropped the $i\varepsilon$ and are using the Fenyman Green's function as the source is static, and we need not worry about changes
+in time of the source. We can integrate over $t'$; we obtain a delta function that forces $\omega_k=0$: $2\pi\delta(k^0)$, and we get
+\begin{align*}
+    \int d^3x' J(\mathbf{x}') \int \frac{d^3k}{(2\pi)^3}\frac{e^{i\mathbf{k}\cdot(\mathbf{x}-\mathbf{x'})}}{\mathbf{k}^2+m^2}
+\end{align*}
+There is clearly no pole in the integrand, which confirms that we do not need to use the $i\varepsilon$ prescription. The computation of the inner integral
+is left for a problem set:
+\begin{align*}
+    V(|\mathbf{x}-\mathbf{x}'|)=\int \frac{d^3k}{(2\pi)^3}\frac{e^{i\mathbf{k}\cdot(\mathbf{x}-\mathbf{x'})}}{\mathbf{k}^2+m^2}=\frac{1}{4\pi}\frac{e^{-m|\mathbf{x}-\mathbf{x}'|}}{|\mathbf{x}-\mathbf{x}'|},
+\end{align*}
+which, by the way, is known as the \textbf{Yukawa potential}. This potential drops off as $1/r$ when $r\ll 1/m$, but is exponentially supressed when $r\gg 1/m$.
+Why we interpret this as a potential energy will be made clear in a moment. Let us now compute the energy of our $\phi_x$ sourced by a static $J$.
+The Hamiltonian density is written
+\begin{align*}
+    \mathcal{H}&=\Pi\dot\phi-\mathcal{L}\\
+    &=\frac{1}{2}(\partial_t\phi)^2+\frac{1}{2}(\nabla\phi)^2+\frac{1}{2}m^2\phi^2-J\phi
+\end{align*}
+Substituting $\phi(x)=\int d^3x' J(\mathbf{x}')V(|\mathbf{x}-\mathbf{x}'|)$ and compute the Hamiltonian (check this):
+\begin{align*}
+    H=-\frac{1}{2}\int d^3x d^3x'\;J(\mathbf{x})J(\mathbf{x}')V(|\mathbf{x}-\mathbf{x}'|).
+\end{align*}
+This is very satisfying, as this expression looks exactly analogous to the energy we typically find in electrostatics. This is telling us that once
+we turn on a source, it's like turning on a electrostatic-esque potential. It is almost as if this $\phi$, our ``particle'', is what \textit{mediates}
+a force! Indeed, we can see that this force is attractive, due to the minus sign out front. Finally, note that a mediating particle with any mass
+will mediate a force that dies off exponentially.
 
 \end{document}

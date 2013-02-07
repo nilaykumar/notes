@@ -11,6 +11,7 @@ Disclaimer: there are most certainly mistakes littered throughout these notes. I
 TODO soon:
 * Fill in missing parts of the manifolds lectures on bump/cutoff functions
 * Prettify the parentheses throughout the notes
+* Figure out how to do evaluated at prettier than with a pipe
 
 TODO later (i.e. summer break):
 * Work through the representation theory notes and TeX them up
