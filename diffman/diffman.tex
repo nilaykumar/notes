@@ -590,4 +590,110 @@ differentiable (topologically, one could simply make this map continuous and $TM
     of coordinates is smooth because it's linear in the $v^i$ and because, again, $\tilde{x}$ is smooth.
 \end{proof}
 
+\begin{defn}
+    A $C^\infty$ \textbf{vector field} $Y$ on $M$ is a $C^\infty$ map $Y:M\to TM$ such that $\pi\circ Y=\id_M$ or $Y(p)\in T_pM$
+\end{defn}
+
+In other words, we assign a derivation to each point $p$ on the base manifold with the stipulation that the assigned derivation be in the
+tangent space ``over'' $p$. That means, that we can write, in the local coordinate chart:
+\begin{align*}
+    Y=Y^i(p)\frac{\partial}{\partial x^i}\bigg|_p
+\end{align*}
+where $Y^i(p)$ are $C^\infty$ functions on the coordinate chart. We have assigned a tuple of smooth functions at each point on the manifold - this
+should remind you of vector fields that we are used to working with on Euclidean spaces. Of course, if $p$ is in another chart as well, it can be
+written as 
+\begin{align*}
+    Y=\tilde{Y}^i(p)\frac{\partial}{\partial \tilde{x}^i}\bigg|_p.
+\end{align*}
+Clearly we must have
+\begin{align*}
+    Y^i(p)\frac{\partial}{\partial x^i}\bigg|_p&=Y^i(p)\frac{\partial \tilde{x}^j}{\partial x^i}\frac{\partial}{\partial \tilde{x}^j}\bigg|_p\\
+    \tilde{Y}^j(p)&=Y^i(p)\frac{\partial \tilde{x}^j}{\partial x^i}(p)
+\end{align*}
+
+\begin{exmp}
+    On $\mathbb{R}^2\setminus(0,0)$ we can take
+    \begin{align*}
+        Y_1&=x\frac{\partial}{\partial x}+y\frac{\partial}{\partial y}\\
+        Y_2&=x\frac{\partial}{\partial x}-y\frac{\partial}{\partial y}\\
+        \tilde{Y}_1&=\frac{1}{\sqrt{x^2+y^2}}\left(x\frac{\partial}{\partial x}+y\frac{\partial}{\partial y}\right)\\
+        \tilde{Y}_2&=\frac{1}{\sqrt{x^2+y^2}}\left(x\frac{\partial}{\partial x}-y\frac{\partial}{\partial y}\right).
+    \end{align*}
+    Note that the second two are unit vector fields and thus cannot be extended continuously to the point 0, as their length remains constant.
+    The first two, on the other hand shrink as we approach 0, and thus \textit{can} be extended to become vector fields on $\mathbb{R}^2$.
+
+    Let us now try to push this vector field on $\mathbb{R}^2$ to a vector field on $S^2$ with the north pole delted using the stereographic projection.
+    Taking the usual stereographic chart $\phi$, we can use $\phi^{-1}$ to push forward $Y_1$ and $Y_2$ so they become vector fields
+    on $S^2$ with the north pole deleted. The question now arises: can we extend this vector field to the north pole? Well, note that
+    $\left( \phi^{-1} \right)_* Y_1$ (push forwards of rays going out to infinity) is tangent to a longitude line of the sphere.
+    What we must examine, then, is the length of the vector field along this line in the vicinity of the north pole -- in fact, it could be infinite, finite, or zero!
+    But what about $\left( \phi^{-1} \right)_* Y_2$? This is the push forward of circles about the origin. This will yield tangents to
+    a latitude line of the sphere, and again the question is whether or not the field goes to zero as we approach the north pole.
+
+    This question of whether the vector field can be globally defined on $S^2$ is left as a future homework problem.
+\end{exmp}
+
+\begin{exmp}
+    Consider $T=\mathbb{R}^2\setminus{\sim}$ with
+    \begin{align*}
+        (x,y)&\sim(x+1,y)\\
+        (x,y)&\sim(x,y+1).
+    \end{align*}
+    The first relation quotients out points into vertical lines, and the second relation quotients out points into horizontal lines, and thus
+    it can be seen that the only relevant space is a square of side length 1 with the bottom-left corner at the origin. Note, however, that one
+    must be careful to associate the opposite edges with each other -- in fact, what we get is called a flat torus.
+
+    We can show that this is a differentiable manifold. Indeed, another way to define this is to consider
+    \begin{align*}
+        T=\left\{ (x,y,z,w)|x^2+y^2=\frac{1}{2}, z^2+w^2=\frac{1}{2} \right\}\subset \mathbb{R}^4.
+    \end{align*}
+    But notice that $x,y$ are not globally defined functions on $T$. $\frac{\partial}{\partial x}$, on the other hand, is a well-defined global vector field,
+    as the position of the vector does not matter, so a horizontal vector on the left edge of the square can be unambiguously identified with itself on the
+    right edge of the square. The same holds for $\frac{\partial}{\partial y}$. These derivative vector fields are non-zero everywhere on $T$, unlike what
+    we saw at the poles of $S^2$.
+\end{exmp}
+
+\begin{defn}
+    A \textbf{global derivation} on $M$ is a linear map over $\mathbb{R}$, $Y:C^\infty(M)\to C^\infty(M)$ such that $Y(fg)(p)=f(p)(Yg)(p)+g(p)(Yf)(p)$. 
+\end{defn}
+
+\begin{thm}
+    Every global derviation comes from a global smooth vector field.
+\end{thm}
+
+\begin{defn}
+    Let $\mathcal{T}(M)$ be the set of all smooth vector fields on $M$. Again, this is a real vector space. We can also multiply a smooth vector
+    field by a smooth function, so in fact, $C^\infty(M)$ has a ring structure. Thus, $\mathcal{T}(M)$ can be considered as a module over $C^\infty(M)$.
+    In fact, $\mathcal{T}(M)$ can be identified with the vector space of global derivations on $M$.
+\end{defn}
+
+Suppose $X$ and $Y$ are smooth vector fields, and thus global derivations, $f\to Xf$. The question is: can we take a second derivative?
+Is $YX$ a global derivation? 
+\begin{align*}
+    YX(fg)&=Y(gXf+fXg)\\
+    &=(Yg)\cdot Xf+g\cdot YXf+(Yf)\cdot Xg+f\cdot YXg
+\end{align*}
+The second and the fourth terms are the requirements to be a global derivation, and thus there are two extra terms and $YX$ is not necessarily
+a global derivation. Note that the extra terms are symmetric with respect to $X$ and $Y$, which we can use to obtain a global derivation. Consider
+\begin{align*}
+    (XY-YX)(fg)=g\cdot(XY-YX)f+f\cdot (XY-YX)g,
+\end{align*}
+which \textit{is} a global derivation.
+\begin{defn}
+    The \textbf{Lie bracket}, or bracket, is a binary operation on $\mathcal{T}(M)$ that satisfies:
+    \begin{itemize}
+        \item linearity: $[aX+bY,Z]=a[X,Z]+b[Y,Z]$
+        \item skew-symmetry: $[X,Y]=-[Y,X]$
+        \item Jacobi identity: $[X,[Y,Z]]+[Y,[Z,X]]+[Z,[X,Y]]$
+    \end{itemize}
+\end{defn}
+
+Consequently, if $X,Y\in\mathcal{T}(M)$, $XY$ is not necessarily in $\mathcal{T}(M)$, but $[X,Y]$ is. This makes $\mathcal{T}(M)$ a $\textbf{Lie algebra}$.
+
+Note that in local coordinates, if $X=v^i\frac{\partial}{\partial x^i}$ and $Y=w^j\frac{\partial}{\partial x^j}$,
+\begin{align*}
+    [X,Y]=\left( v^i\frac{\partial w^j}{\partial x^i}-w^i\frac{\partial v^j}{\partial x^i}\right)\frac{\partial}{\partial x^j}.
+\end{align*}
+
+
 \end{document}
