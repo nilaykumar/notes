@@ -1,0 +1,40 @@
+\documentclass{../../mathnotes}
+
+
+\title{Differentiable Manifolds Problem Set 2}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+
+Let $X$ be a Hausdorff and second countable topological space. We wish to show that any subspace $Y$ of $X$ is itself Hausdorff
+and second countable. Take any $p,q\in Y\subset X$. As $X$ is Hausdorff, there exist disjoint open sets $U_p, U_q\in X$ containing $p$ and $q$
+respectively. By definition of the subspace topology, the open sets in $Y$ are of the form $U\cap Y$, where $U$ are the open sets in $X$.
+Consequently, $U_p\cap Y$ and $U_q\cap Y$ are disjoint open sets in the topology on $Y$; as $p,q$ were arbitrary, $Y$ is Hausdorff.
+
+Let us now show that $Y$ is second countable. By second countability, we know that there exists a countable basis $\mathcal{B}_X$ of $X$.
+Take $\mathcal{B}_Y$ to be the collection of open sets $B_Y=Y\cap B_X$, where $B_X\in\mathcal{B}_X$. 
+Note that for any two basis elements $C_X, D_X\in\mathcal{B}_X$, there exists a basis element $E_X$ contained in $C_X\cap D_X$ by the basis
+criterion. It follows, then, that for the two basis elements
+$C_Y=Y\cap C_X \nm{and} D_Y=Y\cap D_X$ in $\mathcal{B}_Y$, the basis element $Y\cap E_X\in \mathcal{B}_Y$ is contained in $C_Y\cap D_Y$.
+It should be clear, then, that the basis $\mathcal{B}_Y$ generates the topology on $Y$, and since $\mathcal{B}_Y$ is necessarily smaller
+than $\mathcal{B}_X$, $Y$ is second countable.
+
+\subsection*{Problem 2}
+
+\subsection*{Problem 3}
+
+Let $SL(n)$ be the set of all $n\times n$ matrices with determinant 1.
+
+\subsection*{Problem 4}
+
+\subsection*{Problem 5}
+
+\subsection*{Problem 6}
+
+\end{document}
