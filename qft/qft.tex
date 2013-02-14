@@ -317,4 +317,101 @@ a little confusing, and we will not trouble ourselves too much at the moment.
 Diagrams with no external legs are generically known as \textbf{bubble diagrams}, and typically correspond to \textbf{virtual particles} -- particles that
 pop out of the vacuum and then disappear. More precisely, these are additional contributions to the vacuum energy (the cosmological constant).
 
+
+\section*{What \textit{is} the scalar field?}
+
+(February 14, 2013)
+
+Think about the surface of the ocean (or a drum). In the ground state the surface is, of course, flat. Any deviation from the ground state
+can obviously be represented by a scalar field (as there is only a magnitude of deviation from flat). We know that one can describe
+waves in such a field as 
+\begin{align*}
+    \left(-\frac{\partial^2}{\partial t^2}+c_s^2\frac{\partial^2}{\partial \mathbf{x}^2}\right)\phi(\mathbf{x},t)=0
+\end{align*}
+It should be clear that there exist solutions of the form $e^{-i\omega_kt +i\mathbf{k}\cdot\mathbf{x}}$ which yield the dispersion relation $\omega_k^2=c_s^2\mathbf{k}^2$.
+We can even guess the action to be
+\begin{align*}
+    S=\int dt d^3x\;\left( \frac{1}{2}(\partial_t\phi)^2-\frac{c_s^2}{2}\left( \nabla \phi \right)^2 \right)
+\end{align*}
+In field theory language, we would say this field describes a massless particle. But where did this particle come from?
+
+Well, quantum mechanically, it is impossible for the scalar field to be perfectly flat -- there will inevitably be fluctuations. Indeed, in computing
+the $n$-point functions that we have been doing, we've been computing amplitudes of non-trivial phenomena in the ground state! This is clearly behavior that
+is incompatible with classical mechanics. In fact, as we showed, Fourier decomposing the quantum fluctuations (i.e. Fourier transforming $\phi$) yields some
+$a_k,a_k^\dagger$ operators. Of course, there is no physical meaning of these coefficients yet -- they are simply Fourier coefficients. It is imposing the
+commutation relations in a way similar to that done for the harmonic oscillator,
+\begin{align*}
+    [a_k,a^\dagger_{k'}]=\delta(k-k')
+\end{align*}
+that provokes us to think of these operators as ``creation'' and ``annihilation'' operators. However, one must be careful to treat the scalar field as a field
+not of a media, but in field theory, we imagine it residing in vacuum.
+
+But $\phi$ is itself an operator. What are its eigenvalues and eigenstates? We take
+\begin{align*}
+    \hat{\phi}(x)|f(x)\rangle=f(x)|f(x)\rangle.
+\end{align*}
+What is this eigenstate? Roughly, it is a field configuration in the shape of $f(x)$, and thus any function $f(x)$ can be put in the above equation.
+Now the question arises, how does the function $f(x)$ evolve? First note that $\hat{\phi}$ is a Heisenberg operator:
+\begin{align*}
+    \hat{\phi}(x,t)=e^{iHt}\hat{\phi}(x,0)e^{-iHt}.
+\end{align*}
+For the sake of clarity let us rewrite the eigen-equation as
+\begin{align*}
+    \hat{\phi}(x,t)|f(x),t\rangle=f(x)|f(x),t\rangle.
+\end{align*}
+Inserting the Heisenberg expression into the eigen-equation, we have that
+\begin{align*}
+    e^{iHt}\hat{\phi}(x,0)e^{-iHt}|f(x),t\rangle=f(x)|f(x),t\rangle.
+\end{align*}
+Additionally, at time 0, the Heisenberg and Schrodinger pictures line up:
+\begin{align*}
+    \hat{\phi}(x,0)|f(x),0\rangle=f(x)|f(x),0\rangle,
+\end{align*}
+Enforcing both of these equations, we find
+\begin{align*}
+    |f(x,t)\rangle=e^{iHt}|f(x),0\rangle,
+\end{align*}
+i.e. that the Heisenberg eigenstates evolve backwards in time, while the Heisenberg operators evolve forwards in time.
+
+\section*{Bubble diagrams}
+
+Let us now return to bubble diagrams. Recall that we have
+\begin{align*}
+    S=\int d^4x\left( \mathcal{L}_0 +\mathcal{L}_{\rm int}\right)
+\end{align*}
+where
+\begin{align*}
+    \mathcal{L}_{\rm int}=-\frac{1}{2}(Z_\phi - 1)(\partial \phi)^2-\frac{1}{2}(Z_m-1)m^2\phi^2+\frac{1}{3!}Z_gg\phi^3+Y\phi +\Lambda.
+\end{align*}
+It is still unclear why in adding the cubic term, we have been forced by quantum mechanics to add in many of these extra terms.
+These additional terms are typically known as \textbf{counter terms}.
+Let's see if we can determine where the cosmological constant $\Lambda$ come from.
+
+We considered the generating function with only a cubic term (and an external source):
+\begin{align*}
+    Z_1[J]=\int D\phi e^{i\int d^4x\left( \mathcal{L}_0+\frac{1}{3!}Z_gg\phi^3+J\phi \right)}
+\end{align*}
+There are a huge number of terms in this path integral. We considered the terms with no $J$, that led to a myriad of bubble diagrams.
+There are many others, with arbitrary high numbers of $J$'s.
+
+\begin{thm}
+    \begin{align*}
+        Z_1[J]=\exp\left(\sum\nm{connected diagrams}\right)
+    \end{align*}
+    In other words, exponentiating the connected diagrams yields the full result (including the disconnected diagrams).
+\end{thm}
+\begin{proof}
+    Take the sum over diagrams
+    \begin{align*}
+        \sum_{\left\{ n_I \right\}} D^{\left\{ n_I \right\}}
+    \end{align*}
+    where we $n_I$ labels each different type of diagram. This can be rewritten:
+    \begin{align*}
+        \sum\frac{1}{S_D}\prod_I(c_I)^{n_I}&=\sum\frac{1}{\prod_In_I!}\prod_Ic_I^{n_I}=\sum\prod_I\frac{c_I^{n_I}}{n_I!}\\
+        &=\prod_I\sum_{n_I=0}^\infty \frac{c_I^{n_I}}{n_I!}=\prod_I e^{c_I}=e^{\sum_Ic_I},
+    \end{align*}
+    where the nontrivial step is the last one, which you should probably think a little bit about.
+\end{proof}
+
+
 \end{document}
