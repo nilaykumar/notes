@@ -15,6 +15,8 @@
 \DeclareMathOperator{\Int}{Int}
 \DeclareMathOperator{\Ext}{Ext}
 \DeclareMathOperator{\id}{Id}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\supp}{supp}
 
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}

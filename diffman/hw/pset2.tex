@@ -27,14 +27,263 @@ than $\mathcal{B}_X$, $Y$ is second countable.
 
 \subsection*{Problem 2}
 
+We wish to construct partition of unity for $S^2$ subordinate to our usual stereographic atlas $\left\{ (U,\phi),(V,\phi) \right\}$.
+In other words, we wish to find smooth functions $u,v:S^2:\mathbb{R}$ such that
+\begin{itemize}
+    \item $\supp u \subset U$ and $\supp v \subset V.$
+    \item $0\leq u,v\leq 1$ and $u+v=1$ everywhere on $S^2$.
+\end{itemize}
+Let us take $(U,\phi)$ to be the chart that excludes the north pole, and $(V,\psi)$ to be the chart that excludes the south pole.
+The way to proceed is to use the bump function, $H:\mathbb{R}^2\to\mathbb{R}$ that we defined in class. $H$ has the properties that
+it is smooth, $H(x)\leq1$ everywhere, $H\equiv 1$ on $|x|\leq2$, and $\supp H$ is the set $|x|\leq 3$. Let us now define
+\begin{align*}
+    \alpha=
+    \left\{
+        \begin{array}{cc}
+            H\circ \phi & \nm{on} U\\
+            0 & \nm{north pole}
+        \end{array}
+    \right.
+    \\
+    \beta=
+    \left\{
+        \begin{array}{cc}
+            H\circ \psi & \nm{on} U\\
+            0 & \nm{south pole}
+        \end{array}
+    \right.
+\end{align*}
+We must check that $\alpha$ and $\beta$ are smooth. To do so, we check that the real functions $\alpha\circ\phi^{-1},\alpha\circ\psi^{-1}$ and
+$\beta\circ\phi^{-1},\beta\circ\psi^{-1}$ are smooth where they overlap (everywhere but the poles):
+\begin{align*}
+    \alpha\circ\phi^{-1}&=H\circ\phi\circ\phi^{-1}=H\\
+    \alpha\circ\psi^{-1}&=H\circ\phi\circ\psi^{-1}.
+\end{align*}
+The first is smooth by smoothness of $H$ and the second is smooth by the smoothness of the transition maps of $S^2$.
+Exactly the same reasoning holds for $\beta$.
+
+Note additionally that far enough out in the stereographic plane (i.e. close to the north/south pole), the bump function has no support. Consequently,
+there is a neighborhood about the north/south pole in which $\alpha$ (or $\beta$) are zero. Thus, $\supp\alpha\subset U$ and $\supp\beta\subset V$.
+However, it is not necessarily true that $\alpha+\beta=1$, so we define functions from $S^2\to\mathbb{R},$
+\begin{align*}
+    u&=\frac{\alpha}{\alpha+\beta}\\
+    v&=\frac{\beta}{\alpha+\beta}.
+\end{align*}
+$u$ and $v$ are smooth by smoothness of $\alpha$ and $\beta$ and the fact that $\alpha+\beta$ is never zero (this is not obvious, but is
+true by the specific ``radius'' of the bump function that we chose -- the inner part of the bump function must always ``wrap'' at least past the
+equator). Additionally, $\supp u\subset U$ and $\supp v\subset V$ as $u,v$ are zero wherever $\alpha,\beta$ are, and $u+v=1$ everywhere
+on $S^2$. Finally, $0\leq u,v\leq 1$ because $\alpha,\beta$ are (by the properties of the bump function), and because the quotients
+above are between $\alpha$ and something larger than $\alpha$ (and $\beta$ and something larger than $\beta$).
+Consequently, $u,v$ as defined above form a partition of unity for the sphere.
+
+
+
 \subsection*{Problem 3}
 
-Let $SL(n)$ be the set of all $n\times n$ matrices with determinant 1.
+Let $SL_n$ be the set of all $n\times n$ matrices with determinant 1. We wish to show that $SL_n$ is a smooth manifold.
+Let us denote the determinant function by $F=\det:GL_n\to\mathbb{R}$; then $SL_n=F^{-1}(1)$. Recall that $F^{-1}(1)$ is an $(n^2-1)$-dimensional
+smooth manifold if $1$ is a regular value of $F$. To check this, we must show that $\nabla F(x)\neq 0$ for all $x\in F^{-1}(1)$:
+\begin{align*}
+    \left(\begin{array}[]{ccccc}
+        \frac{\partial F}{\partial\delta_{11}} & \frac{\partial F}{\partial\delta_{12}} & \cdots & \frac{\partial F}{\partial\delta_{n(n-1)}} & \frac{\partial F}{\partial\delta_{nn}}
+    \end{array}
+    \right)(x)\neq 0
+\end{align*}
+Here we have chosen to differentiate with respect to the $n^2$ basis matrices $\delta_{ij}$ of the tangent space, which are simply matrices with a 1 
+in the $i$th row and $j$th column and 0's everywhere else. In other words, for 1 to be a regular value, one of the $\partial F/\partial\delta_{ij}$ must be non-zero at $x$.
+
+To compute one of these derivatives, we can use the formula given in Lee:
+\begin{align*}
+    \frac{\partial F}{\partial\delta_{ij}}\bigg|_x&=d(\det)_x(\delta_{ij})=(\det x)\tr(x^{-1}\delta_{ij})\\
+    &=\tr(x^{-1}\delta_{ij})=\tr(x^{-1}_{ij})\\
+    &=x^{-1}_{ij}
+\end{align*}
+All we require is for $x^{-1}_{ij}$ to be non-zero for some $i,j$. This is clearly the case, because if it were not so, $x^{-1}$ would be the zero matrix,
+which is not in $SL_n$. Thus 1 is a regular point of $F$, and $SL_n$ is an $(n^2-1)$-dimensional smooth manifold.
 
 \subsection*{Problem 4}
 
+Consider a map $F:\mathbb{R}^4\to\mathbb{R}^2$ defined by
+\begin{align*}
+    F(x,y,s,t)=(x^3+y,x^3+y^2+s^2+t^2+y).
+\end{align*}
+We wish to show that $(0,1)$ is a regular value of $F$ and that the level set $F^{-1}\left( 0,1 \right)$ is diffeomorphic to $S^2$.
+
+Let us first compute
+\begin{align*}
+    dF=\left( 
+    \begin{array}[]{cccc}
+        3x^2 & 1 & 0 & 0\\
+        3x^2 & 2y+1 & 2s & 2t
+    \end{array}
+    \right)
+\end{align*}
+Note that $dF$ is not full rank if $y=s=t=0$ (because the two rows will not be linearly independent). Note however, we are only interested in
+$F^{-1}((0,1))$, i.e. when
+\begin{align*}
+    x^3+y&=0\\
+    x^3+y^2+s^2+t^2+y&=1
+\end{align*}
+but rank deficiency occurs only when $x^3=0=1$, which is clearly impossible. Consequently, $(0,1)$ is a regular value for $F$,
+and $M=F^{-1}( (0,1) )$ forms a 2-dimensional smooth manifold.
+
+To show that $M=F^{-1}((0,1))$ is diffeomorphic to $S^2$, let us construct smooth coordinate charts for $M$ and then show that there exists
+a diffeomorphism between $M$ and $S^2$ with respect to this smooth structure. Using the relations between the 4 variables above, we can construct
+6 coordinate charts as follows.
+
+For $y<0$ we define
+\begin{align*}
+    \phi_1:M\to\mathbb{R}^2\\
+    \phi_1(x,y,s,t)=(s,t)\\
+    \phi_1^{-1}(s,t)=\left( (1-s^2-t^2)^{1/6},-(1-s^2-t^2)^{1/2},s,t \right)
+\end{align*}
+and for $y>0$ we define the analogous coordinate chart $\phi_2$ with the appropriate sign change.
+
+For $s<0$ we define
+\begin{align*}
+    \phi_3:M\to\mathbb{R}^2\\
+    \phi_3(x,y,s,t)=(y,t)\\
+    \phi_3^{-1}(y,t)=\left( -y^{1/3},y,\sqrt{1-y^2-t^2},t \right)
+\end{align*}
+and for $s>0$ we define the analogous coordinate chart $\phi_4$ with the appropriate sign change.
+
+For $t<0$ we define
+\begin{align*}
+    \phi_5:M\to\mathbb{R}^2\\
+    \phi_5(x,y,s,t)=(y,s)\\
+    \phi_5^{-1}(y,s)=\left( -y^{1/3},y,s,-\sqrt{1-s^2-t^2} \right)
+\end{align*}
+and for $t>0$ we define the analogous coordinate chart $\phi_6$ with appropriate sign change. It is straightforward but tedious to show
+that these charts are smoothly compatible.
+
+Now, recall the coordinate charts for $S^2$ (with coordinates $a,b,c$). For $a<0$ we define
+\begin{align*}
+    \psi_1:S^2\to\mathbb{R}^2\\
+    \psi_1(a,b,c)=(b,c)\\
+    \psi_1^{-1}(b,c)=\left( -\sqrt{1-b^2-c^2},b,c \right)
+\end{align*}
+and for $a>0$ we define the analogous coordinate chart $\psi_2$ with appropriate sign change.
+
+For $b<0$ we define
+\begin{align*}
+    \psi_3:S^2\to\mathbb{R}^2\\
+    \psi_3(a,b,c)=(a,c)\\
+    \psi_3^{-1}(a,c)=\left(a, -\sqrt{1-a^2-c^2},c \right)
+\end{align*}
+and for $b>0$ we define the analogous coordinate chart $\psi_4$ with appropriate sign change.
+
+For $c<0$ we define
+\begin{align*}
+    \psi_5:S^2\to\mathbb{R}^2\\
+    \psi_5(a,b,c)=(a,b)\\
+    \psi_5^{-1}(a,b)=\left( a,b,-\sqrt{1-a^2-b^2} \right)
+\end{align*}
+and for $c>0$ we define the analogous coordinate chart $\psi_6$ with appropriate sign change. These charts were shown to be smoothly compatible on
+the previous problem set.
+
+Now define a map
+\begin{align*}
+    f:M\to S^2\\
+    f(x,y,s,t)=(y,s,t)\\
+    f^{-1}(a,b,c)=(-a^{1/3},a,b,c).
+\end{align*}
+We wish to show that this function is a diffeomorphism from $M$ to $S^2$. To do this, we must check that $\phi_i\circ f\circ\psi_j^{-1}$ is smooth
+for all $i,j$. Fortunately, we need only check 4 combinations, as many of these charts have almost identical structure, and the analysis for these
+would proceed analogously:
+\begin{align*}
+    \psi_1\circ f\circ\phi_1^{-1}(s,t)=\psi_1\left( -(1-s^2-t^2)^{1/2},s,t \right)=(s,t)\\
+    \phi_1^{-1}\circ f^{-1}\circ\psi_1(s,t)=(s,t),
+\end{align*}
+which are clearly smooth as they are the identity, and
+\begin{align*}
+    \psi_1\circ f\circ\phi_3^{-1}(y,t)=\psi_1\left( y,-\sqrt{1-y^2-t^2},t \right)=\left( -\sqrt{1-y^2-t^2},t \right)\\
+    \phi_3\circ f^{-1}\circ \psi_1^{-1}(b,c)=\phi_3\left( (1-b^2-c^2)^{1/6},-\sqrt{1-b^2-c^2} \right)=\left( -\sqrt{1-b^2-c^2},c \right),
+\end{align*}
+which are clearly smooth, as well (because the square roots are never zero in the appropriate charts). Thus, we have found a
+diffeomorphism between $M$ and $S^2$, and $F^{-1}( (0,1) )$ is diffeomorphic to $S^2$.
+
+Note that the subsets on which $x$ and $y$ can be solved as smooth functions of $s$ and $t$ were simply the subsets on which
+$\phi_1,\phi_2$ were defined, i.e. $y\neq 0$.
+
 \subsection*{Problem 5}
 
+For each $n\in\mathbb{Z}$, we define the $n$th power map $p_n:S^1\to S^1$ given in complex notation by $p_n(z)=z^n$.
+On each copy of $S^1$, we can take 4 graphical coordinate charts. Let us only work with two of these total 8 charts, one on each copy,
+$(U,\phi)$ and $(V,\psi)$ respectively, where $U,V$ are the upper hemispheres of the circles. The proofs for the other charts
+follow almost exactly as what follows. We have the charts
+\begin{align*}
+    \phi(\cos\theta,\sin\theta)=\cos\theta\\
+    \phi^{-1}(\cos\theta)=\left(\cos\theta,\sqrt{1-\cos^2\theta}\right)
+\end{align*}
+and
+\begin{align*}
+    \psi(\cos\theta,\sin\theta)=\cos\theta\\
+    \psi^{-1}(\cos\theta)=\left(\cos\theta,\sqrt{1-\cos^2\theta}\right).
+\end{align*}
+We now wish to show that the following composition is smooth:
+\begin{align*}
+    \psi\circ p_n\circ\phi^{-1}(\cos\theta)&=\psi\circ p_n\left(\cos\theta,\sqrt{1-\sin^2\theta}\right)\\
+    &=\psi\left(\cos(n\theta),\sqrt{1-\sin^2(n\theta)}\right)=\cos(n\theta)
+\end{align*}
+It is well known that the function $\cos(n\theta)$ can be written smoothly in terms of $\cos\theta$ via the Chebyshev
+polynomials. Consequently, $p_n$ is a smooth map from $S^1$ to $S^1$.
+
+Now define the antipodal map $\alpha:S^n\to S^n$ such that $\alpha(x)=-x$. It should be clear that each copy of $S^n$ will have $2(n+1)$
+graphical coordinates. The charts are for each copy:
+\begin{align*}
+    \phi_{2i}&:S^n\to\mathbb{R}^n \nm{for}x^i>0\\
+    \phi_{2i}(\vec{x})&=(x^1\cdots \hat{x}^i\cdots x^{n+1})\\
+    \phi_{2i}^{-1}(x^1\cdots \hat{x}^i \cdots x^n)&=\left(x^1\cdots +\sqrt{1-\sum_{k\neq i}(x^k)^2}\cdots x^{n+1}\right)
+\end{align*}
+and
+\begin{align*}
+    \phi_{2i+1}&:S^n\to\mathbb{R}^n \nm{for}x^i<0\\
+    \phi_{2i+1}(\vec{x})&=(x^1\cdots \hat{x}^i\cdots x^{n+1})\\
+    \phi_{2i+1}^{-1}(x^1\cdots \hat{x}^i \cdots x^n)&=\left(x^1\cdots -\sqrt{1-\sum_{k\neq i}(x^k)^2}\cdots x^{n+1}\right),
+\end{align*}
+where we have paired the charts for convenience. Let us denote the coordinate charts for the second copy of $S^n$ by $\psi$.
+Then, to check that $\alpha$ is smooth, we need only check that $\psi_{2j}\circ \alpha\circ \phi_{2i}^{-1}$ is smooth for all $i,j$.
+Of course, we are done if we can show smoothness for $i\neq j$ (we assume $i<j$ without loss of generality) and for $i=j$. We have for the first case
+\begin{align*}
+    \psi_{2j}\circ \alpha\circ \phi_{2i}^{-1}(x^1\cdots \hat{x}^i\cdots x^{n+1})&=\psi_{2j}\left(-x^1\cdots -\sqrt{1-\sum_{k\neq i}(x^k)^2}\cdots -x^{n+1}\right)\\
+    &=\left( -x^1\cdots \hat{x}^j \cdots \sqrt{1-\sum_{k\neq i}(x^k)^2}\cdots -x^{n+1}\right),
+\end{align*}
+which is always smooth (the square root does not create problems as we are working in charts where the square root is never zero). If $i=j$, however, note
+that the coordinate removed is that which was added in, and so we have:
+\begin{align*}
+    \psi_{2i}\circ \alpha\circ \phi_{2i}^{-1}(x^1\cdots \hat{x}^i\cdots x^{n+1})&=\psi_{2i}\left(-x^1\cdots -\sqrt{1-\sum_{k\neq i}(x^k)^2}\cdots -x^{n+1}\right)\\
+    &=\left( -x^1\cdots \hat{x}^i \cdots -x^{n+1}\right),
+\end{align*}
+which is clearly smooth.
+
+Now take the map $F:S^3\to S^2$ given by $F(z,w)=(z\bar{w}+w\bar{z},iw\bar{z}-iz\bar{w},z\bar{z}-w\bar{w})$, where we think of $S^3$ as the subset
+$\left\{ (w,z):|w|^2+|z|^2=1 \right\}$ of $\mathbb{C}^2$. We choose, of course, the typical graphical coordinate charts for $S^2$, and treat 
+$S^3\cong S^1_{\mathbb{C}}$. We then take the coordinate chart
+\begin{align*}
+    \psi_1:S^1_{\mathbb{C}}\to \mathbb{R}^3\nm{for}|w|\neq 1\\
+    \psi_1(w,z)=(|w|,\theta_w,\theta_z)\\
+    \psi_1^{-1}(|w|,\theta_w,\theta_z)=(|w|e^{i\theta_w},\sqrt{1-|w|^2}e^{i\theta_z}),
+\end{align*}
+and examine the composition
+\begin{align*}
+    \phi\circ F\circ \psi_1^{-1}(|w|,\theta_w,\theta_z)=\phi\circ F\left(|w|e^{i\theta_w},\sqrt{1-|w|^2}e^{i\theta_z}\right)\\
+    =\phi\left( |w|\sqrt{1-|w|^2}(e^{i(\theta_w-\theta_z)}+e^{-i(\theta_w-\theta_z)}),i|w|\sqrt{1-|w|^2}(e^{i(\theta_w-\theta_z)}-e^{-i(\theta_w-\theta_z)}),1-2|w|^2 \right)\\
+    =\phi\left(|w|\sqrt{1-|w|^2}2\cos(\theta_w-\theta_z),|w|\sqrt{1-|w|^2}2\sin(\theta_w-\theta_z),1-2|w|^2\right).
+\end{align*}
+Since $\phi$ is a graphical coordinate chart for $S^2$, all it will do is drop one of the coordinates. This composition is clearly smooth in $|w|,\theta_w, \theta_z$,
+in the chart. However, we need a chart to cover the cases for when $|w|=1$ -- all we must do is construct an identical chart, but now:
+\begin{align*}
+    \psi_2:S^1_{\mathbb{C}}\to \mathbb{R}^3\nm{for}|z|\neq 1\\
+    \psi_2(w,z)=(|z|,\theta_w,\theta_z)\\
+    \psi_2^{-1}(|z|,\theta_w,\theta_z)=(|z|e^{i\theta_z},\sqrt{1-|z|^2}e^{i\theta_w}),
+\end{align*}
+from which the smoothness of $F$ follows almost identically as above. As these two charts cover $S^1_{\mathbb{C}}$, and
+$F$ is smooth with respect to the two manifolds' smooth structures, we are done.
+
 \subsection*{Problem 6}
+
+Take our smooth manifold to be $\mathbb{R}$ and $A$ to be the set $[1,2)$, and $f(x)$ to be a constant $c$. Take the open subset $U$ of $\mathbb{R}$
+    to be $(1-\varepsilon,2)$ for some positive $\varepsilon$. It should be clear that $\supp f\supset [1,2]$ and so it is not true that the support
+    of $f$, even after weighted by a partition of unity, is contained in $U$.
 
 \end{document}
