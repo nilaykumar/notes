@@ -413,5 +413,125 @@ There are many others, with arbitrary high numbers of $J$'s.
     where the nontrivial step is the last one, which you should probably think a little bit about.
 \end{proof}
 
+\section*{Back to perturbation theory}
+
+(February 19, 2013)
+
+Let us return to the interaction Lagrangian that we wrote down in the last lecture. Again, we will focus on the $\phi^3$ interaction:
+\begin{align*}
+    Z_1[J]=\int D\phi e^{i\int d^4x \mathcal{L}_0+\frac{1}{3!}Z_g g\phi^3+J\phi},
+\end{align*}
+which we formally expanded to get
+ \begin{align*}
+    Z_1(J)=\sum_{v=0}\frac{1}{v!}\left[ \frac{iZ_gg}{6}\int d^4x\;\left( \frac{\delta}{\delta iJ} \right)^3 \right]^v\sum_{P=0}\frac{1}{P!}\left[ \frac{1}{2}\int d^4y d^4z\; (iJ_y)\frac{1}{i}\Delta_{yz}(iJ_z)\right]^P,
+\end{align*}
+where the second sum is simply the free generating function. But now we can write this function as a sum of connected diagrams:
+\begin{align*}
+    Z_1[J]=e^{iW[J]},
+\end{align*}
+where $W[J]$ represents the sum. We separate the connected diagrams according to the number of $J$'s they contain, but let us for now
+consider only terms with no external current $J$. Recall our convention for the free generating function that $Z_0[J=0]=1$. It should be
+clear, however, that for our $\phi^3$ theory,
+\begin{align*}
+    Z_1[J=0]=e^{iW[J=0]}=\exp\left( \sum\rm{bubble\; diagrams} \right)
+\end{align*}
+is generically not unity. Let's introduce a counterterm $\Lambda$ to enforce $Z_1[J=0]=1$ for convenience:
+\begin{align*}
+    Z_1[J]=\int D\phi\; e^{i\int d^4x \mathcal{L}_0+\frac{1}{3!}Z_g g\phi^3+J\phi+\Lambda}.
+\end{align*}
+Let's choose:
+\begin{align*}
+    -i\int d^4x\;\Lambda=W[J=0]
+\end{align*}
+where of course, we are discussing the connected bubble diagrams. This is not quite obvious -- let us take the bubble diagram $\Theta$:
+\begin{align*}
+    \frac{(iZ_gg)^2}{12}\int d^4xd^4y\;(\frac{1}{i}\Delta_{xy})^3=\frac{(iZ_gg)^2}{12}\int\frac{d^4x d^4y}{i^3}\left( \int \frac{d^4k_1}{(2\pi)^4}\frac{e^{ik_1(x-y)}}{k_1^2+m^2-i\varepsilon} \right)\left( \cdots \right)\left( \cdots \right).
+\end{align*}
+Integrating over $y$ will yield a delta function $\delta(k_1+k_2+k_3$, and then integrating over $k_1$, will yield:
+\begin{align*}
+    \frac{(iZ_gg)^2}{12i^3}\int d^4x\int\frac{d^4k_2d^4k_3}{(2\pi)^3}\frac{1}{(-k_2-k_3)^2+m^2-i\varepsilon}\frac{1}{k_2^2+m^2-i\varepsilon}\frac{1}{k_3^2+m^2-i\varepsilon}.
+\end{align*}
+Consequently, we want $\Lambda$ to contain all of this term except the overall $d^4x$ integration. Note, however, that for very
+large $k$, this integral goes as $k^8/k^6\sim k^2$ -- i.e. it diverges. Thus, if we wish to enforce our normalization, we have to introduce
+a constant $\Lambda$ that is diverges. One might wave this off as simply a mathematical convenience tool, but the problem is much more severe
+than it seems. Indeed, $\Lambda$ is in the Lagrangian, and thus in the Hamiltonian. $-\Lambda$ is then interpreted as the vacuum energy density,
+i.e. the energy density when $\phi\equiv 0$.
+
+So should we give up on this calculational convenience? It turns out that the normalization condition is more than just convenient;
+we need
+\begin{align*}
+    \lim_{t\to\pm\infty}\langle 0|e^{-iH(t_f-t_i)}|0\rangle
+\end{align*}
+to give us the transition amplitude, so the presence of the vacuum energy will clearly contribute a phase shift.
+
+So what do we do? Mumble a few words: we should not trust this theory at arbitrarily high momentum, i.e. past the ultraviolet cutoff.
+We will choose to integrate only up until $k_{UV}$.
+These are issues we will return to later in the course. But what's the takeaway for bubble diagrams? We can now throw them away, having
+cancelled them out using $\Lambda$.
+
+Let us now turn to the diagrams with 1 $J$. It turns out, in fact, that we want to cancel out these diagrams as well. Why is this?
+First consider the one-point function:
+\begin{align*}
+    \langle 0 | \hat\phi(x) | 0 \rangle = \frac{\delta Z_1[J]}{\delta iJ}\bigg|_{J=0}=\frac{\delta e^{iW[J]}}{\delta iJ(x)}\bigg|_{J=0}
+    =e^{iW[J]}\frac{\delta iW[J]}{\delta iJ(x)}\bigg|_{J=0}
+\end{align*}
+Note that the exponential prefactor is 1 at $J=0$, and we are left with the derivative w.r.t $iJ_x$ of the connected 1 J diagrams at $J=0$
+So we now write in time explicitly:
+\begin{align*}
+    \langle 0|e^{iHt}\hat\phi(0,\vec{x})e^{-iHt}|0\rangle=0
+\end{align*}
+if we assume $H|0\rangle =0$, the exponentials become 1 and we expect the the 1 point function to be time-independent. 
+Consequently, we add a $Y\phi$ to the Lagrangian to deal with this,
+\begin{align*}
+    Z_1[J]=\int D\phi\; e^{i\int d^4x \mathcal{L}_0+\frac{1}{3!}Z_g g\phi^3+J\phi+\Lambda+Y\phi},
+\end{align*}
+where $Y$ is chosen to cancel out the diagrams. We think of the $\phi$ term as another interaction; one which contributes to diagrams
+as vertices with one leg sticking out that goes straight to a $J$ (there's no other options). 
+\begin{align*}
+    iY\int d^4x d^4y\;(iJ_y)\frac{1}{i}\Delta_{xy}.
+\end{align*}
+Let us now determine what $Y$ must be to cancel out
+\begin{align*}
+    \frac{(iZ_gg)}{2}\int d^4xd^4y\;(iJ_y)\frac{1}{i}\Delta_{xy}\frac{1}{i}\Delta(0),
+\end{align*}
+for example. Clearly we should choose $Y=-Z_gg/2\cdot \frac{1}{i}\Delta(0)$. Of course, there are other 1 $J$ diagrams that
+have to be cancelled out. The argument is that one should write $Y$ as a power series in $g$, where each term's coefficients cancel out
+appropriate 1 $J$ diagrams with arbitrary number of vertices, each of which come with that particular power of $g$. Note however,
+that the order $g$ contribution to $Y$ is already fixed. Consequently, one can draw out diagrams with, say both types of interactions
+that go as $gY^2$, $g^2Y$, $g^3$, etc. all of which can be cancelled by tuning the order $g^3$ component of $Y$. This holds for higher orders
+as well, and while we do not prove it here, it should seem fairly plausible.
+
+It turns out actually, that we cancel out more terms than we actually desired, as there are some diagrams, such as \textbf{tadpole diagrams},
+for example, that go to zero due to how the 1 $J$ terms sum to zero. Indeed, this is how we characterize tadpole diagrams: any diagram
+(not necessarily 1-$J$) such that when one leg is cut, the diagram has a part with no $J$. The claim is that tuning $Y$ to enforce
+$\langle 0|\hat\phi|0\rangle=0$ cancels out all of the tadpoles.
+We now write
+\begin{align*}
+    Z_1[J]=\exp\sum\left( \nm{connected}, -\nm{bubbles},-\nm{tadpoles}\right)
+\end{align*}
+since we have cancelled out the latter two.
+
+Now, it is not so obvious why the mass and wavefunction renormalization terms must be present in the Lagrangian. For now, we shall assume that
+they are there, and try to see what they do. We consider
+\begin{align*}
+    &\int d^4x -\frac{1}{2}(Z_\phi-1)(\partial\phi)^2-\frac{1}{2}(Z_m-1)m^2\phi^2\\
+    &=\int d^4x +\frac{1}{2}\phi\square\phi-\frac{1}{2}(Z_m-1)m^2\phi^2\\
+    &=\frac{1}{2}\int d^4x +\phi(x)\left[ (Z_\phi-1)\square_x-(Z_m-1)m^2 \right]\phi(x)
+\end{align*}
+We now write for the full generating function,
+\begin{align*}
+    Z[J]=\int D\phi\; e^{i\int d^4x \mathcal{L}_0+\mathcal{L}_{\rm int}+J\phi}
+\end{align*}
+and expand
+\begin{align*}
+    Z[J]=\exp\left( \frac{i}{2}\int d^4x\frac{\delta}{\delta iJ_x}\left[ (Z_\phi-1)\square_x-(Z_m-1)m^2 \right]\frac{\delta}{\delta iJ_x} \right)Z_1[J].
+\end{align*}
+This will give diagrams with vertice that have two legs sticking out. Let's do an example of a 2 $J$ diagram with the two $J$'s connected
+to such a vertex. Such a diagram will yield
+\begin{align*}
+    \int d^4xd^4ad^4b\;(iJ_a)(iJ_b)\Delta_{ax}i\left[ (Z_\phi-1)\square_x-(Z_m-1)m^2 \right]\frac{1}{i}\Delta_{xb}
+\end{align*}
+where, since this vertex has an operator embedded in it, we have sandwiched it between the two propogators. Again, why we need these
+vertices is not clear at the moment.
 
 \end{document}
