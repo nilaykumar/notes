@@ -826,4 +826,115 @@ and we have
     =XYf(p)-YX(\phi_{-t}(p))=XY-YX
 \end{align*}
 
+\subsection*{Where do vector fields come from?}
+
+\textbf{February 19, 2013}
+
+One can take any smooth flow, $\phi:(-\varepsilon,\varepsilon)\times M\to M$. Then, $\phi_*(\partial/\partial t)$ is a vector field
+on $M$. Recall that on $\mathbb{R}^n$ there is actually a gradient vector field associated with any smooth function $f$:
+\begin{align*}
+    \nabla f = \left( \partial f/\partial x^1 \cdots \partial f/\partial x^n \right)
+\end{align*}
+which has the nice property that it's always perpendicular to a level set. Now given a smooth function $f$ on a smooth manifold $M$,
+is $(\partial f/\partial x^1\cdots\partial f/\partial x^n)$ a smooth vector field?
+
+Recall that given local coordinates of two overlapping charts $x^i$ and $\tilde{x}^j$, one can write a derivation as
+\begin{align*}
+    v&=v^i\frac{\partial}{\partial x^i}=\tilde{v}^j\frac{\partial}{\partial \tilde{x}^j}\\
+    &=\tilde{v}^j\frac{\partial x^i}{\partial \tilde{x}^j}\frac{\partial}{\partial x^i}m
+\end{align*}
+which means the coordinates of the derivation must transform as
+\begin{align*}
+    v^i=\tilde{v}^j\frac{\partial x^i}{\partial \tilde{x}^j}
+\end{align*}
+for all $i=1\cdots n$. The question, then, is -- given the gradient vector field above, does it transform similarly?
+In other words, how do $\nabla f = \left( \partial f/\partial x^1 \cdots \partial f/\partial x^n \right)
+$ and $\nabla f = \left( \partial f/\partial \tilde{x}^1 \cdots \partial f/\partial \tilde{x}^n \right)$ relate?
+It should be clear that we have
+\begin{align*}
+    \frac{\partial f}{\partial x^i}=\frac{\partial f}{\partial \tilde{x}^j}\frac{\partial\tilde{x}^j}{\partial x^i}.
+\end{align*}
+It appears that this object transforms as the inverse, since
+$\partial \tilde{x}^j/\partial x^i\cdot\partial x^i/\partial\tilde{x}^k=\delta^j_k$.
+In general, a matrix is not equal to its inverse, and so $\nabla f$ is actually not a vector field on a general manifold.
+
+This is similar to the total differential from multivariable calculus:
+\begin{align*}
+    df=\frac{\partial f}{\partial x^i}dx^i.
+\end{align*}
+We will see that the $dx_i$ obejcts are sections of the cotangent bundle, and not just a convenient notational tool.
+But let us first discuss a more general concept of a bundle.
+
+\begin{defn}
+    A real \textbf{vector bundle} of rank $k$ over $M$ smooth is a pair $(E,\pi)$, in which $E$ is a smooth manifold of dimension
+    $n+k$ and $\pi$ is a smooth projection map $\pi:E\to M$ such that:
+    \begin{enumerate}
+        \item For any $p\in M$, $\pi^{-1}(p)$ is a $k$-dimensional real vector space
+        \item (Existence of local trivialization) For any $p\in M$ there exists a neighborhood $U$ of $p$, and
+            a diffeomorphism $\Phi:\pi^{-1}(U)\to U\times \mathbb{R}^k$ such that the following diagram commutes.
+            In other words, $\pi^{-1}(q)$ is sent to $\left\{ q \right\}\times \mathbb{R}^k$ by $\Phi$, for any $q\in U$.
+        \item For each $q\in U$, the restriction of $\Phi$ to $\pi^{-1}(q)$ is a linear isomorphism between $\pi^{-1}(q)$
+            and $\left\{ q \right\}\times \mathbb{R}^k$. (i.e. $\Phi|_{\pi^{-1}(q)}:\pi^{-1}(q)\to\left\{ q \right\}\times \mathbb{R}^k$
+            is linear, one-to-one, and onto)
+    \end{enumerate}
+\end{defn}
+
+Let's compare this abstract definition to the tangent bundle.
+\begin{exmp}
+    Take the tangent bundle $TM$ of $M$. Recall that we had the coordinate chart for $TM$, $\Phi:\pi^{-1}(U)\to U\times \mathbb{R}^n$
+    that mapped derivations to a tuple containing the point at which that derviation's tangent space is attached and the
+    derivation's coordinates in the tangent space. Furthermore, $v^i=\tilde{v}^j\partial x^i/\partial\tilde{x}^j$, when
+    changing coordinates. This Jacobian of this transformation is a linear isomorphism.
+\end{exmp}
+
+\begin{defn}
+    A \textbf{global section} of $(E,\pi)$ is a smooth map $\sigma:M\to E$ such that $\pi\circ\sigma=\id_M$.
+    We can define \textbf{local sections} $\sigma:U\subset M\to E$, as well.
+\end{defn}
+A section simply assigns a point in the fiber above $p\in M$ to $p$. In this sense, as one moves around on $M$, the section,
+in some sense, forms a ``graph''. 
+
+Note that a local trivialization gives local sections of the bundle.
+\begin{exmp}
+    Take $E=TM$. Then $\pi^{-1}(U)\to U\times \mathbb{R}^n$ maps $v^i\partial/\partial x^i|_p\to(p,v^i)$. We claim that
+    for any $v_0\in \mathbb{R}^n$, $\Phi^{-1}(p,v_0)$ gives a local section. In fact, if $v_0=(1, 0, \cdots, 0)$, then
+    $\Phi^{-1}(p(1,0,\cdots,0))=\partial/\partial x^1|_p$, which is a local section.
+\end{exmp}
+
+\begin{defn}
+    A vector bundle $(E,\pi)$ is \textbf{trivial} is a global trivialization exists, i.e. there exists a diffeomorphism $\Phi:E\to M\times \mathbb{R}^k$
+    such that $\Phi|_{\pi^{-1}(q)}$ is a linear isomorphism between $\pi^{-1}(q)$ and $\left\{ q \right\}\times\mathbb{R}^k$. This essentially
+    replaces $U$ by $M$ in the definition of local trivialization.
+\end{defn}
+
+\begin{exmp}[Product bundle]
+    Take $S^1\times \mathbb{R}$ (cylinder). This is a trivial bundle over $S^1$, by definition.
+\end{exmp}
+
+\begin{exmp}
+    Claim: the total space of an infinite M\"{o}bius strip is a non-trivial, rank 1, vector bundle over $S^1$.
+
+    First, observe that if a bundle is trivial, then there exists a global section that is nowhere zero. Take any nonzero vector $v_0\in\mathbb{R}^k$
+    and consider $\Phi^{-1}(p,v_0)$, since $\Phi$ is a linear isomorphism on each fiber, $\Phi^{-1}(p,v_0)\neq0\in\pi^{-1}(p)$.
+
+    Now suppose there exists a global section that is nowhere zero (i.e. the Mobius band is trivial). However, if one draws the rectangle
+    from which the Mobius band is created, it is clear that we must cross zero somewhere, as we identify positive values on the left edge
+    with negative values on the right edge.
+\end{exmp}
+
+\begin{defn}
+    Suppose two local trivializations overlap. On $\pi^{-1}(U)\cap \pi^{-1}(V)$, we obtain the \textbf{transition function}
+    \begin{align*}
+        \Psi\circ\Phi^{-1}:U\cap V\times \mathbb{R}^k\to U\cap V\times \mathbb{R}^k.
+    \end{align*}
+    and $\Psi\circ\Phi^{-1}$ restricts to a linear isomorphism on each fiber. Because $\Phi$ and $\Psi$ send fibers to fibers,
+    \begin{align*}
+        \Psi\circ\Phi^{-1}(p,v)=(p, f(p, v)),
+    \end{align*}
+    where $f(p,v)$ is a linear isomorphism for each $p$. But $\Psi\circ\Phi^{-1}$ is smooth, so $f(p,v)=\tau(p)v$, where $\tau$ is a smooth
+    linear isomorphism. $\tau(p)$ is a linear isomorphism from $\mathbb{R}^k$ to $\mathbb{R}^k$ that depends smoothly on $p\in U\cap V$,
+    i.e. it is in $GL(k)$. We get a smooth map from $U\cap V\to GL(k)$.
+\end{defn}
+
+
 \end{document}
