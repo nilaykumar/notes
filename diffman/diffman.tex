@@ -865,6 +865,8 @@ This is similar to the total differential from multivariable calculus:
 We will see that the $dx_i$ obejcts are sections of the cotangent bundle, and not just a convenient notational tool.
 But let us first discuss a more general concept of a bundle.
 
+\section{Vector bundles}
+
 \begin{defn}
     A real \textbf{vector bundle} of rank $k$ over $M$ smooth is a pair $(E,\pi)$, in which $E$ is a smooth manifold of dimension
     $n+k$ and $\pi$ is a smooth projection map $\pi:E\to M$ such that:
@@ -872,7 +874,8 @@ But let us first discuss a more general concept of a bundle.
         \item For any $p\in M$, $\pi^{-1}(p)$ is a $k$-dimensional real vector space
         \item (Existence of local trivialization) For any $p\in M$ there exists a neighborhood $U$ of $p$, and
             a diffeomorphism $\Phi:\pi^{-1}(U)\to U\times \mathbb{R}^k$ such that the following diagram commutes.
-            In other words, $\pi^{-1}(q)$ is sent to $\left\{ q \right\}\times \mathbb{R}^k$ by $\Phi$, for any $q\in U$.
+            In other words, $\pi^{-1}(q)$ is sent to $\left\{ q \right\}\times \mathbb{R}^k$ by $\Phi$, for any $q\in U$,
+            so fibers are sent to fibers.
         \item For each $q\in U$, the restriction of $\Phi$ to $\pi^{-1}(q)$ is a linear isomorphism between $\pi^{-1}(q)$
             and $\left\{ q \right\}\times \mathbb{R}^k$. (i.e. $\Phi|_{\pi^{-1}(q)}:\pi^{-1}(q)\to\left\{ q \right\}\times \mathbb{R}^k$
             is linear, one-to-one, and onto)
@@ -931,10 +934,78 @@ Note that a local trivialization gives local sections of the bundle.
     \begin{align*}
         \Psi\circ\Phi^{-1}(p,v)=(p, f(p, v)),
     \end{align*}
-    where $f(p,v)$ is a linear isomorphism for each $p$. But $\Psi\circ\Phi^{-1}$ is smooth, so $f(p,v)=\tau(p)v$, where $\tau$ is a smooth
-    linear isomorphism. $\tau(p)$ is a linear isomorphism from $\mathbb{R}^k$ to $\mathbb{R}^k$ that depends smoothly on $p\in U\cap V$,
-    i.e. it is in $GL(k)$. We get a smooth map from $U\cap V\to GL(k)$.
+    where $f(p,v)$ is a linear isomorphism for each $p$. But $\Psi\circ\Phi^{-1}$ is smooth, so $f(p,v)=\tau(p)v$, where $\tau$ is a 
+    linear isomorphism that is smooth as $p$ varies. $\tau(p)$ is a linear isomorphism from $\mathbb{R}^k$ to $\mathbb{R}^k$ that depends smoothly on $p\in U\cap V$,
+    i.e. it is in $GL(k)$. Thus we get a smooth map from $U\cap V\to GL(k)$.
 \end{defn}
 
+\textbf{February 21, 2013}
+
+Local trivialization of a vector bundle yields a local section -- take any $v_0\in \mathbb{R^k}$ and consider $\Phi^{-1}(p,v_0)$. In the
+case of the tangent bundle, this just sends $v^i\partial/\partial x^i\to (p,v^i)$, so, for example, $\Phi^{-1}(p,(1,0,0,\cdots)=\partial/\partial x^i|_p$.
+We can take a basis $e_1\cdots e_k$ for $\mathbb{R}^k$, and then $\Phi^{-1}(p,e_k)$ for all $k$ form a basis at each $E_p=\pi^{-1}(p)$; i.e. bases
+are preserved due to the linear isomorphism property. $\Phi^{-1}(e_k)$ is known as a \textbf{local frame}.
+
+Now, what if we wish to talk about morphisms over the category of vector bundles? The most natural map, just from the definition of vector
+bundles, is as follows.
+
+\begin{defn}
+    Suppose $(E,\pi)$ over $M$ and $(E',\pi')$ over $M'$ are two smooth vector bundles. A \textbf{bundle map} from $E$ to $E'$ is
+    a pair of $C^\infty$ maps $F:E\to E'$ and $f:M\to M'$ such that $F$ covers $f$, i.e. the diagram commutes and
+    \begin{align*}
+        \pi'\circ F=f\circ \pi,
+    \end{align*}
+    (in other words, $F$ sends fibers to fibers), and $F|_{E_p}:E_p\to E'_{f(p)}$ is a linear map.
+
+    A \textbf{bundle isomorphism} is a bundle map where the $C^\infty$ maps are diffeomorphisms, and the linear map is a linear isomorphism.
+\end{defn}
+Thus, whenever we talk about classifying bundles, we are really talking bundles upto bundle isomorphisms.
+
+\begin{exmp}
+    A smooth map $f:M\to N$ induces a bundle map $F$ on the tangent bundle via $f_*$:
+    \begin{align*}
+        F(X_p)=f_*(X_p)
+    \end{align*}
+    which is linear, as,
+    \begin{align*}
+        f_*\left(\frac{\partial}{\partial x^i}\right)=\frac{\partial f^\lambda}{\partial x^i}\frac{\partial}{\partial y^\alpha}.
+    \end{align*}
+\end{exmp}
+
+We denote the smooth sections of $E$ by $\Gamma(E)$. We claim, then, that in the case of $M=N$ and the identity map between the two,
+there exists a smooth section $\mathcal{F}:\Gamma(E)\to\Gamma(E')$. Taking any $\sigma\in p(E),$ we define $\mathcal{F}(\sigma)(p)=F(\sigma(p))\in E'_p$,
+where $F$ is a map from $TM\to TN$.
+If $f$ is a diffeomorphism from $M\to M$, $f$ induces a bundle map on $\mathcal{T}(M)$.
+Notice that $\Gamma(E)$ is again a real vector space, and is in fact, a module over $C^\infty(M)$.
+
+\textbf{Question:} Does every linear map $\mathcal{F}:\Gamma(E)\to \Gamma(E')$ come from a bundle map $F:E\to E'$? 
+
+\begin{exmp}
+    Consider $C^\infty(M)$ as sections of the trivial bundle $M\times \mathbb{R}$. Take $f\in C^\infty(M)$ and define the map
+    $\mathcal{T}(M)=\Gamma(TM)\to C^\infty(M)=\Gamma(M\times \mathbb{R})$ by $X\to Xf$. We claim that this comes from a bundle map
+    $F:TM\to M\times \mathbb{R}$ that sends $X_p\to (Xf)(p)$, since the directional derivative is linear.
+
+    However, if we fixed $X$ instead, and consider the map from $C^\infty(M)\to C^\infty(M)$ that sends $f\to Xf$. We claim that this
+    does not come from any bundle map. Suppose there is such a bundle map,  $F(f(p))=Xf(p)$. This is not necessarily linear, as a function
+    that is zero need not have a derivative that is zero.
+\end{exmp}
+
+\begin{thm}
+    Suppose $E$ and $E$ are both smooth vector bundles over $M$. A linear map $\mathcal{F}:\Gamma(E)\to\Gamma(E')$ comes from a bundle map
+    $F:E\to E'$ if and only if $\mathcal{F}$ is linear over $C^\infty(M)$. We consider both $\Gamma(E)$ and $\Gamma(E')$ as modules over $C^\infty(M)$,
+    i.e. we need to require that $\mathcal{F}$ is a module morphism $F:\Gamma(E)\to\Gamma(E')$ such that $F(u\sigma)=uF(\sigma)$ for any
+    smooth function $u$.
+\end{thm}
+\begin{proof}
+    We sketch the proof.
+
+    If $\mathcal{F}$ is from a bundle map $F$, then $\mathcal{F}(\sigma)(p)=F(\sigma(p))$. Let $u$ be any smooth function.
+    Then, $\mathcal{F}(u\sigma)(p)=F(u\sigma(p))=F(u(p)\sigma(p))$. But $F$ is linear on each fiber, so we just get $u(p)F(\sigma(p))=u(p)\mathcal{F}(\sigma)(p)=(u\mathcal{F}(\sigma))(p)$.
+    On the other hand, if $\mathcal{F}$ is linear over $C^\infty(M)$, we show that it must come from a bundle map. To define $F_p$ on any
+    $v\in E_p$, take a section $\sigma\in\Gamma(E)$ such that $\sigma(p)=v$. Then, $F_p(v)=F_p(\sigma(p))=\mathcal{F}(\sigma)(p)$.
+    What if we choose a different $\tilde{\sigma}$, such that $\sigma(p)=\tilde{\sigma}(p)$? We need to show $\mathcal{F}(\sigma)(p)=\mathcal{F}(\tilde{\sigma}(p)$
+    if this is true, i.e. that if $\sigma(p)=0$, then $\mathcal{F}(\sigma)(p)$. Heuristically, if $\sigma(p)=0$, we write it as $\sigma=u\sigma'$ such that $u(p)=0$.
+    Then, $\mathcal{F}(\sigma)(p)=\mathcal{F}(u\sigma')(p)=u\mathcal{F}(\sigma')(p)=u(p)\mathcal{F}(\sigma')(p)=0$ by linearity.
+\end{proof}
 
 \end{document}
