@@ -534,4 +534,134 @@ to such a vertex. Such a diagram will yield
 where, since this vertex has an operator embedded in it, we have sandwiched it between the two propogators. Again, why we need these
 vertices is not clear at the moment.
 
+\section*{Scattering amplitudes}
+
+(February 21, 2013)
+
+So far, we have been working the generating function, whose derivatives yields $n$-point correlation functions, which we can use to, among other
+things, compute scattering amplitudes via the LSZ-reduction formula. Recall our previous result that
+\begin{align*}
+    Z[J]=e^{iW[J]}
+\end{align*}
+where $W[J]$ is the sum of all connected diagrams, where the bubble and tadpole diagrams have been cancelled out.
+
+Let's compute a two-point correlation function,
+\begin{align*}
+    \langle \phi_1\phi_2\rangle&=\frac{1}{i}\Delta_{\rm exact},
+\end{align*}
+where the propogator is to be distinguished from the free propogator. We compute
+\begin{align*}
+    \langle \phi_1 \phi_2 \rangle &= \frac{\delta Z[J]}{\delta iJ_2\delta iJ_1}\bigg|_{J=0}\\
+    &= \frac{\delta}{\delta iJ_2}\left( e^{iW[J]}\frac{\delta iW}{\delta iJ_1} \right)\bigg|_{J=0}\\
+    &= e^{iW[J]}\frac{\delta iW}{\delta iJ_2}\frac{\delta iW}{\delta iJ_1}\bigg|_{J=0}+e^{iW[J]}\frac{\delta iW}{\delta iJ_2\delta iJ_1}\bigg|_{J=0}\\
+    &=\frac{\delta iW[J]}{\delta iJ_1\delta iJ_2}\bigg|_{J=0}
+\end{align*}
+where in the last step we have used the fact that 1-$J$ diagrams have been removed and that the exponential goes to 1 due to the removal of
+bubble diagrams. We then have
+\begin{align*}
+    \frac{\delta^2}{\delta iJ_2\delta iJ_1}\left( \cdots \right)\bigg|_{J=0}
+\end{align*}
+where the ellipsis stands for an infinite number of diagrams in various orders of $g$. The lowest order diagram is that with 2 $J$'s connected
+by a propogator and nothing else:
+\begin{align*}
+    \frac{\delta^2}{\delta iJ_2\delta iJ_1}\left(\frac{1}{2}\int d^4xd^4y\;(iJ_x)(iJ_y)\frac{1}{i}\Delta_{xy}\right)=\frac{1}{i}\Delta(x_1-x_2),
+\end{align*}
+where again the propogator is the free propogator. This is not surprising -- ignoring interactions completely, this is the only term that
+contributes. However, what happens to the same diagram after we add a bubble (2 vertices now, order $g^2$). We have
+\begin{align*}
+    \frac{\delta^2}{\delta iJ_2\delta iJ_1}&\left( \frac{1}{4}\int d^4xd^4yd^4ad^4b\;(iZ_gg)^2\left(\frac{1}{i}\Delta_{xy}\right)^2\frac{1}{i}\Delta_{xa}\frac{1}{i}\Delta_{yb}(iJ_a)(iJ_b) \right)\bigg|_{J=0}\\
+    =&\frac{(ig)^2}{2}\int d^4xd^4y\;\left( \frac{1}{i}\Delta_{xy} \right)^2\frac{1}{i}\Delta(x-x_1)\frac{1}{i}\Delta(y-x_2),
+\end{align*}
+where we have used the fact that $Z_g$ is of order $1+O(g^2)$, which we will see next week. Thus, we have calculated the first two terms in the 
+expansion for the full two-point correlation function. We will see that this second integral will diverge, something that is due to the presence
+of loops such as the bubble that we included.
+
+Let's now look at the four-point function in order to talk about two-to-two scattering:
+\begin{align*}
+    \langle \phi_1 \phi_2 \phi_3 \phi_4\rangle=&\frac{\delta^4}{\delta iJ_1 \cdots \delta iJ_4}e^{iW[J]}\bigg|_{J=0}\\
+    =&\frac{\delta^4 iW}{\delta iJ_4\cdots\delta iJ_1}+\frac{\delta iW}{\delta iJ_4\delta iJ_2}\frac{\delta^2iW}{\delta iJ_3iJ_1}+
+    \frac{\delta iW}{\delta iJ_4\delta iJ_1}\frac{\delta^2iW}{\delta iJ_3iJ_2}\\
+    +& \frac{\delta iW}{\delta iJ_4\delta iJ_3}\frac{\delta^2iW}{\delta iJ_2iJ_1}
+\end{align*}
+where we have anticipated that any term with only first and third derivatives of $W$ will vanish. Note that other than the first term,
+we could have expected all of these via the usual Wick expansion for free theory. The first we call connected, and write
+\begin{align*}
+    \langle \phi_1 \phi_2 \phi_3 \phi_4\rangle=\langle \phi_1\phi_2\phi_3\phi_4\rangle_c+\langle\phi_4\phi_2\rangle+\langle\phi_3\phi_1\rangle
+    +\langle \phi_4\phi_1\rangle\langle \phi_3\phi_2\rangle+\langle\phi_4\phi_3\rangle\langle\phi_2\phi_1\rangle
+\end{align*}
+It should be clear that the first term will require diagrams with at least 4 $J$'s and 2 vertices
+Let us focus on the one that looks like pair annihilation and then creation.
+Note that it has no loops (it is a tree diagram) and thus should not diverge:
+\begin{align*}
+    \frac{(ig)^2}{8}&\left(\int d^4xd^4y\int d^4ad^4bd^4cd^4d\;iJ_aiJ_biJ_ciJ_d\frac{1}{i}\Delta_{xy}\frac{1}{i}\Delta_{xa}\frac{1}{i}\Delta_{xb}\frac{1}{i}\Delta_{yc}\frac{1}{i}\Delta_{yd}\right)
+\end{align*}
+There are three distinct possibilities -- 2 and 1 are paired against 1' and 2', 2 and 2' are paired against 1 and 1', and 2 and 1' are paired against 1 and 2', which
+we have to account for combinatorially. At the end of the day, one can check that we are left with
+\begin{align*}
+    (ig)^2\int d^4xd^4y\frac{1}{i}\Delta_{xy}\frac{1}{i}\Delta_{x1}\frac{1}{i}\Delta_{x2}\frac{1}{i}\Delta_{y1'}\frac{1}{i}\Delta_{y2'}
+\end{align*}
+for the first topology. To get the overall term, one would have to switch some of the indices and sum over the other topologies as well.
+
+Let us now turn again to the LSZ formula, where the 1 stands for trivial scattering
+\begin{align*}
+    \langle k_2'k_1'|k_1k_2\rangle-1=i^4\int d^4x_1d^4x_2d^4x_1'd^4x_2'e^{i(k_1x_1+k_2x_2-k_1'x_1'-k_2'x_2')}\\
+    (-\square_1+m^2)(-\square_2+m^2)(-\square_{1'}+m^2)(-\square_{2'}+m^2)\langle\phi_1\phi_2\phi_{1'}\phi_{2'}\rangle
+\end{align*}
+It turns out that the nonconnected terms in the Wick expansion contribute zero to the scattering amplitude -- this should make a lot of sense,
+as they represent what is present already in the free-field theory, i.e. trivial scattering. Let's see that we get this. Integrating the boxes by
+parts, and acting them on the exponentials, we get out terms that go as $k_1^2+m^2=-(k_1^0)^2+(\vec{k}_1)^2+m^2=0$. This will force such
+contributions to vanish as long as the four-point function does not cancel these zeros out. For these terms, there are not enough poles to
+cancel them out, while for interacting theory, there are. To see how these poles arise, note that the LSZ formula is almost a Fourier transform
+of the four-point function:
+\begin{align*}
+    \langle k_2'k_1'|k_1k_2\rangle-1=i^4\int d^4x_1d^4x_2d^4x_1'd^4x_2'e^{i(k_1x_1+k_2x_2-k_1'x_1'-k_2'x_2')}\\
+    (k_1^2+m^2)(k_2^2+m^2)(k_{1'}^2+m^2)(k_{2'}^2+m^2)\langle\phi_1\phi_2\phi_{1'}\phi_{2'}\rangle.
+\end{align*}
+For free theory, we have, ignoring the zeros,
+\begin{align*}
+    \int d^4x_1d^4x_2d^4x_{1}'d^4x_2'e^{i(k_1x_1+k_2x_2-k_1'x_1'-k_2'x_2')}\frac{1}{i^2}\left(\Delta_{12}\Delta_{1'2'}+\Delta_{11'}\Delta_{22'}+\Delta_{12'}\Delta_{21'}  \right),
+\end{align*}
+where each product of propogators goes as
+\begin{align*}
+    \int \frac{d^4q}{(2\pi)^4}\frac{e^{iq(x_1-x_2)}}{q^2+m^2-i\varepsilon}\int \frac{d^4p}{(2\pi)^4}\frac{e^{ip(x_1'-x_2')}}{p^2+m^2-i\varepsilon}
+\end{align*}
+and it should be clear that at most we will have two poles, and so will have no contributions from the two-point functions. Thus, let us now try
+put the earlier diagram that we were considering into this context, seeing as it dominates over the others.
+
+Consider the Fourier transform of the connected four-point correlation function, a fourty-four dimensional integral,
+\begin{align*}
+    \int d^4x_1d^4x_2d^4x_1'd^4x_2'e^{i(k_1x_1+k_2x_2-k_1'x_1'-k_2'x_2')}\\
+    \frac{(ig)^2}{i^5}\int d^4xd^4y\int \frac{d^4p_a}{(2\pi)^4}\frac{e^{ip_a(x-y)}}{p_a^2+m^2}
+    \int \frac{d^4p_b}{(2\pi)^4}\frac{e^{ip_b(x-x_1)}}{p_b^2+m^2}\int \frac{d^4p_c}{(2\pi)^4}\frac{e^{ip_c(x-x_2)}}{p_c^2+m^2}\\
+    \int \frac{d^4p_d}{(2\pi)^4}\frac{e^{ip_d(y-x_1')}}{p_d^2+m^2}    \int \frac{d^4p_e}{(2\pi)^4}\frac{e^{ip_e(y-x_2')}}{p_e^2+m^2}
+\end{align*}
+Integrating over $x_1$ will use up the first part of the exponential to get rid of the $p_b$ integral and replace $p_b$ with $k_1$ (and
+get rid of all other $x_1$'s); do this on your own, carefully. Doing this for $x_2,x_1',x_2'$ as well, simplifies what we have considerably.
+Integrating over $x$ will set $p_a=-k_1-k_2$ and integrating over $y$ will set $p_a=-k_1'-k_2'$ and yields overall momentum conservation:
+\begin{align*}
+    \frac{(ig)^2}{i^5}(2\pi)^4\delta(k_1+k_2-k_1'-k_2')\frac{1}{(k_1+k_2)^2+m^2}\frac{1}{k_1^2+m}\frac{1}{k_2^2+m}\frac{1}{k_1'^2+m}\frac{1}{k_2'^2+m}.
+\end{align*}
+To summarize, at the end of the day, we have the LSZ formula equal to
+\begin{align*}
+    \frac{(ig)^2}{i}(2\pi)^4\delta(k_1+k_2-k_1'-k_2')\frac{1}{(k_1+k_2)^2+m^2}.
+\end{align*}
+So, at the end of the day we see that the only propogator that matters is the internal one, not those directly connected to $J$'s, as those are
+cancelled by the zeros in the LSZ formula. Note, however, that $(k_1+k_2)^2\neq -m^2$, i.e. the internal particle is virtual, as it is not
+on shell.
+With this Feynman rule in mind, we can do the other, topologically distinct diagrams quite easily and write the LSZ formula as:
+\begin{align*}
+    \frac{(ig)^2}{i}(2\pi)^4\delta(k_1+k_2-k_1'-k_2')
+    \left(\frac{1}{(k_1+k_2)^2+m^2-i\varepsilon}+\frac{1}{(k_1-k_1')^2+m^2-i\varepsilon}+\frac{1}{(k_1-k_2')^2+m^2-i\varepsilon}\right).
+\end{align*}
+
+Note, now, that when we talk about scattering, we say
+\begin{align*}
+    \langle k_2'k_1'|k_2k_1\rangle-1\equiv(2\pi)^4\delta(k_1+k_2-k_1'-k_2')i\mathcal{M},
+\end{align*}
+where by scattering amplitude, we are really just talking about $\mathcal{M}$.
+
+\section*{Cross sections}
+
+Now that we know how to compute scattering amplitudes, we can now move on to computing cross-sections.
+
 \end{document}
