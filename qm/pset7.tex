@@ -1,0 +1,64 @@
+\documentclass{../mathnotes}
+
+
+\title{QM for Mathematicians: PSET 7}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+
+We wish to show that elementary antisymmetric matrices $L_{jk}$ satisfy the same commutation relations as the quadratic elements
+$\gamma_j\gamma_k/2$ of the Clifford algebra ${\rm Cliff}(n,\mathbb{R})$. First note that $(L_{jk})_{\alpha\beta}=-\delta_{j\alpha}\delta_{k\beta}
++\delta_{j\beta}\delta_{k\alpha}$, and so we have
+\begin{align*}
+    [L_{jk}, L_{mn}]_{\alpha\beta}=&(L_{jk}L_{mn})_{\alpha\beta}-(L_{mn}L_{jk})_{\alpha\beta}\\
+    =&(L_{jk})_{\alpha\gamma}(L_{mn})_{\gamma\beta}-(L_{mn})_{\alpha\gamma}(L_{jk})_{\gamma\beta}\\
+    =&\sum_\gamma\left( -\delta_{j\alpha}\delta_{k\gamma}+\delta_{j\gamma}\delta_{k\alpha} \right) \left( -\delta_{m\gamma}\delta_{n\beta}+\delta_{m\beta}\delta_{n\gamma} \right)\\
+    &-\sum_\gamma\left( -\delta_{m\alpha}\delta_{n\gamma}+\delta_{m\gamma}\delta_{n\alpha} \right) \left( -\delta_{j\gamma}\delta_{k\beta}+\delta_{j\beta}\delta_{k\gamma} \right)\\
+    =&\sum_\gamma\delta_{m\gamma}\delta_{j\gamma}L_{kn}+\delta_{n\gamma}\delta_{j\gamma}L_{mk}+\delta_{k\gamma}\delta_{n\gamma}L_{jm}+\delta_{k\gamma}\delta_{m\gamma}L_{nj}\\
+    =&\delta_{mj}L_{kn}+\delta_{nj}L_{mk}+\delta_{kn}L_{jm}+\delta_{km}L_{nj},
+\end{align*}
+where we have expanded out the matrix multiplication and then, in the last step, collapsed the sum over $\gamma$ via the Kronecker deltas.
+
+Now, for the Clifford algebra, using the anticommutation relation $[\gamma_j,\gamma_k]_+=2\delta_{jk}$,
+\begin{align*}
+    \frac{1}{4}[\gamma_j\gamma_k,\gamma_m\gamma_n]&=\frac{1}{4}\left(\gamma_j\gamma_k\gamma_m\gamma_n-\gamma_m\gamma_n\gamma_j\gamma_k\right)\\
+    &=\frac{1}{4}\left(\gamma_j\gamma_k\gamma_m\gamma_n+\gamma_m\gamma_j\gamma_n\gamma_k+2\delta_{jn}\gamma_m\gamma_k\right)\\
+    &=\frac{1}{4}\left(\gamma_j\gamma_k\gamma_m\gamma_n-\gamma_j\gamma_m\gamma_n\gamma_k+2\delta_{jn}\gamma_m\gamma_k-2\delta_{jm}\gamma_n\gamma_k\right)\\
+    &=\;\cdots\\
+    &=\frac{1}{2}\delta_{jm}\gamma_k\gamma_n+\frac{1}{2}\delta_{nj}\gamma_m\gamma_k+\frac{1}{2}\delta_{kn}\gamma_j\gamma_m+\frac{1}{2}\delta_{km}\gamma_n\gamma_j,
+\end{align*}
+recovering the same commutation relations as above. Thus, the Lie algebras of ${\rm Spin}(n)$ and ${\rm SO(n)}$ are the same.
+
+\subsection*{Problem 2}
+
+To show that conjugation by an exponential of the quadratic Clifford algebra $\frac{1}{2}\gamma_j\gamma_k$ yields a rotation,
+we first note that the square of this quadratic element is simply $-\frac{1}{4}$. This allows us to write, 
+\begin{align*}
+    e^{\frac{\theta}{2}\gamma_j\gamma_k}=\cos\left( \frac{\theta}{2} \right)+\gamma_j\gamma_k\sin\left( \frac{\theta}{2} \right).
+\end{align*}
+We then have, using the anti-commutation relation $[\gamma_j,\gamma_k]_+=2\delta_{jk}$,
+\begin{align*}
+    e^{-\frac{\theta}{2}\gamma_j\gamma_k}&(v_j\gamma_j+v_k\gamma_k)e^{\frac{\theta}{2}\gamma_j\gamma_k}=\left( \cos\frac{\theta}{2}-\gamma_j\gamma_k\sin\frac{\theta}{2} \right)
+    \left(v_j\gamma_j+v_k\gamma_k  \right)\left( \cos\frac{\theta}{2}+\gamma_j\gamma_k\sin\frac{\theta}{2} \right)\\
+    =&\cos^2\frac{\theta}{2}(v_j\gamma_j+v_k\gamma_k)+\cos\frac{\theta}{2}\sin\frac{\theta}{2}(v_j\gamma_j+v_k\gamma_k)\gamma_j\gamma_k\\
+    &-\cos\frac{\theta}{2}\sin\frac{\theta}{2}\gamma_j\gamma_k(v_j\gamma_j+v_k\gamma_k)-\sin^2\frac{\theta}{2}\gamma_j\gamma_k(v_j\gamma_j+v_k\gamma_k)\gamma_j\gamma_k\\
+    =&\cos^2\frac{\theta}{2}(v_j\gamma_j+v_k\gamma_k)-\sin\theta\gamma_j\gamma_k(v_j\gamma_j+v_k\gamma_k)+\delta_{jk}\sin\theta(v_j\gamma_j+v_k\gamma_k)\\
+    &-\sin^2\frac{\theta}{2}(v_j\gamma_j+v_k\gamma_k+2v_j\gamma_j\gamma_k\gamma_j\delta_{jk}+2v_k\gamma_j\gamma_k\gamma_k\delta_{jk})
+\end{align*}
+If we assume that $j\neq k$, then this simplifies via a double angle identity to:
+\begin{align*}
+    &\cos\theta(v_j\gamma_j+v_k\gamma_k)-\gamma_j\gamma_k\sin\theta(v_j\gamma_j+v_k\gamma_k)\\
+    =&\cos\theta(v_j\gamma_j+v_k\gamma_k)-\sin\theta(-v_j\gamma_k+v_k\gamma_j)\\
+    =&(v_j\cos\theta-v_k\sin\theta)\gamma_j+(v_j\sin\theta+v_k\cos\theta)\gamma_k,
+\end{align*}
+and so we are left with a rotation in the $j-k$ plane, as desired.
+
+\subsection*{Problem 3}
+
+\end{document}
