@@ -6,6 +6,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage{enumerate}
 
 \newcommand{\nm}[1]{\;\textnormal{#1}\;}
 \newcommand{\ra}[0]{\rightarrow}
