@@ -841,7 +841,7 @@ is $(\partial f/\partial x^1\cdots\partial f/\partial x^n)$ a smooth vector fiel
 Recall that given local coordinates of two overlapping charts $x^i$ and $\tilde{x}^j$, one can write a derivation as
 \begin{align*}
     v&=v^i\frac{\partial}{\partial x^i}=\tilde{v}^j\frac{\partial}{\partial \tilde{x}^j}\\
-    &=\tilde{v}^j\frac{\partial x^i}{\partial \tilde{x}^j}\frac{\partial}{\partial x^i}m
+    &=\tilde{v}^j\frac{\partial x^i}{\partial \tilde{x}^j}\frac{\partial}{\partial x^i},
 \end{align*}
 which means the coordinates of the derivation must transform as
 \begin{align*}
@@ -941,7 +941,7 @@ Note that a local trivialization gives local sections of the bundle.
 
 \textbf{February 21, 2013}
 
-Local trivialization of a vector bundle yields a local section -- take any $v_0\in \mathbb{R^k}$ and consider $\Phi^{-1}(p,v_0)$. In the
+Local trivialization of a vector bundle yields a local section -- take any $v_0\in \mathbb{R}^k$ and consider $\Phi^{-1}(p,v_0)$. In the
 case of the tangent bundle, this just sends $v^i\partial/\partial x^i\to (p,v^i)$, so, for example, $\Phi^{-1}(p,(1,0,0,\cdots)=\partial/\partial x^i|_p$.
 We can take a basis $e_1\cdots e_k$ for $\mathbb{R}^k$, and then $\Phi^{-1}(p,e_k)$ for all $k$ form a basis at each $E_p=\pi^{-1}(p)$; i.e. bases
 are preserved due to the linear isomorphism property. $\Phi^{-1}(e_k)$ is known as a \textbf{local frame}.
@@ -1007,5 +1007,82 @@ Notice that $\Gamma(E)$ is again a real vector space, and is in fact, a module o
     if this is true, i.e. that if $\sigma(p)=0$, then $\mathcal{F}(\sigma)(p)$. Heuristically, if $\sigma(p)=0$, we write it as $\sigma=u\sigma'$ such that $u(p)=0$.
     Then, $\mathcal{F}(\sigma)(p)=\mathcal{F}(u\sigma')(p)=u\mathcal{F}(\sigma')(p)=u(p)\mathcal{F}(\sigma')(p)=0$ by linearity.
 \end{proof}
+
+\section{Cotangent Bundles}
+
+We have already talked about tangent bundles, whose sections are vector fields. Now we turn to the dual of the tangent bundle.
+Let $V$ be a finite-dimensional real vector space and $V^*=\left\{ \omega|\omega:V\to \mathbb{R}\;{\rm linear} \right\}$ be the real vector space of linear functionals on $V$.
+Take any basis $\left\{ E_i \right\}_{i=1\cdots n}$ of $V$. Then we can consider the dual basis $\left\{ \varepsilon^i \right\}_{i=1\cdots n}$
+of $V*$ defined by $\varepsilon^i(E_j)=\delta^i_j$. We claim that this is a basis; we must show that this set spans $V*$ and is linearly independent.
+Given any $\omega\in V*$ and any $x=x^iE_i\in V$, we simply apply
+\begin{align*}
+    \varepsilon^j(x)=\varepsilon^j(x^iE_i)=x^i\varepsilon^j(E_i)=x^j\\
+\end{align*}
+and then take
+\begin{align*}
+    \omega(x)=\omega(x^iE_i)=x^i\omega(E_i)=\omega(E_i)\varepsilon^i(x)
+\end{align*}
+Since this is true for all $x$, we see that $\omega=\omega(E_i)\varepsilon^i$ and so this set spans all linear functionals.
+Next suppose that $\sum_{i=1}^n a_i\varepsilon^i=0$; we wish to show that $a_i=0$. We apply this sum to an element in the original space:
+\begin{align*}
+    \sum_{i=1}^n a_i\varepsilon^i(E_j)=a_j=0
+\end{align*}
+for all $j$, and thus, what we called the dual basis spans the space of functionals and is linearly independent, and thus is a basis.
+
+Indeed, there exists a non-canonical isomorphism from $V$ to $V*$ when working with the dual basis, as we can just send basis vectors to basis vectors.
+But we can even talk about the double dual, $V^{**}=(V^*)^*$, and the claim is that this is isomorphic to $V$ independent of any basis.
+Take the map $f$ from $V$ to $V^{**}$ such that $f(x)(\omega)=\omega(x)$. It suffices to show that the kernel of this map is non-zero
+because $\dim V=\dim V^{**}$ and for any linear map between two vector spaces of the same dimension, the map is injective if and only
+if it is surjective (this follows fairly easily from the rank-nullity theorem). Well what does it mean for $f(x)=0$? This is equivalent to
+saying that $\omega(x)=0$ for all $\omega$. Then, $\varepsilon^j(x^iE_i)=0$, which implies that $x^j=0$ for all $j$, and we are done.
+
+\begin{defn}
+    If $A:V\to W$ is a linear map, then the \textbf{dual map} $A^*:W^*\to V^*$ is defined as follows. Given $\omega\in W^*$, $x\in V$,
+    we define \[A^*\omega(x)=\omega(A(x)).\]
+\end{defn}
+
+One can check that this map is linear: $A^*(c_1\omega_1+c_2\omega_2)=c_1A^*\omega_1+c_2A^*\omega_2$. Although this definition
+is basis-independent, we are free to choose $\left\{ E_i \right\}_{i=1\cdots n}$ for $V$, $\left\{ \varepsilon^j \right\}$ for $V^*$,
+$\left\{ \tilde{E}_\alpha \right\}_{\alpha=1\cdots m}$ for $W$, and $\left\{ \tilde{\varepsilon}^\alpha\right\}$ for $W^*$.
+Then, $A(E_i)=A_i^\alpha\tilde{E}_\alpha$ and $A^*(\tilde{\varepsilon}^\alpha)=B^a_i\varepsilon^i$. How are the matrices $A$ and $B$
+related? In general, $A$ is an $m\times n$ matrix whereas $B$ is an $n\times m$ matrix, so it seems natural for them to be transposes.
+Indeed, we are used to dual vectors' matrix representations being transposes, i.e. row vectors instead of column vectors. Let us prove
+this. Assume $A(E_i)=A_i^\alpha\tilde{E}_\alpha$ and consider $A^*(\tilde{\varepsilon}^\alpha(E_j))=\tilde{\varepsilon}^\alpha(A(E_j))
+=\tilde{\varepsilon}^\alpha(A_j^\beta\tilde{E}_\beta)=A_j^\beta\tilde{\varepsilon}^\alpha(\tilde{E}_\beta)=A_j^\alpha$. But since
+$A^*(\tilde{E}^\alpha)(E_i)=B_j^\alpha\varepsilon^j(E_i)=B_i^\alpha$ and so $A_i^\alpha=B_i^\alpha$, and looking at the way the maps
+are operated, one finds the transpose property.
+
+Let us now apply these concepts to vector bundles. In essence, we will simply dualize each fiber in the vector bundle.
+
+\begin{defn}
+    Let $E$ be a vector bundle of rank $k$ over $M$. Define $E^*=\sqcup_{p\in M}E_p^*$ and a projection $\pi:E^*\to M$ that sends
+    the fiber to the point at which the fiber is attached to the base manifold. Given $U\subset M$, we consider $\pi^*(U)$ and
+    define the local trivialization as follows. Consider a map from $(\pi^*)^{-1}(U)\to U\times \mathbb{R}^k$. This is sending elements
+    of $E_p^*$, say $\omega_p$, to $(p, \omega_p(E_1) \cdots \omega_p(E_k))$ where $E_i$ is the local frame coming from the local trivialization
+    of $E$, i.e. $E_i(p)=\Phi^{-1}(p,e_i)$.
+\end{defn}
+
+Let us apply this procedure to the tangent bundle and denote the dual bundle by $T^*M$. A section of $T^*M$ is called a one-form,
+and the space of smooth sections of $T^*M$ is denoted by $\Gamma(T^*M)$.
+
+\begin{exmp}
+    Recall, that given a smooth function $f$ on $M$, one can consider the gradient $\nabla f$. We previously showed that this $n$-tuple 
+    of functions does not yield a section of the tangent bundle, as it transforms incorrectly. But, as we shall see,
+    the gradient is a section of the cotangent bundle, i.e. a one-form. In fact, it is better to consider the total differential,
+    $df$ such that $df(x_p)=(Xf)_p$. This is in analogy to how directional derivatives can be written as the gradient dotted into a vector -- 
+    since this yields a number at any point, it suggests that the gradient is, in fact, some sort of covector.
+\end{exmp}
+
+How does a section of $T^*M$ transform? Well, for the tangent bundle, the local trivialization sends derivations that can
+be represented by $v^i\partial/\partial x^i|_p$ to $(p,v^1\cdots v^n)$. Thus we have local frames that look like
+$\Phi^{-1}(p,e_i)=\partial/\partial x^i|_p$. What are the dual local frames to $\partial/\partial x^i|_p$? We look for
+$\omega$ such that $\omega^j(\partial/\partial x^i|_p)=\delta^j_i$. We take $x^j$ and defined $dx^j$ as
+$dx^j(X_p)=X(x^j)_p$. We apply this: $dx^j(\partial/\partial x^i|_p)=\delta_i^j$. Thus, $dx^1\cdots dx^n$ form a local
+frame of $T^*M$ on $U$ and the local trivialization is given by $v_idx^j|_p\mapsto (p,v_1\cdots v_n)$. Notice that they transform
+differently from $\partial/\partial x^i$:
+\begin{align*}
+    \frac{\partial}{\partial x^i}&=\frac{\partial \tilde{x}^j}{\partial x^i}\frac{\partial}{\partial \tilde{x}^j}\\
+    dx^i&=\frac{\partial x^i}{\partial \tilde{x}^j}d\tilde{x}^j
+\end{align*}
 
 \end{document}
