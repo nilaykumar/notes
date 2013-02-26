@@ -650,8 +650,8 @@ cancelled by the zeros in the LSZ formula. Note, however, that $(k_1+k_2)^2\neq 
 on shell.
 With this Feynman rule in mind, we can do the other, topologically distinct diagrams quite easily and write the LSZ formula as:
 \begin{align*}
-    \frac{(ig)^2}{i}(2\pi)^4\delta(k_1+k_2-k_1'-k_2')
-    \left(\frac{1}{(k_1+k_2)^2+m^2-i\varepsilon}+\frac{1}{(k_1-k_1')^2+m^2-i\varepsilon}+\frac{1}{(k_1-k_2')^2+m^2-i\varepsilon}\right).
+    \frac{(ig)^2}{i}&(2\pi)^4\delta(k_1+k_2-k_1'-k_2')\\
+    &\left(\frac{1}{(k_1+k_2)^2+m^2-i\varepsilon}+\frac{1}{(k_1-k_1')^2+m^2-i\varepsilon}+\frac{1}{(k_1-k_2')^2+m^2-i\varepsilon}\right).
 \end{align*}
 
 Note, now, that when we talk about scattering, we say
@@ -662,6 +662,144 @@ where by scattering amplitude, we are really just talking about $\mathcal{M}$.
 
 \section*{Cross sections}
 
-Now that we know how to compute scattering amplitudes, we can now move on to computing cross-sections.
+(February 26, 2013)
+
+Now that we know how to compute scattering amplitudes, we can move on to computing cross-sections.
+Let us first define the \textbf{Mandelstam} variables:
+\begin{align*}
+    s&\equiv -(k_1+k_2)^2,\\
+    t&\equiv -(k_1-k_1')^2=-(k_2-k_2')^2,\\
+    u&\equiv -(k_1-k_2')^2=-(k_2-k_1')^2,
+\end{align*}
+where the square is the usual four-dimensional contraction. These definitions are motivated by the three topologies of the
+two-to-two processes that we worked with in the last section. The processes are called $s,t,u$-channel processes. Note that
+the Mandelstam variables have the property that
+\begin{align*}
+    s+t+u=m_1^2+m_2^2+m_{1'}^2+m_{2'}^2
+\end{align*}
+where we are treating the general case of arbitrary masses. Additionally, in the center of momentum frame, where $\vec{k}_1+\vec{k}_2=0$,
+we have
+\begin{align*}
+    s=-\left( (k_1+k_2)^0 \right)^2=(\omega_1+\omega_2)^2,
+\end{align*}
+and so $s$ is just the square of the total energy (in this frame).
+
+Now, to compute the cross-section, first imagine that we have particle 2 shooting towards particle 1, which has a certain ``cross-section''.
+The interaction rate should be given by $n_2|\vec{v}_1-\vec{v}_2|\sigma$ where $n_2$ is the number density of particle 2 and $\sigma$ is
+the cross-section of particle 1. Before we try to calculate the total cross-section, let us for now play with a differential cross-section.
+If we perform our measurements in a spatial volume $V$ and over a time-duration of $T$, we write
+\[{|\vec{v}_1-\vec{v}_2|}{V}d\sigma,\]
+which is the scattering rate times the number of outgoing state configurations. How do we isolate the scattering rate?
+
+Well, let us first ask -- what are the dimensions of the scattering amplitude, $\mathcal{M}$? Recall that we are using units where
+the action is dimensionless (since $\hbar=1$), and
+\[S_{\rm free}=\int d^4x \left( -\frac{1}{2}(\partial\phi)^2-\frac{1}{2}m^2\phi^2 \right).\]
+It is convenient to work in the units of mass. First note that length scales as the inverse of mass (by the uncertainty principle
+$\Delta x\Delta p \geq 1$. Consequently, the differential $d^4x$ has units of $m^{-4}$, and so $\phi$ must have dimensions of mass
+in order to make the action dimensionless. But since
+\[S_{\rm int}=\int d^4x g\phi^3,\]
+$g$ must also have dimensions of mass. Returning to our expression for the scattering amplitude $\mathcal{M}$ in the previous section, then, we find
+that it is dimensionless. This is, in fact, due to the fact that we are only considering 2-to-2 scattering, i.e.
+\[\langle k_1'|k_1\rangle = (2\pi)^32\omega_1\delta^{(3)}(\vec{k}_1'-\vec{k}_1).\]
+
+Now the scattering rate goes as
+\[\frac{1}{T}\frac{|(2\pi)^4\delta^{(4)}(k_1+k_2-k_1'-k_2')\mathcal{M}|^2}{\langle k_1'k_2'|k_1'k_2'\rangle\langle k_1k_2|k_1k_2\rangle}\]
+where the first term in the denominator involves out states while the other involves in states. The denominator comes about
+due to our peculiar choice for normalization for out states. Finally, we need to compute the number of outgoing states. 
+The number of outgoing states in phase space is given as
+\[\frac{d^3k_1'}{(2\pi)^3/V}\frac{d^3k_2'}{(2\pi)^3/V}.\]
+This fact is explained thoroughly in the book.
+
+At the end of the day, we obtain
+\begin{align*}
+    d\sigma=\frac{1}{4\omega_1\omega_2|\vec{v}_1-\vec{v}_2|}|\mathcal{M}|^2(2\pi)^2\delta^{(4)}(k_1+k_2-k_1'-k_2')\frac{d^3k_1'}{(2\pi)^3w\omega_{1'}}\frac{d^3k_1'}{(2\pi)^3w\omega_{2'}}.
+\end{align*}
+How? One of the delta functions disappears because the other takes it to $\delta(0)$, since they have the same argument.
+What does this mean? Recall that we define $\delta^{(4)}(0)(2\pi)^4=\int d^4x=V\cdot T$, which is in fact, what leads (after some work)
+to obtaining a cross-section that is well-defined and independent of $V$ and $T$. Again, this is derived more thoroughly in the book.
+Notice that a cross-section has units of area, i.e. inverse mass squared -- one can check that this formula yields precisely these units.
+Furthermore, this formula is more general than the same-mass model that we have been playing with, and can be generalized for more outgoing
+particles by adding more differential terms.
+
+Let us consider particles 1 and 2 approaching each other along the $z$-axis. One can show that the prefactor $1/4\omega_1\omega_2|v_1-v_2|$
+is invariant under boosts along the $z$ direction. The rest of the cross-section formula is manifestly Lorentz invariant. So the cross-section
+is only invariant in one direction; this is something that meshes well with the concept of cross-section as an area. If we look at these
+two particles in the center of momentum frame ($\vec{k}_2=-\vec{k}_1$) and let $\theta$ be the angle between $k_1'$ and $k_2$, we will find that
+\[d\sigma=\frac{1}{64\pi^2s}\frac{|\vec{k}_1'|}{|\vec{k}_1}|\mathcal{M}|^2d\Omega,\]
+where $d\Omega$ is the solid angle of outgoing momenta with respect to the incoming momentum. Note that $\mathcal{M}$ is, in general,
+angle dependent. With this in hand, we can compute the total cross section via
+\[\sigma_{\rm total}=\frac{1}{2}\int \frac{d\sigma}{d\Omega}d\Omega,\]
+where the constant in the denominator out front is more generall $\Pi_I n_I!$ where $n_I$ is the number of outgoing identical particles of
+type $I$. Why is this factor necessary? Imagine $k_1'=(\sqrt{a^2+m^2},\vec{a})$ and $k_2'=(\sqrt{b^2+m^2},\vec{b})$. If these are identical particles,
+one can swap $\vec{a}$ and $\vec{b}$ and obtain the same outgoing configuration.
+
+Now, in the center of mass frame, with $m_1=m_2=m_1'=m_2'=m$, we have
+\begin{align*}
+    s&=(\omega_1+\omega_2)^2=4(|\vec{k}_1|^2+m^2)\geq 4m^2\\
+    t&=-(k_1-k_1')^2=(\omega_1-\omega_1')^2-(\vec{k}_1-\vec{k}_1')^2=-2|\vec{k}_1|^2(1-\cos\theta)\\
+    &=-2\left( \frac{s}{4}-m^2 \right)(1-\cos\theta)\\
+    u&=-2\left( \frac{s}{4}-m^2 \right)\left( 1+\cos\theta \right)
+\end{align*}
+Using these, and working in the high energy limit where $s\gg m$, we can write
+\begin{align*}
+    \mathcal{M}&=\frac{(ig)^2}{i}\left( -\frac{1}{s}+\frac{1}{s/2(1-\cos\theta)}+\frac{1}{s/2(1+\cos\theta)} \right)\\
+    &=\frac{(ig)^2}{is}\frac{3+\cos^2\theta}{\sin^2\theta}
+\end{align*}
+This formula tells us a number of interesting things. First, low-energy scattering has larger cross-section than high-energy scattering does.
+In fact, in 4-dimensions, any cubic/quartic interaction acts like this, as we will see later, when we talk about renormalization.
+Additionally, this scattering tends to favor angles that are either 0 or $\pi$, i.e. completely forwards or completely backwards. This formula
+can then be used to compute $\sigma$.
+
+\section*{Higher spacetime dimensions}
+
+Let's consider
+\[S=\int d^dx\left( -\frac{1}{2}(\partial\phi)^2-\frac{1}{2}m^2\phi^2+\frac{g}{3!}\phi^3 \right),\]
+where $d$ is the number of space-time dimensions in which we are working. The differential then has dimensions of inverse mass
+to the $d$ power. Consequently, $\phi$ must have dimensions of $[m]^{(d-2)/2}$ and $g$ must have dimensions of $[m]^{(6-d)/2}$.
+Why do we care? Well, note that $g$ is dimensionless if $d=6$. This turns out to be nice because it will remove energy dependence from
+the coupling constants when we think about renormalization.
+
+Recall the Klein-Gordon equation, $(-\square+m^2)\phi=0$. Clearly, the form of the equation is independent of the number of dimensions.
+The solution is given
+\begin{align*}
+    \langle 0 | T\hat\phi_1\hat\phi_2|0\rangle=\frac{1}{i}\int \frac{d^d}{(2\pi)^d}\frac{e^{ik\cdot(x-y)}}{k^2+m^2-i\varepsilon}=\frac{1}{i}\Delta_{\rm free}(x-y)
+\end{align*}
+where we are taking appropriate dimensional contractions. All in all, there is not much that changes, and thus we will from now on
+often perform our computations, in general, in $d$ dimensions.
+
+\section*{Lehmann-Kallen form of the exact propogator}
+
+Let's find an explicit form for the two-point function. Let's first consider $x^0>y^0:$
+\begin{align*}
+    \langle 0|\hat\phi_x\hat\phi_y|0\rangle=\sum_{n}\langle 0 | \hat\phi_x|n\rangle\langle n|\hat\phi_y|0\rangle
+\end{align*}
+where $n$ represents any state, and 
+\begin{align*}
+    \hat\phi(x)=e^{-ip\cdot x}\phi(0)e^{ip\cdot x}
+\end{align*}
+we are considering the Heisenberg picture for position. Note that $e^{ip\cdot x}|0\rangle=|0\rangle$. If the momentum hits
+any other state, on the other hand, we get out the total momentum $k_n$, so we write:
+\begin{align*}
+    \langle 0|\hat\phi_x\hat\phi_y|0\rangle&=\sum_ne^{ik_n\cdot(x-y)}|\langle0|\hat\phi_0|n\rangle|^2\\
+    &=\int d^dp\; e^{ip\cdot (x-y)}\sum_n|\langle 0|\hat\phi(0)|n\rangle|^2\delta^{(d)}(p-k_n)\\
+    &=\int d^dp\; e^{ip\cdot (x-y)} \frac{1}{(2\pi)^{d-1}}\Theta(p^0>0)\rho_{\rm total}(-p^2)\\
+    &=\int d^dp\; e^{ip\cdot (x-y)} \frac{1}{(2\pi)^{d-1}}\Theta(p^0>0)\int_0^\infty d\mu^2\;\rho_{\rm tot}(\mu^2)\delta(p^2+\mu^2)\\
+    &=\int_0^\infty d\mu^2\;\rho_{\rm tot}(\mu^2)\int\frac{d^dp}{(2\pi)^{d-1}}\Theta(p^0>0)e^{ip\cdot(x-y)}\delta(p^2+\mu^2)
+\end{align*}
+where we have simply rewritten quantities and defined the sum to be some mysterious function of $-p^2$.
+The reverse time-ordered expression will be exactly the same, just with $e^{-ip\cdot(x-y)}$ instead. Note that the inner integral has been
+written in a form that reminds us of a Green's function. Finally, we say
+\begin{align*}
+    \langle 0|T\hat\phi_x\hat\phi_y|0\rangle
+    =\int_0^\infty d\mu^2\;\rho_{\rm tot}(\mu^2)\left[\Theta(x^0>y^0)\int \frac{d^{d-1}p}{(2\pi)^{d-1}2\omega_p}e^{ip\cdot(x-y)}\right.\\
+        \left.+\Theta(y^0>x^0)\int \frac{d^{d-1}p}{(2\pi)^{d-1}2\omega_p}e^{-ip\cdot(x-y)}\right]\\
+        =\int_0^\infty d\mu^2\rho_{\rm tot}(\mu^2)\frac{1}{i}\int \frac{d^dp}{(2\pi)^d}\frac{e^{ip\cdot (x-y)}}{p^2+\mu^2-i\varepsilon}.
+\end{align*}
+where $p^0=\omega_p=\sqrt{\vec{p}^2+\mu^2}$. What have we gained from rewriting in this way? Well $\rho_{\rm tot}$ is nice and positive-definite;
+we expect it to be $\delta$-spiked at $m^2$, then $4m^2$, and then after that, a continuum that is nonzero. This is because in 2-particle states,
+one can discuss the continuum of all possible momenta states. In fact, one can ever have isolated bound states between $m$ and $4m^2$. 
+In fact, the final explicit expression for the propogator is given: (see Srednicki)
+
+
 
 \end{document}
