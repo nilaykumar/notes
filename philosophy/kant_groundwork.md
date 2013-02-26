@@ -83,10 +83,28 @@ Notes on: Kant's *Groundwork of the Metaphysics of Morals*
     * Again, Kant seems to switch into rather utilitarian vocabularly: "But, even without taking note of duty,
     all human beings have already of their own the most powerful an intimate inclination to happiness, as it
     is just in this idea that all inclinations unite in one sum" (p.14)
+* Kant states that many things should be done "from duty", such as preserving ones life and being beneficient
+    where one can, etc. Where does he get these? Why are these duties, and not other things? For one who is trying to
+    systematize moral philosophy, he's making an awful lot of statements that he doesn't back up.
+* Actions only have moral worth when they are performed for duty, Kant claims. But what use is moral worth? This kinda
+    goes back to the previous question, but Kant doesn't seem to give reasons as to why actions with moral
+    worth are necessarily "better" than others
 * Kant claims that "an action from duty has its moral worth not in the purpose that is to be attained by it,
-    but in the maximaccording to which it is resolved upon..." (p.15)
+    but in the maxim according to which it is resolved upon..." (p.15)
 * "Duty is the necessity of an action from respect for the law" (p.16)
-
+    * What is the form of such laws such that duties derived from them are wholly good?
+        * Such laws must be extendable to *universal laws*
+        * In other words, we must act under laws that we would like others to follow as well
+* I don't understand Kant's argument on page 18 about lying. He claims that there can be no universal
+    law to lie because then "there would actually be no promise at all". What's wrong with this? There never
+    was a promise for the individual in the first place, as it was false. Is the concept of promise too
+    valuable to have everyone throw it away? Or is it just that we'd get lied back to if everyone lied,
+    which is for some reason fundamentally wrong? I can see how it might be undesirable, but Kant would
+    argue that human desires are worthless, and it is only that which is morally defensible that has any worth...
+    which yields circular logic...
+* "In fact, it is absolutely impossible by means of experience to make out with complete certainty a single
+    case in which the maxim of an action that otherwise conforms with duty did rest solely on moral grounds and
+    on the representation of one's duty." (p.22)
 
 ## My questions ##
 
