@@ -17,6 +17,7 @@
 \DeclareMathOperator{\Ext}{Ext}
 \DeclareMathOperator{\id}{Id}
 \DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\irr}{irr}
 \DeclareMathOperator{\supp}{supp}
 
 \theoremstyle{plain}

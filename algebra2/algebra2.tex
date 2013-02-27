@@ -164,4 +164,131 @@ to find wholly new fields.
     \end{itemize}
 \end{exmp}
 
+
+\section{Field extensions}
+February 27, 2013
+
+In general, a problem in algebra is to enlarge the domain of discourse, i.e. $\mathbb{R}\to\mathbb{C}$, so that one can solve
+equations that were hitherto unsolvable. So given a polynomial $f(x)\in F[x]$, we wish to find a root of $f(x)$. Maybe there is
+not root of $f(x)$ in $F$, so we wish to enlarge $F$.
+A simple idea that we saw earlier was that if $R$ is any ring with $f(x)\in R[x]$, there was a way to enlarge $R$.
+We consider $R[x]/(f(x))$, which always has a root $x+(f(x))=\alpha$. By construction, $f(\alpha)=0$.
+
+There is a problem with this -- we don't know much about the algebraic structure of this new quotient ring, $R[x]/I$.
+The solution is: if $R$ is a field, and $f(x)$ is irreducible, then $R[x]/I$ is good, i.e. it is a field, as we
+saw last lecture. But really, even if $f(x)$ is reducible, we should think in analogy to the world of
+$\mathbb{Z}/n\mathbb{Z}$, where $n>0$. The full details of this analogy are fleshed out in the file \texttt{analogy.pdf}.
+
+\begin{thm}
+    Let $f(x)\in F[x]$ and suppose $\deg f(x)>0$, i.e. $f$ is nonconstant. Then, there exists a field $E$ that
+    contains (a subfield isomorphic to) $F$, and an element $\alpha\in E$ such that $f(\alpha)=0$.
+\end{thm}
+\begin{proof}
+    Take $f(x)$ and find an irreducible factor (we know these exist from last time) $p(x)$. We consider $E=F[x]/(p(x))$;
+    $E$ is a field. Additionally, there is a map $F\to E$ that sends $a\in F\mapsto a+(p(x))$. This map is injective (why?),
+    and we identify $F$ with the image subfield. We know that if $\alpha=x+(p(x))$, then $p(\alpha)=0$. But
+    $p(x)|f(x)$, so $f(\alpha)=0$ as well, and we are done.
+\end{proof}
+
+\begin{cor}
+    Let $f(x)\in F[x]$, $\deg f(x)>0$. Then there exists a field $E$ such that, in $E[x]$, $f(x)$ is a product
+    of linear factors.
+\end{cor}
+\begin{proof}
+    We apply the above theorem to find $E_1$ and $\alpha_1\in E_1$ such that $f(\alpha_1)=0$ ($F\leq E_1$).
+    In $E_1[x]$, $f(x)=(x-\alpha_1)g_1(x)$, where $\deg g_1(x)=\deg f(x)-1$. Informally speaking, now all we have to do
+    is to keep going! We find $E_2$ with $E_1\leq E_2$ such that we can write $g_1(x)=(x-\alpha_2)g_2(x)$ with $\alpha_2\in E_2$ with
+    $\deg g_2=\deg f(x)-2$. We continute until we run out of degrees, and clearly we have factored $f$ into linear factors.
+\end{proof}
+
+Let us now switch perspectives. Let's consider the situation where $E$ and $F$ are fields, and $F\leq E$, i.e. $F$ is a subfield
+of $E$. We also say that $E$ is an \textbf{extension field} of $F$. Note that we used the machinery of prime and maximal ideals to
+construct extensions. Now, given an extension, let us use these tools to analyze these fields.
+
+Consider $E$ an extension field of $F$, and let $\alpha\in E$. Look at ${\rm ev}_\alpha: F[x]\to E$. Note that ${\rm Im\;} {\rm ev}_\alpha=F[\alpha]\leq E$.
+At this point, all we know is that $F[\alpha]$ is an integral domain. We claim that there are exactly 2 possibilities.
+\begin{enumerate}
+    \item $\ker {\rm ev}_\alpha=\left\{ 0 \right\}$, i.e. that if $f(x)\in F[x]$, $f(x)\neq 0$, then $f(\alpha)\neq 0$.
+        In this case, we say that $\alpha$ is \textbf{transcendental} over $F$. Additionally, ${\rm ev}_\alpha:F[x]\to E$
+        is injective, which suggests that it extends to an injection $F(x)\to E$, whose image we call $F(\alpha)$. Elements
+        of this image have the form $f(\alpha)/g(\alpha)$ where $f,g\in F[x]$ and $g\neq 0$. This is the smallest subfield of
+        $E$ containing $F$ and $\alpha$.
+
+        A famous example is that $\pi \in \mathbb{R}$ is transcendental over $\mathbb{Q}$ (Lindemann, 1880). The same holds
+        for $e$. Note carefully, that $\pi\in \mathbb{R}$ is not transcendental over $\mathbb{R}$, as $\pi$ is a root of $x-\pi$.c w
+    \item $\ker {\rm ev}_\alpha\neq \left\{ 0 \right\},$ i.e. there exists an $f(x)\in F[x]$, $f\neq 0$ such that $f(\alpha)=0$.
+        In this case, we say that $\alpha$ is \textbf{algebraic} over $F$. What can we say here? An incredible amount, it turns out.
+
+        First note that $\ker {\rm ev}_\alpha$ is a principal ideal in $F[x]$: $\ker {\rm ev}_\alpha=(p(x))$. Additionally,
+        we know that $F[\alpha]={\rm Im\;}{\rm ev}_\alpha\cong F[x]/\ker{\rm ev}_\alpha$. But since $F[x]$ is an integral domain
+        (subring of a field), $(p(x))$ is a prime ideal that is not $\left\{ 0 \right\}$. This means that $(p(x))$ is a maximal ideal
+        and $p(x)$ is irreducible (by theorem proved last time). Consequently, $F[x]/(p(x))=F[x]/\ker{\rm ev}_\alpha$ is a field, and
+        $F[\alpha]$ is a field. Recall the example of $\mathbb{Q}[\sqrt[3]{2}]$ being a field. Thus, we now write $F[\alpha]=F(\alpha)$,
+        which is the smallest subfield of $E$ containing $F$ and $\alpha$.
+
+        In particular, there is a unique monic generator of $(p(x))=\ker{\rm ev}_\alpha$. It is denoted $\irr(\alpha,F,x)$, which
+        is read ``the irreducible polynomial for $\alpha$ over $F$.'' It satisfies $\irr(\alpha,F,\alpha)=0$. Let us do a few examples:
+        \begin{exmp}
+            \[\irr(\frac{1}{2},\mathbb{Q},x)=x-\frac{1}{2}\]
+            \[\irr(\sqrt[3]{2},\mathbb{Q},x)=x^3-2\]
+            \[\irr(\sqrt[3]{2},\mathbb{Q}(\sqrt[3]{2}),x)=x-\sqrt[3]{2}\]
+            \[\irr(\sqrt[3]{2},\mathbb{Q}(\sqrt{2}),x)=?\]
+        \end{exmp}
+
+        \begin{rem}
+        Note that if $f(x)\in F[x]$ is any polynomial such that $f(\alpha)=0$, then the $\irr(a,F,x)|f(x)$.
+        \end{rem}
+        \begin{proof}
+            $f(\alpha)=0\iff f(x)\in\ker {\rm ev}_\alpha=(\irr(\alpha,F,x))$. By definition, then, $\irr(\alpha,F,x)|f(x)$.
+        \end{proof}
+        For example, take $f(x)\in \mathbb{R}[x]$. If $f(i)=0$, then $x^2+1|f(x)$.
+\end{enumerate}
+
+Mostly we will be working with the algebraic case, as the transcendental case belongs in a separate course.
+
+\begin{defn}
+    Given $F\leq E$ and $\alpha\in E$ algebraic over $F$, we define the \textbf{degree} of $\alpha$ over $F$ as $\deg\irr(\alpha,F,x)$.
+\end{defn}
+For example, $\deg_{\mathbb{Q}}\sqrt[3]{2}=3$ and $\deg_{\mathbb{R}}\sqrt[3]{2}=1$ and $\deg_{\mathbb{R}}i=2$.
+
+\begin{defn}
+    Let $F\leq E$. Then we say that $E$ is a \textbf{simple extension} of $F$ if $E=F(\alpha)$ for some $\alpha\in E$.
+\end{defn}
+Roughly speaking, this means that we can extend $F$ to $E$ by throwing in only one more element -- i.e. we can do this if $\alpha$ is transcendental.
+Take, for example, $\mathbb{Q}(\sqrt{2})$. $\sqrt{3}\notin\mathbb{Q}(\sqrt{2})$. Then, $\mathbb{Q}(\sqrt{2})\leq \mathbb{Q}(\sqrt{2})(\sqrt{3})=\mathbb{Q}(\sqrt{2},\sqrt{3}).$
+Then, $\mathbb{Q}\leq \mathbb{Q}(\sqrt{2}+\sqrt{3})$, one can find that $\mathbb{Q}(\sqrt{2}+\sqrt{3})=\mathbb{Q}(\sqrt{2},\sqrt{3})$. This shows
+that simple extensions are not always obviously simple.
+
+\section{$F$-vector spaces}
+Let us take a detour through vector spaces.
+
+Let $F$ be a field. An \textbf{$F$-vector space} is an abelian group $(V,+)$ and a function $F\times V\to V$ called \textbf{scalar multiplication}, which
+we write as $av$ such that:
+\begin{enumerate}
+    \item $a(bv)=(ab)v$
+    \item $a(v+w)=av+aw$
+    \item $(a+b)v=av+bv$
+    \item $1\cdot v=v$
+\end{enumerate}
+
+A very useful example is $V=F^n=\left\{ (a_1\cdots a_n): a_i\in F \right\}$, i.e. the Cartesian product of $F$ with itself $n$ times.
+We define addition componentwise, and multiply the scalar through each component, as usual. It is easy to check that $F^n$ is a vector space.
+The $n=0$ case is allowed, as it is the zero vector space with only 0.
+
+Another example is the space of functions $X\to F$ on any set $X$, which we denote by $F^X$. Functions are added pointwise as usual,
+and scalar multiplication is done pointwise as well.
+
+The important example for us is actually a bit unexpected. Suppose $E$ is an extension field of $F$. Then $E$ is an $F$-vector space.
+$E$ is already an abelian group and scalar multiplication is defined in the ordinary sense of multiplication. The rest of the axioms
+follow straightforwardly. Now, this is not as strange as it might look. The complex numbers, for example, are an extension field of the reals,
+and we are used to going back and forth between numbers/vectors: $a+bi\iff (a,b)$. Similarly, $\mathbb{Q}(\sqrt[3]{2})$ is a $\mathbb{Q}$-vector
+space as $a+b\sqrt[3]{2}+c\sqrt[3]{2}^2\iff (a,b,c)$. Furthermore, $\mathbb{R}$ is a $\mathbb{Q}$-vector space (but a really big one).
+
+One might ask, why does one require $F$ to be a field? We can define a similar structure for a ring.
+\begin{defn}
+    If $R$ is a commutative ring with unity, then an $R$-module $M$ is an abelian group $(M,+)$ with a scalar multiplication
+    $R\times M\to M$ that satisfies the properties defined above for $F$-vector spaces.
+\end{defn}
+These are, however, more interesting for algebra in general, and not so much for our case, where we will extensively use the field properties.
+
 \end{document}

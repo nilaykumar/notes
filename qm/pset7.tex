@@ -61,6 +61,241 @@ and so we are left with a rotation in the $j-k$ plane, as desired.
 
 \subsection*{Problem 3}
 
+If we consider the fermionic oscillator with 2 degrees of freedom, the Hamiltonian becomes
+\begin{align*}
+    H&=a_1^\dagger a_1+a_2^\dagger a_2 -\mathbf{1}\\
+    &=N_1+N_2-\mathbf{1},
+\end{align*}
+and since spinors are eigenstates of the Hamiltonian, they are necessarily eigenstates of $\hat U=\exp(iH\theta)$. Consequently,
+we can write
+\begin{align*}
+    \hat U|0,0\rangle&=e^{-i\theta}|0,0\rangle\\
+    \hat U|1,0\rangle&=|1,0\rangle\\
+    \hat U|0,1\rangle&=|0,1\rangle\\
+    \hat U|1,1\rangle&=e^{i\theta}|1,1\rangle.
+\end{align*}
+The Hamiltonian thus generates a $U(1)$ action on the spinors as
+\begin{align*}
+    \hat U \iff
+    \left(
+    \begin{array}[]{cccc}
+        e^{-i\theta} &  &  & \\
+         & 1 &  & \\
+         &  & 1 & \\
+         &  &  & e^{i\theta}
+    \end{array}
+    \right)
+\end{align*}
+is clearly a unitary matrix. This is easily extended to three degrees of freedom:
+\begin{align*}
+    H&=a_1^\dagger a_1+a_2^\dagger a_2 -a_3^\dagger a_3 -\frac{3}{2}\\
+    &=N_1+N_2+N_3-\frac{3}{2},
+\end{align*}
+and
+\begin{align*}
+    \hat U|0,0,0\rangle&=e^{-3i\theta/2}|0,0,0\rangle\\
+    \hat U|1,0,0\rangle&=e^{-i\theta/2}|1,0,0\rangle\\
+    \hat U|0,1,0\rangle&=e^{-i\theta/2}|0,1,0\rangle\\
+    \hat U|0,0,1\rangle&=e^{-i\theta/2}|0,0,1\rangle\\
+    \hat U|1,1,0\rangle&=e^{i\theta/2}|1,1,0\rangle\\
+    \hat U|1,0,1\rangle&=e^{i\theta/2}|1,0,1\rangle\\
+    \hat U|0,1,1\rangle&=e^{i\theta/2}|0,1,1\rangle\\
+    \hat U|1,1,1\rangle&=e^{3i\theta/2}|1,1,1\rangle\\
+\end{align*}
+with the unitary matrix representation
+\begin{align*}
+    \hat U \iff
+    \left(
+    \begin{array}[]{cccccccc}
+        e^{-3i\theta/2} &  &  &  &  &  &  & \\
+         & e^{-i\theta/2} &  &  &  &  &  & \\
+         &  & e^{-i\theta/2} &  &  &  &  & \\
+         &  &  & e^{-i\theta/2} &  &  &  & \\
+         &  &  &  & e^{i\theta/2} &  &  & \\
+         &  &  &  &  & e^{i\theta/2} &  & \\
+         &  &  &  &  &  & e^{i\theta/2} & \\
+         &  &  &  &  &  &  & e^{3i\theta/2}\\
+    \end{array}
+    \right).
+\end{align*}
 
+If we consider the Clifford algebra in 4 dimensions, i.e. the fermionic oscillator with 2 degrees of freedom, we have
+\begin{align*}
+    \gamma_1&=a_1+a_1^\dagger\\
+    \gamma_2&=-i(a_1-a_1^\dagger)\\
+    \gamma_3&=a_2+a_2^\dagger\\
+    \gamma_4&=-i(a_2-a_2^\dagger).
+\end{align*}
+The Hamiltonian, in this setup is given by
+\begin{align*}
+    H&=a_1^\dagger a_1 + a_2^\dagger a_2 + -\mathbf{1}\\
+    &=\frac{i}{4}\left( \gamma_1\gamma_2-\gamma_2\gamma_1+\gamma_3\gamma_4-\gamma_4\gamma_3 \right)\\
+    &=\frac{i}{2}\left( \gamma_1\gamma_2+\gamma_3\gamma_4 \right),
+\end{align*}
+using the anticommutation rules.
+It should be fairly obvious how to extend $\gamma_i$ and the Hamiltonian to an arbitrary number of even dimension of the algebra.
+
+Now, if we consider the action of the Hamiltonian on vectors in the Clifford algebra, we have in $n=2m$ dimensions,
+\begin{align*}
+    e^{-iH\theta}\left(\sum_jv_j\gamma_j\right)e^{iH\theta}=e^{-\frac{\theta}{2}\sum_k^m \gamma_{2k-1}\gamma_{2k}}\left(\sum_jv_j\gamma_j\right)e^{-\frac{\theta}{2}\sum_l^m \gamma_{2l-1}\gamma_{2l}}
+\end{align*}
+We can take advantage of the fact that $[\gamma_j\gamma_k,\gamma_m\gamma_n]=0$ (due to anticommutativity) for the two sets of $\gamma$'s from distinct copies of $\mathbb{C}$,
+and use the Baker-Campbell-Hausdorff formula to factor the exponentials:
+\begin{align*}
+   \prod_k^m(e^{-\frac{\theta}{2}\gamma_{2k-1}\gamma_{2k}})\left(\sum_jv_j\gamma_j\right)\prod_l^m(e^{-\frac{\theta}{2}\gamma_{2l-1}\gamma_{2l}})
+\end{align*}
+Thankfully, many of these terms vanish -- in particular due to the commutation rules for $\gamma$'s (and their products, and the exponentials of their products),
+the exponentials of quadratics when acting on terms in the sum that are not in the same copy of $\mathbb{C}$ commute through and annihilate with the conjugates
+on the right-hand side. Thus, the terms that do not vanish simply give rotations of the form of those in problem 2, with one for $m$:
+\begin{align*}
+    &\sum_m^n e^{-\frac{\theta}{2}\gamma_{2m-1}\gamma_{2m}}(v_{2m-1}\gamma_{2m-1}+v_{2m}\gamma_{2m})e^{-\frac{\theta}{2}\gamma_{2m-1}\gamma_{2m}}\\
+    =&\sum_m^n (v_{2m-1}\cos\theta-v_{2m}\sin\theta)\gamma_{2m-1}+(v_{2m-1}\sin\theta+v_{2m}\cos\theta)\gamma_{2m}
+\end{align*}
+The matrix representation of this rotation is of course just a block diagonal matrix with each block being a rotation in that copy of $\mathbb{C}$.
+
+Next, let us consider the rotation by an angle $\theta$ in the $j-k$ plane in 4 or 6 dimensions. The element of the spin group that perform such a
+rotation, we saw earlier, are of the form $\exp(\theta\gamma_j\gamma_k/2)$. If we act these on spinors of the fermionic oscillator space, we
+must consider the case where the two $\gamma$'s are from the same copy of $\mathbb{C}$ as well as the case in which they are from different
+copies. The first case is fairly simple:
+\begin{align*}
+    e^{\frac{\theta}{2}\gamma_j\gamma_k}&=\cos\frac{\theta}{2}+\gamma_j\gamma_k\sin\frac{\theta}{2}\\
+    &=\cos\frac{\theta}{2}+i\sin\frac{\theta}{2}-2i\sin\frac{\theta}{2}N_1\\
+    &=e^{i\frac{\theta}{2}}-2i\sin\frac{\theta}{2}N_1
+\end{align*}
+where we have used the fact that
+\begin{align*}
+    \gamma_j\gamma_k=(a_1+a_1^\dagger)\cdot -i(a_1-a_1^\dagger)=-2ia_1^\dagger a_1+i.
+\end{align*}
+If we denote such rotations by $\hat R$, we can write for 4 dimensions,
+\begin{align*}
+    \hat R|0,0\rangle&=e^{i\theta/2}|0,0\rangle\\
+    \hat R|1,0\rangle&=e^{-i\theta/2}|1,0\rangle\\
+    \hat R|0,1\rangle&=e^{i\theta/2}|0,1\rangle\\
+    \hat R|1,1\rangle&=e^{-i\theta/2}|1,1\rangle.
+\end{align*}
+so we can represent
+\begin{align*}
+    \hat R \iff
+    \left(
+    \begin{array}[]{cccc}
+        e^{i\theta/2} &  &  & \\
+         & e^{-i\theta/2} &  & \\
+         &  & e^{i\theta/2} & \\
+         &  &  & e^{-i\theta/2}
+    \end{array}
+    \right)
+\end{align*}
+For 6 dimensions,
+\begin{align*}
+    \hat R|0,0,0\rangle&=e^{i\theta/2}|0,0,0\rangle\\
+    \hat R|1,0,0\rangle&=e^{-i\theta/2}|1,0,0\rangle\\
+    \hat R|0,1,0\rangle&=e^{i\theta/2}|0,1,0\rangle\\
+    \hat R|0,0,1\rangle&=e^{i\theta/2}|0,0,1\rangle\\
+    \hat R|1,1,0\rangle&=e^{-i\theta/2}|1,1,0\rangle\\
+    \hat R|1,0,1\rangle&=e^{-i\theta/2}|1,0,1\rangle\\
+    \hat R|0,1,1\rangle&=e^{i\theta/2}|0,1,1\rangle\\
+    \hat R|1,1,1\rangle&=e^{-i\theta/2}|1,1,1\rangle\\
+\end{align*}
+with the unitary matrix representation
+\begin{align*}
+    \hat R \iff
+    \left(
+    \begin{array}[]{cccccccc}
+        e^{i\theta/2} &  &  &  &  &  &  & \\
+         & e^{-i\theta/2} &  &  &  &  &  & \\
+         &  & e^{i\theta/2} &  &  &  &  & \\
+         &  &  & e^{i\theta/2} &  &  &  & \\
+         &  &  &  & e^{-i\theta/2} &  &  & \\
+         &  &  &  &  & e^{-i\theta/2} &  & \\
+         &  &  &  &  &  & e^{i\theta/2} & \\
+         &  &  &  &  &  &  & e^{-i\theta/2}\\
+    \end{array}
+    \right).
+\end{align*}
+
+Things get more complicated when we consider rotations that are not generated by elements in the same copy of $\mathbb{C}$.
+\begin{align*}
+    e^{\frac{\theta}{2}\gamma_j\gamma_n}&=\cos\frac{\theta}{2}+\gamma_j\gamma_n\sin\frac{\theta}{2}\\
+    &=\cos\frac{\theta}{2}-i\sin\frac{\theta}{2}\left( a_1a_2-a_1^\dagger a_2^\dagger+a_1^\dagger a_2 -a_1a_2^\dagger \right).
+\end{align*}
+Again, we write for 4 dimensions
+\begin{align*}
+    \hat R|0,0\rangle&=\cos\frac{\theta}{2}|0,0\rangle + i\sin\frac{\theta}{2}|1,1\rangle\\
+    \hat R|0,1\rangle&=\cos\frac{\theta}{2}|0,1\rangle - i\sin\frac{\theta}{2}|1,0\rangle\\
+    \hat R|1,0\rangle&=\cos\frac{\theta}{2}|1,0\rangle + i\sin\frac{\theta}{2}|0,1\rangle\\
+    \hat R|1,1\rangle&=\cos\frac{\theta}{2}|1,1\rangle - i\sin\frac{\theta}{2}|0,0\rangle\\
+\end{align*}
+so we can represent
+\begin{align*}
+    \hat R \iff
+    \left(
+    \begin{array}[]{cccc}
+        \cos\frac{\theta}{2} &  &  &i\sin\frac{\theta}{2} \\
+        & \cos\frac{\theta}{2} & -i\sin\frac{\theta}{2} & \\
+        & i\sin\frac{\theta}{2} & \cos\frac{\theta}{2} & \\
+        -i\sin\frac{\theta}{2}&  &  & \cos\frac{\theta}{2}
+    \end{array}
+    \right)
+\end{align*}
+For 6 dimensions,
+\begin{align*}
+    \hat R|0,0,0\rangle&=\cos\frac{\theta}{2}|0,0,0\rangle+i\sin\frac{\theta}{2}|1,1,0\rangle\\
+    \hat R|1,0,0\rangle&=\cos\frac{\theta}{2}|1,0,0\rangle+i\sin\frac{\theta}{2}|0,1,0\rangle\\
+    \hat R|0,1,0\rangle&=\cos\frac{\theta}{2}|0,1,0\rangle-i\sin\frac{\theta}{2}|1,0,0\rangle\\
+    \hat R|0,0,1\rangle&=\cos\frac{\theta}{2}|0,0,1\rangle+i\sin\frac{\theta}{2}|1,1,1\rangle\\
+    \hat R|1,1,0\rangle&=\cos\frac{\theta}{2}|1,1,0\rangle-i\sin\frac{\theta}{2}|0,0,0\rangle\\
+    \hat R|1,0,1\rangle&=\cos\frac{\theta}{2}|1,0,1\rangle+i\sin\frac{\theta}{2}|0,1,1\rangle\\
+    \hat R|0,1,1\rangle&=\cos\frac{\theta}{2}|0,1,1\rangle-i\sin\frac{\theta}{2}|1,0,1\rangle\\
+    \hat R|1,1,1\rangle&=\cos\frac{\theta}{2}|1,1,1\rangle-i\sin\frac{\theta}{2}|0,0,1\rangle\\
+\end{align*}
+with the matrix representation
+\begin{align*}
+    \hat R \iff
+    \left(
+    \begin{array}[]{cccccccc}
+        \cos\frac{\theta}{2} &  &  &  &i\sin\frac{\theta}{2}  &  &  & \\
+        &\cos\frac{\theta}{2} &i\sin\frac{\theta}{2}  &  &  &  &  & \\
+        & -i\sin\frac{\theta}{2} & \cos\frac{\theta}{2} &  &  &  &  & \\
+        &  &  & \cos\frac{\theta}{2} &  &  &  & i\sin\frac{\theta}{2}\\
+        -i\sin\frac{\theta}{2}&  &  &  & \cos\frac{\theta}{2} &  &  & \\
+        &  &  &  &  & \cos\frac{\theta}{2} &\sin\frac{\theta}{2}  & \\
+        &  &  &  &  & -i\sin\frac{\theta}{2} & \cos\frac{\theta}{2} & \\
+        &  &  & -i\sin\frac{\theta}{2} &  &  &  & \cos\frac{\theta}{2}\\
+    \end{array}
+    \right).
+\end{align*}
+
+\subsection*{Problem 4}
+
+Recall that for the classic analog of fermionic quantum mechanics, we define Grassman variables $\theta_i$ that are defined by
+$\left\{ \theta_j,\theta_k \right\}_+=2\delta_{jk}$. As this implies that $\theta_i^2=1$, all polynomials in an arbitrary number
+of Grassman variables are below degree 2 in each $\theta_i$. We defined $\psi_i=\theta_{2i-1}+i\theta_{2i}$ with 
+\[\left\{ \frac{\partial}{\partial \psi_i},\psi_i \right\}_+=1,\]
+and
+\[\left\{ \frac{\partial}{\partial \psi_i},\frac{\partial}{\partial \psi_i} \right\}_+=0=\left\{ \psi_i,\psi_i \right\}_+,\]
+where $\psi$ is constructed in analog to $a^\dagger$ and $\frac{\partial}{\partial \psi_i}$ is constructed in analog to $a$ (we require the dimension
+of the Grassman algebra to be even, of course). This is
+consistent with the idea that polynomials in this mechanics represent our states, and thus derivatives ``annihilate'' states, while
+multiplying by $\psi$ ``raises'' states (degree-wise). In parallel to the inner product defined for the Bargmann-Fock
+representation of the bosonic oscillator, we define the inner product via the Berezin integral:
+\begin{align*}
+    \langle f_1 | f_2 \rangle = \int \overline{f_1(\psi)}f_2(\psi)\prod_j^m e^{\bar\psi_j \psi_j}d\psi_j d\bar\psi_j,
+\end{align*}
+where $f_1,f_2$ are polynomials of $m$ Grassman variables (abbreviated as $\psi$) and the integrals are taken over all such variables.
+To see that our $\psi_i$ and $\partial/\partial\psi_i$ are adjoint with respect to this inner product, we require
+\begin{align*}
+    \langle f_1 | \psi_i | f_2 \rangle =  \langle f_2 | \frac{\partial}{\partial \psi_i} | f_1 \rangle^*.
+\end{align*}
+Let us start with the right hand side:
+\begin{align*}
+    \langle f_2 | \frac{\partial}{\partial \psi_i} | f_1 \rangle^*&=\left(\int \overline{f_1(\psi)}\frac{\partial}{\partial \psi_i}f_2(\psi)\prod_j^me^{\bar\psi_j \psi_j} d\psi_j d\bar\psi_j\right)^*\\
+    &=\int f_1(\psi)\frac{\partial}{\partial\bar\psi_i}\overline{f_2(\psi)}\prod_j^me^{\psi_j\bar\psi_j} d\bar\psi_j d\psi_j\\
+    &=\int f_1(\psi)\overline{f_2(\psi)}\prod_j^m\frac{\partial}{\partial\bar\psi_i}e^{\bar\psi_j\psi_j} d\psi_j d\bar\psi_j\\
+    &=\int f_1(\psi)\overline{f_2(\psi)}\psi_i\prod_j^me^{\bar\psi_j\psi_j} d\psi_j d\bar\psi_j\\
+    &=\int f_1(\psi)\psi_i\overline{f_2(\psi)}\prod_j^me^{\bar\psi_j\psi_j} d\psi_j d\bar\psi_j
+\end{align*}
+where in the third equality we have integrated by parts (as legitimized in class) and have used the fact that $[\psi_j,\bar\psi_j]=0$ 
+to reorder terms. Additionally, we have used the fact that the derivative of the exponential behaves as usual (the exponential is just a linear polynomial
+as all higher terms vanish). But this is just the left hand side of the requirement for adjointness, and so we are done.
 
 \end{document}
