@@ -1,0 +1,211 @@
+\documentclass{../../mathnotes}
+
+
+\title{Differentiable Manifolds Problem Set 3}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+
+Let us take two copies of $\R^2$, call them $M$ and $N$. On $M$, we define the standard coordinates $(x,y)$
+given by the global identity coordinate chart $\id_1:M\to\R^2$. On $N$, let us try to define a different global smooth
+coordinate chart, $\phi:N\to\R^2$ that maps $\id_1^{-1}(x,y)\mapsto \left( \tilde x=x,\tilde y=f(x,y) \right)$,
+where $f$ is a smooth function from $\R^2\to\R$. For $\phi$ to be a global coordinate chart, it must be a global
+homeomorphism. It is clear that $\phi$ is continuous (smooth, in fact) by the smoothness of $f$, but it is not obvious
+that its inverse is continuous as well. We use the inverse function theorem on $\phi$ (which acts
+from $N=\R^2\to\R^2$):
+\begin{align*}
+    D\phi=\left(
+    \begin{array}[]{cc}
+        1 & 0\\
+        \frac{\partial f}{\partial x} & \frac{\partial f}{\partial y}
+    \end{array}
+    \right),
+\end{align*}
+which is clearly nonsingular as long as $\partial f/\partial y\neq 0$. Consequently, as long as this condition holds,
+$\phi$ is locally a diffeomorphism, i.e. its inverse is locally continuous (and smooth).
+It will follow that $\phi$ is a global diffeomorphism if we can show that the inverse of $\phi$ exists.
+In other words, we need to make sure that for a given $(x,z)$, there exists a unique point $(x,y)$ such that
+$\phi(x,y)=(x,z)$ -- i.e. that $z$ is not the same for two different values of $y$. But since $z=f(x,y)$
+is smooth, by the mean value theorem, if this did happen, $\partial f/\partial y$ would have to be zero
+somewhere. As this is never true under the condition above, $\phi$ is injective. Furthermore, $\phi$ is
+surjective, as the inverse function theorem guarantees that we can find a $y$ that is mapped by $f$ to a given
+$z$. Consequently, $\phi$ is a global homeomorphism (diffeomorphism) and is thus a global chart for $\R^2$.
+
+Let us define the diffeomorphism $\id_2:M\to N$. Derivatives on $M$ take the form of the usual derivatives on
+$\R^2$, as we are using the identity chart. Derivatives on $N$, however, need not be of the same form, as we
+are working in the nontrivial coordinates given by $\phi$. If we take some smooth function $g:N\to\R$, and its
+pullback $h=g\circ\id_2:M\to\R$, and compare the derivatives of these two functions, we will find that they are
+in general different. On $M$, the derivative is expressed in coordinates as
+\begin{align*}
+    \frac{\partial}{\partial x}\bigg|_{(x,y)}h&=(\id_1^{-1})_*\frac{\partial}{\partial x}\bigg|_{\id_1(x,y)}h\\
+    &=\frac{\partial}{\partial x}\bigg|_{\id_1(x,y)}\left( h\circ \id_1^{-1} \right)\\
+    &=\frac{\partial h}{\partial x}\bigg|_{(x,y)}=\frac{\partial g}{\partial x}\bigg|_{\phi(x,y)},
+\end{align*}
+as expected. Let us now look at
+\begin{align*}
+    \frac{\partial}{\partial \tilde x}\bigg|_{(x,y)}g&=(\phi^{-1})_*\frac{\partial}{\partial \tilde x}\bigg|_{\phi(x,y)}g\\
+    &=\frac{\partial}{\partial \tilde x}\bigg|_{\phi(x,y)}(g\circ\phi^{-1})\\
+    &=\frac{\partial g}{\partial (\phi^{-1})^j}\bigg|_{\phi(x,y)}\frac{\partial (\phi^{-1})^j}{\partial \tilde x}\bigg|_{(x,y)}\\
+    &=\frac{\partial g}{\partial x}\bigg|_{\phi(x,y)}\frac{\partial x}{\partial \tilde x}\bigg|_{(x,y)}
+    +\frac{\partial g}{\partial y}\bigg|_{\phi(x,y)}\frac{\partial y}{\partial \tilde x}\bigg|_{(x,y)}\\
+    &=\frac{\partial g}{\partial x}\bigg|_{\phi(x,y)}
+    +\frac{\partial g}{\partial y}\bigg|_{\phi(x,y)}\frac{\partial y}{\partial x}\bigg|_{(x,y)}.
+\end{align*}
+This is clearly not the same as the above derivative, as we required earlier that $\partial y/\partial x$ is not identically
+zero.
+
+\subsection*{Problem 2}
+
+Recall one of the transition functions for the stereographic atlas on $S^2$,
+\begin{align*}
+    \psi\circ\phi^{-1}(u,v)=\left( \frac{4u}{u^2+v^2},\frac{4v}{u^2+v^2} \right).
+\end{align*}
+Here, let $\phi$ be the chart that excludes the north pole and let $\psi$ be the chart that excludes the
+south pole.
+Now, given the vector field $F=u\p/\p u+v\p/\p v$ (smooth, as the components are smooth functions on $\R^2$)
+defined on the copy of $\R^2$ that $\phi$ sends points on the manifold to (what we'll call $M$), we can push it forward to a 
+vector field on the copy of $\R^2$ that $\psi$ sends points on the manifold to (what we'll call $N$). For some $p\in N$ and
+some $f\in C^\infty(N)$,
+\begin{align*}
+    F_*=\left( \psi \circ \phi^{-1} \right)_*&\left( u\frac{\p}{\p u} + v\frac{\p}{\p v} \right)(f)(p)
+    =\left(u\frac{\p}{\p u}+v\frac{\p}{\p v}\right)\left(f\circ \psi \circ \phi^{-1}\right)\left(\phi\circ\psi^{-1}(p)\right)\\
+    &=u\frac{\p}{\p u}f\left( \psi\circ\phi^{-1} \right)+v\frac{\p}{\p v}f\left( \psi \circ \phi^{-1} \right)\\
+    &=u\frac{\p(\psi\circ\phi^{-1})^j}{\p u}\bigg|_{\phi\circ\psi^{-1}(p)}\frac{\p f}{\p(\psi\circ\phi^{-1})^j}\bigg|_p
+    +v\frac{\p(\psi\circ\phi^{-1})^j}{\p v}\bigg|_{\phi\circ\psi^{-1}(p)}\frac{\p f}{\p(\psi\circ\phi^{-1})^j}\bigg|_p
+\end{align*}
+Note that we have used the Einstein summation convention. Taking the necessary derivatives of the transition
+maps, we find
+\begin{align*}
+    u\frac{\p}{\p u}\left( \frac{4u}{u^2+v^2} \right)&=u\frac{4(v^2-u^2)}{(u^2+v^2)^2}\\
+    u\frac{\p}{\p u}\left( \frac{4v}{u^2+v^2} \right)&=-\frac{8 u^2 v}{\left(u^2+v^2\right)^2}\\
+    v\frac{\p}{\p v}\left( \frac{4u}{u^2+v^2} \right)&=-\frac{8 u v^2}{\left(u^2+v^2\right)^2}\\
+    v\frac{\p}{\p v}\left( \frac{4v}{u^2+v^2} \right)&=\frac{4 v \left(u^2-v^2\right)}{\left(u^2+v^2\right)^2}.
+\end{align*}
+Let us first note that the pushforward of the vector field is not defined at $(0,0)\in N$, as that corresponds
+to the north pole. However, we can smoothly define it to be 0 there; the pushforward of the vector field
+goes smoothly to zero as $(0,0)$ because $\lim_{q\to\infty}\psi\circ\phi^{-1}(q)=(0,0)$ and because the above
+derivatives similarly go smoothly to zero, where $q$ is a point on $M$,
+by the transition function above. Furthermore, the pushforward of the field is smooth everywhere else as well,
+as seen by inserting the above derivatives into the expression for the pushforward at the top of the page.
+
+Informally speaking, we now have smooth vector fields in coordinate charts that will cover the manifold when
+each is pushforwarded back onto the manifold (in their respective domains of definitions). In other words, if
+we push forward our original vector field from $M$ to $S^2$ we'll get a smooth vector field defined everywhere
+but at the north pole, and if we push forward $F_*$ from $N$ to $S^2$ we'll get a smooth vector field defined
+everywhere but at the south pole. If we then define a vector field $X$ that is on the southern hemisphere
+equal to the pushfoward by $\phi^{-1}$ of $F$ and on the northern hemisphere equal to the pushforward by
+$\psi^{-1}$ of $F$, we have a globally smooth manifold on $S^2$, as the two are equal everywhere but the poles,
+and on the poles they smoothly go to zero. This is easily seen from the fact that pushforwarding $F_*$ via
+$\psi^{-1}$ will yield the same eexpression, as desired (we have already shown that they go smoothly to zero).
+
+Suppose now that we were working with the vector field $F=v\p/\p u+-\p/\p v$. Then, all of the above statements
+still hold -- although the derivatives will be slightly different, the functions still be smooth, and will obey
+the same limits, and thus we will again end up with a global vector field on $S^2$.
+
+\subsection*{Problem 3}
+
+
+\subsection*{Problem 4}
+
+Let $x,y$ be the standard coordinates on $\R^2$, and $X$ be a vector field given by $X(x,y)=y\p/\p x-x\p/\p y$.
+We want to solve for $\phi(t,x,y)$ where $\frac{\p\phi}{\p t}(t,x,y)=X(\phi(t,x,y))$ with the initial
+conditions that $\phi(0,x,y)=(x,y)$. Since $\phi$ sends points on the manifold to other points on the manifold
+as a function of time, we write $\phi(t,x,y)=(x(t),y(t))$. Using the fact that $X(\phi(t,x,y))=\phi_*(\p/\p t)$,
+we can compute
+\begin{align*}
+    \frac{\p x}{\p t}&=\left( y\frac{\p}{\p x}-x\frac{\p}{\p y} \right)x=y\\
+    \frac{\p y}{\p t}&=\left( y\frac{\p}{\p x}-x\frac{\p}{\p y} \right)y=-x.
+\end{align*}
+This is a system of linear first order equations that can be easily decoupled by taking
+$\p^2x/\p t^2=dy/dt$ and $dy/dt=-x$, which yields the differential equation
+\[\frac{d^2x}{dt^2}+x=0,\]
+which results in the solutions
+\begin{align*}
+    x(t)&=A\sin t+B\cos t\\
+    y(t)&=A\cos t-B\sin t.
+\end{align*}
+Using the initial conditions, we find that
+\begin{align*}
+    \phi(t,x,y)=\left( y\sin t+x\cos t,y\cos t-x\sin t \right),
+\end{align*}
+where $x,y$ on the right hand side are the initial conditions.
+
+\subsection*{Problem 5}
+
+Let $X$ be the smooth vector field on $S^2$ which is the extension of $u\p/\p u+v\p/\p v$ from
+$U=S^2-\left\{ \left( 0,0,1 \right) \right\}$ to the whole $S^2$. We wish to find the one parameter
+group of diffeomorphisms $\phi_t$ generated by $X$. If we take any integral curve $\gamma(t)$ on $S^2$,
+we have the requirement that $\gamma'(t)=X_{\gamma(t)}$. To solve for $\gamma(t)$ let us work in coordinates,
+i.e. the chart $\psi$ without the north pole, and solve for $\psi(\gamma)$. By pushing forward, we find that
+\begin{align*}
+    \frac{\p}{\p t}\left( u(t),v(t) \right)=\left( u\frac{\p}{\p v}+v\frac{\p}{\p v} \right)\left( u(t),v(t) \right),
+\end{align*}
+which yields the differential equations,
+\begin{align*}
+    u(t)=u_0 e^t\\
+    v(t)=v_0 e^t
+\end{align*}
+where $u_0,v_0$ are the coordinates of the initial point, $\gamma(0)$. Note carefully that $\gamma(t)$
+is an arbitrary integral curve. Now, $\phi_t(x,y)$, in some sense, is simply the set of all integral curves, but
+parameterized by the initial point $x,y$. 
+For any given $x,y$, then, we can write
+\begin{align*}
+    \psi\circ\phi_t\circ\psi^{-1}(x,y)=(x e^t, y e^t).
+\end{align*}
+Using the expressions for the stereographic chart,
+\begin{align*}
+    \psi(x,y,z)&=\left( \frac{2x}{1-z},\frac{2y}{1-z} \right)\\
+    \psi^{-1}(u,v)&=\left( \frac{4u}{u^2+v^2+4}, \frac{4v}{u^2+v^2+4},\frac{u^2+v^2-4}{u^2+v^2+4} \right),
+\end{align*}
+we can solve
+\begin{align*}
+    \phi_t(x,y,z)=\left( \frac{2x e^t}{(1+z)e^{2t}+(1-z)},\frac{2y e^t}{(1+z)e^{2t}+(1-z)},\frac{(1+z)e^{2t}-(1-z)}{(1+z)e^{2t}+(1-z)} \right).
+\end{align*}
+Intuitively, these equations tell us that the vector field induces a flow from the south pole up to the north pole
+that in coordinates equates to following a ray exponentially to infinity.
+As we approach the north pole, we have $z\to 1$, and so the above function approaches $(xe^{-t},ye^{-t},1)$. In other
+words, as we get closer to the north pole, we flow towards it exponentially slower and slower. 
+On the contrary, near the south pole, the flow is exponentially fast, as can be seen by inserting $z=-1$.
+At the north/south poles themselves, of course, due to $\phi_t$ having to be bijective, there can be no flow.
+
+\subsection*{Problem 6}
+
+Let $A\subset\mathcal{X}(\R^3)$ be the subspace spanned by $\left\{ X,Y,Z \right\}$, where
+\begin{align*}
+    X=y\frac{\p}{\p z}-z\frac{\p}{\p y}, Y=z\frac{\p}{\p x}-x\frac{\p}{\p z}, Z=x\frac{\p}{\p y}-y\frac{\p}{\p x}.
+\end{align*}
+We wish to show that $A$ is a Lie subalgebra of $\mathcal{X}(\R^2)$, which is isomorphic to $\R^3$ with the
+cross product. To show the first part, we must simply show that it is closed under the Lie brackets:
+\begin{align*}
+    [X,Y]&=\left( y\frac{\p}{\p z}-z\frac{\p}{\p y} \right)\left( z\frac{\p}{\p x}-x\frac{\p}{\p z} \right)
+    -\left( z\frac{\p}{\p x}-x\frac{\p}{\p z} \right)\left( y\frac{\p}{\p z}-z\frac{\p}{\p y} \right)\\
+    &=y\p_x+yz\p_{zx}-xy\p_{zz}-z^2\p_{yx}+xz\p_{yz}
+    -zy\p_{xz}+z^2\p_{xy}+xy\p_z^2-xz\p_{zy}-x\p_y\\
+    &=y\p_x-x\p_y=-Z\\
+    [Y,Z]&=\left( z\frac{\p}{\p x}-x\frac{\p}{\p z} \right)\left( x\frac{\p}{\p y}-y\frac{\p}{\p x} \right)
+    -\left( x\frac{\p}{\p y}-y\frac{\p}{\p x} \right)\left( z\frac{\p}{\p x}-x\frac{\p}{\p z} \right)\\
+    &=z\p_y+xz\p_{xy}-zy\p_{xx}-x^2\p_{zy}+xy\p_{zx}-xz\p_{yx}+x^2\p_{yz}+yz\p_{xx}-yx\p_{xz}-y\p_z\\
+    &=z\p_y-y\p_z=-X\\
+    [X,Z]&=\left( y\frac{\p}{\p z}-z\frac{\p}{\p y} \right)\left( x\frac{\p}{\p y}-y\frac{\p}{\p x} \right)
+    -\left( x\frac{\p}{\p y}-y\frac{\p}{\p x} \right)\left( y\frac{\p}{\p z}-z\frac{\p}{\p y} \right)\\
+    &=xy\p_{zy}-y^2\p_{zx}-zx\p_{yy}+zy\p_{yx}+z\p_x-x\p_z-xy\p_{yz}+xz\p_{yy}+y^2\p_{xz}-yz\p_{xy}\\
+    &=z\p_x-x\p_z=Y
+\end{align*}
+Up to a sign convention, it is clear that $A$ is isomorphic to $\R^3$ with the cross product,
+as:
+\begin{align*}
+    \hat x \times \hat y &= \hat z\\
+    \hat y \times \hat z &= \hat x\\
+    \hat x \times \hat z &= - \hat y.
+\end{align*}
+
+\subsection*{Problem 7}
+
+
+\end{document}
