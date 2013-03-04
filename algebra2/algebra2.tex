@@ -259,7 +259,7 @@ Take, for example, $\mathbb{Q}(\sqrt{2})$. $\sqrt{3}\notin\mathbb{Q}(\sqrt{2})$.
 Then, $\mathbb{Q}\leq \mathbb{Q}(\sqrt{2}+\sqrt{3})$, one can find that $\mathbb{Q}(\sqrt{2}+\sqrt{3})=\mathbb{Q}(\sqrt{2},\sqrt{3})$. This shows
 that simple extensions are not always obviously simple.
 
-\section{$F$-vector spaces}
+\subsection{interlude : $F$-vector spaces}
 Let us take a detour through vector spaces.
 
 Let $F$ be a field. An \textbf{$F$-vector space} is an abelian group $(V,+)$ and a function $F\times V\to V$ called \textbf{scalar multiplication}, which
@@ -290,5 +290,123 @@ One might ask, why does one require $F$ to be a field? We can define a similar s
     $R\times M\to M$ that satisfies the properties defined above for $F$-vector spaces.
 \end{defn}
 These are, however, more interesting for algebra in general, and not so much for our case, where we will extensively use the field properties.
+
+%\subsection{Back to field extensions}
+
+(March 4, 2013)
+
+%Recall what we discussed about field extensions earlier. It should be clear that every element of $F(\alpha)$ is uniquely written
+%as $c_0+c_1\alpha+\ldots+d_{d-1}\alpha^{d-1}$ where $d=\deg \irr(\alpha,F,x)$ and $c_i\in F$. This is because every coset
+%in $F[x]/(\irr(\alpha,F,x))$ is uniquely $g(x)+(\irr(\alpha,F,x))$ with $\deg f(x)< d$ (or $g=0$). Take, for example,
+%$\Q(\sqrt[3]{2})$. Every element here is uniquely written as $a+b\sqrt[3]{2}+c(\sqrt[3]{2})^2$, with $a,b,c\in\Q$. We know,
+%of course, that $\sqrt[3]{2}^3=2$. Uniqueness here follows by assuming it can be written via $a_1,b_1,c_1$ and $a_2,b_2,c_2$,
+%equating the two and subtracting one to the other side, and then noting that if at least one of the coefficients were not zero,
+%then we would have a polynomial with degree $\leq 2$ that evaluated at $\sqrt[3]{2}$ would yield zero. However, we know that
+%$\irr(\sqrt[3]{2},\Q,x)=x^3-2$, so we reach a contradiction.
+
+What we wish to do with these ideas is to use linear algebraic ideas to understand more deeply field extensions.
+
+Let's talk about a few basic notions.
+\begin{defn}
+    A \textbf{vector subspace} of an $F$-vector space $V$ is a subgroup $W$ of $(V,+)$ such that for all $a\in F$,$w\in W$, $aw\in W$.
+    $W$ then becomes an $F$-vector space in its own right.
+\end{defn}
+
+\begin{defn}
+    $F:V_1\to V_2$ is a \textbf{linear map} if
+    \begin{enumerate}
+        \item $f$ is a homomorphism of abelian groups
+        \item $f$ preserves scalar multiplication: $a,b\in F, v\in V_1$, $f(av)=af(v)$
+    \end{enumerate}
+    A \textbf{linear isomorphism} is just a bijective linear map. Its inverse is linear as well.
+\end{defn}
+
+\begin{defn}
+    Let $V$ be an $F$-vector space and let $v_1,\ldots v_n\in V$. Then a \textbf{linear combination} of these vectors is
+    an element of v of the form $a_1v_1 + \ldots + a_nv_n$. We define the \textbf{span} of this set of vectors as the set of all such linear combinations.
+    It should be clear that the span of a set of vectors is a vector space.
+\end{defn}
+
+\begin{defn}
+    $V$ is \textbf{finite dimensional} if there exists a set of vectors in $V$ whose span equals $V$.
+\end{defn}
+Note, for example, that $F^n$ is finite dimensional (via the standard basis), but $F[x]$ is not. However, $F[x]$, does have many
+interesting finite dimensional subspaces. If we define $P_n$ to be the set of polynomials in $F[x]$ with degree $n$ or less, it 
+forms a vector subspace spanned by $1, x, x^2, \ldots, x^n$.
+
+\begin{defn}
+    A set of vectors $v_1, \ldots, v_n\in V$ are \textbf{linearly independent} if the only linear combination of them that yields
+    zero is where the coefficients in the linear combination are all zero.
+\end{defn}
+
+\begin{thm}
+    If $V$ is an $F$-vector space, and $v_1,\ldots, v_n\in V$ are linearly independent, and $w_1,\ldots, w_m$ span $V$, then
+    $n\leq m$.
+\end{thm}
+
+\begin{defn}
+    $v_1,\ldots v_n$ is a \textbf{basis} of $V$ if these vectors are linearly independent, and they span $V$.
+\end{defn}
+
+\begin{thm}
+    If $v_1,\ldots, v_n$ and $w_1,\ldots, w_n$ are two bases of $V$, then $n=m$. In this case, we define
+    this number $n=\dim_F V$.
+\end{thm}
+\begin{proof}
+    By the counting theorem above, $n\leq m$ and $m\leq n$, so $n=m$.
+\end{proof}
+
+The main example that will be important for us to consider is as follows. Let $f(x)\in F[x]$ with $\deg f(x)=n$ and $f\notin F$.
+Consider $F\leq F[x]/(f(x))$. In fact, we know that every element in the coset ring is uniquely of the form
+$g(x)+(f(x))$ where $g$ is zero or $\deg g(x)<n$.  This says that the cosets $1+(f(x)), x+(f(x)), \ldots, x^{n-1}+(f(x))$ are an
+$F$-basis for $F[x]/(f(x))$. This implies that $\dim_F F[x]/(f(x))=n$.
+
+\begin{cor}
+    Let $F\leq E$ and $\alpha$ algebraic over $F$. Let $\deg_F\alpha=\deg\irr(\alpha,F,x)$.
+    Then $F(\alpha)$ is a finite dimensional $F$-vector space: $\dim_F F(\alpha)=\deg_F \alpha=\deg\irr(\alpha,F,x)$.
+\end{cor}
+We have already seen a few examples: $\dim_\R\C=2$ and $\dim_\Q\Q(\sqrt[3]{2})=3$.
+
+Let's recall some more important linear algebra facts.
+
+\begin{thm}
+    Let $V$ be a finite-dimensional $F$-vector space. Then,
+    \begin{enumerate}
+        \item Any set $v_1,\ldots, v_n\in V$ that spans $V$ contains a subset which is a basis.
+        \item Any set $v_1, \ldots, v_n\in V$ which is linearly independent can be completed to a basis.
+        \item If $W$ is a vector subspace of $V$, then $\dim W\leq \dim V$. If $\dim W=\dim V$, then $W=V$.
+        \item If $V_1$ and $V_2$ are two finite-dimensional vector spaces with bases given by $v_n$, $w_m$,
+            and $f:V_1\to V_2$ is a linear map, then
+            \[f(v_i)=\sum_{j=1}^ma_{ji}w_j\]
+            where $A=(a_{ij})$ is an $m\times n$ matrix. $f$ determines and is determined by $A$.
+    \end{enumerate}
+\end{thm}
+
+\begin{rem}
+    Suppose $F$ is a finite field, with $q$ elements. Suppose $V$ is a finite-dimensional $F$-vector space of dimension $n$,
+    i.e. there exists a basis $v_1,\ldots, v_n$ of $V$ where every vector can be written uniquely in terms of this basis.
+    It should be clear that the number of elements in $V$ is $q^n$. In fact, any finite dimensional vector space of dimension
+    $n$ is isomorphic to $F^n$.
+    
+    In particular, if $F$ itself is finite, its characteristic must be a prime $p$, and $\F_p\leq F$.
+    Thus, any finite field is an $\F_p$-vector space. Since $F$ is also finite-dimensional, the number of elements in $F$
+    is simply $p^k$.
+\end{rem}
+
+\begin{defn}
+    Let $E$ be an extension field of $F$. Then $E$ is a \textbf{finite extension} of $F$ if $E$ is a finite-dimensional
+    $F$-vector space. In this case, we define $\dim_F E=[E:F]$, the \textbf{degree of $E$ over $F$}.
+\end{defn}
+\begin{exmp}
+    $\C$ is a finite extension of $\R$, as $[\C:\R]=2$. Similarly, $\Q(\sqrt{2})$ is a finite extension of $\Q$ with
+    $[\Q(\sqrt{2}):\Q]=2$. Again, $\Q(\sqrt[3]{2}):\Q]=3$. However, $\R$ is not a finite extension of $\Q$, as $\R$ is
+    an infinite-dimensional $\Q$-vector space.
+\end{exmp}
+
+\begin{thm}
+    Let $E=F(\alpha)$ be a simple extension of $F$. Then, $E$ is a finite extension of $F$ if and only if
+    $\alpha$ is algebraic over $F$. In this case, $[E:F]=\deg_F\alpha=\deg\irr(\alpha,F,x)$.
+\end{thm}
+
 
 \end{document}

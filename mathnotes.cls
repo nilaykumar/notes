@@ -15,6 +15,7 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\F}{\mathbb{F}}
+\newcommand{\C}{\mathbb{C}}
 \newcommand{\p}{\partial}
 
 
