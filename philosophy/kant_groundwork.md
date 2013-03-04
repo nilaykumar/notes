@@ -105,6 +105,12 @@ Notes on: Kant's *Groundwork of the Metaphysics of Morals*
 * "In fact, it is absolutely impossible by means of experience to make out with complete certainty a single
     case in which the maxim of an action that otherwise conforms with duty did rest solely on moral grounds and
     on the representation of one's duty." (p.22)
+* Kant claims that even the existence of a noble duty is independent of whether anyone in the world
+    actually acts from it. But how do we know whether such duty exists, then? Even Kant says that we can only
+    believe in the existence: "And here nothing can protect us from falling away entirely from our ideas of duty
+    and preserve a well-founded respect for its law in our soul, except the clear conviction that, even if
+    there never have been actions that have sprung from such pure sources...reason by itself and independently
+    of all appearances commands what ought to happen"
 
 ## My questions ##
 

@@ -11,6 +11,13 @@
 \newcommand{\nm}[1]{\;\textnormal{#1}\;}
 \newcommand{\ra}[0]{\rightarrow}
 \newcommand{\fa}[0]{\;\forall}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\p}{\partial}
+
+
 \DeclareMathOperator{\length}{length}
 \DeclareMathOperator{\res}{Res}
 \DeclareMathOperator{\Int}{Int}
@@ -19,7 +26,6 @@
 \DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\irr}{irr}
 \DeclareMathOperator{\supp}{supp}
-
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}
 \newtheorem{lem}[thm]{Lemma}
