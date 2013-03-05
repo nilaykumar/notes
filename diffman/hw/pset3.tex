@@ -55,10 +55,9 @@ as expected. Let us now look at
     &=\frac{\partial g}{\partial x}\bigg|_{\phi(x,y)}\frac{\partial x}{\partial \tilde x}\bigg|_{(x,y)}
     +\frac{\partial g}{\partial y}\bigg|_{\phi(x,y)}\frac{\partial y}{\partial \tilde x}\bigg|_{(x,y)}\\
     &=\frac{\partial g}{\partial x}\bigg|_{\phi(x,y)}
-    +\frac{\partial g}{\partial y}\bigg|_{\phi(x,y)}\frac{\partial y}{\partial x}\bigg|_{(x,y)}.
+    +\frac{\partial g}{\partial y}\bigg|_{\phi(x,y)}\frac{\partial y}{\partial \tilde x}\bigg|_{(x,y)}.
 \end{align*}
-This is clearly not the same as the above derivative, as we required earlier that $\partial y/\partial x$ is not identically
-zero.
+This is clearly not the same as the above derivative, $\p y/\p\tilde x$ is not necessarily zero everywhere on the manifold.
 
 \subsection*{Problem 2}
 
@@ -68,12 +67,12 @@ Recall one of the transition functions for the stereographic atlas on $S^2$,
 \end{align*}
 Here, let $\phi$ be the chart that excludes the north pole and let $\psi$ be the chart that excludes the
 south pole.
-Now, given the vector field $F=u\p/\p u+v\p/\p v$ (smooth, as the components are smooth functions on $\R^2$)
+Now, given the vector field $X=u\p/\p u+v\p/\p v$ (smooth, as the components are smooth functions on $\R^2$)
 defined on the copy of $\R^2$ that $\phi$ sends points on the manifold to (what we'll call $M$), we can push it forward to a 
 vector field on the copy of $\R^2$ that $\psi$ sends points on the manifold to (what we'll call $N$). For some $p\in N$ and
 some $f\in C^\infty(N)$,
 \begin{align*}
-    F_*=\left( \psi \circ \phi^{-1} \right)_*&\left( u\frac{\p}{\p u} + v\frac{\p}{\p v} \right)(f)(p)
+    X'=\left( \psi \circ \phi^{-1} \right)_*&\left( u\frac{\p}{\p u} + v\frac{\p}{\p v} \right)(f)(p)
     =\left(u\frac{\p}{\p u}+v\frac{\p}{\p v}\right)\left(f\circ \psi \circ \phi^{-1}\right)\left(\phi\circ\psi^{-1}(p)\right)\\
     &=u\frac{\p}{\p u}f\left( \psi\circ\phi^{-1} \right)+v\frac{\p}{\p v}f\left( \psi \circ \phi^{-1} \right)\\
     &=u\frac{\p(\psi\circ\phi^{-1})^j}{\p u}\bigg|_{\phi\circ\psi^{-1}(p)}\frac{\p f}{\p(\psi\circ\phi^{-1})^j}\bigg|_p
@@ -97,19 +96,44 @@ as seen by inserting the above derivatives into the expression for the pushforwa
 Informally speaking, we now have smooth vector fields in coordinate charts that will cover the manifold when
 each is pushforwarded back onto the manifold (in their respective domains of definitions). In other words, if
 we push forward our original vector field from $M$ to $S^2$ we'll get a smooth vector field defined everywhere
-but at the north pole, and if we push forward $F_*$ from $N$ to $S^2$ we'll get a smooth vector field defined
+but at the north pole, and if we push forward $X'$ from $N$ to $S^2$ we'll get a smooth vector field defined
 everywhere but at the south pole. If we then define a vector field $X$ that is on the southern hemisphere
-equal to the pushfoward by $\phi^{-1}$ of $F$ and on the northern hemisphere equal to the pushforward by
-$\psi^{-1}$ of $F$, we have a globally smooth manifold on $S^2$, as the two are equal everywhere but the poles,
-and on the poles they smoothly go to zero. This is easily seen from the fact that pushforwarding $F_*$ via
+equal to the pushfoward by $\phi^{-1}$ of $X$ and on the northern hemisphere equal to the pushforward by
+$\psi^{-1}$ of $X$, we have a globally smooth manifold on $S^2$, as the two are equal everywhere but the poles,
+and on the poles they smoothly go to zero. This is easily seen from the fact that pushforwarding $X'$ via
 $\psi^{-1}$ will yield the same eexpression, as desired (we have already shown that they go smoothly to zero).
 
-Suppose now that we were working with the vector field $F=v\p/\p u+-\p/\p v$. Then, all of the above statements
-still hold -- although the derivatives will be slightly different, the functions still be smooth, and will obey
-the same limits, and thus we will again end up with a global vector field on $S^2$.
+Suppose now that we were working with the vector field $X=v\p/\p u+-\p/\p v$. Then, all of the above statements
+still hold -- although the derivatives will be slightly different, as below,
+\begin{align*}
+    v\frac{\p}{\p u}\left( \frac{4u}{u^2+v^2} \right)&=v\frac{4(v^2-u^2)}{(u^2+v^2)^2}\\
+    v\frac{\p}{\p u}\left( \frac{4v}{u^2+v^2} \right)&=-\frac{8 u v^2}{\left(u^2+v^2\right)^2}\\
+    u\frac{\p}{\p v}\left( \frac{4u}{u^2+v^2} \right)&=-\frac{8 u^2 v}{\left(u^2+v^2\right)^2}\\
+    u\frac{\p}{\p v}\left( \frac{4v}{u^2+v^2} \right)&=\frac{4 u \left(u^2-v^2\right)}{\left(u^2+v^2\right)^2}.
+\end{align*}
+The pushforward should will still smoothly go to zero, as these derivatives go to zero with $u,v\to\infty$.
+Thus we will again end up with a global vector field on $S^2$.
+
 
 \subsection*{Problem 3}
 
+Consider the torus $\mathbb{T}=S^1\times S^1$. It should be clear that $\mathbb{T}$ is a manifold via its
+product structure; $S^1\times S^1$ forms a manifold with charts of the form $(\prod U_i, \prod\psi_i)$, where $U_i$ are
+the the (graphical) charts for $S^1$ (smoothness of transition maps follows trivially).
+
+To show that $\p/\p x,\p/\p y$ are smooth on all of $\mathbb{T}$, we compute in one coordinate chart -- by analogy,
+it is easily extended to the other charts by symmetry. First let us parameterize the torus as $\left\{ x^2+y^2=1,w^2+z^2=1 \right\}$.
+Take then, for example, the vector field $\p/\p x$ and the graphical chart defined on $x,w>0$, given by
+$\psi(x,y,z,w)=(x,z)$ and $\psi^{-1}(x,z)=(x,\sqrt{1-x^2},z,\sqrt{1-z^2})$.
+Pushing forward the vector field, from the chart to $\mathbb{T}$, we find for some $f\in C^\infty(\mathbb{T})$,
+\begin{align*}
+    \phi^{-1}_*\left( \frac{\p}{\p x} \right)(f)\bigg|_p&=\frac{\p}{\p x}\left( f\circ\phi^{-1} \right)\bigg|_{\phi(p)}\\
+    &=\frac{\p f}{\p x}\bigg|_p-\frac{x}{\sqrt{1-x^2}}\bigg|_{\phi(p)}\frac{\p f}{\p w}
+\end{align*}
+Since $f$ is smooth and because $x>0$ in this chart, the pushforward of the vector field onto the torus is smooth.
+This procedure can be carried out for any chart, and thus we can construct a smooth global vector field that covers
+$\mathbb{T}$ similar to how we did in the last problem (as the vector fields are equal where they overlap). The same
+holds for $\p/\p y$.
 
 \subsection*{Problem 4}
 
@@ -180,7 +204,7 @@ Let $A\subset\mathcal{X}(\R^3)$ be the subspace spanned by $\left\{ X,Y,Z \right
 \begin{align*}
     X=y\frac{\p}{\p z}-z\frac{\p}{\p y}, Y=z\frac{\p}{\p x}-x\frac{\p}{\p z}, Z=x\frac{\p}{\p y}-y\frac{\p}{\p x}.
 \end{align*}
-We wish to show that $A$ is a Lie subalgebra of $\mathcal{X}(\R^2)$, which is isomorphic to $\R^3$ with the
+We wish to show that $A$ is a Lie subalgebra of $\mathcal{X}(\R^3)$, which is isomorphic to $\R^3$ with the
 cross product. To show the first part, we must simply show that it is closed under the Lie brackets:
 \begin{align*}
     [X,Y]&=\left( y\frac{\p}{\p z}-z\frac{\p}{\p y} \right)\left( z\frac{\p}{\p x}-x\frac{\p}{\p z} \right)
@@ -195,19 +219,68 @@ cross product. To show the first part, we must simply show that it is closed und
     [X,Z]&=\left( y\frac{\p}{\p z}-z\frac{\p}{\p y} \right)\left( x\frac{\p}{\p y}-y\frac{\p}{\p x} \right)
     -\left( x\frac{\p}{\p y}-y\frac{\p}{\p x} \right)\left( y\frac{\p}{\p z}-z\frac{\p}{\p y} \right)\\
     &=xy\p_{zy}-y^2\p_{zx}-zx\p_{yy}+zy\p_{yx}+z\p_x-x\p_z-xy\p_{yz}+xz\p_{yy}+y^2\p_{xz}-yz\p_{xy}\\
-    &=z\p_x-x\p_z=Y
+    &=z\p_x-x\p_z=Y.
 \end{align*}
-Up to a sign convention, it is clear that $A$ is isomorphic to $\R^3$ with the cross product,
-as:
+Now we take $\hat x\in\R^3$ to be the unit vector in the $x$-direction, $\hat y\in\R^3$ to be the unit
+vector in the $y$-direction, $\hat z\in\R^3$ to be unit vector in the $z$-direction. Then, defining the usual
+cross-product (with a left-handed convention), we find 
 \begin{align*}
-    \hat x \times \hat y &= \hat z\\
-    \hat y \times \hat z &= \hat x\\
-    \hat x \times \hat z &= - \hat y
+    \hat x \times \hat y &= -\hat z\\
+    \hat y \times \hat z &= -\hat x\\
+    \hat x \times \hat z &= \hat y.
 \end{align*}
-as long as we associate $\hat x$ with $X$, $\hat y$ with $Y$, $\hat z$ with $Z$, and the isomorphism
-takes the Lie bracket to the cross product.
+If we identifyeach of these unit vectors with the $X,Y,Z$ above, we see that there exists a Lie algebra
+isomorphism $\varphi(aX+bY+cY)=a\hat x+b\hat y+c\hat z$, as $\varphi$ would preserve the action of the Lie bracket,
+as we see in the cross products above.
 
 \subsection*{Problem 7}
+
+Let $\pi_1:M\to S^1$ be the Mobius bundle given by
+\begin{align*}
+    \pi_1: M &\to S^1\\
+    [(x,t)]&\mapsto \left( \cos(2\pi x),\sin(2\pi x) \right)
+\end{align*}
+We define $U=S^1\setminus\left\{ 1 \right\}$ and $V=S^1\setminus\left\{ -1 \right\}$.
+Let us define the following maps:
+\begin{align*}
+    \phi_1: \pi_1^{-1}(U)&\to U\times \R\\
+    [(x,t)]&\mapsto \left( (\cos(2\pi x), \sin(2\pi x)), t \right)
+\end{align*}
+and
+\begin{align*}
+    \phi_2: \pi_1^{-1}(V)&\to V\times \R\\
+    [(x,t)]&\mapsto
+    \left\{ 
+        \begin{array}[]{cc}
+            ( (\cos(2\pi x),\sin(2\pi x)), t) & 0\leq x < 1/2\\
+            ( (\cos(2\pi x),\sin(2\pi x)), -t) & 1/2< x \leq 1\\
+        \end{array}
+        \right..
+\end{align*}
+It should be clear that these are local trivializations, as they are smooth, and the fibers are
+isomorphically mapped to fibers (multiplication by either plus or minus).
+Note that the transition function $\phi_1\circ \phi_2^{-1}$ will yield precisely what we are given
+for the problem - i.e. $\tau$ is 1 on the top half of the circle and -1 on the bottom half of the
+circle.
+
+Note that for the given $\pi_2:F\to S^2$, we know that there exist local trivializations 
+\begin{align*}
+    \psi_1: & \pi^{-1}(U)\to U\times \R\\
+    \psi_2: & \pi^{-1}(V)\to V\times \R.
+\end{align*}
+These are, by definition, diffeomorphisms, and thus if we compose $\psi_1^{-1}\circ\phi_1:\pi_1^{-1}(U)\to\pi_2^{-1}(U)$,
+and $\psi_2^{-1}\circ\phi_2:\pi_1^{-1}(V)\to\pi_2^{-1}(V)$, we now have diffeomorphisms between subsets of the two bundles.
+To find a smooth isomorphism between the two vector bundles, we wish to show that these two maps are equal where they overlap,
+i.e. we want $\psi_2^{-1}\circ\phi_2=\psi_1^{-1}\circ\phi_1$ on $\pi_1^{-1}(U\cap V)\cap\pi_2^{-1}(U\cap V)$.
+This can be done by realizing that the transition functions for the local trivializations on each vector bundle
+are exactly the same, as we remarked earlier (the $\tau$'s are the same). Thus we have that
+\begin{align*}
+    \phi_1\circ\phi_2^{-1}&=\psi_1\circ\psi_2^{-1}\\
+    \psi_2^{-1}\circ\phi_2&=\psi_1^{-1}\circ\phi_1,
+\end{align*}
+as desired. Consequently, there is a smooth isomorphism between $F$ and $E$.
+
+
 
 
 \end{document}
