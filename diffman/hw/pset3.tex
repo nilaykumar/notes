@@ -131,9 +131,10 @@ Pushing forward the vector field, from the chart to $\mathbb{T}$, we find for so
     &=\frac{\p f}{\p x}\bigg|_p-\frac{x}{\sqrt{1-x^2}}\bigg|_{\phi(p)}\frac{\p f}{\p w}
 \end{align*}
 Since $f$ is smooth and because $x>0$ in this chart, the pushforward of the vector field onto the torus is smooth.
-This procedure can be carried out for any chart, and thus we can construct a smooth global vector field that covers
-$\mathbb{T}$ similar to how we did in the last problem (as the vector fields are equal where they overlap). The same
-holds for $\p/\p y$.
+This procedure can be carried out for any chart by the symmetry of the torus, and thus we can construct a smooth global vector field that covers
+$\mathbb{T}$ similar to how we did in the last problem (as the vector fields are equal where they overlap).
+In fact, the exact same analysis holds for the vector field $\p/\p y$, as one now simply takes $y$-derivatives in the pushforward,
+which will yield analogous expressions as above.
 
 \subsection*{Problem 4}
 
@@ -156,9 +157,8 @@ which results in the solutions
 \end{align*}
 Using the initial conditions, we find that
 \begin{align*}
-    \phi(t,x,y)=\left( y\sin t+x\cos t,y\cos t-x\sin t \right),
+    \phi(t,x,y)=\left( y\sin t+x\cos t,y\cos t-x\sin t \right)
 \end{align*}
-where $x,y$ on the right hand side are the initial conditions.
 
 \subsection*{Problem 5}
 
@@ -229,17 +229,19 @@ cross-product (with a left-handed convention), we find
     \hat y \times \hat z &= -\hat x\\
     \hat x \times \hat z &= \hat y.
 \end{align*}
-If we identifyeach of these unit vectors with the $X,Y,Z$ above, we see that there exists a Lie algebra
-isomorphism $\varphi(aX+bY+cY)=a\hat x+b\hat y+c\hat z$, as $\varphi$ would preserve the action of the Lie bracket,
-as we see in the cross products above.
+If we identify each of these unit vectors with the $X,Y,Z$ above, we see that there exists a Lie algebra
+isomorphism between $A$ and $\R^3$ (equipped with a cross product) $\varphi(aX+bY+cY)=a\hat x+b\hat y+c\hat z$,
+as $\varphi$ would preserve the action of the Lie bracket, as we see in the cross products above.
 
 \subsection*{Problem 7}
 
 Let $\pi_1:M\to S^1$ be the Mobius bundle given by
 \begin{align*}
     \pi_1: M &\to S^1\\
-    [(x,t)]&\mapsto \left( \cos(2\pi x),\sin(2\pi x) \right)
+    [(x,t)]&\mapsto \left( \cos(2\pi x),\sin(2\pi x) \right),
 \end{align*}
+where the brackets denote equivalence classes.
+
 We define $U=S^1\setminus\left\{ 1 \right\}$ and $V=S^1\setminus\left\{ -1 \right\}$.
 Let us define the following maps:
 \begin{align*}

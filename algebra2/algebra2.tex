@@ -259,7 +259,7 @@ Take, for example, $\mathbb{Q}(\sqrt{2})$. $\sqrt{3}\notin\mathbb{Q}(\sqrt{2})$.
 Then, $\mathbb{Q}\leq \mathbb{Q}(\sqrt{2}+\sqrt{3})$, one can find that $\mathbb{Q}(\sqrt{2}+\sqrt{3})=\mathbb{Q}(\sqrt{2},\sqrt{3})$. This shows
 that simple extensions are not always obviously simple.
 
-\subsection{interlude : $F$-vector spaces}
+\section{$F$-vector spaces}
 Let us take a detour through vector spaces.
 
 Let $F$ be a field. An \textbf{$F$-vector space} is an abelian group $(V,+)$ and a function $F\times V\to V$ called \textbf{scalar multiplication}, which
@@ -399,8 +399,11 @@ Let's recall some more important linear algebra facts.
 \end{defn}
 \begin{exmp}
     $\C$ is a finite extension of $\R$, as $[\C:\R]=2$. Similarly, $\Q(\sqrt{2})$ is a finite extension of $\Q$ with
-    $[\Q(\sqrt{2}):\Q]=2$. Again, $\Q(\sqrt[3]{2}):\Q]=3$. However, $\R$ is not a finite extension of $\Q$, as $\R$ is
+    $[\Q(\sqrt{2}):\Q]=2$. Again, $[\Q(\sqrt[3]{2}):\Q]=3$. However, $\R$ is not a finite extension of $\Q$, as $\R$ is
     an infinite-dimensional $\Q$-vector space.
+
+    Furthermore, consider $F$ any field, a subring of $F[x]$. Then, $F\leq F(x)$, but $F(x)$ is not a finite extension
+    of $F$ since $F\subset F[x]\subset F(x)$.
 \end{exmp}
 
 \begin{thm}
@@ -408,5 +411,132 @@ Let's recall some more important linear algebra facts.
     $\alpha$ is algebraic over $F$. In this case, $[E:F]=\deg_F\alpha=\deg\irr(\alpha,F,x)$.
 \end{thm}
 
+Note that if $\alpha$ is transcendental, $F[\alpha]\cong F[x]$ (because there is no kernel), which is not a field,
+but $F[\alpha]\subset F(\alpha)\cong F(x)$. In particular, $F(\alpha)$ (quotients) is the smallest subfield of $E$ containing $F$
+and $\alpha$. Since $F(\alpha)\cong F(x)$, this is not a finite extension of $F$.
+
+If $\alpha$ is algebraic over $F$, $\ker{\rm ev}_\alpha$ is a maximal ideal and thus $F[\alpha]={\rm Im}\;{\rm ev}_\alpha$
+which is already a field, that we denote by $F[\alpha]=F(\alpha)$. Again, it is the smallest subfield of $E$ containing
+$F$ and $\alpha$. In this case $F(\alpha)\cong F[x]/\ker{\rm ev}_\alpha\cong F[x]/(\irr(\alpha,F,x)).$ This forms a 
+finite-dimensional $F$-vector space with basis $1,\alpha,\ldots,\alpha^{d-1}$, where $d=\deg\irr(\alpha,F,x)$. In other words,
+every element of $F(\alpha)$ is uniquely written $c_0+c_1\alpha+\ldots+c_{d-1}\alpha^{d-1}$, $c_i\in F$.
+
+One piece of notation: if $F\leq E$, we take $\alpha_1,\ldots, \alpha_n\in E$. We can define $F(\alpha_1,\ldots,\alpha_n)$
+as the smallest subfield of $E$ containing $F$ and $\alpha_1,\ldots,\alpha_n$. It is easy to check that there is an inductive
+definition $F(\alpha_1,\ldots, \alpha_n)=F(\alpha_1,\ldots \alpha_{n-1})(\alpha_n)$. For example, we could look at $\Q(\sqrt{2},\sqrt{3})$.
+This is, in fact, the same thing is as $\Q(\sqrt{2})(\sqrt{3})$. If $\alpha=\sqrt{2}+\sqrt{3}$, $\Q(\alpha)\leq \Q(\sqrt{2},\sqrt{3})$.
+On the other hand, by an explicit check, one can show that $\Q(\alpha)=\Q(\sqrt{2},\sqrt{3})$. It is enough to show that
+$\sqrt{2}\in\Q(\alpha)$ and $\sqrt{3}\in\Q(\alpha)$.
+
+\begin{lem}
+    Let $E$ be a finite extension of $F$ and let $V$ be a finite dimensional $E$-vector space. Then $V$ is a finite-dimensional $F$-vector space
+    and $\dim_F V=[E:F]\dim_E V$.
+\end{lem}
+\begin{proof}
+    There exists a basis for $V$ as a vector space over $E$, say $w_1\cdots w_n$, with $n=\dim_E V$. Additionally, there exists
+    a basis for $E$ as a vector space over $F$, say $\alpha_1\cdots\alpha_m$, where $m=\dim_F E$. Consider the collection
+    $\alpha_i w_j$, which has $mn$ elements. We claim that $\alpha_i w_j$ is an $F$-basis for $V$. Once we prove the claim, we see
+    that $V$ is a finite-dimensional $F$-vector space, and that $\dim_F V=mn=[E:F]\dim_E V$.
+
+    Let us first show that $\alpha_i w_j$ spans $V$ over $F$. We know that $w_j$ span $V$ over $E$, i.e. for all $v\in V$,
+    there exist $\beta_j\in E$ such that $v=\sum_{j=1}^n\beta_j w_j$. But we also know that $\alpha_i$ span $E$ over $F$, i.e.
+    $\beta_j=\sum b_{ij}\alpha_i$, with $b_{ij}\in F$. Putting these together, we find 
+    \[v=\sum_{j=1}^n\left( \sum_{i=1}^n b_{ij} \alpha_i \right)w_j=\sum_{i,j=1}^{m,n}b_{ij}(\alpha_iw_j),\]
+    as desired.
+
+    Next we show that $\alpha_i w_j$ are linearly independent. Suppose $\sum_{ij}b_{ij}\alpha_iw_j=0$ -- we wish to show that
+    $b_{ij}=0$ for all $i,j$. We simply rewrite the sum as
+    \begin{align*}
+        \sum_{j=1}^n\left( \sum_{i=1}^mb_{ij}\alpha_i \right)w_j=0,
+    \end{align*}
+    but by linear independence of $w_j$, the inner sums must be zero, but if the inner sum is zero, by linear independence of
+    $\alpha_i$, $b_{ij}=0$ for all $i,j$, and we are done.
+\end{proof}
+
+\begin{thm}
+    Suppose $F\leq E\leq K$, all fields. Then $K$ is a finite extension of $F$ if and only if $K$ is a finite extension of $E$
+    and $E$ is a finite extension of $F$. Furthermore, $[K:F]=[K:E][E:F]$.
+\end{thm}
+\begin{proof}
+    Let us start with the forwards direction. If $K$ is a finite extension of $F$, then, $K$ is a finite dimensional $F$-vector space.
+    In particular, $E$ is a vector subspace of $K$. But this implies that $\dim_F E$ is also finite, which in turn implies that
+    $E$ is a finite extension of $F$. Also, $K$ is spanned over $F$ by a finite number of elements $\alpha_1,\ldots, \alpha_n\in K$.
+    But notice that the span of the $\alpha_i$ with $E$-coefficients includes the span with $F$-coefficients. This implies that
+    $\alpha_i$ span $K$ over $E$. In other words, for all $\alpha\in K$, $\alpha=\sum f_i\alpha_i$ with $f_i\in F$. Since $F\subset E$,
+    $\alpha$ is in the $E$-span of $\alpha_1\ldots \alpha_n$, which implies that $K$ is spanned over $E$ by $\alpha_1, \ldots, \alpha_n$.
+
+    The other direction is trivial via the above lemma; take $V=K$ -- then $\dim_FK=[K:F]$, and we are done.
+\end{proof}
+
+\begin{cor}
+    Both $[K:E]$ and $[E:F]$ divide $[K:F]$.
+\end{cor}
+\begin{proof}
+    Obvious.
+\end{proof}
+
+\begin{exmp}
+    Is $\sqrt{2}\in\Q(\sqrt[3]{2})$? No. Why? Because if there were, we'd have
+    $\Q\leq\Q(\sqrt{2})\leq\Q(\sqrt[3]{2})$. But $[\Q(\sqrt{2}):\Q]=2$ and $[\Q(\sqrt[3]{2}):\Q]=3$, but two does not divide three,
+    so we are done by contradiction.
+\end{exmp}
+
+Note that the above proof shows that if  $\alpha_1\cdots\alpha_m$ is a basis for $E$ over $F$ and $\beta_1\cdots\beta_n$ is a basis 
+for $K$ over $E$, $\alpha_i\beta_j$ is a basis for $K$ over $F$.
+
+\begin{exmp}
+    $\Q\leq \Q(\sqrt{2})\leq\Q(\sqrt{2},\sqrt{3})$ and $\sqrt{3}\neq \Q(\sqrt{2})$. We have
+    $[\Q(\sqrt{2},\sqrt{3}):\Q]=[\Q(\sqrt{2},\sqrt{3}):\Q(\sqrt{2})][\Q(\sqrt{2}):\Q]$ where the second term is 2.
+    But we have $\Q(\sqrt{2},\sqrt{3})=\Q(\sqrt{2})(\sqrt{3})$ and $[\Q(\sqrt{2},\sqrt{3}):\Q(\sqrt{2})]$ is the degree
+    of $\irr(\sqrt{3},\Q(\sqrt{3}),x)$. What is this? It's $x^2-3$, but this is irreducible in $\Q(\sqrt{2})[x]$ since it has
+    no root in $\Q(\sqrt{2})$. Thus this degree is 2, and $[\Q(\sqrt{2},\sqrt{3}):\Q]=4$.
+
+    Note $1, \sqrt{2}$ is a basis for $\Q(\sqrt{2})$ over $\Q$ and the basis for $\Q(\sqrt{2})(\sqrt{3})$ over $\Q(\sqrt{2})$ is 
+    $1,\sqrt{3}$ (because in general, $[F(\alpha):F]=1,\alpha,\cdots,\alpha^{d-1}$). Then the basis for $\Q(\sqrt{2},\sqrt{3})$
+    over $\Q$ is $1,\sqrt{2},\sqrt{3},\sqrt{6}$.
+
+    But note that we know if $\alpha=\sqrt{2}+\sqrt{3}$, $\Q(\sqrt{2},\sqrt{3})=\Q(\alpha)$. We know that $\alpha$ is a root of
+    $x^4-10x^2+1$ and thus $\irr(\alpha,\Q,x)$ divides this polynomial. But $\deg\irr(\alpha,\Q,x)=[\Q(\alpha):\Q]=[\Q(\sqrt{2},\sqrt{3}):\Q]=4$.
+    Consequently, $x^4-10x^2+1$ is irreducible in $\Q[x]$ and it is the $\irr(\alpha,\Q,x)$. Then, $1,\alpha,\alpha^2,\alpha^3$ is another $\Q$-basis
+    for $\Q(\sqrt{2},\sqrt{3})$.
+\end{exmp}
+
+\begin{defn}
+    Let $F\leq E$. We say that $E$ is an \textbf{algebraic extension} of $F$ if for all $\alpha\in E$, $\alpha$ is algebraic over $F$.
+\end{defn}
+
+\begin{exmp}
+    $\R$ is not an algebraic extension of $\Q$.
+\end{exmp}
+
+\begin{thm}
+    If $E$ is a finite extension of $F$, then $E$ is an algebraic extension of $F$.
+\end{thm}
+\begin{proof}
+    If $\alpha\in E$ is not algebraic over $F$, then we have $F\leq F(\alpha)\leq E$. But we've seen that $F(\alpha)$ is not
+    finite dimensional as an $F$-vector space. But this contradicts that $E$ is finite-dimensional. Thus every $\alpha$ is
+    algebraic.
+\end{proof}
+
+\begin{thm}
+    Suppose $F\leq E$ and $\alpha,\beta\in E$ are both algebraic over $F$. Then, $a\pm \beta, \alpha\beta, \alpha/\beta$
+    are also algebraic over $F$ (where $\beta\neq 0$ for division).
+\end{thm}
+\begin{proof}
+    Note that $F\leq F(\alpha)\leq F(\alpha,\beta)=F(\alpha)(\beta)$. We know that $\alpha$ is algebraic over $F$, which
+    implies that $F(\alpha)$ is a finite extension of $F$. If $\beta$ is algebraic over $F$, it is clearly algebraic over $F(\alpha)$.
+    This implies that $F(\alpha)(\beta)$ is a finite extension of $F(\alpha)$. Thus, $F(\alpha,\beta)$ is a finite extension of $F$.
+    Consequently, every element of $F(\alpha,\beta)$ is algebraic over $F$. By closure of the field operations, then, and the previous theorem,
+    we are done.
+\end{proof}
+
+\begin{cor}
+    If $F\leq E$ then $\left\{ a\in E:\alpha\text{ is algebraic over }F \right\}$ is a subfield of $E$ called the \textbf{algebraic closure} of
+    $F$ in $E$.
+\end{cor}
+
+\begin{exmp}
+    The algebraic closure of $\Q$ in $\C$ is $\Q^{\rm alg}$, which is an algebraic extension of $\Q$, but is not finite.
+\end{exmp}
 
 \end{document}
