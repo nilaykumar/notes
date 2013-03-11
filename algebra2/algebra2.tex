@@ -539,4 +539,149 @@ for $K$ over $E$, $\alpha_i\beta_j$ is a basis for $K$ over $F$.
     The algebraic closure of $\Q$ in $\C$ is $\Q^{\rm alg}$, which is an algebraic extension of $\Q$, but is not finite.
 \end{exmp}
 
+(March 11, 2013)
+
+Let's do a quick recap -- we've defined 3 types of extensions:
+\begin{enumerate}
+    \item $E$ is a simple extension of $F$ if $E=F(\alpha)$. If $\alpha$ is algebraic over $F$, then $F(\alpha)=F[\alpha]$.
+    \item $E$ is a finite extension of $F$ if $\dim_FE=[E:F]<\infty$. $E$ is a finite-dimensional $F$-vector space.
+    \item $E$ is an algebraic extension of $F$ if for all $\alpha\in E$, $\alpha$ is algebraic over $F$.
+\end{enumerate}
+
+What is the relationship between these three concepts? First of all, we know that if $\alpha$ is algebraic over $F$, then
+the simple extension $F(\alpha)$ is a finite extension of $F$, and in fact, $[F(\alpha):F]=\deg_F\alpha=\deg\irr(\alpha,F,x)$. 
+Second, we know that if $E$ is a finite extension of $F$, then it is an algebraic extension of $F$. What about the converses of
+these two statements? First, note that there are algebraic extensions that are not finite. Take, for example, $\Q(\sqrt{2},\sqrt{3},\sqrt{5},\ldots)$.
+This is clearly algebraic but not finite (we've joined all prime numbers). Second, finite doesn't always have to be simple, but in fact,
+it is \textit{almost always}. We will talk about this later, but recall the example of $\Q(\sqrt{2},\sqrt{3})$ and $\Q(\sqrt{2}+\sqrt{3})$.
+Of course, simple extensions can sometimes be harder to work with, so this is not always to be taken advantage of.
+
+What else do we know? If $F\leq E$, with $\alpha,\beta\in E$ algebraic over $F$, then $\alpha\pm\beta,\alpha\beta,\alpha/\beta$ are all
+algebraic over $F$ as well (if the quotient is defined). This is what motivated us to define above the algebraic closure of $F$.
+
+\begin{lem}
+    Let $E$ be an extension of $F$. Then $E$ is a finite extension of $F$ if and only if there exist $\alpha_1,\cdots,\alpha_n\in E$ with
+    $\alpha_i$ algebraic over $F$ for all $i$ such that $E=F(\alpha_1,\cdots,\alpha_n)$.
+\end{lem}
+\begin{proof}
+    Let us take the backwards direction. If $E=F(\alpha_1,\cdots,\alpha_n)$, where $\alpha_i$ are algebraic over $F$, we simply
+    consider the sequence of extensions $F\leq F(\alpha_1)\leq F(\alpha_1,\alpha_2) \leq \cdots \leq F(\alpha_1,\cdots,\alpha_n)=E$.
+    We claim by induction that $F(\alpha_1,\cdots,\alpha_i)$ is a finite extension of $F$ for $i=1,\cdots,n$. For the case $i=1$, we
+    have a simple extension, and by hypothesis, $\alpha_1$ is algebraic over $F$, we know $F(\alpha)$ is a finite extension of $F$.
+    Now assume that $F\leq F(\alpha_1,\cdots,\alpha_i)\leq F(\alpha_1,\cdots,\alpha_{i+1})$. We wish to show that this last extension
+    is finite over $F$. We know that $F(\alpha_1,\cdots,\alpha_{i+1})=F(\alpha_1,\cdots,\alpha_i)(\alpha_{i+1})$, so this is a simple extension.
+    In particular, $\alpha_{i+1}$ is algebraic over $F$, and hence algebraic over any bigger field. Then we clearly have a finite extension
+    of $F(\alpha_1,\cdots,\alpha_i)$, and by the theorem proved last time, we have a finite extension of $F$.
+
+    Now we show the forwards direction. Suppose $E$ be a finite extension of $F$. Then we know that $E$ is an algebraic extension of $F$,
+    i.e. for all $\alpha\in E$, $\alpha$ is algebraic over $F$. Now we argue by complete induction on $[E:F]$. If $[E:F]=1$, $E=F$ and we are done.
+    Suppose that the result is true for all finite extensions of fields of degree less than some $d>1$. Given $E$ an extension of $F$ with $[E:F]=d$.
+    Clearly $E\neq F$ and so there exists some $\alpha_1\in E$, $\alpha_1\notin F$, which is algebraic over $F$ ($E$ is finite). Then, $F\leq F(\alpha_1)\leq E$
+    and $[E:F]=[E:F(\alpha_1)][F(\alpha_1):F]$. The second term is bigger than 1, and so $[E:F(\alpha_1)]<d$. By induction, then, there
+    exist $\alpha_2,\cdots,\alpha_n\in E$ that are algebraic over $F(\alpha_1)$ such that $E=F(\alpha_1,\alpha_2,\cdots,\alpha_n)$.
+    In fact, $\alpha_i$ are algebraic over $F$, again since $E$ is a finite extension, and we are done.
+\end{proof}
+Thus, we have shown that every finite extension can be broken up into a sequence of simple extensions.
+
+\begin{exmp}
+    We looked at the case $\Q(\sqrt{2},\sqrt{3})=\sqrt{2}\sqrt{3}$ by direct computation because $\deg\irr(\sqrt{3},\Q(\sqrt{2}),x)=2$.
+    In general, however, such a statement about polynomials is not always obvious.
+\end{exmp}
+
+\begin{lem}
+    Take $F\leq E\leq K$. Suppose that $E$ is algebraic over $F$. Suppose $\alpha\in K$. Then $\alpha$ is algebraic over $F$
+    if and only if $\alpha$ is algebraic over $E$.
+\end{lem}
+\begin{proof}
+    The forward direction is trivial, as if $\alpha$ is the root of $f(x)\in F[x]$ non-zero, we just view that as a member
+    of $E[x]$. The difficult direction is the backwards one. Suppose $\alpha$ is algebraic over $E$. This means that there exists an
+    $f(x)=x^d+a_{d-1}x^{d-1}+\cdots+a_0\in E[x]$ such that $f(\alpha)=0$. Consider $F\leq F(a_0,\cdots,a_{d-1})\leq F(a_0,\cdots,a_{d-1},\alpha)$.
+    By the above lemma, $F(a_0,\cdots,a_{d-1})$ is a finite extension of $F$. Additionally, $\alpha$ is algebraic over $F(a_0,\cdots,a_{d-1})$,
+    and so $F(a_0,\cdots,a_{d-1},\alpha)$ is a finite extension of $F$. But this implies that it is an algebraic extension of $F$, and since
+    $\alpha\in F(a_0,\cdots,a_{d-1},\alpha)$, $\alpha$ must be algebraic over $F$.
+\end{proof}
+
+\begin{cor}
+    Suppose $F\leq E\leq K$. Then $K$ is algebraic over $F$ if and only if $K$ is algebraic over $E$ and $E$ is algebraic over $F$.
+\end{cor}
+\begin{proof}
+    If $K$ is algebraic over $F$, then every element of $K$ is algebraic over $F$. In particular,
+    given $\alpha\in E\leq K$, $\alpha$ is algebraic over $F$. And given $\alpha\in K$, $\alpha$ is algebraic over $F$, then $\alpha$ is algebraic
+    over $E$.
+
+    Now assume that $K$ is algebraic over $E$ and $E$ is algebraic over $F$. Then, we are done by the above lemma.
+\end{proof}
+
+\begin{defn}
+    A field $K$ is \textbf{algebraically closed} if for all $f(x)\in K[x]$ with $\deg f(x)\geq 1$, then $f(x)$ has a root in $K$.
+\end{defn}
+
+\begin{thm}
+    For a field $K$, the following are equivalent:
+    \begin{enumerate}
+        \item $K$ is algebraically closed.
+        \item Every $f(x)\in K[x]$ non-constant is a product of linear factors, i.e. $f(x)$ is irreducible in $K[x]$ if and only if
+            $\deg f(x)=1$
+        \item If $E$ is an algebraic extension of $K$, then $E=K$.
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    These are fairly straightforward, so they are left as an exercise. [Hint: the second is via induction]
+\end{proof}
+
+\begin{defn}
+    Let $F$ be a field. Then an \textbf{algebraic closure} of $F$ is an extension field $K$ such that $K$ is an algebraic extension
+    of $F$ and $K$ is algebraically closed.
+\end{defn}
+\begin{rem}
+    Notice that $\C$ is not an algebraic closure of $Q$, as $\C$ is not an algebraic extension (it contains transcendental elements over $\Q$).
+\end{rem}
+
+Let's pause and look at the definitions:
+\begin{enumerate}
+    \item If $F\leq E$, we've defined the algebraic closure of $F$ in $E$.
+    \item $K$ is algebraically closed.
+    \item $K$ is an algebraic closure of $F$.
+\end{enumerate}
+
+\begin{thm}
+    Let $F\leq K$ with $K$ be algebraically closed. Then the algebraic closure of $F$ in $K$, $F^{\rm alg}$, is an algebraic closure of $F$.
+\end{thm}
+
+\begin{exmp}
+    Before we prove this proposition, note the following intuitive example.
+    We have some relationship of the form $\Q\leq \Q^{\rm alg}\leq \C$, and the proposition in this case states says that
+    $\Q^{\rm alg}$ is an algebraic closure of $\Q$.
+\end{exmp}
+
+\begin{proof}
+    We know, by definition, that $F^{\rm alg}$ is an algebraic extension of $F$, because it is the set of all things in $K$
+    that are algebraic over $F$. We wish to show that $F^{\rm alg}$ is algebraically closed. In other words, given some 
+    $f(x)\in F^{\rm alg}[x]$ non-constant, we must show that there exists an $\alpha$, a root of $f(x)$ in $F^{\rm alg}$.
+    We know that $f(x)\in F^{\rm alg}\leq K[x]$. Since $K$ is algebraically closed, there exists an $\alpha$ in $K$ such that
+    $f(\alpha)=0$. We want to show that $\alpha\in F^{\rm alg}$. But this is equivalent to saying that $\alpha$ is algebraic
+    over $F$. But we know that $\alpha$ is algebraic over $F^{\rm alg}$ and that $F^{\rm alg}$ is algebraic over $F$. By the lemma
+    we proved earlier, then, we have that $K$ must be algebraic over $F$.
+\end{proof}
+
+\begin{rem}
+    It is a fact that for any field $F$, there exists an algebraic closure of $F$ and any two of these algebraic closures of $F$ are isomorphic.
+\end{rem}
+
+\section{Multiple roots and derivatives}
+
+Suppose $F$ is a field and $f(x)\in F[x]$, with $\deg f(x)\geq 1$. $\alpha$ is a root of $f(x)$ if and only if $(x-a)|f(x)$.
+In general, given any $f(x)\in F[x]$ non-constant and any $\alpha\in F$, there exists an integer $m\geq0$ such that $(x-\alpha)^m|f(x)$
+but $(x-\alpha)^{m+1}$ does not divide $f(x)$. Notice that $m=0$ if and only if $\alpha$ is not a root. This number $m$ is called the
+\textbf{multiplicity} of the root $\alpha$.
+
+If the multiplicity of $\alpha$ is 1, we say that $\alpha$ is a simple root, and if the multiplicity of $\alpha$ is greater than 1, we say
+that $\alpha$ is a \textbf{multiple} or $\textbf{repeated}$ root. To see if $\alpha$ is a repeated root, we write $f(x)=(x-\alpha)g(x)$
+if and only if $f(\alpha)=0$. Notice also that $\alpha$ is a repeated root if and only if $f(\alpha)=f'(\alpha)=0$. But what is a derivative in
+any field? Forget about limits -- we define derivatives purely formally.
+
+\begin{defn}
+    Given $f(x)=\sum_{i=0}^na_ix^i\in F[x]$, we define the \textbf{derivative} of $f$ purely formally as \[Df(x)=\sum_{i=1}^nia_ix^{i-1}.\]
+\end{defn}
+
 \end{document}

@@ -15,7 +15,8 @@
 
 Let $E=\Q(\sqrt{5},\sqrt{7})$ and let $\alpha=2\sqrt{5}-\sqrt{7}\in E$. We know that $\Q(\sqrt{5},\sqrt{7})=\Q(\sqrt{5})(\sqrt{7})$.
 Since $\sqrt{5}$ and $\sqrt{7}$ are obviously algebraic over $\Q$ and $\Q(\sqrt{5})$ respectively, $E$ is a finite extension over
-$\Q$ by the theorem proved in class. Furthermore, since $\deg\irr(\sqrt{5},\Q,x)=\deg x^2-5=2$ and $\deg\irr(\sqrt{7},\Q(\sqrt{5}),x)=\deg x^2-7=2$,
+$\Q$ by the theorem proved in class (of course, we should check that $\sqrt{5}\notin\Q$ and $\sqrt{7}\notin\Q(\sqrt{5})$ but this obviously holds
+via the usual divisibility arguments). Furthermore, since $\deg\irr(\sqrt{5},\Q,x)=\deg x^2-5=2$ and $\deg\irr(\sqrt{7},\Q(\sqrt{5}),x)=\deg x^2-7=2$,
 we have, $[E:\Q]=[E:\Q(\sqrt{5})][\Q(\sqrt{5}):\Q]=2\cdot2=4$. We can write a basis for $E$, then, to be $\left\{1,\sqrt{5},\sqrt{7},\sqrt{35}\right\}$.
 
 Let us now show that $E=\Q(\alpha)$. It is obvious that $\Q(\alpha)\subset E$ -- let us show that $E\subset \Q(\alpha)$. First note that
@@ -41,7 +42,7 @@ be another basis for $E$.
 \subsection*{Problem 2}
 
 First note that $\Q(i)$ is a 2-dimensional finite extension of $\Q$, as $i$ is algebraic over $\Q$ and $\deg\irr(i,\Q,x)=\deg x^2+1=2$.
-Furthermore, $\Q(i,\sqrt[4]{2})$ is a 4-dimensional finite extension of $\Q(i)$, as $\sqrt[4]{2}$ is algebraic over $\Q(i)$ and
+Furthermore, $\Q(i,\sqrt[4]{2})$ is a 4-dimensional finite extension of $\Q(i)$, as $\sqrt[4]{2}$ is clearly algebraic over (and not in) $\Q(i)$ and
 $\deg\irr(\sqrt[4]{2},\Q(i),x)=\deg x^2-4=4$. Then, $[\Q(i,\sqrt[4]{2}):\Q]=[\Q(i,\sqrt[4]{2}):\Q(i)][\Q(i):\Q]=4\cdot2=8$.
 Note that $\left\{ 1,i \right\}$ forms a $\Q$-basis for $\Q(i)$ and that $\left\{ 1,\sqrt[4]{2},\sqrt[4]{2}^2, \sqrt[4]{2}^3 \right\}$
 forms a $\Q(i)$ basis for $\Q(i,\sqrt[4]{2})$. It follows, then, that $\left\{ 1,i, \sqrt[4]{2},\sqrt[4]{2}^2, \sqrt[4]{2}^3,
@@ -52,7 +53,7 @@ If $\alpha=i+\sqrt[4]{2}$, we can compute
     0&=(\alpha-i)^4-2\\
     0&=\alpha^4-4i\alpha^3-6\alpha^2+4\alpha-1
 \end{align*}
-Squaring this yields the eighth order irreducible polynomial for $\alpha$.
+Squaring this yields on the right-hand side the eighth order irreducible polynomial for $\alpha$.
 
 
 \subsection*{Problem 3}
@@ -118,8 +119,9 @@ and that $\deg_F\alpha=n,\deg_F\beta=m$. If we construct $F(\alpha),$ it should 
 over $F(\alpha)$, as the polynomial in $F[x]$ whose solution is $\beta$ is also in $F(\alpha)[x]$. For precisely
 this reason, $\deg_{F(\alpha)}\beta$ cannot be greater than $m$, i.e. $\deg_{F(\alpha)}=[F(\alpha,\beta):F(\alpha)]\leq m$. Then, using
 \[ [F(\alpha,\beta):F]=[F(\alpha,\beta):F(\alpha)]n,\]
-we have that $[F(\alpha,\beta):F]\leq mn$. Hence, since $\alpha+\beta$ and $\alpha\beta$ are in $F(\alpha,\beta)$,
-we must have $\deg_F(\alpha+\beta)\leq mn$ and $\deg_F(\alpha\beta)\leq mn$.
+we have that $[F(\alpha,\beta):F]\leq mn$. Hence, since $F(\alpha+\beta)$ and $F(\alpha\beta)$ are in $F(\alpha,\beta)$,
+the degrees of the irreducible polynomials must divide $[F(\alpha,\beta):F]$, similar to above,
+and so we must have $\deg_F(\alpha+\beta)\leq mn$ and $\deg_F(\alpha\beta)\leq mn$.
 
 
 \subsection*{Problem 8}
