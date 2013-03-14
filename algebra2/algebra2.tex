@@ -537,7 +537,9 @@ for $K$ over $E$, $\alpha_i\beta_j$ is a basis for $K$ over $F$.
 
 \begin{exmp}
     The algebraic closure of $\Q$ in $\C$ is $\Q^{\rm alg}$, which is an algebraic extension of $\Q$, but is not finite.
+    What is the algebraic closure of $F$ in $F(t)$? It is simply $F$.
 \end{exmp}
+
 
 (March 11, 2013)
 
@@ -651,7 +653,8 @@ Let's pause and look at the definitions:
 \begin{exmp}
     Before we prove this proposition, note the following intuitive example.
     We have some relationship of the form $\Q\leq \Q^{\rm alg}\leq \C$, and the proposition in this case states says that
-    $\Q^{\rm alg}$ is an algebraic closure of $\Q$.
+    $\Q^{\rm alg}$ is an algebraic closure of $\Q$. Note, however, that $\C$ is not an algebraic closure of $\Q$, as $\C$
+    has transcendental numbers, i.e. $i\in\Q^{\rm alg}$ but $\pi i\in\C\notin\Q^{\rm alg}$.
 \end{exmp}
 
 \begin{proof}
@@ -661,11 +664,20 @@ Let's pause and look at the definitions:
     We know that $f(x)\in F^{\rm alg}\leq K[x]$. Since $K$ is algebraically closed, there exists an $\alpha$ in $K$ such that
     $f(\alpha)=0$. We want to show that $\alpha\in F^{\rm alg}$. But this is equivalent to saying that $\alpha$ is algebraic
     over $F$. But we know that $\alpha$ is algebraic over $F^{\rm alg}$ and that $F^{\rm alg}$ is algebraic over $F$. By the lemma
-    we proved earlier, then, we have that $K$ must be algebraic over $F$.
+    we proved earlier, then, we have that $K$ must be algebraic over $F$, and thus $\alpha$ must be in $F^{\rm alg}$.
 \end{proof}
 
 \begin{rem}
     It is a fact that for any field $F$, there exists an algebraic closure of $F$ and any two of these algebraic closures of $F$ are isomorphic.
+\end{rem}
+
+\begin{rem}
+Suppose one can construct a length $\alpha\in\R$. It can be shown that $\alpha$ can be constructed via compass/straightedge 
+if and only if $[\Q(\alpha):\Q]=2^k$.
+Then, one can show that trisecting a 60 degree angle allows one to construct $\alpha=\cos 20$, but $[\Q(\alpha):\Q]=3$, as one can show,
+so an angle cannot be trisected.
+Likewise, one can show that it is impossible to double the cube, i.e. construct the cube root of two. Finally, it can be show that it is
+impossible to construct a square whose side length is $\sqrt{\pi}$, which is, of course, impossible, as $\pi$ and $\sqrt{\pi}$ are transcendental.
 \end{rem}
 
 \section{Multiple roots and derivatives}
@@ -675,13 +687,125 @@ In general, given any $f(x)\in F[x]$ non-constant and any $\alpha\in F$, there e
 but $(x-\alpha)^{m+1}$ does not divide $f(x)$. Notice that $m=0$ if and only if $\alpha$ is not a root. This number $m$ is called the
 \textbf{multiplicity} of the root $\alpha$.
 
+\begin{rem}
+    We might have $F\leq E$ and we might be looking at $\alpha\in E$ -- we talk about divisibility in $E[x]$, as
+    $x-\alpha$ is not necessarily in the smaller field $F$.
+\end{rem}
+
 If the multiplicity of $\alpha$ is 1, we say that $\alpha$ is a simple root, and if the multiplicity of $\alpha$ is greater than 1, we say
 that $\alpha$ is a \textbf{multiple} or $\textbf{repeated}$ root. To see if $\alpha$ is a repeated root, we write $f(x)=(x-\alpha)g(x)$
 if and only if $f(\alpha)=0$. Notice also that $\alpha$ is a repeated root if and only if $f(\alpha)=f'(\alpha)=0$. But what is a derivative in
 any field? Forget about limits -- we define derivatives purely formally.
 
 \begin{defn}
-    Given $f(x)=\sum_{i=0}^na_ix^i\in F[x]$, we define the \textbf{derivative} of $f$ purely formally as \[Df(x)=\sum_{i=1}^nia_ix^{i-1}.\]
+    Given $f(x)=\sum_{i=0}^na_ix^i\in F[x]$, we define the \textbf{derivative} of $f$ in $F[x]$ purely formally as \[Df(x)=\sum_{i=1}^nia_ix^{i-1}.\]
+    Note that $\deg Df(x)\leq \deg f(x)-1$. In particular, we may define the derivative generally as a function $D:F[x]\to F[x]$.
+    In the context of an extension $F\leq E$ we can define compatibly $D:E[x]\to E[x]$ as the derivatve does not particularly care about where
+    the coefficients live. $D$ is determined by $D(x^i)=ix^{i-1}$ and is $F$-linear. It should be obvious that $D$ is not a ring homomorphism,
+    as it instead follows the product rule:
+    \[D(x^ax^b)=D(x^{a+b})=(a+b)x^{a+b-1}=ax^{a-1}x^b+x^abx^{b-1}=(Dx^a)x^b+x^aDx^b\]
+    and by linearity, this holds for all polynomials.
+    
+    There is a corollary of the product rule that states
+    \[D( (f(x))^n)=nf(x)^{n-1}\cdot Df(x),\]
+    proved via induction.
+
+    We can, of course, inquire into the kernel of $D$. It is not just constant functions,
+    however, as if $F$ has characteristic $p$, $Dx^p=px^{p-1}=0$! In fact, it is easy to see that if the characteristic of $F$ is zero,
+    the $\ker D=F\leq F[x]$, but if the characteristic is $p$, then $\ker D=F[x^p]={\rm Im}\;{\rm Frob}\leq F[x]$, i.e. the polynomials in $x^p$.
 \end{defn}
+
+Now what is the connection of the derivative to multiple roots? Let us work in $F\leq E$ with $\alpha\in E$. Let $m$ be the multiplicity
+of $\alpha$ in $f(x)$, i.e. $(x-\alpha)^m$ divides $f(x)$ but higher powers do not. In other words, we can write $f(x)=(x-\alpha)^mg(x)$
+with $g(\alpha)\neq 0$. If $m=0$, $f(\alpha)\neq 0$. Let's assume that $m\geq 1$. Then we write $f(x)=(x-\alpha)^mg(x)$. Taking the derivative, we find
+\begin{align*}
+    Df(x)&=D\left( (x-a)^m \right)g(x)+(x-\alpha)^mDg(x)\\
+    &= m(x-a)^{m-1}g(x)+(x-\alpha)^mDg(x)
+\end{align*}
+Now, if $m=1$, $Df(x)=f(x)+(x-a)Dg(x)$ and $Df(\alpha)=g(\alpha)\neq 0$. If $m\geq 2$, on the other hand, we have at least one overall factor of $x-\alpha$.
+Here, unlike before, $Df(\alpha)=f(\alpha)=0$.
+
+\begin{thm}
+    Any $\alpha\in E$ is a multiple root of $f(x)$ if and only if $f(\alpha)=Df(\alpha)=0$.
+\end{thm}
+
+This is not exactly what we want, however, as we want a condition that $f(x)$ has a multiple root in some extension field without knowing
+what the root or the extension field are.
+
+\begin{lem}
+    Let $F\leq E$ and $f(x),g(x)\in F[x]$ not both 0, $f(x)$ not constant.
+    \begin{enumerate}
+        \item $f(x)|g(x)$ in $F[x]$ if and only if $f(x)|g(x)$ in $E[x]$.
+        \item $d(x)\in F[x]$ is a gcd of $f,g$ in $F[x]$ if and only if it is a gcd in $E[x]$.
+        \item $f,g$ are relatively prime in $F[x]$ if and only if they are relatively prime in $E[x]$.
+    \end{enumerate}
+\end{lem}
+\begin{proof}
+    \begin{enumerate}
+        \item The forward direction is obvious. Suppose $g(x)=f(x)h(x)$ with $h(x)\in E[x]$. We wish to show that $h(x)\in F[x]$.
+            We can apply long division with remainder in $F[x]$: $g(x)=q(x)f(x)+r(x)$ with $q,r\in F[x]$ and either $r=0$ or $\deg r<\deg f$.
+            We now have two different expression for $g$, but we know that in $E[x]$ long division with remainder is unique! Thus, they must be the same. 
+            This implies that $h(x)=q(x)$ and $r(x)=0$, i.e. that $h(x)\in F[x]$.
+        \item  Say $d(x)$ is a gcd of $f,g$ in $F[x]$. In particular, we know that $d|f, d|g$ and $d=af+bg$. To show that $d$ is a gcd of
+            $f,g$ in $E[x]$, we need to show that anything that divides $f,g$ divides $d$. Suppose $e(x)$ in $E[x]$ divides $f,g$.
+            Then $e|af+bg=d$ so $e|d$ and $d$ is a gcd in $E[x]$. Conversely suppose $d(x)\in F[x]$ is a gcd of $f,g$ in $E[x]$ so
+            $d|f,d|g$ in $E[x]$. But by the first statement of this lemma, we know that $d|f,d|g$ in $F[x]$. Then if $e\in F[x]$
+            with $e|f,e|g$, then $e|f,e|g$ in $E[x]$ implies $e|d$ in $E[x]$ and thus  $e|d$ in $F[x]$. This shows that $e$ is a gcd
+            in $F[x]$.
+            \item $f,g$ are relatively prime in $F[x]$ if and only if 1 is a gcd of $f,g$ in $F[x]$, which by statement 2 of the lemma,
+            implies that 1 is a gcd of $f,g$ in $E[x]$. Then $f,g$ are relatively prime in $E[x]$.
+    \end{enumerate}
+\end{proof}
+
+\begin{cor}
+    Let $f(x)\in F[x]$ non-constant. Then there exists an extension field $E$ of $F$ and an $\alpha\in E$ which is a multiple root of $f(x)$
+    if and only if $f(x)$ and $Df(x)$ are not relatively prime in $F[x]$.
+\end{cor}
+\begin{proof}
+    Suppose that $f(x)$ has a multiple root $\alpha$ in some extension $E$. This implies that $x-\alpha|f(x)$ and $x-\alpha|Df(x)$.
+    This implies that $f,Df$ are not relatively prime in $E[x]$. But if they are not relatively prime in $E[x]$, they are not relatively
+    prime in $F[x]$.
+
+    If $f(x),Df(x)$ are not relatively prime in $F[x]$, then there exists an irreducible $p(x)$ in $F[x]$ such that $p(x)|f(x)$ and
+    $p(x)|Df(x)$. But we know that there exists an extension field $E$ of $F$ and a root $\alpha$ of $p(x)\in E$. In $E$, then,
+    $\alpha$ is a root of $f(x)$ and $Df(x)$, which implies that $\alpha$ is a multiple root.
+\end{proof}
+
+\begin{cor}
+    Let $f(x)$ be an irreducible polynomial in $F[x]$. $f(x)$ has a multiple root in some extension field $E$ of $F$ if (and only if)
+    $Df(x)=0$.
+\end{cor}
+\begin{proof}
+    If $f(x)$ has a multiple root in some extension field, then $f(x),Df(x)$ are not relatively prime, by the above corollary.
+    But we know that $f(x)$, by hypothesis, is irreducible, and $Df(x)$, if non-zero, has smaller degree (not necessarily $n-1$ in
+    positive characteristic fields). Since $f(x)$ is irreducible, we know that either the gcd of $f(x),Df(x)$ is one or $f(x)|Df(x)$.
+    However, the first is not true due to the multiple root, and the second is not true due to the degrees of the polynomials.
+    Thus we reach a contradiction, and $Df(x)=0$.
+\end{proof}
+
+\begin{cor}
+    If the characteristic of $F$ is zero, an irreducible $f(x)\in F[x]$ never has a multiple root in an extension field.
+\end{cor}
+\begin{proof}
+    $Df(x)\neq 0$.
+\end{proof}
+
+In fact, this does happen if the characteristic of $F$ is $p$, but not if $F$ is finite.
+\begin{exmp}
+    Let $F=\F_p(t)$, an infinite field of rational functions with characteristic $p$. Now consider $f(x)=x^p-t$.
+    A zero $\alpha$ of $f(x)$ is equal to a $p$th root of $t$. Thus $f(x)$ has no root in $\F_p(t)$ just because
+    the polynomial would have to have power $1/p$. Note that one can check that $f(x)$ is irreducible.
+
+    Let $\alpha$ be a root of $f(x)$ in some extension field: $\alpha^p=t$. In $E[x]$, $f(x)=x^p-t=x^p-\alpha^p=(x-\alpha)^p$.
+    Thus, $\alpha$ is a root of multiplicity $p$.
+    Notice that in this case $D(x^p-t)=px^{p-1}=0$.
+\end{exmp}
+
+When we come back from break, we will move on to using this to classify finite fields.
+
+
+
+
+
 
 \end{document}
