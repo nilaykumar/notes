@@ -1,0 +1,160 @@
+\documentclass{../mathnotes}
+
+
+\title{QM for Mathematicians: PSET 8}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+
+We wish to compute the propagator $\langle 0 | \hat\psi(x',t')\hat\psi(x,t)|0\rangle$. Let us first work with the
+Fourier transform
+\begin{align*}
+    \tilde G(k',t',k,t)&=\langle 0 | \hat\psi(k',t')\hat\psi(k,t)|0\rangle\\
+    &=\langle 0|a_{k'}^\dagger(t')a_k(t)|0\rangle\\
+    &=\langle k',t'|k,t\rangle\\
+    &=\langle k',t_0|e^{ik'^2t'/2m}e^{-ik^2t/2m}|k,t_0\rangle\\
+    &=e^{-ik^2(t-t')/2m}\delta(k-k').
+\end{align*}
+We can now Fourier transform back,
+\begin{align*}
+    G(x',t',x,t)&=\int \frac{dk dk'}{2\pi}e^{i(kx-k'x')}e^{-ik^2(t-t')/2m}\delta(k-k')\\
+    &=\int \frac{dk}{2\pi}e^{ik(x-x')}e^{-ik^2(t-t')/2m}\\
+    &=\sqrt{\frac{m}{2\pi i(t-t')}}e^{2mi(x-x')^2/(t-t')}.
+\end{align*}
+Note that the integral of all space over this expression is 1, and when $x=x'$, we are left with the square root, which blows up as
+$t\to t'$, as expected for a delta function of $x-x'$. Furthermore, if $x\neq x'$, and we let $t\to t'$, the exponential oscillates
+extremely fast and thus, under an integral, takes any function multiplying it to zero. Consequently, we can write
+\[\lim_{t\to t'}G(x',t',x,t)=\delta(x'-x).\]
+
+\subsection*{Problem 2}
+
+For non-relativistic free quantum field theory with a background potential, we can write
+\begin{align*}
+    \hat N_V&=\hat N=\int dx'\; \hat\psi^\dagger(x')\hat\psi(x')\\
+    \hat H_V&=\int dx\; \hat\psi^\dagger(x)\left( -\frac{1}{2m}\frac{\p^2}{\p x^2}+V(x) \right)\psi(x)
+\end{align*}
+Computing the commutator, we have
+\begin{align*}
+    [\hat H_V, \hat N_V]=\int dx dx'\;&\hat\psi^\dagger(x)\left( -\frac{1}{2m}\frac{\p^2}{\p x^2}+V(x) \right)\hat\psi(x)\hat\psi^\dagger(x')\hat\psi(x')\\
+    -&\hat\psi^\dagger(x')\hat\psi(x')\hat\psi^\dagger(x)\left( -\frac{1}{2m}\frac{\p^2}{\p x^2}+V(x) \right)\hat\psi(x).
+\end{align*}
+The terms involving the potential appear as
+\begin{align*}
+    \int dx dx'\;V(x)\left(\hat\psi^\dagger(x)\hat\psi(x)\hat\psi^\dagger(x')\hat\psi(x')-\hat\psi^\dagger(x')\hat\psi(x')\hat\psi^\dagger(x)\hat\psi(x)\right).
+\end{align*}
+This term vanishes because when $x\neq x'$, the field operators commute, allowing us to reorder them, and when $x=x'$, the first and second terms are exactly the same.
+Consequently, we are left with the commutator in the case of no background potential:
+\begin{align*}
+    [H_V,N_V]=[H,N]=0.
+\end{align*}
+This is zero because we know that in the absence of a background potential, a non-relativistic free field theory conserves particle number
+(this is seen directly by working in momentum space -- then the derivatives become order-insensitive factors of $k$ and we can again
+use the field operator commutation relations as we did for the potential term).
+
+Furthermore, the particle number operator $\hat N$ generates a $U(1)$ symmetry -- to see this, take the canonical basis for the Fock space.
+Since each basis state has a well-defined particle number $n\in\N$ (simply because of how we defined the basis in class), the action of $\hat N$ on such a basis
+state will return the same state, multiplied by $n$. Thus, if we act on a basis state with
+\begin{align*}
+    e^{i\hat N}=1+i\hat N-\frac{\hat N^2}{2!}-\cdots,
+\end{align*}
+we simply get back the state multiplied by $e^{in}$. Thus, all of the eigenvalues of $e^{i\hat N}$ are phases, and thus it is a unitary action.
+
+\subsection*{Problem 3}
+
+Let us define the classical angular momentum functions as
+\begin{align*}
+    L_3=\int d^3x \left( x\psi^*(\vec x)\frac{\p \psi}{\p y} - y\psi^*(\vec x)\frac{\p \psi}{\p x} \right)
+\end{align*}
+(and analogously for $L_1,L_2$). We can check, rather tediously, that these Poisson-commute with the Hamiltonian defined as
+\begin{align*}
+    H=\int d^3x \frac{1}{2m}|\nabla\psi|^2,
+\end{align*}
+as follows (I might have dropped some constants and neglected $x$ vs. $x'$ here and there, but we get zero regardless):
+\begin{align*}
+    \{L_3,H\}&=\frac{1}{2m}\int d^3xd^3x'\;x\left\{\psi^*(\vec x)\frac{\p \psi(\vec x)}{\p y},|\nabla\psi(\vec x')|^2\right\}
+    -y\left\{\psi^*(\vec x)\frac{\p \psi(\vec x}{\p x},|\nabla\psi(\vec x')|^2\right\}\\
+\end{align*}
+If we focus on the first term, we can use the product properties of Possion brackets, pull derivatives out, and use the
+Poisson-commutation relations to simplify to
+\begin{align*}
+    \{L_3,H\}=\frac{i}{2m}\int d^3xd^3x'\;&\left( \frac{\p \psi^*}{\p x}\frac{\p}{\p x}\delta^{(3)}(\vec x-\vec x')
+    +\frac{\p \psi^*}{\p y}\frac{\p}{\p y}\delta^{(3)}(\vec x-\vec x') +\frac{\p \psi^*}{\p z}\frac{\p}{\p z}\delta^{(3)}(\vec x-\vec x') \right)\\
+    &\left( x\frac{\p \psi}{\p y}-y\frac{\p \psi}{\p x} \right)
+\end{align*}
+Integrating the delta functions by parts and collapsing the $\vec x'$ integral, we find
+\begin{align*}
+    \{L_3,H\}&=\int d^3x \nabla^2\psi^*(\vec x)\left( x\frac{\p \psi}{\p y}-y\frac{\p \psi}{\p x} \right)+\frac{\p \psi^*}{\p x}\left( \frac{\p \psi}{\p y}+x\frac{\p^2\psi}{\p x\p y}-y\frac{\p^2\psi}{\p x^2} \right)+\cdots
+\end{align*}
+where the dots represent analogous terms for $y$ and $z$. Note that we can now integrate the Laplacian out front by parts, and term-by-term,
+everything cancels. Thus, this angular momentum operator Poisson-commutes with the Hamiltonian. The same holds for $L_1,L_2$.
+
+We define the corresponding quantized operators as
+\begin{align*}
+    \hat H=\int d^3x \frac{|\nabla\hat\psi|^2}{2m}=\frac{1}{2m}\int d^3x \frac{\p\hat\psi^\dagger}{\p x}\frac{\p\hat\psi}{\p x}+\frac{\p\hat\psi^\dagger}{\p y}\frac{\p\hat\psi}{\p y}
+    +\frac{\p\hat\psi^\dagger}{\p z}\frac{\p\hat\psi}{\p z}
+\end{align*}
+and
+\begin{align*}
+    \hat L_3=-i\hbar\int d^3x \left( x\hat\psi^\dagger(\vec x)\frac{\p \hat\psi}{\p y} - y\hat\psi^\dagger(\vec x)\frac{\p \hat\psi}{\p x} \right).
+\end{align*}
+We can now compute the commutator,
+\begin{align*}
+    [\hat L_3,\hat H]=-\frac{i\hbar}{2m}\int d^3x d^3x'\;x[\hat\psi^\dagger(\vec x)\frac{\p \hat\psi}{\p y},|\nabla\hat\psi(\vec x')|^2]-
+    y[\hat\psi^\dagger(\vec x)\frac{\p \hat\psi}{\p x},|\nabla\hat\psi(\vec x')|^2].
+\end{align*}
+Note that this is almost exactly what we had before, except with operators and commutators instead of Poisson brackets.
+Since we can perform the same operations with the commutator (such as the ``product rule'' and pulling out derivatives), the steps follow almost precisely
+as above, and we find that the commutator vanishes, i.e. that the Hamiltonian commutes with the angular momentum operator.
+
+Finally, we compute
+\begin{align*}
+    [\hat L_1,\hat L_2]&=
+    [-i\hbar\int d^3x \left( y\hat\psi^\dagger(\vec x)\frac{\p \hat\psi}{\p z} - z\hat\psi^\dagger(\vec x)\frac{\p \hat\psi}{\p y} \right),
+    -i\hbar\int d^3x \left( z\hat\psi^\dagger(\vec x)\frac{\p \hat\psi}{\p x} - x\hat\psi^\dagger(\vec x)\frac{\p \hat\psi}{\p z} \right)]\\
+    &=-ih\int d^3x d^3x'\;yz'[\hat\psi^\dagger(\vec x)\frac{\p\hat\psi}{\p z},\hat\psi^\dagger(\vec x')\frac{\p \hat\psi(\vec x')}{\p x'}]+
+    xz'[\hat\psi^\dagger(\vec x)\frac{\p\hat\psi}{\p y},\hat\psi^\dagger(\vec x')\frac{\p \hat\psi(\vec x')}{\p z'}]\\
+    -&zz'[\hat\psi^\dagger(\vec x)\frac{\p\hat\psi}{\p y},\hat\psi^\dagger(\vec x')\frac{\p \hat\psi(\vec x')}{\p x'}]-
+    x'y[\hat\psi^\dagger(\vec x)\frac{\p\hat\psi}{\p z},\hat\psi^\dagger(\vec x')\frac{\p \hat\psi(\vec x')}{\p z'}]
+\end{align*}
+Each of the commutators can be expanded by using the product rule repeatedly -- some of these terms vanish, due to the commutation relations,
+while others will yield delta functions in certain terms.
+When the smoke clears, however, the terms containing delta functions cancel and  we are left with precisely the third angular momentum
+relation
+\begin{align*}
+    [\hat L_1,\hat L_2]&=-i\hbar\int d^3x \left( x\hat\psi^\dagger(\vec x)\frac{\p \hat\psi}{\p y} - y\hat\psi^\dagger(\vec x)\frac{\p \hat\psi}{\p x} \right)
+    =L_3.
+\end{align*}
+
+\subsection*{Problem 4}
+
+We wish to show that $\mathfrak{so}(4,\C)\cong \mathfrak{sl}(2,\C)\times\mathfrak{sl}(2,\C)$. First recall that in class we showed
+that
+\begin{align*}
+    \mathfrak{so}(1,3)\otimes\C\cong \mathfrak{sl}(2,\C)\times\mathfrak{sl}(2,\C)
+\end{align*}
+by taking certain complex linear combinations of rotations and boosts. It turned out that there were two types of linear combinations,
+and each acted as complexified unitary 2-by-2 matrices, which are simply elements of $\mathfrak{so}(2,\C)$ (since complexifying removes
+the unitary condition, but retains tracelessness).
+
+Note, however, complexifying $\mathfrak{so}(1,3)$ effectively
+erases all distinctions between metrics; i.e if the elements are allowed to be complex, the metric signature that the matrices keep invariant
+depend on whether certain components are real or imaginary. The complexified Lie algebra, in some sense, ``contains'' all of the metric
+signatures as long as the matrix elements are complex, and so we can write $\mathfrak{so}(4,\C)\cong\mathfrak{so}(1,3)\otimes\C$.
+It follows, then, that $\mathfrak{so}(4,\C)\cong \mathfrak{sl}(2,\C)\times\mathfrak{sl}(2,\C)$.
+
+Next recall that, in class, we showed at the group level that $Spin(4)\cong SU(2)\times SU(2)$, $Spin(1,3)\cong SL(2,\C)$, and
+$Spin(2,2)\cong SL(2,\R)\times SL(2,\R)$. From this, we can deduce that $\mathfrak{spin}(4)=\mathfrak{su}(2)\times\mathfrak{su}(2)$,
+$\mathfrak{spin}(1,3)\cong\mathfrak{sl}(2,\C)$, and $\mathfrak{spin}(2,2)=\mathfrak{sl}(2,\R)\times\mathfrak{sl}(2,\R)$. By what we showed
+above, then, since $\mathfrak{su}(2)\times\mathfrak{su}(2)$ is an algebra that is contained in $\mathfrak{sl}(2,\C)\times \mathfrak{sl}(2,\C)$,
+it is clear that $\mathfrak{spin}(4)$ is a subalgebra of $\mathfrak{so}(4,\C)$. Similarly, $\mathfrak{spin}(1,3)\cong\mathfrak{sl}(2,\C)$ is an algebra that is contained
+(trivially) in $\mathfrak{sl}(2,\C)\times\mathfrak{sl}(2,\C)$, and is thus a subalgebra of $\mathfrak{so}(4,\C)$. Finally, $\mathfrak{sl}(2,\R)\times\mathfrak{sl}(2,\R)$
+is an algebra contained in $\mathfrak{sl}(2,\C)\times\mathfrak{sl}(2,\C)$ and thus $\mathfrak{spin}(2,2)$ is a subalgebra of $\mathfrak{so}(4,\C)$.
+
+
+\end{document}

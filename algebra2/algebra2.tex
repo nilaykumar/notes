@@ -803,9 +803,140 @@ In fact, this does happen if the characteristic of $F$ is $p$, but not if $F$ is
 
 When we come back from break, we will move on to using this to classify finite fields.
 
+\section{Classification of finite fields}
 
+(March 25, 2013)
 
+Although we will not work much with finite fields in this course, they are often useful in coding theory and number theory.
 
+Every finite field $\F$ has prime characteristic. Consequently, $\F_p\leq \F$. Furthermore,
+if $\dim_{\F_p}\F=n$, then $\F$ is a finite-dimensional $\F_p$-vector space and the number of elements
+in $\F$ is $q=p^n$. We know that $\F^*=\langle\beta\rangle$ is cyclic. Thus, $\F=\F_p(\beta)$ and
+$\F$ is a simple extension of $\F_p$ (or of any subfield $\F'$).
+
+If the number of elements in $\F$ is $q$, the number of elements in $\F^*$ is clearly $q-1$. If $\alpha\in F^*$ then
+$\alpha^{q-1}=1$, by Lagrange's theorem. Multiplying by $\alpha$, we can write that $\alpha^q=\alpha$. This statement now holds
+for all $\alpha$ (including zero). This is a generalization of Fermat's little theorem. Consequently, every $\alpha\in\F$ is a root of $x^q-z\in\F_p[x]$.
+
+Recall the Frobenius homomorphism, $\sigma_p:\F\to\F$ given by $\sigma_p(\alpha)=\alpha^p$ with the nice properties that $(\alpha+\beta)^p=\alpha^p+\beta^p$
+and $(\alpha\beta)^p=\alpha^p\beta^p$. The kernel $\ker\sigma_p=\left\{ \alpha:\alpha^p=0 \right\}=\left\{ 0 \right\}$, as we are in an integral domain.
+Thus, $\sigma_p$ is injective. But because $\F$ is finite, $\sigma_p$ must be surjective, as well, and thus in the case of finite fields, the Frobenius homomorphism
+is actually an isomorphism. This implies that every element of $\F$ is a $p$th power (we say $\F$ is \textbf{perfect}).
+
+We can take
+\begin{align*}
+    (\sigma_p)^2(\alpha)=\sigma_p(\sigma_p(\alpha))=(\alpha^p)^p=\alpha^{p^2},
+\end{align*}
+and, in general,
+\begin{align*}
+    \sigma_p^k=\sigma_{p^k}.
+\end{align*}
+In particular, $\sigma_q(\alpha)=\alpha^q=\alpha$ and so $\sigma_q=\id$.
+We should be careful to note, however, that although every element of $\F$ satisfies $\alpha^q=\alpha$, $x^q-x$ is \textit{not} the zero polynomial
+in $\F[x]$ or $\F_p[x]$.
+
+\begin{thm}[Classification of finite fields]
+    Let $p$ be a prime throughout.
+    \begin{enumerate}[(i)]
+        \item If $q=p^n$, $n\in \N$, then there exists a finite field $\F$ with $q$ elements.
+        \item If $\F_1$ and $\F_2$ are two finite fields, $\F_1\cong\F_2$ if an only if they have the same number of elements.
+        \item Given $q=p^n$, $q'=p^m$, and $\F$ a field with $q$ elements and $\F'$ a field with $q'$ elements,
+            then $\F'$ is isomorphic to a subfield of $\F$ if and only if $q=(q')^d$ for some $d\in \N$, i.e. $m$ divides $n$.
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    Let us begin with $(i)$. Consider $x^q-x\in\F_p[x]$. We know that there exists a field $E$, $\F_p\leq E$, such that in $E[x]$,
+    $x^q-x=\prod_i^q(x-\alpha_i)$. Then $\alpha\in E$ satisfies $\alpha^p=\alpha$ if and only if $\alpha=\alpha_i$ for some $i$.
+    We claim that $x^q-x$ has no multiple root, and that all $\alpha_i$ are distinct. We have $D(x^q-x)=qx^{q-1}-1=-1$, a unit.
+    By definition, then, $x^q-x,D(x^q-x)$ are relatively prime, i.e. there are no multiple roots.
+
+    We now define 
+    \begin{align*}
+        \F_q\subset E=\left\{ \alpha_1,\ldots,\alpha_q \right\}=\left\{ \alpha\in E:\alpha^q=\alpha \right\}=\left\{ \alpha\in E:\sigma_q(\alpha)=\alpha \right\}.
+    \end{align*}
+    This is called a \textbf{fixed field} of $\sigma_q$. We know that the number of elements in $\F_q$ is $q$. We claim that $\F_q$ is a subfield
+    of $E$. Say $\alpha,\beta\in \F_q$. They satisfy $\alpha^q=\alpha,\beta^q=\beta$. Note that
+    \begin{align*}
+        (\alpha\pm\beta)^q=\sigma_q(\alpha\pm\beta)=\sigma_q(\alpha)\pm\sigma_q(\beta)=\alpha\pm\beta
+    \end{align*}
+    and similarly $(\alpha\beta)^q=\alpha\beta$ and $(\alpha/\beta)^q=\alpha/\beta$ (for $\beta\neq 0$). Thus we have a field, since these operations are closed.
+
+    Next, we wish to prove the forward implication in $(iii)$. We wish to show that given $\F,\F'$ with $q,q'$ elements respectively,
+    if $\F'$ is isomorphic to a subfield of $\F$, then $q=(q')^d$ for some $d$. We can identify $\F'$ with a subfield of $\F$. This implies
+    that $\F$ is an $\F'$-vector space that is finite-dimensional. Let $d=\dim_{\F'}\F$. We then have $d$ elements in a basis, so the number of elements of
+    $\F$ is equal to the number of elements of $\F'$ to the $d$th power, i.e. $q=(q')^d$, and we are done.
+
+    Next we show the backwards implication for $(iii)$. Let us show this first for the field we constructed in the proof for $(i)$, i.e. $\F=\F_q$,
+    the set of roots of $x^q-x$ in some $E$. $\F'$ is any field whose order is $q'$ and $q=(q')^d$. We wish to show that $\F'$ is isomorphic to some
+    subfield of $\F_q$. We know that $\F'=\F_p(\beta)$, where $\langle\beta\rangle=(\F')^*$. We have the $\irr(\beta,\F_p,x)\in\F_p[x]$. We claim that
+    $\beta^q=\beta$. We know that $\beta^{q'}=\beta$, i.e. $\sigma_{q'}(\beta)=\beta$ so $\sigma_{q'}^d(\beta)=\beta$ and thus $\sigma_q(\beta)=b$.
+    Consequently, $\beta$ is a root of $x^p-x\in \F_p[x]$. This implies that $\irr(\beta,\F_p,x)$ divides $x^q-x$. We can write in $\F_p[x]$
+    \begin{align*}
+        x^q-x=\irr(\beta,\F_p,x)\cdot p(x),
+    \end{align*}
+    for some polynomial $p$. But we know that in $\F_q[x]$ that $x^q-x$ factors into a product of linear polynomials. We thus have two different factorizations
+    of $x^q-x$. Thus, by unique factorization, it must be that for some $i$, $x-\alpha_i$ divides $\irr(\beta,\F_p,x)$ in $\F_q[x]$.
+    Thus there exists an $i$ such that $\alpha_i$ is a root of $\irr(\beta,\F_p,x)$. This implies that $\irr(\alpha_i,\F_p,x)=\irr(\beta,\F_p,x)$.
+    But recall that $\F_p(\beta)\cong\F_p[x]/(\irr(\beta,\F_p[x],x)))$, where the isomorphism is given by ${\rm ev}_{\beta}$. There is also
+    a homomorphism ${\rm ev}_{\alpha_i}$ from this quotient to $\F_q$. This yields an injective homomorphism ${\rm ev}_{\alpha_i}\circ ({\rm ev}_\beta)^{-1}:\F'\to\F_q$
+    (because homomorphisms between fields are injective). The image of this homomorphisms is a subfield of $\F_q$, automatically isomorphic to $\F'$, and we are done.
+
+    Let's prove $(ii)$. Suppose $\F_1$ and $\F_2$ are two finite fields with the same number of elements, $q$. By what we've shown so far in $(iii)$, since
+    $q=q^1$ there exists an injective homomorphism from $\F_1\to\F_q$. Since $\F_1,\F_q$ both that the same number of elements, the injection is also
+    an isomorphism, and thus $\F_1\cong \F_q$. Likewise, $\F_2\cong \F_q$, and thus $\F_1\cong\F_2$.
+
+    Finally, we must finish $(iii)$: if $\F$ is any field with $q$ elements and $\F'$ a field with $q'$ elements with $(q')^d=q$, we've seen that
+    $\F'$ is isomorphic to a subfield of $\F_q\cong\F$. But the composition of these isomorphisms is an isomorphism between $\F'$ and a subfield of $\F$.
+\end{proof}
+
+Note that from an isomorphism $\sigma_q:E\to E$ of fields, we constructed a fixed field $\left\{ \alpha\in E:\sigma_q(\alpha)=\alpha \right\}$.
+Furthremore, we used $\F_p(\beta)\cong \F_p[x]/(\irr(\beta,\F_p,x))$ to construct a homomorphism. These were, in some sense, the two main tricks of the proof --
+we will come back to these techniques later.
+
+Note also that we usually call $\F_q$ \textit{the} field with $q$ elements. This field is defined by the roots of the polynomial $x^q-x$. This polynomial
+is not irreducible in $\F_p[x]$: $0,1,\ldots,p-1$ are roots.
+
+\begin{defn}
+    Let $N_(k)$ be the number of irreducible monic polynomials in $\F_p[x]$ of degree $k$. For example, $N_p(1)=p$.
+\end{defn}
+
+In fact, there exists a formula, with $q=p^n$,
+\begin{align*}
+    \sum_{d|n}dN_p(d)=p^n
+\end{align*}
+
+\section{Factorization in integral domains}
+Throughout this section, $R$ will denote an integral domain. We will have two general questions. First, what about $F[x]$ can be generalized?
+Second, what are the criteria for when a polynomial (even with rational coefficients) is irreducible.
+
+\begin{defn}
+    The \textbf{units} $R^*$ are $\left\{ u\in R:(\exists r\in R) ur=1 \right\}$ and given $r,s\in R$ we say that
+    $r$ \textbf{divides} $s$, $r|s$ if there exists $t\in R$ such that $s=rt$. We say $r,s\in R$ are \textbf{associates}
+    if there exists a $u\in R^*$ such that $s=ur, r=u^{-1}s$. Note that the associate property is an equivalence relation.
+    Two associates behave the same way with respect to factorization.
+\end{defn}
+
+\begin{exmp}
+    For example, if $R=\Z,$ then $R^*=\left\{ \pm 1 \right\}$. If $R=F[x],$ then $R^*=F^*$. If $R=\Z[i],$ then the units are $R^*=\left\{ \pm 1,\pm i \right\}$,
+    i.e. $3+4i,-4+3i,4-3i,-3-4i$ are all associates. If $R=\Z[\sqrt{2}]$, $1+\sqrt{2}$ is a unit because its inverse is $-(1-\sqrt{2})$. In fact,
+    $\Z[\sqrt{w}]^*\cong\Z\times(\Z/2\Z)$. Finally, if $R=\Z[\sqrt{-2}]=\Z[i\sqrt{2}]$, then $R^*=\left\{ \pm 1 \right\}$.
+\end{exmp}
+
+\begin{defn}
+    An element $r\in R$ is \textbf{irreducible}, or \textbf{an irreducible}, if $r\neq 0, r\notin R^*$ and if $r=st$, then either $s$ is a unit and 
+    $t$ is an associate of $r$, or $s$ is an associate of $r$ and $t$ is a unit.
+\end{defn}
+\begin{exmp}
+    In $\Z$, irreducibles are $\pm p$, with $p$ prime. In $F[x]$, irreducibles are irreducible polynomials.
+\end{exmp}
+
+\begin{defn}
+    $R$ is a \textbf{unique factorization domain (UFD)} if
+    \begin{enumerate}
+        \item for any $r\in R$, $r\neq 0$ and $r\notin R^*$, there exist irreducibles $p_1,\ldots,p_n\in R$ such that $r=p_1\cdots p_n$.
+        \item if $p_1\cdots p_n=q_1\cdots q_n$, $p_i,q_j$ are irreducibles, then $n=m$ and, after reordering, $p_i$ and $q_i$ are associates.
+    \end{enumerate}
+\end{defn}
 
 
 \end{document}
