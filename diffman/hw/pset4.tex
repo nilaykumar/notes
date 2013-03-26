@@ -17,5 +17,166 @@ is an open cover of $M$, and for each $\alpha\in A$ we are given a smooth local 
 of $E$. For each $\alpha,\beta\in A$ such that $U_\alpha\cap U_\beta\neq\varnothing$, let $\tau_{\alpha\beta}:U_\alpha\cap U_\beta\to GL(k,\R)$ be
 the transition function defined by $\Phi_\alpha\circ\Phi_\beta^{-1}(p,v)=(p,\tau_{\alpha\beta}(p)v)$.
 
+Let $U_\alpha,U_\beta,U_\gamma$ be elements of the open cover. We know that $\phi_\alpha\circ\phi^{-1}_\beta(p,v)=(p,\tau_{\alpha\beta}(p)v)$
+and $\phi_\beta\circ\phi^{-1}_\gamma(p,v)=(p,\tau_{\beta\gamma}(p)v)$ and $\phi_\alpha\circ\phi^{-1}_\gamma(p,v)=(p,\tau_{\alpha\gamma}(p)v)$.
+In $U_\alpha\cap U_\beta\cap U_\gamma$, we can compose the first two maps to obtain a map $\phi_\alpha\circ\phi^{-1}_\gamma(p,v)=(p,\tau_{\alpha\beta}(p)\tau_{\beta\gamma}(p)v)$.
+Consequently
+\begin{align*}
+    \phi_\alpha\circ\phi^{-1}_\gamma(p,v)=(p,\tau_{\alpha\beta}(p)\tau_{\beta\gamma}(p)v)=(p,\tau_{\alpha\gamma}(p),v),
+\end{align*}
+and thus
+\begin{align*}
+    \tau_{\alpha\beta}(p)\tau_{\beta\gamma}(p)=\tau_{\alpha\gamma}(p)
+\end{align*}
+
+\subsection*{Problem 2}
+
+Let $V$ be a finite-dimensional real vector space, and let $G_k(V)$ be the Grassmanian of $k$-dimensional subspaces of $V$. Let $T$
+be the subset of $G_k(V)\times V$ defined by
+\begin{align*}
+    T=\left\{ (S,v)\in G_k(V)\times V:v\in S \right\}.
+\end{align*}
+
+\subsection*{Problem 3}
+
+Let $E$ be the tautological vector bundle over $G_1(\R^2)$.
+
+\subsection*{Problem 4}
+
+Let $M$ be a smooth manifold and $p$ be a point of $M$. Let $\ell_p$ denote the subspace of $C^\infty(M)$ consisting of smooth functions
+that vanish at $p$, and let $\ell_p^2$ be the subspace of $\ell_p$ spanned by functions of the form $fg$ for some $f,g\in\ell_p$.
+\begin{enumerate}[(a)]
+    \item We wish to show that $h\in\ell^2_p$ if and only if in any smooth local coordinates, its first-order Taylor
+        polynomial at $p$ is zero. First note that the coordinate representation in any coordinate chart $\phi$ is $\hat h=h\circ\phi^{-1}$.
+        The backwards implication is easy to see -- if $h\in\ell^2_p$, we know that $h=fg$ for some $f,g$ vanishing at $p$, then
+        \begin{align*}
+            \nabla\hat h=\nabla\left( (fg)\circ\phi^{-1} \right)=\nabla(f\circ\phi^{-1})\cdot (g\circ\phi^{-1})+\nabla(g\circ\phi^{-1})\cdot (f\circ\phi^{-1}).
+        \end{align*}
+        Both terms vanish at $\phi(p)$, as $f,g$ vanish at $p$. $\hat h$ vanishes at $p$ as well, for the same reason.
+        Consequently, the first-order Taylor polynomial vanishes at $p$ in any coordinate chart.
+
+        We can show the converse as follows. If the first order Taylor polynomial for $h$ is zero in any coordinate chart $\phi$, by Taylor's theorem
+        with remainder, we can write (in some open ball about $\phi(p)$)
+        \begin{align*}
+            \hat h(\vec x)=\sum_i g_i(\vec x)(x^i-\phi(p)^i),
+        \end{align*}
+        where $g_i(\phi(p))=0$. But this is simply the form of a dot product of two vector-valued functions, each of is in $\ell_p$.
+        Thus $\hat h\in\ell_p^2$.
+    \item We define a map $\Phi:\ell_p\to T_p^*M$ by setting $\Phi(f)=df_p$. If we restrict $\Phi$ to $\ell_p^2$,
+        \begin{align*}
+            \Phi(f)=\Phi(gh)=d(gh)_p=g(p)dh_p+h(p)dg_p
+        \end{align*}
+        which is simply zero, as $g,h$ are $\ell_p$ functions, i.e. they vanish at $p$. To show that $\Phi$ descends to a vector
+        space isomorphism from $\ell_p/\ell_p^2$ to $T^*M$, we first show that $\Phi$ is surjective, and then use the first isomorphism theorem.
+        $\Phi$ is surjective because the functions $x^i$ in any chart centered at $p$ are zero at $p$ and thus in $\ell_p$ (by centering).
+        They get sent by $\Phi$ to $dx^i$, the basis for $T^*M$ and thus, by linearity of $\Phi$, $\Phi$ is surjective.
+        Furthermore, it should be clear that $\ker\Phi=\ell_p^2$ -- the above computation showed that $\ell_p^2\subset\ker\Phi$ and the following
+        computation shows that $\ker\Phi\subset\ell_p^2$:
+        \begin{align*}
+            \Phi(f)=df_p=\frac{\partial f}{\partial x^i}dx^i=0
+        \end{align*}
+        because by linear independence of $dx^i$, the gradient of $f$ must be zero at $p$, and by part a, then, $f\in\ell^2_p$.
+\end{enumerate}
+
+\subsection*{Problem 5}
+
+Let $f:\R^3\to\R$ be the function $f(x,y,z)=x^2+y^2+z^2$, and let $F:\R^2\to\R^3$ be the following map
+\begin{align*}
+    F(u,v)=\left( \frac{2u}{u^2+v^2+1},\frac{2v}{u^2+v^2+1}, \frac{u^2+v^2-1}{u^2+v^2-1} \right).
+\end{align*}
+First note that $df=2xdx+2ydy+2zdz$.
+We then compute
+\begin{align*}
+    F^*df&=2\frac{2u}{u^2+v^2+1}d(\frac{2u}{u^2+v^2+1})+2\frac{2v}{u^2+v^2+1}d(\frac{2v}{u^2+v^2+1})\\
+    &+2\frac{u^2+v^2-1}{u^2+v^2-1}d(\frac{u^2+v^2-1}{u^2+v^2-1})\\
+    &=\frac{4u}{u^2+v^2+1}\left( \frac{2(u^2+v^2+1)-4u^2}{(u^2+v^2+1)^2}du-\frac{4uv}{(u^2+v^2+1)^2}dv \right)\\
+    &+\frac{4v}{u^2+v^2+1}\left( \frac{2(u^2+v^2+1)-4v^2}{(u^2+v^2+1)^2}dv-\frac{4uv}{(u^2+v^2+1)^2}du \right)\\
+    &+\frac{2(u^2+v^2-1)}{u^2+v^2+1}\left(\frac{4u}{(u^2+v^2+1)^2}du-\frac{4v}{(u^2+v^2+1)^2}dv \right)\\
+    &=0,
+\end{align*}
+Alternatively, we can compute
+\begin{align*}
+    d(f\circ F)&=d\left(\frac{4u^2}{(u^2+v^2+1)^2}+\frac{4v^2}{(u^2+v^2+1)^2}+\frac{(u^2+v^2-1)^2}{(u^2+v^2+1)^2}\right)\\
+    &=d(1)=0,
+\end{align*}
+which yields the same result, as expected.
+
+\subsection*{Problem 6}
+
+\begin{enumerate}[(a)]
+    \item
+        In this case, we compute
+        \begin{align*}
+            df=d\left( \frac{x}{x^2+y^2} \right)=\frac{x^2+y^2-2x^2}{(x^2+y^2)^2}dx+\frac{-2xy}{(x^2+y^2)^2}dy
+        \end{align*}
+        Note that for $df$ to be zero, the second term must be zero, but this only happens when $x$ or $y$ is zero.
+        The numerator of the first term is zero when $y^2-x^2=0$, i.e. $y=\pm x$. These two conditions together hold
+        only at the origin, which is not a point in our manifold, and thus $df$ is nowhere zero on $M$.
+    \item In polar coordinates we have
+        \begin{align*}
+            df=d\left( \frac{r\cos\theta}{r^2} \right)=\frac{-\cos\theta}{r}dr-\frac{\sin\theta}{r}d\theta
+        \end{align*}
+        Note that, again, $df$ is zero nowhere on the manifold, as $\cos\theta=\sin\theta=0$ holds nowhere.
+    \item If we take $f(p)=z(p)$ on $M=S^2\subset\R^3$,
+        \begin{align*}
+            d\left(\frac{u^2+v^2-4}{u^2+v^2+4}\right)&=\frac{2u(u^2+v^2+4)-2u(u^2+v^2-4)}{(u^2+v^2+4)^2}du\\
+            &+\frac{2v(u^2+v^2+4)-2v(u^2+v^2-4)}{(u^2+v^2+4)^2}dv\\
+            &=\frac{16(udu+vdv)}{(u^2+v^2+4)^2}
+        \end{align*}
+        This is zero only when $u=v=0$, i.e. at the north and south poles (depending on the stereographic charts one has chosen).
+    \item If $M=\R^n$ and $f(x)=|x|^2=\sum_i (x^i)^2$, we have
+        \begin{align*}
+            df=\sum_i^n2x^i dx^i,
+        \end{align*}
+        which is clearly zero only at the origin.
+\end{enumerate}
+
+\subsection*{Problem 7}
+
+\begin{enumerate}[(a)]
+    \item Using the hint, if we define $\omega_x(v)=X_x\cdot v$, we can compute the components of $\omega$ in the case that $X=\text{grad} f$:
+        \[\omega_i=X\cdot \frac{d}{dx^i}=\frac{\partial f}{\partial x^i}\]
+        and thus $\omega=\frac{\partial f}{\partial x^i}dx^i=df$. Using the hint to rewrite the integral, we have
+        \[\int_a^bX_{\gamma(t)}\cdot \gamma'(t)dt=\int_a^b\omega_{\gamma(t)}(\gamma'(t))dt=\int_\gamma\omega=\int_\gamma df\]
+        and by what we know about integrals of exact forms, this must be zero on piecewise smooth closed curves. This is exactly
+        what conservative is defined for vector fields, and thus $X=\text{grad} f$ is conservative.
+
+        Conversely, if we know that $X$ is a conservative vector field, the integral above of $\omega$ on a piecewise smooth closed curve (in $U$) always vanishes.
+        This implies that $\omega$ is conservative, which we know implies that $\omega$ is exact: $\omega=\frac{\p f}{\p x^i}dx^i$ for some $f$. Consequently, 
+        since $\omega$ is defined as the dot product of $X$ with the argument, $X$ is the gradient of this $f$.
+    \item Suppose $n=3$. If $X$ is conservative, we know that it can be written as $X=\text{grad} f$. Then $\omega$ is exact and closed. Consequently
+        $\p \omega_i/\p x^j=\p\omega_j/\p x^i$ and thus $\p X^i/\p x^j=\p X^j/\p x^i$ and thus $\text{curl\;} X=0$ by the formula given.
+    \item If $\text{curl\;} X=0$, the associated $\omega$ must be closed. Since every closed covector field is exact on some star-shaped $U$, by
+        the above computations, $X$ must be conservative on this star-shaped region. Conversely, if $U$ is star-shaped and $X$ is conservative
+        on $U$, by the previous part of the problem we know that $\text{curl\;} X=0$.
+\end{enumerate}
+
+\subsection*{Problem 8}
+
+Let $V=W=\R^2$ anything of the form $v\otimes w$ can be written as
+\begin{align*}
+    (ae_1+be_2)\otimes (ce_1+de_2)=ace_1\otimes e_1+bde_2\otimes e_2+ade_1\otimes e_2+bce_2\otimes e_1
+\end{align*}
+Now take $x=e_1\otimes e_2+e_2\otimes e_1\in V\otimes W$. It is clear that this cannot be written as the above form,
+as either $a$ or $c$ and either $b$ or $d$ would have to be zero, reducing the above expression to zero instead of $x$.
+
+\subsection*{Problem 9}
+
+\subsection*{Problem 10}
+
+Let $M$ be a smooth $n$-manifold, and let $A$ be a smooth covariant $k$-tensor field on $M$. If $(U,(x^i))$ and $(\tilde U,(\tilde x^j))$
+are overlapping smooth charts on $M$, we can write
+\begin{align*}
+    A=A_{i_1\ldots i_k}dx^{i_1}\otimes \cdots \otimes dx^{i_k}=\tilde A_{j_1\ldots j_k}d\tilde x^{j_1}\otimes \cdots \otimes d\tilde x^{j_k}
+\end{align*}
+Using the transformation rule for covectors, we can write
+\begin{align*}
+    \omega_i=\frac{\p \tilde x^j}{\p x^i}(p) \tilde \omega_j
+\end{align*}
+and thus each factor in the tensor product pulls out such a derivative by linearity of the tensor product, and we can relate
+the tensor components as
+\begin{align*}
+    A_{i_1\ldots i_k}=\frac{\p \tilde x^{j_1}}{\p x_{i_1}}\cdots\frac{\p \tilde x^{j_k}}{\p x_{i_k}} \tilde A_{j_1\ldots j_k}
+\end{align*}
 
 \end{document}
