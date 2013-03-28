@@ -38,8 +38,17 @@ be the subset of $G_k(V)\times V$ defined by
 \end{align*}
 We wish to show that $\pi:T\to G_k(V)$ is a smooth rank-$k$ subbundle of the product bundle $G_k(V)\times V\to G_k(V)$
 
-First note that for every point $S\in G_k(V)$, there is attached the vector space $S$, and thus $T_p=\pi^{-1}(S)$ is
-a $k$-dimensional real vector space.
+Let us define an open cover consisting of $\binom{n}{k}$ open sets $\{U_i\}$ of $G_k(V)$ to be the $\binom{n}{k}$ $k$-dimensional vector subspaces of $V$
+such that the intersection of $U_i$ with any $n-k$ dimensional vector space is $\{0\}$. Let us choose a basis for $S$ to be $(e_{i_1}, \dots, e_{i_l})$.
+Next consider the projection map $\pi : G_k \times V \to G_k(V)$ and its restriction $\pi|_T = \tilde{\pi}$.
+We construct a local trivialization $\Phi : \tilde{\pi}^{-1}(U_i) \to U_i \times \R^k$ defined by $\Phi(S,v) = (S, v^{i_1}, \dots, v^{i_k})$, which
+is clearly a diffeomorphism.
+We now wish to check that these local trivializations are smoothly compatible. Choose any $U_j$ such that $U_i \cap U_j \neq 0$. Let $S$ be in this intersection, and define a similar $\Psi : \tilde{\pi}^{-1}(U_j) \to U_j \times \R^k$.
+Let the basis here to be $(x^{i_1}, \dots, x^{i_k})$. The transition map $\Psi \circ \Phi^{-1}(U_i \cap U_j)$ is defined by
+\[ \Psi \circ \Phi^{-1}(S, v^{i_1}, \dots, v^{i_k}) = (S, \tilde{v}^{i_1}, \dots, \tilde{v}^{i_k}), \] where $(\tilde{v}^{i_1}, \dots, \tilde{v}^{i_k})$
+is the coordinate representation of $v$ in the $x^{i_j}$ basis.
+Since this is a change of basis, the restriction of $\Phi$ to $\tilde{\pi}^{-1}(S)$ to an element $S \in U$ is a vector space isomorphism.
+Thus $T$ is a bundle and thus is a subbundle of $G_k(v) \times V$. 
 
 \subsection*{Problem 3}
 
@@ -209,11 +218,25 @@ as either $a$ or $c$ and either $b$ or $d$ would have to be zero, reducing the a
         \begin{align*}
             \beta(v,\ldots,v)=\alpha(v,\ldots, v),
         \end{align*}
-        then $\beta=\text{Sym\;}\alpha$. Take
+        then $\beta=\text{Sym\;}\alpha$. Let us prove this for $k=2$, and then proceed by induction.
+        It is clear that
         \begin{align*}
-            \beta(v+w,\ldots,v+w)=\alpha(v+w,\ldots,v+w).
+            \beta(v+w,v+w)-\beta(v-w,v-w)&=\alpha(v+w,v+w)-\alpha(v-w,v-w)\\
+            \beta(v,w)=\frac{1}{2}\left( \alpha(v,w)+\alpha(w,v) \right)&=\text{Sym }\alpha(v,w)
         \end{align*}
-        
+        Now suppose this holds for $k$. Then we can take
+        \begin{align*}
+            \beta(v_1,\ldots,v_k,v_{k+1})=\frac{1}{k!}\sum_{\sigma\in S_k}\alpha(v_{\sigma(1)},\ldots, v_{\sigma(k)},v_{k+1}).
+        \end{align*}
+        Let's permute now $v_{k+1}$:
+        \begin{align*}
+            (k+1)\beta(v_1,\ldots,v_{k+1})=\frac{1}{k!}\sum_{\sigma \in S_k}\sum_{\tau}\alpha(v_{\tau\sigma(1)},\ldots,v_{\tau\sigma(k)},v_{\tau(k+1)})
+        \end{align*}
+        where the $\tau$'s are cyclic permutations. We can then write
+        \begin{align*}
+            \beta(v_1,\ldots,v_{k+1})=\frac{1}{(k+1)!}\sum_{\sigma\in S_k}\alpha(v_{\sigma(1)},\ldots, v_{\sigma(k+1)}),
+        \end{align*}
+        and we're done, by induction.
     \item To see that the symmetric product is associative, we use the last part (because $\alpha,\beta,\gamma$ are symmetric and thus equal to their $\text{Sym}$) to compute:
         \begin{align*}
             (\alpha\beta)\gamma\underbrace{(v, \dots, v)}_{\text{$k + l + m$ times}}& = \bigg( \text{Sym }\left( \big(\text{Sym }\left( \alpha \otimes \beta \right)\big) \otimes \gamma \right) \bigg) \underbrace{(v, \dots, v)}_{\text{$k + l + m$}} \\
