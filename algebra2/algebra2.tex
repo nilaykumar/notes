@@ -930,13 +930,174 @@ Second, what are the criteria for when a polynomial (even with rational coeffici
     In $\Z$, irreducibles are $\pm p$, with $p$ prime. In $F[x]$, irreducibles are irreducible polynomials.
 \end{exmp}
 
+(March 27, 2013)
+
 \begin{defn}
-    $R$ is a \textbf{unique factorization domain (UFD)} if
+    An integral domain $R$ is a \textbf{unique factorization domain (UFD)} if
     \begin{enumerate}
         \item for any $r\in R$, $r\neq 0$ and $r\notin R^*$, there exist irreducibles $p_1,\ldots,p_n\in R$ such that $r=p_1\cdots p_n$.
         \item if $p_1\cdots p_n=q_1\cdots q_n$, $p_i,q_j$ are irreducibles, then $n=m$ and, after reordering, $p_i$ and $q_i$ are associates.
     \end{enumerate}
 \end{defn}
 
+Note that $\Z$ and $F[x]$ are both UFDs.
+
+\begin{rem}
+    Instead of writing $r=p_1\cdots p_n$ we might write $r=up_1^{q_1}\cdots p_r^{q_r}$, $p_i$ irreducible, $q_i\in\N$ and if $i\neq j$
+    $p_i,p_j$ are not associates, and $u$ is a unit. For example, in $\Z$, $-4=(-1)2^2$.
+\end{rem}
+
+\begin{defn}
+    An integral domain $R$ is a \textbf{principal ideal domain} (PID) if every ideal $I$ in $R$ is a principal ideal.
+\end{defn}
+
+Note that we have shown that $\Z$ and $F[x]$ are PIDs.
+
+\begin{thm}
+    Every PID is a UFD.
+\end{thm}
+\begin{proof}
+    We will not do the full proof here. The first idea is to show the existence of factorization into irreducibles, i.e.
+    if $r\in R$ non-zero and not a unit, then there exist $p_1,\ldots, p_n\in R$ irreducible such that $r$ is the product of these $p_i$.
+    This is actually true in a very general class of rings which have some finiteness property (these are called \textbf{Noetherian rings}).
+    We'll define a special class of PIDS shortly where we can prove this directly.
+
+    Next we need to show uniqueness of this factoring. The main point here is to show that if $p$ is irreducible and $p|rs$, then
+    $p|r$ or $p|s$. This is easy to do using the same arguments we used for $F[x]$. We then use induction: if $p_1\cdots p_n=q_1\cdots q_m$,
+    then $p_1|q_1\cdots q_m$, and thus $p_1|q_i$ for some $i$. Since $q_i$ is an irreducible, $p_1,q_i$ are associates. We can relabel so that
+    $i\mapsto 1$, cancel off, and continue.
+\end{proof}
+
+What are some examples of UFDs that are not PIDs? Well, take $F[x,y]$. The ideal $(x,y)$ is clearly not a principal ideal. But,
+we will show later that $F[x,y]$ is, in fact, a UFD. Indeed, $F[x_1,\ldots,x_n]$ is in general a UFD, but not a PID if $n\geq 2$.
+Additionally, $\Z[x_1,\ldots,x_n]$ is a UFD but not a PID if $n\geq 1$. Note that all of these examples are polynomial rings -- in
+fact, we will show that if $R$ is a UFD, then $R[x]$ is a UFD.
+In general, though, most integral domains are not UFDs.
+
+Recall that in any integral domain, $r|s$ if $s=rt$. We can also define a gcd of $r,s$ as a $d\in R$ such that $d|r,d|s$ and if $e\in R$,
+and $e|r,e|s$, then $e|d$ (as long as $r,s$ are not both zero). It is easy to see that if $d_1,d_2$ are 2 gcds of $r$ and $s$, then $d_1,d_2$
+are associates, because they must divide each other, and since neither is zero, if $d_1=ud_2,d_2=vd_1$, then $uv=1$.
+
+\begin{thm}
+    If $R$ is a UFD with $r,s\in R$ not both zero, then a gcd of $r$ and $s$ exists.
+\end{thm}
+\begin{proof}
+    This proof is rather ugly, so let us just sketch it. We can assume $r,s$ are not both 0 or units (as these are the easy cases),
+    and therefore that both can be factored into irreducibles: $r=up_1^{a_1}\cdots p_r^{a_r},s=vp_1^{b_1}\cdots v_r^{b_r}$ with $u,v$ units and $a_i,b_i\geq 0$.
+    Additionally, we assume that if $i\neq j$ then $p_i,p_j$ are not associates. We must show that this is possible, but we shall not go into this here.
+    But once we get here, we are done, as we just define $c_i=\text{min }\left\{ a_i,b_i \right\}$ and let $d=p_1^{c_1}\cdots p_r^{c_r}$. It should be
+    clear that $d|r, d|s$ and that if $e|r, e|s$ one can factorize $e$ and show that the exponents will be smaller, and thus $d|e$.
+\end{proof}
+
+\begin{thm}
+    If $R$ is a PID and $r,s\in R$, not both zero, then the gcd of $r,s$ exists and $d=ar+bs$ for some $a,b\in R$.
+\end{thm}
+\begin{proof}
+    Consider the ideal $I=(r,s)=(r)+(s)=\left\{ ar+bs:a,b\in R \right\}$. Since $I$ is an ideal, it is principal, since $R$ is a PID.
+    Consequently, $I=(d)$ and by definition, $d=ar+bs$ for some $a,b\in R$. But $r,s\in I$ and thus $d|r,d|s$. If $e|r,e|s$, then $e|ar+bs$ so $e|d$.
+\end{proof}
+
+Note that in a general UFD, gcds will \textit{not} be linear combinations. Take, for example, $F[x,y]$, a UFD. What is the $\text{gcd}(x,y)$? Well both
+$x,y$ are irreducible and not associates so $\text{gcd}(x,y)=1$. Here it is obvious that we cannot write 1 as $f(x,y)x+g(x,y)y$, because if we insert
+$x=y=0,$ we get $0=1$.
+
+\begin{defn}
+    $r,s\in R$ are \textbf{relatively prime} if $\text{gcd}(r,s)=1$.
+\end{defn}
+
+\begin{thm}
+    If $R$ is a UFD, and $r,s\in R$ are relatively prime, and $r|st$, then $r|t$.
+    Hence if $p$ is an irreducible, and $p|rs$, either $p|r$ or $p|s$.
+\end{thm}
+\begin{proof}
+    Straightforward but messy.
+\end{proof}
+
+These statements can be proved cleanly in a PID by exactly the same arguments that we used for $F[x]$.
+The above dichotomy about divisibility can be extended to ideals.
+
+\begin{thm}
+    If $R$ is a UFD then $p\in R$ non-zero is irreducible if and only if $(p)$ is a prime ideal.
+\end{thm}
+\begin{proof}
+    This is just saying that $rs\in(p)$ if and only if $r\in(p)$ or $s\in(p)$.
+\end{proof}
+
+We'll see examples of integral domains $R$ such that there exist $p$ irreducible with $r,s\in R$ with $p|rs$ but $p$
+doesn't divide $r$ or $s$ and hence $(p)$ cannot be prime.
+
+\begin{thm}
+    Let $R$ be a PID, not a field. Let $I$ be an ideal in $R$. Then the following are equivalent:
+    \begin{itemize}
+        \item $I$ is a maximal ideal.
+        \item $I$ is a prime ideal and $I\neq\left\{0 \right\}$.
+        \item there exists $p\in R$ such that $I=(p)$
+    \end{itemize}
+\end{thm}
+\begin{proof}
+    Again, the proof is similar to what we've done before for $F[x]$.
+\end{proof}
+
+\begin{defn}
+    An integral domain $R$ is a \textbf{Euclidean domain} if there exists $N:R-\left\{ 0 \right\}\to\Z$
+    called the \textbf{Euclidean norm} such that:
+    \begin{itemize}
+        \item $N(r)\geq0$ for all $r\in R-\left\{ 0 \right\}$
+        \item For all $a,b\in R$ with $a\neq 0$, there exist $q,r\in R$ such that $b=aq+r$ and either
+            $r=0$ or $N(r)<N(q)$.
+    \end{itemize}
+\end{defn}
+
+Note that this roughly says that one can do long division with remainder. However, it does not require the remainder to be unique.
+A simple example is $R=\Z$, where $N(k)=|k|$ (this is defined even for 0). In the case of $R=F[x]$ we have the degree of a polynomial
+as the norm (not defined for 0).
+
+\begin{defn}
+    A Euclidean norm $N$ is \textbf{submultiplicative} if for all $r,s\in R-\left\{ 0 \right\}$, $N(r)\leq N(rs)$.
+\end{defn}
+Note: Robert Friedman made this word up.
+
+\begin{thm}
+    Let $R$ be a Euclidean domain. Then $R$ is a PID.
+\end{thm}
+\begin{proof}
+    Let $I$ be an ideal in $R$. If $I=\left\{ 0 \right\}$, then $I=(0)$. Assume $I\neq\left\{ 0 \right\}$.
+    We choose $d\in I$ non-zero such that $N(d)$ is the smallest possible. We claim that $I=(d)$. We know that
+    $(d)\subset I$. If $b\in I$, we can write $b=dq+r$ with either $r=0$ or $N(r)<N(d)$. But $r=b-dq\in I$
+    so $r\neq 0$. However, this implies that $N(r)<N(d)$, which contradicts the choice of $d$. Thus $r=0$
+    and $b=dq$,so $b\in(d)$ and $I\subset(d)$. Consequently, $I=(d)$.
+\end{proof}
+
+Note that there are PIDs that are \textit{not} Euclidean.
+
+\begin{lem}
+    Suppose $R$ is Euclidean and $N$ is a submultiplicative norm. Then, given $r,s\in R-\left\{ 0 \right\}$, either $s$ is a unit
+    and $N(r)=N(rs)$ or $s$ is not a unit and $N(r)<N(rs)$.
+\end{lem}
+\begin{proof}
+    Say $s$ is a unit. $N(r)\leq N(rs)$ and $N(rs)\leq N(rs s^{-1})=N(r)$. Thus, $N(rs)=N(r)$. Conversely, supposed $N(r)=N(rs)$.
+    We must show that $s$ is a unit (hence if $s$ is not a unit, $N(r)<N(rs)$). The idea is to long divide $rs$ into $r$.
+    We can write $r=(rs)q+t$ where either $t=0$ or $N(t)<N(rs)=N(r)$. We claim that $N(t)<N(r)$ is impossible because
+    $t=r-rsq=r(1-sq)$ implies $N(t)=N(r(1-sq))\geq N(r)$. Hence, $t=0$, which implies that $r=rsq$ or $sq=1$, i.e $s$ is a unit.
+\end{proof}
+
+This has various consequences; if $R$ is Euclidean, $N$ submultiplicative
+\begin{itemize}
+    \item $c\in R^*$ if and only if $N(r)=N(1)$
+    \item If $r\in R$, non-zero, not a unit, then $r$ can be factored into a product of irreducibles $r=p_1\cdots p_n$
+\end{itemize}
+The first is left for homework but the second can be proved as follows. If $r$ is irreducible, then we are done. Otherwise,
+$r=st$, neither a unit, and $N(r)=N(st)$ with $N(s)<N(r)$ and $N(t)<N(r)$. One can keep going and argue by complete induction
+on $N(r)$ to further reduce $s,t$.
+
+\begin{rem}
+    In any Euclidean domain, we can implement the Euclidean algorithm to find a gcd. Look up the Euclidean algorithm if
+    you are unfamiliar with it.
+\end{rem}
+
+\begin{exmp}
+    Take the Gaussian integers $\Z[i]=\left\{ a+bi:a,b\in\Z \right\}$. We take $N(a+bi)=a^2+b^2$. Next time, we will show
+    that $\Z[i]$ is a Euclidean domain and thus a PID and a UFD.
+\end{exmp}
 
 \end{document}

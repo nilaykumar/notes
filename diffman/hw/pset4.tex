@@ -36,10 +36,44 @@ be the subset of $G_k(V)\times V$ defined by
 \begin{align*}
     T=\left\{ (S,v)\in G_k(V)\times V:v\in S \right\}.
 \end{align*}
+We wish to show that $\pi:T\to G_k(V)$ is a smooth rank-$k$ subbundle of the product bundle $G_k(V)\times V\to G_k(V)$
+
+First note that for every point $S\in G_k(V)$, there is attached the vector space $S$, and thus $T_p=\pi^{-1}(S)$ is
+a $k$-dimensional real vector space.
 
 \subsection*{Problem 3}
 
-Let $E$ be the tautological vector bundle over $G_1(\R^2)$.
+Let $T$ be the tautological vector bundle over $G_1(\R^2)=\R P^1$. We wish to show $T$ is smoothly isomorphic
+to the Mobius bundle.
+
+First note that $\R P^1$ is the space of lines going through the origin of $\R^2$. This topology
+is in fact homeomorphic to that of a circle, as one can think of the projective line in terms of unit vectors in the plane, where
+pairs of antiparallel vectors are quotiented out; i.e. the right half of the unit circle, with the north pole identified with the south
+pole, which is clearly homeomorphic to the circle. Since the same smooth structure can be constructed on these two homeomorphic topologies,
+it should be clear that $\R P^1$ is diffeomorphic to $S^1$, and thus that the base manifolds of our vector bundles are diffeomorphic.
+
+Now, since the fibers of each bundle are both 1-dimensional, if we can show that there are local trivializations
+(defined on the same charts on the base manifolds) that have identical transition functions. The charts on our base manifold $S^1$
+(or $\R P^1$) that we will use for constructing local trivializations of both $T$ and the Mobius bundle are as follows. Given
+the unit circle, take open sets $U$ and $V$ such that $U$ covers the bottom half of the circle, $V$ covers the top half, and $U$
+intersects $V$ in small neighborhoods at the east and west poles.
+
+%Note that the west pole in the case of $\R P^1$ is actually the
+%simultaneously the north and south pole of the right-half-circle constructed in the previous paragraph; this distinction does
+%not change anything in the construction of the trivializations, of course, due to the diffeomorphism.
+
+For the Mobius bundle it should be clear that if we take local trivializations $\Phi',\Psi'$ to $U\times\R^1,V\times\R^1$,
+the transition function will be -1 at one of the poles, say the west pole, and +1 at the other (by construction of the Mobius
+bundle, as we saw on the last homework). Now it remains to show that we can construct similar local trivializations
+of $T$: $\Phi,\Psi$. For both charts $(U,\Phi),(V,\Psi)$, we take the unit vector in the direction of the line in $\R P^1$
+to to parameterize points in the base manifold. The coordinate along the line attached can be given by some real number, which,
+when multiplied by the unit vector gives you the suitable point on the line. Note that where the two charts overlap on the
+east pole, the unit vectors that represent a point on the base manifold are the same, i.e. they point in the same direction, and
+thus the transition function is uniformly +1 on this overlap. However, on the west pole, due to how the north pole and the south
+pole have been quotiented out, the same unit vector is represented in different coordinate charts with a transition factor of -1;
+in one chart the unit vector is pointing upwards, but in the other it points downwards, and thus the bundle has a ``twist'' in it.
+But this is exactly the transition function (the twisting) that is used when constructing the Mobius bundle, and thus $T$ must
+be smoothly isomorphic to the Mobius bundle.
 
 \subsection*{Problem 4}
 
@@ -76,6 +110,7 @@ that vanish at $p$, and let $\ell_p^2$ be the subspace of $\ell_p$ spanned by fu
             \Phi(f)=df_p=\frac{\partial f}{\partial x^i}dx^i=0
         \end{align*}
         because by linear independence of $dx^i$, the gradient of $f$ must be zero at $p$, and by part a, then, $f\in\ell^2_p$.
+        We now use the first isomorphism theorem, and we are done.
 \end{enumerate}
 
 \subsection*{Problem 5}
@@ -161,6 +196,61 @@ Now take $x=e_1\otimes e_2+e_2\otimes e_1\in V\otimes W$. It is clear that this 
 as either $a$ or $c$ and either $b$ or $d$ would have to be zero, reducing the above expression to zero instead of $x$.
 
 \subsection*{Problem 9}
+
+\begin{enumerate}[(a)]
+    \item Let $\alpha$ be a covariant $k$-tensor on a finite-dimensional real vector space $V$. We wish to show that
+        $\text{Sym\;}\alpha$ is the unique symmetric $k$-tensor satisfying
+        \begin{align*}
+            (\text{Sym\;}\alpha)(v,\ldots,v)=\alpha(v,\ldots, v).
+        \end{align*}
+        First note that 
+        \[\text{Sym\;}\alpha(v,\ldots,v)=\frac{1}{k!}\sum_{\sigma\in S_k}\alpha(v,\ldots, v)=k!\cdot\frac{1}{k!}\alpha(v,\ldots,v)=\alpha(v,\ldots, v)\]
+        as the permutations are all the same. We must now show that this is unique, i.e. that given some symmetric $k$-tensor $\beta$, if
+        \begin{align*}
+            \beta(v,\ldots,v)=\alpha(v,\ldots, v),
+        \end{align*}
+        then $\beta=\text{Sym\;}\alpha$. Take
+        \begin{align*}
+            \beta(v+w,\ldots,v+w)=\alpha(v+w,\ldots,v+w).
+        \end{align*}
+        
+    \item To see that the symmetric product is associative, we use the last part (because $\alpha,\beta,\gamma$ are symmetric and thus equal to their $\text{Sym}$) to compute:
+        \begin{align*}
+            (\alpha\beta)\gamma\underbrace{(v, \dots, v)}_{\text{$k + l + m$ times}}& = \bigg( \text{Sym }\left( \big(\text{Sym }\left( \alpha \otimes \beta \right)\big) \otimes \gamma \right) \bigg) \underbrace{(v, \dots, v)}_{\text{$k + l + m$}} \\
+            & = \big( \big( \text{Sym }(\alpha \otimes \beta) \big)\underbrace{(v, \dots, v)}_{\text{$k + l$}} \big)  \cdot \big( \gamma \underbrace{(v, \dots, v)}_{\text{$m$ }} \big) \\
+            & = \big( \big(\alpha(\otimes)\beta\big)\underbrace{(v, \dots, v)}_{\text{$k + l$ }} \big) \cdot \big( \gamma\underbrace{(v, \dots, v)}_{\text{$m$ }} \big) \\
+            & = \big( \alpha\underbrace{(v, \dots, v)}_{\text{$k$ }} \cdot \beta \underbrace{(v, \dots, v)}_{\text{$l$ }} \big)  \cdot \gamma \underbrace{(v, \dots, v)}_{\text{$m$ }} \\
+            & =  \alpha\underbrace{(v, \dots, v)}_{\text{$k$ }} \cdot \big( \beta \underbrace{(v, \dots, v)}_{\text{$l$ }}   \cdot \gamma \underbrace{(v, \dots, v)}_{\text{$m$ }} \big)\\
+            & = \alpha(\beta\gamma)\underbrace{(v, \dots, v)}_{\text{$k + l + m$ times}},
+        \end{align*}
+        where in the last step, we worked backwards to reexpress the product as a symmetric product.
+    \item Since any covector $\omega$ has only one argument, it is clearly symmetric. Consequently, the $k$ given $\omega^i$ are
+        symmetric 1-tensors. It follows directly from the definition of a symmetric product, then, that
+        \begin{align*}
+            \omega^1\omega^2=\text{Sym\;}(\omega^1\otimes\omega^2)=\frac{1}{2}\left( \omega^1\otimes\omega^2+\omega^2\otimes\omega^1 \right).
+        \end{align*}
+        Let us assume that the formula for the product of $k-1$ such covectors is given by
+        \begin{align*}
+            \omega^1\cdots\omega^{k-1}=\frac{1}{(k-1)!}\sum_{\sigma\in S_{k-1}}\omega^{\sigma(1)}\otimes \cdots\otimes\omega^{\sigma(k-1)}.
+        \end{align*}
+        Then, the product of $k$ covectors can be written (using the associativity of the symmetric product)
+        \begin{align*}
+            \omega^1\cdots\omega^k&=\frac{1}{2} \left(\frac{1}{(k-1)!}\sum_{\sigma\in S_{k-1}}\omega^{\sigma(1)}\otimes \cdots\otimes\omega^{\sigma(k-1)}\right)\otimes\omega^k\\
+            &+\frac{1}{2}\omega^k\otimes\left(\frac{1}{(k-1)!}\sum_{\sigma\in S_{k-1}}\omega^{\sigma(1)}\otimes \cdots\otimes\omega^{\sigma(k-1)}\right).
+        \end{align*}
+        We can now perform the following trick:
+        \begin{align*}
+            \frac{k}{k}\omega^1\cdots\omega^k&=\frac{1}{k}\sum_{\text{cyclic }\sigma}\omega^{\sigma(1)}\cdots\omega^{\sigma(k)}\\
+            &=\frac{1}{2k}\sum_{\text{cyclic }\sigma}\left( \omega^{(\sigma(1)}\cdots\omega^{\sigma(k-1)}\otimes \omega^{\sigma(k)}+\omega^{\sigma(k)}\otimes\omega^{(\sigma(1)}\cdots\omega^{\sigma(k-1)}\right)\\
+            &=\frac{1}{2k!}\sum_{\text{cyclic }\sigma}\sum_{\rho\in S_{k-1}}\omega^{\rho(\sigma(1))}\otimes \cdots\otimes\omega^{\rho(\sigma(k-1))}\otimes\omega^{\sigma(k)}+\cdots,
+        \end{align*}
+        where the ellipsis on the last line represents the second term with $\omega^{\sigma(k)}$ at the beginning instead of the end. Note that the
+        combination of cyclic permutations and $S_{k-1}$ permutations gives us every combination for both terms (which cancels the one-half) and thus we arrive at
+        \begin{align*}
+            \omega^1\cdots\omega^k=\frac{1}{k!}\sum_{\tau\in S_{k}}\omega^{\tau(1)}\otimes\cdots\otimes\omega^{\tau(k)},
+        \end{align*}
+        and we are done by induction.
+\end{enumerate}
 
 \subsection*{Problem 10}
 
