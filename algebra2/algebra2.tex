@@ -1054,8 +1054,9 @@ as the norm (not defined for 0).
 
 \begin{defn}
     A Euclidean norm $N$ is \textbf{submultiplicative} if for all $r,s\in R-\left\{ 0 \right\}$, $N(r)\leq N(rs)$.
+    $N$ is \textbf{multiplicative} if for all $a,b\in R-\left\{ 0 \right\}$, $N(ab)=N(a)N(b)$.
 \end{defn}
-Note: Robert Friedman made this word up.
+Note: Robert Friedman made the word ``submultiplicative'' up.
 
 \begin{thm}
     Let $R$ be a Euclidean domain. Then $R$ is a PID.
@@ -1096,8 +1097,132 @@ on $N(r)$ to further reduce $s,t$.
 \end{rem}
 
 \begin{exmp}
-    Take the Gaussian integers $\Z[i]=\left\{ a+bi:a,b\in\Z \right\}$. We take $N(a+bi)=a^2+b^2$. Next time, we will show
-    that $\Z[i]$ is a Euclidean domain and thus a PID and a UFD.
+    Take the \textbf{Gaussian integers} $\Z[i]=\left\{ a+bi:a,b\in\Z \right\}$. We take $N:\Z[i]\to\Z$ such that $N(a+bi)=a^2+b^2$.
+    Consequently, if we write $\alpha=a+bi$, we have that $N(\alpha)=\alpha\bar\alpha$. It is easy to see that $N(\alpha)\geq 0$,
+    $N(\alpha)=0$ if and only if $\alpha=0$, and that $N$ is multiplicative (in fact, $N$ extends to a function from $\Q(i)\to\Q$,
+    which in fact becomes a homomorphism). Less obvious is the fact that we can do long division with remainder.
+    
+    More generally,
+    we could work with $\Z[\sqrt{-d}]\subset\Q(\sqrt{-d})$ with $d\in\N$ -- these are called \textbf{imaginary quadratic fields}.
+    Since $\Z[\sqrt{-d}]=\left\{ a+b\sqrt{-d}:a,b\in\Z \right\}$, we define a norm $N(a+b\sqrt{-d})=a^2+db^2$. In other words, there's
+    nothing special here about $d=1$. In general, though, for $d\geq 3$, this is never a Euclidean norm, and in fact, $\Z[-\sqrt{d}]$
+    is never a UFD (for $d\geq 3$).
+
+    We could even look at $\Z[\sqrt{d}]$ where $d\in\N$ is not a perfect square. This would be a subring of $\Q(\sqrt{d})\subset\R$.
+    These are called \textbf{real quadratic fields}. Here, we could have a norm given by $N(a+b\sqrt{d})=|(a+b\sqrt{d})(a-b\sqrt{d})|=
+    |a^2-bd^2|$. This norm is multiplicative, and sometimes Euclidean. It is in fact an unsolved problem about whether there
+    are finitely many or infinitely many $d$ such that $\Z[\sqrt{d}]$ is a UFD!
 \end{exmp}
+
+\begin{thm}
+    For the Gaussian integers, $\Z[i]$, the norm $N:\Z[i]\to\Z$ such that $N(a+bi)=a^2+b^2$ is a Euclidean norm,
+    i.e. for all $\alpha,\beta\in\Z[i]$, for $\alpha\neq0$, there exists $\xi,\rho$ such that $\beta=\alpha\xi+\rho$
+    with either $\rho=0$ or $N(\rho)<N(\alpha)$.
+\end{thm}
+\begin{proof}
+    Given $\alpha,\beta\in\Z[i]$, $\alpha\neq0$, we want to find $\xi\in\Z[i]$ such that $\beta/\alpha-\xi=\gamma$
+    with $N(\gamma)<1$, where $\gamma\in\Q(i)$. Once we've found this, we set $\rho=\alpha\gamma=\beta-\alpha\xi$.
+    Since $\beta,\alpha,\xi$ are Gaussian integers, $\rho$ is as well. But $N(\rho)=N(\alpha\gamma)=N(\alpha)N(\gamma)<N(\alpha)$.
+    Note that this allows for $\rho=0$.
+
+    We write $\beta/\alpha\in\Q(i)$. We know $\beta/\alpha=q_1+q_2i$, $q_1,q_2\in\Q$. If $\xi=n+mi$, then
+    $\beta/\alpha-\xi=(q_1-n)+(q_2-m)i$. Then $N(\beta/\alpha-\xi)=(q_1-n)^2+(q_2-m)^2$. But for any rational
+    number $q_1$, there exists an $n\in\Z$ such that $|q_1-n|\leq 1/2$. We choose $n$ such that $|q_1-n|\leq 1/2$
+    and $m$ such that $|q_2-m|\leq1/2$. Then, $N(\gamma)=N(\beta/\alpha-\xi)\leq1/4+1/4<1$. Finally, we take
+    $\rho=\beta-\alpha\xi$, and by the above paragraph, we are done.
+\end{proof}
+
+\begin{cor}
+    The Gaussian integers, $\Z[i]$, are both a PID and a UFD.
+\end{cor}
+\begin{proof}
+    Follows from the previous theorem and our remarks about the norm chosen -- $\Z[i]$ is a Euclidean domain
+    and thus a PID and a UFD.
+\end{proof}
+
+Let's now examine factorization in $\Z[i]$. First of all, what are the units? We've seen that they are $\left\{ \pm1,\pm i \right\}$.
+In fact, we claim that $\alpha\in\Z[i]$ is a unit if and only if $N(\alpha)=1$: If $\alpha\beta=1$, we can write $1^2=1=N(1)=N(\alpha)N(\beta)$
+and since $N(\alpha)\in\Z$, $N(\alpha)|1$ and thus $N(\alpha)=1$. Conversely, if $N(\alpha)=1=\alpha\bar\alpha$, then $\bar\alpha$
+is an inverse in $\Z[i]$, and thus $\alpha$ is a unit.
+
+A harder question to ask is: what are the irreducibles in $\Z[i]$? Note that if $n\in N$, $n=N(\alpha)$ for some $\alpha=a+bi\in\Z[i]$,
+we know $n=a^2+b^2$. Thus $n$ is a sum of 2 integer squares (and the converse). This shows that factorization in $\Z[i]$ is in fact connected
+to a classical problem in number theory. We will approach the problem slightly differently.
+\begin{lem}
+    If $p$ is a prime number and $\alpha\in\Z[i]$ with $N(\alpha)=p$, then $\alpha$ is irreducible in $\Z[i]$.   
+\end{lem}
+\begin{proof}
+    If $\alpha=\beta\gamma$, then $N(\alpha)=N(\beta)N(\gamma)=p$, but since $p$ is prime, either $N(\beta)=1$ or $N(\gamma)=1$. But
+    by what we noticed above, this requires either of $\beta,\gamma$ to be a unit, i.e. that $\alpha$ is irreducible.
+\end{proof}
+
+\begin{exmp}
+    $N(1+i)=2$ and thus $1+i$ is irreducible. Similarly $N(2+i)=5$ and thus $2+i$ is irreducible. $N(3+i)=10$, and in fact, $3+i$
+    is not irreducible.
+\end{exmp}
+
+\begin{lem}
+    $p$ is a prime number, and $p$ is not irreducible in $\Z[i]$ if any only if there exists an $\alpha\in\Z[i]$ such that $p=N(\alpha)$,
+    which again simply means that $p$ is a sum of two integer squares. Note that if $p=N(\alpha)$, then $\alpha$ is irreducible.
+\end{lem}
+\begin{proof}
+    If $p$ is not irreducible, then it factors $p=\alpha\beta$, where neither $\alpha,\beta$ is a unit. Then we take norms,
+    $N(p)=N(\alpha\beta)=N(\alpha)N(\beta)=p^2$, and since we know that $N(\alpha)\neq 1$ and $N(\beta)\neq 1$, we must have
+    $N(\alpha)=N(\beta)=p$. This implies that $\alpha$ is irreducible and that $p=\alpha\bar\alpha$, a sum of squares. Conversely,
+    if $p=\alpha\bar\alpha$, $p$ is not irreducible since $N(\alpha)=N(\bar\alpha)=p$, $\alpha,\bar\alpha$ not units.
+\end{proof}
+
+Consequently, if $p$ is a prime, either $p$ is irreducible in $\Z[i]$ or $p=N(\alpha)=\alpha\bar\alpha$ where $\alpha$ is irreducible in $\Z[i]$.
+
+\begin{lem}
+    If $\pi\in\Z[i]$ is irreducible then there exists a prime number $p$ such that $\pi|p$ in $\Z[i]$.
+    The only possibilities are that either $\pi$ is $p$ or an associate, or $N(\pi)=\pi\bar\pi=p$.
+\end{lem}
+\begin{proof}
+    Given $\pi$, consider $\pi\bar\pi=N(\pi)\in\N$ an $N(\pi)>1$ as $\pi$ is not a unit.
+    We factor: $\pi\bar\pi=p_1\cdots p_k$, $p_i$ primes. Then $\pi|p_1\cdots p_k$. Since $\Z[i]$ is a UFD, $\pi|p_i=p$ for some $i$.
+    If $p$ is itself irreducible in $\Z[i]$ we have one irreducible dividing another, and thus $\pi$ must be equal to $p$ up to associate.
+    Otherwise, $p=\alpha\bar\alpha$ where $\alpha,\bar\alpha$ are irreducible. Then $\pi|\alpha\bar\alpha$ which means that either $\pi|\alpha$
+    or $\pi|\bar\alpha$. Thus $\pi$ is an associate of $\alpha$ or $\bar\alpha$. Then $N(\pi)=\pi\bar\pi=N(\alpha)=p$.
+\end{proof}
+
+\begin{lem}
+    If $p\equiv\mod 4$ then there exists $k\in\Z$ such that $k^2\equiv-1\mod p$, i.e there exists an $a\in\Z/p\Z$ such that
+    $a^2=-1$.
+\end{lem}
+\begin{proof}
+    $p\equiv 1\mod 4$ if and only if $4|(p-1)$. The order of $(\Z/p\Z)^*$ is $p-1$. We know that this is a cyclic group, and thus
+    that there exists a cyclic subgroup $\langle a\rangle$ of order 4, i.e. $a\in(\Z/p\Z)^*,$ $a^4=1,a^2\neq 1$.
+    We know $(a^2)^2=1$ so $a^2$ is a root of $x^2-1$ in $\Z/p\Z[x]$. But we can factor this to $(x-1)(x+1)$, and thus 
+    $a^2$ is either 1 or -1. It must be -1, since its order is 4, and thus we are done.
+\end{proof}
+
+\begin{thm}
+    The irreducibles in $\Z[i]$ are
+    \begin{enumerate}
+        \item $1+i$ and its associates. Note that $N(1+i)=2$
+        \item $p\in\Z$ a prime number such that $p\equiv3\mod 4$ and associates
+        \item $\pi\in\Z[i]$ such that $N(\pi)=p$ a prime, $p\equiv 1\mod 4$, and moreover, if $p\equiv 1\mod 4$
+            then $p=N(\pi)$ for some irreducible $\pi$.
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    \begin{enumerate}
+        \item $2=1\times 1=N(1+i)$ and we are done.
+        \item If $p\equiv 3\mod 4$, then $p$ can't be written as the sum of two integer squares, which implies that
+            $p$ is irreducible in $\Z[i]$. Why? Because if $p=a^2+b^2,$ $a,b\in\Z$ with $p$ odd, they can't both be even
+            or odd. Thus one is even and the other is odd. If we take $a=2k+1,b=2k$, we have that $a^2+b^2\equiv 1\mod 4$.
+        \item Must show that if $p\equiv1\mod 4$, then $p=N(\pi)=a^2+b^2$. By the lemma above, there exists $k$ such that
+            $k^2\equiv -1\mod p$, which implies that $p|(k^2+1)=(k+i)(k-i)$. We claim that this means $p$ is not irreducible, because
+            if it were, then since $p|(k+i)(k-i)$, we would have to have $p|(k\pm i)$. But $k/p\pm1/p$ is not a Gaussian integer,
+            and thus $p$ doesn't divide either factor, and consequently, $p$ is not irreducible. But if a prime is not irreducible,
+            it is the norm of something that is irreducible, and we are done.
+    \end{enumerate}
+\end{proof}
+
+\begin{cor}
+    A prime number $p$ is a sum of 2 integer squares if and only if $p=2$ or $p\equiv 1\mod 4$.
+\end{cor}
+
 
 \end{document}
