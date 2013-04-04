@@ -1,0 +1,163 @@
+\documentclass{../../mathnotes}
+
+
+\title{Differentiable Manifolds Problem Set 5}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+
+Let $\mathring{g}$ denote the round metric on $\mathbb{S}^n$. We wish to compute the coordinate representation of
+$\mathring{g}$ in stereographic coordinates. First note that the inverse of the stereographic projection for $\mathbb{S}^n$
+is given by
+\[\sigma^{-1}(u^1,\ldots,u^n)=\frac{(2u^1,\ldots,2u^n,|u|^2-1)}{|u|^2+1}.\]
+The coordinate representation of $\mathring{g}$ is then given by the pullback
+\begin{align*}
+    (\sigma^{-1})^*\bar g&=(\sigma^{-1})^*\left( (dx^1)^2+\ldots+(dx^{n+1})^2\right)\\
+\end{align*}
+First note that
+\begin{align*}
+    d\left( \frac{2u^i}{|u|^2+1} \right)^2=&\left(  \frac{2du^i(|u|^2+1)-2u^i\cdot2\sum_ju^jdu^j}{(|u|^2+1)^2}\right)^2\\
+    =\frac{1}{(|u|^2+1)^4}&\left(4(du^i)^2(|u|^2+1)^2+4(u^i)^2\sum_{j,k}u^ju^kdu^jdu^k-8u^idu^i(|u|^2+1)\sum_ju^jdu^j \right).
+\end{align*}
+We also have that
+\begin{align*}
+    d\left( \frac{|u|^2-1}{|u|^2+1} \right)^2=\frac{16\sum_{j,k}u^ju^kdu^jdu^k}{(|u|^2+1)^4}.
+\end{align*}
+Then,
+\begin{align*}
+    (\sigma^{-1})^*\bar g&=d\left( \frac{|u|^2-1}{|u|^2+1} \right)^2+\sum_i d\left( \frac{2u^i}{|u|^2+1} \right)^2\\
+    &=\left( \frac{2}{1+|u|^2} \right)^2\sum_i (du^i)^2
+\end{align*}
+where we brought in the sum over $i$ to cancel out sums and to cancel out an overall factor $|u|^2+1$.
+
+
+\subsection*{Problem 2}
+
+Suppose $(M,g)$ is a Riemannian manifold. A smooth curve $\gamma:J\to M$ is said to be a unit-speed curve if
+$|\gamma'(t)|_g\equiv1$. We wish to show that every smooth curve with nowhere-vanishing velocity has a unit-speed
+reparametrization. Let us define a reparametrization of $\gamma$, $\lambda:K\to M$ defined by $\lambda=\gamma\circ\phi$
+where $\phi:K\to J$ with $K$ some other interval.
+We compute in local coordinates
+\begin{align*}
+    |\lambda'(s)|_g&=\sqrt{g_{\lambda(s)}(\lambda'(s),\lambda'(s))}\\
+    &=\sqrt{g_{\gamma(\phi(t))}(\dot\phi(t)\dot\gamma(\phi(t))\p/\p x,\dot\phi(t)\dot\gamma(\phi(t))\p/\p x)}\\
+    &=\dot\phi(t)\sqrt{g_{\gamma(\phi(t))}(\dot\gamma(\phi(t))\p/\p x,\dot\gamma(\phi(t))\p/\p x)}\\
+    &=\dot\phi(t)\sqrt{g_{\gamma(t)}(\gamma'(t),\gamma'(t))}\\
+    &=\dot\phi(t)|\gamma'(t)|_g
+\end{align*}
+Consequently, if we reparametrize our curve by $\phi(t)=\int_0^t 1/|\gamma'(\tau)|_gd\tau$, we will have a unit-speed parametrization.
+We know that this is a diffeomorphism (and thus a good reparametrization), as the velocity is nowhere-vanishing and
+thus $1/|\gamma'(\tau)|_g$ is smooth (as the curve is smooth).
+
+\subsection*{Problem 3}
+
+We wish to show that the shortest path between two points in Euclidean space is a straight line segment.
+Let us consider points $x,y\in\R^n$ along the $x$-axis; we can do this without loss of generality, as one can always
+choose suitable coordinates. Now take a straight-line path $\gamma$ from $x$ to $y$ along the axis with length $L_1$ as well as some
+other path $\lambda$ from $x$ to $y$, not necessarily along the axis, with length $L_2$:
+\begin{align*}
+    L_1&=\int_a^b\sqrt{\bar g(\gamma'(t),\gamma'(t))} dt\\
+    &=\int_a^b\dot\gamma(t) dt=\gamma(b)-\gamma(a)
+\end{align*}
+On the other hand, we have that
+\begin{align*}
+    L_2&=\int_a^b\sqrt{\bar g(\lambda'(t),\lambda'(t))} dt\\
+    &\geq\int_a^b\dot\lambda(t) dt=\lambda(b)-\lambda(a)
+\end{align*}
+where the inequality comes from dropping all terms under the square root except for the contribution to the dot product
+from the $x$ components of $\lambda'(t)$. Note, however, that $\gamma(b)=\lambda(b)=y,\gamma(a)=\lambda(a)=x$ by construction,
+and thus we have that $L_1\leq L_2$. Equality occurs only when the terms that we have dropped were zero in the first place,
+i.e. $\lambda$ is the same curve as $\gamma$ up to reparametrization. Of course, the length will be the same, due to the
+parametrization-invariance of length. Thus, $L_1<L_2$ except when $\lambda=\gamma$ (up to parametrization).
+
+\subsection*{Problem 4}
+
+Let $M=\R^2\setminus\left\{0 \right\}$, and let $g$ be the restriction to $M$ of the Euclidean metric $\bar g$. We wish
+to show that there are points $p,q\in M$ for which there is no piecewise smooth curve segment $\gamma$ from $p$ to $q$
+in $M$ with $L_g(\gamma)=d_g(p,q)$. Take $p=(0,1)$ and $q=(0,1)$. This distance in $\R^2$ would simply be 2. On $\R^2\setminus\left\{ 0 \right\}$,
+however, it is not so obvious. Note first that that $d_g(p,q)\leq d_{\bar g}(p,q)=2$, as it could not possibly be greater -- the induced metric
+is simply a restriction of $\bar g$. Let us now assume for the sake of contradiction that $d_g(p,q)<d_{\bar g}(p,q)$.
+Then there must exist a piecewise smooth curve $\gamma$ in $M$ such that $L_g(\gamma)\leq(d_g(p,q)+d_{\bar g}(p,q))/2$.
+But we know that $L_g(\gamma)=L_{\bar g}(\gamma)$. Using now the assumed inequality, we find $L_{g}(\gamma)<d_{\bar g}(p,q)$,
+and reach a contradiction. Thus $d_g(p,q)=d_{\bar g}(p,q)=2$.
+
+Now we wish to show that there is no piecewise smooth curve $\gamma$ from $p$ to $q$ that has a length of 2. It should be clear
+that the curve must intersect the $x$-axis at some point in order to get from $p$ to $q$ (as defined above). Roughly 
+speaking, since we know that the shortest curve between two points (where the straight line connecting them does not hit
+the origin) is a straight line, we can replace the pieces of $\gamma$ with straight lines to get a $\tilde \gamma$ with
+smaller length. However, now we may simply use the triangle inequality to show that the length of $\tilde \gamma$ will
+always be greater than 2 (simply because the point at which the lines intersect the $x$-axis will never be able to hit the
+origin). Consequently, there is no piecewise smooth curve on $M$ that achieves the desired length.
+
+\subsection*{Problem 5}
+
+Suppose $g=f(t)dt^2$ is a Riemannian metric on $\R$. First note that we must determine what we mean by distance in this metric:
+\begin{align*}
+    d(x,y)&=\inf_\gamma\int_a^b|\gamma'(t)|_g dt\\
+    &=\inf_\gamma\int_a^b\sqrt{g_{\gamma(t)}dt^2(\gamma'(t),\gamma'(t))} dt\\
+    &=\inf_\gamma\int_a^b\sqrt{f(\gamma(t))}\gamma'(t) dt\\
+    &=\inf_\gamma\int_{\gamma(a)}^{\gamma(b)}\sqrt{f(s)} ds\\
+    &=\int_{\gamma(a)}^{\gamma(b)}\sqrt{f(s)} ds\\
+\end{align*}
+where in the last step we have dropped the infimum, as the integral is insensitive to everything but the endpoints of $\gamma$
+(this should be intuitively clear as we are constrained on $\R$ and thus the shortest path should be a straight-line path).
+
+Let us assume that the integral $\int_0^\infty\sqrt{f(t)}dt$ converges.
+We wish to show that there exists some Cauchy sequence on $\R$ (under this metric) that does not converge, i.e. the space
+is not complete. Take for now some the sequence $\left\{ x_i=i \right\}$ with $i\in\N$. It should be clear that this sequence
+diverges. Hence, it suffices to show that this sequence is Cauchy. We do so for $n,m\in\N$ with $n>m$:
+\begin{align*}
+    d(x_m,x_n)=\int_m^n\sqrt{f(s)} ds.
+\end{align*}
+If we take $n,m\to\infty$, this integral must go to zero. This can be shown rigorously by applying the fact that
+if $\lim_{i\to\infty}a_i$ converges, then $\lim_{i\to\infty}a_{i+1}$ converges as well to this integral (after splitting it up)
+and making use of the our assumption that the integral from 0 to $\infty$ converges (and thus ``smaller'' integrals converge as well).
+Consequently, this sequence is Cauchy, and we are done (note that an analogous argument would have followed if we had assumed that
+the other integral converged).
+
+The converse is a bit easier. Let us assume that we have a Cauchy sequence $\left\{ x_i \right\}$ that does not converge. We
+wish to show that one of the integrals converges. 
+Again, take the example of the sequence of integers we used earlier. Since the sequence is Cauchy, we know that there exists an $N>0$
+such that for $m,n>N$, the distance $d(x_m,x_n)<\varepsilon$, for arbitrary positive $\varepsilon=17$. Using the triangle
+inequality, we find that
+\begin{align*}
+    d(0,x_n)&\leq d(0,x_m)+17\\
+    17&\geq d(0,x_n)-d(x_m,0)
+\end{align*}
+Rewriting this in terms of integrals and taking $m\to-\infty,n\to\infty$ we find that
+\begin{align*}
+    \int_0^{x_n}\sqrt{f(s)} ds-\int_{x_m}^0\sqrt{f(s)} ds\leq 17\\
+    \int_0^{\infty}\sqrt{f(s)} ds-\int_{-\infty}^0\sqrt{f(s)} ds\leq 17.
+\end{align*}
+Consequently, each of the integrals must converge, and we are done.
+
+
+
+\subsection*{Problem 6}
+
+Let $(M,g)$ be a Riemannian manifold, let $f\in C^\infty(M)$, and let $p\in M$ be a regular point of $f$.
+\begin{enumerate}[(a)]
+    \item Let us compute the angle between the gradient of $f$ at $p$ and any (unit) directional derivative, $X|_p$ at $p$:
+        \begin{align*}
+            \cos\theta=\frac{\langle \text{grad }f,X\rangle_g}{|\text{grad }f|_g|X|_g}&=\frac{Xf|_p}{|\text{grad }f|_g}\\
+            |\text{grad }f|_g\cos\theta&=Xf|_p
+        \end{align*}
+        The left-hand side of the equation is maximized when $\theta=0$. But the right hand side, the directional derivative of
+        $f$ in the direction of $X$, which represents the change of $f$, must also be maximized at $\theta=0$. Thus,
+        the gradient of $f$ at $p$ points in the direction of greatest change at $p$ and has magnitude, seen above, to
+        be equal to this change (the directional derivative).
+    \item The level set of $f$ through $p$ forms a submanifold of $M$, since $p$ is a regular point of $f$. Simply by definition
+        of a level set, $f$ must be constant over this submanifold. Now we find $|\text{grad }f|_g\cos\theta=Xf|_p=0$ for some
+        directional derivative $X$ in the tangent space to the level set at $p$.
+        But since the gradient cannot be zero (as $f$ is arbitrary), it must be that $\cos\theta=0$, and thus the gradient must
+        be orthogonal to the level set of $f$ through $p$.
+\end{enumerate}
+
+
+\end{document}
