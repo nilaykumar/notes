@@ -1,0 +1,52 @@
+\documentclass{../../mathnotes}
+
+
+\title{Differentiable Manifolds Problem Set 6}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+
+Let $V_1,\ldots, V_k$ and $W$ be finite-dimensional real vector spaces. We wish to show that there is a canonical isomorphism
+$V_1^* \otimes \cdots \otimes V_k^*\otimes W\cong L(V_1,\ldots,V_k;W)$. First consider the map
+$\Phi:V_1^*\times \cdots \times V_k^*\times W\to L(V_1,\ldots,V_k;W)$ given by
+\[\Phi(\xi^1,\ldots,\xi^k,w)(v_1,\ldots,v_k,\omega)=\xi^1(v_1)\cdots\xi^k(v_k)w.\]
+This right-hand side is clearly linear in each of the arguments and takes values in $W$, so it is indeed a member of
+$L(V_1,\ldots,V_k;W)$. Note that $\Phi$ is multilinear in $\xi^1,\ldots\xi^k,w$, as the right-hand side is simply
+multiplication. By the characteristic property of tensor product spaces, then, $\Phi$ descends uniquely to a linear map
+$\tilde\Phi$ from $V_1^* \otimes \cdots \otimes V_k^*\otimes W$ to $L(V_1,\ldots,V_k;W)$:
+\[\tilde\Phi(\xi^1 \otimes \cdots \otimes \xi^k,w)(v_1,\ldots,v_k,\omega)=\xi^1(v_1)\cdots\xi^k(v_k)w.\]
+Furthermore, $\tilde\Phi$ takes the basis of $V_1^* \otimes \cdots \otimes V_k^*\otimes W$ to the
+basis of $L(V_1,\ldots,V_k;W)$:
+\[\tilde\Phi(e^1\otimes\cdots\otimes e^k, E_1)(v_1,\ldots,v_k,w)=e^1(v_1)\cdots e^k(v_k)E_1.\]
+Thus $\tilde\Phi$ must be an isomorphism (independent of the specific bases chosen), and we are done.
+
+\subsection*{Problem 2}
+
+Let $(e^1,e^2,e^3)$ be the standard dual basis for $(\R^3)^*$. Suppose that $\omega=e^1\otimes e^2\otimes e^3$ can be written
+as the sum of an alternating tensor and a symmetric tensor,
+\begin{align*}
+    \omega=e^1\otimes e^2\otimes e^3=\left(\eta+\theta\right)_{ijk}e^i\otimes e^j\otimes e^k
+\end{align*}
+with $\eta$ antisymmetric, $\theta$ symmetric. By linear independence of the basis vectors of $T^3( (\R^3)^*)$,
+the only non-vanishing term on the right-hand side must be that which contains a $e^1\otimes e^2\otimes e^3$,
+i.e. $(\eta+\theta)_{123}=1$. Note, however, that $(\eta+\theta)_{312}=(\eta+\theta)_{123}$ must be zero. This
+contradicts the previous statment, and thus this tensor cannot be written as a sum of an alternating and a symmetric
+tensor.
+
+\subsection*{Problem 3}
+
+We wish to show that the covectors $\omega^1,\ldots,\omega^k$ are linearly independent on a finite-dimensional space
+if and only if $\omega^1\wedge\cdots\wedge\omega^k=0$.
+
+\subsection*{Problem 4}
+\subsection*{Problem 5}
+\subsection*{Problem 6}
+
+
+\end{document}
