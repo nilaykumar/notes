@@ -1224,5 +1224,42 @@ Consequently, if $p$ is a prime, either $p$ is irreducible in $\Z[i]$ or $p=N(\a
     A prime number $p$ is a sum of 2 integer squares if and only if $p=2$ or $p\equiv 1\mod 4$.
 \end{cor}
 
+(April 8, 2013)
+
+We talked a bit about algebraic integers. I don't have any notes on this part. Sorry.
+
+\section{Irreducibility}
+
+How do we decide whether or not a polynomial is irreducible? We want to develop some tests, event for $f(x)\in\Q[x]$. The general
+setup is as follows: $R$ is a UFD and $F$ is the field of quotients of $R$. Of course, we can imagine that we are talking about
+$R=\Z,F=\Q$.
+
+\begin{exmp}[\textbf{Rational roots test}]
+    Let $f(x)=a_nx^n+\ldots+a_0\in\Z[x]$ for $a_n\neq 0,n\geq 1$. Suppose $f(x)$ has a rational root $p/q\in\Q$, $p,q\in\Z$,
+    in lowest terms $gcd(p,q)=1$. Then $p|a_0$ and $q|a_n$.
+\end{exmp}
+\begin{proof}
+    Suppose $f(p/q)=0$. Then
+    \[a_np^n/q^n+\ldots+a_0=0.\]
+    Multiplying by $q^n$, and moving one term to the other side, we can factor:
+    \[a_0q^n=p(-a_np^{n-1}-\ldots-a_1q^{n-1})\]
+    and thus $p|a_0q^n$. But since $p,q$ are relatively prime, the gcd of $p$ and $q^n$ is 1, and thus $p|a_0$.
+    Likewise, $q|a_n$.
+\end{proof}
+
+Note that if $f(x)$ is monic and in $\Z[x]$, a rational root has to be an integer. In fact, this works in any UFD -
+the proof is identical as above.
+
+\begin{thm}
+    Let $R$ be a UFD and $F$ be its field of quotients. Suppose we have $f(x)\in R[x]$ with degree $n\geq 1$. Then $f(x)$ is a product in $F[x]$
+    of two polynomials of degrees $d,e<n$ if and only if $f(x)$ is a product in $R[x]$ of 2 polynomials of degrees $d,e<n$.
+\end{thm}
+\begin{proof}
+    Note that the backward implication is obvious. The forwards implication is the non-trivial one.
+\end{proof}
+
+For the rational roots test above, we know that $x-p/q|f(x)\in\Q[x]$. The proof of the theorem shows that if $p/q$ are relatively prime,
+then $qx-p\in\Z[x]$ and $qx-p|f(x)\in\Z[x]$. This implies that $q|a_n$ and $p|a_0$. Essentially the test is the above theorem with one of the
+factors having degree one.
 
 \end{document}
