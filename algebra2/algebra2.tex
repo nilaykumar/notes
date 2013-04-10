@@ -1262,4 +1262,132 @@ For the rational roots test above, we know that $x-p/q|f(x)\in\Q[x]$. The proof 
 then $qx-p\in\Z[x]$ and $qx-p|f(x)\in\Z[x]$. This implies that $q|a_n$ and $p|a_0$. Essentially the test is the above theorem with one of the
 factors having degree one.
 
+(April 10, 2013)
+
+The above theorem leads to the following.
+\begin{cor}
+    If $f(x)\in R[x]$ and $f(x)$ is not a product of polynomials of smaller degrees in $R[x]$, then $f(x)$ is irreducible in $F[x]$.
+\end{cor}
+It's possible for $f(x)$ to be irreducible in $F[x]$ but reducible in $R[x]$ - take for example $11x^2-22\in\Z[x]$, which can have 11 factored
+out of it, which is irreducible in $\Z$ but not in $\Q[x]$, as 11 is a unit.
+
+\begin{rem}
+    Suppose $R$ is any ring and $I$ is an ideal in $R$. We have a homomorphism $\pi:R\to R/I$ such that $\pi(r)=r+I=\bar r$.
+    Similarly, given $R[x]$, we have a homomorphism $R[x]\to R/I[x]$ which simply reduces all coefficients mod $I$ that we will
+    write $\pi(f(x))=\bar f(x)$. The fact that this is a homomorphism follows easily from the fact that $\pi:r\to R/I$ is one.
+\end{rem}
+
+\begin{lem}
+    Suppose $R$ is an integral domain and $I$ is an ideal in $R$. Take some polynomial $f(x)=\sum_{i=0}^na_ix^i\in R[x]$ with
+    $n\geq 1$. Suppose $a_n\notin I$ and $f(x)=g(x)h(x)$ where $\deg g(x)=d$, $\deg h(x)=e$, with $d+e=n$. Then,
+    $\deg \bar g(x)=d,\deg \bar h(x)=e$.
+\end{lem}
+\begin{proof}
+    We know that $\deg f=d+e$ becasue $R$ is an integral domain. On the other hand, $\deg\bar g\leq d$ and $\deg \bar h\leq e$
+    and $\deg \bar g\bar h\leq\deg \bar g+\deg\bar g\leq d+e$. But since $f=gh,$ we must have $\bar f=\bar g\bar h$. But since 
+    the leading coefficient is not in $I$, we must have $\deg \bar f=\deg f=n$. We have a series of inequalities, but both ends
+    are the same, and thus each inequality must become an equality; in particular, $\deg\bar g=d$ and $\deg\bar h=e$.
+\end{proof}
+
+\begin{thm}
+    Let $R$ be a UFD, $I$ an ideal in $R$. Let $f(x)=\sum_{i=0}^na_ix^i\in R[x]$ with $a_n\neq 0$, $a_n\neq I$. If
+    $\bar f(x)$ in $(R/I)[x]$ is not a product of 2 polynomials of degrees less than $n$, then $f(x)$ is irreducible
+    in $F[x]$.
+\end{thm}
+\begin{proof}
+    We know that $f(x)$ reducible in $F[x]$ implies that $f(x)=g(x)h(x)$ in $R[x]$ where the degree of $g$ is $d<n$ and the degree
+    of $h$ is $d<n$ (from the theorem/corollary above). But this implies that $\bar f(x)=\bar g(x)\bar h(x)$ where the degrees
+    of $\bar g,\bar h$ are still $d,e<n$. This contradicts the hypothesis and $f(x)$ must be irreducible in $F[x]$.
+\end{proof}
+
+\begin{exmp}
+    Say $R=\Z$ and $I=(p)$. $R/I$ is a field. If $\bar f(x)$ in $\F_p[x]$ is irreducible then $f(x)$ is irreducible.
+    The strategy, given $f(x)\in\Z[x]$, is to simply look at $f(x)\mod p$ where $p$ is any prime, and if the result
+    is ever irreducible for some $p$, then $f(x)$ itself was irreducible in $\Q[x]$.
+
+    In $\F_2[x]$ if we look at $x^4+x^3+x^2+x+1$, this is irreducible in $\F_2[x]$. How would we check this? It's clear that
+    there's no linear factor, and thus it could only be a product of 2 irreducible degree 2 polynomials. But since there is only
+    one such polynomial, it would have to be $(x^2+x+1)^2$. But in characteristic 2, this is $x^4+x^2+1$, which is not what
+    we wanted. In this sense, we have a (rather computational) sieve.
+
+    Now let $f(x)\in \Z[x]$, $f(x)=5x^4-127x^3+1789x^2-2751x+19$. It's clear that $f(x)\mod 2=x^4+x^3+x^2+x+1$ is
+    irreducible in $\F_2[x]$, and thus $f(x)$ is irreducible in $\Q[x]$. (the question of whether it is irreducible
+    in $\Z[x]$ is just a matter of whether there is some common factor, which of course doesn't affect irreducibility
+    in $\Q[x]$).
+
+    Note carefully that the leading coefficient must not be in the ideal $I$. Let's look at a stupid example:
+    $f(x)=6x^2+5x+1$. $f(x)\mod 3=2x+1$ in $\F_3[x]$, which is irreducible. However, $f(x)=(2x+1)(3x+1)$; the reason it doesn't
+    work is simply because the second factor, $3x+1$, would become a unit in $\F_3[x]$.
+\end{exmp}
+
+Now an example from last time is $x^2+1\in\Z[x]$. If we reduce $\mod p$, we get $p\equiv1\mod4$ and $x^2+1$ has a root
+and thus is irreducible. If $p\equiv 3\mod 4$ then $x^2+1$ is irreducible. We clearly can ``pick the wrong prime.'' The
+question then arises - can we always pick a right prime? In particular, given $f(x)\in\Z[x]$ irreducible in $\Q[x]$,
+does there always exist a prime $p$ such that $\bar f(x)\in\F_p[x]$ is irreducible? The answer, in fact, turns out to be no,
+and we will see an example on the homework. Consequently, this test will not work all the time.
+
+\begin{thm}[\textbf{Eisenstein criterion}]
+    Let $R$ be a UFD, and $M$ a maximal ideal (in fact this theorem holds for prime ideals, but the proof is just more complicated).
+    Let $f(x)=\sum_{i=0}^na_ix^i\in R[x]$. Suppose that
+    \begin{enumerate}
+        \item $a_n\notin M$
+        \item for all $i<n$, $a_i\in M$
+        \item $a_0\notin M^2$, i.e. not a product of two things in $M$.
+    \end{enumerate}
+Then $f(x)$ is irreducible in $F[x]$. In fact, any if $R=\Z$ and $M=(p)$ and $f(x)$ satisfies the above criteria,
+we say that $f(x)$ \textbf{is Eisenstein at $p$}.
+\end{thm}
+\begin{proof}
+    Take $f(x)\in R[x]$ that satisfies the required conditions. Look at $\bar f(x)\in (R/M)[x]$. Clearly this forces
+    $\bar f(x)=\bar a_0x^n$. Suppose $f(x)=g(x)h(x)$. Then $\bar f(x)=\bar g(x)\bar h(x)=\bar a_0x^n$. But $x^n$ is a product
+    of irreducibles and the only way to factor this is to have $\bar b_dx^d\bar c_ex^e$ where $d+e=n$. This implies that
+    $g(x)=\sum_{i=0}^db_ix^i$ satisfies $b_i\in M$ for all $i<d$ and likewise for $h(x)$, $c_i\in M$ for all $i<e$. In particular,
+    $b_0,c_0\in M$ as the constant terms don't show up. But $b_0c_0=a_0$. But this contradicts the third Eisenstein criterion and
+    thus $f(x)$ must be irreducible in $F[x]$.
+\end{proof}
+
+\begin{exmp}
+    Take $f(x)=11x^4-33x^2+99x+363$. There are clearly two primes floating around - 11 will clearly not work as 
+    it is in $M$. It's clear that $11\notin (3)$, while the coefficients are divisible by 3. Finally, is $363\in(3)^2\in(3)^2=(9)$?
+    No. Then, $f(x)$ is irreducible in $\Q[x]$. It's clearly not irreducible in $\Z[x]$ as you can factor out an 11.
+
+    Take $f(x)=x^3-2$. $f$ is certainly Eisenstein at 2, and thus $f(x)$ is irreducible. Note however, that previously we 
+    could not say anything for things like $x^4-2$, as it is not enough just to not have a root. This criterion now allows us
+    to show that $f(x)=x^n-p$ is irreducible hwere $p$ is a prime, simply because $f$ is Eisenstein at $p$. This can be
+    generalized in many ways, and thus although the criterion looks strange, it is actually quite natural.
+\end{exmp}
+
+\section{Cyclotomic polynomials}
+
+Let us work with coefficients in $\Q$. Recall we have the roots of $x^n-1$: $\mu_n\subset\C^*$. This polynomial is obvously
+not irreducible. Notice that if $d|n$, then $\mu_d\leq\mu_n$ and in fact, $x^d-1|x^n-1$, which can be checked via algebra.
+
+Take, for example, $x^4-1=(x^2+1)(x+1)(x-1)$. Thus every fourth root of 1 has roots of order 1 or 2. Similarly,
+one can show that every sixth root of 1 has order either 1 or 6. If $n$ is prime, however, $x^p-1=(x-1)(x^{p-1}+x^{p-1}+\ldots+1)$,
+which we define to be $\Phi_p(x)$, the $p$th cyclotomic polynomial. By definition,$\Phi_p(x)=\frac{x^p-1}{x-1}$.
+
+\begin{thm}
+    If $p$ is a prime, then $\Phi_p(x)$ is irreducible.
+\end{thm}
+
+\begin{proof}
+    Note the following trick: given a polynomial $f(x)\in F[x]$, $f$ is irreducible if and only if $f(ax+b)$ is irreducible where $a,b\in F$ with $a\neq 0$.
+    We will show that $\Phi_p(x+1)$ is irreducible by showing that this is Eisenstein. Remember that $\Phi_p(x)=(x^p-1)/(x-1)$. Then,
+    \[\Phi_p(x+1)=\frac{(x+1)^p-1}{x+1-1}=\ldots=x^{p-1}+\binom{p}{1}x^{p-2}+\ldots+\binom{p}{p-1}.\]
+    If $k\leq p-1$ then $\binom{p}{k}$ is divisible by $p$ and $\binom{p}{p-1}=\binom{p}{1}=p$ is not divisible by $p^2$
+    and thus $\Phi_p(x+1)$ is Eisenstein at $p$ and thus irreducible. By the aforementioned trick then, $\Phi_p(x)$ is irreducible.
+    Without this trick, we could not have used the Eisenstein as all the coefficients were 1.
+\end{proof}
+
+In general, given $\mu_n$, we say an $n$th root of unity $\alpha$ is a primitive $n$th root of unity if $\langle \alpha\rangle=\mu_n$,
+i.e. $\alpha^n=1$, $\alpha^k\neq 1$ if $0<k<n$. For example, $e^{2\pi ik/n}$ is primitive if and only if $\gcd(k,n)=1$. In fact, the number
+of primitive roots of unity is simply the Euler phi function $\varphi(n)$. We define $\Phi_n(x)=\prod_\alpha(x-\alpha)$ where the product is over
+all primitive $n$th roots of unity. Note that $n=p\alpha$ is a primitive root of unity if and only if $\alpha\neq 1$. (?)
+
+Note that
+\begin{enumerate}
+    \item $\Phi_n(x)\in\Q[x]$ and in fact in $\Z[x]$
+    \item $\Phi_n(x)$ is irreducible in $\Q[x]$
+\end{enumerate}
+
 \end{document}

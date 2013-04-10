@@ -41,10 +41,24 @@ tensor.
 
 \subsection*{Problem 3}
 
-We wish to show that the covectors $\omega^1,\ldots,\omega^k$ are linearly independent on a finite-dimensional space
-if and only if $\omega^1\wedge\cdots\wedge\omega^k=0$.
+We wish to show that the covectors $\omega^1,\ldots,\omega^k$ are linearly dependent on a finite-dimensional space
+if and only if $\omega^1\wedge\cdots\wedge\omega^k=0$. Let us first assume that we have the set of covectors is linearly
+dependent. Then, since
+\[\omega^1\wedge\cdots\wedge\omega^k(v_1,\ldots,v_k)=\det(\omega^j(v_i)),\]
+and since $\omega^j(v_i)$ is not full rank by assumption, the determinant is zero. Consequently the wedge product must
+be zero.
+
+Conversely, let us assume that the wedge product is zero. It follows that one of the arguments must be a multiple of another.
+Clearly, then the set of covectors is linearly dependent.
 
 \subsection*{Problem 4}
+
+\begin{enumerate}
+    \item 
+        Given an ordered $k$-tuple $(v_1,\ldots,v_k)$ of elements of $V$, we wish to show it's linearly dependent if and
+        only if $v_1\wedge\cdots\wedge v_k=0$.
+\end{enumerate}
+
 \subsection*{Problem 5}
 \subsection*{Problem 6}
 
