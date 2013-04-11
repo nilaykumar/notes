@@ -15,15 +15,15 @@
 Let $V_1,\ldots, V_k$ and $W$ be finite-dimensional real vector spaces. We wish to show that there is a canonical isomorphism
 $V_1^* \otimes \cdots \otimes V_k^*\otimes W\cong L(V_1,\ldots,V_k;W)$. First consider the map
 $\Phi:V_1^*\times \cdots \times V_k^*\times W\to L(V_1,\ldots,V_k;W)$ given by
-\[\Phi(\xi^1,\ldots,\xi^k,w)(v_1,\ldots,v_k,\omega)=\xi^1(v_1)\cdots\xi^k(v_k)w.\]
+\[\Phi(\xi^1,\ldots,\xi^k,w)(v_1,\ldots,v_k)=\xi^1(v_1)\cdots\xi^k(v_k)w.\]
 This right-hand side is clearly linear in each of the arguments and takes values in $W$, so it is indeed a member of
 $L(V_1,\ldots,V_k;W)$. Note that $\Phi$ is multilinear in $\xi^1,\ldots\xi^k,w$, as the right-hand side is simply
 multiplication. By the characteristic property of tensor product spaces, then, $\Phi$ descends uniquely to a linear map
 $\tilde\Phi$ from $V_1^* \otimes \cdots \otimes V_k^*\otimes W$ to $L(V_1,\ldots,V_k;W)$:
-\[\tilde\Phi(\xi^1 \otimes \cdots \otimes \xi^k,w)(v_1,\ldots,v_k,\omega)=\xi^1(v_1)\cdots\xi^k(v_k)w.\]
+\[\tilde\Phi(\xi^1 \otimes \cdots \otimes \xi^k \otimes w)(v_1,\ldots,v_k)=\xi^1(v_1)\cdots\xi^k(v_k)w.\]
 Furthermore, $\tilde\Phi$ takes the basis of $V_1^* \otimes \cdots \otimes V_k^*\otimes W$ to the
 basis of $L(V_1,\ldots,V_k;W)$:
-\[\tilde\Phi(e^1\otimes\cdots\otimes e^k, E_1)(v_1,\ldots,v_k,w)=e^1(v_1)\cdots e^k(v_k)E_1.\]
+\[\tilde\Phi(e^1\otimes\cdots\otimes e^k \otimes E_1)(v_1,\ldots,v_k,w)=e^1(v_1)\cdots e^k(v_k)E_1.\]
 Thus $\tilde\Phi$ must be an isomorphism (independent of the specific bases chosen), and we are done.
 
 \subsection*{Problem 2}
@@ -53,14 +53,110 @@ Clearly, then the set of covectors is linearly dependent.
 
 \subsection*{Problem 4}
 
-\begin{enumerate}
+\begin{enumerate}[(a)]
     \item 
-        Given an ordered $k$-tuple $(v_1,\ldots,v_k)$ of elements of $V$, we wish to show it's linearly dependent if and
-        only if $v_1\wedge\cdots\wedge v_k=0$.
+        Given an ordered $k$-tuple $(v_1,\ldots,v_k)$ of elements of $V$, we wish to show that it's linearly dependent if and
+        only if $v_1\wedge\cdots\wedge v_k=0$. Note that everything that we have shown for differential forms built up using
+        alternating covariant $k$-tensors can be shown for differential forms built up using alternating contravariant $k$-tensors,
+        simply by the canonical isomorphism between $V$ and its double dual $V^{**}$. Then exactly the same logic holds over from
+        the last problem.
+    \item
+        Given two linearly independent ordered $k$-tuples $(v_1,\ldots,v_k)$ and $(w_1,\ldots,w_k)$, we wish to show that they
+        have the same span if and only if $v_1\wedge\cdots\wedge v_k=cw_1\wedge\cdots\wedge w_k$ for some nonzero real number $c$.
+        Suppose that these $k$-tuples have the same span. Then it should be clear that these are two different bases for the space
+        and are related by an invertible linear map. Consequently, we can solve for $w_i$ in terms of $v_j$ and insert these expressions
+        into the right hand wedge product. Note that there will be many terms with repeated indices, which will vanish, and thus, after
+        rearranging forms at the cost of negative signs, we will be left with one term that looks like $v_1\wedge\cdots\wedge v_k$
+        with some constant term out front that is a linear combination of certain entries of the change of basis matrix that relates
+        the two bases.
+
+        Conversely, let us assume that the wedge products differ by a multiplicative constant. Let us take
+        \[w_i\wedge v_1\wedge\cdots\wedge v_k=0\]
+        due to the repeated vectors on the right-hand side. This implies, by the previous part of the problem, that $(w_i,v_1,\ldots, v_k)$
+        are linearly dependent, i.e. $w_i$ can be written as a linear combination of the $v_j$. We can do precisely the same trick and take the
+        wedge product with $v_i$ on both sides to show that $v_i$ can be written as $w_j$. This shows that the $k$-tuples have the same
+        span.
 \end{enumerate}
 
 \subsection*{Problem 5}
+
+\begin{enumerate}[(a)]
+    \item Take the 2-form $\omega=x dy\wedge dz+ydz\wedge dx+zdx\wedge dy$. We can convert to spherical coordinates,
+        \[(x,y,z)\mapsto(\rho\sin\phi\cos\theta,\rho\sin\phi\sin\theta,\rho\cos\phi)\]
+        which is rather messy:
+        \begin{align*}
+            \omega=\rho\cos\phi(&-\rho\cos^2\theta\sin^2\theta d\theta\wedge d\rho -\rho\sin^2\theta\sin^2\theta d\theta\wedge d\rho \\
+            &-\rho^2\cos^2\theta\cos\theta\sin\theta d\theta\wedge d\phi-\rho^2\cos\phi\sin^2\theta\sin\phi d\theta\wedge d\phi)\\
+            +\rho\sin\theta\sin\phi(&-\rho\cos\phi\sin\theta\sin\phi d\theta\wedge d\rho+\rho^2\sin\theta\sin^2\phi d\theta\wedge d\phi\\
+            &-\rho\cos\theta\cos^2\phi d\rho\wedge d\phi-\rho\cos\theta\sin^2\phi d\rho\wedge d\phi)\\
+            +\rho\cos\theta\sin\theta(&\rho\cos\theta\cos\phi\sin\phi d\theta\wedge d\rho-\rho^2\cos\theta\sin^2\phi d\theta\wedge d\phi\\
+            &-\rho\cos^2\phi-\rho\cos^2\phi\sin\theta d\rho\wedge d\phi-\rho\sin\theta\sin^2\phi d\rho\wedge d\phi)
+        \end{align*}
+        which can be simplified by using the alternating property of differential forms and trig identities to get
+        \[\omega=-\rho^3 \sin\phi d\theta\wedge d\phi.\]
+    \item We can now compute the exterior derivative:
+        \begin{align*}
+            d\omega=-d(\rho^3\sin\phi d\theta \wedge d\phi)=- 3\rho^2\sin\phi d\rho\wedge d\theta \wedge d\phi
+        \end{align*}
+        and in Cartesian coordinates:
+        \begin{align*}
+            d\omega&=d(x dy\wedge dz+ydz\wedge dx+zdx\wedge dy)\\
+            &=dx\wedge dy \wedge dz+dy\wedge dz\wedge dx+dz\wedge dx \wedge dy\\
+            &=3dx\wedge dy \wedge dz
+        \end{align*}
+        These two, are in fact, the same, as if we convert the Cartesian version to spherical, we find
+        \begin{align*}
+            d\omega&=3d(\rho\sin\phi\cos\theta)\wedge d(\rho\sin\phi\sin\theta)\wedge d(\rho\cos\phi)\\
+            &=3(\rho^2\cos^2\theta\cos^2\phi\sin\phi d\theta\wedge d\rho\wedge d\phi+\rho^2\cos^2\phi\sin^2\theta\sin\phi d\theta\wedge d\rho\wedge d\phi\\
+            &+\rho^2\cos^2\theta\sin^3\phi d\theta\wedge d\rho \wedge d\phi+\rho^2\sin^2\theta\sin^3\phi d\theta\wedge d\rho\wedge d\phi)\\
+            &=-3\rho^2\sin\phi d\theta\wedge d\rho \wedge d\phi
+        \end{align*}
+        precisely as desired. In other words, if we view the coordinate change as a pullback onto the same manifold, we simply have
+        that the pullback commutes with the exterior derivative.
+    \item Let us compute the pullback $\iota^*_{\mathbb{S}^2}\omega$ to $\mathbb{S}^2$ using coordinates $(\phi,\theta)$ on the
+        open subset where these coordinates are defined. First note that
+        \[\iota(\phi,\theta)=(\sin\phi\cos\theta,\sin\phi\sin\theta,\cos\phi).\]
+        The pullback of $\omega=x dy\wedge dz+ydz\wedge dx+zdx\wedge dy$ is then simply:
+        \begin{align*}
+            \iota^*\omega&=-\cos^2\theta\sin^3\theta d\theta\wedge d\phi-\sin^2\theta\sin^3\phi d\theta\wedge d\phi\\
+            &+\cos\phi\left( -\cos^2\theta\cos\phi\sin\phi d\theta\wedge d\phi-\cos\phi\sin^2\theta\sin\phi d\theta\wedge d\phi \right)\\
+            &=\sin\phi d\phi\wedge d\theta
+        \end{align*}
+    \item 
+        The above pullback 2-form is not zero anywhere where the coordinates are defined, as $\phi=0,\pi$ are not in the coordinate system.
+        As the spherical coordinates are defined on the open set that is the complement of half any great circle (including
+        the north and south poles), it now remains to show that the 2-form is zero on this set. It should be clear, however,
+        that we have simply chosen one choice of coordinates, and since there is rotational symmetry, by simply choosing a different
+        spherical coordinate system, we would again arive at the fact that the 2-form is non-zero.
+\end{enumerate}
+
+
 \subsection*{Problem 6}
+
+\begin{enumerate}[(a)]
+    \item Take $F(s,t)=(st,e^t)$ from $M=\R^2\to N=\R^2$. Let $\omega=x dy$. Then we can compute
+        \begin{align*}
+            d\omega=d(x dy)=dx\wedge dy
+        \end{align*}
+        If we now pullback, we have
+        \begin{align*}
+            F^*(dx\wedge dy)=d(st)\wedge d(e^t)=(t ds+s dt)\wedge(e^t dt)=te^t ds\wedge dt.
+        \end{align*}
+        On the other hand, we compute
+        \begin{align*}
+            F^*(x dy)=st d(e^t)=ste^t dt
+        \end{align*}
+        and then take
+        \begin{align*}
+            d(ste^t dt)=te^t ds\wedge dt
+        \end{align*}
+        as the product rule terms with $t$ will contribute $dt$'s, which will ultimately vanish due to the wedge product.
+        Consequently, we see that here $F^*(d\omega)=d(F^*\omega)$.
+    \item Note that since $\omega$ is a 2-form, $d\omega$ must be a 3-form. Since pulling back a 3-form to $\R^2$
+        will yield a 3-form on a 2-dimensional space, there must be a repeated index and thus the pullback must be zero.
+    \item Here, again, $\omega$ is a 2-form and thus $d\omega$ must be a 3-form. Precisely the same argument as in part (b) holds:
+        pulling back will yield a 3-form on a 2-dimensional space, which will always be zero.
+\end{enumerate}
 
 
 \end{document}
