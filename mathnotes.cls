@@ -24,6 +24,8 @@
 \DeclareMathOperator{\res}{Res}
 \DeclareMathOperator{\Int}{Int}
 \DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Gal}{Gal}
 \DeclareMathOperator{\id}{Id}
 \DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\irr}{irr}

@@ -1230,13 +1230,13 @@ We talked a bit about algebraic integers. I don't have any notes on this part. S
 
 \section{Irreducibility}
 
-How do we decide whether or not a polynomial is irreducible? We want to develop some tests, event for $f(x)\in\Q[x]$. The general
+How do we decide whether or not a polynomial is irreducible? We want to develop some tests, even for $f(x)\in\Q[x]$. The general
 setup is as follows: $R$ is a UFD and $F$ is the field of quotients of $R$. Of course, we can imagine that we are talking about
 $R=\Z,F=\Q$.
 
 \begin{exmp}[\textbf{Rational roots test}]
     Let $f(x)=a_nx^n+\ldots+a_0\in\Z[x]$ for $a_n\neq 0,n\geq 1$. Suppose $f(x)$ has a rational root $p/q\in\Q$, $p,q\in\Z$,
-    in lowest terms $gcd(p,q)=1$. Then $p|a_0$ and $q|a_n$.
+    in lowest terms $\gcd(p,q)=1$. Then $p|a_0$ and $q|a_n$.
 \end{exmp}
 \begin{proof}
     Suppose $f(p/q)=0$. Then
@@ -1255,7 +1255,8 @@ the proof is identical as above.
     of two polynomials of degrees $d,e<n$ if and only if $f(x)$ is a product in $R[x]$ of 2 polynomials of degrees $d,e<n$.
 \end{thm}
 \begin{proof}
-    Note that the backward implication is obvious. The forwards implication is the non-trivial one.
+    Note that the backward implication is obvious. The forwards implication is the non-trivial one. The proof of this is contained
+    in the notes.
 \end{proof}
 
 For the rational roots test above, we know that $x-p/q|f(x)\in\Q[x]$. The proof of the theorem shows that if $p/q$ are relatively prime,
@@ -1389,5 +1390,59 @@ Note that
     \item $\Phi_n(x)\in\Q[x]$ and in fact in $\Z[x]$
     \item $\Phi_n(x)$ is irreducible in $\Q[x]$
 \end{enumerate}
+
+\section{Galois theory}
+
+(April 15, 2013)
+
+We wish to understand a polynomial $f(x)\in F[x]$ by understanding the symmetries of its roots.
+
+\begin{defn}
+    If $E$ is a field, then an \textbf{automorphism} of $E$ is just an isomorphism from $E$ to itself.
+\end{defn}
+
+If $E=\C$, for example, complex conjugation is an automorphism. If $E=\Q(\sqrt{2})$, we showed in homework
+that there are only two possibilities: the identity, and $\sigma:\Q(\sqrt{2})\to\Q(\sqrt{2})$ such that $\sigma(a+b\sqrt{2})=a-b\sqrt{2}$.
+
+\begin{defn}
+    Given a field $E$ we define the set of all automorphisms of $E$ as $\Aut E$. This set, in fact, forms the \textbf{automorphism group}.
+    The identity is typically denoted 1 and the product is denoted by juxtaposition.
+\end{defn}
+
+Take, for example, $\Aut \Q(\sqrt{2})=\left\{ 1,\sigma \right\}$ or $\Aut\R=\left\{ 1 \right\}$. On the other hand,
+$\Aut\C$ is a very large group that we don't even begin to describe.
+
+\begin{defn}
+    Given an extension $F\leq E$ (almost always finite), we define the \textbf{Galois group}:
+    \[\Gal(E/F)=\left\{ \sigma\in\Aut E:\sigma(a)=a \text{ for all } a\in F \right\}.\]
+    It is easy to see that $\Gal(E/F)$ is a subgroup of $\Aut E$.
+\end{defn}
+
+\begin{exmp}
+    Take, for example, $\Gal(\C/\R)$. We have that 
+    \begin{align*}
+        \sigma(a+bi)=\sigma(a)+\sigma(b)\sigma(i)=a+b\sigma(i)=a\pm bi,
+    \end{align*}
+    and thus $\Gal(\C/\R)=\left\{ 1,\sigma \right\}$ where $\sigma$ is complex conjugation.
+
+    It is easy to see that any automorphism of a field preserves the prime field; in other words if $F$ is a prime
+    subfield of $E$, then for all $\sigma\in\Aut E$, $\sigma(a)=a$ for all $a\in F$. 
+\end{exmp}
+
+Given $\sigma\in\Gal(E/F)$, we get a field $E^\sigma$, called the \textbf{fixed field} of $\sigma$. We have seen this before:
+\[E^\sigma=\left\{ \alpha\in E:\sigma(\alpha)=\alpha \right\}.\]
+Clearly $F\subset E^\sigma\subset E$. We claim that $E^\sigma$ is a subfield of $E$, as it is non-empty, and because
+$\alpha,\beta\in E^\sigma$ if and only if $\sigma(\alpha)=\alpha,\sigma(\beta)=\beta$ and thus
+$\sigma(\alpha\pm\beta)=\sigma(\alpha)\pm\sigma(\beta)=\alpha\pm\beta$ so $\alpha\pm\beta\in E^\sigma$ (and likewise
+for multiplication and division).
+
+If $X\subset \Gal(E/F)$, then we defined
+\[E^X=\left\{ \alpha\in E:\sigma(\alpha)=\alpha \text{ for all }\sigma\in X \right\}=\cap_{\sigma\in X}E^\sigma,\]
+which is also a subfield, $F\leq E^X\leq E$.
+
+Thus given $H\leq\Gal(E/F)$, we get a fixed field $E^H$, such that $F\leq E^H\leq E$. This is in fact order-reversing,
+as if $H_1\leq H_2$, then $E^{H_2}\leq E^{H_1}$. On the other hand, given an intermediate field $F\leq K\leq E$, we can
+look at $\Gal(E/K).$ It clearly automatically is the identity on the smallest field and thus $\Gal(E/K)\leq\Gal(E/F)$.
+This is also order-reversing: given $F\leq K_1\leq K_2\leq E$, we have that $\Gal(E/K_2)\leq\Gal(E/K_1)$.
 
 \end{document}
