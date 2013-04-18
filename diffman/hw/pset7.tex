@@ -1,0 +1,152 @@
+\documentclass{../../mathnotes}
+
+
+\title{Differentiable Manifolds Problem Set 7}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+
+We wish to show that for any $(e^{2\pi ix},e^{2\pi iy})$ on the torus, and for any $\varepsilon>0$, there exists an $n\in \Z$ such that
+\[|(e^{2\pi ix},e^{2\pi iy})-(e^{2\pi i(x+n)},e^{2\pi i\alpha(x+n)})|<2\pi\varepsilon,\]
+where the second term is on the curve $\gamma$. 
+This will show that we can get arbitrarily close to any point on the torus.
+This specific choice allows simplifies the distance to
+\begin{align*}
+    |1-e^{2\pi i(\alpha x+\alpha n-y)}|&<2\pi\varepsilon\\
+    |e^{2\pi i(\alpha x+\alpha n-y)}-e^{2\pi im}|&<2\pi\varepsilon
+\end{align*}
+which, using the trick from the book yields
+\[|e^{2\pi i(\alpha x+\alpha n-y)}-e^{2\pi im}|\leq|\beta+\alpha n-m|<\varepsilon\]
+where we've defined $\beta=\alpha x-y$. In other words, we want to show that $-\beta$ can be well approximated
+by $\alpha n-m$ for some integers $n,m$. This holds by an analog to Dirichlet's Approximation Theorem,
+which I can't quite figure out how to prove.
+
+\subsection*{Problem 2}
+
+Let $\CP^n$ denote the $n$-dimensional complex projective space. 
+\begin{enumerate}[(a)]
+    \item Let us for now consider the case where $n=1$ and extrapolate from there.
+        Let $\pi:\C^2\setminus\left\{ 0 \right\}\to\CP^1$ be the quotient map
+        generating the projective space. In the 2nd coordinate chart, we have that:
+        \begin{align*}
+            \hat\pi\left(x_1+iy_1,x_2+iy_2\right)&=\left(\frac{x_1x_2+y_1y_2}{x_2^2+y_2^2},\frac{y_1x_2-x_1y_2}{x_2^2+y_2^2}\right)\\
+        \end{align*}
+        where we are implicitly working with reals. We can now compute the differential:
+        \begin{align*}
+            d\hat\pi=\left(
+            \begin{array}[]{cccc}
+                \frac{x_2}{x_2^2+y_2^2} & \frac{y_2}{x_2^2+y_2^2} & \frac{x_1(x_2^2+y_2^2)-(x_1x_2+y_1y_2)2x_2}{(x_2^2+y_2^2)^2} & \frac{y_1(x_2^2+y_2^2)-(x_1x_2+y_1y_2)2y_2}{(x_2^2+y_2^2)^2}\\
+                -\frac{y_2}{x_2^2+y_2^2} & \frac{x_2}{x_2^2+y_2^2} & \frac{y_1(x_2^2+y_2^2)-(y_1x_2+x_1y_2)2x_2}{(x_2^2+y_2^2)^2} & -\frac{x_1(x_2^2+y_2^2)-(y_1x_2+x_1y_2)2y_2}{(x_2^2+y_2^2)^2}
+            \end{array}
+            \right)
+        \end{align*}
+        Note that the first 2-by-2 block is clearly non-singular (the determinant is 1) and thus the matrix is full-rank
+        and surjective (and smooth, since in this chart $x_2,y_2\neq 0$). Thus $\pi$ is a submersion in the case where $n=1$.
+        If we go to higher $n$, we will have, in the $i$th chart,
+        \[\hat\pi(z_1,\ldots,z_{n+1})=\left( \frac{z_1}{z_i},\ldots,\hat z_i,\ldots,\frac{z_{n+1}}{z_i} \right).\]
+        If we now compute the differential, we will find, similar to the $n=2$ case, that there is a $2n$-by-$2n$ minor on the left
+        that will be block diagonal (and look similar to that above depending on the coordinate chart chosen) whose determinant
+        will always be 1. Thus, for any $n$, the differential will be surjective (and smooth), and we have a submersion.
+    \item We wish to show that $\CP^1$ and $S^2$ are diffeomorphic; first note that both can be described with the usual two coordinate charts,
+        call them $(U_1,f_1)$ and $(U_2,f_2)$ for $\CP^1$ and $(V_1,g_1)$ and $(V_2, g_2)$ for $S^2$. 
+        Let us define $\Phi_1:U_1\to V_1$ such that $\Phi_1=g_1^{-1}\circ \id\circ f_1$ and $\Phi_2:U_2\to V_2$ such that
+        $\Phi_2=g_2^{-1}\circ\id\circ f_2$. Clearly, since $g_i,f_i,\id$ are bijective and smooth with smooth inverse, $\Phi_i$ are diffeomorphisms
+        from $U_i$ to $V_i$. Consequently, we have diffeomorphisms from charts to charts - now we must put them together to get
+        a diffeomorphism from $\CP^1$ to $S^2$. Define $\Phi$ to be $\Phi_1$ on $U_1$ and $\Phi_2$ on $U_2$. We must check that
+        $\Phi_1$ and $\Phi_2$ agree where they overlap, i.e. $\Phi_1(p)=\Phi_2(p)$ whenever $p\in U_1\cap U_2$. Pushing definitions,
+        we find that this is equivalent to:
+        \[f_1\circ f_2^{-1}=g_1\circ g_2^{-1}.\]
+        For the sphere, we know we have $(u,v)\mapsto (4u/(u^2+v^2),4v/(u^2+v^2))$, which in complex notation goes as
+        $z\mapsto 1/z$. For the complex projective space, we do the computation:
+        \[f_1\circ f_2^{-1}(z_2/z_1)=f_1(z_2,z_1)=z_1/z_2\]
+        and again we get $z\mapsto 1/z$. Consequently, the transition maps agree and we have a diffeomorphism $\Phi$ from
+        $\CP^1$ to $S^2$.
+\end{enumerate}
+
+\subsection*{Problem 3}
+
+Let $M$ be a nonempty smooth compact manifold. Suppose there exists a smooth submersion
+$F:M\to\R^k$ for some $k>0$. Since $F$ is smooth, it must be continuous. Consequently,
+the image $N=F(M)\subset\R^k$ must be compact, as continuous maps take compact to compact.
+Note, however, that every smooth submersion is an open map, and since $M$ is open, $N$
+must be open as well. But if $N$ is both open and closed in $\R^k$, it must be either
+$\R^k$ itself or the null set $\varnothing$. As the image of a map, $N$ cannot possibly
+be the null set, but it cannot be $\R^k$ either as $N$ is compact and $\R^k$ is not
+(for $k>0$).  Thus we reach a contradiction - no such smooth submersion can exist.
+
+\subsection*{Problem 4}
+
+Let $S:V\to W$ and $T:W\to X$ be linear maps. Suppose $S$ and $T$ are both injective.
+Then, $\ker S=\left\{ 0 \right\}$ and $\ker T=\left\{ 0 \right\}$. Clearly, then,
+$\ker T\circ S=\left\{ 0 \right\}$ as well, because the only element that $T$ maps
+to $0\in X$ is $0\in W$, and in turn, the only element of $V$ sent by $S$ to $0\in W$
+is $0\in V$. Thus $T\circ S$ is injective.
+
+Suppose now that $S$ and $T$ are both surjective. In other words, $\text{Im }S=W$ and $\text{Im }T=X$.
+Clearly $T\circ S$ must be surjective as well - given an $x\in X$, we can find a $w\in W$ such that
+$T(w)=x$ by surjectivity of $T$, and a $v\in V$ such that $S(v)=w$ by surjectivity of $S$.
+
+Next suppose that $T\circ S$ is surjective. Take $x\in X$. Can we find a $w\in W$, such that $T(w)=x$? 
+Using the surjectivity of $T\circ S$, we can find a $v\in V$ such that $T(S(v))=x$. We simply take
+$w=S(v)$ and thus $T(w)=T(S(v))=x$, and so $T$ is surjective as well. However, $S$ need not be
+surjective; consider, for example, $V=\R^2,W=\R^3,X=\R$ with $S$ the inclusion map and $T$ the
+projection map. $T\circ S$ is clearly surjective, as it takes $\R^2$, injects it into $\R^3$,
+and then projects out 2 dimensions onto $\R$ - the overall effect is simply a projection that
+drops one dimension. $T$ is surjective, as it is a projection, but $S$ is clearly not surjective,
+as $\R^3$ has higher dimension than $\R^2$.
+
+Finally, suppose that $T\circ S$ is injective, i.e. if $T(S(v_1))=T(S(v_2))$,
+then $v_1=v_2$. Now let $S(v_1)=S(v_2)$. Then, applying $T$ on both sides yields
+$T(S(v_1))=T(S(v_2))$, which implies that $v_1=v_2$, and thus $S$ must be injective as well.
+However, $T$ need not be injective; consider, for example $V=\R,W=\R^3,X=\R^2$ with $S$
+the inclusion map and $T$ the projection map. $T\circ S$ is clearly injective, as it is simply
+the inclusion of $\R$ into $\R^2$, but $T$ is not injective, as it is a projection onto $\R^2$.
+
+\subsection*{Problem 5}
+
+Suppose $V,W,X$ are finite-dimensional vector spaces, and $S:V\to W$ and $T:W\to X$
+are linear maps. 
+\begin{enumerate}[(a)]
+    \item By the rank-nullity theorem we have that $\dim V=\text{rank }S+\text{null }S$.
+        Since $\text{null} S\geq 0$, it is clear that $\text{rank }S\leq \dim V$. Note that
+        equality is obtained only when $\text{null }S=0$, i.e. when $\ker S=\left\{ 0 \right\}$
+        and $S$ is injective.
+    \item Since $\text{rank }S=\dim\text{Im }S$ and $\text{Im }S\subset W$, it's clear that
+        $\text{rank }S\leq \dim W$.  Note that if $S$ is surjective, then $\text{rank }S=\dim W$
+        because $\text{Im} S=W$. Conversely, if $\text{rank }S=\dim W$, then $\text{Im }S=W$,
+        i.e. $S$ is surjective.
+    \item Let $\dim V=\dim W$. If $S$ is injective, $\text{null }S=0$ and thus
+        $\dim W=\dim V=\text{rank }S$ by the rank-nullity theorem, and consequently, $S$ is surjective
+        as well, making it an isomorphism. If $S$ is surjective, on the other hand, $\text{rank }S=\dim W$
+        and so by the rank-nullity theorem, $\text{null }S=\dim V-\text{rank }S=0$, i.e. $S$ is injective
+        as well, making it an isomorphism.
+    \item By the rank-nullity theorem we know that $\dim V=\text{rank }S+\text{null }S$ and that
+        $\dim V=\text{rank }T\circ S+\text{null }T\circ S$. This implies that
+        \[\text{rank }T\circ S=\text{rank }S+\text{null }S-\text{null }T\circ S.\]
+        Note, however, that $\text{null }S-\text{null }T\circ S\leq 0$; this is because $T(\ker S)=0$
+        and the fact that there may be vectors in $S$ not in $\ker S$ that are sent to the $\ker T$,
+        so thus the nullity of $T\circ S$ must be greater than or equal to the nullity of $S$.
+        Hence, $\text{rank }T\circ S\leq\text{rank } S$. Note that equality only happens when
+        there are no vectors in $S$ that are sent to $\ker T$ other than those in $\ker S$, i.e.
+        $\text{Im }S\cap \ker T=\left\{ 0 \right\}$.
+    \item Since $T\circ S$ is the composition of $T$ with $S$, and since not necessarily all of $\text{Im }S$
+        is sent by $T$ to non-zero elements in $X$ (the kernel might be non-zero), we must have that
+        $\text{rank }T\circ S\leq \text{rank }T$. We have equality only when what is nothing is lost due to $S$,
+        i.e. $\text{Im }S+\ker T=W$.
+    \item By the previous part, we know that $\text{rank }T\circ S\leq \text{rank }T$ with equality
+        only if $\text{Im }S+\ker T=W$. But note that if $S$ is an isomorphism, then $\text{Im }S=W$,
+        and thus we must have equality $\text{rank }T\circ S=\text{rank }T$.
+    \item By part (d) we know that $\text{rank }T\circ S\leq\text{rank }S$ with equality only if
+        $\text{Im }S\cap\ker T=\left\{ 0 \right\}$. But note that if $T$ is an isomorphism, then
+        $\ker T=\left\{ 0 \right\}$, and thus the condition is satisfied (as $\text{Im }S$ will always
+        contain 0) and we have equality, $\text{rank }T\circ S=\text{rank }S$.
+\end{enumerate}
+
+
+\end{document}
