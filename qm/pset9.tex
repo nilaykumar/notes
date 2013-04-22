@@ -1,0 +1,292 @@
+\documentclass{../mathnotes}
+
+
+\title{QM for Mathematicians: PSET 9}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+
+We wish to compute commutators of the form $[K_l,P_m]$ where $K_l$ generate boosts and $P_m$ generate
+translations. We can do this by following the derivation in the notes:
+\begin{align*}
+    [X,Y]&=\frac{d}{dt}\left( e^{tX}Ye^{-tX} \right)|_{t=0},
+\end{align*}
+where the term in parentheses, using the property of semi-direct products becomes, for a translation $(a,1)\in\mathcal{P}$
+and a Lorentz transformation $(0,\Lambda)\in\mathcal{P}$,
+\begin{align*}
+    (0,\Lambda)(a,1)(0,\Lambda)^{-1}&=(0,\Lambda)(a,1)(0,\Lambda^{-1})\\
+    &=(0,\Lambda)(a+\Lambda^{-1}0,\Lambda^{-1})\\
+    &=(0,\Lambda)(a,\Lambda^{-1})\\
+    &=(\Lambda a,1)
+\end{align*}
+If we take a $\Lambda=e^{tK_1}$, we find:
+\begin{align*}
+    \frac{d}{dt}\Lambda a|_{t=0}=\frac{d}{dt}
+    \left( 
+    \begin{array}[]{cccc}
+        \cosh t & \sinh t & 0 & 0\\ 
+        \sinh t & \cosh t & 0 & 0\\ 
+        0 & 0 & 1 & 0\\ 
+        0 & 0 & 0 & 1 
+    \end{array}
+    \right)
+    \left( 
+    \begin{array}[]{c}
+        P_0\\
+        P_1\\
+        P_2\\
+        P_3
+    \end{array}
+    \right)
+    \bigg|_{t=0}=
+    \left( 
+    \begin{array}[]{c}
+        P_1\\
+        P_0\\
+        0\\
+        0
+    \end{array}
+    \right).
+\end{align*}
+For $\Lambda=e^{tK_2}$, we find:
+\begin{align*}
+    \frac{d}{dt}\Lambda a|_{t=0}=\frac{d}{dt}
+    \left( 
+    \begin{array}[]{cccc}
+        \cosh t & 0 & \sinh t & 0\\ 
+        0 & 1 & 0 & 0\\ 
+        \sinh t & 0 & \cosh t & 0\\ 
+        0 & 0 & 0 & 1 
+    \end{array}
+    \right)
+    \left( 
+    \begin{array}[]{c}
+        P_0\\
+        P_1\\
+        P_2\\
+        P_3
+    \end{array}
+    \right)
+    \bigg|_{t=0}=
+    \left( 
+    \begin{array}[]{c}
+        P_2\\
+        0\\
+        P_0\\
+        0
+    \end{array}
+    \right).
+\end{align*}
+For $\Lambda=e^{tK_3}$, we find:
+\begin{align*}
+    \frac{d}{dt}\Lambda a|_{t=0}=\frac{d}{dt}
+    \left( 
+    \begin{array}[]{cccc}
+        \cosh t & 0 & 0 & \sinh t\\ 
+        0 & 1 & 0 & 0\\ 
+        0 & 0 & 1 & 0\\ 
+        \sinh t & 0 & 0 & \cosh t 
+    \end{array}
+    \right)
+    \left( 
+    \begin{array}[]{c}
+        P_0\\
+        P_1\\
+        P_2\\
+        P_3
+    \end{array}
+    \right)
+    \bigg|_{t=0}=
+    \left( 
+    \begin{array}[]{c}
+        P_3\\
+        0\\
+        0\\
+        P_0 
+    \end{array}
+    \right).
+\end{align*}
+Thus we see that in general we have $[K_j,P_0]=P_j$, $[K_j,P_j]=P_0$, and $[K_j,P_k]=0$ if $j\neq k,k\neq 0$ (otherwise).
+
+\subsection*{Problem 2}
+
+For the real scalar quantum field theory, we can write the momentum operator as:
+\begin{align*}
+    \hat P&=-i\int d^3x \dot\phi(x) \left( -i\nabla \right)\phi(x)=-\int d^3x \dot\phi(x)\nabla\phi(x)
+\end{align*}
+using $\pi=\dot\phi$. We can now use the expansion:
+\begin{align*}
+    \phi(x)&=\int \frac{d^3k}{(2\pi)^{3/2}\sqrt{2\omega_k}}\left( a_ke^{-ikx}+a_k^\dagger e^{ikx} \right)\\
+    \dot\phi(x)&=\int \frac{d^3k}{(2\pi)^{3/2}\sqrt{2\omega_k}}i\omega_k\left( a_ke^{-ikx}-a_k^\dagger e^{ikx} \right)\\
+    \nabla\phi(x)&=\int \frac{d^3k}{(2\pi)^{3/2}\sqrt{2\omega_k}}ik\left( -a_ke^{-ikx}+a_k^\dagger e^{ikx} \right)\\
+\end{align*}
+Inserting these above yields:
+\begin{align*}
+    \hat P&=-\int d^3x\frac{d^3k d^3k'}{(2\pi)^3 \sqrt{4\omega_k\omega_{k'}}}k'\omega_{k}\left( a_ke^{-ikx}-a_k^\dagger e^{ikx} \right)\left( -a_{k'}e^{-ik'x}+a_{k'}^\dagger e^{ik'x} \right)\\
+    &=-\int d^3x\frac{d^3k d^3k'}{(2\pi)^3 \sqrt{4\omega_k\omega_{k'}}}k'\omega_{k}\left( -a_ka_{k'}e^{-ix(k+k')}-a_k^\dagger a_{k'}^\dagger e^{ix(k+k')}+a_k^\dagger a_{k'}e^{ix(k-k')}+a_ka_{k'}^\dagger e^{ix(k-k')} \right)\\
+    &=-\int\frac{d^3k d^3k'}{(2\pi)^3 \sqrt{4\omega_k\omega_{k'}}}k'\omega_{k}\left( -a_ka_{k'}-a_k^\dagger a_{k'}^\dagger\right)\delta(k+k')+k'\omega_k\left(a_k^\dagger a_{k'}+a_ka_{k'}^\dagger\right)\delta(k-k')\\
+    &=-\int\frac{d^3k}{(2\pi)^3 2\omega_k}k\omega_k\left( -a_ka_{-k}-a_k^\dagger a_{-k}^\dagger \right)+k\omega_k\left(a_k^\dagger a_k+a_ka_k^\dagger\right)
+\end{align*}
+Note that the first term vanishes as it is odd, and we are left with
+\begin{align*}
+    \hat P=&\int \frac{d^3k}{(2\pi)^3 2\omega_k}k\omega_k \left( a_k^\dagger a_k+a_ka_k^\dagger \right)\\
+    &=\int \frac{d^3k}{(2\pi)^3} k\; a_k^\dagger a_k
+\end{align*}
+
+On the other hand, for the complex quantum field theory, we have
+\begin{align*}
+    \phi(x)&=\int \frac{d^3k}{(2\pi)^{3/2}\sqrt{2\omega_k}}\left( a_ke^{ikx}+b_k^\dagger e^{-ikx} \right)\\
+    \dot\phi(x)&=\int \frac{d^3k}{(2\pi)^{3/2}\sqrt{2\omega_k}}i\omega_k\left( -a_ke^{ikx}+b_k^\dagger e^{-ikx} \right)\\
+    \nabla\phi(x)&=\int \frac{d^3k}{(2\pi)^{3/2}\sqrt{2\omega_k}}ik\left( a_ke^{ikx}-b_k^\dagger e^{-ikx} \right)\\
+    \phi^\dagger(x)&=\int \frac{d^3k}{(2\pi)^{3/2}\sqrt{2\omega_k}}\left( a_k^\dagger e^{-ikx}+b_k e^{ikx} \right)\\
+    \dot\phi^\dagger(x)&=\int \frac{d^3k}{(2\pi)^{3/2}\sqrt{2\omega_k}}i\omega_k\left( a_k^\dagger e^{-ikx}-b_ke^{ikx} \right)\\
+    \nabla\phi^\dagger(x)&=\int \frac{d^3k}{(2\pi)^{3/2}\sqrt{2\omega_k}}ik\left(-a_k^\dagger e^{-ikx}+b_ke^{ikx} \right).
+\end{align*}
+The momentum density is given by:
+\begin{align*}
+    \mathcal{T}^{0i}=-\frac{\p\mathcal{L}}{\p\dot\phi}\nabla\phi-\nabla\phi^\dagger\frac{\p\mathcal{L}}{\p\dot\phi^\dagger}
+\end{align*}
+and so the momentum is found by integrating over space:
+\begin{align*}
+    \hat P=-\int d^3x \left( \dot\phi^\dagger\nabla\phi+\nabla\phi^\dagger\dot\phi \right)
+\end{align*}
+Let us look at the first term:
+\begin{align*}
+    \hat P_1&=\int \frac{d^3xd^3kd^3l}{(2\pi)^3\sqrt{4\omega_k\omega_l}}\omega_kl\left( a_k^\dagger e^{-ikx}-b_ke^{ikx} \right)
+    \left( a_le^{ilx}-b_l^\dagger e^{-ilx} \right)\\
+    &=\int \frac{d^3xd^3kd^3l}{(2\pi)^3\sqrt{4\omega_k\omega_l}}\omega_kl\left( a_k^\dagger a_le^{-i(k-l)x}+b_kb_l^\dagger e^{i(k-l)x}
+    -a_k^\dagger b_l^\dagger e^{-i(k+l)x}-b_ka_l e^{i(k+l)x}\right)\\
+    &=\int \frac{d^3kd^3l}{(2\pi)^3\sqrt{4\omega_k\omega_l}}\omega_kl\left( a_k^\dagger a_l\delta(k-l)+b_kb_l^\dagger \delta(k-l)
+    -a_k^\dagger b_l^\dagger \delta(k+l)-b_ka_l \delta(k+l)\right)\\
+    &=\int\frac{d^3k}{(2\pi)^32} k\left(a_k^\dagger a_k+b_k^\dagger b_k\right)
+\end{align*}
+where in the last step we have discarded the odd term and in the remaining term made use of commutation relations. The
+term $\hat P_2$ contributes precisely the same term and thus the total momentum operator is given by:
+\[\hat P=\int\frac{d^3k}{(2\pi)^3} k\left(a_k^\dagger a_k+b_k^\dagger b_k\right)\]
+
+\subsection*{Problem 3}
+
+We have seen that we can construct a free theory of two real scalar fields that has an $SO(2)$ internal symmetry.
+We can instead consider a free theory of two complex scalar fields with Lagrangian:
+\[\mathcal{L}=\p_\mu\psi^\dagger\p^\mu\psi+\p_\mu\phi^\dagger\p^\mu\phi-m^2\psi^\dagger\psi-m^2\phi^\dagger\phi.\]
+Note that we can take some unitary two-by-two matrix $U$ and define
+\begin{align*}
+    \left(
+    \begin{array}[]{c}
+        \psi' \\
+        \phi'
+    \end{array}
+    \right)
+    =
+    U
+    \left(
+    \begin{array}[]{c}
+        \psi \\
+        \phi
+    \end{array}
+    \right)
+\end{align*}
+then we have that
+\begin{align*}
+    \psi'^\dagger\psi'+\phi'^\dagger\phi'
+    =
+    \left(\begin{array}[]{cc}
+        \psi' & \phi'
+    \end{array}\right)
+    \left( 
+    \begin{array}[]{c}
+        \psi'\\
+        \phi'
+    \end{array}
+    \right)
+    =
+    \left(\begin{array}[]{cc}
+        \psi & \phi
+    \end{array}\right)
+    U U^\dagger
+    \left( 
+    \begin{array}[]{c}
+        \psi\\
+        \phi
+    \end{array}
+    \right)
+    =\psi^\dagger\psi+\phi^\dagger\phi.
+\end{align*}
+Hence, since the Lagrangian is dependent on the fields in this way (the derivatives can be ignored as $U$ is constant in spacetime),
+it clearly has a $U(2)$ symmetry. To find the operators that give the Lie algebra action for this symmetry on the state space,
+let us first determine what the Lie algebra of $U(2)$ looks like. We have already seen in class that the elements of the algebra
+are two-by-two skew-Hermitian matrices, i.e. $X$ such that $X^\dagger=-X$. It is fairly clear that any such matrix can be written as
+\begin{align*}
+    X=
+    \left(
+    \begin{array}[]{cc}
+        ai & be^{-i\gamma} \\
+        -be^{i\gamma} & di
+    \end{array}\right)
+\end{align*}
+for any real $a,b,d,\gamma$. We can split this up to find a basis for $\mathfrak{u}(2)$:
+\begin{align*}
+    X&=a
+    \left( 
+    \begin{array}[]{cc}
+        i & 0\\
+        0 & 0
+    \end{array}
+    \right)
+    +d
+    \left( 
+    \begin{array}[]{cc}
+        0 & 0 \\
+        0 & i
+    \end{array}
+    \right)
+    +b
+    \left( 
+    \begin{array}[]{cc}
+        0 & e^{-i\gamma} \\
+        -e^{i\gamma} & 0
+    \end{array}
+    \right)\\
+    &=a
+    \left( 
+    \begin{array}[]{cc}
+        i & 0\\
+        0 & 0
+    \end{array}
+    \right)
+    +d
+    \left( 
+    \begin{array}[]{cc}
+        0 & 0 \\
+        0 & i
+    \end{array}
+    \right)
+    +b\cos\gamma
+    \left( 
+    \begin{array}[]{cc}
+        0 & 1 \\
+        -1 & 0
+    \end{array}
+    \right)
+    -b\sin\gamma
+    \left( 
+    \begin{array}[]{cc}
+        0 & i \\
+        i & 0
+    \end{array}
+    \right).
+\end{align*}
+Going back to the group by exponentiating, we see that the first and second terms represents multiplying $\psi$ and $\phi$
+respectively by a phase, leaving the Lagrangian invariant. Exponentiating the third term yields a ``rotation'' of the fields
+into each other (it's the familiar generator for rotations), while the final term yields something that looks like a rotation
+but with a $+i$ and a $-i$ in front of the sine terms; a compex rotation if you will.
+
+
+
+\end{document}
