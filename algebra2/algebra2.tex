@@ -1560,4 +1560,215 @@ So $\alpha$ is a root of $f(x)$ if and only if $\sigma(\alpha)$ is a root of $\p
     $f(x)$.
 \end{exmp}
 
+(April 22, 2013)
+
+If $F\leq E$ and we have an isomorphism $\psi:F\to F'\leq K$, and a homomorphism $\phi: E\to K$, then if $\alpha\in E$ is a root of
+$f(x)\in F[x]$, then $\phi(\alpha)\in K$ is a root of $\psi(f)(x)\in F'[x]$.
+
+\begin{exmp}
+    Let's look at $\Q(\sqrt[3]{2})$. The only root of $x^3-2\in\Q(\sqrt[3]{2})$ is $\sqrt[3]{2}$.
+    But note that if we let $\omega=-1/2+\sqrt{-3}/2$, then $\omega^3=1$ and $\omega\neq 1$.
+    Then $\omega\sqrt[3]{2}$ and $\omega^2\sqrt[3]{2}$ are also roots. Hence $\Q(\sqrt[3]{2},\omega)$
+    has all 3 roots of $x^3-2$. So if we have a homomorphism from $\Q(\sqrt[3]{2})\to\Q(\sqrt[3]{2},\omega)$,
+    the only possibilities for $\phi(\sqrt[3]{2})$ can only potentially be one of the three roots; there 
+    are at most 3 such homomorphisms, then, since $\phi$ is specified by its value on $\sqrt[3]{2}$. We
+    will prove this later.
+
+    If we want to get a group, we should ask what the homomorphisms from $\Q(\sqrt[3]{2},\omega)$ to itself are; i.e. what
+    the Galois group $\Gal(\Q(\sqrt[3]{2},\omega)/\Q)$ is. If we label the roots by $\alpha_i$, then we know that
+    $\Q(\sqrt[3]{2},\omega)=\Q(\alpha_1,\alpha_2,\alpha_3)$ and thus the Galois group must be isomorphic to a subgroup
+    of $S_3$. In particular, the order of the Galois group is at most the order of $S_3$, which is six.
+    Another way to see this is that $\Q(\sqrt[3]{2},\omega)=\Q(\sqrt[3]{2},\sqrt{-3})$. Since $\phi$ is determined
+    by its values on $\sqrt[3]{2}$ and $\sqrt{-3}$, i.e. 3 possibilities and 2 possibilities respectively, which
+    gives us a total of at most 6 possibilities. In fact, this Galois group is isomorphic to the full $S_3$.
+
+    Next, let us look at $\Q(\sqrt[4]{2})$. There are of course 2 roots of $x^4-2$ ins $\Q(\sqrt[4]{2})$, and thus
+    one can show that $\Gal(\Q(\sqrt[4]{2})/\Q)\cong\Z/n\Z$. Note that $[\Q(\sqrt[4]{2}):\Q]=4$ as $x^4-2$ is irreducible
+    by Eisenstein. Thus the Galois group is perhaps smaller than naively expected. Let us exmaine
+    $[\Q(\sqrt[4]{2},i):\Q]=[\Q(\sqrt[4]{2},i):\Q(\sqrt[4]{2})][\Q(\sqrt[4]{2}):\Q]=8$. The four roots of $x^4-2$ in this bigger
+    field are $\beta_1=\sqrt[4]{2},\beta_2=i\sqrt[4]{2},\beta_3=-\sqrt[4]{2},\beta_4=-i\sqrt[4]{2}$. The number
+    of homomorphisms of $\Q(\sqrt[4]{2})\to\Q(\sqrt[4]{2},i)$ is at most four, as it is specified by its value on $\sqrt[4]{2}$.
+    But notice that $\Q(\sqrt[4]{2},i)=\Q(\beta_1,\beta_2,\beta_3,\beta_4)$. This says that the Galois group of this field is
+    isomorphic to a subgroup of $S_4$. Similar to the previous example, $\phi$ is specified by its value of $\sqrt[4]{2}$ and
+    $i$ and thus there is actually only a maximum of 8 choices. In fact, the order of the Galois group is equal to 8 and
+    is isomorphic to $D_4$, the symmetries of the square.
+\end{exmp}
+
+Given $F\leq E$ we want to find elements of $\Gal(E/F)$. There are 2 parts. One, we wish to find some homomorphisms from $E$ to
+some extension of $F$ that is not necessarily $E$ that fixes $F$. Secondly, we want to find conditions when such a $\phi$ automatically
+has image $E$.
+
+\begin{lem}
+    Let $E=F(\alpha)$ be a simple extension of $F$ with $\alpha$ algebraic over $E$. Suppose $K$ is an extension field of $E$.
+    Thus we have $F\leq F(\alpha)\leq K$. Then, there is a bijection from homomorphisms $\phi:F(\alpha)\to K$ such that $\phi(a)=a$
+    for all $a\in F$ and the roots of $\irr(\alpha,F,x)$ in $K$.
+\end{lem}
+
+\begin{proof}
+    Given $\phi:F(\alpha)\to K$ that fixes $F$, we've seen that $\phi(\alpha)$ is a root of $\irr(\alpha,F,x)=f(x)$.
+    Also, $\phi$ is determined by $\phi(\alpha)$ since $F(\alpha)$ is all things of the form $\sum_{i=0}^nc_i\alpha^i$ with $c_i\in F$.
+    We need to show: given $\beta$ a root of $f(x)$ in $K$, there exists a $\phi:F(\alpha)\to K$ such that $\phi(\alpha)=\beta$.
+    Recall $F(\alpha)\cong F[x]/(f(x))$. But given a polynomial, we can evaluate it a $\beta$. What is the kernel of the evaluation at $\beta$?
+    It's simply the $(\irr(\beta,F,x))$, but this implies that $\irr(\beta,F,x)|f(x)=\irr(\alpha,F,x)$ since $f(\beta)=0$. Since both are irreducible
+    and monic, they must be equal. Now we just define $\phi=\text{ev}_\beta\circ\text{ev}_\alpha^{-1}$:
+    \[\phi(\alpha)=\text{ev}_\beta\circ\text{ev}_\alpha^{-1}(\alpha)=\text{ev}_\beta(x+(f(x)))=\beta.\]
+\end{proof}
+
+\begin{rem}
+    There is a slightly more general version: Given $F\leq F(\alpha),F'\leq K$ and an isomorphism from $F\to F'$,
+    then there is a bijection from homomorphisms $\phi:F(\alpha)\to K$ such that $\phi(a)=\psi(a)$ for $a\in F$ and the
+    roots of $\psi(f)(x)$ in $K$ where $f(x)=\irr(\alpha,F,x)$. The proof of this is very similar to the above lemma.
+\end{rem}
+
+Let's look at some applications of this lemma.
+
+\begin{exmp}
+    Let's look at $\Gal(\Q(\sqrt[3]{2},\omega)/\Q)$. Look at $x^3-2\in\Q(\omega)[x]$. We claim that $x^3-2$ is irreducible in $\Q(\omega)[x]$.
+    Note: $x^3-2$ not irreducible in $\Q(\omega)$ is equivalent to $x^3-2$ not having a root $\alpha$ in $\Q(\omega)$. We have to have, then,
+    $[\Q(\alpha):\Q]|[\Q(\omega):\Q]$, but 3 does not divide 2. We now apply the lemma to $F=\Q(\omega)$ with $\alpha=\sqrt[3]{2}$, $K=\Q(\sqrt[3]{2},\omega)=F(\alpha)$.
+    We know that there is a homomorphism from $\Q(\sqrt[3]{2},\omega)$ to itself such that $\phi(\omega)=\omega$ and $\phi(\sqrt[3]{2})=\omega\sqrt[3]{2}$.
+    In terms of $\alpha_1=\sqrt[3]{2},\alpha_2=\omega\sqrt[3]{2},\alpha_3=\omega^2\sqrt[3]{2}$, we know that $\phi(\alpha_1)=\alpha_2$ and
+    $\phi(\alpha_2)=\phi(\omega\alpha_1)=\omega\phi(\alpha_1)=\omega^2\sqrt[3]{2}=\alpha_3$. Thus as an element of $S_3$, $\phi\Leftrightarrow (123)$.
+    We get $\langle \phi\rangle$ a subgroup of the image of the Galois group which gives $\left\{ 1,(123),(132) \right\}$. But what about complex
+    conjugation, $\tau$? It's easy to see that $\tau(\omega)=\omega^2$. Thus $\tau(\alpha_1)=\alpha_1$ and $\tau(\alpha_2)=\alpha_3$.
+    It is now clear that all of the Galois group is $S_3$.
+
+    The same technique will show that $\Gal(\Q(\sqrt[4]{2},i)/\Q)$ has order 8 and is isomorphic to $D_4$.
+\end{exmp}
+
+\begin{thm}[Isomorphism Extension Theorem]
+    Let $F\leq E$ with some isomorphism $\psi:F\to F'$ where $F'\leq K$. In this situation:
+    \begin{enumerate}
+        \item there are at most $[E:F]$ extensions of $\psi$ to a homomorphism $\phi:E\to K$ such that $\phi(a)=\psi(a)$ for all $a\in F$
+        \item there is always some finite extension $L$ of $K$ and a $\phi:E\to L$ such that $\phi(a)=\psi(a)$ for all $a\in F$
+        \item If the characteristic of $F$ is zero or $F$ is finite or perfect, there exists a finite extension $L$ of $K$
+            and exactly $[E:F]$ extensions of $\psi$ to a $\phi:E\to L$.
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    We know that if $E$ is a finite extension of $F$ then $E=F(\alpha_1,\ldots,\alpha_n)$ where $\alpha_i$
+    are algebraic over $F$. The proof proceeds by induction on $n$; the main step is really $n=1$, when
+    $E=F(\alpha)$. By the lemma/remark above, there is a bijection between $\phi:F(\alpha)\to K$ such that $\phi(a)=\psi(a)$
+    where $a\in F$ and the roots of $\psi(f)(x)\in F'[x]$ where $f(x)=\irr(\alpha,F,x)$. But the number
+    of roots in $K$ of $\psi(f)(x)$ is less than or equal to the degree of $\psi(f)(x)$, which equals the degree of $f(x)$,
+    which is the degree of $\alpha$ over $F$, $[F(\alpha):F]$. This proves the first point. For the second point: there always exists
+    some extension of $K$ where $\psi(f)(x)$ has a root. If $L$ is such an extension, then there exists a $\phi:F(\alpha)\to L$.
+    For the third: there exists a finite extension $L$ where $\psi(f)(x)$ splits into a product of linear factors. Each such factor
+    gives a root of $\psi(f)(x)$ and hence a $\phi:F(\alpha)\to L$. We'd expect the number of such $\phi$ to be the degree
+    of $\psi(f)(x)=[F(\alpha):F]$. There's just one problem -- there might be multiple roots. So we will get $[E:F]=[F(\alpha):F]$
+    different extensions as long as $\psi(f)(x)$ doesn't have multiple roots. But $\psi(f)(x)$ corresponds to $\irr(\alpha,F,x)$
+    by the isomorphism, and by the hypotheses, in $F$, irreducible polynomials always have distinct roots.
+
+    The inductive step proceeds as follows. We assume the theorem holds for $F(\alpha_1,\ldots,\alpha_{n-1})$.
+    We let $E=F(\alpha_1,\ldots,\alpha_{n-1})(\alpha_n)$ and thus we can view $E$ as a simple extension. 
+    There are at most $[F(\alpha_1,\ldots,\alpha_{n-1}):F]$ extensions of $\psi$ to a homomorphism
+    $\phi':F(\alpha_1,\ldots,\alpha_{n-1})\to K$ with $\phi'(a)=\psi(a)$ for all $a\in F$. Since we're
+    in the case of a simple extension, given $\phi'$, the total number of extensions is at most the degree
+    of this simple extension. For the total number of extensions, then, we simply multiply the degrees and
+    we have, at most, $[E:F]$. That shows the first part. The other two parts of the theorem follow similarly.
+\end{proof}
+
+\begin{cor}
+    The order of the Galois group $\Gal(E/F)$ is always less than or equal to $[E:F]$.
+\end{cor}
+
+\begin{defn}
+    $E$ is a \textbf{separable} extension of $F$ if $E$ is a finite extension of $F$ and for all $\alpha\in E$,
+    $\irr(\alpha,F,x)$ does not have multiple roots.
+\end{defn}
+
+In this context, the proof of the third part of the isomorphism extension theorem suggests that the third statement holds
+for if $E$ is a separable extension of $F$.
+
+\begin{rem}[Primitive Element Theorem]
+    If $E$ is a finite and separable extension of $F$, then $E$ is a simple extension of $F$, i.e. there is an $\alpha\in E$
+    such that $E=F(\alpha)$.
+\end{rem}
+
+Given $F\leq E$ we want to find conditions on $E$ when the size of the Galois group is as large as possible, namely, by the
+isomorphism extension theorem, that it is $[E:F]$.
+
+\begin{defn}
+    Let $F$ be a field and $E$ an extension field of $F$. Let $f(x)\in F[x]$, nonconstant. Then $E$ is a \textbf{splitting field
+    for $f(x)$ over $F$} if
+    \begin{enumerate}
+        \item $f(x)=c(x-\alpha_1)\cdots(x-\alpha_n)$ in $E[x]$, for $\alpha_i\in E$
+        \item $E=F(\alpha_1,\ldots,\alpha_n)$
+    \end{enumerate}
+\end{defn}
+
+\begin{exmp}
+    $\Q(\sqrt{2},\sqrt{3})$ is a splitting field for $(x^2-2)(x^2-3)$ over $\Q$. Along these lines, $\Q(\sqrt{2},\sqrt{3})$ is \textit{not}
+    a splitting field for $x^2-2$ over $\Q$, since $\Q(\sqrt{2},\sqrt{3})\neq \Q(\sqrt{2},-\sqrt{2})$. On the other hand, $\Q(\sqrt{2},\sqrt{3})$
+    is a splitting field for $x^2-2$ over $\Q(\sqrt{3})$.
+\end{exmp}
+
+\begin{rem}
+    First, any 2 splitting fields for $f(x)$ for $F$ are isomorphic. Secondly, if $[E:F]=2$ and $\alpha\in E$ but $\alpha\notin F$,
+then $E$ is a splitting field for $\irr(\alpha,F,x)$ over $F$.
+\end{rem}
+\begin{proof}
+    We will not prove the first remark. Take $E=F(\alpha)$. In $E[x]$, $x-\alpha$ is a factor of $f(x)$. But any degree 2 polynomial with
+    one root must factor completely, and thus we're left with $f(x)=(x-\alpha)(x-\beta)$.
+\end{proof}
+
+\begin{thm}
+    Let $E$ be a finite extension of $F$. Then the following are equivalent:
+    \begin{enumerate}
+        \item There exists a $f(x)\in F[x]$ of degree at least 1 such that $E$ is a splitting field of $f(x)$ over $F$.
+        \item For every finite extension $K$ of $E$, if $\phi:E\to K$ such that $\phi(a)=a$ for all $a\in F$, then
+            $\phi(E)=E$, i.e. $\phi\in\Gal(E/F)$.
+        \item If $p(x)\in F[x]$ irreducible, and there exists $\alpha\in E$ such that $p(\alpha)=0$, then
+            $p(x)$ is a product of linear factors in $E[x]$.
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    We first show that the first implies the second. Say the roots of $f(x)$ are $\alpha_1,\ldots,\alpha_n\in E$
+    and $f(x)=c(x-\alpha_1)\cdots(x-\alpha_n)$ and $E=F(\alpha_1,\ldots,\alpha_n)$. Now given a homomorphism $\phi: E\to K$ such that
+    $\phi(a)=a$ for all $a\in F$. It's clear that $\phi(E)=\phi(F)(\phi(\alpha_1),\ldots,\phi(\alpha_n))$. But we know that
+    $\phi(F)=F$ and that $\phi$ simply permutes the roots of $f(x)$, and thus we have that $\phi(E)=F(\alpha_1,\ldots,\alpha_n)=E$.
+
+    Now we show that the second implies the third. We wish to show that all roots of $p(x)$ already lie in $E$. We know that
+    we can always find a field $L$ of $E$ where $p(x)$ splits into a product of linear factors. In $L$,
+    $p(x)=c(x-\alpha_1)\cdots(x-\alpha_n)$. We take $\alpha=\alpha_1$. There exists a homomorphism $\psi:F(\alpha)\to L$
+    such that $\psi(\alpha)=\alpha_j$ and $\psi(a)=a$ for all $a\in F$. By the second statement of the Isomorphism Extension Theorem,
+    there exists some finite extension$K$ and an extension of $\psi$, $\phi: E\to K$ such that $\phi(a)=\psi(a)$ for all $a\in F(\alpha)$.
+    But using the hypothesis, we know that if $\phi:E\to K$ such that $\phi$ fixes $F$, then $\phi(E)=E$. Then $\psi(F(\alpha))\subset E=\phi(E)$
+    But then $\psi(\alpha)=\alpha_j\in E$, for all $j$. Thus all roots of $p(x)$ lie in $E$, which implies that $p(x)$ factors into linear factors
+    in $E$.
+    
+    Finally we show that the third implies the first. We can write $E=F(\beta_1,\ldots,\beta_k)$ where $\beta_i$ are algebraic over $F$.
+    This implies that $\irr(\beta_i,F,x)=p_i(x)$, some irreducible polynomial $p_i(x)\in F[x]$. By hypothesis, since it has some root
+    $\beta_i$ in $E$, $p_i(x)$ factors into linear factors in $E[x]$. Now we consider $f(x)=p_1(x)\cdots p_k(x)$. Then each factor is a product
+    of linear factors in $E[x]$ and thus so is $f(x)$. Among the roots of $(x)$ are $\beta_1,\ldots,\beta_k$ and thus $E$ is generated
+    over $F$ by the roots of $f(x)$. This shows that $E$ is a splitting field for $f(x)$ over $F$.
+\end{proof}
+
+\begin{defn}
+    $E$ is a \textbf{normal extension} of $F$ if any one of the above conditions holds.
+\end{defn}
+
+Typically the way to check whether an extension is normal is to just find a polynomial $f(x)\in F[x]$ such that $E$ is the
+splitting field for $f(x)$ over $F$.
+
+\begin{exmp}
+    $\Q(\sqrt[3]{2},\omega)$ is a normal extension of $\Q$ because it is a splitting field of $x^3-2$ over $\Q$.
+    On the other hand, $\Q(\sqrt[3]{2})$ is not a normal extension of $\Q$. Since $x^3-2$ is irreducible in $\Q[x]$,
+    it has one root in $\Q(\sqrt[3]{2})$ but not all roots.
+\end{exmp}
+
+\begin{cor}
+    Suppose $E$ is a separable and normal extension of $F$. Then the order of $\Gal(E/F)$ is $[E:F]$.
+\end{cor}
+\begin{proof}
+    We know by the third statement of the Isomorphism Extension Theorem that there exists a finite extension $K$ of $E$
+    and $[E:F]$ homomorphisms $\phi:E\to K$ that fix $F$. But by the second statement of the above theorem on normal extensions,
+    we know that $\phi(E)=E$, i.e. $\phi\in\Gal(E/F)$.
+\end{proof}
+
+\begin{defn}
+    We say $E$ is a \textbf{Galois extension} of $F$ if $E$ is separable and normal.
+\end{defn}
+
+
 \end{document}

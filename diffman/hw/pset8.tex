@@ -1,0 +1,80 @@
+\documentclass{../../mathnotes}
+
+
+\title{Differentiable Manifolds Problem Set 8}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+
+Let $m,n,k$ be positive integers with $k\leq\min(m,n)$. We wish to show that an $m\times n$ matrix $M$ has rank greater
+than or equal to $k$ if and only if there exists a $k\times k$ submatrix with nonzero determinant.
+First suppose that there exists a $k\times k$ submatrix with nonzero determinant. Then it is clear that
+there are either (at least, as there could be others) $k$ linearly independent rows or columns of the matrix, as adding $m-k$ or $n-k$ components
+to a linearly independent vector keeps them linearly independent. Thus $M$ has either at least $k$ linearly independent rows
+or columns and thus has rank greater than or equal to $k$.
+Conversely, suppose $M$ has rank greater than or equal to $k$, say $l\leq \min(m,n)$. Then, we can always rewrite $M$ in its canonical form
+by changing bases, which as we showed in class, results in something that looks like (in block form):
+\begin{align*}
+    \left(\begin{array}[]{cc}
+        I_l & 0 \\
+        0 & 0
+    \end{array}\right)
+\end{align*}
+where $I_l$ is the $l\times l$ identity. Of course, if $l=m$ or if $l=n$, some of the zero blocks will not be present.
+Clearly this matrix has a $k\times k$ submatrix that has nonzero determinant, as the top $k\times k$ submatrix of the
+$I_l$ block has determinant 1. We proceed with a proof similar to one carried out in class for $k=1$.
+
+Given a matrix of rank $k$, we know we can find a $k\times k$ submatrix with non-zero determinant.
+Thus we can cover $M_k(m\times n)$ by \textbf{** WHAT? **}. It suffices to show that \textbf{** WHAT **?}
+is an embedded submanifold. Take some matrix $E$ in \textbf{** WHAT? **} of the form
+\begin{align*}
+    \left(\begin{array}[]{c|c}
+        A & B \\ \hline
+        C & D
+    \end{array}\right)
+\end{align*}
+where $A$ is the $k\times k$ submatrix. We can apply row-reduction to obtain in the lower-right block a
+term that must vanish for the rank of $E$ to be $k$:
+\[D-CA^{-1}B=0_{(m-k)\times(n-k)}.\]
+Hence, in order to realize \textbf{** WHAT? **} as a level set of a smooth map with full rank, we define
+a function $F:??\to M( (m-k)\times(n-k))$ that takes some matrix of the form $E$ to its $D-CA^{-1}B$.
+
+
+\subsection*{Problem 2}
+
+Let $M(m\times n)$ be the space of real $m\times n$ matrices as a smooth manifold and $M_k(m\times n)$ be the set
+consisting of matrices with rank $k$. We wish to show that $M_k(m\times n)$ is an embedded submanifold of $M(m\times n)$
+with codimension $(m-k)\times (n-k)$.
+
+\subsection*{Problem 3}
+
+We wish to show that any closed subset of a compact space is compact. Take a compact space $X$ and some open cover
+$\mathcal{U}$ of a compact subset $A$. It is clear that $\mathcal{U}\cup (X-A)$ is an open cover of $X$ (as
+$A$ is closed). But by the compactness of $X$, we find that this cover must have a finite subcover $\left\{U_1,\ldots,U_n\right\}\cup (X-A)$.
+It follows that $\left\{ U_1,\ldots,U_n \right\}$ is an open over for $A$; thus, $A$ must be compact, as this cover is finite.
+
+Next, we wish to show that any compact subset $A$ of a Hausdorff space $X$ is closed. Take some sequence $\left\{ a_i \right\}$ in $A$ that
+converges to some $a\in X$. If we can show that $a\in A$, we are done, as this means $A$ contains all of its limit points. By compactness,
+we know that $\left\{ a_i \right\}$ has a subsequence $\left\{ a_{i_k} \right\}$ that converges to $b\in A$. Suppose $a\neq b$. Then, by the
+Hausdorff property, we can find disjoint open sets $U,V$ such that $a\in U$ and $b\in V$. By the definition of convergence, we know that
+far enough out in $a_i$ we will be guaranteed to be in $U$, and far enough out in $a_{i_k}$ we will be guaranteed to be in $V$. But
+since $a_{i_k}$ is a subsequence of $a_i$, this means after some point, we will be both in $U$ and $V$. This is a contradiction as $U$ and $V$
+are disjoint. Hence $a=b$ and $A$ must be closed.
+
+
+\subsection*{Problem 4}
+
+
+\subsection*{Problem 5}
+
+
+\subsection*{Problem 6}
+
+
+\end{document}
