@@ -30,9 +30,17 @@ where $I_l$ is the $l\times l$ identity. Of course, if $l=m$ or if $l=n$, some o
 Clearly this matrix has a $k\times k$ submatrix that has nonzero determinant, as the top $k\times k$ submatrix of the
 $I_l$ block has determinant 1. We proceed with a proof similar to one carried out in class for $k=1$.
 
+
+\subsection*{Problem 2}
+
+Let $M(m\times n)$ be the space of real $m\times n$ matrices as a smooth manifold and $M_k(m\times n)$ be the set
+consisting of matrices with rank $k$. We wish to show that $M_k(m\times n)$ is an embedded submanifold of $M(m\times n)$
+with codimension $(m-k)\times (n-k)$.
+
+We proceed almost exactly as we did in class for the $k=1$ case.
 Given a matrix of rank $k$, we know we can find a $k\times k$ submatrix with non-zero determinant.
-Thus we can cover $M_k(m\times n)$ by \textbf{** WHAT? **}. It suffices to show that \textbf{** WHAT **?}
-is an embedded submanifold. Take some matrix $E$ in \textbf{** WHAT? **} of the form
+Thus we can cover $M_k(m\times n)$ by $(m-k)(n-k)$ open sets $U_i$ (seen by counting). It suffices to show that $M_k(m\times n)\cap U_1$
+is an embedded submanifold. Take some matrix $E$ in $M_k(m\times n)\cap U_1$ of the form 
 \begin{align*}
     \left(\begin{array}[]{c|c}
         A & B \\ \hline
@@ -42,15 +50,19 @@ is an embedded submanifold. Take some matrix $E$ in \textbf{** WHAT? **} of the 
 where $A$ is the $k\times k$ submatrix. We can apply row-reduction to obtain in the lower-right block a
 term that must vanish for the rank of $E$ to be $k$:
 \[D-CA^{-1}B=0_{(m-k)\times(n-k)}.\]
-Hence, in order to realize \textbf{** WHAT? **} as a level set of a smooth map with full rank, we define
-a function $F:??\to M( (m-k)\times(n-k))$ that takes some matrix of the form $E$ to its $D-CA^{-1}B$.
+Hence, in order to realize matrices in $M_k(m\times n)\cap U_1$ as a level set of a smooth map with full rank, we define
+a function $F:M_k(m\times n)\cap U_1\to M( (m-k)\times(n-k))$ that takes some matrix of the form $E$ to its $D-CA^{-1}B$
+and then we have that $M_k(m\times n)\cap U_1=F^{-1}(0_{(m-k)\times(n-k)})$. To prove that this is an embedded
+submanifold, we must show that $dF$ is full rank on $F^{-1}(0)$. To do this, consider the set of matrices in $F^{-1}(0)$
+where the lower right block in of the form $D+tX$ for some arbitrary $X\in T_{F(p)}M( (m-k)\times (n-k))$. It's clear that applying
+$F$ to such matrices will yield $D+tX-CA^{-1}B$, the differential of which, yields $X$. But since this hold for arbitrary $X$,
+$dF$ must be surjective, and we are done.
 
+We can compute the codimension as follows. Consider any $(k+1)\times(k+1)$ minor $A_{ij}$ of an element of $M_k(m\times n)$,
+where the minor is labelled by its top-left position. Any such minor must have zero determinant: $\det A_{ij}=0$, again for
+$1\leq i\leq m-k, 1\leq j\leq n-k$. Thus we have $(m-k)(n-k)$ linear equations in $mn$ unknowns. Hence, the codimension is
+$(m-k)(n-k)$.
 
-\subsection*{Problem 2}
-
-Let $M(m\times n)$ be the space of real $m\times n$ matrices as a smooth manifold and $M_k(m\times n)$ be the set
-consisting of matrices with rank $k$. We wish to show that $M_k(m\times n)$ is an embedded submanifold of $M(m\times n)$
-with codimension $(m-k)\times (n-k)$.
 
 \subsection*{Problem 3}
 
@@ -70,11 +82,55 @@ are disjoint. Hence $a=b$ and $A$ must be closed.
 
 \subsection*{Problem 4}
 
+We wish to show that the figure-eight curve is not an embedded submanifold of $\R^2$. Note that in order to be an
+embedded submanifold, the figure-eight curve on its own would have to be at least a topological manifold of its own right
+with the subspace topology.
+However, with this topology, the curve is not locally homeomorphic to $\R$ at the self-intersection point;
+take some open ball in $\R^2$ about the origin (an open set in the subspace topology). We can see that the part of the curve contained 
+in this ball is not homeomorphic to $\R$ here (although it is away from the origin) as follows.
+If we remove the origin we are left with four disconnected components of the curve, whereas in $\R$,
+removing a point from an open set yields only 2 disconnected components. Since the number of components is a topological invariant, there
+cannot be a homeomorphism, and thus the curve is not a topological manifold.
+
 
 \subsection*{Problem 5}
 
+We wish to show that the dense curve on the torus from the previous homework is not an embedded submanifold of $\R^2$.
+Similar to the previous problem, we can show that, with the subspace topology, the curve $\gamma$ cannot possibly
+be a topological manifold, and thus not a embedded submanifold. If we work with the flat torus, we can show that
+it will not be locally homeomorphic to a Euclidean space as follows.
+First note that the intersection of the curve and some open set $B$ will look like a subset of $\R\times\Q$ as there are countably many ``lines'' inside $B$
+(this can be seen by examining the space pre-quotient and noting that we will have a countable number of squares in the space, and the
+number of squares is the total number of lines in the flat torus); hence, this ball is homeomorphic neither to $\R$ nor $\R^2$. 
+
 
 \subsection*{Problem 6}
+Let $\Phi:\R^2\to\R$ be defined by $\Phi(x,y)=x^2-y^2$.
+\begin{enumerate}[(a)]
+    \item We wish to show that $\Phi^{-1}(0)$ is not an embedded submanifold of $\R^2$. But note that this is
+        very similar to the case of problem 4 above -- we have two lines tha intersect at the origin. In the subspace
+        topology, any open set containing the origin is not homeomorphic to $\R^1$ (which we want because other parts of the
+        space are), and thus the level set is not locally Euclidean.
+    \item Let us give $\Phi^{-1}(0)$ a different topology in order to make it an immersed submanifold of $\R^2$. On
+        one branch of the set, call it $X$, we can take the open sets to be intervals as usual, but on the other branch, call it $Y$,
+        we take the open sets to be all intervals that don't contain the origin. We can now very easily give this topology
+        a smooth structure by treating it as a disjoint union of $\R$ and $\R\setminus \left\{ 0 \right\}$, where the coordinates
+        on each branch are simply given by projections to the $x$-axis (we of course need 2 coordinate charts, one for each branch).
+        It remains now to check that the inclusion map is
+        a smooth immersion. The coordinate representation is just given: $\id\circ\iota\circ\phi^{-1}(x)=(x,x)$ (this holds for the second
+        chart as well). Clearly this is smooth
+        and the differential has full rank everywhere, and thus we have a smooth immersion, and we are done.
+    \item Here we follow Lee's Example 5.45.
+        It is easy to check that $\psi^{-1}(0)\setminus\left\{ (0,0) \right\}$ is an embedded 1-dimensional submanifold of $\R^2$,
+        so if $\psi^{-1}(0)$ is to be a smooth submanifold at all, it must be 1-dimensional. Suppose there were some smooth manifold
+        structure on $\psi^{-1}(0)$ making into an immersed submanifold. Then $T_{(0,0)}\psi^{-1}(0)$ would be a 1-dimensional
+        subspace $T_{(0,0)}\R^2$, so by Proposition 5.35 of Lee, there would be a smooth curve $\gamma:(-\varepsilon,\varepsilon)\to\R^2$
+        whose image lies in $\psi^{-1}(0)$, and that satisfies $\gamma(0)=(0,0)$ and $\gamma'(0)\neq0$. Writing $\gamma(t)=(x(t),y(t))$,
+        we see that $y(t)$ takes a global minimum at $t=0$, so $\dot y(0)=0$ (evident from the plot). On the other hand, because every
+        point $(x,y)\in\psi^{-1}(0)$ satisfies $x^2=y^3$, taking derivatives, we conclude that $\dot x(0)=\dot y(0)=0$, which is a contradiction, as
+        we see that the differential is not full rank. Consequently, there can be no such manifold structure.
+        Note that this implies that this cannot be an embedded submanifold, either, as that is a stronger condition.
+\end{enumerate}
 
 
 \end{document}
