@@ -28,7 +28,7 @@ by changing bases, which as we showed in class, results in something that looks 
 \end{align*}
 where $I_l$ is the $l\times l$ identity. Of course, if $l=m$ or if $l=n$, some of the zero blocks will not be present.
 Clearly this matrix has a $k\times k$ submatrix that has nonzero determinant, as the top $k\times k$ submatrix of the
-$I_l$ block has determinant 1. We proceed with a proof similar to one carried out in class for $k=1$.
+$I_l$ block has determinant 1. 
 
 
 \subsection*{Problem 2}
@@ -108,8 +108,8 @@ number of squares is the total number of lines in the flat torus); hence, this b
 Let $\Phi:\R^2\to\R$ be defined by $\Phi(x,y)=x^2-y^2$.
 \begin{enumerate}[(a)]
     \item We wish to show that $\Phi^{-1}(0)$ is not an embedded submanifold of $\R^2$. But note that this is
-        very similar to the case of problem 4 above -- we have two lines tha intersect at the origin. In the subspace
-        topology, any open set containing the origin is not homeomorphic to $\R^1$ (which we want because other parts of the
+        very similar to the case of problem 4 above -- we have two lines that intersect at the origin. In the subspace
+        topology, the intersection of $\Phi^{-1}(0)$ and any open set containing the origin is not homeomorphic to $\R^1$ (which we want because other parts of the
         space are), and thus the level set is not locally Euclidean.
     \item Let us give $\Phi^{-1}(0)$ a different topology in order to make it an immersed submanifold of $\R^2$. On
         one branch of the set, call it $X$, we can take the open sets to be intervals as usual, but on the other branch, call it $Y$,
@@ -117,14 +117,14 @@ Let $\Phi:\R^2\to\R$ be defined by $\Phi(x,y)=x^2-y^2$.
         a smooth structure by treating it as a disjoint union of $\R$ and $\R\setminus \left\{ 0 \right\}$, where the coordinates
         on each branch are simply given by projections to the $x$-axis (we of course need 2 coordinate charts, one for each branch).
         It remains now to check that the inclusion map is
-        a smooth immersion. The coordinate representation is just given: $\id\circ\iota\circ\phi^{-1}(x)=(x,x)$ (this holds for the second
+        a smooth immersion. The coordinate representation for the chart $\phi$ is just given: $\id\circ\iota\circ\phi^{-1}(x)=(x,x)$ (this holds for the second
         chart as well). Clearly this is smooth
         and the differential has full rank everywhere, and thus we have a smooth immersion, and we are done.
     \item Here we follow Lee's Example 5.45.
         It is easy to check that $\psi^{-1}(0)\setminus\left\{ (0,0) \right\}$ is an embedded 1-dimensional submanifold of $\R^2$,
         so if $\psi^{-1}(0)$ is to be a smooth submanifold at all, it must be 1-dimensional. Suppose there were some smooth manifold
-        structure on $\psi^{-1}(0)$ making into an immersed submanifold. Then $T_{(0,0)}\psi^{-1}(0)$ would be a 1-dimensional
-        subspace $T_{(0,0)}\R^2$, so by Proposition 5.35 of Lee, there would be a smooth curve $\gamma:(-\varepsilon,\varepsilon)\to\R^2$
+        structure on $\psi^{-1}(0)$ making it into an immersed submanifold. Then $T_{(0,0)}\psi^{-1}(0)$ would be a 1-dimensional
+        subspace of $T_{(0,0)}\R^2$, so by Proposition 5.35 of Lee, there would be a smooth curve $\gamma:(-\varepsilon,\varepsilon)\to\R^2$
         whose image lies in $\psi^{-1}(0)$, and that satisfies $\gamma(0)=(0,0)$ and $\gamma'(0)\neq0$. Writing $\gamma(t)=(x(t),y(t))$,
         we see that $y(t)$ takes a global minimum at $t=0$, so $\dot y(0)=0$ (evident from the plot). On the other hand, because every
         point $(x,y)\in\psi^{-1}(0)$ satisfies $x^2=y^3$, taking derivatives, we conclude that $\dot x(0)=\dot y(0)=0$, which is a contradiction, as

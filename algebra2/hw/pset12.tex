@@ -1,0 +1,128 @@
+\documentclass{../../mathnotes}
+
+\usepackage{enumerate}
+
+\title{Modern Algebra II: Problem Set 12}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+
+Consider the field $\Q(\sqrt[3]{2},\omega)$, with $\omega=(-1+\sqrt{-3})/2$. We have
+seen that $\Gal(\Q(\sqrt[3]{2},\omega)/\Q)\cong S_3$.
+
+\begin{enumerate}[(i)]
+    \item Let $\rho\in\Gal(\Q(\sqrt[3]{2},\omega)/\Q)$ be the unique element such that
+        $\rho(\omega)=\omega$ and $\rho(\sqrt[3]{2})=\omega\sqrt[3]{2}$. It's clear that
+        the fixed field $\Q(\sqrt[3]{2},\omega)^\rho$ should be $\Q(\omega)$, as anything
+        with a $\sqrt[3]{2}$ is not fixed. To prove this, note that anything in $\Q(\omega)$
+        is fixed by $\rho$, and thus, $\Q(\omega)\leq\Q(\sqrt[3]{2},\omega)^\rho$. Additionally,
+        by look at the degrees of the extensions, we see that
+        \[ 3=[\Q(\sqrt[3]{2},\omega):\Q(\omega)]=[\Q(\sqrt[3]{2},\omega):\Q(\sqrt[3]{2},\omega)^\rho][\Q(\sqrt[3]{2},\omega)^\rho:\Q(\omega)] \]
+        which tells us that one of the factors is 3 and the other is 1. Note, however, that
+        the first cannot be 1, as $\sqrt[3]{2}$ is not fixed, and thus we see that
+        $[\Q(\sqrt[3]{2},\omega)^\rho:\Q(\omega)]=1$, i.e. $\Q(\omega)$ is the fixed field.
+    \item Let $\sigma\in\Gal(\Q(\sqrt[3]{2},\omega)/\Q)$ be complex conjugation. It's clear that
+        $\Q(\sqrt[3]{2})\leq\Q(\sqrt[3]{2},\omega)^\sigma$, as the subfield consists only of real
+        numbers. Again by counting degrees, we have
+        \[ 2=[\Q(\sqrt[3]{2},\omega):\Q(\sqrt[3]{2})]=[\Q(\sqrt[3]{2},\omega):\Q(\sqrt[3]{2},\omega)^\sigma][\Q(\sqrt[3]{2},\omega)^\sigma:\Q(\sqrt[3]{2})]  \]
+        and since $\omega$ cannot be in the fixed field, it follows that $[\Q(\sqrt[3]{2},\omega)^\sigma:\Q(\sqrt[3]{2})]=1$
+        and thus $\Q(\sqrt[3]{2})$ is the fixed field.
+    \item For the subgroup $H_1=\langle(12)\rangle$ of $S_3$, we find that $H_1(\sqrt[3]{2})=\omega\sqrt[3]{2}$
+        and $H_1(\omega\sqrt[3]{2})=\sqrt[3]{2}$. Note that this permutation fixes $\omega^2\sqrt[3]{2}$,
+        and thus $\Q(\omega^2\sqrt[3]{2})$ must be contained in the fixed field.
+
+        The subgroup $H_2=\langle(13)\rangle$ of $S_3$ fixes $\omega\sqrt[3]{2}$. Thus $\Q(\omega\sqrt[3]{2})$
+        must be contained in the fixed field. 
+\end{enumerate}
+
+\subsection*{Problem 2}
+
+Consider the field $\Q(\sqrt[4]{2},i)$. We have seen that $\Gal(\Q(\sqrt[4]{2},i)/\Q)$ has order 8.
+
+\begin{enumerate}[(i)]
+    \item Suppose that $\sigma\in\Gal(\Q(\sqrt[4]{2},i)/\Q)$ corresponds to the permutation $(13)(24)$.
+        Thus $\sigma(\sqrt[4]{2})=-\sqrt[4]{2}$, $\sigma(-\sqrt[4]{2})=\sqrt[4]{2}$, $\sigma(i\sqrt[4]{2})=-i\sqrt[4]{2}$,
+        $\sigma(-i\sqrt[4]{2})=i\sqrt[4]{2}$. This yields:
+        \[\sigma(\sqrt{2})=\sigma(\sqrt[4]{2})\sigma(\sqrt[4]{2})=\sqrt{2}\]
+        and
+        \[\sigma(i)=\sigma(i\sqrt[4]{2})/\sigma(\sqrt[4]{2})=-i\sqrt[4]{2}/-\sqrt[4]{2}=i.\]
+        Consequently, we know that $\Q(\sqrt{2},i)$ is contained in the fixed field. Counting degrees,
+        \[ 2=[\Q(\sqrt[4]{2},i):\Q(\sqrt{2},i)]=[\Q(\sqrt[4]{2},i):\Q(\sqrt[4]{2},i)^\sigma][\Q(\sqrt[4]{2},i)^\sigma:\Q(\sqrt{2},i)]  \]
+        and by the argument that the first term cannot be 1 (as $\sqrt[4]{2}$ is not fixed) we find that the fixed
+        field $\Q(\sqrt[4]{2},i)^\sigma=\Q(\sqrt{2},i)$.
+    \item Let $\tau\in\Gal(\Q(\sqrt[4]{2},i)/\Q)$ be complex conjugation, i.e. the permutation $(24)$. It's
+        clear that $\Q(\sqrt[4]{2})$ is contained in the fixed field, as it contains no complex numbers. We
+        now count degrees:
+        \[ 2=[\Q(\sqrt[4]{2},i):\Q(\sqrt[4]{2})]=[\Q(\sqrt[4]{2},i):\Q(\sqrt[4]{2},i)^\tau][\Q(\sqrt[4]{2},i)^\tau:\Q(\sqrt[4]{2})]  \]
+        and since the first term cannot be one, we must have that the fixed field
+        $\Q(\sqrt[4]{2},i)^\tau=\Q(\sqrt[4]{2})$.
+    \item Let $\rho\in\Gal(\Q(\sqrt[4]{2},i)/\Q)$ correspond to the permutation $(13)$, i.e. switches
+        $\pm\sqrt[4]{2}$. It's clear that $\Q(i\sqrt[4]{2})$ is contained in the fixed field for this permutation.
+        We can count degrees:
+        \[ 2=[\Q(\sqrt[4]{2},i):\Q(i\sqrt[4]{2})]=[\Q(\sqrt[4]{2},i):\Q(\sqrt[4]{2},i)^\rho][\Q(\sqrt[4]{2},i)^\rho:\Q(i\sqrt[4]{2})]  \]
+        and since the first term cannot be 1, because $\sqrt[4]{2}$ is not fixed. Thus we must have
+        the fixed field $\Q(\sqrt[4]{2},i)^\rho=\Q(i\sqrt[4]{2})$. (Note that the overall extension was degree 2 because, writing out the bases,
+        we can conclude that $\Q(i\sqrt[4]{2},i)=\Q(\sqrt[4]{2},i)$.
+    \item Now consider the subgroup $H=\langle(1234)\rangle$. This permutation takes
+        \begin{align*}
+            H(\sqrt[4]{2})&=i\sqrt[4]{2}\\
+            H(i\sqrt[4]{2})&=-\sqrt[4]{2}\\
+            H(-\sqrt[4]{2})&=-i\sqrt[4]{2}\\
+            H(-i\sqrt[4]{2})&=\sqrt[4]{2}.
+        \end{align*}
+        We can compute what the permutation does to $i$:
+        \[H(i)=H(i\sqrt[4]{2}/\sqrt[4]{2})=-\sqrt[4]{2}/i\sqrt[4]{2}=-1/i=i.\]
+        Thus $\Q(i)$ must be contained in the fixed field. 
+\end{enumerate}
+
+\subsection*{Problem 3}
+
+Let $F$ be a field of characteristic zero and let $n\in\N$.
+
+\begin{enumerate}[(i)]
+    \item Let $f(x)=x^n-1$. We can compute the derivative $Df(x)=nx^{n-1}$. Since $f$ is characteristic zero,
+        $Df$ is nonzero. These are relatively prime, as we can write
+        \[-1(x^n-1)+x/n(nx^{n-1})=1\]
+        and thus $f$ does not have a multiple root in any extension field.
+    \item Let $E$ be a splitting field for $x^n-1$ over $F$. By definition of a splitting field,
+        $x^n-1$ must factor completely into linear factors, and since the polynomial has no multiple roots
+        (in any extension field), it must factor into $n$ distinct roots (by the fundamental theorem of algebra),
+        the $n^\text{th}$ roots of unity. 
+        We can show that the roots of $x^n-1$ form a finite subgroup of $F$. First note that if $\alpha,\beta$ are roots,
+        then $\alpha^n\beta^n-1=\beta^n(\alpha^n-1)+\beta^n-1=0$ and thus $\alpha\beta$ is also a root. Furthermore,
+        it is clear that 1 is a root that serves as identity and the inverse is simply $\alpha^{-1}$, which is a root, as
+        $\alpha^{-n}-1=(1-\alpha^n)/\alpha^n=0$ ($\alpha\neq 0$ as 0 is not a root). Note, however, that any
+        finite subgroup of a field is cyclic, and thus the roots of unity form a cyclic group.
+        If $\zeta$ is any primitive $n^\text{th}$ root of unity, it's clear that $F(\zeta)$ will contain all
+        powers of $\zeta$, and thus every element can be written as $a_0+a_1\zeta+\ldots+a_{n-1}\zeta^{n-1}$, $a_i\in F$. Note, however,
+        that the powers of $\zeta$ are the roots of $x^n-1$, and since $E$ is the splitting field for $x^n-1$ over $F$
+        we know that $E=F(\zeta,\zeta^2,\ldots,\zeta^{n-1})$ and thus $E=F(\zeta)$.
+    \item $E$ is clearly a normal extension of $F$, as $f(x)=x^n-1\in F[x]$ is a polynomial of degree at least 1 such that
+        $E$ is a splitting field of $f(x)$ over $F$. Let $\sigma\in\Gal(E/F)$. Then $\sigma(\zeta)$ must be a root of
+        $x^n-1$ as well, and thus $\sigma(\zeta)=\zeta^i$ for some $i$. Note that if $d=\gcd(i,n)$, then we
+        must have that $(\zeta^i)^{n/d}=1^{i/d}=1$. This implies that $\zeta^i$ is a root of $x^{n/d}-1$, and so is $\zeta$
+        (obtained by $\sigma^{-1}$ since homomorphisms preserver order). Note, however, that $\zeta$ has order $n$ and since $n/d\leq n$, we must have $d=1$,
+        i.e. $i$ is relatively prime to $n$.
+        
+        Hence, if we define $\phi:\Gal(E/F)\to(\Z/n\Z)^*$ by $\sigma(\zeta)=\zeta^{\phi(\sigma)}$ where
+        $\phi(\sigma)$ is well-defined (as above). $\phi$ is clearly a homomorphism:
+        \[\sigma(\rho(\zeta))=\sigma(\zeta^{\phi(\rho)})=\sigma(\zeta)^{\phi(\rho)}=\zeta^{\phi(\sigma)\phi(\rho)}\]
+        Note that this is injective because if $f(\sigma)=1$, then $\sigma(\zeta)=\zeta$ and we have the identity
+        permutation, and the kernel is simply the identity.
+    \item First note that the degree of the extension $\Q(\zeta_p)$ over $\Q$ is $\deg\Phi_p=p-1$. Note that
+        $\Q(\zeta_p)$ is a separable extension as $\Phi_p$ does not have multiple roots. Furthermore,
+        $\Q(\zeta_p)$ is normal extension as well, because $\Q(\zeta_p)$ is clearly a splitting field for
+        $\Phi_p$ over $\Q$. Then, by the theorem proven in class, the order of $\Gal(\Q(\zeta_p)/\Q)$
+        is exactly $p-1$. But from the last part, we have an injective homomorphism from the Galois group
+        to $(\Z/p\Z)^*$. However, this homomorphism must be surjective as well, as both groups are of the same
+        order; hence, we have an isomorphism.
+\end{enumerate}
+
+
+\end{document}
