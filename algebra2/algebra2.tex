@@ -1770,5 +1770,114 @@ splitting field for $f(x)$ over $F$.
     We say $E$ is a \textbf{Galois extension} of $F$ if $E$ is separable and normal.
 \end{defn}
 
+Let's take a step back and look at the big picture. THe basic idea of Galois theory has been to measure the
+complexity of an extension by understanding the complexity of $\Gal(E/F)$. The problem is that, often,
+the Galois group is too small. Thus we wish to find circumstances when $\Gal(E/F)$ is as
+large as possible. We know, from earlier theorems, that the order of the Galois group is at most
+$[E:F]$.
+
+We divide the study into two parts:
+\begin{enumerate}
+    \item We allow a larger extension; under very general circumstances we can find an $L$ such that
+        there exist $[E:F]$ homomorphisms $\phi:E\to L$ that fix $F$. Unfortunately, they don't form a group.
+        This always holds when the characteristic of $F$ is zero or if $F$ is finite or $F$ is perfect.
+    \item To get that, with $\phi:E\to L$, we want $\phi(E)=E$. We need some conditions on the extension --
+        then we can compose 2.
+\end{enumerate}
+If both 1 and 2 hold, we know that the order of the Galois group is $[E:F]$.
+Recall that the condition for 1 is named separable, and the condition for 2 is named normal. When an extension
+is both separable and normal, we know that the order of the Galois group is maximal. This is actually an if and only if
+statement, but we will not prove that here.
+
+The problem then becomes checking whether extensions are separable or normal. The first is not hard at all, while the second is
+not obvious. This is precisely why we defined the splitting field. Indeed, this definition is quite useful, as it is easy to write
+down splitting fields. We showed last time that $E$ is a normal extension of $F$ if and only if $E$ is the splitting field for
+some polynomial $f(x)\in F[x]$. There is, in fact, another property that is sometimes useful: $E$ is a normal extension of $F$ if and
+only if for every irreducible polynomial $p(x)\in F[x]$, if $\alpha$ is a root of $p(x)$ in $E$ then $p(x)$ is a product of linear factors
+in $E$. This fact is often used to show that an extension is not normal.
+
+\begin{exmp}
+    Let's look at $\Q(\sqrt[3]{2},\omega)$ again. We know that this is a splitting field of $x^3-2$ over $\Q$, and thus
+    it is a normal extension of $\Q$. It is also separable, as the characteristic is zero. Thus the order of the Galois
+    group must be $[\Q(\sqrt[3]{2},\Q]=6$.
+    Indeed, we know that if $\alpha_1=\sqrt[3]{2},\alpha_2=\omega\sqrt[3]{w},\alpha_3=\omega^2\sqrt[3]{2}$, then
+    $\Q(\sqrt[3]{2},\omega)=\Q(\alpha_1,\alpha_2,\alpha_3)$. This implies that there exists an injective
+    homomorphism from the Galois group to $S_3$, but since they have the same order, they must be isomorphic.
+
+    Similarly, for $\Q(\sqrt[4]{2},i)$ is a splitting field for $x^4-2$ over $\Q$ and thus the order of the Galois group has to be 8.
+    From this, we can easily check that we can assign $\phi(\sqrt[4]{2})$ some fourth root of 2, yield 4 roots, and similarly, 2 choices
+    for $\phi(i)$, and thus all 8 choices are possible. In particular, there exists a $\phi\in\Gal(\Q(\sqrt[4]{2},i)/\Q)$ such that
+    $\phi(\sqrt[4]{2})=i\sqrt[4]{2}$ and $\phi(i)=i$. Writing out roots, we can see that this $\phi$ corresponds to $(1234)$ and thus
+    the Galois group is isomorphic to $D_4$.
+\end{exmp}
+
+Let's make a couple of useful remarks about normal extensions:
+\begin{enumerate}
+    \item If $[E:F]=2$, then $E$ is always a normal extension: choose $\alpha\in E$, $\alpha\notin F$, then $E=F(\alpha)$.
+        On the other hand, if $f(x)=\irr(\alpha,F,x)$ of degree 2, we can write in $E[x]$ $f(x)=(x-\alpha)(x-\beta)$.
+        Thus $E$ must be a splitting field.
+    \item Given $F\leq K\leq E$ where $K$ is a normal extension of $F$ and $E$ is a normal extension of $K$,
+        it is \textit{not} always the case that $E$ is a normal extension of $F$. Take, for example,
+        $\Q\leq\Q(\sqrt{2})\leq\Q(\sqrt[4]{2})$. Each of the intermediate extensions is of degree 2, and thus normal.
+        But, $\Q(\sqrt[4]{2})$ is not a normal extension of $\Q$: $x^4-2$ has two roots in $\Q(\sqrt[4]{2})$, but not all four.
+    \item Suppose $F\leq K\leq E$ and $E$ is normal over $F$. Then, $E$ is automatically normal over $K$, but $K$ need not be
+        normal over $F$. Take, for example, $\Q\leq\Q(\sqrt[3]{2})\leq\Q(\sqrt[3]{2},\omega)$ as an example of this.
+        Why does $E$ have to be normal over the intermediate one? Well $E$ is normal over $F$ if and only if, for all $\phi:E\to L$,
+        $\phi$ fixes $F$ and $\phi(E)=E$. $E$ is normal over $K$ if and only if, for all $\phi:E \to L$, $\phi$ fixes $K$ and
+        $\phi(E)=E$. Hence, $E$ normal over $F$ implies $E$ normal over $K$.
+\end{enumerate}
+
+\begin{rem}
+    Let us assume we are working in characteristic zero.
+    Suppose $f(x)\in F[x]$ of degree $n$ is irreducible and $E$ is a splitting field. Let the roots of $f(x)$ be $\alpha_1,\ldots,\alpha_n$.
+    We've seen that the Galois group acts on this set of roots. We claim that $\Gal(E/F)$ acts \textbf{transitively} on the set, i.e. that for
+    all $j$, there exists a $\phi\in\Gal(E/F)$ such that $\phi(\alpha_1)=\alpha_j$.
+\end{rem}
+\begin{proof}
+    We know that there exists a $\phi:F(\alpha_i)\to E$ such that $\phi(\alpha_i)=\alpha_j$ that fixes $F$.
+    By the isomorphism extension theorem, there exists some finite extension $L$ of $E$ such that and a homomorphism
+    $\sigma:E\to L$ such that $\sigma(\beta)=\phi(\beta)$ for all $\beta\in F(\alpha_1)$. Since $E$ is a splitting field
+    of $f(x)$ over $F$, it is normal, which implies that $\sigma(E)=E$. $\sigma(\alpha_1)=\phi(\alpha_1)=\alpha_j$.
+\end{proof}
+
+\begin{cor}
+    Let the characteristic of $F$ be zero. Let $f(x)$ be irreducible in $F[x]$ of degree $n$ and let $E$ be a splitting field
+    for $f(x)$ for $F$. Then, $n$ divides the order of $\Gal(E/F)$ and the order of $\Gal(E/F)$ divides $n!$.
+\end{cor}
+\begin{proof}
+    Let us first show the second statement. We know that $E=F(\alpha_1,\ldots,\alpha_n)$, where $\alpha_i$ are the roots of $f(x)$.
+    This implies that there exists an injective homomorphism from $\Gal(E/F)$ to $S_n$. This implies that $\Gal(E/F)\cong H\leq S_n$.
+    But Lagrange's theorem tells us that the order of a subgroup divides the order of the larger group. Since the Galois group is isomorphic
+    to $H$, the order of $\Gal(E/F)$ must divide $n!$.
+
+    Let us turn to the first statement. We know that if $G$ is a finite group and $G$ acts on a set $X$ and $O$ is a $G$-orbit,
+    then the number of elements in $O$ divides the order of $G$ (this also follows from Lagrange's theorem). Since the Galois group acts transitively,
+    the whole set is one orbit with $n$ elements, which yields that $n$ divides the order of the Galois group.
+\end{proof}
+
+Now recall that a Galois extension is a finite extension that is both separable and normal. This is equivalent to the statement
+that the order of the Galois group is equal to the degree of the extension.
+
+\begin{thm}[Main theorem of Galois theory]
+    There is a bijection between intermediate fields $K$, $F\leq K\leq E$, and subgroups $H$ of $\Gal(E/F)$.
+\end{thm}
+\begin{proof}
+    In the PDF notes on Galois theory.
+\end{proof}
+
+Thus, given $K$, $F\leq K\leq E$, we associate $K$ with $\Gal(E/K)\leq\Gal(E/K)$. Additionally, given $H\leq\Gal(E/F)$,
+we associate $H$ with the fixed field $E^H$, $F\leq E^H\leq E$. Note that these two are inverse constructions in that
+$E^{\Gal(E/K)}=K$ and $\Gal(E/E^H)=H$. Furthermore, we saw earlier that these operations are order-reversing.  
+On one extreme, $E^{\left\{ 1 \right\}}=E$ and $E^{\Gal(E/F)}=F$. Thus $\Gal(E/E)=\left\{ 1 \right\}$.
+In particular, there are only finitely many intermediate fields $K$, $F\leq K\leq E$, and we can describe them all.
+
+Here, given $F\leq K\leq E$, $[E:K]$ equals the order of $\Gal(E/K)$ and $[K:F]=\left( \Gal(E/F):\Gal(E/K) \right)$,
+where this is the index, i.e. the quotient of the orders. In particular, if $H\leq\Gal(E/F)$ then $[E:E^H]$ is the order of $H$
+and $[E^H:F]=\left( \Gal(E/F):H \right)$.
+
+Finally, we have $F\leq K\leq E$, we have seen that $E$ is a normal and hence Galois extension of $K$ but
+$K$ is not necessarily a normal extension of $F$. When \textit{is it} a normal extension? $K$ is normal, and hence a Galois
+extension of $F$, if and only if $\Gal(E/K)$ is a normal subgroup of $\Gal(E/F)$. In this case, $\Gal(E/F)/\Gal(E/K)\cong\Gal(K/F)$,
+and thus we see the rationale for the name ``normal.''
 
 \end{document}
