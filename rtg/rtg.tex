@@ -1,0 +1,64 @@
+\documentclass{../mathnotes}
+
+\title{RTG Notes}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\setcounter{section}{-1}
+
+\section{Introduction}
+
+\subsection{Adam}
+
+What is algebraic geometry? It is the study of solutions to systems of polynomial equations.
+
+\begin{defn}
+    An \textbf{algebraic variety} $V(f_1,\ldots,f_s$ is the set of points $p$ such that $f_1(p)=f_2(p)=\cdots=0$
+\end{defn}
+
+One nice thing is that we can work over different fields and get different results. In fact, we can often get
+hard number theoretic problems. Take for example $V(x^n+y^n-z^n)$ over $\Q$ -- analyzing this necessitates Fermat's
+last theorem!
+
+\begin{exmp}
+    Let us, for example, find rational solutions to $x^2+y^2=z^2$. We can rewrite this as $X^2+Y^2$ by a
+    substitution. It's clear that we have a circle which goes through $(0,1)$. If we assume there exists a
+    rational point $(p,q)$ also on the circle, it's clear that the line going from $(0,1)$ and $(p,q)$ has rational
+    slope. Conversely, any line with rational slope will also hit some rational point on the circle. Thus we can
+    parametrize the solutions to our problem by rational slopes $m$.
+\end{exmp}
+
+In light of this example, how do we work backwards from parametrizations (toric varieties) to varieties?
+
+\begin{exmp}
+    Let $C=\left\{ (t,t^2,t^3)\in\R^3|t\in\R \right\}$. $C$ is, in fact, an algebraic variety:
+    \[C=V(y-x^2,z-x^3).\]
+    Are there other choices? Well we could try to start with the parametrizations and try to eliminate the parameter.
+    Consider the homomorphism $\phi:\R[x,y,z]\to\R[t]$ given by $\phi(x)=t,\phi(y)=t^2,\phi(z)=t^3$. Clearly the set
+    we want is $\ker\phi$, i.e. the set of polynomials in $x,y,z$ that vanish when $x=t,y=t^2,z=t^3$. We've reduced 
+    the problem to determining the kernel of some ring homomorphism.
+\end{exmp}
+
+The general question is, given a homomorphism $\phi:\R[x_1,\ldots,x_s]\to\R[r,s,t]$, how do we describe the kernel?
+Let's look at another example.
+
+\begin{exmp}
+    Consider the parametrizations
+    \[\phi(x_1)=s^4,\phi(x_2)=s^3t,\phi(x_3)=st^3,\phi(x_4)=t^4.\]
+    One equation is $x_1x_4-x_3x_2$. However, it's clear that these problems can quickly get rather difficult.
+\end{exmp}
+
+These are the types of questions we will generally be talking about.
+
+\subsection{Pablo}
+
+\subsection{Dan}
+
+
+
+\end{document}
