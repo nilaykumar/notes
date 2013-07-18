@@ -1,0 +1,364 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\DeclareMathOperator{\SL}{SL}
+
+\title{RTG Notes: Representation theory}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\setcounter{section}{0}
+
+\section{The irreducible finite representations of $\fr{sl}_2\C$}
+
+Let $V$ be an irreducible finite-dimensional representation of $\fr{sl}_2$. Let us choose as a basis for $\fr{sl}_2$ the matrices
+\begin{equation}
+    \begin{array}[]{ccc}
+        X=\left(
+        \begin{array}[]{cc}
+            0 & 1\\
+            0 & 0
+        \end{array}
+        \right)
+        &
+        Y=\left(
+        \begin{array}[]{cc}
+            0 & 0\\
+            1 & 0
+        \end{array}
+        \right)
+        &
+        H=\left(
+        \begin{array}[]{cc}
+            1 & 0\\
+            0 & -1
+        \end{array}
+        \right)
+    \end{array}
+\end{equation}
+and for now restrict our attention to the action of $H$. Since Lie algebra actions preserve Jordan decomposition (F-H theorem 9.20),
+the action of $H$ on $V$ is diagonalizable. Hence the eigenvectors of $H$ in $V$ span $V$ and we have a decomposition $V=\bigoplus V_\alpha$
+where the $\alpha$ run over a set of complex numbers, such that for any vector $v\in V_\alpha$ we have $Hv=\alpha v$, i.e.
+the $V_\alpha$ are invariant under the action of $H$. Next we must determine how $X$ and $Y$ act on these $V_\alpha$. In particular,
+given a $v\in V_\alpha$, for which $\beta$ is $Xv$ contained in $V_\beta$?
+\begin{align*}
+    HXv&=XHv+[H,X]v\\
+    &=X\alpha v+2Xv\\
+    &=(\alpha+2)Xv
+\end{align*}
+and thus if $v$ is an eigenvector for $H$ with eigenvalue $\alpha$, then $Xv$ is also an eigenvector $H$, with eigenvalue $\alpha+2$.
+In other words, we can view $X$ as a map from $V_\alpha$ to $V_{\alpha+2}$. The action of $Y$ is similarly computed: $Y:V_\alpha\to V_{\alpha-2}$.
+
+Consider the subspace of $V$ given by the direct sum $V'=\bigoplus_{n\in\Z}V_{\alpha_0+2n}$. It's clear that $V'$ is invariant under
+the action of $H,X,Y$, but since $V$ is irreducible, we must have that $V=V'$. Furthermore, since $V$ is finite-dimensional, this direct sum
+occurs over a finite subset of the complex numbers, $n,n-2,n-4,\ldots,p$. It is at the moment unclear whether $n$ is an integer, and what the value
+of the lower bound, $p$ is.
+
+Now choose any vector $v\in V_n$. Since this is the highest subspace, $V_{n+2}=(0)$ and $Xv=0$. Let us investigate what happens when we
+apply $Y$ to this vector.
+
+\begin{lem}
+    The vectors $\left\{ v,Yv,Y^2v,\ldots \right\}$ span $V$.
+\end{lem}
+\begin{proof}
+    By the irreducibility of $V$, it suffices to show that the subspace $W$ spanned by these vectors is invariant under the action of
+    $\fr{sl}_2$. It is immediate that $W$ is invariant under both $H$ and $Y$. Thus it suffices to check that $XW\subset W$; indeed we
+    shall show by induction that
+    \[XY^m v=m(n-m+1)Y^{m-1}v,\]
+    which would imply that $X$ preserves $W$.
+    For $m=1$, using the fact that $Xv=0$ and $[X,Y]=H$ we see that
+    \begin{align*}
+        XYv&=YXv+[X,Y]v\\
+        &=Hv=nv,
+    \end{align*}
+    as desired. Assuming the formula holds for $m$, we compute:
+    \begin{align*}
+        XY^{m+1}v&=XY(Y^m)v=(YX+[X,Y])Y^mv\\
+        &=Y\left( mn-m^2+m \right)Y^{m-1}v+HY^{m}v\\
+        &=(mn-m^2+m)Y^{m}v+HY^mv\\
+        &=(mn-m^2+m)Y^mv+(n-2m)Y^mv\\
+        &=(mn-m^2-m+n)Y^mv\\
+        &=(m+1)(n-m)Y^mv,
+    \end{align*}
+    which completes the proof.
+\end{proof}
+
+\begin{cor}
+    Each of the eigenspaces $V_{\alpha}$ is one-dimensional.
+\end{cor}
+\begin{proof}
+    Suppose one of the $V_\alpha$ were more than one-dimensional. Then the set of vectors $\left\{ v,Yv,Y^2v,\ldots \right\}$
+    will not span the whole space $V$, in contradiction to the above lemma.
+\end{proof}
+
+Incidentally, the representation $V$ is completely characterized by the complex number $n$.
+Furthermore, since $V$ is finite-dimensional, it must have a lower bound as well (as well as an upper bound).
+Suppose $m$ is the smallest power of $Y$ that annihilates $v$; then from the lemma we find that
+\[0=XY^mv=m(n-m+1)Y^{m-1}v.\]
+Hence, since $Y^{m-1}v\neq 0$, we must have that $n-m+1$. This tells us several things. First of all, we see that $n$ is, in fact,
+a non-negative integer. Additionally since, the eigenvalues jump by two, we see that the eigenvalues $\alpha$ of $H$ on $V$
+form a string of integers differing by 2 and symmetric about the origin in $\Z$.
+
+To summarize, we have found that there is a unique representation $V^{(n)}$ of $\fr{sl}_2$ for each non-negative integer $n$. The representation
+$V^{(n)}$ is $(n+1)$-dimensional with $H$ taking eigenvalues $n,n-2,\ldots,-n+2,-n$. This is very useful information: now, if we are given any
+representation $V$ of $\fr{sl}_2$ such that the eigenvalues of the action of $H$ all have the same parity and occur with multiplicity one, it must be irreducible.
+Furthermore, given an arbitrary representation $V$ of $\fr{sl}_2$, the number of irreducible factors contained within it is exactly the sum of the multiplicities
+of 0 and 1 as eigenvalues of $H$.
+
+Let's examine some of these irreducible representations. Take the trivial representation of $\fr{sl}_2$ on $\C$ that sends every Lie algebra
+element to the zero endomorphism -- this is clearly $V^{(0)}$. Consider next the standard representation on $\C^2$. If we
+take $x$ and $y$ be the standard basis for $\C^2$, we find that $H(x)=x,H(y)=-y$. This gives us the decomposition $V=\C\cdot x\oplus\C\cdot y=V_1\oplus V_{-1}$.
+We can obtain the higher-dimensional irreducible representations by taking symmetric powers of the standard representation. Take for example,
+$W=\Sym^2V=\Sym^2\C^2$, which has basis $\left\{ x^2,xy,y^2 \right\}$:
+\begin{align*}
+    H(x^2)&=x\cdot Hx+Hx\cdot x=2x\cdot x\\
+    H(xy)&=x\cdot Hy+Hx\cdot y=0\\
+    H(y^2)&=y\cdot Hy+Hy\cdot y=-2y\cdot y,
+\end{align*}
+which yields $V^{(2)}=\C\cdot x^2\oplus\C\cdot xy\oplus\C\cdot y^2=W_2\oplus W_0\oplus W_{-2}$.
+
+We leave it as an exercise for the reader to determine the action of $H$ on the basis of $\Sym^n V$ and show that the
+eigenvalues are precisely $n,n-2,\ldots,-n+2,-n$ and hence that $V^{(n)}=\Sym^n V$. In conclusion, then, any irreducible representation of $\fr{sl}_2$
+is a symmetric power of the standard representation $V=\C^2$.
+
+\section{The regular representation of $SL_2(\C)$}
+
+Let us now turn to an example of how the results from the previous section can be useful.
+Consider the regular representation of the Lie group $SL_2(\C)$, i.e. the space $R=C[SL_2(\C)]=\C[a,b,c,d]/\left\{ ad-bc-1 \right\}$
+of complex-valued functions on $SL_2(\C)$. The action of $g\in SL_2$ on $f\in R$ (evaluated at $h\in SL_2$) is given by $\pi(g)(f)(h)=f(g^{-1}h)$.
+Let us determine the associated Lie algebra homomorphism via the following commutative diagram. 
+\begin{equation*}
+    \begin{tikzcd}
+        SL_2\arrow{r}{\pi} & GL(R)\\
+        \fr{sl}_2\arrow{r}{\rho}\arrow{u}{\exp} & \fr{gl}(R)\arrow{u}{\exp}
+    \end{tikzcd}
+\end{equation*}
+Given some $f\in R,g=\left(\begin{smallmatrix}x&y\\z&w\end{smallmatrix}\right)\in SL_2$, then, the diagram above
+shows that the action of $H$ is:
+\begin{align*}
+    \rho(H)(f)(g)&=\frac{d}{dt}\bigg|_{t=0}f\left( e^{-tH}g  \right)\\
+    &=\frac{d}{dt}\bigg|_{t=0}f\left( 
+    \begin{array}[]{cc}
+        e^{-t}x & e^{-t}y\\
+        e^{t}z & e^{t}w
+    \end{array}
+    \right)\\
+    &=-x\frac{\p f}{\p a}(g)-y\frac{\p f}{\p b}(g)+z\frac{\p f}{\p c}(g)+w\frac{\p f}{\p d}(g).
+\end{align*}
+Note carefully that the action preserves the degree of the polynomial $f$, as it multiplies by a variable
+after taking a derivative. Similar computations for $X$ and $Y$ yield:
+\begin{align*}
+    \rho(X)(f)(g)&=\frac{d}{dt}\bigg|_{t=0}f\left( e^{-tX}g  \right)\\
+    &=\frac{d}{dt}\bigg|_{t=0}f\left( 
+    \begin{array}[]{cc}
+        x-tz & y-tw\\
+        z & w
+    \end{array}
+    \right)\\
+    &=-z\frac{\p f}{\p a}(g)-w\frac{\p f}{\p b}(g)\\
+    \rho(Y)(f)(g)&=\frac{d}{dt}\bigg|_{t=0}f\left( e^{-tY}g  \right)\\
+    &=\frac{d}{dt}\bigg|_{t=0}f\left( 
+    \begin{array}[]{cc}
+        x & y\\
+        z-tx & w-ty
+    \end{array}
+    \right)\\
+    &=-x\frac{\p f}{\p c}(g)-y\frac{\p f}{\p d}(g).
+\end{align*}
+Note that the action of $X$ and $Y$ do not preserve the degree, as $\rho(X)(cd)=0$ and $\rho(Y)(ab)=0$.
+The question now arises: how can we write this representation in terms of the irreducible representations that we
+computed in the previous section?
+
+Take some monomial $a^ib^jc^kd^l$ in $R$. By successive applications of $X$ one can reach the highest-weight vector
+$c^{i+k}d^{j+l}$. Let us rewrite, for convenience, this vector as $c^{\alpha}d^{\beta}$. Note, however, that the chain of eigenspaces
+specified by this highest weight vector is uniquely specified by the sum $n=\alpha+\beta$, because the eigenvalues associated with the
+eigenspaces are the same for $c^2$ as they are for $cd$ or $d^2$. Hence, for a given $n$, we have some number of irreducible representations of $\fr{sl}_2$:
+to keep track of the multiplicities we note that all the possible heighest weight vectors form the space $\Sym^n\left( \C\cdot c\oplus\C\cdot d\right)$. Hence
+the regular representation decomposes as
+\begin{align*}
+    R&=\bigoplus_n\left( \Sym^n\left( \C\cdot c\oplus\C\cdot d\right)\otimes\Sym^n\C^2\right)\\
+    &=\bigoplus_n\left(\Sym^n\C^2 \otimes\Sym^n\C^2\right)
+\end{align*}
+
+We can now move back to the group level by noting that $SL_2$ is simply connected, and thus its representations are
+in one-to-one correspondence with the representations of $\fr{sl}_2$ \cite{F-H}. Hence, the direct sum above is the decomposition of
+the regular representation of $SL_2$.
+
+Suppose now that instead of acting from the left, we have $SL_2$ acting from the right, i.e. given $g\in SL_2$ and $f\in R$
+(evaluated at $h\in SL_2$),
+\[f\cdot g=\pi(g)(f)(h)\]
+
+\section{Representations of $\fr{sl}_3\C$}
+
+In the case of $\fr{sl}_2$ we examined the action of the maximal torus, $H$, on the representation $V$. Things
+are not so simple in $\fr{sl}_3$ (which is eight-dimensional), as the maximal torus is in fact a two-dimensional
+subspace $\fr h$. Indeed, we can write the basis neatly in one place as:
+\begin{equation*}
+    \left( 
+    \begin{array}[]{ccc}
+        H_1 & X_1 & X_3\\
+        Y_1 & H_2-H_1 & X_2\\
+        Y_3 & Y_2 & -H_2
+    \end{array}
+    \right).
+\end{equation*}
+Then the maximal torus is spanned by the basis elements ${H_1,H_2}$. Again, we must require that the action
+of the maximal torus on some representation $V$ be diagonalizable, so we can get the eigenvectors to span $V$.
+Thankfully, since $[H_1,H_2]=0$, we can use the fact that commuting diagonalizable matrices are simultaneously
+diagonalizable, and the eigenvectors under the action of $\fr h$ span $V$.
+
+Because we are no longer dealing with the action of one element of the Lie algebra, we have to be a little more
+careful about what we mean by eigenvalue and eigenvector. For one, by eigenvector, we mean any $v\in V$ that is an eigenvector
+for every $H\in\fr h$. Furthermore, we must label the eigenvalue with the action to which it belongs, which we will do as:
+\[Hv=\alpha(H)\cdot v.\]
+The reader can verify that $\alpha$ is linear in $H$ and thus, when we refer to an eigenvalue, it will be to an element $\alpha\in\fr h^*$
+satisfying the above equation. Finally, by the eigenspace associated to the eigenvalue $\alpha$, we mean the subspace of
+vectors $v$ in $V$ satisfying the above equation.
+
+In light of this notation, it should be clear that any finite-dimensional representation $V$ of $\fr{sl}_3$ has a decomposition
+\[V=\bigoplus V_\alpha\]
+where $V_\alpha$ is an eigenspace for $\fr h$ and $\alpha$ ranges over a finite subset of $\fr h^*$. Now the question arises:
+what elements of $\fr{sl}_3$ will play the role of $X$ and $Y$ as before? The key lies in the commutation relations
+\[
+    \begin{array}[]{ccc}
+        [H,X]=2X & \text{ and } & [H,Y]=-2Y 
+    \end{array},
+\]
+i.e. $X$ and $Y$ are eigenvectors for the adjoint action of $H$ on $\fr{sl}_2$. In our present case, these are precisely
+the $X_i,Y_j$.
+\todo{Finish writing this up?}
+
+
+
+
+\section{A determinant identity}
+
+Consider the determinant $\det\left( \lambda I-A \right)$ where $A=\left(\begin{smallmatrix}e_{11} & e_{12}\\e_{21}&e_{22}\end{smallmatrix}\right)$
+is some $2\times 2$ matrix. Explicit computation yields that
+\begin{align*}
+    \det(\lambda I-A)&=\lambda^2-(a+d)\lambda+(ad-bc)\\
+    &=\lambda^2-\lambda\tr A + \det A.
+\end{align*}
+We can further rewrite this identity using wedge powers. Recall that since $A$ is a linear map $A:\C^2\to\C^2$, we get
+a map $\Lambda^2 A:\Lambda^2\C^2\to\Lambda^2\C^2$. But since $\Lambda^2\C^2$ is one-dimensional (write out the basis),
+$\Lambda^2 A$ must be the determinant map, as the determinant is the unique columnwise $n$-linear that is alternating and
+preserves the identity. Consequently,
+\[ \det(\lambda I-A)=\lambda^2-\lambda\tr(\Lambda^1A)+\tr(\Lambda^2A). \]
+One might ask how this identity generalizes to higher dimensions. It should be clear that in $n$ dimensions, the $\lambda^n$ term
+will have coefficient 1 and the $\lambda^0$ term will have coefficient $\tr\left(\Lambda^n\C^n\right)$. We will proceed by induction
+in order to show that
+\[\det(\lambda I-A)=\lambda^n-\lambda^{n-1}\tr\left( \Lambda^1A \right)+\lambda^{n-2}\tr\left( \Lambda^2A \right)+\cdots+\lambda^0\tr\left(\Lambda^nA\right)\]
+\todo{Do the induction}
+
+
+\section{$B$ semi-invariants}
+
+Throughout this section, $B$ is the subgroup of upper-triangular matrices in $SL_n$, and $U$ is the subgroup of $B$ with
+1's along the diagonal (the Heisenberg group). We wish to compute the subalgebra of $\C[SL_n]^H=\C[SL_n/H]$ that is semi-invariant
+under the right-action of $B$. \todo{why?}
+
+\begin{defn}
+    Let a group $G$ act on a vector space $V$. We say that $v\in V$ is semi-invariant under $G$ if, for all $g\in G$
+    \[f\cdot g=\chi(g) f\]
+    where $\chi$ is an algebraic character $\chi:G\to\C^\times$ (and similarly for left actions).
+\end{defn}
+
+\begin{lem}
+    Elements of $\C[SL_n/H]$ semi-invariant under $B$ are also invariant under $U$.
+\end{lem}
+
+\begin{proof}
+    Suppose $f\in\C[SL_n/H]$ is semi-invariant under $B$, i.e. for $b\in B$
+    \[f\cdot b=\chi(b) f\]
+    where $\chi$ is a algebraic character, $\chi:B\to\C^\times$. It suffices to show that $\chi(u)=1$ for $u\in U$.
+    First note that $U\cong\C^{n(n-1)/2}$ and that $\chi$ restricted to $U$ is a regular polynomial map. In particular,
+    if $u=(u_1,\ldots, u_n)$, then $\chi(u)$ is a polynomial in $u_1,\ldots, u_n$. Since the polynomial maps into $\C^\times$,
+    it must not vanish. By the maximum modulus principle, it follows that $\chi$ is constant. In particular, $\chi=1$, as it
+    is a homomorphism.
+\end{proof}
+
+\begin{thm}
+    Elements of $f\in\C[SL_n/H]$ semi-invariant under $B$ are the highest-weight vectors of $\C[SL_n/H]$ as a representation of $SL_n$.
+\end{thm}
+
+\begin{proof}
+    Suppose $f$ is semi-invariant under $B$; by the above lemma, it must be invariant under the action of $U$: $f\cdot U=f$ This implies that
+    for each $X\in \Lie(U)$, $f\cdot X=0$. Incidentally, one can check that $\Lie(U)$ is simply the space of strictly upper-triangular matrices
+    \cite{hall2003lie}, whose basis is precisely the space of raising operators $X_i$ that we encounter in the representation theory of $SL_n$.
+    \todo{right action! does that change much?}
+    That each $X_i$ annihilates $f$ implies that $f$ must be a highest-weight vector in $\C[SL_n/H]$ as a $SL_n$-module (and conversely).
+\end{proof}
+
+This result allows us to compute the $B$ semi-invariants in $\C[SL_n/H]$ indirectly; namely by finding the highest-weight vectors in $\C[SL_n/H]$.
+
+
+\section{Wonderful compactification via symmetric varieties}
+
+This section serves primarily as notes from \cite{de1983}, in which the authors take a semisimple adjoint group $G$ along with 
+an involution (automorphism of order 2) $\sigma$ and construct a wonderful compactification of the symmetric variety $G/G^{\sigma}$,
+where $G^{\sigma}$ is the subgroup of $G$ invariant under the action of $\sigma$. Here we apply a similar method for our case
+of $\SL_n/H$.
+
+For the sake of concreteness, let us start with the simple example of $G=\SL_2$ and $H$ the subgroup of diagonal matrices.
+Consider the involution $\sigma:\SL_2\to\SL_2$, given by the conjugation
+\begin{equation*}
+    \sigma:
+    \begin{pmatrix}
+        x & y\\
+        z & w
+    \end{pmatrix}
+    \mapsto
+    \begin{pmatrix}
+        -1 &\\
+        & 1
+    \end{pmatrix}
+    \begin{pmatrix}
+        x & y\\
+        z & w
+    \end{pmatrix}
+    \begin{pmatrix}
+        -1 &\\
+        & 1
+    \end{pmatrix}^{-1}
+    =
+    \begin{pmatrix}
+        x & -y\\
+        -z & w
+    \end{pmatrix}
+\end{equation*}
+Note that $\SL^\sigma=H$ (in line with the master plan to wonderfully compactify $\SL_2/H$).
+This involution descends to an involution on the Lie algebra $\fr{sl}_2$. To see this, we compute the induced Lie algebra
+homomorphism via the commutative diagram
+\begin{equation*}
+\begin{tikzcd}
+    \SL_2\arrow{r}{\sigma}&\SL_2\\
+    \fr{sl}_2\arrow{u}{\exp}\arrow{r}{\rho}&\fr{sl}_2\arrow{u}[swap]{\exp}
+\end{tikzcd}
+\end{equation*}
+which we call $\rho:\fr{sl}_2\to\fr{sl}_2$. Given $A\in\fr{sl}_2$, $\rho$ acts as
+\begin{equation*}
+    \rho: A\mapsto \frac{d}{dt}\bigg|_{t=0}\sigma(\exp(t A)).
+\end{equation*}
+In particular, given the conjugation $\sigma$ earlier, we can compute the action of $\rho$ on the basis $\left\{ H,X,Y \right\}$
+of $\fr{sl}_2$:
+\begin{align*}
+    \rho(H)&=\frac{d}{dt}\bigg|_{t=0}\begin{pmatrix}t&\\&-t\end{pmatrix}=H\\
+    \rho(X)&=\frac{d}{dt}\bigg|_{t=0}\begin{pmatrix}1&-t\\&1\end{pmatrix}=-X\\
+    \rho(Y)&=\frac{d}{dt}\bigg|_{t=0}\begin{pmatrix}1&\\-t&1\end{pmatrix}=-Y.
+\end{align*}
+In words, $\rho$ negates the $X$ and $Y$-axes in $\fr{sl}_2$. 
+
+
+\newpage
+
+\bibliography{notes}
+\bibliographystyle{alpha}
+
+\end{document}

@@ -1,0 +1,27 @@
+\documentclass{../mathnotes}
+
+\title{Representation Theory Notes}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\setcounter{section}{-1}
+
+\begin{defn}
+    A \textbf{representation} of a finite group $G$ on a finite-dimensional complex vector space $V$
+    is a homomorphism $\rho: G\to GL(V)$ of $G$ to the group of automorphisms of $V$. A map $\phi$ between
+    two representations $V$ and $W$ of $G$ is a vector space map $\phi:V\to W$ such that $g\cdot\phi=\phi\cdot g$
+    and is called a \textbf{morphism} of representations.
+
+    A \textbf{subrepresentation} of a representation of $V$ is a vector subspace $W$ of $V$ which is invariant
+    under $G$. A representation $V$ is called irreducible if there is no proper nonzero invariant subspace $W$ of $V$.
+
+    If $V$ and $W$ are representations, the direct sum $V\oplus W$ and the tensor product $V\otimes W$ are also representations.
+    These are given by $g(v,w)=(gv,gw)$ and $g(v\otimes w)=gv\otimes gw$.
+\end{defn}
+
+\end{document}

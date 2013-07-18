@@ -3,6 +3,7 @@
 
 \LoadClass[11pt]{article}
 
+\usepackage[margin=1in]{geometry}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
@@ -20,14 +21,18 @@
 \newcommand{\RP}{\mathbb{R}\mathbb{P}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\p}{\partial}
+\newcommand{\fr}{\mathfrak}
 
 
+\DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\length}{length}
 \DeclareMathOperator{\res}{Res}
 \DeclareMathOperator{\Int}{Int}
 \DeclareMathOperator{\Ext}{Ext}
 \DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Lie}{Lie}
 \DeclareMathOperator{\id}{Id}
 \DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\irr}{irr}

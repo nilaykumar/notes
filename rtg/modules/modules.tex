@@ -1,0 +1,44 @@
+\documentclass{../../mathnotes}
+
+\usepackage{tikz-cd}
+
+
+\title{Notes on Modules}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\setcounter{section}{-1}
+
+\section{Modules}
+
+Let $A$ be a ring. An \textbf{$A$-module} is an Abelian group $M$ with a multiplication map $A\times M\to M$, written $(f,m)\mapsto fm$
+that satisfies
+\begin{enumerate}[(i)]
+    \item $f(m\pm n)=fm\pm fn$;
+    \item $(f+g)m=fm+gm$;
+    \item $(fg)m=f(gm)$;
+    \item $1_Am=m$
+\end{enumerate}
+for all $f,g\in A$ and $m,n\in M$. We call a subset $N\subset M$ a \textbf{submodule} if $fm+gn\in N$ for all $f,g\in A$ and $m,n\in N$.
+A \textbf{homomorphism} is a map $t:M\to N$ of $A$-modules that is $A$-linear, in the obvious sense that $t(fm+gn)=ft(m)+gt(n)$ for all $f,g\in A$
+and $m,n\in M$.
+
+
+\section{Exact Sequences}
+
+
+
+
+
+
+
+
+\bibliography{notes}
+\bibliographystyle{alpha}
+
+\end{document}

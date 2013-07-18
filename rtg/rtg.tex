@@ -57,8 +57,138 @@ These are the types of questions we will generally be talking about.
 
 \subsection{Pablo}
 
+We will be focusing on representation theory and geometry. What is representation theory? It is the study of
+homomorphisms from a group $G$ into $GL(V)=GL_n$ where $V$ is some vector space of dimension $n$.
+
+As a non-trivial example, consider the group $\left\{ (x,y)\in\C^2|y^2=x^3+x \right\}$ unioned with some point.
+Why is this a group? It's certainly non-obvious, and this kinda relates back to Adam's talk about solution sets.
+Indeed, in certain fields, such as the complex numbers, the set of points may look like something nice -- take, for
+example, the torus. The torus is the direct product of two $U(1)$ groups!
+
+One example of how representation theory can be useful is in the concept of braid groups, where we talk about
+braidings pieces of string. It turns out that operations on these braids yield groups, which can be analyzed via
+representation theory. As another example, one might consider the group $\Z$ and a representation
+\[n\mapsto
+    \left(
+    \begin{array}[]{cc}
+        1 & n\\
+          & 1
+    \end{array}
+    \right).
+    \]
+Another example  is the matrix Lie group $SL_2$ of invertible matrices with determinant 1, which has the inclusion
+map as a representation. Note that representations need not be injective or surjective. For example, we could have a representation
+$U(1)\times U(1)\to GL_1(\C)$ that takes $(z,w)\mapsto z$ or $(z,w)\mapsto zw$, etc. with $(a,b)\in\Z^2$.
+
+Pablo recently learned the following thing that he finds rather cool. Take some arbitrary $n\times n$ matrix. Computing determinants
+is not the most fun thing in the world. Let us take $n=4$ for example. We can write, it turns out:
+\[\det(\lambda I-A)=\lambda^4-\tr(A)\lambda^3+a\lambda^2-b\lambda+\det(A).\]
+Is there a nice way of figuring out what $a,b$ are?
+
+Well consider a map $A:\C^4\to\C^4$. One can consider $\Lambda^4 A:\Lambda^4\C^4\to\Lambda^4\C$. But these new vector spaces
+are one-dimensional, and the map is simply the determinant map of $A$. Thus $\det(A)=\tr(\Lambda^4A)$. It turns out, then that
+the coefficients are of the form $\tr(\Lambda^iA)$! In some sense, this is all due to how alternating tensors work.
+
+But where does the geometry come in? We will get geometry from algebra! For example, we can have groups that act on vector spaces and
+thus groups acting on direct sums of vector spaces. One can consider the very big vector space $\oplus_{n\geq 0}\Sym^n(V)$. This, in fact,
+forms a ring and hence we have a group acting on polynomials! Let's look at as simple case.
+Let $G=\Z/2\Z$ and the vector space $V=\C^2$. One can imagine that the non-identity element in the group acts as $-I$. Consider
+what's fixed in the ring: $\C[x,y]^{\Z/2\Z}=\C[x^2,xy,y^2]\cong \C[a,b,c]$. We can consider the solutions to $ac-b^2=0$. We can draw a picture -- this is geometry!
+
 \subsection{Dan}
 
+We're going to talk about symplectic geometry. Let's talk about some preliminaries. We're typically going to be working with what are called \textbf{symplectic
+manifolds} $(M^{2n},\omega)$. This means that $M^{2n}$ is a $2n$-dimensional smooth manifold (with or without boundary, compact or non-compact).
+One can consider spaces such as $\R^{2n},S^{2n},B^{2n}$ etc. (where the last one is a ball). The $\omega$ is a closed differential two-form ($d\omega=0$) that
+is nondegenerate, i.e. $\omega\wedge\cdots\wedge\omega$ ($n$ times) is nowhere zero. What the two-form does is carry geometric information -- it can tell us,
+for example, what the angle between two vectors in the tangent space of our manifold at some point. Note that the non-degenerateness will give us a
+volume/orientation form. In addition, there are interesting subtleties that stem from the cohomology class of $\omega$. Note that the symplectic conditions
+are rather strong -- not every manifold can be given a symplectic geometry.
+
+Why do we care? What's the motivation for symplectic geometry? These ideas stem from the ideas of parameter spaces. We can think of our symplectic manifold
+as a shape whose points correspond to configurations of a physical system. For example, take the earth-sun-moon system in Newtonian mechanics.
+What's the configuration space for this system? One needs the position of each body, which gives us $\R^9$, but we also need the momentum of each body, which is
+another $\R^9$. In total, then, our parameter space is $\R^{18}$. It turns out to be productive to think of this as the cotangent bundle $T^*\R^9$.
+It turns out that this parameter space has a natural symplectic form: $\omega_{std}=dx_1\wedge dy_1+\cdots+dx_n\wedge dy_n$, where $(x,y)\in\R^9\times\R^9$.
+We leave it as an exercise to show that this form is, in fact, symplectic. More importantly, the form $\omega_{std}$ is an irreplaceable part of the physics
+of the parameter space $\R^{18}=T^*\R^9$.
+
+This motivates some of the fundamental questions of symplectic geometry. For example, when are two symplectic manifolds equivalent? This will motivate
+the definition of symplectic equivalence. What is the geometry of symplectic manifold ``like''?
+
+People have been thinking about symplectic geometry since the 1960s. However, the basic geometry of symplectic manifolds was not well understood until
+the mid-eighties. One of the important questions was: how different is symplectic geometry from volume-preserving geometry? For example, a symplectic form
+induces a volume form, and so one might ask how much of the symplectic geometry is captured in this volume form? Let's look at a precise question.
+Define two symplectic manifolds $(M_1,\omega_1),(M_2,\omega_2)$ to be \textbf{symplectomorphic} if there exists a $\phi:M_1\to M_2$ that is a
+diffeomorphism with $\phi^*(\omega_2)=\omega_1$. We leave it as an exercise to show that a symplectomorphism preserves the volume form, i.e. the induced volume
+form on $M_2$ pulls back to the induced volume form on $M_1$. Hence, a symplectomorphism is volume-preserving. But if we have a volume-preserving map,
+is it symplectic? The answer is no, in general, and this problem was easy. Much more interesting was the question: given a volume-preserving map,
+can we approximate it (arbitrarily closely) by symplectic maps? If the answer were yes, since volume-preserving geometry is relatively easy, we'd see that
+symplectic geometry is really quite trivial. People worried about this for a while, until in 1985 when Gromov (and Eliashberg) proved what is now
+known as Gromov non-squeezing. Gromov thought about $B^{2n}(R)=\left\{ x^2+y_1^2+\cdots+x_n^2+y_n^2\leq R \right\}\subset(\R^{2n},\omega_{std})$
+and $Z(R)=\left\{ x_1^2+y_1^2\leq R \right\}\subset (\R^{2n},\omega_{std}$), i.e. a ball and an infinite cylinder. 
+
+\begin{thm}[Gromov non-squeezing]
+    Symplectically, $B^{2n}(r)$ embeds in $Z(R)$ if and only if $r\leq R$.
+\end{thm}
+
+The significance of this theorem is that $B(1.01)$ easily admits a volume-preserving embedding into $Z(1)$ (easy fact of volume-preserving geometry) since the only
+invariant in the volume-preserving world is volume. This was the first example of what's called \textbf{symplectic rigidty}.
+We're going to be thinking about examples of some ``flexibility'' -- we want to understand just how rigid symplectic geometry really is.
+
+\section{WWHS}
+
+Here's a rough syllabus of things we will be learning about (in no particular order):
+\begin{itemize}
+    \item $SL_2(\C)$ and representation theory
+    \item Lie algebras
+    \item Root systems
+    \item Toric varieties
+    \item Flag varieties
+    \item Weyl character formula
+    \item Highest weight theory
+    \item Littlewood-Richardson Rule
+    \item Borel-Weil-Bott
+\end{itemize}
+
+\subsection{Assignment 1}
+
+\begin{enumerate}
+
+    \item Take $x\in\fr g$ and $g\in G$. Now consider
+        \begin{align*}
+            \exp\left(gXg^{-1}t\right)&=1+gXg^{-1}t+(gXg^{-1})^2t^2/2+\cdots\\
+            &=g\left(1+Xt+X^2t^2/2+\cdots\right)g^{-1}\\
+            &=g\exp(Xt)g^{-1}.
+        \end{align*}
+        Hence, $gXg^{-1}\in\fr g$.
+
+    \item Given a representation $r:G\to GL_n(\C)$, we can consider the differential at the identity,
+        $dr:T_eG=\fr g\to T_eGL_n(\C)=M_{n\times n}(\C)$. We wish to show that $dr$ is a Lie algebra homomorphism.
+
+    \item Define $\pi:\fr g\to\fr{gl}(V\otimes W)$ by
+        \[\pi(X)(v\otimes w)=\pi_1(X)v\otimes w+v\otimes \pi_2(X)w.\]
+        We wish to show that $\pi$ is a Lie algebra homomorphism, i.e. that $\pi([X,Y])=[\pi(X),\pi(Y)]$.
+        The left-hand side yields
+        \begin{align*}
+            \pi([X,Y])(v\otimes w)&=\pi_1([X,Y])v\otimes w+v\otimes \pi_2([X,Y])\\
+            &=[\pi_1(X),\pi_1(Y)]v\otimes w+v\otimes[\pi_2(X),\pi_2(Y)]w
+        \end{align*}
+        \textbf{FINISH****}
+
+        Now note that given any $X\in\fr g$, we can recover the group element $e^{tX}\in G$. This element is sent by the Lie
+        group homomorphism $\rho:G\to GL(V\otimes W)$ to an action
+        \[e^{tX}(v\otimes w)=e^{tX}v\otimes e^{tX}w\]
+        by definition of the representation of tensor products. Then, to descend back down to $\fr{gl}(V\otimes W)$, we simply take a derivative:
+        \begin{align*}
+            \frac{d}{dt}\left(e^{tX}v\otimes e^{tX}w\right)\bigg|_{t=0}&=\left(Xe^{tX}v\otimes e^{tX}w+e^{tX}v\otimes Xe^{tX}w\right)\bigg|_{t=0}\\
+            &=Xv\otimes w+v\otimes Xw.
+        \end{align*}
+        But this action is precisely that carried out by $\pi$, and thus the given diagram commutes.
+
+    \item Elementary computation for vector fields from differential geometry. 
+
+\end{enumerate}
 
 
 \end{document}
