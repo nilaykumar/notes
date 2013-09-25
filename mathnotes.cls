@@ -19,6 +19,7 @@
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\CP}{\mathbb{C}\mathbb{P}}
 \newcommand{\RP}{\mathbb{R}\mathbb{P}}
+\newcommand{\Proj}{\mathbb{P}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\p}{\partial}
 \newcommand{\fr}{\mathfrak}
@@ -30,6 +31,10 @@
 \DeclareMathOperator{\Int}{Int}
 \DeclareMathOperator{\Ext}{Ext}
 \DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Diff}{Diff}
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\ad}{ad}
 \DeclareMathOperator{\Gal}{Gal}
 \DeclareMathOperator{\Sym}{Sym}
 \DeclareMathOperator{\Lie}{Lie}
@@ -37,10 +42,12 @@
 \DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\irr}{irr}
 \DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Spec}{Spec}
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}
 \newtheorem{lem}[thm]{Lemma}
 \newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}{Proposition}
 \newtheorem{exc}{Exercise}
 
 \theoremstyle{definition}

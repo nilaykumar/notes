@@ -1,0 +1,70 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{amsmath}
+
+
+\title{Lie Groups and Representations: Notes}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+%\setcounter{section}{-1}
+
+\begin{thm}[Fundamental theorem of Lie theory]
+    The category of connected, simply-connected, Lie groups is equivalent to the category of Lie algebras.
+\end{thm}
+\begin{proof}
+    Omitted.
+\end{proof}
+
+One can consider as an example the case of $SO(3)$ and $SU(2)$, which have identical Lie algebras. Another example is
+$\fr{sl}(2,\R)$ ($2\times 2$ matrices with trace zero), which corresponds to $\widetilde{SL(2,\R)}$, the universal cover of $SL(2,\R)$.
+Indeed, to understand connected Lie groups, it suffices to understand Lie algebras as well as their theory of coverings.
+One direction of this theorem is easy to see, namely sending groups to algebras, but the difficulty arises in the other direction:
+how does one lift a Lie algebra homomorphism to a Lie group homomorphism? One (not completely obvious) way to do this is to use the
+Baker-Campbell-Hausdorff formula, which allows us to locally recover the group law from the Lie algebra.
+
+Indeed, the Baker-Campbell-Hausdorff formula can be used to define the Lie bracket operation. Another way of doing this is of course to
+treat the Lie algebra elements as left-invariant vector fields, and to then use the usual Lie bracket of vector fields.
+Of course, for matrix groups we can obviously define the bracket as simply the commutator $[X,Y]=XY-YX$ (we can think of this more
+abstractly as the derivative of the adjoint representation of the group).
+
+\begin{defn}
+    A \textbf{representation $(\pi, V)$ of a group} $G$ on a vector space $V$ is a homomorphism $\pi: G\to GL(V)$.
+\end{defn}
+
+\begin{rem}
+    For us, $G$ will be a Lie group, and $V$ will be a finite-dimensional vector space over a field, usually $\C$.
+\end{rem}
+
+\begin{defn}
+    A \textbf{representation $(\phi, V)$ of a Lie algebra} $\fr g$ on a vector space $V$ is a Lie algebra homomorphism $\phi:\fr g\to\fr{gl}(V)=\End V$.    
+\end{defn}
+
+\begin{rem}
+    Given a representation $(\pi, V)$ of $G$, we obtain a representation of $\fr g$ simply by taking the derivative $(\pi_*,V)$,
+    with $\pi_*(X)=d/dt\pi(e^{tX})|_{t=0}$. However, we cannot necessarily go the other way: given a Lie algebra representation, we cannot
+    always lift to a Lie group representation. If a representation of $\fr g$ is $\pi_*$ for some $\pi$ a representation of $G$, then we call
+    $\pi$ \textbf{integrable}.
+\end{rem}
+
+Note that for any Lie group $G$, we can construct an action of $G$ on itself. This is the adjoint action given by $g\mapsto c(g)\in\Diff(G)$ where
+$c(g)h=ghg^{-1}$. Note however that $\Diff(G)$ is nonlinear and hence we obtain a nonlinear representation. Instead we can consider
+$g\mapsto (c(g))_*: TG\to TG$, which restricts at the identity to a map $\fr g\to\fr g$. Indeed, one can check that we get a representation this way.
+
+\begin{defn}
+    The \textbf{Adjoint representation of the group $G$} is $(\Ad,\fr g)$ where $\Ad(g)=(c(g))_*(e)$.
+\end{defn}
+
+We can go further and differentiate this representation to obtain a Lie algebra representation.
+
+\begin{defn}
+    The \textbf{adjoint representation} of a Lie algebra $\fr g=\Lie G$ is $(\ad, \fr g)$ where $\ad(X)=\Ad'(e^{tX})=\frac{d}{dt}\bigg|_{t=0}\Ad(e^{tX})$.
+\end{defn}
+
+\end{document}

@@ -1,0 +1,214 @@
+\documentclass{../../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\title{Modern Geometry PSET 1}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{prop}
+    Every topological manifold is path-connected if and only if it is connected.
+\end{prop}
+
+The following lemma is useful.
+
+\begin{lem}
+    Let $M^n$ be a topological manifold. Then $M^n$ is locally path-connected.
+\end{lem}
+\begin{proof}
+    Given a point $x\in M$, it suffices to show that there exists an open path-connected neighborhood $U\ni x$.
+    Let $x$ lie in the chart $(V,\psi)$; then $\psi(V)$ is an open set in $\R^n$. By the topology of $\R^n$, we can
+    find an open ball $B\ni\psi(x)$ such that $B\subset \psi(V)$. Since $B$ is clearly path-connected and open, so is $\psi^{-1}(B)$.
+    Then $\psi^{-1}(B)$ is an open path-connected neighborhood of $x$, and we are done.
+\end{proof}
+
+We now prove the proposition.
+
+\begin{proof}
+    Let $C$ be a path-component of $M$. Given some point $p\in C$, path-connectedness implies that there exists a path-connected neighborhood
+    $U$ of $p$. It's clear that $U$ must be contained in $C$, and hence $C$ must be open. It is true in general that path-connectedness
+    implies connectedness; it suffices to show that connectedness implies path-connectedness. Suppose $M$ is connected, i.e. $M$ consists of
+    one (open) component. For some $p\in M$ consider the path component $P$ containing $p$. Suppose $P$ is not the only path-component in $M$.
+    Then the set $\left\{ P, M\setminus P \right\}$ would be separation of $M$, contradicting that $M$ is connected. Hence $P$ must be the only
+    path-component of $M$, and since $M$ is connected it follows that $P=M$, i.e. that $M$ is path-connected.
+\end{proof}
+
+\begin{prop}
+    Consider the diagram
+    \begin{equation*}
+        \begin{tikzcd}
+            \R^{n+1}\setminus\left\{ 0 \right\}\arrow[swap]{d}{\pi}\arrow[dashed]{r}{f} & S^n\times\R\arrow{d}{p}\\
+            \RP^n & S^n\arrow{l}{\pi|_{S^n}}
+        \end{tikzcd}
+    \end{equation*}
+    where $\pi$ is the quotient map and $p$ is projection onto the first factor. Then the following are true:
+    \begin{enumerate}[(a)]
+        \item there exists a homeomorphism $f:\R^{n+1}\setminus\left\{ 0 \right\}\to S^n\times\R$ such that the diagram commutes;
+        \item the inverse image of an open set in $\RP^n$ in $S^n\times\R$ is
+        \item $\RP^n$ is Hausdorff, second-countable, and compact.
+    \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    \begin{enumerate}[(a)]
+        \item Define the map $f$ by $\vec v\mapsto (\vec v/|\vec v|,\ln|\vec v|)$. It's clear that the map is
+            bijective with inverse $f^{-1}:(\vec w, x)\mapsto e^x\vec w$ and that both $f$ and $f^{-1}$ are continuous.
+            Hence $f$ is a homeomorphism. To check that the diagram commutes, note that $p(f(\vec v))=\vec v/|\vec v|$,
+            which when projected to $\RP^n$ simply yields $[\vec v]$, as needed.
+        \item
+            Geometrically, the map $\pi|_{S^n}$ simply identifies antipodal points on the sphere, and hence the inverse image of an open set
+            in $\RP^n$ is two open sets on $S^n$ (antipodally symmetric). The inverse image of this in $S^n\times \R$ gives us back these open sets but
+            with fibers isomorphic to $\R$ attached to each point. Geometrically we can imagine a double-napped hypercone (with center
+            at the center of the sphere) that intersects $S^n$ in the shape of the open set of $\RP^n$. 
+        \item We showed in class that $\RP^n$ is locally Euclidean and constructed charts $(U_i,\phi_i)$. Let us first show that $\RP^n$ is
+            second-countable. Take the collection of open sets $\{\pi^{-1}(U_i)\}$, which is an open cover of $\R^{n+1}\setminus\{0\}$.
+            Pick a countable sub-cover of this collection and call $\mathcal{U}'$ the collection of open sets of $\RP^n$ whose preimage
+            by $\pi$ is this countable sub-cover. Then $\mathcal{U}'$ is a countable cover of $\RP^n$ by Euclidean balls of dimension $n$.
+            Since each ball has a countable basis, the union of such bases gives us a countable cover for $\RP^n$.
+
+            Next we show that $\RP^n$ is Hausdorff. Pick two distinct points $x,y\in\RP^n$. The preimage of $x$ in $S^n$ is $\{x,-x\}$
+            and the preimage of $y$ is $\{y,-y\}$. Consider $S^n$ as embedded in $\R^{n+1}$ and define the following open sets of $S^n$:
+            \begin{align*}
+                U&=S^n\cap B_\epsilon(x)\\
+                V&=S^n\cap B_\epsilon(y).
+            \end{align*}
+            for $\epsilon=\min(|x-y|,|x+y|)/2$. It's clear then that on the $n$-sphere, $U,V,-U,$ and $-V$ are disjoint neighborhoods of
+            $x,y,-x$ and $-y$. Note now that the preimage of the image of $U$ and $V$ under $\pi|_{S^n}$ are $-U\cup U$ and $-V\cup V$
+            respectively. By definition of the quotient topology, $\pi|_{S^n}(U)$ and $\pi|_{S^n}(V)$ are open in $\RP^n$. Additionally,
+            they must be disjoint, because if there were a point common to both, the preimage of the point would fall into both $-U\cup U$
+            and $-V\cup V$, which is impossible as they are disjoint. Hence $\RP^n$ is Hausdorff.
+
+            That $\RP^n$ is compact follows from the fact that compactness is preserved by continuous maps (i.e. if $X$ is compact then
+            $f(X)$ is compact) applied to the quotient map $\pi|_{S^n}$ since the sphere is obviously compact.
+    \end{enumerate}
+\end{proof}
+
+\begin{prop}
+    If $M, N, L$ are smooth manifolds with $f: M\to N$ and $g:N\to L$ smooth maps, then the composition $g\circ f: M\to L$ is smooth.
+\end{prop}
+\begin{proof}
+    Since $g$ is smooth, we can find smooth charts $(V,\psi)$ containing $f(p)$ and $(W,\xi)$ containing $g(f(p))$ such that
+    $g(V)$ is contained in $W$ and the composition $\xi\circ g\circ \psi^{-1}$ is smooth. But now, by smoothness of $f$, we can
+    find a chart $(U,\phi)$ containing $p$ such that $f(U)$ is contained in $V$ (as we discussed in class, the coordinate representation
+    of a smooth map is smooth with respect to every pair of smooth charts). Hence the composition $\psi\circ f\circ \phi^{-1}$
+    is smooth as well. Composing these compositions, we find that $\xi\circ g\circ f\circ \phi^{-1}$ is smooth, and we conclude
+    that the composition $g\circ f$ is smooth.
+\end{proof}
+
+\begin{prop}
+    Bump functions, etc.
+\end{prop}
+\begin{proof}
+    \begin{enumerate}[(a)]
+        \item It's clear that $f$ is continuous and smooth on $\R\setminus\{0\}$. Additionally, $f$ is continuous at $x=0$
+            because $f(0)=0$ and $\lim_{x\to 0}e^{-1/x^2}=0$. Hence it suffices to compute the derivatives at all orders of $f$ at $x=0$.
+            
+            Let us first prove by induction that for $x>0$,
+            \[\frac{d^nf}{dx^n}=p_n(x)\frac{e^{-1/x^2}}{x^{3n}},\]
+            for some polynomial $p_n(x)$. The formula clearly holds for $n=0$. We assume it holds for $n-1$. Then
+            \begin{align*}
+                \frac{d^nf}{dx^n}&=\frac{d}{dx}\left( p_{n-1}(x)\frac{e^{-1/x^2}}{x^{3(n-1)}} \right)\\
+                &=p_{n-1}'(x)\frac{e^{-1/x^2}}{x^{3(n-1)}}+p_{n-1}(x)\left( 2 e^{-\frac{1}{x^2}} x^{-3-3 (-1+n)}-3 e^{-\frac{1}{x^2}} (-1+n) x^{-1-3 (-1+n)} \right)\\
+                &=p_{n-1}'(x)\frac{e^{-1/x^2}}{x^{3(n-1)}}+p_{n-1}(x)\frac{e^{-1/x^2}}{x^{3n}}\left( 2-3(n-1)x^2 \right).
+            \end{align*}
+            Combining the two terms yields an overall denominator of $x^{3n}$ with a now-different polynomial out front. Hence we are done.
+
+            Now let us compute the $n$th derivative of $f$ at zero:
+            \begin{align*}
+                \frac{d^nf}{dx^n}\bigg|_{x=0}=\lim_{h\to 0}\frac{p_n(h)\frac{e^{-1/h^2}}{h^{3n}}}{h}=p_n(0)\lim_{h\to0}\frac{e^{-1/h^2}}{h^{3n+1}}=0.
+            \end{align*}
+            Since the derivatives exist, they must be continuous as well. Hence $f$ is smooth.
+        \item Define $g:\R\to\R$ by
+            \[g(x)=\frac{f(1 - |x|)}{f(1 - |x|)+f(|x|-1/2)}.\]
+            For $|x|>1$ the numerator vanishes, as desired and for $|x|<1/2$, note that the second term in the denominator vanishes and hence $g$ is identically 1.
+            It is also easy to see that when $|x|<1$, $g$ is positive (by the properties of $f$). This function is smooth by composition on $\R\setminus\{0\}$.
+            It is, in fact, also smooth at 0 as it is identically 1 in an open neighborhood of 0.
+        \item Define $h:\R\to[0,1]$ by
+            \[h(x)=1-\frac{f(1 - x)}{f(1 - x)+f(x)}.\]
+            Consider for now just the fraction: for $x<0$, the second term in the denominator vanishes and hence we get 1. For $x>1$, the numerator vanishes and we get 0.
+            This is precisely the opposite of what we want. Hence we subtract it from 1. This function is smooth by composition.
+        \item Take $\psi:\R^n\to\R$ given by
+            \[\psi(\vec x)=\frac{f(2\epsilon - |x|)}{f(2\epsilon - |x|)+f(|x|-\epsilon)},\]
+            for $\epsilon>0$.
+            The numerator is zero for $|x|\geq 2\epsilon$ by the definition of $f$, and hence $\psi$ is zero for $|x|\geq 2\epsilon$.
+            For $\epsilon\leq |x|\leq 2\epsilon$ the second term in the denominator vanishes and hence $\psi$ is identically 1, as desired.
+            By composition, $\psi$ is clearly smooth on $\R^n\setminus\{0\}$. At zero, however, it is also smooth, as $\psi$ is identically 1
+            in an open neigborhood of zero.
+        \item Consider $h(U)\subset\R^n$ where $(U,h)$ is a coordinate chart. Pick balls $B(p), B'(p)$ such that $B(p)\subset B'(p)\subset h(U)$.
+            We can construct a function (just as in the previous part of this problem) that is 1 on $B(p)$ and 0 outside $B'(p)$; call this function $\psi$.
+            Then the function $\phi:M\to\R$ given by $\psi\circ h$ on $U$ and 0 on $M\setminus U$ satisfies our requirements and is smooth because the
+            coordinate representation is smooth (in $U$, this follows from the previous part, outside $U$ the function is simply 0).
+    \end{enumerate}
+\end{proof}
+
+\begin{prop}
+    The stereographic charts for $S^2$ are compatible.
+\end{prop}
+\begin{proof}
+    Let $U_-=S^2\setminus\{0,0,1\}$ and $U_+=S^2\setminus\{0,0,-1\}$.
+
+    The line that goes through $(0,0,1)$ and $(x,y,z)\in S^2$ is given by $(0,0,1)+t(x,y,z-1)$ for $t\in\R$. This line intersects
+    the plane $z=0$ when $1+t(z-1)=0$, i.e. when $t=-1/(z-1)$. Hence we define
+    \[\phi_-(x,y,z)=\left(-\frac{x}{z-1}, -\frac{y}{z-1}\right)\]
+    as our chart $(U_-,\phi_-)$. Since $z\neq 1$ in $U_-$, $\phi_-$ is continuous. If we write $\phi_-(x,y,z)=(u,v)$, we can solve
+    for $z$ (via the quadratic formula, discarding the case $z=1$) and then $x,y$ in terms of $u,v$ which yields the inverse
+    \[\phi_-^{-1}(u,v)=\left(\frac{2u}{u^2+v^2+1}, \frac{2v}{u^2+v^2+1}, \frac{u^2+v^2-1}{u^2+v^2+1} \right),\]
+    which is clearly continuous as well. Hence $\phi_-$ is a homeomorphism.
+
+    The line that goes through $(0,0,-1)$ and $(x,y,z)\in S^2$ is given by $(0,0,-1)+t(x,y,z+1)$ for $t\in\R$. This line intersects
+    the plane $z=0$ when $-1+t(z+1)=0$, i.e. when $t=1/(z+1)$. Hence we define
+    \[\phi_+(x,y,z)=\left(\frac{x}{z+1}, \frac{y}{z+1}\right)\]
+    as our chart $(U_+,\phi_+)$. Since $z\neq -1$ in $U_+$, $\phi_+$ is continuous. If we write $\phi_+(x,y,z)=(u,v)$, we can solve
+    for $z$ (via the quadratic formula, discarding the case $z=-1$) and then $x,y$ in terms of $u,v$ which yields the inverse
+    \[\phi_+^{-1}(u,v)=\left(\frac{2u}{u^2+v^2+1}, \frac{2v}{u^2+v^2+1}, \frac{-u^2-v^2+1}{u^2+v^2+1} \right),\]
+    which is clearly continuous as well. Hence $\phi_+$ is a homeomorphism.
+
+    Let us now check that the charts $(U_-,\phi_-)$ and $(U_+,\phi_+)$ are compatible, i.e. $\phi_+\circ\phi_-^{-1}:\phi_-(U\cap V)\to\phi_+(U\cap V)$
+    and $\phi_-\circ\phi_+^{-1}:\phi_+(U\cap V)\to\phi_-(U\cap V)$ are smooth. We compute
+    \begin{align*}
+        \phi_+\circ\phi_-^{-1}(u,v)&=\phi_+\left( \frac{2u}{u^2+v^2+1},\frac{2v}{u^2+v^2+1},\frac{u^2+v^2-1}{u^2+v^2+1} \right)\\
+        &=\left( \frac{u}{u^2+v^2}, \frac{v}{u^2+v^2} \right)\\
+        \phi_-\circ\phi_+^{-1}(u,v)&=\phi_-\left( \frac{2u}{u^2+v^2+1},\frac{2v}{u^2+b^2+1},\frac{-u^2-v^2+1}{u^2+v^2+1} \right)\\
+        &=\left( \frac{u}{u^2+v^2},\frac{v}{u^2+v^2} \right),
+    \end{align*}
+    which are clearly smooth since $(u,v)\neq(0,0)$ in the overlap.
+\end{proof}
+
+\begin{prop}
+    For $M\overset{\phi}{\to}N\overset{\phi}{\to}P$ smooth maps of manifolds, the push-forward is covariant, i.e. $(\psi\circ\phi)_*=\psi_*\circ\phi_*$.
+\end{prop}
+
+\begin{proof}
+    Consider two functions $n:N\to\R,p:P\to \R$ and vectors $X\in T_qM,Y\in T_{\phi(q)}N$. The push-forward of the composition $(\psi\circ\phi)_*:T_qM\to T_{\psi(\phi(q))}P$
+    gives us, by definition,
+    \[
+        (\psi\circ\phi)_*(X)(p)=X(p\circ\psi\circ\phi).
+    \]
+    Next consider the composition of pushforwards. Again, by definition, we have 
+    \begin{align*}
+        \phi_*(X)(n)&=X(n\circ\phi)\\
+        \psi_*(Y)(p)&=Y(p\circ\psi)
+    \end{align*}
+    Composing these, $\psi_*\circ\phi_*:T_qM\to T_{\psi(\phi(q))}P$ we find:
+    \[
+        \psi_*(\phi_*(X))(p)=\phi_*(X)(p\circ\psi)=X(p\circ\psi\circ\phi),
+    \]
+    precisely as needed.
+\end{proof}
+
+\begin{prop}
+    If a non-empty $m$-manifold $M$ is diffeomorphic to an $n$-manifold $N$, then $m=n$.
+\end{prop}
+\begin{proof}
+    Pick a point $p\in M$. We have a diffeomorphism $\phi: M\to N$, and hence a pushforward $\phi_*: T_pM\to T_{\phi(p)}N$ that is a vector space isomorphism.
+    Note however that $T_pM$ has dimension $m$ and $T_{\phi(p)}N$ has dimension $n$, and hence $m$ must equal $n$.
+\end{proof}
+
+
+\end{document}

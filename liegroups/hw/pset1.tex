@@ -1,0 +1,188 @@
+\documentclass{../../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\title{Lie Groups PSET 1}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{prop}
+    The matrix groups $SO(n)$ and $SU(n)$ are compact and connected.
+\end{prop}
+\begin{proof}
+    We will use throughout this problem that path-connectedness is equivalent to connectedness on topological manifolds.
+
+    Let us start by showing that $SU(n)$ is connected. We can use the fact that every unitary matrix has an orthonormal basis of eigenvectors
+    to write any $U\in SU(n)$ as
+    \[
+        U=U_1\begin{pmatrix}e^{i\theta_1} & & 0\\&\ddots&\\0&&e^{i\theta_n}\end{pmatrix}U_1^{-1}    
+    \]
+    where $U_1$ is unitary and $\theta_i\in\R$. Note that since $U\in SU(n)$, we must have that $\sum_i\theta_i$ is an integer multiple of
+    $2\pi$. Of course, we can simply add or subtract multiples of $2\pi$ from any of the $\theta_i$ to force the sum to zero. Hence if we consider the matrix
+    \[
+        U(t)=U_1\begin{pmatrix}e^{i(1-t)\theta_1} & & 0\\&\ddots&\\0&&e^{i(1-t)\theta_n}\end{pmatrix}U_1^{-1}
+    \]
+    for $t\in[0,1]$, we obtain a continuous path in $SU(n)$ from $U$ to the identity; the path is wholly contained in $SU(n)$ as the determinant
+    is of the form $\exp(i(1-t)\sum_i\theta_i)$, which must be 1 for all $t$ if the sum is zero.
+
+    Let us now turn to $SO(n)$. The case $n=1$ is trivial, so let $n\geq 2$. We wish to path-connect an arbitrary $T\in SO(n)$ to the identity.
+    Let $\left\{ e_j \right\}$ be the standard basis of $\R^n$ and $v_j=Te_j$ be the resulting orthonormal basis.
+    Now suppose we have a function $u$ that spits out orthonormal bases in a continuous fashion that at time 0 gives us $\left\{ e_j \right\}$ and
+    at time $t$ gives us $\left\{ v_j \right\}$ (we shall construct $u$ shortly). Then the linear maps $T_t:V\to V$ definied by $T_t(e_j)=u_j(t)$
+    are orthogonal, and since $T_0=\id$, they in fact have determinant one. This shows path-connectedness. Let us now construct $u$ by inducting on $n$.
+    Given the two bases $\left\{ e_i \right\},\left\{ v_i \right\}$, let $W$ be the span of $e_1,v_1$ if they are independent and any subspace
+    containing the line spanned by $e_1,v_1$ if not. We can orthogonally decompose $\R^n$ as $W\oplus W^\perp$. It's clear that we can construct a
+    rotation matrix $R$ that rotates $e_1$ into $v_1$ in $W$ (and leaves $W^\perp$ unchanged). It's clear now that if we define $T_t$ to rotate in this manner
+    we get a continuous path $t\mapsto T\circ T_t$ in $SO(n)$.
+
+
+\end{proof}
+
+\begin{prop}
+    $SO(n)/SO(n-1)=S^{n-1}$ and $SU(n)/SU(n-1)=S^{2n-1}$ (for $n\geq 2)$.
+\end{prop}
+\begin{proof}
+    Consider the action of $SO(n)$ on $S^{n-1}$ given by the usual rotation. This is clearly a smooth action, as it is a restriction
+    of the action of $GL(n)$ on $\R^n$ to the regular submanifold $S^{n-1}$. 
+    It is easy to see that this action is transitive; it suffices to show that there exists a $g\in SO(n)$ such that $g\cdot e_1=v$
+    for any $v\in S^{n-1}$, where $e_1=(1,0,\ldots,0)$. But this is obvious, since one can take the identity matrix and replace the first column
+    by the (unit) vector $v$ - this yields an orthogonal matrix (that can be made special orthogonal as necessary by multiplying one of the
+    other columns by -1) satisfying the required condition. Hence the orbit of, say, the north pole $(0,\cdots,0,1)$ is all of $S^{n-1}$.
+    Note additionally that the stabilizer of
+    this point is the subgroup of $SO(n)$ that keeps the last component fixed, i.e. the subgroup $SO(n-1)$, which rotates the first $n-1$ components
+    and leaves the $n$th component fixed. Hence, by Kirilov's Corollary 2.21, since the orbit $S^{n-1}$ is trivially a submanifold of $S^{n-1}$,
+    the quotient $SO(n)/SO(n-1)\cong S^{n-1}$.
+
+    Consider $S^{2n-1}$ as embedded in $\C^n$ and consider the action of $SU(n)$ on it. We may argue almost exactly as above. The action is smooth,
+    as it is a restriction of $GL(n)$ (over $\C$) on $\C^n$ to the submanifold $S^{2n-1}$. The action is transitive using exactly the same
+    argument as above in $\C^n$. Hence the orbit of the north pole is again the whole sphere $S^{2n-1}$. Of course, the stabilizer of this point
+    is the subgroup of $SU(n)$ that acts only on the first $2n-2$ (real) coordinates, i.e. $SU(n-1)$. Hence we see that $SU(n)/SU(n-1)\cong S^{2n-1}$.
+\end{proof}
+
+\begin{prop}
+    Right-invariant vector fields, etc.
+\end{prop}
+\begin{proof}
+    Let $G$ be a Lie group and let $\mathcal{R}$ be the set of right-invariant vector fields on $G$. It should be clear that $\mathcal{R}$ is a
+    real vector space. Let us define the Lie bracket operation as usual to be $[X,Y]=XY-YX$ for $X,Y\in\mathcal{R}$. It is straightforward but tedious to
+    check that the bracket operation satisfies the Lie algebra bracket conditions. Hence it suffices to show that $\mathcal{R}$ is closed under this bracket:
+    \begin{align*}
+        (R_g)_*[X,Y]=[(R_g)_*X,(R_g)_*Y]=[X,Y].
+    \end{align*}
+    Here we have used the naturality of the Lie bracket (since $R_g$ is a diffeomorphism) in the first step and the fact that $X$ and $Y$ are right-invariant in the second step.
+    Hence $\mathcal{R}$ is a Lie algebra in a very natural way. Let us show that it is isomorphic to the Lie algebra of $G$, $\fr g=T_1G$.
+    Define the map $\phi:\fr g\to\mathcal{R}$ as taking the vector $X\in\fr g$ to the vector field defined as $v|_g=(R_g)_*X$.
+    Let us first check that $v=\phi(X)$ is indeed a smooth vector field, i.e. that for any $f\in C^\infty(G)$, $vf$ is smooth. Pick a smooth curve
+    $\gamma:\left(-\delta,\delta \right)\to G$ such that $\gamma(0)=1$ and $\gamma'(0)=X$. Then for all $g\in G$,
+    \begin{align*}
+        vf|_g=v|_gf=(R_g)_*X f=\gamma'(0)\left( f\circ R_g \right)=\frac{d}{dt}\bigg|_{t=0}\left( f\circ R_g\circ \gamma \right)(t),
+    \end{align*}
+    which is clearly smooth. Next, let us check that $v$ is right-invariant, i.e. that $(R_h)_*v|_g=v|_{gh}$:
+    \[(R_h)_*v|_g=(R_h)_*(R_g)_*X=(R_h\circ R_g)_*X=(R_{gh})_*X=v|_{gh},\]
+    as desired.
+
+    Note that $\phi$ is indeed a morphism of Lie algebras, as (evaluating the vector fields at $g$)
+    \begin{align*}
+        \phi([X,Y])|_g=(R_g)_*[X,Y]=[(R_g)_*X,(R_g)_*Y]=[\phi(X)|_g,\phi(Y)|_g]
+    \end{align*}
+    again by the naturality of the Lie bracket. Furthermore, $\phi$ is injective:
+    \begin{align*}
+        \phi(X)|_g&=\phi(Y)|_g\\
+        (R_{g^{-1}})_*(R_g)_*X&=(R_{g^{-1}})_*(R_g)_*Y\\
+        (R_{g^{-1}}\circ R_g)_*X&=(R_{g^{-1}}\circ R_g)_*Y\\
+        X&=Y.
+    \end{align*}
+    Surjectivity is also fairly clear. Given a right-invariant vector field $v$, let $X=v|_1$. Right-invariance tells us that
+    $(R_h)_*v|_g=v|_{gh}$ and applying this at $g=1$ gives us the condition that $(R_h)_*v_1=(R_h)_*X=v|_h$. But this is precisely
+    the statement that $\phi(X)=v$, and thus $\phi$ is surjective. Consequently we see that $\mathcal{R}\cong\fr g$ as Lie algebras.
+
+    Now consider the diffeomorphism $\psi:g\in G\mapsto\psi(g)=g^{-1}\in G$. Consider a left-invariant vector field $v$, i.e. $(L_b)_*v|_a=v|_{ba}$. The pushforward
+    by $\psi$ of $v$ gives us another vector field $w=\psi_* v$.
+\end{proof}
+
+\begin{prop}
+    The Grassmanian $Gr(k,n)$ of $n$-dimensional subspaces of $\R^n$ is a $O(n,\R^n)$-space and can be identified as the quotient
+    $O(n)/\left( O(k)\times O(n-k) \right)$.
+\end{prop}
+\begin{proof}
+    Take two distinct subspaces $V,W\subset\R^n$. Let $\left\{ v_i \right\},\left\{ w_i \right\}$ be their orthonormal bases respectively.
+    Since each of the $v_i$, $w_i$ are normal, they live on $S^{n-1}$. Because $S^{n-1}$ is a $O(n)$-space, it's clear that we can find
+    an orthogonal transformation that rotates $\left\{ v_i \right\}$ to $\left\{ w_j \right\}$. Of course, points in $Gr(k,n)$
+    are $k$-dimensional subspaces and hence determined by bases such as these. Consequently, $Gr(k,n)$ is a homogeneous $O(n)$-space.
+    Given any $k$-dimensional subspace $V\subset\R^n$, we can split $\R^n$ as $V\oplus V^\perp$. Note that we can rotate the summands independently
+    by elements of $O(k)$ and $O(n-k)$ respectively. Since rotations that take $V$ to $V$ stabilize the point $V\in Gr(k,n)$ both $O(k)$ and
+    $O(n-k)$ stabilize any point in $Gr(k,n)$. Because these rotations can be performed in a completely disjoint manner, the subgroup
+    $O(k)\times O(n-k)\leqslant O(n)$ stabilizes any point of $Gr(k,n)$, and thus by Kirillov 2.21 we see that
+    \[Gr(k,n)=O(n)/\left( O(k)\times O(n-k) \right).\]
+    Since the dimension of the $O(n)$ is $n(n-1)/2$, the dimension of the Grassmanian can be found by subtracting appropriately to get $k(n-k)$.
+\end{proof}
+
+\begin{prop}
+    Kirillov 2.8, 2.9, 2.10
+\end{prop}
+\begin{proof}
+    Let $\phi:SU(2)\to GL(3,\R)$ be the map that takes $g$ to the matrix of $Ad(g)$ (in the basis of $i$ times the Pauli matrices).
+    In other words, we have a map $G\overset{\phi}{\to}GL(\fr{su}_2)$ such that $Ad(g)X=gXg^{-1}$ for some $g\in G$ and $X\in\fr{su}_2$.
+    It is easy to see that $Ad(g)$ is a linear map, as $Ad(g)(aX_1+bX_2)=g(aX_1+bX_2)g^{-1}=a Ad(g)X_1+b Ad(g)X_2$. Additionally, $Ad(g)$
+    is an element of $SO(\fr{su}_2)\cong SO(3)$ as it preserves the standard inner product. We can see this by first writing out an
+    element $(x_1,x_2,x_3)$ of $\fr{su}_2$ as
+    \[X=\begin{pmatrix} ix_3&x_2+ix_1 \\ -x_2+ix_1&-ix_3\end{pmatrix},\]
+    and then noting via a simple computation that the determinant gives us the inner product $\det X=x_1^2+x_2^2+x_3^2$. Of course, the
+    determinant is preserved: $\det Ad(g)X=\det gXg^{-1}=\det X$. Hence $Ad(g)$ also preserves the inner product and is orthogonal.
+    Note that $\phi$ is a morphism of Lie groups:
+    \[Ad(gh)X=ghXh^{-1}g^{-1}=gAd(h)Xg^{-1}\]
+    and hence $Ad(gh)=Ad(g)\circ Ad(h)$.
+
+    Let us now compute explicitly the map of tangent spaces $\phi_*:\fr{su}_2\to\fr{so}_3$. Consider an integral curve $\gamma(t)$ of some $X\in\fr{su}_2$ about the
+    identity of $SU(2)$ (i.e. $\gamma'(0)=X$). We wish to compute the derivative at $t=0$ of $Ad(\gamma(t))Y=\gamma(t)Y\gamma(t)^{-1}$:
+    \begin{align*}
+        \frac{d}{dt}\bigg|_{t=0}Ad(\gamma(t))Y&=\gamma'(0)Y\gamma(0)+\gamma(0)Y\left( -\gamma(0)^{-1}\gamma'(0)\gamma(0)^{-1} \right)\\
+        &=XY-YX\\
+        &=[X,Y].
+    \end{align*}
+    The derivative is simply the Lie bracket operation. Since $\fr{su}_2$ and $\fr{so}_3$ are both three-dimensional Lie algebras, it's clear
+    that they are isomorphic as vector spaces. All that remains is to show that the isomorphism is in fact a Lie algebra isomorphism, i.e. that
+    $\phi_*([X,Y])=[\phi_*(X),\phi_*(Y)]$. Let us explicitly compute the action of $\phi_*$ on the basis $i\sigma_j$.
+    Let us first look at
+    \begin{align*}
+        \phi_*(i\sigma_1)(ai\sigma_1+bi\sigma_2+ci\sigma_3)&=[i\sigma_1,ai\sigma_1+bi\sigma_2+ci\sigma_3]\\
+        &=-b[\sigma_1,\sigma_2]-c[\sigma_1,\sigma_3]\\
+        &=-2bi\sigma_3+2ci\sigma_2
+    \end{align*}
+    We can perform similar computations and find that $\phi_*$ sends
+    \begin{align*}
+        i\sigma_1&\to\begin{pmatrix}&&\\&&2\\&-2&\end{pmatrix}\equiv 2\ell_1\\
+        i\sigma_2&\to\begin{pmatrix}&&-2\\&&\\2&&\end{pmatrix}\equiv 2\ell_2\\
+        i\sigma_3&\to\begin{pmatrix}&2&\\-2&&\\&&\end{pmatrix}\equiv 2\ell_3.
+    \end{align*}
+    Now let us verify that $\phi_*$ is a Lie algebra morphism; we do this for one case as the rest are simple computations:
+    \begin{align*}
+        \phi_*([i\sigma_1,i\sigma_2])&=\phi_*(-2i\sigma_3)\\
+        &=-4\ell_3=[2\ell_1,2\ell_2]\\
+        &=[\phi(i\sigma_1,i\sigma_2)].
+    \end{align*}
+
+    Next consider the kernel of $\phi$ - as the kernel of a Lie group homomorphism, it must be a normal subgroup. 
+    Since the derivative $\phi_*$ is an isomorphism we see by the inverse function theorem that there exists an open set $U$
+    about any element $g\in\ker\phi$ such that $U\to\phi(U)$ is a diffeomorphism. This of course means that no other element
+    in $U$ can be in $\ker\phi$, as otherwise this would violate injectivity. Hence the elements of $\ker\phi$ must not accumulate,
+    and thus $\ker\phi$ is a discrete subgroup of $SU(2)$.
+
+    Moreover, since $\phi_*$ is surjective, $\phi$ is a (smooth) submersion. Hence the subgroup $\text{Im }\phi$ of $SO(3)$
+    is in fact open, simply because submersions are open maps (and $SU(2)$ is by definition open in its own topology).
+
+    Finally, note that $\phi$ is in fact a covering map as the fiber over any point is discrete; by the classification of covering spaces
+    we know that $\ker\phi$ must be $\Z_2$ as $\pi_1(SO(3))\cong\Z_2$. Another way of showing that $\ker\phi\cong \Z_2$ is to
+    show that the only solution to the linear system of equations $gXg^{-1}=X$ is for $g=\pm \text{Id}$. This is straightforward but tedious, which
+    is why we present the topological proof. Next, note that the map $\phi$ is in fact surjective (it covers all of $SO(3)$) because $SO(3)$ is connected
+    and $\phi_*$ is surjective (see Kirillov 2.10). By the first isomorphism theorem, then, we have that $SU(2)/\Z_2\cong SO(3)$, as desired.
+\end{proof}
+
+
+\end{document}

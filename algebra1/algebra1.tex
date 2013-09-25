@@ -1,0 +1,1883 @@
+\documentclass{../mathnotes}
+
+\title{Notes on Algebra II}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Reducibility}
+
+February 25, 2013
+
+Let $F$ be a field, and $F[x]$ be the ring of polynomials over $F$. Recall we have already shown that every ideal
+in $F[x]$ is principal, and that there exists a unique gcd of two non-zero polynomials. Additionally, we showed that
+if $f$ and $g$ are two relatively prime polynomials, then $f|gh\implies f|h$.
+
+\begin{defn}
+    A polynomial $p(x)\in F[x]$ is \textbf{irreducible} if $\deg p(x)>0$, i.e. $p$ is not zero and not a unit,
+    and if $p=fg$ implies that one of $f,g$ is a unit and the other is a unit times $p$. In words, $p(x)$ is
+    irreducible if it does not factor into a product of two polynomials with strictly smaller (non-zero)
+    degree. A polynomial is said to be $\textbf{reducible}$ if it is not irreducible.
+\end{defn}
+
+\begin{exmp}(Reducibility)
+    \begin{enumerate}[(i)]
+        \item Any linear polynomial $x+a$ is obviously irreducible.
+        \item Any quadratic polynomial is clearly reducible if and only if it has two linear factors.
+            This is equivalent to the polynomial having a root, as long division will yield the second factor.
+        \item Similarly, a cubic polynomial is reducible if and only if it has a root.
+        \item For higher degrees, the existence of a root is not equivalent to reducibility, as we will
+            see in the next example.
+    \end{enumerate}
+\end{exmp}
+
+\begin{exmp}(Simple examples)
+    \begin{itemize}
+        \item $x^2-2$ is irreducible in $\mathbb{Q}[x]$, as it has no roots in $\mathbb{Q}$. It is, however,
+            reducible in $\mathbb{R}[x]$: $x^2-2=(x-\sqrt{2})(x+\sqrt{2})$.
+        \item $x^2+1$ is irreducible in $\mathbb{R}[x]$ but reducible in $\mathbb{C}[x]$: $x^2+1=(x-i)(x+i)$.
+        \item $x^3-2$ is irreducible in $\mathbb{Q}[x]$, but reducible in $\mathbb{R}[x]$, where we can write
+            it as a product of $x-\sqrt[3]{2}$ and an irreducible quadratic.
+        \item $x^4-4=(x^2-2)(x^2+2)$ is reducible in $\mathbb{Q}[x]$ but has no roots!
+    \end{itemize}
+\end{exmp}
+In fact, it is generally a hard problem to determine whether an arbitrary polynomial $f(x)\in\mathbb{Q}[x]$ is
+irreducible. Note, however, that we can think of irreducibility in analogy to that for natural numbers, as
+the following dichotomy illustrates.
+\begin{rem}
+    If $p(x)\in F[x]$ is irreducible, then for any polynomial $f\in F[x]$, either $p|f$ or $p$ and $f$ are
+    relatively prime.
+\end{rem}
+\begin{proof}
+    Let $d=\gcd(p,f)$. By definition, $d$ divides $p$. However, as $p$ is irreducible, $d$ must either be
+    a unit or $d$ must be $cp$ for $c$ a unit. In the first case, since the gcd of $p$ and $f$ is a unit,
+    $p$ and $f$ must be relatively prime. In the second case, since $d=cp$ by construction divides $f$,
+    $p$ must divide $f$.
+\end{proof}
+
+\begin{cor}
+    If $p\in F[x]$ is irreducible and $p|fg$, then either $p|f$ or $p|g$.
+\end{cor}
+\begin{proof}
+    By the above remark, either $p|f$ or $p$ and $f$ are relatively prime.
+    If $p|f$, we are done. Otherwise, $p$ is relatively prime to $f$, and by what we showed last class,
+    $p|g$.
+\end{proof}
+
+\begin{thm}[Unique factorization of polynomials]
+    Let $f(x)\in F[x]$ with $\deg f(x)>0$. Then there exist $k$ irreducible polynomials in $F[x]$ such
+    that
+    \[f(x)=\prod_{i=1}^k p_i(x).\]
+    Additionally, if it is also true that $f(x)=\prod_{i=1}^lq_i$, then $k=l$, and after some reordering,
+    there exist nonzero constants such that $q_i=c_ip_i$.
+
+    In other words, for any polynomial with degree greater than zero, there always exists a unique
+    factorization into a product of irreducible polynomials.
+\end{thm}
+\begin{proof}
+    Let us first show existence. We proceed by complete induction on the degree of $f$.
+    If $\deg f=1$, $f$ is irreducible, and we are done. Otherwise, we assume that the theorem
+    holds for all degrees less than $n$. Let $\deg f=n$. If $f$ is irreducible, we are done.
+    Otherwise, $f=g_1g_2$ with $\deg g_1<n$ and $\deg g_2<n$. By the inductive hypothesis,
+    $g_1$ and $g_2$ are products of irreducible polynomials, and thus $f$ must be as well, and we are done.
+
+    The real muscle of this theorem comes in the form of uniqueness. Suppose $f=\prod_{i=1}^kp_i=\prod_{j=1}^lq_j$,
+    with $p_i,q_j$ reducible. We proceed by induction on $k$. If $k=1$, $p_1=q_1\cdots q_l$. Clearly, then,
+    $p_1|q_1\cdots q_l$, and thus (by induction over the statement at the beginning of lecture), $p_1$ must divide
+    $q_i$ for some $i$. But the $q_i$ are irreducible and $p_1$ is not a constant, so $p_1=cq_i$ for some unit
+    $c$. If we now reorder terms, we can assume that $i=1$ and we can cancel:
+    \begin{align*}
+        p_1=cq_1&=q_1q_2\cdots q_l\\
+        c&=q_2\cdots q_l.
+    \end{align*}
+    But this is impossible, as the product of $q$'s has degree greater than zero. Consequently, $l$ must be 1, and
+    thus $p_1=q_1$ and we have shown that $k=l$. The general case is similar; we write $p_1\cdots p_k=q_1\cdots q_l$. Then $p_1|q_1\cdots q_l$,
+    and so for some $i$, $p_1=cq_i$. After reordering, we can write
+    \begin{align*}
+        cq_1p_2\cdots p_k&=q_1\cdots q_l\\
+        cp_2\cdots p_k&=q_2 \cdots q_l,
+    \end{align*}
+    and by induction, we know that $k-1=l-1$. Reordering, we can write $p_=c_iq_i$ for $i=2\cdots k$,
+    and we are done.
+\end{proof}
+Note that the irreducible factors need not be distinct.
+
+\begin{thm}
+    Let $F$ be a field. Let $I$ be an ideal in $F[x]$. Then the following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $I$ is a maximal ideal.
+        \item $I$ is a prime ideal and $I\neq \left\{ 0 \right\}$.
+        \item $I=(p)$, where $p$ is a irreducible polynomial.
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    Let us first show that $(i)\implies(ii)$.
+    Say $I$ is maximal. Then, $I$ must be prime. Additionally, $I$ cannot be the zero ideal, as it is not
+    maximal, and so we are done.
+
+    Showing $(ii)\implies(iii)$ is a little trickier. Suppose $I$ is a prime ideal with $I\neq \left\{ 0 \right\}$.
+    We want to show that the ideal is generated by an irreducible element. Since every ideal in $F[x]$ is principal,
+    $I=(p)$ for some $p\in F[x]$. Let us show that $p$ is irreducible. First note that $p$ cannot be a unit, because
+    otherwise $1\in(p)$ which implies that $(p)=F[x]$, which is not possible for prime ideals. Furthermore,
+    $p\neq0$, as $I$ is assumed not to be the zero ideal. To show that $p$ is irreducible, we need to show that if
+    $p=fg$ then one of $f,g$ is a unit and the other is a unit times $p$. So take $p=fg$. Then, $fg\in (p)=I$.
+    Since $I$ is prime, either $f\in I$ or $g\in I$. Take the first case, $f\in(p)$. Then, $f=hp$ for some $h\in F[x]$,
+    and so $p=hpg\implies 1=hg$, i.e. $h,g$ are units, and thus $f$ is a unit times $p$.
+    Thus, $p$ is irreducible.
+
+    Finally, we show that $(iii)\implies(i)$. Let $I=(p)$, with $p$ irreducible. We wish to show that $I$ is maximal,
+    i.e. $(p)\neq F[x]$ and if $(p)\subset J$ then either $J=(p)$ or $J=F[x]$. First note that $(p)\neq F[x]$ because
+    $\deg p>1$ and so it can't generate constants. Next, since $J$ is necessarily a principal ideal, $J=(f)$, for some
+    $f\in F[x]$. If $(p)\subset (f)$, then $p\in(f)$, so $p=fg$ for some $g\in F[x]$. But $p$ is irreducible, so either
+    $f$ is a unit, in which case $J=(f)=F[x]$, or $f=cp$, for $c$ a unit, in which case $J=(f)=(p)$. Hence, $I$ is
+    maximal.
+\end{proof}
+This theorem is quite handy in constructing interesting fields, as the following corollary shows.
+\begin{cor}
+    $F[x]/(f)$ is a field if and only if $f$ is irreducible.
+\end{cor}
+\begin{proof}
+    This follows from above theorem and the fact that $F[x]/(f)$ is a field if and only if $(f)$ is a maximal ideal.
+\end{proof}
+
+This allows us to show that certain rings are, in fact, fields -- something that may not have been obvious -- or, in fact,
+to find wholly new fields.
+\begin{exmp}{\ \\} 
+    \begin{itemize}
+        \item $\mathbb{Q}[x]/(x^2-2)$ is a field, as $x^2-2$ is irreducible in $\mathbb{Q}[x]$, and its elements,
+            by what we know about long division, are of the form $c+d\alpha$, where $\alpha=x+(x^2-2)$. In addition,
+            $\alpha^2=2$.
+        \item $\mathbb{R}[x]/(x^2+1)$ is a field, as $x^2+1$ is irreducible in $\mathbb{R}[x]$, and its elements are of
+            the form $c+d\alpha$ where $\alpha=x+(x^2+1)$ satisfies $\alpha^2=-1$.
+        \item $\mathbb{Q}[x]/(x^3-2)$ is a field, as $x^3-2$ is irreducible in $\mathbb{Q}[x]$, and its elements are of
+            the form $c+d\alpha+e\alpha^2$, where $\alpha=x+(x^3-2)$ satisfies $\alpha^3=2$. We often rewrite the elements
+            as $c+d\sqrt[3]{2}+e\sqrt[3]{2}^2$.
+        \item Take the finite field $\mathbb{F}_2$ and the polynomial $x^2+x+1\in\mathbb{F}_2$. Since the only members of
+            $\mathbb{F}_2$ are 0 and 1, it should be clear that this polynomial has no roots, and thus is irreducible in $\mathbb{F}_2[x]$.
+            Consequently, $E=\mathbb{F}_2[x]/(x^2+x+1)$ is a field. Its elements are of the form $c+d\alpha$, where of course $c,d\in\mathbb{F}_2$
+            and $\alpha=x+(x^2+x+1)$, which satisfies the property that $\alpha^2=-\alpha-1=\alpha+1$. $E$ has four elements
+            (since $c$ and $d$ can each take 2 values).
+    \end{itemize}
+\end{exmp}
+
+
+\section{Field extensions}
+February 27, 2013
+
+In general, a problem in algebra is to enlarge the domain of discourse, i.e. $\mathbb{R}\to\mathbb{C}$, so that one can solve
+equations that were hitherto unsolvable. So given a polynomial $f(x)\in F[x]$, we wish to find a root of $f(x)$. Maybe there is
+not root of $f(x)$ in $F$, so we wish to enlarge $F$.
+A simple idea that we saw earlier was that if $R$ is any ring with $f(x)\in R[x]$, there was a way to enlarge $R$.
+We consider $R[x]/(f(x))$, which always has a root $x+(f(x))=\alpha$. By construction, $f(\alpha)=0$.
+
+There is a problem with this -- we don't know much about the algebraic structure of this new quotient ring, $R[x]/I$.
+The solution is: if $R$ is a field, and $f(x)$ is irreducible, then $R[x]/I$ is good, i.e. it is a field, as we
+saw last lecture. But really, even if $f(x)$ is reducible, we should think in analogy to the world of
+$\mathbb{Z}/n\mathbb{Z}$, where $n>0$. The full details of this analogy are fleshed out in the file \texttt{analogy.pdf}.
+
+\begin{thm}
+    Let $f(x)\in F[x]$ and suppose $\deg f(x)>0$, i.e. $f$ is nonconstant. Then, there exists a field $E$ that
+    contains (a subfield isomorphic to) $F$, and an element $\alpha\in E$ such that $f(\alpha)=0$.
+\end{thm}
+\begin{proof}
+    Take $f(x)$ and find an irreducible factor (we know these exist from last time) $p(x)$. We consider $E=F[x]/(p(x))$;
+    $E$ is a field. Additionally, there is a map $F\to E$ that sends $a\in F\mapsto a+(p(x))$. This map is injective (why?),
+    and we identify $F$ with the image subfield. We know that if $\alpha=x+(p(x))$, then $p(\alpha)=0$. But
+    $p(x)|f(x)$, so $f(\alpha)=0$ as well, and we are done.
+\end{proof}
+
+\begin{cor}
+    Let $f(x)\in F[x]$, $\deg f(x)>0$. Then there exists a field $E$ such that, in $E[x]$, $f(x)$ is a product
+    of linear factors.
+\end{cor}
+\begin{proof}
+    We apply the above theorem to find $E_1$ and $\alpha_1\in E_1$ such that $f(\alpha_1)=0$ ($F\leq E_1$).
+    In $E_1[x]$, $f(x)=(x-\alpha_1)g_1(x)$, where $\deg g_1(x)=\deg f(x)-1$. Informally speaking, now all we have to do
+    is to keep going! We find $E_2$ with $E_1\leq E_2$ such that we can write $g_1(x)=(x-\alpha_2)g_2(x)$ with $\alpha_2\in E_2$ with
+    $\deg g_2=\deg f(x)-2$. We continute until we run out of degrees, and clearly we have factored $f$ into linear factors.
+\end{proof}
+
+Let us now switch perspectives. Let's consider the situation where $E$ and $F$ are fields, and $F\leq E$, i.e. $F$ is a subfield
+of $E$. We also say that $E$ is an \textbf{extension field} of $F$. Note that we used the machinery of prime and maximal ideals to
+construct extensions. Now, given an extension, let us use these tools to analyze these fields.
+
+Consider $E$ an extension field of $F$, and let $\alpha\in E$. Look at ${\rm ev}_\alpha: F[x]\to E$. Note that ${\rm Im\;} {\rm ev}_\alpha=F[\alpha]\leq E$.
+At this point, all we know is that $F[\alpha]$ is an integral domain. We claim that there are exactly 2 possibilities.
+\begin{enumerate}
+    \item $\ker {\rm ev}_\alpha=\left\{ 0 \right\}$, i.e. that if $f(x)\in F[x]$, $f(x)\neq 0$, then $f(\alpha)\neq 0$.
+        In this case, we say that $\alpha$ is \textbf{transcendental} over $F$. Additionally, ${\rm ev}_\alpha:F[x]\to E$
+        is injective, which suggests that it extends to an injection $F(x)\to E$, whose image we call $F(\alpha)$. Elements
+        of this image have the form $f(\alpha)/g(\alpha)$ where $f,g\in F[x]$ and $g\neq 0$. This is the smallest subfield of
+        $E$ containing $F$ and $\alpha$.
+
+        A famous example is that $\pi \in \mathbb{R}$ is transcendental over $\mathbb{Q}$ (Lindemann, 1880). The same holds
+        for $e$. Note carefully, that $\pi\in \mathbb{R}$ is not transcendental over $\mathbb{R}$, as $\pi$ is a root of $x-\pi$.c w
+    \item $\ker {\rm ev}_\alpha\neq \left\{ 0 \right\},$ i.e. there exists an $f(x)\in F[x]$, $f\neq 0$ such that $f(\alpha)=0$.
+        In this case, we say that $\alpha$ is \textbf{algebraic} over $F$. What can we say here? An incredible amount, it turns out.
+
+        First note that $\ker {\rm ev}_\alpha$ is a principal ideal in $F[x]$: $\ker {\rm ev}_\alpha=(p(x))$. Additionally,
+        we know that $F[\alpha]={\rm Im\;}{\rm ev}_\alpha\cong F[x]/\ker{\rm ev}_\alpha$. But since $F[x]$ is an integral domain
+        (subring of a field), $(p(x))$ is a prime ideal that is not $\left\{ 0 \right\}$. This means that $(p(x))$ is a maximal ideal
+        and $p(x)$ is irreducible (by theorem proved last time). Consequently, $F[x]/(p(x))=F[x]/\ker{\rm ev}_\alpha$ is a field, and
+        $F[\alpha]$ is a field. Recall the example of $\mathbb{Q}[\sqrt[3]{2}]$ being a field. Thus, we now write $F[\alpha]=F(\alpha)$,
+        which is the smallest subfield of $E$ containing $F$ and $\alpha$.
+
+        In particular, there is a unique monic generator of $(p(x))=\ker{\rm ev}_\alpha$. It is denoted $\irr(\alpha,F,x)$, which
+        is read ``the irreducible polynomial for $\alpha$ over $F$.'' It satisfies $\irr(\alpha,F,\alpha)=0$. Let us do a few examples:
+        \begin{exmp}
+            \[\irr(\frac{1}{2},\mathbb{Q},x)=x-\frac{1}{2}\]
+            \[\irr(\sqrt[3]{2},\mathbb{Q},x)=x^3-2\]
+            \[\irr(\sqrt[3]{2},\mathbb{Q}(\sqrt[3]{2}),x)=x-\sqrt[3]{2}\]
+            \[\irr(\sqrt[3]{2},\mathbb{Q}(\sqrt{2}),x)=?\]
+        \end{exmp}
+
+        \begin{rem}
+        Note that if $f(x)\in F[x]$ is any polynomial such that $f(\alpha)=0$, then the $\irr(a,F,x)|f(x)$.
+        \end{rem}
+        \begin{proof}
+            $f(\alpha)=0\iff f(x)\in\ker {\rm ev}_\alpha=(\irr(\alpha,F,x))$. By definition, then, $\irr(\alpha,F,x)|f(x)$.
+        \end{proof}
+        For example, take $f(x)\in \mathbb{R}[x]$. If $f(i)=0$, then $x^2+1|f(x)$.
+\end{enumerate}
+
+Mostly we will be working with the algebraic case, as the transcendental case belongs in a separate course.
+
+\begin{defn}
+    Given $F\leq E$ and $\alpha\in E$ algebraic over $F$, we define the \textbf{degree} of $\alpha$ over $F$ as $\deg\irr(\alpha,F,x)$.
+\end{defn}
+For example, $\deg_{\mathbb{Q}}\sqrt[3]{2}=3$ and $\deg_{\mathbb{R}}\sqrt[3]{2}=1$ and $\deg_{\mathbb{R}}i=2$.
+
+\begin{defn}
+    Let $F\leq E$. Then we say that $E$ is a \textbf{simple extension} of $F$ if $E=F(\alpha)$ for some $\alpha\in E$.
+\end{defn}
+Roughly speaking, this means that we can extend $F$ to $E$ by throwing in only one more element -- i.e. we can do this if $\alpha$ is transcendental.
+Take, for example, $\mathbb{Q}(\sqrt{2})$. $\sqrt{3}\notin\mathbb{Q}(\sqrt{2})$. Then, $\mathbb{Q}(\sqrt{2})\leq \mathbb{Q}(\sqrt{2})(\sqrt{3})=\mathbb{Q}(\sqrt{2},\sqrt{3}).$
+Then, $\mathbb{Q}\leq \mathbb{Q}(\sqrt{2}+\sqrt{3})$, one can find that $\mathbb{Q}(\sqrt{2}+\sqrt{3})=\mathbb{Q}(\sqrt{2},\sqrt{3})$. This shows
+that simple extensions are not always obviously simple.
+
+\section{$F$-vector spaces}
+Let us take a detour through vector spaces.
+
+Let $F$ be a field. An \textbf{$F$-vector space} is an abelian group $(V,+)$ and a function $F\times V\to V$ called \textbf{scalar multiplication}, which
+we write as $av$ such that:
+\begin{enumerate}
+    \item $a(bv)=(ab)v$
+    \item $a(v+w)=av+aw$
+    \item $(a+b)v=av+bv$
+    \item $1\cdot v=v$
+\end{enumerate}
+
+A very useful example is $V=F^n=\left\{ (a_1\cdots a_n): a_i\in F \right\}$, i.e. the Cartesian product of $F$ with itself $n$ times.
+We define addition componentwise, and multiply the scalar through each component, as usual. It is easy to check that $F^n$ is a vector space.
+The $n=0$ case is allowed, as it is the zero vector space with only 0.
+
+Another example is the space of functions $X\to F$ on any set $X$, which we denote by $F^X$. Functions are added pointwise as usual,
+and scalar multiplication is done pointwise as well.
+
+The important example for us is actually a bit unexpected. Suppose $E$ is an extension field of $F$. Then $E$ is an $F$-vector space.
+$E$ is already an abelian group and scalar multiplication is defined in the ordinary sense of multiplication. The rest of the axioms
+follow straightforwardly. Now, this is not as strange as it might look. The complex numbers, for example, are an extension field of the reals,
+and we are used to going back and forth between numbers/vectors: $a+bi\iff (a,b)$. Similarly, $\mathbb{Q}(\sqrt[3]{2})$ is a $\mathbb{Q}$-vector
+space as $a+b\sqrt[3]{2}+c\sqrt[3]{2}^2\iff (a,b,c)$. Furthermore, $\mathbb{R}$ is a $\mathbb{Q}$-vector space (but a really big one).
+
+One might ask, why does one require $F$ to be a field? We can define a similar structure for a ring.
+\begin{defn}
+    If $R$ is a commutative ring with unity, then an \textbf{$R$-module} $M$ is an abelian group $(M,+)$ with a scalar multiplication
+    $R\times M\to M$ that satisfies the properties defined above for $F$-vector spaces.
+\end{defn}
+These are, however, more interesting for algebra in general, and not so much for our case, where we will extensively use the field properties.
+
+%\subsection{Back to field extensions}
+
+(March 4, 2013)
+
+%Recall what we discussed about field extensions earlier. It should be clear that every element of $F(\alpha)$ is uniquely written
+%as $c_0+c_1\alpha+\ldots+d_{d-1}\alpha^{d-1}$ where $d=\deg \irr(\alpha,F,x)$ and $c_i\in F$. This is because every coset
+%in $F[x]/(\irr(\alpha,F,x))$ is uniquely $g(x)+(\irr(\alpha,F,x))$ with $\deg f(x)< d$ (or $g=0$). Take, for example,
+%$\Q(\sqrt[3]{2})$. Every element here is uniquely written as $a+b\sqrt[3]{2}+c(\sqrt[3]{2})^2$, with $a,b,c\in\Q$. We know,
+%of course, that $\sqrt[3]{2}^3=2$. Uniqueness here follows by assuming it can be written via $a_1,b_1,c_1$ and $a_2,b_2,c_2$,
+%equating the two and subtracting one to the other side, and then noting that if at least one of the coefficients were not zero,
+%then we would have a polynomial with degree $\leq 2$ that evaluated at $\sqrt[3]{2}$ would yield zero. However, we know that
+%$\irr(\sqrt[3]{2},\Q,x)=x^3-2$, so we reach a contradiction.
+
+What we wish to do with these ideas is to use linear algebraic ideas to understand more deeply field extensions.
+
+Let's talk about a few basic notions.
+\begin{defn}
+    A \textbf{vector subspace} of an $F$-vector space $V$ is a subgroup $W$ of $(V,+)$ such that for all $a\in F$,$w\in W$, $aw\in W$.
+    $W$ then becomes an $F$-vector space in its own right.
+\end{defn}
+
+\begin{defn}
+    $F:V_1\to V_2$ is a \textbf{linear map} if
+    \begin{enumerate}
+        \item $f$ is a homomorphism of abelian groups
+        \item $f$ preserves scalar multiplication: $a,b\in F, v\in V_1$, $f(av)=af(v)$
+    \end{enumerate}
+    A \textbf{linear isomorphism} is just a bijective linear map. Its inverse is linear as well.
+\end{defn}
+
+\begin{defn}
+    Let $V$ be an $F$-vector space and let $v_1,\ldots v_n\in V$. Then a \textbf{linear combination} of these vectors is
+    an element of v of the form $a_1v_1 + \ldots + a_nv_n$. We define the \textbf{span} of this set of vectors as the set of all such linear combinations.
+    It should be clear that the span of a set of vectors is a vector space.
+\end{defn}
+
+\begin{defn}
+    $V$ is \textbf{finite dimensional} if there exists a set of vectors in $V$ whose span equals $V$.
+\end{defn}
+Note, for example, that $F^n$ is finite dimensional (via the standard basis), but $F[x]$ is not. However, $F[x]$, does have many
+interesting finite dimensional subspaces. If we define $P_n$ to be the set of polynomials in $F[x]$ with degree $n$ or less, it 
+forms a vector subspace spanned by $1, x, x^2, \ldots, x^n$.
+
+\begin{defn}
+    A set of vectors $v_1, \ldots, v_n\in V$ are \textbf{linearly independent} if the only linear combination of them that yields
+    zero is where the coefficients in the linear combination are all zero.
+\end{defn}
+
+\begin{thm}
+    If $V$ is an $F$-vector space, and $v_1,\ldots, v_n\in V$ are linearly independent, and $w_1,\ldots, w_m$ span $V$, then
+    $n\leq m$.
+\end{thm}
+
+\begin{defn}
+    $v_1,\ldots v_n$ is a \textbf{basis} of $V$ if these vectors are linearly independent, and they span $V$.
+\end{defn}
+
+\begin{thm}
+    If $v_1,\ldots, v_n$ and $w_1,\ldots, w_n$ are two bases of $V$, then $n=m$. In this case, we define
+    this number $n=\dim_F V$.
+\end{thm}
+\begin{proof}
+    By the counting theorem above, $n\leq m$ and $m\leq n$, so $n=m$.
+\end{proof}
+
+The main example that will be important for us to consider is as follows. Let $f(x)\in F[x]$ with $\deg f(x)=n$ and $f\notin F$.
+Consider $F\leq F[x]/(f(x))$. In fact, we know that every element in the coset ring is uniquely of the form
+$g(x)+(f(x))$ where $g$ is zero or $\deg g(x)<n$.  This says that the cosets $1+(f(x)), x+(f(x)), \ldots, x^{n-1}+(f(x))$ are an
+$F$-basis for $F[x]/(f(x))$. This implies that $\dim_F F[x]/(f(x))=n$.
+
+\begin{cor}
+    Let $F\leq E$ and $\alpha$ algebraic over $F$. Let $\deg_F\alpha=\deg\irr(\alpha,F,x)$.
+    Then $F(\alpha)$ is a finite dimensional $F$-vector space: $\dim_F F(\alpha)=\deg_F \alpha=\deg\irr(\alpha,F,x)$.
+\end{cor}
+We have already seen a few examples: $\dim_\R\C=2$ and $\dim_\Q\Q(\sqrt[3]{2})=3$.
+
+Let's recall some more important linear algebra facts.
+
+\begin{thm}
+    Let $V$ be a finite-dimensional $F$-vector space. Then,
+    \begin{enumerate}
+        \item Any set $v_1,\ldots, v_n\in V$ that spans $V$ contains a subset which is a basis.
+        \item Any set $v_1, \ldots, v_n\in V$ which is linearly independent can be completed to a basis.
+        \item If $W$ is a vector subspace of $V$, then $\dim W\leq \dim V$. If $\dim W=\dim V$, then $W=V$.
+        \item If $V_1$ and $V_2$ are two finite-dimensional vector spaces with bases given by $v_n$, $w_m$,
+            and $f:V_1\to V_2$ is a linear map, then
+            \[f(v_i)=\sum_{j=1}^ma_{ji}w_j\]
+            where $A=(a_{ij})$ is an $m\times n$ matrix. $f$ determines and is determined by $A$.
+    \end{enumerate}
+\end{thm}
+
+\begin{rem}
+    Suppose $F$ is a finite field, with $q$ elements. Suppose $V$ is a finite-dimensional $F$-vector space of dimension $n$,
+    i.e. there exists a basis $v_1,\ldots, v_n$ of $V$ where every vector can be written uniquely in terms of this basis.
+    It should be clear that the number of elements in $V$ is $q^n$. In fact, any finite dimensional vector space of dimension
+    $n$ is isomorphic to $F^n$.
+    
+    In particular, if $F$ itself is finite, its characteristic must be a prime $p$, and $\F_p\leq F$.
+    Thus, any finite field is an $\F_p$-vector space. Since $F$ is also finite-dimensional, the number of elements in $F$
+    is simply $p^k$.
+\end{rem}
+
+\begin{defn}
+    Let $E$ be an extension field of $F$. Then $E$ is a \textbf{finite extension} of $F$ if $E$ is a finite-dimensional
+    $F$-vector space. In this case, we define $\dim_F E=[E:F]$, the \textbf{degree of $E$ over $F$}.
+\end{defn}
+\begin{exmp}
+    $\C$ is a finite extension of $\R$, as $[\C:\R]=2$. Similarly, $\Q(\sqrt{2})$ is a finite extension of $\Q$ with
+    $[\Q(\sqrt{2}):\Q]=2$. Again, $[\Q(\sqrt[3]{2}):\Q]=3$. However, $\R$ is not a finite extension of $\Q$, as $\R$ is
+    an infinite-dimensional $\Q$-vector space.
+
+    Furthermore, consider $F$ any field, a subring of $F[x]$. Then, $F\leq F(x)$, but $F(x)$ is not a finite extension
+    of $F$ since $F\subset F[x]\subset F(x)$.
+\end{exmp}
+
+\begin{thm}
+    Let $E=F(\alpha)$ be a simple extension of $F$. Then, $E$ is a finite extension of $F$ if and only if
+    $\alpha$ is algebraic over $F$. In this case, $[E:F]=\deg_F\alpha=\deg\irr(\alpha,F,x)$.
+\end{thm}
+
+Note that if $\alpha$ is transcendental, $F[\alpha]\cong F[x]$ (because there is no kernel), which is not a field,
+but $F[\alpha]\subset F(\alpha)\cong F(x)$. In particular, $F(\alpha)$ (quotients) is the smallest subfield of $E$ containing $F$
+and $\alpha$. Since $F(\alpha)\cong F(x)$, this is not a finite extension of $F$.
+
+If $\alpha$ is algebraic over $F$, $\ker{\rm ev}_\alpha$ is a maximal ideal and thus $F[\alpha]={\rm Im}\;{\rm ev}_\alpha$
+which is already a field, that we denote by $F[\alpha]=F(\alpha)$. Again, it is the smallest subfield of $E$ containing
+$F$ and $\alpha$. In this case $F(\alpha)\cong F[x]/\ker{\rm ev}_\alpha\cong F[x]/(\irr(\alpha,F,x)).$ This forms a 
+finite-dimensional $F$-vector space with basis $1,\alpha,\ldots,\alpha^{d-1}$, where $d=\deg\irr(\alpha,F,x)$. In other words,
+every element of $F(\alpha)$ is uniquely written $c_0+c_1\alpha+\ldots+c_{d-1}\alpha^{d-1}$, $c_i\in F$.
+
+One piece of notation: if $F\leq E$, we take $\alpha_1,\ldots, \alpha_n\in E$. We can define $F(\alpha_1,\ldots,\alpha_n)$
+as the smallest subfield of $E$ containing $F$ and $\alpha_1,\ldots,\alpha_n$. It is easy to check that there is an inductive
+definition $F(\alpha_1,\ldots, \alpha_n)=F(\alpha_1,\ldots \alpha_{n-1})(\alpha_n)$. For example, we could look at $\Q(\sqrt{2},\sqrt{3})$.
+This is, in fact, the same thing is as $\Q(\sqrt{2})(\sqrt{3})$. If $\alpha=\sqrt{2}+\sqrt{3}$, $\Q(\alpha)\leq \Q(\sqrt{2},\sqrt{3})$.
+On the other hand, by an explicit check, one can show that $\Q(\alpha)=\Q(\sqrt{2},\sqrt{3})$. It is enough to show that
+$\sqrt{2}\in\Q(\alpha)$ and $\sqrt{3}\in\Q(\alpha)$.
+
+\begin{lem}
+    Let $E$ be a finite extension of $F$ and let $V$ be a finite dimensional $E$-vector space. Then $V$ is a finite-dimensional $F$-vector space
+    and $\dim_F V=[E:F]\dim_E V$.
+\end{lem}
+\begin{proof}
+    There exists a basis for $V$ as a vector space over $E$, say $w_1\cdots w_n$, with $n=\dim_E V$. Additionally, there exists
+    a basis for $E$ as a vector space over $F$, say $\alpha_1\cdots\alpha_m$, where $m=\dim_F E$. Consider the collection
+    $\alpha_i w_j$, which has $mn$ elements. We claim that $\alpha_i w_j$ is an $F$-basis for $V$. Once we prove the claim, we see
+    that $V$ is a finite-dimensional $F$-vector space, and that $\dim_F V=mn=[E:F]\dim_E V$.
+
+    Let us first show that $\alpha_i w_j$ spans $V$ over $F$. We know that $w_j$ span $V$ over $E$, i.e. for all $v\in V$,
+    there exist $\beta_j\in E$ such that $v=\sum_{j=1}^n\beta_j w_j$. But we also know that $\alpha_i$ span $E$ over $F$, i.e.
+    $\beta_j=\sum b_{ij}\alpha_i$, with $b_{ij}\in F$. Putting these together, we find 
+    \[v=\sum_{j=1}^n\left( \sum_{i=1}^n b_{ij} \alpha_i \right)w_j=\sum_{i,j=1}^{m,n}b_{ij}(\alpha_iw_j),\]
+    as desired.
+
+    Next we show that $\alpha_i w_j$ are linearly independent. Suppose $\sum_{ij}b_{ij}\alpha_iw_j=0$ -- we wish to show that
+    $b_{ij}=0$ for all $i,j$. We simply rewrite the sum as
+    \begin{align*}
+        \sum_{j=1}^n\left( \sum_{i=1}^mb_{ij}\alpha_i \right)w_j=0,
+    \end{align*}
+    but by linear independence of $w_j$, the inner sums must be zero, but if the inner sum is zero, by linear independence of
+    $\alpha_i$, $b_{ij}=0$ for all $i,j$, and we are done.
+\end{proof}
+
+\begin{thm}
+    Suppose $F\leq E\leq K$, all fields. Then $K$ is a finite extension of $F$ if and only if $K$ is a finite extension of $E$
+    and $E$ is a finite extension of $F$. Furthermore, $[K:F]=[K:E][E:F]$.
+\end{thm}
+\begin{proof}
+    Let us start with the forwards direction. If $K$ is a finite extension of $F$, then, $K$ is a finite dimensional $F$-vector space.
+    In particular, $E$ is a vector subspace of $K$. But this implies that $\dim_F E$ is also finite, which in turn implies that
+    $E$ is a finite extension of $F$. Also, $K$ is spanned over $F$ by a finite number of elements $\alpha_1,\ldots, \alpha_n\in K$.
+    But notice that the span of the $\alpha_i$ with $E$-coefficients includes the span with $F$-coefficients. This implies that
+    $\alpha_i$ span $K$ over $E$. In other words, for all $\alpha\in K$, $\alpha=\sum f_i\alpha_i$ with $f_i\in F$. Since $F\subset E$,
+    $\alpha$ is in the $E$-span of $\alpha_1\ldots \alpha_n$, which implies that $K$ is spanned over $E$ by $\alpha_1, \ldots, \alpha_n$.
+
+    The other direction is trivial via the above lemma; take $V=K$ -- then $\dim_FK=[K:F]$, and we are done.
+\end{proof}
+
+\begin{cor}
+    Both $[K:E]$ and $[E:F]$ divide $[K:F]$.
+\end{cor}
+\begin{proof}
+    Obvious.
+\end{proof}
+
+\begin{exmp}
+    Is $\sqrt{2}\in\Q(\sqrt[3]{2})$? No. Why? Because if there were, we'd have
+    $\Q\leq\Q(\sqrt{2})\leq\Q(\sqrt[3]{2})$. But $[\Q(\sqrt{2}):\Q]=2$ and $[\Q(\sqrt[3]{2}):\Q]=3$, but two does not divide three,
+    so we are done by contradiction.
+\end{exmp}
+
+Note that the above proof shows that if  $\alpha_1\cdots\alpha_m$ is a basis for $E$ over $F$ and $\beta_1\cdots\beta_n$ is a basis 
+for $K$ over $E$, $\alpha_i\beta_j$ is a basis for $K$ over $F$.
+
+\begin{exmp}
+    $\Q\leq \Q(\sqrt{2})\leq\Q(\sqrt{2},\sqrt{3})$ and $\sqrt{3}\neq \Q(\sqrt{2})$. We have
+    $[\Q(\sqrt{2},\sqrt{3}):\Q]=[\Q(\sqrt{2},\sqrt{3}):\Q(\sqrt{2})][\Q(\sqrt{2}):\Q]$ where the second term is 2.
+    But we have $\Q(\sqrt{2},\sqrt{3})=\Q(\sqrt{2})(\sqrt{3})$ and $[\Q(\sqrt{2},\sqrt{3}):\Q(\sqrt{2})]$ is the degree
+    of $\irr(\sqrt{3},\Q(\sqrt{3}),x)$. What is this? It's $x^2-3$, but this is irreducible in $\Q(\sqrt{2})[x]$ since it has
+    no root in $\Q(\sqrt{2})$. Thus this degree is 2, and $[\Q(\sqrt{2},\sqrt{3}):\Q]=4$.
+
+    Note $1, \sqrt{2}$ is a basis for $\Q(\sqrt{2})$ over $\Q$ and the basis for $\Q(\sqrt{2})(\sqrt{3})$ over $\Q(\sqrt{2})$ is 
+    $1,\sqrt{3}$ (because in general, $[F(\alpha):F]=1,\alpha,\cdots,\alpha^{d-1}$). Then the basis for $\Q(\sqrt{2},\sqrt{3})$
+    over $\Q$ is $1,\sqrt{2},\sqrt{3},\sqrt{6}$.
+
+    But note that we know if $\alpha=\sqrt{2}+\sqrt{3}$, $\Q(\sqrt{2},\sqrt{3})=\Q(\alpha)$. We know that $\alpha$ is a root of
+    $x^4-10x^2+1$ and thus $\irr(\alpha,\Q,x)$ divides this polynomial. But $\deg\irr(\alpha,\Q,x)=[\Q(\alpha):\Q]=[\Q(\sqrt{2},\sqrt{3}):\Q]=4$.
+    Consequently, $x^4-10x^2+1$ is irreducible in $\Q[x]$ and it is the $\irr(\alpha,\Q,x)$. Then, $1,\alpha,\alpha^2,\alpha^3$ is another $\Q$-basis
+    for $\Q(\sqrt{2},\sqrt{3})$.
+\end{exmp}
+
+\begin{defn}
+    Let $F\leq E$. We say that $E$ is an \textbf{algebraic extension} of $F$ if for all $\alpha\in E$, $\alpha$ is algebraic over $F$.
+\end{defn}
+
+\begin{exmp}
+    $\R$ is not an algebraic extension of $\Q$.
+\end{exmp}
+
+\begin{thm}
+    If $E$ is a finite extension of $F$, then $E$ is an algebraic extension of $F$.
+\end{thm}
+\begin{proof}
+    If $\alpha\in E$ is not algebraic over $F$, then we have $F\leq F(\alpha)\leq E$. But we've seen that $F(\alpha)$ is not
+    finite dimensional as an $F$-vector space. But this contradicts that $E$ is finite-dimensional. Thus every $\alpha$ is
+    algebraic.
+\end{proof}
+
+\begin{thm}
+    Suppose $F\leq E$ and $\alpha,\beta\in E$ are both algebraic over $F$. Then, $a\pm \beta, \alpha\beta, \alpha/\beta$
+    are also algebraic over $F$ (where $\beta\neq 0$ for division).
+\end{thm}
+\begin{proof}
+    Note that $F\leq F(\alpha)\leq F(\alpha,\beta)=F(\alpha)(\beta)$. We know that $\alpha$ is algebraic over $F$, which
+    implies that $F(\alpha)$ is a finite extension of $F$. If $\beta$ is algebraic over $F$, it is clearly algebraic over $F(\alpha)$.
+    This implies that $F(\alpha)(\beta)$ is a finite extension of $F(\alpha)$. Thus, $F(\alpha,\beta)$ is a finite extension of $F$.
+    Consequently, every element of $F(\alpha,\beta)$ is algebraic over $F$. By closure of the field operations, then, and the previous theorem,
+    we are done.
+\end{proof}
+
+\begin{cor}
+    If $F\leq E$ then $\left\{ a\in E:\alpha\text{ is algebraic over }F \right\}$ is a subfield of $E$ called the \textbf{algebraic closure} of
+    $F$ in $E$.
+\end{cor}
+
+\begin{exmp}
+    The algebraic closure of $\Q$ in $\C$ is $\Q^{\rm alg}$, which is an algebraic extension of $\Q$, but is not finite.
+    What is the algebraic closure of $F$ in $F(t)$? It is simply $F$.
+\end{exmp}
+
+
+(March 11, 2013)
+
+Let's do a quick recap -- we've defined 3 types of extensions:
+\begin{enumerate}
+    \item $E$ is a simple extension of $F$ if $E=F(\alpha)$. If $\alpha$ is algebraic over $F$, then $F(\alpha)=F[\alpha]$.
+    \item $E$ is a finite extension of $F$ if $\dim_FE=[E:F]<\infty$. $E$ is a finite-dimensional $F$-vector space.
+    \item $E$ is an algebraic extension of $F$ if for all $\alpha\in E$, $\alpha$ is algebraic over $F$.
+\end{enumerate}
+
+What is the relationship between these three concepts? First of all, we know that if $\alpha$ is algebraic over $F$, then
+the simple extension $F(\alpha)$ is a finite extension of $F$, and in fact, $[F(\alpha):F]=\deg_F\alpha=\deg\irr(\alpha,F,x)$. 
+Second, we know that if $E$ is a finite extension of $F$, then it is an algebraic extension of $F$. What about the converses of
+these two statements? First, note that there are algebraic extensions that are not finite. Take, for example, $\Q(\sqrt{2},\sqrt{3},\sqrt{5},\ldots)$.
+This is clearly algebraic but not finite (we've joined all prime numbers). Second, finite doesn't always have to be simple, but in fact,
+it is \textit{almost always}. We will talk about this later, but recall the example of $\Q(\sqrt{2},\sqrt{3})$ and $\Q(\sqrt{2}+\sqrt{3})$.
+Of course, simple extensions can sometimes be harder to work with, so this is not always to be taken advantage of.
+
+What else do we know? If $F\leq E$, with $\alpha,\beta\in E$ algebraic over $F$, then $\alpha\pm\beta,\alpha\beta,\alpha/\beta$ are all
+algebraic over $F$ as well (if the quotient is defined). This is what motivated us to define above the algebraic closure of $F$.
+
+\begin{lem}
+    Let $E$ be an extension of $F$. Then $E$ is a finite extension of $F$ if and only if there exist $\alpha_1,\cdots,\alpha_n\in E$ with
+    $\alpha_i$ algebraic over $F$ for all $i$ such that $E=F(\alpha_1,\cdots,\alpha_n)$.
+\end{lem}
+\begin{proof}
+    Let us take the backwards direction. If $E=F(\alpha_1,\cdots,\alpha_n)$, where $\alpha_i$ are algebraic over $F$, we simply
+    consider the sequence of extensions $F\leq F(\alpha_1)\leq F(\alpha_1,\alpha_2) \leq \cdots \leq F(\alpha_1,\cdots,\alpha_n)=E$.
+    We claim by induction that $F(\alpha_1,\cdots,\alpha_i)$ is a finite extension of $F$ for $i=1,\cdots,n$. For the case $i=1$, we
+    have a simple extension, and by hypothesis, $\alpha_1$ is algebraic over $F$, we know $F(\alpha)$ is a finite extension of $F$.
+    Now assume that $F\leq F(\alpha_1,\cdots,\alpha_i)\leq F(\alpha_1,\cdots,\alpha_{i+1})$. We wish to show that this last extension
+    is finite over $F$. We know that $F(\alpha_1,\cdots,\alpha_{i+1})=F(\alpha_1,\cdots,\alpha_i)(\alpha_{i+1})$, so this is a simple extension.
+    In particular, $\alpha_{i+1}$ is algebraic over $F$, and hence algebraic over any bigger field. Then we clearly have a finite extension
+    of $F(\alpha_1,\cdots,\alpha_i)$, and by the theorem proved last time, we have a finite extension of $F$.
+
+    Now we show the forwards direction. Suppose $E$ be a finite extension of $F$. Then we know that $E$ is an algebraic extension of $F$,
+    i.e. for all $\alpha\in E$, $\alpha$ is algebraic over $F$. Now we argue by complete induction on $[E:F]$. If $[E:F]=1$, $E=F$ and we are done.
+    Suppose that the result is true for all finite extensions of fields of degree less than some $d>1$. Given $E$ an extension of $F$ with $[E:F]=d$.
+    Clearly $E\neq F$ and so there exists some $\alpha_1\in E$, $\alpha_1\notin F$, which is algebraic over $F$ ($E$ is finite). Then, $F\leq F(\alpha_1)\leq E$
+    and $[E:F]=[E:F(\alpha_1)][F(\alpha_1):F]$. The second term is bigger than 1, and so $[E:F(\alpha_1)]<d$. By induction, then, there
+    exist $\alpha_2,\cdots,\alpha_n\in E$ that are algebraic over $F(\alpha_1)$ such that $E=F(\alpha_1,\alpha_2,\cdots,\alpha_n)$.
+    In fact, $\alpha_i$ are algebraic over $F$, again since $E$ is a finite extension, and we are done.
+\end{proof}
+Thus, we have shown that every finite extension can be broken up into a sequence of simple extensions.
+
+\begin{exmp}
+    We looked at the case $\Q(\sqrt{2},\sqrt{3})=\sqrt{2}\sqrt{3}$ by direct computation because $\deg\irr(\sqrt{3},\Q(\sqrt{2}),x)=2$.
+    In general, however, such a statement about polynomials is not always obvious.
+\end{exmp}
+
+\begin{lem}
+    Take $F\leq E\leq K$. Suppose that $E$ is algebraic over $F$. Suppose $\alpha\in K$. Then $\alpha$ is algebraic over $F$
+    if and only if $\alpha$ is algebraic over $E$.
+\end{lem}
+\begin{proof}
+    The forward direction is trivial, as if $\alpha$ is the root of $f(x)\in F[x]$ non-zero, we just view that as a member
+    of $E[x]$. The difficult direction is the backwards one. Suppose $\alpha$ is algebraic over $E$. This means that there exists an
+    $f(x)=x^d+a_{d-1}x^{d-1}+\cdots+a_0\in E[x]$ such that $f(\alpha)=0$. Consider $F\leq F(a_0,\cdots,a_{d-1})\leq F(a_0,\cdots,a_{d-1},\alpha)$.
+    By the above lemma, $F(a_0,\cdots,a_{d-1})$ is a finite extension of $F$. Additionally, $\alpha$ is algebraic over $F(a_0,\cdots,a_{d-1})$,
+    and so $F(a_0,\cdots,a_{d-1},\alpha)$ is a finite extension of $F$. But this implies that it is an algebraic extension of $F$, and since
+    $\alpha\in F(a_0,\cdots,a_{d-1},\alpha)$, $\alpha$ must be algebraic over $F$.
+\end{proof}
+
+\begin{cor}
+    Suppose $F\leq E\leq K$. Then $K$ is algebraic over $F$ if and only if $K$ is algebraic over $E$ and $E$ is algebraic over $F$.
+\end{cor}
+\begin{proof}
+    If $K$ is algebraic over $F$, then every element of $K$ is algebraic over $F$. In particular,
+    given $\alpha\in E\leq K$, $\alpha$ is algebraic over $F$. And given $\alpha\in K$, $\alpha$ is algebraic over $F$, then $\alpha$ is algebraic
+    over $E$.
+
+    Now assume that $K$ is algebraic over $E$ and $E$ is algebraic over $F$. Then, we are done by the above lemma.
+\end{proof}
+
+\begin{defn}
+    A field $K$ is \textbf{algebraically closed} if for all $f(x)\in K[x]$ with $\deg f(x)\geq 1$, then $f(x)$ has a root in $K$.
+\end{defn}
+
+\begin{thm}
+    For a field $K$, the following are equivalent:
+    \begin{enumerate}
+        \item $K$ is algebraically closed.
+        \item Every $f(x)\in K[x]$ non-constant is a product of linear factors, i.e. $f(x)$ is irreducible in $K[x]$ if and only if
+            $\deg f(x)=1$
+        \item If $E$ is an algebraic extension of $K$, then $E=K$.
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    These are fairly straightforward, so they are left as an exercise. [Hint: the second is via induction]
+\end{proof}
+
+\begin{defn}
+    Let $F$ be a field. Then an \textbf{algebraic closure} of $F$ is an extension field $K$ such that $K$ is an algebraic extension
+    of $F$ and $K$ is algebraically closed.
+\end{defn}
+\begin{rem}
+    Notice that $\C$ is not an algebraic closure of $Q$, as $\C$ is not an algebraic extension (it contains transcendental elements over $\Q$).
+\end{rem}
+
+Let's pause and look at the definitions:
+\begin{enumerate}
+    \item If $F\leq E$, we've defined the algebraic closure of $F$ in $E$.
+    \item $K$ is algebraically closed.
+    \item $K$ is an algebraic closure of $F$.
+\end{enumerate}
+
+\begin{thm}
+    Let $F\leq K$ with $K$ be algebraically closed. Then the algebraic closure of $F$ in $K$, $F^{\rm alg}$, is an algebraic closure of $F$.
+\end{thm}
+
+\begin{exmp}
+    Before we prove this proposition, note the following intuitive example.
+    We have some relationship of the form $\Q\leq \Q^{\rm alg}\leq \C$, and the proposition in this case states says that
+    $\Q^{\rm alg}$ is an algebraic closure of $\Q$. Note, however, that $\C$ is not an algebraic closure of $\Q$, as $\C$
+    has transcendental numbers, i.e. $i\in\Q^{\rm alg}$ but $\pi i\in\C\notin\Q^{\rm alg}$.
+\end{exmp}
+
+\begin{proof}
+    We know, by definition, that $F^{\rm alg}$ is an algebraic extension of $F$, because it is the set of all things in $K$
+    that are algebraic over $F$. We wish to show that $F^{\rm alg}$ is algebraically closed. In other words, given some 
+    $f(x)\in F^{\rm alg}[x]$ non-constant, we must show that there exists an $\alpha$, a root of $f(x)$ in $F^{\rm alg}$.
+    We know that $f(x)\in F^{\rm alg}\leq K[x]$. Since $K$ is algebraically closed, there exists an $\alpha$ in $K$ such that
+    $f(\alpha)=0$. We want to show that $\alpha\in F^{\rm alg}$. But this is equivalent to saying that $\alpha$ is algebraic
+    over $F$. But we know that $\alpha$ is algebraic over $F^{\rm alg}$ and that $F^{\rm alg}$ is algebraic over $F$. By the lemma
+    we proved earlier, then, we have that $K$ must be algebraic over $F$, and thus $\alpha$ must be in $F^{\rm alg}$.
+\end{proof}
+
+\begin{rem}
+    It is a fact that for any field $F$, there exists an algebraic closure of $F$ and any two of these algebraic closures of $F$ are isomorphic.
+\end{rem}
+
+\begin{rem}
+Suppose one can construct a length $\alpha\in\R$. It can be shown that $\alpha$ can be constructed via compass/straightedge 
+if and only if $[\Q(\alpha):\Q]=2^k$.
+Then, one can show that trisecting a 60 degree angle allows one to construct $\alpha=\cos 20$, but $[\Q(\alpha):\Q]=3$, as one can show,
+so an angle cannot be trisected.
+Likewise, one can show that it is impossible to double the cube, i.e. construct the cube root of two. Finally, it can be show that it is
+impossible to construct a square whose side length is $\sqrt{\pi}$, which is, of course, impossible, as $\pi$ and $\sqrt{\pi}$ are transcendental.
+\end{rem}
+
+\section{Multiple roots and derivatives}
+
+Suppose $F$ is a field and $f(x)\in F[x]$, with $\deg f(x)\geq 1$. $\alpha$ is a root of $f(x)$ if and only if $(x-a)|f(x)$.
+In general, given any $f(x)\in F[x]$ non-constant and any $\alpha\in F$, there exists an integer $m\geq0$ such that $(x-\alpha)^m|f(x)$
+but $(x-\alpha)^{m+1}$ does not divide $f(x)$. Notice that $m=0$ if and only if $\alpha$ is not a root. This number $m$ is called the
+\textbf{multiplicity} of the root $\alpha$.
+
+\begin{rem}
+    We might have $F\leq E$ and we might be looking at $\alpha\in E$ -- we talk about divisibility in $E[x]$, as
+    $x-\alpha$ is not necessarily in the smaller field $F$.
+\end{rem}
+
+If the multiplicity of $\alpha$ is 1, we say that $\alpha$ is a simple root, and if the multiplicity of $\alpha$ is greater than 1, we say
+that $\alpha$ is a \textbf{multiple} or $\textbf{repeated}$ root. To see if $\alpha$ is a repeated root, we write $f(x)=(x-\alpha)g(x)$
+if and only if $f(\alpha)=0$. Notice also that $\alpha$ is a repeated root if and only if $f(\alpha)=f'(\alpha)=0$. But what is a derivative in
+any field? Forget about limits -- we define derivatives purely formally.
+
+\begin{defn}
+    Given $f(x)=\sum_{i=0}^na_ix^i\in F[x]$, we define the \textbf{derivative} of $f$ in $F[x]$ purely formally as \[Df(x)=\sum_{i=1}^nia_ix^{i-1}.\]
+    Note that $\deg Df(x)\leq \deg f(x)-1$. In particular, we may define the derivative generally as a function $D:F[x]\to F[x]$.
+    In the context of an extension $F\leq E$ we can define compatibly $D:E[x]\to E[x]$ as the derivatve does not particularly care about where
+    the coefficients live. $D$ is determined by $D(x^i)=ix^{i-1}$ and is $F$-linear. It should be obvious that $D$ is not a ring homomorphism,
+    as it instead follows the product rule:
+    \[D(x^ax^b)=D(x^{a+b})=(a+b)x^{a+b-1}=ax^{a-1}x^b+x^abx^{b-1}=(Dx^a)x^b+x^aDx^b\]
+    and by linearity, this holds for all polynomials.
+    
+    There is a corollary of the product rule that states
+    \[D( (f(x))^n)=nf(x)^{n-1}\cdot Df(x),\]
+    proved via induction.
+
+    We can, of course, inquire into the kernel of $D$. It is not just constant functions,
+    however, as if $F$ has characteristic $p$, $Dx^p=px^{p-1}=0$! In fact, it is easy to see that if the characteristic of $F$ is zero,
+    the $\ker D=F\leq F[x]$, but if the characteristic is $p$, then $\ker D=F[x^p]={\rm Im}\;{\rm Frob}\leq F[x]$, i.e. the polynomials in $x^p$.
+\end{defn}
+
+Now what is the connection of the derivative to multiple roots? Let us work in $F\leq E$ with $\alpha\in E$. Let $m$ be the multiplicity
+of $\alpha$ in $f(x)$, i.e. $(x-\alpha)^m$ divides $f(x)$ but higher powers do not. In other words, we can write $f(x)=(x-\alpha)^mg(x)$
+with $g(\alpha)\neq 0$. If $m=0$, $f(\alpha)\neq 0$. Let's assume that $m\geq 1$. Then we write $f(x)=(x-\alpha)^mg(x)$. Taking the derivative, we find
+\begin{align*}
+    Df(x)&=D\left( (x-a)^m \right)g(x)+(x-\alpha)^mDg(x)\\
+    &= m(x-a)^{m-1}g(x)+(x-\alpha)^mDg(x)
+\end{align*}
+Now, if $m=1$, $Df(x)=f(x)+(x-a)Dg(x)$ and $Df(\alpha)=g(\alpha)\neq 0$. If $m\geq 2$, on the other hand, we have at least one overall factor of $x-\alpha$.
+Here, unlike before, $Df(\alpha)=f(\alpha)=0$.
+
+\begin{thm}
+    Any $\alpha\in E$ is a multiple root of $f(x)$ if and only if $f(\alpha)=Df(\alpha)=0$.
+\end{thm}
+
+This is not exactly what we want, however, as we want a condition that $f(x)$ has a multiple root in some extension field without knowing
+what the root or the extension field are.
+
+\begin{lem}
+    Let $F\leq E$ and $f(x),g(x)\in F[x]$ not both 0, $f(x)$ not constant.
+    \begin{enumerate}
+        \item $f(x)|g(x)$ in $F[x]$ if and only if $f(x)|g(x)$ in $E[x]$.
+        \item $d(x)\in F[x]$ is a gcd of $f,g$ in $F[x]$ if and only if it is a gcd in $E[x]$.
+        \item $f,g$ are relatively prime in $F[x]$ if and only if they are relatively prime in $E[x]$.
+    \end{enumerate}
+\end{lem}
+\begin{proof}
+    \begin{enumerate}
+        \item The forward direction is obvious. Suppose $g(x)=f(x)h(x)$ with $h(x)\in E[x]$. We wish to show that $h(x)\in F[x]$.
+            We can apply long division with remainder in $F[x]$: $g(x)=q(x)f(x)+r(x)$ with $q,r\in F[x]$ and either $r=0$ or $\deg r<\deg f$.
+            We now have two different expression for $g$, but we know that in $E[x]$ long division with remainder is unique! Thus, they must be the same. 
+            This implies that $h(x)=q(x)$ and $r(x)=0$, i.e. that $h(x)\in F[x]$.
+        \item  Say $d(x)$ is a gcd of $f,g$ in $F[x]$. In particular, we know that $d|f, d|g$ and $d=af+bg$. To show that $d$ is a gcd of
+            $f,g$ in $E[x]$, we need to show that anything that divides $f,g$ divides $d$. Suppose $e(x)$ in $E[x]$ divides $f,g$.
+            Then $e|af+bg=d$ so $e|d$ and $d$ is a gcd in $E[x]$. Conversely suppose $d(x)\in F[x]$ is a gcd of $f,g$ in $E[x]$ so
+            $d|f,d|g$ in $E[x]$. But by the first statement of this lemma, we know that $d|f,d|g$ in $F[x]$. Then if $e\in F[x]$
+            with $e|f,e|g$, then $e|f,e|g$ in $E[x]$ implies $e|d$ in $E[x]$ and thus  $e|d$ in $F[x]$. This shows that $e$ is a gcd
+            in $F[x]$.
+            \item $f,g$ are relatively prime in $F[x]$ if and only if 1 is a gcd of $f,g$ in $F[x]$, which by statement 2 of the lemma,
+            implies that 1 is a gcd of $f,g$ in $E[x]$. Then $f,g$ are relatively prime in $E[x]$.
+    \end{enumerate}
+\end{proof}
+
+\begin{cor}
+    Let $f(x)\in F[x]$ non-constant. Then there exists an extension field $E$ of $F$ and an $\alpha\in E$ which is a multiple root of $f(x)$
+    if and only if $f(x)$ and $Df(x)$ are not relatively prime in $F[x]$.
+\end{cor}
+\begin{proof}
+    Suppose that $f(x)$ has a multiple root $\alpha$ in some extension $E$. This implies that $x-\alpha|f(x)$ and $x-\alpha|Df(x)$.
+    This implies that $f,Df$ are not relatively prime in $E[x]$. But if they are not relatively prime in $E[x]$, they are not relatively
+    prime in $F[x]$.
+
+    If $f(x),Df(x)$ are not relatively prime in $F[x]$, then there exists an irreducible $p(x)$ in $F[x]$ such that $p(x)|f(x)$ and
+    $p(x)|Df(x)$. But we know that there exists an extension field $E$ of $F$ and a root $\alpha$ of $p(x)\in E$. In $E$, then,
+    $\alpha$ is a root of $f(x)$ and $Df(x)$, which implies that $\alpha$ is a multiple root.
+\end{proof}
+
+\begin{cor}
+    Let $f(x)$ be an irreducible polynomial in $F[x]$. $f(x)$ has a multiple root in some extension field $E$ of $F$ if (and only if)
+    $Df(x)=0$.
+\end{cor}
+\begin{proof}
+    If $f(x)$ has a multiple root in some extension field, then $f(x),Df(x)$ are not relatively prime, by the above corollary.
+    But we know that $f(x)$, by hypothesis, is irreducible, and $Df(x)$, if non-zero, has smaller degree (not necessarily $n-1$ in
+    positive characteristic fields). Since $f(x)$ is irreducible, we know that either the gcd of $f(x),Df(x)$ is one or $f(x)|Df(x)$.
+    However, the first is not true due to the multiple root, and the second is not true due to the degrees of the polynomials.
+    Thus we reach a contradiction, and $Df(x)=0$.
+\end{proof}
+
+\begin{cor}
+    If the characteristic of $F$ is zero, an irreducible $f(x)\in F[x]$ never has a multiple root in an extension field.
+\end{cor}
+\begin{proof}
+    $Df(x)\neq 0$.
+\end{proof}
+
+In fact, this does happen if the characteristic of $F$ is $p$, but not if $F$ is finite.
+\begin{exmp}
+    Let $F=\F_p(t)$, an infinite field of rational functions with characteristic $p$. Now consider $f(x)=x^p-t$.
+    A zero $\alpha$ of $f(x)$ is equal to a $p$th root of $t$. Thus $f(x)$ has no root in $\F_p(t)$ just because
+    the polynomial would have to have power $1/p$. Note that one can check that $f(x)$ is irreducible.
+
+    Let $\alpha$ be a root of $f(x)$ in some extension field: $\alpha^p=t$. In $E[x]$, $f(x)=x^p-t=x^p-\alpha^p=(x-\alpha)^p$.
+    Thus, $\alpha$ is a root of multiplicity $p$.
+    Notice that in this case $D(x^p-t)=px^{p-1}=0$.
+\end{exmp}
+
+When we come back from break, we will move on to using this to classify finite fields.
+
+\section{Classification of finite fields}
+
+(March 25, 2013)
+
+Although we will not work much with finite fields in this course, they are often useful in coding theory and number theory.
+
+Every finite field $\F$ has prime characteristic. Consequently, $\F_p\leq \F$. Furthermore,
+if $\dim_{\F_p}\F=n$, then $\F$ is a finite-dimensional $\F_p$-vector space and the number of elements
+in $\F$ is $q=p^n$. We know that $\F^*=\langle\beta\rangle$ is cyclic. Thus, $\F=\F_p(\beta)$ and
+$\F$ is a simple extension of $\F_p$ (or of any subfield $\F'$).
+
+If the number of elements in $\F$ is $q$, the number of elements in $\F^*$ is clearly $q-1$. If $\alpha\in F^*$ then
+$\alpha^{q-1}=1$, by Lagrange's theorem. Multiplying by $\alpha$, we can write that $\alpha^q=\alpha$. This statement now holds
+for all $\alpha$ (including zero). This is a generalization of Fermat's little theorem. Consequently, every $\alpha\in\F$ is a root of $x^q-z\in\F_p[x]$.
+
+Recall the Frobenius homomorphism, $\sigma_p:\F\to\F$ given by $\sigma_p(\alpha)=\alpha^p$ with the nice properties that $(\alpha+\beta)^p=\alpha^p+\beta^p$
+and $(\alpha\beta)^p=\alpha^p\beta^p$. The kernel $\ker\sigma_p=\left\{ \alpha:\alpha^p=0 \right\}=\left\{ 0 \right\}$, as we are in an integral domain.
+Thus, $\sigma_p$ is injective. But because $\F$ is finite, $\sigma_p$ must be surjective, as well, and thus in the case of finite fields, the Frobenius homomorphism
+is actually an isomorphism. This implies that every element of $\F$ is a $p$th power (we say $\F$ is \textbf{perfect}).
+
+We can take
+\begin{align*}
+    (\sigma_p)^2(\alpha)=\sigma_p(\sigma_p(\alpha))=(\alpha^p)^p=\alpha^{p^2},
+\end{align*}
+and, in general,
+\begin{align*}
+    \sigma_p^k=\sigma_{p^k}.
+\end{align*}
+In particular, $\sigma_q(\alpha)=\alpha^q=\alpha$ and so $\sigma_q=\id$.
+We should be careful to note, however, that although every element of $\F$ satisfies $\alpha^q=\alpha$, $x^q-x$ is \textit{not} the zero polynomial
+in $\F[x]$ or $\F_p[x]$.
+
+\begin{thm}[Classification of finite fields]
+    Let $p$ be a prime throughout.
+    \begin{enumerate}[(i)]
+        \item If $q=p^n$, $n\in \N$, then there exists a finite field $\F$ with $q$ elements.
+        \item If $\F_1$ and $\F_2$ are two finite fields, $\F_1\cong\F_2$ if an only if they have the same number of elements.
+        \item Given $q=p^n$, $q'=p^m$, and $\F$ a field with $q$ elements and $\F'$ a field with $q'$ elements,
+            then $\F'$ is isomorphic to a subfield of $\F$ if and only if $q=(q')^d$ for some $d\in \N$, i.e. $m$ divides $n$.
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    Let us begin with $(i)$. Consider $x^q-x\in\F_p[x]$. We know that there exists a field $E$, $\F_p\leq E$, such that in $E[x]$,
+    $x^q-x=\prod_i^q(x-\alpha_i)$. Then $\alpha\in E$ satisfies $\alpha^p=\alpha$ if and only if $\alpha=\alpha_i$ for some $i$.
+    We claim that $x^q-x$ has no multiple root, and that all $\alpha_i$ are distinct. We have $D(x^q-x)=qx^{q-1}-1=-1$, a unit.
+    By definition, then, $x^q-x,D(x^q-x)$ are relatively prime, i.e. there are no multiple roots.
+
+    We now define 
+    \begin{align*}
+        \F_q\subset E=\left\{ \alpha_1,\ldots,\alpha_q \right\}=\left\{ \alpha\in E:\alpha^q=\alpha \right\}=\left\{ \alpha\in E:\sigma_q(\alpha)=\alpha \right\}.
+    \end{align*}
+    This is called a \textbf{fixed field} of $\sigma_q$. We know that the number of elements in $\F_q$ is $q$. We claim that $\F_q$ is a subfield
+    of $E$. Say $\alpha,\beta\in \F_q$. They satisfy $\alpha^q=\alpha,\beta^q=\beta$. Note that
+    \begin{align*}
+        (\alpha\pm\beta)^q=\sigma_q(\alpha\pm\beta)=\sigma_q(\alpha)\pm\sigma_q(\beta)=\alpha\pm\beta
+    \end{align*}
+    and similarly $(\alpha\beta)^q=\alpha\beta$ and $(\alpha/\beta)^q=\alpha/\beta$ (for $\beta\neq 0$). Thus we have a field, since these operations are closed.
+
+    Next, we wish to prove the forward implication in $(iii)$. We wish to show that given $\F,\F'$ with $q,q'$ elements respectively,
+    if $\F'$ is isomorphic to a subfield of $\F$, then $q=(q')^d$ for some $d$. We can identify $\F'$ with a subfield of $\F$. This implies
+    that $\F$ is an $\F'$-vector space that is finite-dimensional. Let $d=\dim_{\F'}\F$. We then have $d$ elements in a basis, so the number of elements of
+    $\F$ is equal to the number of elements of $\F'$ to the $d$th power, i.e. $q=(q')^d$, and we are done.
+
+    Next we show the backwards implication for $(iii)$. Let us show this first for the field we constructed in the proof for $(i)$, i.e. $\F=\F_q$,
+    the set of roots of $x^q-x$ in some $E$. $\F'$ is any field whose order is $q'$ and $q=(q')^d$. We wish to show that $\F'$ is isomorphic to some
+    subfield of $\F_q$. We know that $\F'=\F_p(\beta)$, where $\langle\beta\rangle=(\F')^*$. We have the $\irr(\beta,\F_p,x)\in\F_p[x]$. We claim that
+    $\beta^q=\beta$. We know that $\beta^{q'}=\beta$, i.e. $\sigma_{q'}(\beta)=\beta$ so $\sigma_{q'}^d(\beta)=\beta$ and thus $\sigma_q(\beta)=b$.
+    Consequently, $\beta$ is a root of $x^p-x\in \F_p[x]$. This implies that $\irr(\beta,\F_p,x)$ divides $x^q-x$. We can write in $\F_p[x]$
+    \begin{align*}
+        x^q-x=\irr(\beta,\F_p,x)\cdot p(x),
+    \end{align*}
+    for some polynomial $p$. But we know that in $\F_q[x]$ that $x^q-x$ factors into a product of linear polynomials. We thus have two different factorizations
+    of $x^q-x$. Thus, by unique factorization, it must be that for some $i$, $x-\alpha_i$ divides $\irr(\beta,\F_p,x)$ in $\F_q[x]$.
+    Thus there exists an $i$ such that $\alpha_i$ is a root of $\irr(\beta,\F_p,x)$. This implies that $\irr(\alpha_i,\F_p,x)=\irr(\beta,\F_p,x)$.
+    But recall that $\F_p(\beta)\cong\F_p[x]/(\irr(\beta,\F_p[x],x)))$, where the isomorphism is given by ${\rm ev}_{\beta}$. There is also
+    a homomorphism ${\rm ev}_{\alpha_i}$ from this quotient to $\F_q$. This yields an injective homomorphism ${\rm ev}_{\alpha_i}\circ ({\rm ev}_\beta)^{-1}:\F'\to\F_q$
+    (because homomorphisms between fields are injective). The image of this homomorphisms is a subfield of $\F_q$, automatically isomorphic to $\F'$, and we are done.
+
+    Let's prove $(ii)$. Suppose $\F_1$ and $\F_2$ are two finite fields with the same number of elements, $q$. By what we've shown so far in $(iii)$, since
+    $q=q^1$ there exists an injective homomorphism from $\F_1\to\F_q$. Since $\F_1,\F_q$ both that the same number of elements, the injection is also
+    an isomorphism, and thus $\F_1\cong \F_q$. Likewise, $\F_2\cong \F_q$, and thus $\F_1\cong\F_2$.
+
+    Finally, we must finish $(iii)$: if $\F$ is any field with $q$ elements and $\F'$ a field with $q'$ elements with $(q')^d=q$, we've seen that
+    $\F'$ is isomorphic to a subfield of $\F_q\cong\F$. But the composition of these isomorphisms is an isomorphism between $\F'$ and a subfield of $\F$.
+\end{proof}
+
+Note that from an isomorphism $\sigma_q:E\to E$ of fields, we constructed a fixed field $\left\{ \alpha\in E:\sigma_q(\alpha)=\alpha \right\}$.
+Furthremore, we used $\F_p(\beta)\cong \F_p[x]/(\irr(\beta,\F_p,x))$ to construct a homomorphism. These were, in some sense, the two main tricks of the proof --
+we will come back to these techniques later.
+
+Note also that we usually call $\F_q$ \textit{the} field with $q$ elements. This field is defined by the roots of the polynomial $x^q-x$. This polynomial
+is not irreducible in $\F_p[x]$: $0,1,\ldots,p-1$ are roots.
+
+\begin{defn}
+    Let $N_(k)$ be the number of irreducible monic polynomials in $\F_p[x]$ of degree $k$. For example, $N_p(1)=p$.
+\end{defn}
+
+In fact, there exists a formula, with $q=p^n$,
+\begin{align*}
+    \sum_{d|n}dN_p(d)=p^n
+\end{align*}
+
+\section{Factorization in integral domains}
+Throughout this section, $R$ will denote an integral domain. We will have two general questions. First, what about $F[x]$ can be generalized?
+Second, what are the criteria for when a polynomial (even with rational coefficients) is irreducible.
+
+\begin{defn}
+    The \textbf{units} $R^*$ are $\left\{ u\in R:(\exists r\in R) ur=1 \right\}$ and given $r,s\in R$ we say that
+    $r$ \textbf{divides} $s$, $r|s$ if there exists $t\in R$ such that $s=rt$. We say $r,s\in R$ are \textbf{associates}
+    if there exists a $u\in R^*$ such that $s=ur, r=u^{-1}s$. Note that the associate property is an equivalence relation.
+    Two associates behave the same way with respect to factorization.
+\end{defn}
+
+\begin{exmp}
+    For example, if $R=\Z,$ then $R^*=\left\{ \pm 1 \right\}$. If $R=F[x],$ then $R^*=F^*$. If $R=\Z[i],$ then the units are $R^*=\left\{ \pm 1,\pm i \right\}$,
+    i.e. $3+4i,-4+3i,4-3i,-3-4i$ are all associates. If $R=\Z[\sqrt{2}]$, $1+\sqrt{2}$ is a unit because its inverse is $-(1-\sqrt{2})$. In fact,
+    $\Z[\sqrt{w}]^*\cong\Z\times(\Z/2\Z)$. Finally, if $R=\Z[\sqrt{-2}]=\Z[i\sqrt{2}]$, then $R^*=\left\{ \pm 1 \right\}$.
+\end{exmp}
+
+\begin{defn}
+    An element $r\in R$ is \textbf{irreducible}, or \textbf{an irreducible}, if $r\neq 0, r\notin R^*$ and if $r=st$, then either $s$ is a unit and 
+    $t$ is an associate of $r$, or $s$ is an associate of $r$ and $t$ is a unit.
+\end{defn}
+\begin{exmp}
+    In $\Z$, irreducibles are $\pm p$, with $p$ prime. In $F[x]$, irreducibles are irreducible polynomials.
+\end{exmp}
+
+(March 27, 2013)
+
+\begin{defn}
+    An integral domain $R$ is a \textbf{unique factorization domain (UFD)} if
+    \begin{enumerate}
+        \item for any $r\in R$, $r\neq 0$ and $r\notin R^*$, there exist irreducibles $p_1,\ldots,p_n\in R$ such that $r=p_1\cdots p_n$.
+        \item if $p_1\cdots p_n=q_1\cdots q_n$, $p_i,q_j$ are irreducibles, then $n=m$ and, after reordering, $p_i$ and $q_i$ are associates.
+    \end{enumerate}
+\end{defn}
+
+Note that $\Z$ and $F[x]$ are both UFDs.
+
+\begin{rem}
+    Instead of writing $r=p_1\cdots p_n$ we might write $r=up_1^{q_1}\cdots p_r^{q_r}$, $p_i$ irreducible, $q_i\in\N$ and if $i\neq j$
+    $p_i,p_j$ are not associates, and $u$ is a unit. For example, in $\Z$, $-4=(-1)2^2$.
+\end{rem}
+
+\begin{defn}
+    An integral domain $R$ is a \textbf{principal ideal domain} (PID) if every ideal $I$ in $R$ is a principal ideal.
+\end{defn}
+
+Note that we have shown that $\Z$ and $F[x]$ are PIDs.
+
+\begin{thm}
+    Every PID is a UFD.
+\end{thm}
+\begin{proof}
+    We will not do the full proof here. The first idea is to show the existence of factorization into irreducibles, i.e.
+    if $r\in R$ non-zero and not a unit, then there exist $p_1,\ldots, p_n\in R$ irreducible such that $r$ is the product of these $p_i$.
+    This is actually true in a very general class of rings which have some finiteness property (these are called \textbf{Noetherian rings}).
+    We'll define a special class of PIDS shortly where we can prove this directly.
+
+    Next we need to show uniqueness of this factoring. The main point here is to show that if $p$ is irreducible and $p|rs$, then
+    $p|r$ or $p|s$. This is easy to do using the same arguments we used for $F[x]$. We then use induction: if $p_1\cdots p_n=q_1\cdots q_m$,
+    then $p_1|q_1\cdots q_m$, and thus $p_1|q_i$ for some $i$. Since $q_i$ is an irreducible, $p_1,q_i$ are associates. We can relabel so that
+    $i\mapsto 1$, cancel off, and continue.
+\end{proof}
+
+What are some examples of UFDs that are not PIDs? Well, take $F[x,y]$. The ideal $(x,y)$ is clearly not a principal ideal. But,
+we will show later that $F[x,y]$ is, in fact, a UFD. Indeed, $F[x_1,\ldots,x_n]$ is in general a UFD, but not a PID if $n\geq 2$.
+Additionally, $\Z[x_1,\ldots,x_n]$ is a UFD but not a PID if $n\geq 1$. Note that all of these examples are polynomial rings -- in
+fact, we will show that if $R$ is a UFD, then $R[x]$ is a UFD.
+In general, though, most integral domains are not UFDs.
+
+Recall that in any integral domain, $r|s$ if $s=rt$. We can also define a gcd of $r,s$ as a $d\in R$ such that $d|r,d|s$ and if $e\in R$,
+and $e|r,e|s$, then $e|d$ (as long as $r,s$ are not both zero). It is easy to see that if $d_1,d_2$ are 2 gcds of $r$ and $s$, then $d_1,d_2$
+are associates, because they must divide each other, and since neither is zero, if $d_1=ud_2,d_2=vd_1$, then $uv=1$.
+
+\begin{thm}
+    If $R$ is a UFD with $r,s\in R$ not both zero, then a gcd of $r$ and $s$ exists.
+\end{thm}
+\begin{proof}
+    This proof is rather ugly, so let us just sketch it. We can assume $r,s$ are not both 0 or units (as these are the easy cases),
+    and therefore that both can be factored into irreducibles: $r=up_1^{a_1}\cdots p_r^{a_r},s=vp_1^{b_1}\cdots v_r^{b_r}$ with $u,v$ units and $a_i,b_i\geq 0$.
+    Additionally, we assume that if $i\neq j$ then $p_i,p_j$ are not associates. We must show that this is possible, but we shall not go into this here.
+    But once we get here, we are done, as we just define $c_i=\text{min }\left\{ a_i,b_i \right\}$ and let $d=p_1^{c_1}\cdots p_r^{c_r}$. It should be
+    clear that $d|r, d|s$ and that if $e|r, e|s$ one can factorize $e$ and show that the exponents will be smaller, and thus $d|e$.
+\end{proof}
+
+\begin{thm}
+    If $R$ is a PID and $r,s\in R$, not both zero, then the gcd of $r,s$ exists and $d=ar+bs$ for some $a,b\in R$.
+\end{thm}
+\begin{proof}
+    Consider the ideal $I=(r,s)=(r)+(s)=\left\{ ar+bs:a,b\in R \right\}$. Since $I$ is an ideal, it is principal, since $R$ is a PID.
+    Consequently, $I=(d)$ and by definition, $d=ar+bs$ for some $a,b\in R$. But $r,s\in I$ and thus $d|r,d|s$. If $e|r,e|s$, then $e|ar+bs$ so $e|d$.
+\end{proof}
+
+Note that in a general UFD, gcds will \textit{not} be linear combinations. Take, for example, $F[x,y]$, a UFD. What is the $\text{gcd}(x,y)$? Well both
+$x,y$ are irreducible and not associates so $\text{gcd}(x,y)=1$. Here it is obvious that we cannot write 1 as $f(x,y)x+g(x,y)y$, because if we insert
+$x=y=0,$ we get $0=1$.
+
+\begin{defn}
+    $r,s\in R$ are \textbf{relatively prime} if $\text{gcd}(r,s)=1$.
+\end{defn}
+
+\begin{thm}
+    If $R$ is a UFD, and $r,s\in R$ are relatively prime, and $r|st$, then $r|t$.
+    Hence if $p$ is an irreducible, and $p|rs$, either $p|r$ or $p|s$.
+\end{thm}
+\begin{proof}
+    Straightforward but messy.
+\end{proof}
+
+These statements can be proved cleanly in a PID by exactly the same arguments that we used for $F[x]$.
+The above dichotomy about divisibility can be extended to ideals.
+
+\begin{thm}
+    If $R$ is a UFD then $p\in R$ non-zero is irreducible if and only if $(p)$ is a prime ideal.
+\end{thm}
+\begin{proof}
+    This is just saying that $rs\in(p)$ if and only if $r\in(p)$ or $s\in(p)$.
+\end{proof}
+
+We'll see examples of integral domains $R$ such that there exist $p$ irreducible with $r,s\in R$ with $p|rs$ but $p$
+doesn't divide $r$ or $s$ and hence $(p)$ cannot be prime.
+
+\begin{thm}
+    Let $R$ be a PID, not a field. Let $I$ be an ideal in $R$. Then the following are equivalent:
+    \begin{itemize}
+        \item $I$ is a maximal ideal.
+        \item $I$ is a prime ideal and $I\neq\left\{0 \right\}$.
+        \item there exists $p\in R$ such that $I=(p)$
+    \end{itemize}
+\end{thm}
+\begin{proof}
+    Again, the proof is similar to what we've done before for $F[x]$.
+\end{proof}
+
+\begin{defn}
+    An integral domain $R$ is a \textbf{Euclidean domain} if there exists $N:R-\left\{ 0 \right\}\to\Z$
+    called the \textbf{Euclidean norm} such that:
+    \begin{itemize}
+        \item $N(r)\geq0$ for all $r\in R-\left\{ 0 \right\}$
+        \item For all $a,b\in R$ with $a\neq 0$, there exist $q,r\in R$ such that $b=aq+r$ and either
+            $r=0$ or $N(r)<N(q)$.
+    \end{itemize}
+\end{defn}
+
+Note that this roughly says that one can do long division with remainder. However, it does not require the remainder to be unique.
+A simple example is $R=\Z$, where $N(k)=|k|$ (this is defined even for 0). In the case of $R=F[x]$ we have the degree of a polynomial
+as the norm (not defined for 0).
+
+\begin{defn}
+    A Euclidean norm $N$ is \textbf{submultiplicative} if for all $r,s\in R-\left\{ 0 \right\}$, $N(r)\leq N(rs)$.
+    $N$ is \textbf{multiplicative} if for all $a,b\in R-\left\{ 0 \right\}$, $N(ab)=N(a)N(b)$.
+\end{defn}
+Note: Robert Friedman made the word ``submultiplicative'' up.
+
+\begin{thm}
+    Let $R$ be a Euclidean domain. Then $R$ is a PID.
+\end{thm}
+\begin{proof}
+    Let $I$ be an ideal in $R$. If $I=\left\{ 0 \right\}$, then $I=(0)$. Assume $I\neq\left\{ 0 \right\}$.
+    We choose $d\in I$ non-zero such that $N(d)$ is the smallest possible. We claim that $I=(d)$. We know that
+    $(d)\subset I$. If $b\in I$, we can write $b=dq+r$ with either $r=0$ or $N(r)<N(d)$. But $r=b-dq\in I$
+    so $r\neq 0$. However, this implies that $N(r)<N(d)$, which contradicts the choice of $d$. Thus $r=0$
+    and $b=dq$,so $b\in(d)$ and $I\subset(d)$. Consequently, $I=(d)$.
+\end{proof}
+
+Note that there are PIDs that are \textit{not} Euclidean.
+
+\begin{lem}
+    Suppose $R$ is Euclidean and $N$ is a submultiplicative norm. Then, given $r,s\in R-\left\{ 0 \right\}$, either $s$ is a unit
+    and $N(r)=N(rs)$ or $s$ is not a unit and $N(r)<N(rs)$.
+\end{lem}
+\begin{proof}
+    Say $s$ is a unit. $N(r)\leq N(rs)$ and $N(rs)\leq N(rs s^{-1})=N(r)$. Thus, $N(rs)=N(r)$. Conversely, supposed $N(r)=N(rs)$.
+    We must show that $s$ is a unit (hence if $s$ is not a unit, $N(r)<N(rs)$). The idea is to long divide $rs$ into $r$.
+    We can write $r=(rs)q+t$ where either $t=0$ or $N(t)<N(rs)=N(r)$. We claim that $N(t)<N(r)$ is impossible because
+    $t=r-rsq=r(1-sq)$ implies $N(t)=N(r(1-sq))\geq N(r)$. Hence, $t=0$, which implies that $r=rsq$ or $sq=1$, i.e $s$ is a unit.
+\end{proof}
+
+This has various consequences; if $R$ is Euclidean, $N$ submultiplicative
+\begin{itemize}
+    \item $c\in R^*$ if and only if $N(r)=N(1)$
+    \item If $r\in R$, non-zero, not a unit, then $r$ can be factored into a product of irreducibles $r=p_1\cdots p_n$
+\end{itemize}
+The first is left for homework but the second can be proved as follows. If $r$ is irreducible, then we are done. Otherwise,
+$r=st$, neither a unit, and $N(r)=N(st)$ with $N(s)<N(r)$ and $N(t)<N(r)$. One can keep going and argue by complete induction
+on $N(r)$ to further reduce $s,t$.
+
+\begin{rem}
+    In any Euclidean domain, we can implement the Euclidean algorithm to find a gcd. Look up the Euclidean algorithm if
+    you are unfamiliar with it.
+\end{rem}
+
+\begin{exmp}
+    Take the \textbf{Gaussian integers} $\Z[i]=\left\{ a+bi:a,b\in\Z \right\}$. We take $N:\Z[i]\to\Z$ such that $N(a+bi)=a^2+b^2$.
+    Consequently, if we write $\alpha=a+bi$, we have that $N(\alpha)=\alpha\bar\alpha$. It is easy to see that $N(\alpha)\geq 0$,
+    $N(\alpha)=0$ if and only if $\alpha=0$, and that $N$ is multiplicative (in fact, $N$ extends to a function from $\Q(i)\to\Q$,
+    which in fact becomes a homomorphism). Less obvious is the fact that we can do long division with remainder.
+    
+    More generally,
+    we could work with $\Z[\sqrt{-d}]\subset\Q(\sqrt{-d})$ with $d\in\N$ -- these are called \textbf{imaginary quadratic fields}.
+    Since $\Z[\sqrt{-d}]=\left\{ a+b\sqrt{-d}:a,b\in\Z \right\}$, we define a norm $N(a+b\sqrt{-d})=a^2+db^2$. In other words, there's
+    nothing special here about $d=1$. In general, though, for $d\geq 3$, this is never a Euclidean norm, and in fact, $\Z[-\sqrt{d}]$
+    is never a UFD (for $d\geq 3$).
+
+    We could even look at $\Z[\sqrt{d}]$ where $d\in\N$ is not a perfect square. This would be a subring of $\Q(\sqrt{d})\subset\R$.
+    These are called \textbf{real quadratic fields}. Here, we could have a norm given by $N(a+b\sqrt{d})=|(a+b\sqrt{d})(a-b\sqrt{d})|=
+    |a^2-bd^2|$. This norm is multiplicative, and sometimes Euclidean. It is in fact an unsolved problem about whether there
+    are finitely many or infinitely many $d$ such that $\Z[\sqrt{d}]$ is a UFD!
+\end{exmp}
+
+\begin{thm}
+    For the Gaussian integers, $\Z[i]$, the norm $N:\Z[i]\to\Z$ such that $N(a+bi)=a^2+b^2$ is a Euclidean norm,
+    i.e. for all $\alpha,\beta\in\Z[i]$, for $\alpha\neq0$, there exists $\xi,\rho$ such that $\beta=\alpha\xi+\rho$
+    with either $\rho=0$ or $N(\rho)<N(\alpha)$.
+\end{thm}
+\begin{proof}
+    Given $\alpha,\beta\in\Z[i]$, $\alpha\neq0$, we want to find $\xi\in\Z[i]$ such that $\beta/\alpha-\xi=\gamma$
+    with $N(\gamma)<1$, where $\gamma\in\Q(i)$. Once we've found this, we set $\rho=\alpha\gamma=\beta-\alpha\xi$.
+    Since $\beta,\alpha,\xi$ are Gaussian integers, $\rho$ is as well. But $N(\rho)=N(\alpha\gamma)=N(\alpha)N(\gamma)<N(\alpha)$.
+    Note that this allows for $\rho=0$.
+
+    We write $\beta/\alpha\in\Q(i)$. We know $\beta/\alpha=q_1+q_2i$, $q_1,q_2\in\Q$. If $\xi=n+mi$, then
+    $\beta/\alpha-\xi=(q_1-n)+(q_2-m)i$. Then $N(\beta/\alpha-\xi)=(q_1-n)^2+(q_2-m)^2$. But for any rational
+    number $q_1$, there exists an $n\in\Z$ such that $|q_1-n|\leq 1/2$. We choose $n$ such that $|q_1-n|\leq 1/2$
+    and $m$ such that $|q_2-m|\leq1/2$. Then, $N(\gamma)=N(\beta/\alpha-\xi)\leq1/4+1/4<1$. Finally, we take
+    $\rho=\beta-\alpha\xi$, and by the above paragraph, we are done.
+\end{proof}
+
+\begin{cor}
+    The Gaussian integers, $\Z[i]$, are both a PID and a UFD.
+\end{cor}
+\begin{proof}
+    Follows from the previous theorem and our remarks about the norm chosen -- $\Z[i]$ is a Euclidean domain
+    and thus a PID and a UFD.
+\end{proof}
+
+Let's now examine factorization in $\Z[i]$. First of all, what are the units? We've seen that they are $\left\{ \pm1,\pm i \right\}$.
+In fact, we claim that $\alpha\in\Z[i]$ is a unit if and only if $N(\alpha)=1$: If $\alpha\beta=1$, we can write $1^2=1=N(1)=N(\alpha)N(\beta)$
+and since $N(\alpha)\in\Z$, $N(\alpha)|1$ and thus $N(\alpha)=1$. Conversely, if $N(\alpha)=1=\alpha\bar\alpha$, then $\bar\alpha$
+is an inverse in $\Z[i]$, and thus $\alpha$ is a unit.
+
+A harder question to ask is: what are the irreducibles in $\Z[i]$? Note that if $n\in N$, $n=N(\alpha)$ for some $\alpha=a+bi\in\Z[i]$,
+we know $n=a^2+b^2$. Thus $n$ is a sum of 2 integer squares (and the converse). This shows that factorization in $\Z[i]$ is in fact connected
+to a classical problem in number theory. We will approach the problem slightly differently.
+\begin{lem}
+    If $p$ is a prime number and $\alpha\in\Z[i]$ with $N(\alpha)=p$, then $\alpha$ is irreducible in $\Z[i]$.   
+\end{lem}
+\begin{proof}
+    If $\alpha=\beta\gamma$, then $N(\alpha)=N(\beta)N(\gamma)=p$, but since $p$ is prime, either $N(\beta)=1$ or $N(\gamma)=1$. But
+    by what we noticed above, this requires either of $\beta,\gamma$ to be a unit, i.e. that $\alpha$ is irreducible.
+\end{proof}
+
+\begin{exmp}
+    $N(1+i)=2$ and thus $1+i$ is irreducible. Similarly $N(2+i)=5$ and thus $2+i$ is irreducible. $N(3+i)=10$, and in fact, $3+i$
+    is not irreducible.
+\end{exmp}
+
+\begin{lem}
+    $p$ is a prime number, and $p$ is not irreducible in $\Z[i]$ if any only if there exists an $\alpha\in\Z[i]$ such that $p=N(\alpha)$,
+    which again simply means that $p$ is a sum of two integer squares. Note that if $p=N(\alpha)$, then $\alpha$ is irreducible.
+\end{lem}
+\begin{proof}
+    If $p$ is not irreducible, then it factors $p=\alpha\beta$, where neither $\alpha,\beta$ is a unit. Then we take norms,
+    $N(p)=N(\alpha\beta)=N(\alpha)N(\beta)=p^2$, and since we know that $N(\alpha)\neq 1$ and $N(\beta)\neq 1$, we must have
+    $N(\alpha)=N(\beta)=p$. This implies that $\alpha$ is irreducible and that $p=\alpha\bar\alpha$, a sum of squares. Conversely,
+    if $p=\alpha\bar\alpha$, $p$ is not irreducible since $N(\alpha)=N(\bar\alpha)=p$, $\alpha,\bar\alpha$ not units.
+\end{proof}
+
+Consequently, if $p$ is a prime, either $p$ is irreducible in $\Z[i]$ or $p=N(\alpha)=\alpha\bar\alpha$ where $\alpha$ is irreducible in $\Z[i]$.
+
+\begin{lem}
+    If $\pi\in\Z[i]$ is irreducible then there exists a prime number $p$ such that $\pi|p$ in $\Z[i]$.
+    The only possibilities are that either $\pi$ is $p$ or an associate, or $N(\pi)=\pi\bar\pi=p$.
+\end{lem}
+\begin{proof}
+    Given $\pi$, consider $\pi\bar\pi=N(\pi)\in\N$ an $N(\pi)>1$ as $\pi$ is not a unit.
+    We factor: $\pi\bar\pi=p_1\cdots p_k$, $p_i$ primes. Then $\pi|p_1\cdots p_k$. Since $\Z[i]$ is a UFD, $\pi|p_i=p$ for some $i$.
+    If $p$ is itself irreducible in $\Z[i]$ we have one irreducible dividing another, and thus $\pi$ must be equal to $p$ up to associate.
+    Otherwise, $p=\alpha\bar\alpha$ where $\alpha,\bar\alpha$ are irreducible. Then $\pi|\alpha\bar\alpha$ which means that either $\pi|\alpha$
+    or $\pi|\bar\alpha$. Thus $\pi$ is an associate of $\alpha$ or $\bar\alpha$. Then $N(\pi)=\pi\bar\pi=N(\alpha)=p$.
+\end{proof}
+
+\begin{lem}
+    If $p\equiv\mod 4$ then there exists $k\in\Z$ such that $k^2\equiv-1\mod p$, i.e there exists an $a\in\Z/p\Z$ such that
+    $a^2=-1$.
+\end{lem}
+\begin{proof}
+    $p\equiv 1\mod 4$ if and only if $4|(p-1)$. The order of $(\Z/p\Z)^*$ is $p-1$. We know that this is a cyclic group, and thus
+    that there exists a cyclic subgroup $\langle a\rangle$ of order 4, i.e. $a\in(\Z/p\Z)^*,$ $a^4=1,a^2\neq 1$.
+    We know $(a^2)^2=1$ so $a^2$ is a root of $x^2-1$ in $\Z/p\Z[x]$. But we can factor this to $(x-1)(x+1)$, and thus 
+    $a^2$ is either 1 or -1. It must be -1, since its order is 4, and thus we are done.
+\end{proof}
+
+\begin{thm}
+    The irreducibles in $\Z[i]$ are
+    \begin{enumerate}
+        \item $1+i$ and its associates. Note that $N(1+i)=2$
+        \item $p\in\Z$ a prime number such that $p\equiv3\mod 4$ and associates
+        \item $\pi\in\Z[i]$ such that $N(\pi)=p$ a prime, $p\equiv 1\mod 4$, and moreover, if $p\equiv 1\mod 4$
+            then $p=N(\pi)$ for some irreducible $\pi$.
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    \begin{enumerate}
+        \item $2=1\times 1=N(1+i)$ and we are done.
+        \item If $p\equiv 3\mod 4$, then $p$ can't be written as the sum of two integer squares, which implies that
+            $p$ is irreducible in $\Z[i]$. Why? Because if $p=a^2+b^2,$ $a,b\in\Z$ with $p$ odd, they can't both be even
+            or odd. Thus one is even and the other is odd. If we take $a=2k+1,b=2k$, we have that $a^2+b^2\equiv 1\mod 4$.
+        \item Must show that if $p\equiv1\mod 4$, then $p=N(\pi)=a^2+b^2$. By the lemma above, there exists $k$ such that
+            $k^2\equiv -1\mod p$, which implies that $p|(k^2+1)=(k+i)(k-i)$. We claim that this means $p$ is not irreducible, because
+            if it were, then since $p|(k+i)(k-i)$, we would have to have $p|(k\pm i)$. But $k/p\pm1/p$ is not a Gaussian integer,
+            and thus $p$ doesn't divide either factor, and consequently, $p$ is not irreducible. But if a prime is not irreducible,
+            it is the norm of something that is irreducible, and we are done.
+    \end{enumerate}
+\end{proof}
+
+\begin{cor}
+    A prime number $p$ is a sum of 2 integer squares if and only if $p=2$ or $p\equiv 1\mod 4$.
+\end{cor}
+
+(April 8, 2013)
+
+We talked a bit about algebraic integers. I don't have any notes on this part. Sorry.
+
+\section{Irreducibility}
+
+How do we decide whether or not a polynomial is irreducible? We want to develop some tests, even for $f(x)\in\Q[x]$. The general
+setup is as follows: $R$ is a UFD and $F$ is the field of quotients of $R$. Of course, we can imagine that we are talking about
+$R=\Z,F=\Q$.
+
+\begin{exmp}[\textbf{Rational roots test}]
+    Let $f(x)=a_nx^n+\ldots+a_0\in\Z[x]$ for $a_n\neq 0,n\geq 1$. Suppose $f(x)$ has a rational root $p/q\in\Q$, $p,q\in\Z$,
+    in lowest terms $\gcd(p,q)=1$. Then $p|a_0$ and $q|a_n$.
+\end{exmp}
+\begin{proof}
+    Suppose $f(p/q)=0$. Then
+    \[a_np^n/q^n+\ldots+a_0=0.\]
+    Multiplying by $q^n$, and moving one term to the other side, we can factor:
+    \[a_0q^n=p(-a_np^{n-1}-\ldots-a_1q^{n-1})\]
+    and thus $p|a_0q^n$. But since $p,q$ are relatively prime, the gcd of $p$ and $q^n$ is 1, and thus $p|a_0$.
+    Likewise, $q|a_n$.
+\end{proof}
+
+Note that if $f(x)$ is monic and in $\Z[x]$, a rational root has to be an integer. In fact, this works in any UFD -
+the proof is identical as above.
+
+\begin{thm}
+    Let $R$ be a UFD and $F$ be its field of quotients. Suppose we have $f(x)\in R[x]$ with degree $n\geq 1$. Then $f(x)$ is a product in $F[x]$
+    of two polynomials of degrees $d,e<n$ if and only if $f(x)$ is a product in $R[x]$ of 2 polynomials of degrees $d,e<n$.
+\end{thm}
+\begin{proof}
+    Note that the backward implication is obvious. The forwards implication is the non-trivial one. The proof of this is contained
+    in the notes.
+\end{proof}
+
+For the rational roots test above, we know that $x-p/q|f(x)\in\Q[x]$. The proof of the theorem shows that if $p/q$ are relatively prime,
+then $qx-p\in\Z[x]$ and $qx-p|f(x)\in\Z[x]$. This implies that $q|a_n$ and $p|a_0$. Essentially the test is the above theorem with one of the
+factors having degree one.
+
+(April 10, 2013)
+
+The above theorem leads to the following.
+\begin{cor}
+    If $f(x)\in R[x]$ and $f(x)$ is not a product of polynomials of smaller degrees in $R[x]$, then $f(x)$ is irreducible in $F[x]$.
+\end{cor}
+It's possible for $f(x)$ to be irreducible in $F[x]$ but reducible in $R[x]$ - take for example $11x^2-22\in\Z[x]$, which can have 11 factored
+out of it, which is irreducible in $\Z$ but not in $\Q[x]$, as 11 is a unit.
+
+\begin{rem}
+    Suppose $R$ is any ring and $I$ is an ideal in $R$. We have a homomorphism $\pi:R\to R/I$ such that $\pi(r)=r+I=\bar r$.
+    Similarly, given $R[x]$, we have a homomorphism $R[x]\to R/I[x]$ which simply reduces all coefficients mod $I$ that we will
+    write $\pi(f(x))=\bar f(x)$. The fact that this is a homomorphism follows easily from the fact that $\pi:r\to R/I$ is one.
+\end{rem}
+
+\begin{lem}
+    Suppose $R$ is an integral domain and $I$ is an ideal in $R$. Take some polynomial $f(x)=\sum_{i=0}^na_ix^i\in R[x]$ with
+    $n\geq 1$. Suppose $a_n\notin I$ and $f(x)=g(x)h(x)$ where $\deg g(x)=d$, $\deg h(x)=e$, with $d+e=n$. Then,
+    $\deg \bar g(x)=d,\deg \bar h(x)=e$.
+\end{lem}
+\begin{proof}
+    We know that $\deg f=d+e$ becasue $R$ is an integral domain. On the other hand, $\deg\bar g\leq d$ and $\deg \bar h\leq e$
+    and $\deg \bar g\bar h\leq\deg \bar g+\deg\bar g\leq d+e$. But since $f=gh,$ we must have $\bar f=\bar g\bar h$. But since 
+    the leading coefficient is not in $I$, we must have $\deg \bar f=\deg f=n$. We have a series of inequalities, but both ends
+    are the same, and thus each inequality must become an equality; in particular, $\deg\bar g=d$ and $\deg\bar h=e$.
+\end{proof}
+
+\begin{thm}
+    Let $R$ be a UFD, $I$ an ideal in $R$. Let $f(x)=\sum_{i=0}^na_ix^i\in R[x]$ with $a_n\neq 0$, $a_n\neq I$. If
+    $\bar f(x)$ in $(R/I)[x]$ is not a product of 2 polynomials of degrees less than $n$, then $f(x)$ is irreducible
+    in $F[x]$.
+\end{thm}
+\begin{proof}
+    We know that $f(x)$ reducible in $F[x]$ implies that $f(x)=g(x)h(x)$ in $R[x]$ where the degree of $g$ is $d<n$ and the degree
+    of $h$ is $d<n$ (from the theorem/corollary above). But this implies that $\bar f(x)=\bar g(x)\bar h(x)$ where the degrees
+    of $\bar g,\bar h$ are still $d,e<n$. This contradicts the hypothesis and $f(x)$ must be irreducible in $F[x]$.
+\end{proof}
+
+\begin{exmp}
+    Say $R=\Z$ and $I=(p)$. $R/I$ is a field. If $\bar f(x)$ in $\F_p[x]$ is irreducible then $f(x)$ is irreducible.
+    The strategy, given $f(x)\in\Z[x]$, is to simply look at $f(x)\mod p$ where $p$ is any prime, and if the result
+    is ever irreducible for some $p$, then $f(x)$ itself was irreducible in $\Q[x]$.
+
+    In $\F_2[x]$ if we look at $x^4+x^3+x^2+x+1$, this is irreducible in $\F_2[x]$. How would we check this? It's clear that
+    there's no linear factor, and thus it could only be a product of 2 irreducible degree 2 polynomials. But since there is only
+    one such polynomial, it would have to be $(x^2+x+1)^2$. But in characteristic 2, this is $x^4+x^2+1$, which is not what
+    we wanted. In this sense, we have a (rather computational) sieve.
+
+    Now let $f(x)\in \Z[x]$, $f(x)=5x^4-127x^3+1789x^2-2751x+19$. It's clear that $f(x)\mod 2=x^4+x^3+x^2+x+1$ is
+    irreducible in $\F_2[x]$, and thus $f(x)$ is irreducible in $\Q[x]$. (the question of whether it is irreducible
+    in $\Z[x]$ is just a matter of whether there is some common factor, which of course doesn't affect irreducibility
+    in $\Q[x]$).
+
+    Note carefully that the leading coefficient must not be in the ideal $I$. Let's look at a stupid example:
+    $f(x)=6x^2+5x+1$. $f(x)\mod 3=2x+1$ in $\F_3[x]$, which is irreducible. However, $f(x)=(2x+1)(3x+1)$; the reason it doesn't
+    work is simply because the second factor, $3x+1$, would become a unit in $\F_3[x]$.
+\end{exmp}
+
+Now an example from last time is $x^2+1\in\Z[x]$. If we reduce $\mod p$, we get $p\equiv1\mod4$ and $x^2+1$ has a root
+and thus is irreducible. If $p\equiv 3\mod 4$ then $x^2+1$ is irreducible. We clearly can ``pick the wrong prime.'' The
+question then arises - can we always pick a right prime? In particular, given $f(x)\in\Z[x]$ irreducible in $\Q[x]$,
+does there always exist a prime $p$ such that $\bar f(x)\in\F_p[x]$ is irreducible? The answer, in fact, turns out to be no,
+and we will see an example on the homework. Consequently, this test will not work all the time.
+
+\begin{thm}[\textbf{Eisenstein criterion}]
+    Let $R$ be a UFD, and $M$ a maximal ideal (in fact this theorem holds for prime ideals, but the proof is just more complicated).
+    Let $f(x)=\sum_{i=0}^na_ix^i\in R[x]$. Suppose that
+    \begin{enumerate}
+        \item $a_n\notin M$
+        \item for all $i<n$, $a_i\in M$
+        \item $a_0\notin M^2$, i.e. not a product of two things in $M$.
+    \end{enumerate}
+Then $f(x)$ is irreducible in $F[x]$. In fact, any if $R=\Z$ and $M=(p)$ and $f(x)$ satisfies the above criteria,
+we say that $f(x)$ \textbf{is Eisenstein at $p$}.
+\end{thm}
+\begin{proof}
+    Take $f(x)\in R[x]$ that satisfies the required conditions. Look at $\bar f(x)\in (R/M)[x]$. Clearly this forces
+    $\bar f(x)=\bar a_0x^n$. Suppose $f(x)=g(x)h(x)$. Then $\bar f(x)=\bar g(x)\bar h(x)=\bar a_0x^n$. But $x^n$ is a product
+    of irreducibles and the only way to factor this is to have $\bar b_dx^d\bar c_ex^e$ where $d+e=n$. This implies that
+    $g(x)=\sum_{i=0}^db_ix^i$ satisfies $b_i\in M$ for all $i<d$ and likewise for $h(x)$, $c_i\in M$ for all $i<e$. In particular,
+    $b_0,c_0\in M$ as the constant terms don't show up. But $b_0c_0=a_0$. But this contradicts the third Eisenstein criterion and
+    thus $f(x)$ must be irreducible in $F[x]$.
+\end{proof}
+
+\begin{exmp}
+    Take $f(x)=11x^4-33x^2+99x+363$. There are clearly two primes floating around - 11 will clearly not work as 
+    it is in $M$. It's clear that $11\notin (3)$, while the coefficients are divisible by 3. Finally, is $363\in(3)^2\in(3)^2=(9)$?
+    No. Then, $f(x)$ is irreducible in $\Q[x]$. It's clearly not irreducible in $\Z[x]$ as you can factor out an 11.
+
+    Take $f(x)=x^3-2$. $f$ is certainly Eisenstein at 2, and thus $f(x)$ is irreducible. Note however, that previously we 
+    could not say anything for things like $x^4-2$, as it is not enough just to not have a root. This criterion now allows us
+    to show that $f(x)=x^n-p$ is irreducible hwere $p$ is a prime, simply because $f$ is Eisenstein at $p$. This can be
+    generalized in many ways, and thus although the criterion looks strange, it is actually quite natural.
+\end{exmp}
+
+\section{Cyclotomic polynomials}
+
+Let us work with coefficients in $\Q$. Recall we have the roots of $x^n-1$: $\mu_n\subset\C^*$. This polynomial is obvously
+not irreducible. Notice that if $d|n$, then $\mu_d\leq\mu_n$ and in fact, $x^d-1|x^n-1$, which can be checked via algebra.
+
+Take, for example, $x^4-1=(x^2+1)(x+1)(x-1)$. Thus every fourth root of 1 has roots of order 1 or 2. Similarly,
+one can show that every sixth root of 1 has order either 1 or 6. If $n$ is prime, however, $x^p-1=(x-1)(x^{p-1}+x^{p-1}+\ldots+1)$,
+which we define to be $\Phi_p(x)$, the $p$th cyclotomic polynomial. By definition,$\Phi_p(x)=\frac{x^p-1}{x-1}$.
+
+\begin{thm}
+    If $p$ is a prime, then $\Phi_p(x)$ is irreducible.
+\end{thm}
+
+\begin{proof}
+    Note the following trick: given a polynomial $f(x)\in F[x]$, $f$ is irreducible if and only if $f(ax+b)$ is irreducible where $a,b\in F$ with $a\neq 0$.
+    We will show that $\Phi_p(x+1)$ is irreducible by showing that this is Eisenstein. Remember that $\Phi_p(x)=(x^p-1)/(x-1)$. Then,
+    \[\Phi_p(x+1)=\frac{(x+1)^p-1}{x+1-1}=\ldots=x^{p-1}+\binom{p}{1}x^{p-2}+\ldots+\binom{p}{p-1}.\]
+    If $k\leq p-1$ then $\binom{p}{k}$ is divisible by $p$ and $\binom{p}{p-1}=\binom{p}{1}=p$ is not divisible by $p^2$
+    and thus $\Phi_p(x+1)$ is Eisenstein at $p$ and thus irreducible. By the aforementioned trick then, $\Phi_p(x)$ is irreducible.
+    Without this trick, we could not have used the Eisenstein as all the coefficients were 1.
+\end{proof}
+
+In general, given $\mu_n$, we say an $n$th root of unity $\alpha$ is a primitive $n$th root of unity if $\langle \alpha\rangle=\mu_n$,
+i.e. $\alpha^n=1$, $\alpha^k\neq 1$ if $0<k<n$. For example, $e^{2\pi ik/n}$ is primitive if and only if $\gcd(k,n)=1$. In fact, the number
+of primitive roots of unity is simply the Euler phi function $\varphi(n)$. We define $\Phi_n(x)=\prod_\alpha(x-\alpha)$ where the product is over
+all primitive $n$th roots of unity. Note that $n=p\alpha$ is a primitive root of unity if and only if $\alpha\neq 1$. (?)
+
+Note that
+\begin{enumerate}
+    \item $\Phi_n(x)\in\Q[x]$ and in fact in $\Z[x]$
+    \item $\Phi_n(x)$ is irreducible in $\Q[x]$
+\end{enumerate}
+
+\section{Galois theory}
+
+(April 15, 2013)
+
+We wish to understand a polynomial $f(x)\in F[x]$ by understanding the symmetries of its roots.
+
+\begin{defn}
+    If $E$ is a field, then an \textbf{automorphism} of $E$ is just an isomorphism from $E$ to itself.
+\end{defn}
+
+If $E=\C$, for example, complex conjugation is an automorphism. If $E=\Q(\sqrt{2})$, we showed in homework
+that there are only two possibilities: the identity, and $\sigma:\Q(\sqrt{2})\to\Q(\sqrt{2})$ such that $\sigma(a+b\sqrt{2})=a-b\sqrt{2}$.
+
+\begin{defn}
+    Given a field $E$ we define the set of all automorphisms of $E$ as $\Aut E$. This set, in fact, forms the \textbf{automorphism group}.
+    The identity is typically denoted 1 and the product is denoted by juxtaposition.
+\end{defn}
+
+Take, for example, $\Aut \Q(\sqrt{2})=\left\{ 1,\sigma \right\}$ or $\Aut\R=\left\{ 1 \right\}$. On the other hand,
+$\Aut\C$ is a very large group that we don't even begin to describe.
+
+\begin{defn}
+    Given an extension $F\leq E$ (almost always finite), we define the \textbf{Galois group}:
+    \[\Gal(E/F)=\left\{ \sigma\in\Aut E:\sigma(a)=a \text{ for all } a\in F \right\}.\]
+    It is easy to see that $\Gal(E/F)$ is a subgroup of $\Aut E$.
+\end{defn}
+
+\begin{exmp}
+    Take, for example, $\Gal(\C/\R)$. We have that 
+    \begin{align*}
+        \sigma(a+bi)=\sigma(a)+\sigma(b)\sigma(i)=a+b\sigma(i)=a\pm bi,
+    \end{align*}
+    and thus $\Gal(\C/\R)=\left\{ 1,\sigma \right\}$ where $\sigma$ is complex conjugation.
+
+    It is easy to see that any automorphism of a field preserves the prime field; in other words if $F$ is a prime
+    subfield of $E$, then for all $\sigma\in\Aut E$, $\sigma(a)=a$ for all $a\in F$ (simply because $\sigma(1)=1$ and 
+    the prime subfield is generated by 1). 
+\end{exmp}
+
+Given $\sigma\in\Gal(E/F)$, we get a field $E^\sigma$, called the \textbf{fixed field} of $\sigma$. We have seen this before:
+\[E^\sigma=\left\{ \alpha\in E:\sigma(\alpha)=\alpha \right\}.\]
+Clearly $F\subset E^\sigma\subset E$. We claim that $E^\sigma$ is a subfield of $E$, as it is non-empty, and because
+$\alpha,\beta\in E^\sigma$ if and only if $\sigma(\alpha)=\alpha,\sigma(\beta)=\beta$ and thus
+$\sigma(\alpha\pm\beta)=\sigma(\alpha)\pm\sigma(\beta)=\alpha\pm\beta$ so $\alpha\pm\beta\in E^\sigma$ (and likewise
+for multiplication and division).
+
+If $X\subset \Gal(E/F)$, then we defined
+\[E^X=\left\{ \alpha\in E:\sigma(\alpha)=\alpha \text{ for all }\sigma\in X \right\}=\cap_{\sigma\in X}E^\sigma,\]
+which is also a subfield, $F\leq E^X\leq E$. $\alpha$ is fixed by the subgroup of $\Gal(E/F)$ generated by $F$.
+
+Thus given $H\leq\Gal(E/F)$, we get a fixed field $E^H$, such that $F\leq E^H\leq E$. This is in fact order-reversing,
+as if $H_1\leq H_2$, then $E^{H_2}\leq E^{H_1}$. On the other hand, given an intermediate field $F\leq K\leq E$, we can
+look at $\Gal(E/K).$ It clearly automatically is the identity on the smallest field and thus $\Gal(E/K)\leq\Gal(E/F)$.
+This is also order-reversing: given $F\leq K_1\leq K_2\leq E$, we have that $\Gal(E/K_2)\leq\Gal(E/K_1)$.
+
+(April 17, 2013)
+
+\begin{rem}
+    Recall that any homomorphism of 2 fields is always injective. Furthermore, if $E$ is a finite extension of $F$
+    and $\sigma: E\to E$ is a homomorphism such that $\sigma(a)=a$ for all $a\in F$, then $\sigma$ is a bijective $F$-linear
+    function.
+\end{rem}
+
+For any $X\subset\Gal(E/F)$, the fixed field $E^X=E^{\langle X\rangle}$. Thus, in looking at fixed fields, we may as well
+simply only look at subgroups of the Galois group.
+
+Let $F\leq E$ be a finite extension and $\Gal(E/F)$ with $H\leq\Gal(E/F)$ such that $F\leq E^H\leq E$. Given $F\leq K\leq E$,
+we know that $\Gal(E/K)\leq\Gal(E/F)$. Given a subgroup we can get an intermediate field, and given an intermediate field,
+we can get a Galois subgroup. But these are not always inverse constructions - we will need stronger conditions on the Galois
+group. Both, are, however, order-preserving.
+
+Applying both constructions, we can take $H\leq\Gal(E/F)$ with $F\leq E^H\leq E$. Then we know that
+$H\leq\Gal(E/E^H)\leq\Gal(E/F)$, just by looking at the definitions. Likewise, if we start with an intermediate field
+$F\leq K\leq E$, we can take $\Gal(E/K)\leq\Gal(E/F)$ and construct the fixed field $E^{\Gal(E/K)}$. Again, by
+definition, we will have $K\leq E^{\Gal(E/K)}$.
+
+\begin{rem}
+    Suppose we have $f(x)\in\R[x]$. Given $\alpha\in\C$ such that $f(\alpha)=0$. Then, $\bar \alpha$ is also a root,
+    i.e. $f(\bar \alpha)=0$.
+\end{rem}
+\begin{proof}
+    Take $f(x)=\sum_{i=0}^na_ix^i$, $a_i\in\R$. We know $f(\alpha)=\sum_{i=0}^na_ix^i=0$. Taking conjugates of both sides,
+    we find $\bar{f}(\alpha)=\sum_{i=0}^na_i\bar\alpha^i=f(\bar\alpha)=0$.
+\end{proof}
+
+Note that if $\alpha$ is real the above remark gives us no information. If $\alpha\in\R$, however, we know that both
+$x-\alpha,x-\bar\alpha$ are both factors of $f(x)$, and thus so is $(x-\alpha)(x+\alpha)=x^2-2(\text{Re }\alpha)x+|\alpha|^2\in\R[x]$.
+We can conclude, if we assume the fundamental theorem of algebra, that the monic irreducible polynomials in $\R[x]$ are
+either linear or quadratic with no real roots.
+
+Let's generalize this as follows.
+\begin{thm}
+ Say we have $F\leq E$, a finite extension. Suppose we have $f(x)\in F[x]$ and $\alpha\in E, f(\alpha)=0$.
+Furthermore, suppose that $\sigma\in\Gal(E/F)$. Then, $\sigma(\alpha)$ is a root of $f(x)$ as well. Any two such
+roots are called \textbf{conjugate roots}.
+\end{thm}
+\begin{proof}
+    Let $f(x)=\sum_{i=0}^na_ix^i$. Then $f(\alpha)=\sum_{i=0}^na_i\alpha^i=0$. Applying the homomorphism $\sigma$, we find:
+    \[0=\sum_{i=0}^n\sigma(a_i)\sigma(\alpha)^i=f(\sigma(\alpha)).\]
+\end{proof}
+
+We can make an even more general statement. Given $F\leq E$ and $\sigma:E\to E'$ a homomorphism, we define $\psi=\sigma|_F:F\to F'\leq E'$.
+Then, $\sigma(f(\alpha))=\sum_{i=0}^n\sigma(a_i)\sigma(\alpha)^i=\sum_{i=0}^n\psi(a_i)\sigma(\alpha)^i=\psi(f)(\sigma(\alpha))$.
+So $\alpha$ is a root of $f(x)$ if and only if $\sigma(\alpha)$ is a root of $\psi(f)(x)$.
+
+\begin{exmp}
+    \begin{enumerate}
+        \item If $\sigma\in\Gal(\C/\R)$, then $\sigma(i)=\pm i$. This is because $i$ is a root of $x^2+1\in\R[x]$.
+            $\sigma(i)$ is some root of $x^2+1$, i.e. $\pm i$.
+        \item If $\sigma\in\Gal(\Q(\sqrt{2})/\Q)$, $\sigma(\sqrt{2})=\pm\sqrt{2}$.
+        \item More generally, let $F$ be a field of characteristic not 2 (even 0), and suppose $t\in F$ where $t$ is not a square.
+            This is equivalent to saying that $x^2-t$ is irreducible in $F[x]$. Thus, there exists a field $F(\sqrt{t})$ of degree 2
+            over $F$. Its elements are, of course, of the form $\left\{ a+b\sqrt{2}:a,b\in F \right\}$. By the above remark, then,
+            if $\sigma\in\Gal(F(\sqrt{t})/F)$, then $\sigma(\sqrt{t})=\pm \sqrt{t}$. Thus either $\sigma=1$ or $\sigma(a+b\sqrt{t})=a-b\sqrt{t}$.
+            The order of $\Gal(F(\sqrt{t})/F)$ must be less than or equal to $[F(\sqrt{t}):F]=2$. We claim that if we define $\sigma(a+b\sqrt{t})=a-b\sqrt{t}$
+            then $\sigma$ is an element of the Galois group. One can check that this indeed an automorphism. By hand, then, we can
+            say $\Gal(F(\sqrt{t})/F)=\left\{ 1,\sigma \right\}$.
+    \end{enumerate}
+\end{exmp}
+
+\begin{rem}
+    Let $F\leq E$ be a finite extension and $f(x)\in F[x]$. Let $\alpha_1,\ldots,\alpha_k$ be the roots of $f(x)$ in $E$.
+    Then there is an action of $\Gal(E/F)$ on this set of roots - given $\sigma$ in the Galois group and $\alpha_i$ a root,
+    $\sigma(\alpha_i)$ is some root of $f(x)$ in $E$, i.e. $\sigma(\alpha_i)=\alpha_j$. Thus we get a homomorphism from
+    $\Gal(E/F)\to S_k$, where $S_k$ is the permutations of the set of roots.
+\end{rem}
+
+\begin{thm}
+    Suppose $E=F(\alpha_1,\ldots,\alpha_k)$, i.e. $E$ is generated over $F$ by the roots of $f(x)$ that lie in $E$.
+    Then the homomorphism from $\Gal(E/F)\to S_k$ is injective and thus defines an isomorphism between $\Gal(E/F)$
+    and a subgroup of $S_k$.
+\end{thm}
+\begin{proof}
+    We have a homomorphism from $\Gal(E/F)$ to $S_k$: $\sigma$ defines a permutation of $\left\{ \alpha_1,\ldots,\alpha_k \right\}$
+    by $\sigma(\alpha_i)$. This homomorphism is injective when the kernel is the identity. Thus we must show that if $\sigma(\alpha_i)=\alpha_i$
+    for all $i$, then $\sigma=1$. Suppose $\sigma(\alpha_i)=\alpha_i$ for all $i$. Then we have the fixed field $E^\sigma$, such that
+    $F\leq E^\sigma\leq E$. $\sigma=1$ if and only if $E^\sigma=E$. We know that $F\leq E^\sigma$ and that $\alpha_i\in E^\sigma$ for all $i$
+    by hypothesis, and thus $E^\sigma$ is a subfield of $E$ containing $F$ and $\alpha_i$ for all $i$. But $F(\alpha_1,\ldots,\alpha_k)=E\leq E^\sigma\leq E$
+    and thus $E^\sigma=E$ and $\sigma=1$.
+\end{proof}
+
+\begin{cor}
+    If $f(x)\in F[x]$ and $E=F(\alpha_1,\ldots,\alpha_k)$ where $\alpha_i$ are the roots of $f(x)$ in $E$, then
+    $\Gal(E/F)$ is isomorphic to a subgroup of $S_k$, and thus $\Gal(E/F)$ is finite and thus the order of $\Gal(E/F)$
+    is at most $k!$.
+\end{cor}
+
+\begin{exmp}
+    If $F=\Q$, $E=\Q(\sqrt{2})$, i.e. $f(x)=x^2-2$, then $\Gal(\Q(\sqrt{2})/\Q)\cong S_2=\left\{ 1,(12) \right\}$. If, on the other hand,
+    $E=F(\sqrt[3]{2})$, then $f(x)=x^3-2$. There is only one root of this in $E$. Hence $\Gal(E/F)$ is isomorphic to a subgroup of $S_1$,
+    and thus the Galois group only has one element.
+
+    Next take $E=\Q(\sqrt{2},\sqrt{3})$ and $F=\Q$. Here we can look at $(x^2-2)(x^2-3)\in\Q[x]$, whose roots are $\pm\sqrt{2},\pm\sqrt{3}$.
+    There are four roots. Then the Galois group $G$ is isomorphic to a subgroup of $S_4$. But note that $\sqrt{2}$ can never be permuted to
+    $\sqrt{3}$, so the image of $G$ must be contained in $S_2\times S_2\leq S_4$. At best, then, the order of $G$ is at most $2\times 2=4$.
+    We claim that, in fact, $G\cong S_2\times S_2$. Look at $\Gal(\Q(\sqrt{2},\sqrt{3})/\Q(\sqrt{3}))$. But we know that $x^2-2$ is irreducible
+    in $\Q(\sqrt{3})[x]$. By what we said earlier, there exists a $\sigma_1\in\Gal(\Q(\sqrt{2},\sqrt{3})/\Q(\sqrt{3}))$ such that $\sigma_1(\sqrt{2})=-\sqrt{2}$.
+    However, $\sigma_1(\sqrt{3})=\sqrt{3}$. Thus there is an automorphism that switches $\pm\sqrt{2}$. By a similar argument, there exists a
+    $\sigma_2$ that switches only $\pm\sqrt{3}$. Finally, there is a $\sigma_3$ that is the product $\sigma_1\sigma_2$ and the identity.
+    Since we have found 4 elements, we know that the order of $G$ must be 4
+
+    But recall we viewed $E=\Q(\alpha)$, where $\alpha=\sqrt{2}+\sqrt{3}$. $\alpha$ is a root of $f(x)=x^4-10x^2+1$. What are the other roots?
+    Well, notice that the $\sigma_i$ found above are in $\Gal(\Q(\sqrt{2},\sqrt{3})/\Q)=\Gal(\Q(\alpha)/\Q)$ and thus we have 3 more roots:
+    $-\sqrt{2}-\sqrt{3},\sqrt{2}-\sqrt{3}, -\sqrt{2}+\sqrt{3}$. Thus we get a homomorphism from $G$ to $S_4$ - permutations of these 4 roots.
+    It turns out, in fact, that we do not get the same subgroup as above, the $S_2\times S_2$. We get $\sigma_1\implies(12)(34),
+    \sigma_2\implies(13)(24),\sigma_3\implies(14)(23)$. Thus the actual subgroup of $S_k$ obtained depends on how we choose the polynomial
+    $f(x)$.
+\end{exmp}
+
+(April 22, 2013)
+
+If $F\leq E$ and we have an isomorphism $\psi:F\to F'\leq K$, and a homomorphism $\phi: E\to K$, then if $\alpha\in E$ is a root of
+$f(x)\in F[x]$, then $\phi(\alpha)\in K$ is a root of $\psi(f)(x)\in F'[x]$.
+
+\begin{exmp}
+    Let's look at $\Q(\sqrt[3]{2})$. The only root of $x^3-2\in\Q(\sqrt[3]{2})$ is $\sqrt[3]{2}$.
+    But note that if we let $\omega=-1/2+\sqrt{-3}/2$, then $\omega^3=1$ and $\omega\neq 1$.
+    Then $\omega\sqrt[3]{2}$ and $\omega^2\sqrt[3]{2}$ are also roots. Hence $\Q(\sqrt[3]{2},\omega)$
+    has all 3 roots of $x^3-2$. So if we have a homomorphism from $\Q(\sqrt[3]{2})\to\Q(\sqrt[3]{2},\omega)$,
+    the only possibilities for $\phi(\sqrt[3]{2})$ can only potentially be one of the three roots; there 
+    are at most 3 such homomorphisms, then, since $\phi$ is specified by its value on $\sqrt[3]{2}$. We
+    will prove this later.
+
+    If we want to get a group, we should ask what the homomorphisms from $\Q(\sqrt[3]{2},\omega)$ to itself are; i.e. what
+    the Galois group $\Gal(\Q(\sqrt[3]{2},\omega)/\Q)$ is. If we label the roots by $\alpha_i$, then we know that
+    $\Q(\sqrt[3]{2},\omega)=\Q(\alpha_1,\alpha_2,\alpha_3)$ and thus the Galois group must be isomorphic to a subgroup
+    of $S_3$. In particular, the order of the Galois group is at most the order of $S_3$, which is six.
+    Another way to see this is that $\Q(\sqrt[3]{2},\omega)=\Q(\sqrt[3]{2},\sqrt{-3})$. Since $\phi$ is determined
+    by its values on $\sqrt[3]{2}$ and $\sqrt{-3}$, i.e. 3 possibilities and 2 possibilities respectively, which
+    gives us a total of at most 6 possibilities. In fact, this Galois group is isomorphic to the full $S_3$.
+
+    Next, let us look at $\Q(\sqrt[4]{2})$. There are of course 2 roots of $x^4-2$ ins $\Q(\sqrt[4]{2})$, and thus
+    one can show that $\Gal(\Q(\sqrt[4]{2})/\Q)\cong\Z/n\Z$. Note that $[\Q(\sqrt[4]{2}):\Q]=4$ as $x^4-2$ is irreducible
+    by Eisenstein. Thus the Galois group is perhaps smaller than naively expected. Let us exmaine
+    $[\Q(\sqrt[4]{2},i):\Q]=[\Q(\sqrt[4]{2},i):\Q(\sqrt[4]{2})][\Q(\sqrt[4]{2}):\Q]=8$. The four roots of $x^4-2$ in this bigger
+    field are $\beta_1=\sqrt[4]{2},\beta_2=i\sqrt[4]{2},\beta_3=-\sqrt[4]{2},\beta_4=-i\sqrt[4]{2}$. The number
+    of homomorphisms of $\Q(\sqrt[4]{2})\to\Q(\sqrt[4]{2},i)$ is at most four, as it is specified by its value on $\sqrt[4]{2}$.
+    But notice that $\Q(\sqrt[4]{2},i)=\Q(\beta_1,\beta_2,\beta_3,\beta_4)$. This says that the Galois group of this field is
+    isomorphic to a subgroup of $S_4$. Similar to the previous example, $\phi$ is specified by its value of $\sqrt[4]{2}$ and
+    $i$ and thus there is actually only a maximum of 8 choices. In fact, the order of the Galois group is equal to 8 and
+    is isomorphic to $D_4$, the symmetries of the square.
+\end{exmp}
+
+Given $F\leq E$ we want to find elements of $\Gal(E/F)$. There are 2 parts. One, we wish to find some homomorphisms from $E$ to
+some extension of $F$ that is not necessarily $E$ that fixes $F$. Secondly, we want to find conditions when such a $\phi$ automatically
+has image $E$.
+
+\begin{lem}
+    Let $E=F(\alpha)$ be a simple extension of $F$ with $\alpha$ algebraic over $E$. Suppose $K$ is an extension field of $E$.
+    Thus we have $F\leq F(\alpha)\leq K$. Then, there is a bijection from homomorphisms $\phi:F(\alpha)\to K$ such that $\phi(a)=a$
+    for all $a\in F$ and the roots of $\irr(\alpha,F,x)$ in $K$.
+\end{lem}
+
+\begin{proof}
+    Given $\phi:F(\alpha)\to K$ that fixes $F$, we've seen that $\phi(\alpha)$ is a root of $\irr(\alpha,F,x)=f(x)$.
+    Also, $\phi$ is determined by $\phi(\alpha)$ since $F(\alpha)$ is all things of the form $\sum_{i=0}^nc_i\alpha^i$ with $c_i\in F$.
+    We need to show: given $\beta$ a root of $f(x)$ in $K$, there exists a $\phi:F(\alpha)\to K$ such that $\phi(\alpha)=\beta$.
+    Recall $F(\alpha)\cong F[x]/(f(x))$. But given a polynomial, we can evaluate it a $\beta$. What is the kernel of the evaluation at $\beta$?
+    It's simply the $(\irr(\beta,F,x))$, but this implies that $\irr(\beta,F,x)|f(x)=\irr(\alpha,F,x)$ since $f(\beta)=0$. Since both are irreducible
+    and monic, they must be equal. Now we just define $\phi=\text{ev}_\beta\circ\text{ev}_\alpha^{-1}$:
+    \[\phi(\alpha)=\text{ev}_\beta\circ\text{ev}_\alpha^{-1}(\alpha)=\text{ev}_\beta(x+(f(x)))=\beta.\]
+\end{proof}
+
+\begin{rem}
+    There is a slightly more general version: Given $F\leq F(\alpha),F'\leq K$ and an isomorphism from $F\to F'$,
+    then there is a bijection from homomorphisms $\phi:F(\alpha)\to K$ such that $\phi(a)=\psi(a)$ for $a\in F$ and the
+    roots of $\psi(f)(x)$ in $K$ where $f(x)=\irr(\alpha,F,x)$. The proof of this is very similar to the above lemma.
+\end{rem}
+
+Let's look at some applications of this lemma.
+
+\begin{exmp}
+    Let's look at $\Gal(\Q(\sqrt[3]{2},\omega)/\Q)$. Look at $x^3-2\in\Q(\omega)[x]$. We claim that $x^3-2$ is irreducible in $\Q(\omega)[x]$.
+    Note: $x^3-2$ not irreducible in $\Q(\omega)$ is equivalent to $x^3-2$ not having a root $\alpha$ in $\Q(\omega)$. We have to have, then,
+    $[\Q(\alpha):\Q]|[\Q(\omega):\Q]$, but 3 does not divide 2. We now apply the lemma to $F=\Q(\omega)$ with $\alpha=\sqrt[3]{2}$, $K=\Q(\sqrt[3]{2},\omega)=F(\alpha)$.
+    We know that there is a homomorphism from $\Q(\sqrt[3]{2},\omega)$ to itself such that $\phi(\omega)=\omega$ and $\phi(\sqrt[3]{2})=\omega\sqrt[3]{2}$.
+    In terms of $\alpha_1=\sqrt[3]{2},\alpha_2=\omega\sqrt[3]{2},\alpha_3=\omega^2\sqrt[3]{2}$, we know that $\phi(\alpha_1)=\alpha_2$ and
+    $\phi(\alpha_2)=\phi(\omega\alpha_1)=\omega\phi(\alpha_1)=\omega^2\sqrt[3]{2}=\alpha_3$. Thus as an element of $S_3$, $\phi\Leftrightarrow (123)$.
+    We get $\langle \phi\rangle$ a subgroup of the image of the Galois group which gives $\left\{ 1,(123),(132) \right\}$. But what about complex
+    conjugation, $\tau$? It's easy to see that $\tau(\omega)=\omega^2$. Thus $\tau(\alpha_1)=\alpha_1$ and $\tau(\alpha_2)=\alpha_3$.
+    It is now clear that all of the Galois group is $S_3$.
+
+    The same technique will show that $\Gal(\Q(\sqrt[4]{2},i)/\Q)$ has order 8 and is isomorphic to $D_4$.
+\end{exmp}
+
+\begin{thm}[Isomorphism Extension Theorem]
+    Let $F\leq E$ with some isomorphism $\psi:F\to F'$ where $F'\leq K$. In this situation:
+    \begin{enumerate}
+        \item there are at most $[E:F]$ extensions of $\psi$ to a homomorphism $\phi:E\to K$ such that $\phi(a)=\psi(a)$ for all $a\in F$
+        \item there is always some finite extension $L$ of $K$ and a $\phi:E\to L$ such that $\phi(a)=\psi(a)$ for all $a\in F$
+        \item If the characteristic of $F$ is zero or $F$ is finite or perfect, there exists a finite extension $L$ of $K$
+            and exactly $[E:F]$ extensions of $\psi$ to a $\phi:E\to L$.
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    We know that if $E$ is a finite extension of $F$ then $E=F(\alpha_1,\ldots,\alpha_n)$ where $\alpha_i$
+    are algebraic over $F$. The proof proceeds by induction on $n$; the main step is really $n=1$, when
+    $E=F(\alpha)$. By the lemma/remark above, there is a bijection between $\phi:F(\alpha)\to K$ such that $\phi(a)=\psi(a)$
+    where $a\in F$ and the roots of $\psi(f)(x)\in F'[x]$ where $f(x)=\irr(\alpha,F,x)$. But the number
+    of roots in $K$ of $\psi(f)(x)$ is less than or equal to the degree of $\psi(f)(x)$, which equals the degree of $f(x)$,
+    which is the degree of $\alpha$ over $F$, $[F(\alpha):F]$. This proves the first point. For the second point: there always exists
+    some extension of $K$ where $\psi(f)(x)$ has a root. If $L$ is such an extension, then there exists a $\phi:F(\alpha)\to L$.
+    For the third: there exists a finite extension $L$ where $\psi(f)(x)$ splits into a product of linear factors. Each such factor
+    gives a root of $\psi(f)(x)$ and hence a $\phi:F(\alpha)\to L$. We'd expect the number of such $\phi$ to be the degree
+    of $\psi(f)(x)=[F(\alpha):F]$. There's just one problem -- there might be multiple roots. So we will get $[E:F]=[F(\alpha):F]$
+    different extensions as long as $\psi(f)(x)$ doesn't have multiple roots. But $\psi(f)(x)$ corresponds to $\irr(\alpha,F,x)$
+    by the isomorphism, and by the hypotheses, in $F$, irreducible polynomials always have distinct roots.
+
+    The inductive step proceeds as follows. We assume the theorem holds for $F(\alpha_1,\ldots,\alpha_{n-1})$.
+    We let $E=F(\alpha_1,\ldots,\alpha_{n-1})(\alpha_n)$ and thus we can view $E$ as a simple extension. 
+    There are at most $[F(\alpha_1,\ldots,\alpha_{n-1}):F]$ extensions of $\psi$ to a homomorphism
+    $\phi':F(\alpha_1,\ldots,\alpha_{n-1})\to K$ with $\phi'(a)=\psi(a)$ for all $a\in F$. Since we're
+    in the case of a simple extension, given $\phi'$, the total number of extensions is at most the degree
+    of this simple extension. For the total number of extensions, then, we simply multiply the degrees and
+    we have, at most, $[E:F]$. That shows the first part. The other two parts of the theorem follow similarly.
+\end{proof}
+
+\begin{cor}
+    The order of the Galois group $\Gal(E/F)$ is always less than or equal to $[E:F]$.
+\end{cor}
+
+\begin{defn}
+    $E$ is a \textbf{separable} extension of $F$ if $E$ is a finite extension of $F$ and for all $\alpha\in E$,
+    $\irr(\alpha,F,x)$ does not have multiple roots.
+\end{defn}
+
+In this context, the proof of the third part of the isomorphism extension theorem suggests that the third statement holds
+for if $E$ is a separable extension of $F$.
+
+\begin{rem}[Primitive Element Theorem]
+    If $E$ is a finite and separable extension of $F$, then $E$ is a simple extension of $F$, i.e. there is an $\alpha\in E$
+    such that $E=F(\alpha)$.
+\end{rem}
+
+Given $F\leq E$ we want to find conditions on $E$ when the size of the Galois group is as large as possible, namely, by the
+isomorphism extension theorem, that it is $[E:F]$.
+
+\begin{defn}
+    Let $F$ be a field and $E$ an extension field of $F$. Let $f(x)\in F[x]$, nonconstant. Then $E$ is a \textbf{splitting field
+    for $f(x)$ over $F$} if
+    \begin{enumerate}
+        \item $f(x)=c(x-\alpha_1)\cdots(x-\alpha_n)$ in $E[x]$, for $\alpha_i\in E$
+        \item $E=F(\alpha_1,\ldots,\alpha_n)$
+    \end{enumerate}
+\end{defn}
+
+\begin{exmp}
+    $\Q(\sqrt{2},\sqrt{3})$ is a splitting field for $(x^2-2)(x^2-3)$ over $\Q$. Along these lines, $\Q(\sqrt{2},\sqrt{3})$ is \textit{not}
+    a splitting field for $x^2-2$ over $\Q$, since $\Q(\sqrt{2},\sqrt{3})\neq \Q(\sqrt{2},-\sqrt{2})$. On the other hand, $\Q(\sqrt{2},\sqrt{3})$
+    is a splitting field for $x^2-2$ over $\Q(\sqrt{3})$.
+\end{exmp}
+
+\begin{rem}
+    First, any 2 splitting fields for $f(x)$ for $F$ are isomorphic. Secondly, if $[E:F]=2$ and $\alpha\in E$ but $\alpha\notin F$,
+then $E$ is a splitting field for $\irr(\alpha,F,x)$ over $F$.
+\end{rem}
+\begin{proof}
+    We will not prove the first remark. Take $E=F(\alpha)$. In $E[x]$, $x-\alpha$ is a factor of $f(x)$. But any degree 2 polynomial with
+    one root must factor completely, and thus we're left with $f(x)=(x-\alpha)(x-\beta)$.
+\end{proof}
+
+\begin{thm}
+    Let $E$ be a finite extension of $F$. Then the following are equivalent:
+    \begin{enumerate}
+        \item There exists a $f(x)\in F[x]$ of degree at least 1 such that $E$ is a splitting field of $f(x)$ over $F$.
+        \item For every finite extension $K$ of $E$, if $\phi:E\to K$ such that $\phi(a)=a$ for all $a\in F$, then
+            $\phi(E)=E$, i.e. $\phi\in\Gal(E/F)$.
+        \item If $p(x)\in F[x]$ irreducible, and there exists $\alpha\in E$ such that $p(\alpha)=0$, then
+            $p(x)$ is a product of linear factors in $E[x]$.
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    We first show that the first implies the second. Say the roots of $f(x)$ are $\alpha_1,\ldots,\alpha_n\in E$
+    and $f(x)=c(x-\alpha_1)\cdots(x-\alpha_n)$ and $E=F(\alpha_1,\ldots,\alpha_n)$. Now given a homomorphism $\phi: E\to K$ such that
+    $\phi(a)=a$ for all $a\in F$. It's clear that $\phi(E)=\phi(F)(\phi(\alpha_1),\ldots,\phi(\alpha_n))$. But we know that
+    $\phi(F)=F$ and that $\phi$ simply permutes the roots of $f(x)$, and thus we have that $\phi(E)=F(\alpha_1,\ldots,\alpha_n)=E$.
+
+    Now we show that the second implies the third. We wish to show that all roots of $p(x)$ already lie in $E$. We know that
+    we can always find a field $L$ of $E$ where $p(x)$ splits into a product of linear factors. In $L$,
+    $p(x)=c(x-\alpha_1)\cdots(x-\alpha_n)$. We take $\alpha=\alpha_1$. There exists a homomorphism $\psi:F(\alpha)\to L$
+    such that $\psi(\alpha)=\alpha_j$ and $\psi(a)=a$ for all $a\in F$. By the second statement of the Isomorphism Extension Theorem,
+    there exists some finite extension$K$ and an extension of $\psi$, $\phi: E\to K$ such that $\phi(a)=\psi(a)$ for all $a\in F(\alpha)$.
+    But using the hypothesis, we know that if $\phi:E\to K$ such that $\phi$ fixes $F$, then $\phi(E)=E$. Then $\psi(F(\alpha))\subset E=\phi(E)$
+    But then $\psi(\alpha)=\alpha_j\in E$, for all $j$. Thus all roots of $p(x)$ lie in $E$, which implies that $p(x)$ factors into linear factors
+    in $E$.
+    
+    Finally we show that the third implies the first. We can write $E=F(\beta_1,\ldots,\beta_k)$ where $\beta_i$ are algebraic over $F$.
+    This implies that $\irr(\beta_i,F,x)=p_i(x)$, some irreducible polynomial $p_i(x)\in F[x]$. By hypothesis, since it has some root
+    $\beta_i$ in $E$, $p_i(x)$ factors into linear factors in $E[x]$. Now we consider $f(x)=p_1(x)\cdots p_k(x)$. Then each factor is a product
+    of linear factors in $E[x]$ and thus so is $f(x)$. Among the roots of $(x)$ are $\beta_1,\ldots,\beta_k$ and thus $E$ is generated
+    over $F$ by the roots of $f(x)$. This shows that $E$ is a splitting field for $f(x)$ over $F$.
+\end{proof}
+
+\begin{defn}
+    $E$ is a \textbf{normal extension} of $F$ if any one of the above conditions holds.
+\end{defn}
+
+Typically the way to check whether an extension is normal is to just find a polynomial $f(x)\in F[x]$ such that $E$ is the
+splitting field for $f(x)$ over $F$.
+
+\begin{exmp}
+    $\Q(\sqrt[3]{2},\omega)$ is a normal extension of $\Q$ because it is a splitting field of $x^3-2$ over $\Q$.
+    On the other hand, $\Q(\sqrt[3]{2})$ is not a normal extension of $\Q$. Since $x^3-2$ is irreducible in $\Q[x]$,
+    it has one root in $\Q(\sqrt[3]{2})$ but not all roots.
+\end{exmp}
+
+\begin{cor}
+    Suppose $E$ is a separable and normal extension of $F$. Then the order of $\Gal(E/F)$ is $[E:F]$.
+\end{cor}
+\begin{proof}
+    We know by the third statement of the Isomorphism Extension Theorem that there exists a finite extension $K$ of $E$
+    and $[E:F]$ homomorphisms $\phi:E\to K$ that fix $F$. But by the second statement of the above theorem on normal extensions,
+    we know that $\phi(E)=E$, i.e. $\phi\in\Gal(E/F)$.
+\end{proof}
+
+\begin{defn}
+    We say $E$ is a \textbf{Galois extension} of $F$ if $E$ is separable and normal.
+\end{defn}
+
+Let's take a step back and look at the big picture. THe basic idea of Galois theory has been to measure the
+complexity of an extension by understanding the complexity of $\Gal(E/F)$. The problem is that, often,
+the Galois group is too small. Thus we wish to find circumstances when $\Gal(E/F)$ is as
+large as possible. We know, from earlier theorems, that the order of the Galois group is at most
+$[E:F]$.
+
+We divide the study into two parts:
+\begin{enumerate}
+    \item We allow a larger extension; under very general circumstances we can find an $L$ such that
+        there exist $[E:F]$ homomorphisms $\phi:E\to L$ that fix $F$. Unfortunately, they don't form a group.
+        This always holds when the characteristic of $F$ is zero or if $F$ is finite or $F$ is perfect.
+    \item To get that, with $\phi:E\to L$, we want $\phi(E)=E$. We need some conditions on the extension --
+        then we can compose 2.
+\end{enumerate}
+If both 1 and 2 hold, we know that the order of the Galois group is $[E:F]$.
+Recall that the condition for 1 is named separable, and the condition for 2 is named normal. When an extension
+is both separable and normal, we know that the order of the Galois group is maximal. This is actually an if and only if
+statement, but we will not prove that here.
+
+The problem then becomes checking whether extensions are separable or normal. The first is not hard at all, while the second is
+not obvious. This is precisely why we defined the splitting field. Indeed, this definition is quite useful, as it is easy to write
+down splitting fields. We showed last time that $E$ is a normal extension of $F$ if and only if $E$ is the splitting field for
+some polynomial $f(x)\in F[x]$. There is, in fact, another property that is sometimes useful: $E$ is a normal extension of $F$ if and
+only if for every irreducible polynomial $p(x)\in F[x]$, if $\alpha$ is a root of $p(x)$ in $E$ then $p(x)$ is a product of linear factors
+in $E$. This fact is often used to show that an extension is not normal.
+
+\begin{exmp}
+    Let's look at $\Q(\sqrt[3]{2},\omega)$ again. We know that this is a splitting field of $x^3-2$ over $\Q$, and thus
+    it is a normal extension of $\Q$. It is also separable, as the characteristic is zero. Thus the order of the Galois
+    group must be $[\Q(\sqrt[3]{2},\Q]=6$.
+    Indeed, we know that if $\alpha_1=\sqrt[3]{2},\alpha_2=\omega\sqrt[3]{w},\alpha_3=\omega^2\sqrt[3]{2}$, then
+    $\Q(\sqrt[3]{2},\omega)=\Q(\alpha_1,\alpha_2,\alpha_3)$. This implies that there exists an injective
+    homomorphism from the Galois group to $S_3$, but since they have the same order, they must be isomorphic.
+
+    Similarly, for $\Q(\sqrt[4]{2},i)$ is a splitting field for $x^4-2$ over $\Q$ and thus the order of the Galois group has to be 8.
+    From this, we can easily check that we can assign $\phi(\sqrt[4]{2})$ some fourth root of 2, yield 4 roots, and similarly, 2 choices
+    for $\phi(i)$, and thus all 8 choices are possible. In particular, there exists a $\phi\in\Gal(\Q(\sqrt[4]{2},i)/\Q)$ such that
+    $\phi(\sqrt[4]{2})=i\sqrt[4]{2}$ and $\phi(i)=i$. Writing out roots, we can see that this $\phi$ corresponds to $(1234)$ and thus
+    the Galois group is isomorphic to $D_4$.
+\end{exmp}
+
+Let's make a couple of useful remarks about normal extensions:
+\begin{enumerate}
+    \item If $[E:F]=2$, then $E$ is always a normal extension: choose $\alpha\in E$, $\alpha\notin F$, then $E=F(\alpha)$.
+        On the other hand, if $f(x)=\irr(\alpha,F,x)$ of degree 2, we can write in $E[x]$ $f(x)=(x-\alpha)(x-\beta)$.
+        Thus $E$ must be a splitting field.
+    \item Given $F\leq K\leq E$ where $K$ is a normal extension of $F$ and $E$ is a normal extension of $K$,
+        it is \textit{not} always the case that $E$ is a normal extension of $F$. Take, for example,
+        $\Q\leq\Q(\sqrt{2})\leq\Q(\sqrt[4]{2})$. Each of the intermediate extensions is of degree 2, and thus normal.
+        But, $\Q(\sqrt[4]{2})$ is not a normal extension of $\Q$: $x^4-2$ has two roots in $\Q(\sqrt[4]{2})$, but not all four.
+    \item Suppose $F\leq K\leq E$ and $E$ is normal over $F$. Then, $E$ is automatically normal over $K$, but $K$ need not be
+        normal over $F$. Take, for example, $\Q\leq\Q(\sqrt[3]{2})\leq\Q(\sqrt[3]{2},\omega)$ as an example of this.
+        Why does $E$ have to be normal over the intermediate one? Well $E$ is normal over $F$ if and only if, for all $\phi:E\to L$,
+        $\phi$ fixes $F$ and $\phi(E)=E$. $E$ is normal over $K$ if and only if, for all $\phi:E \to L$, $\phi$ fixes $K$ and
+        $\phi(E)=E$. Hence, $E$ normal over $F$ implies $E$ normal over $K$.
+\end{enumerate}
+
+\begin{rem}
+    Let us assume we are working in characteristic zero.
+    Suppose $f(x)\in F[x]$ of degree $n$ is irreducible and $E$ is a splitting field. Let the roots of $f(x)$ be $\alpha_1,\ldots,\alpha_n$.
+    We've seen that the Galois group acts on this set of roots. We claim that $\Gal(E/F)$ acts \textbf{transitively} on the set, i.e. that for
+    all $j$, there exists a $\phi\in\Gal(E/F)$ such that $\phi(\alpha_1)=\alpha_j$.
+\end{rem}
+\begin{proof}
+    We know that there exists a $\phi:F(\alpha_i)\to E$ such that $\phi(\alpha_i)=\alpha_j$ that fixes $F$.
+    By the isomorphism extension theorem, there exists some finite extension $L$ of $E$ such that and a homomorphism
+    $\sigma:E\to L$ such that $\sigma(\beta)=\phi(\beta)$ for all $\beta\in F(\alpha_1)$. Since $E$ is a splitting field
+    of $f(x)$ over $F$, it is normal, which implies that $\sigma(E)=E$. $\sigma(\alpha_1)=\phi(\alpha_1)=\alpha_j$.
+\end{proof}
+
+\begin{cor}
+    Let the characteristic of $F$ be zero. Let $f(x)$ be irreducible in $F[x]$ of degree $n$ and let $E$ be a splitting field
+    for $f(x)$ for $F$. Then, $n$ divides the order of $\Gal(E/F)$ and the order of $\Gal(E/F)$ divides $n!$.
+\end{cor}
+\begin{proof}
+    Let us first show the second statement. We know that $E=F(\alpha_1,\ldots,\alpha_n)$, where $\alpha_i$ are the roots of $f(x)$.
+    This implies that there exists an injective homomorphism from $\Gal(E/F)$ to $S_n$. This implies that $\Gal(E/F)\cong H\leq S_n$.
+    But Lagrange's theorem tells us that the order of a subgroup divides the order of the larger group. Since the Galois group is isomorphic
+    to $H$, the order of $\Gal(E/F)$ must divide $n!$.
+
+    Let us turn to the first statement. We know that if $G$ is a finite group and $G$ acts on a set $X$ and $O$ is a $G$-orbit,
+    then the number of elements in $O$ divides the order of $G$ (this also follows from Lagrange's theorem). Since the Galois group acts transitively,
+    the whole set is one orbit with $n$ elements, which yields that $n$ divides the order of the Galois group.
+\end{proof}
+
+Now recall that a Galois extension is a finite extension that is both separable and normal. This is equivalent to the statement
+that the order of the Galois group is equal to the degree of the extension.
+
+\begin{thm}[Main theorem of Galois theory]
+    There is a bijection between intermediate fields $K$, $F\leq K\leq E$, and subgroups $H$ of $\Gal(E/F)$.
+\end{thm}
+\begin{proof}
+    In the PDF notes on Galois theory.
+\end{proof}
+
+Thus, given $K$, $F\leq K\leq E$, we associate $K$ with $\Gal(E/K)\leq\Gal(E/K)$. Additionally, given $H\leq\Gal(E/F)$,
+we associate $H$ with the fixed field $E^H$, $F\leq E^H\leq E$. Note that these two are inverse constructions in that
+$E^{\Gal(E/K)}=K$ and $\Gal(E/E^H)=H$. Furthermore, we saw earlier that these operations are order-reversing.  
+On one extreme, $E^{\left\{ 1 \right\}}=E$ and $E^{\Gal(E/F)}=F$. Thus $\Gal(E/E)=\left\{ 1 \right\}$.
+In particular, there are only finitely many intermediate fields $K$, $F\leq K\leq E$, and we can describe them all.
+
+Here, given $F\leq K\leq E$, $[E:K]$ equals the order of $\Gal(E/K)$ and $[K:F]=\left( \Gal(E/F):\Gal(E/K) \right)$,
+where this is the index, i.e. the quotient of the orders. In particular, if $H\leq\Gal(E/F)$ then $[E:E^H]$ is the order of $H$
+and $[E^H:F]=\left( \Gal(E/F):H \right)$.
+
+Finally, we have $F\leq K\leq E$, we have seen that $E$ is a normal and hence Galois extension of $K$ but
+$K$ is not necessarily a normal extension of $F$. When \textit{is it} a normal extension? $K$ is normal, and hence a Galois
+extension of $F$, if and only if $\Gal(E/K)$ is a normal subgroup of $\Gal(E/F)$. In this case, $\Gal(E/F)/\Gal(E/K)\cong\Gal(K/F)$,
+and thus we see the rationale for the name ``normal.''
+
+\end{document}

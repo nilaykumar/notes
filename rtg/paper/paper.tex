@@ -1,23 +1,603 @@
-\documentclass{../../mathnotes}
+ {%------------------------------------------------------------------------------
+% Beginning of journal.tex
+%------------------------------------------------------------------------------
+%
+% AMS-LaTeX version 2 sample file for journals, based on amsart.cls.
+%
+%        ***     DO NOT USE THIS FILE AS A STARTER.      ***
+%        ***  USE THE JOURNAL-SPECIFIC *.TEMPLATE FILE.  ***
+%
+% Replace amsart by the documentclass for the target journal, e.g., tran-l.
+%
+\documentclass{amsart}
 
-\usepackage{tikz-cd}
+%     If your article includes graphics, uncomment this command.
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{todonotes}
+\usepackage{enumerate}
+\usepackage{cite}
+
+\newcommand{\nm}[1]{\;\textnormal{#1}\;}
+\newcommand{\ra}[0]{\rightarrow}
+\newcommand{\fa}[0]{\;\forall}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\CP}{\mathbb{C}\mathbb{P}}
+\newcommand{\RP}{\mathbb{R}\mathbb{P}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\p}{\partial}
+\newcommand{\fr}{\mathfrak}
+\newcommand{\Proj}{\mathbb{P}}
+
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\length}{length}
+\DeclareMathOperator{\res}{Res}
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Lie}{Lie}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\PGL}{PGL}
+\DeclareMathOperator{\id}{Id}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\irr}{irr}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\rank}{rank}
 
 
-\title{Notes on Vector Bundles}
-\author{Nilay Kumar}
-\date{Last updated: \today}
 
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{xca}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+%    Absolute value notation
+\newcommand{\abs}[1]{\lvert#1\rvert}
+
+%    Blank box placeholder for figures (to avoid requiring any
+%    particular graphics capabilities for printing this document).
+\newcommand{\blankbox}[2]{%
+  \parbox{\columnwidth}{\centering
+%    Set fboxsep to 0 so that the actual size of the box will match the
+%    given measurements more closely.
+    \setlength{\fboxsep}{0pt}%
+    \fbox{\raisebox{0pt}[#2]{\hspace{#1}}}%
+  }%
+}
 
 \begin{document}
 
-\maketitle
+\title{On the wonderful compactification of $\SL_n$ via weighted projective space}
 
-\setcounter{section}{-1}
+%    Information for first author
+\author{Priya Kshirsagar}
+%    Address of record for the research reported here
+\address{Department of Mathematics, University of California Berkeley, Berkeley, California 94704}
+\email{priya.kshirsagar@berkeley.edu}
+%    \thanks will become a 1st page footnote.
+%\thanks{The first author was supported in part by NSF Grant \#000000.}
+
+%    Information for second author
+\author{Nilay Kumar}
+\address{Department of Mathematics, Columbia University, New York, New York 10027}
+\email{nk2485@columbia.edu}
+%\thanks{Support information for the second author.}
+
+%    General info
+%\subjclass[2000]{Primary 54C40, 14E20; Secondary 46E25, 20C20}
+
+\date{August 10, 2013}
+
+%\dedicatory{This paper is dedicated to our advisors.}
+
+%\keywords{Differential geometry, algebraic geometry}
+
+\begin{abstract}
+Hello
+\end{abstract}
+
+\maketitle
 
 \section{Introduction}
 
+The wonderful compactification of a variety equipped with an action of an algebraic group $G$ is a $G$-equivariant compactification such that the closure of each orbit is smooth.
+DeConcini and Procesi introduced the wonderful compactification of any complex semisimple group of adjoint type in \cite{CSV} with a view towards problems of enumerative geometry. Since then, the wonderful compactification has taken on a significant role in various other areas of mathematics.
 
-\section{}<++>
+In this work, we construct and analyze the properties of a compactification of $G=\SL_n$. Here the usual technique of constructing a $G\times G$-equivariant embedding $\psi:G\to\Proj(\End V)$ (with $V$ an irreducible $G$ representation) fails; in particular, the center $Z(\SL_n)$ collapses to a single point in projective space. Hence we work instead with a generalization of projective space known as \textit{weighted projective space}, denoted by $\Proj_w$. The crux of our approach lies in constructing an embedding $\psi:G\to \Proj(\End V)\times\Proj_w(\End V)$ on which $G$ acts equivariantly from the left.
+
+This article is organized as follows.
+
+In section 2, we state some useful definitions and well-known facts, as well as a  brief summary of the properties of the wonderful compactification vis a vis \cite{FS} and \cite{CSV}.
+Next, in section 3, we investigate some properties of the wonderful compactification of $\PGL_3$.
+Finally, in section 4, we treat the main problem of $\SL_n$, for which we construct a compactification and examine its properties.
+
+%In section 2, we consider the wonderful compactification of $G=\PGL_n$ as a warm-up in which weighted projective space is not needed, and decompose the $G\times G$ orbits into orbits under the left-action of $G$. Next, we examine the properties of the closures of these orbits. After this, in section 3, we proceed to the main problem of $\SL_n$, for which we construct an embedding using weighted projective space and study the orbit closures.
+\section{Preliminaries}
+
+\subsection{Some definitions}
+
+Throughout this article, $G$ will denote either a complex semisimple group of adjoint type or $\SL_n$, depending on the context, and $\fr g$ will denote its Lie algebra.
+$T$ will denote a fixed maximal rank-$l$ torus ($\fr t$ its Lie algebra) and $R$ will denote the set of roots associated with $\fr g$, $\fr t$. $W$ will denote the Weyl group of $(\fr g,\fr t)$ and $B$ a fixed Borel subgroup of $G$. This determines a set of simple roots $\Delta\subset R$ and a choice of positive and negative roots $R=R^+\coprod R^-$.
+By $I$ we will denote a subset of $\Delta$. Define $W_I$ to be the subgroup of $W$ generated by $I$, and define $P_I=BW_IB$ to be the parabolic subgroup associated to $I$. We write the opposite parabolic as $P^-_I$. Each $P_I$ admits a Levi decomposition, namely $P_I=L_I\ltimes U_I$ where $L_I$ is the Levi subgroup and $U_I$ is the unipotent radical of $P_I$. It will also be useful to consider the adjoint group $\tilde L_I=L_I/Z(L_I)$.
+
+\subsection{The wonderful compactification}
+
+The following basic facts about the wonderful compactification of groups of adjoint type will be useful to keep in mind.
+
+\begin{theorem}[Brion and Kumar \cite{FS}, Theorem 6.1.8]
+Let $G$ be a complex semisimple group of adjoint type and take $\rho: G\to \Aut V$ to be a representation of highest weight $\lambda$. Consider the $(G\times G)$-module $\End V=V^*\otimes V$. Let $h\in\End V$ be the identity, with image $[h]$ in the projectivization $\Proj=\Proj(\End V)$.
+Define an embedding $\psi: G\to\Proj(\End V)$ given by $\psi(g)=[\rho(g)]$. We denote the closure of the embedding by $X=\overline{\psi(G)}$. Then the orbit orbit $(G\times G)\cdot [h]$ is isomorphic to $G$. Moreover, the following are true:
+\begin{enumerate}
+    \item Denote by $\Proj_0$ the complement in $\Proj$ of $\{x_{11}=0: x\in\Proj\}$ and $X_0=X\cap\Proj_0$. Then, $X_0$ is nonsingular.
+\item $X$ is covered by the $(G\times G)$-translates of $X_0$. In particular, $X$ is nonsingular;
+\item The boundary $\partial X=X - G$ is the union of $l$ nonsingular prime divisors $X_1, \ldots, X_l$ with normal crossings; 
+\item For each subset $I\subset \{1,\ldots, l\}$, the intersection $X_I=\cap_{i\in I}X_i$ is the closure of a unique $(G\times G)$-orbit $\mathcal{O}_I$. Conversely, any $(G\times G)$-orbit in $X$ equals $\mathcal{O}_I$ for a unique $I$. Further, $\overline{\mathcal{O}}_I\supseteq\mathcal{O}_J$ if and only if $I\subset J$;
+\item $X$ contains a unique closed orbit $Y=\mathcal{O}_{1,\ldots, l}=X_1\cap\ldots\cap X_l$, which is isomorphic to $G/B\times G/B$;
+\item $X$ is independent of the choices of $\lambda$ and $V$.
+\end{enumerate}
+\label{thm:props}
+\end{theorem}
+
+\begin{theorem}[DeConcini and Procesi \cite{CSV}, Section 5]
+Let $I$ be a subset of $\{1,\ldots, l\}$ as above and consider the $(G\times G)$-orbit $\mathcal{O}_I$. There exists a distinguished point $x_I\in\mathcal{O}_I$ such that \[H_I\equiv \Stab_{x_I}=\{(lu,l'u'):u\in U_I,u'\in U_I^-,l\in L_I,l'\in L_I, l(l')^{-1}\in Z(L_I)\}.\]
+Hence we may write $\mathcal{O}_I=(G\times G)/H_I$.
+Moreover, there exists a $G$-equivariant fibration $\pi_I: \mathcal{O}_I\to G/P_I\times G/P_I^-$ with fiber $\tilde L_I$.
+\label{thm:fib}
+\end{theorem}
+
+For notational convenience, we will denote elements of $\mathcal{O}_I$ as cosets of the form $(g_1,g_2)H_I$ and elements of $G/P_I\times G/P_I^-$ as cosets of the form $(g_1P_I,g_2P_I^-)$.
+
+%\begin{theorem}[DeConcini and Procesi, theorem 3.1]
+%Let $G$ be a complex semisimple group of adjoint type. Fix an irreducible representation $\rho: G\to \GL(V)$ and consider the action of $G\times G$ on $\Proj(\End V)=\Proj(V\otimes V^*)$. Define an embedding $\psi:G\to\Proj(\End V)$
+%given by $\psi(g)=[\rho(g)]$. We denote the closure of the embedding by $X=\overline{\psi(G)}$. The following statements hold:
+%\begin{enumerate}[(i)]
+%\item $X$ is smooth;
+%\item $X-G\cdot h$ is a union of $l$ smooth hypersurfaces $S_i$ which cross transversely, where $h$ is a representative of the open orbit isomorphic to $G$;
+%\item The $G$ orbits of $X$ correspond to the subsets of the indices $\{1,2,\ldots, l\}$ so that the orbit closures are the intersections $S_{i_1}\cap S_{i_2}\cap\ldots\cap S_{i_k}$;
+%\item The unique closed orbit $Y\cong G/P$ is $\cap_{i=1}^l S_i$, where $P$ is \textbf{???}\todo{what's P}.
+%\end{enumerate}
+%\end{theorem}
+
+
+\subsection{Weighted projective space}
+
+To construct a wonderful compactification of $\SL_n$ we will use the construction known as weighted projective space, defined as follows.
+
+\begin{definition}
+The $(n-1)$-dimensional weighted projective space $\Proj_w$ with weights $w=(a_1, \ldots, a_n)\in \N^n$ is the quotient space
+\begin{equation*}
+\Proj_{w} = \Proj(a_1,\ldots,a_n) = \C^{n}- 0/(z_1,\ldots,z_n) \sim (\lambda^{a_1}z_1,\ldots,\lambda^{a_n}z_n),
+\end{equation*}
+for $\lambda \in \C^{\times}.$ Alternatively, one can view weighted projective space as the quotient of $\C^n-0$ by the action of left multiplication by the diagonal matrix:
+\[
+\begin{pmatrix}
+\lambda^{a_1}&&\\
+&\ddots&\\
+&&\lambda^{a_n}
+\end{pmatrix}.
+\]
+For an arbitrary choice of weights this action is not free in general and hence weighted projective spaces may have  singularities.
+\end{definition}
+
+\subsection{Representations of $\SL_3$} We briefly define the weights of the standard and adjoint representations of $\SL_3$ below. For further discussion, refer to \cite{FH}. 
+
+Let the subgroup $H$ of the torus $T \in \SL_3$ be defined by:
+
+\[T = \begin{pmatrix}
+t_1&0&0\\
+0&t_2&0\\
+0&0&t_2^{-1}t_1^{-1}
+\end{pmatrix},\]
+
+for $t_1, t_2 \in \C^{\times}$. For the \textit{standard representation} of $\SL_3$, where $\rho_{std}: \SL_3 \to \Aut(\C^3)$, and $\SL_3$ acts by left multiplication on $\C^3$, we define the weights $\omega_1, \omega_2, \omega_3 \in H^*$, with highest weight $\omega_1$, as follows:
+
+\[\omega_1(T) = t_1, \;
+\omega_2(T) = t_2, \;
+\omega_3(T) = t_2^{-1}t_1^{-1}.\]
+
+For the \textit{adjoint representation} of $\SL_3$, with $\rho_{adj}: \SL_n \to \Aut(\fr{sl_3}), \; (g, h) \mapsto gxh^{-1}$, for $x \in \fr{sl_3}$,  we define the weights $\alpha_1, \alpha_2, \alpha_3$, with highest weight vector $\alpha_3$, as:
+
+\[\alpha_3 = 2\omega_1 + \omega_2, \; \alpha_2 = \omega_1 + 2\omega_2, \; \alpha_1 = \omega_1 + \omega_2. \]
+
+
+
+
+%Let $G$ be a complex semisimple group of adjoint type. % In particular, we will consider briefly the example of $G=\PGL_3$ in the next section.
+%Fix an irreducible representation $V$ of $G$ and consider the action of $G\times G$ on $\Proj(\End V)=\Proj(V\otimes V^*)$. Define an embedding $\psi:G\to\Proj(\End V)$
+%given by $\psi(g)=[g]$. We denote the closure of the embedding by $X=\overline{\psi(G)}$, which we call the wonderful compactification of $G$. The compactification $X$ is, in fact, smooth; this
+%can be shown by the following argument. First, computing the closure of the embedding of the torus $Z=\overline{\psi(T)}$ (and checking that it is smooth)
+%affords an isomorphism $U^-\times U\times Z\to X_0=X\cap\Proj_0$, where $\Proj_0$ is the open set
+%\begin{equation*}
+    %\Proj_0=\{[\sum a_{ij} v_i\otimes v_j^*]:a_{00}\neq 0]\}.
+    %\label{eq:openpiece}
+%\end{equation*}
+%This implies that the open piece $X_0$ is smooth; smoothness of $X$ follows (after a few technical facts) by showing that $X$ can be written as the union of translates
+%\begin{equation*}
+%    X=\bigcup_{a\in G\times G}a\cdot X_0.
+%\end{equation*}
+%Next, one might ask how $X$ decomposes under the action of $G\times G$. It turns out, in fact, that there are $2^l$ orbits, an $X_I$ for each subset $I$ of
+%the set of simple roots $\Delta$. Furthermore, the orbit $X_I$ fibers over the product $G/P_I\times G/P^-_I$ with fiber isomorphic to $\tilde L_I$.
+%Finally, each $X_I$ has a smooth closure in $\Proj(\End V)$.
+
+%The goal of this work is to construct a wonderful compactification of $\SL_n$ that enjoys these outlined properties.
+
+
+
+\section{Left $G$-orbits in the wonderful compactification of $\PGL_3$}
+
+%The construction of the wonderful compactification $X\subset\Proj(\End V)$ of $G$ given by DeConcini and Procesi splits under the action of $G\times G$ into orbits $X_0\sqcup_i X_i$.
+%The orbit $x_0$ is a dense open orbit isomorphic to $G$, while the other orbits fiber over products of generalized flag varieties with a semisimple group as fiber.
+It will be useful in the case of $\SL_n$ to decompose the $(G\times G)$-orbits $X_I$ further into orbits under the left action of $G$.
+To this end, we first study this decomposition in the simpler case of $\PGL_3$ where weighted projective space is not needed.
+The computation of the left $G$-orbit representatives follows fairly easily from the generalized Bruhat decomposition and from Theorem \ref{thm:fib}.
+%We then verify this computation by adapting the techniques developed by Esposito in \cite{DA}.
+%In particular, Esposito computes a $G$-orbit decomposition of the wonderful compactification of $G=\PGL_3$ but for the action of $G$ as embedded diagonally as $(g,g)\leqslant G\times G$.
+%In this section, we adapt Esposito's method to a left action of $G$, i.e. $G$ embedded as $(g,1)\leqslant G\times G$.
+
+%\subsection{Notation}
+
+%Let us begin by defining some terms that will be used throughout this section. First, note that we will use matrix representatives (instead of the equivalence classes) to denote elements of $\PGL_3$ and $\Proj(\End V)$. By $\fr g=\fr{sl}(3,\C)$ we will denote the Lie algebra of $\PGL_3$. \todo{finish this}
+
+\subsection{Decomposition into left $G$-orbits}
+
+%Fix a subset $I\subset\Delta$. This corresponds to fixing one of the $2^l$ $G\times G$-orbits $X_I$ in the wonderful compactification $X$.
+%Procesi and DeConcini show in \cite{CSV} that $X_I$ fibers equivariantly over $G/P_I\times G/P^-_I$ with fiber isomorphic to $\tilde L_I$. 
+%Let us denote this fibration by $\pi$.
+%Computing left $G$-orbits
+%in $X_I$ hence reduces to computing orbits in the product of generalized flag varieties.
+Before computing left $G$-orbits in $\mathcal{O}_I$, we first prove the following lemma, which provides the orbit representatives in the product that $\mathcal{O}_I$ fibers over.
+
+
+\begin{lemma}
+The elements $(P_I,wP_I^-)$ and $(P_I,vP_I^-)$ with distinct $w,v\in W_{P_I}\backslash W/W_{P_I}$ sit in different orbits of $G/P_I\times G/P^-_I$ under the left action of $G$.
+\label{lem:reps}
+\end{lemma}
+\begin{proof}
+This amounts to showing that $(P_I,wP_I^-)$ and $(P_I,vP_I^-)$ are in the same orbit if and only if $w=v$ for $w,v\in W_{P_I}\backslash W/W_{P_I}$. Suppose there exists a $g\in G$ such that $g\cdot (P_I,wP_I^-)=(P_I,vP_I^-)$. This requires that $g\in P_I$ and $gwp^-=v$ for some $p^-\in P_I^-$. By the uniqueness of the generalized Bruhat decomposition,
+\begin{equation}
+G=\coprod_{w\in W_{P_I}\backslash W/W_{P_I}} P_I w P^-_I,
+\end{equation}
+we see that $v=w$. The converse holds trivially.
+\end{proof}
+
+Moreover, $\mathcal{O}_I$ can be written as $G\times G/H_I$ where $H_I$ is the stabilizer of the distinguished point $x_I\in \mathcal{O}_I$.
+Procesi and DeConcini compute explicitly in \cite{CSV} that 
+Using the equivariance of the fibration $\pi$, together with the above lemma, we find that
+$(1,w)H_I$ and $(1,v)H_I$ lie in different $G$-orbits of $\mathcal{O}_I$.
+We can now prove that the $(1,w)H_I$ are in fact $G$-orbit representatives using some simple algebra.
+
+\begin{theorem}
+    The elements $(1,w)H_I$ with $w\in W_{P_I}\backslash W/W_{P_I}$ are a set of representatives for the orbits in $\mathcal{O}_I$ under the left action of $G$.
+    \label{thm:reps}
+\end{theorem}
+\begin{proof}
+    Consider $(g_1,g_2)H_I\in \mathcal{O}_I$. It suffices to show that this element falls into an orbit containing $(1,w)H_I$ for some $w$.
+    The left action of $(g_1^{-1},1)$ yields $(1,g_1^{-1}g_2)H_I$. By the generalized Bruhat decomposition, we can write this as
+    $(1,l_1u_1wl_2u_2)$ for $l_1,l_2\in L_I$, $u_1\in U_I,u_2\in U^-_I$, and $w\in W_{P_I}\backslash W/W_{P_I}$. Absorbing $u_2$ into $H_I$ and
+    acting by $((l_1u_1)^{-1},1)$ yields $(u_1^{-1}l_1^{-1},wl_2)$, which we can rewrite as $(l_1^{-1}u_3,wl_2)$ for some $u_3\in U_I$
+    using the fact that $P_I=L_I\ltimes U_I$. We can absorb $u_3$ into $H_I$, and then write the point as $(l_1^{-1}l_2^{-1},w)(l_2,l_2)H_I$ and
+    absorb $(l_2,l_2)$ into $H_I$. Finally, acting on this point by $(l_2l_1,1)$ yields, as desired, the coset $(1,w)H_I$.
+\end{proof}
+
+%%%% \todo[inline]{Consider the orbit closures}
+
+
+\section{The case of $\SL_n$}
+
+In this section, we construct a compactification $X$ of $G=\SL_n$ using weighted projective space. To do so, we will construct an embedding $\psi: \SL_n \to \Proj(\End V) \times \Proj_w(\End V)$, with $V$ a faithful representation of $G$. Then $X = \overline{\psi(G)}$ is a compactification equivariant under the left action of $G$. For $\psi$ to be an embedding, the weights $w$ of the weighted projective space must satisfy certain constraints. We derive these constraints and then examine the properties of the resulting compactification. 
+
+%To check that our compactification $X$ is wonderful, we study the orbit closures through treating $X$ as a toric variety. We can then make use of the correpondence between the fan associated to a toric variety and the orbit closures under the action of the torus. Finally, we apply the methods discussed in section three to decompose $X$ into $G$-orbits.\todo{add more?}
+
+\subsection{Constructing the embedding}
+Let $\rho: G\to \Aut V$ be a faithful representation. Define a map $\psi: G \to \Proj\equiv\Proj(\End V) \times \Proj_{w}(\End V)$, given by
+$g \mapsto  \left([\rho(g)], [\rho(g)\right])$, where the square brackets denote equivalence classes.
+Next we equip $\Proj$ with a left action of $G$ as:
+\begin{equation}
+    g\cdot ([y_1],[y_2])=([\rho(g)y_1],[\rho(g)y_2]).
+    \label{eq:leftGaction}
+\end{equation}
+In particular, we can write $y_1,y_2,$ and $\rho(g)$ as matrices, affording us the interpretation of the action as matrix multiplication.
+It is not \textit{a priori} obvious that this action is well-defined; the following lemma derives constraints on the weights $w$ for it to be so.
+For ease of notation, we also write the set of weights in matrix form:
+\[w = \left( \begin{array}{ccc} 
+a_1 & \hdots & a_k  \\
+\vdots & \ddots & \vdots \\
+a_{k^2-k-1} & \hdots & a_{k^2} \end{array} \right).\]
+
+%We specify the action of $\SL_n$ on $\Proj(\End V) \times \Proj_w(\End V)$ as left matrix multiplication of $\rho(\SL_n)$. That is, for $g \in \SL_n,\; y = (y_1, y_2) \in \Proj(\End V) \times \Proj_w(\End V)$, we define $g \cdot y = \left(\rho(g)y_1,\rho(g)y_2\right)$.
+%Furthermore, since we express elements of $\Proj(\End V), \Proj_w(\End V)$ as $k \times k$ matrix representatives of each equivalence class, we express the weight vector $w = (a_1, \ldots,a_{k^2})$ as a $k \times k$ matrix as well, so that:
+%\[w = \left( \begin{array}{ccc} 
+%a_1 & \hdots & a_k  \\
+%\vdots & \ddots & \vdots \\
+%a_{k^2-k-1} & \hdots & a_{k^2} \end{array} \right)\] means we define the equivalence class of any $x \in \Proj_w(\End V)$, where:
+%\[x = \left( \begin{array}{cccc} 
+%x_1 & \hdots & a_k  \\
+%\vdots & \ddots & \vdots \\
+%x_{k^2-k-1} & \hdots & x_{k^2} \end{array} \right)\] as: 
+%\[\lambda x = \left( \begin{array}{cccc} 
+%\lambda^{a_1}x_1 & \hdots & \lambda^{a_k}x_k  \\
+%\vdots & \ddots & \vdots \\
+%\lambda^{a_{k^2-k-1}}x_{k^2-k-1} & \hdots & \lambda^{a_{k^2}}x_{k^2} \end{array} \right)\]
+%For any $\lambda \in \C^{\times}$. 
+
+%Hence,  below in Lemma \ref{welldef}, in order to make the left action well-defined, we constrain the elements of the weight matrix $w$ so that each row is an identical set of $k$ weights.  
+%The next lemma provides constraints on the weights $w$, and hence the weighted projective spaces $\Proj_w$ that can used to construct our embedding.
+
+\begin{lemma}
+%$\Proj(\End V) \times \Proj_w(\End V)$ has a well-defined left action of $\SL_n$ when 
+The left-action of $G$ is well-defined on the equivalence classes in $\Proj$ when
+\[w = \left(\begin{array}{ccc} a_1&\hdots&a_k\\ \vdots&\ddots&\vdots\\ a_1&\hdots&a_k \end{array} \right),\]
+    where $a_1,\ldots,a_k\in \N^k$.
+\label{lem:welldef}
+\end{lemma}
+
+\begin{proof}
+    Take $g\in G$ and $p=([x],[y])\in\Proj$.
+%Let $g \in \SL_n$, $y \in \Proj(\End V) \times \Proj_w(\End V)$. 
+    For the action to be well-defined it must be independent of the choice of representatives $x$ and $y$.
+    In other words, we require that, for $\tilde x,\tilde y\in \End V$ such that $[x]=[\tilde x]$ and $[y]=[\tilde y]$,
+    \begin{align}
+        g\cdot ([x],[y])&=g\cdot ([\tilde x],[\tilde y]) \nonumber \\
+        ([\rho(g)x],[\rho(g)y])&=([\rho(g)\tilde x],[\rho(g)\tilde y])
+        \label{eq:welldef}
+    \end{align}
+    This amounts to the statement that $[\rho(g)x]=[\rho(g)\tilde x]$ as elements of $\Proj(\End V)$ and that $[\rho(g)y]=[\rho(g)\tilde y]$ as elements of $\Proj_w(\End V)$.
+%Below, we show that with this weight restriction, the action is well-defined. That is, if $y = y'$ in $\Proj(\End V) \times \Proj_w(\End V)$, then $g \cdot y = g \cdot y'$ in $\Proj(\End V) \times \Proj_w(\End V)$.
+    %Equivalently, we must show that for any $\lambda_1, \lambda_2 \in \C^{\times}$, we can find $\mu_1, \mu_2 \in \C^{\times}$ so that $\left(\mu_1 \rho(g)y_1,\mu_2 \rho(g)y_2\right) = \left(\rho(g)\lambda_1y_1,\rho(g)\lambda_2y_2\right)$. 
+    For ease of notation, we will prove the case $k=2$; the proof generalizes easily to higher $k$. 
+
+    We write the matrix elements of $g$ as $g_i$, of $x$ as $x_i$, and of $y$ as $y_i$, with $g_i,x_i,y_i\in\C$ for $i=1,\ldots,k^2$.
+    Since $[x]=[\tilde x]\implies \tilde x=\lambda x$ for some $\lambda\in\C^\times$, for the first condition to hold there must exist a $\mu\in\C^\times$ such that
+    \begin{align*}
+        \mu
+        \begin{pmatrix}
+            g_1 & g_2\\
+            g_3 & g_4
+        \end{pmatrix}
+        \begin{pmatrix}
+            x_1 & x_2\\
+            x_3 & x_4
+        \end{pmatrix}
+        &=
+        \begin{pmatrix}
+            g_1 & g_2\\
+            g_3 & g_4
+        \end{pmatrix}
+        \begin{pmatrix}
+            \lambda x_1 & \lambda x_2\\
+            \lambda x_3 & \lambda x_4
+        \end{pmatrix}
+        \nonumber \\
+        \mu
+        \begin{pmatrix}
+            g_1x_1+g_2x_3 & g_1x_2+g_2x_4\\
+            g_3x_1+g_4x_3 & g_3x_2+g_4x_4
+        \end{pmatrix}
+        &=
+        \lambda
+        \begin{pmatrix}
+            g_1x_1+g_2x_3 & g_1x_2+g_2x_4\\
+            g_3x_1+g_4x_3 & g_3x_2+g_4x_4
+        \end{pmatrix}.
+    \end{align*}
+    Clearly we can pick $\mu=\lambda$.
+    The second condition is a little more complicated; $[y]=[\tilde y]\implies \tilde y=\gamma\cdot y$ for some $\gamma\in\C^\times$, and so for the condition to hold
+    there must exist a $\kappa\in\C^\times$ such that
+    \begin{align*}
+        \kappa\cdot
+        \left(
+        \begin{pmatrix}
+            g_1 & g_2\\
+            g_3 & g_4
+        \end{pmatrix}
+        \begin{pmatrix}
+            y_1 & y_2\\
+            y_3 & y_4
+        \end{pmatrix}
+        \right)
+        &=
+        \begin{pmatrix}
+            g_1 & g_2\\
+            g_3 & g_4
+        \end{pmatrix}
+        \begin{pmatrix}
+            \gamma^{a_1} y_1 & \gamma^{a_2} y_2\\
+            \gamma^{a_3} y_3 & \gamma^{a_4} y_4
+        \end{pmatrix}
+        \\
+        \kappa\cdot
+        \begin{pmatrix}
+            g_1y_1+g_2y_3 & g_1y_2+g_2y_4\\
+            g_3y_1+g_4y_3 & g_3y_2+g_4y_4
+        \end{pmatrix}
+        &=
+        \begin{pmatrix}
+            g_1\gamma^{a_1}y_1+g_2\gamma^{a_3}y_3 & g_1\gamma^{a_2}y_2+g_2\gamma^{a_4}y_4\\
+            g_3\gamma^{a_1}y_1+g_4\gamma^{a_3}y_3 & g_3\gamma^{a_2}y_2+g_4\gamma^{a_4}y_4
+        \end{pmatrix}.
+        \\
+        \begin{pmatrix}
+            \kappa^{a_1}(g_1y_1+g_2y_3) & \kappa^{a_2}(g_1y_2+g_2y_4)\\
+            \kappa^{a_3}(g_3y_1+g_4y_3) & \kappa^{a_4}(g_3y_2+g_4y_4)
+        \end{pmatrix}
+        &=
+        \begin{pmatrix}
+            g_1\gamma^{a_1}y_1+g_2\gamma^{a_3}y_3 & g_1\gamma^{a_2}y_2+g_2\gamma^{a_4}y_4\\
+            g_3\gamma^{a_1}y_1+g_4\gamma^{a_3}y_3 & g_3\gamma^{a_2}y_2+g_4\gamma^{a_4}y_4
+        \end{pmatrix}.
+    \end{align*}
+    Similarly as above, we can pick $\kappa=\gamma$, as long as $a_1=a_3$ and $a_2=a_4$. This extends obviously to higher dimensions.
+
+    Hence, for the action of $G$ to be well-defined on $\Proj$, we must require that the weights along the columns are identical.
+    
+\end{proof}
+
+\begin{remark}
+Under the above weight restriction, it is easy to see that two elements are in the same equivalence class of $\Proj_w(\End V)$ if one can be written as the other
+right-multiplied by the $k$-by-$k$ diagonal matrix
+\[
+    \begin{pmatrix}
+        \lambda^{a_1} & &\\
+        & \ddots &\\
+        & & \lambda^{a_k}
+    \end{pmatrix}
+    \]
+for some $\lambda \in \C^{\times}$.
+\end{remark}
+
+The next lemma provides the conditions for the injectivity of $\psi$.
+
+\begin{lemma}
+The embedding $\psi$ is injective if for some $p,q,r,s \in \{1, \ldots, k\}$, $\gcd(a_p-a_q,a_r-a_q) = 1$. 
+\label{lem:inj}
+\end{lemma}
+
+\begin{proof}
+    Suppose $\psi(g_1)=\psi(g_2)$ for some $g_1,g_2\in G$.
+    Then $\left([\rho(g_1)], [\rho(g_1)]\right) = \left([\rho(g_2)], [\rho(g_2)]\right)$ in $\Proj$.
+    That is, for some $\lambda, \mu \in \C^{\times}$,
+    \begin{equation}
+        \rho(g_2)^{-1}\rho(g_1)
+        =
+        \begin{pmatrix} \mu&&\\ &\ddots&\\ && \mu \end{pmatrix}
+        =
+        \begin{pmatrix}\lambda^{a_1}&&\\&\ddots&\\&&\lambda^{a_k}\end{pmatrix}
+        \label{eq:inj}
+    \end{equation}
+        %By assumption, $\exists\; p,q,r,s$ such that $gcd(a_p-a_q, a_r-a_s) = 1$. 
+        Since $\lambda^{a_i} = \mu$ for each $i \in \{1, \ldots, k\}$, we have $\lambda^{a_p-a_q} = \mu \mu^{-1} = \lambda^{a_r-a_s} = 1$. 
+        The hypothesis requires that $\lambda=1$, and hence that $\mu=1$.
+        %Because $\gcd(a_p-a_q, a_r-a_s) = 1$ we must have $\lambda = 1$, and so $\mu = 1$. 
+        Thus, $\rho(g_1) = \rho(g_2)$ in $\End V$, and since $\rho$ is a faithful representation, $g_1 = g_2$.
+        Consequently, $\psi$ must be injective. 
+\end{proof}
+The condition of Lemma 4.3 holds for any faithful $V$ representation with the weight vector $w = (1, \ldots, 1, a, 1,\dots,1, b, 1, \ldots, 1)$, with $gcd(a-1, b-1) = 1$. We make use of this to compactify $\SL_3$. 
+
+
+
+\theoremstyle{definition}
+\newtheorem{exmp}{Example}[section]
+
+\begin{exmp}
+We compactify $\SL_3$ using the irreducible component of the tensor product of the adjoint representation and standard representation with highest weight vector $3\omega_1 + \omega_2$. 
+
+So $V \subset \mathfrak{sl_3} \otimes \C^3$, and $\psi: \SL_3 \to \Proj(\End V) \times \Proj_w(\End V)$. 
+
+Though we do not reproduce the computation, we specify the image of the torus $T \in \SL_3$ in $V$ below. 
+
+For any $g \in \SL_3$, $\psi(g)$ is the pair $\left(\rho(g), \rho(g)\right)$, where the two elements in the pair represent equivalence classes in their ambient projective spaces. 
+
+Then $\psi(T) = \left(\rho(T),\rho(T)\right)$, where $T =  \left(\begin{array}{ccc} t_1 &0&0\\0&t_2&0\\0&0&t_2^{-1}t_1^{-1} \end{array}\right)$. 
+
+Since $\rho(T)$ is a $15 \times 15$ diagonal matrix, we write the diagonal entries as a row vector for the ease of the reader. 
+
+And $\rho(T) =$
+\[ \left[t_1^3t_2:t_1^2t_2^2:t_1:t_1^2t_2^{-1}:t_1t_2^3:t_2:t_1:t_1^{-1}t_2^2:t_1^{-1}t_2^{-1}:t_2:t_1^{-2}:t_2^{-2}:t_1^{-1}t_2^{-1}:t_1^{-3}t_2^{-2}:t^{-2}\right] \] 
+ 
+To investigate the closure of the image of $\SL_3$, we compute the limit points of the one-parameter subgroups of the torus in $\Proj(\End V) \times \Proj_w(\End V)$. A one-parameter subgroup of the torus in $\Proj(\End V) \times \Proj_w(\End V)$ is the pair $\left(\lambda^{(i,j)}(t), \lambda^{(i,j)}(t)\right)$, where $\lambda^{(i,j)}(t)  =$ 
+\[\left[t^{3i+j}:t^{2i+2j}:t^{i}:t^{2i-j}:t^{i+3j}:t^{j}:t^{i}:t^{-i+2j}:t^{-i-j}:t^j:t^{-2i}:t^{-2j}:t^{-i-j}:t^{-3i-2j}:t^{-2j}\right]\]
+
+for $i,j, \in \Z$. Now, we compute $\lim_{x \to 0} \lambda^{(i,j)}(t)$  in both $\Proj(\End V)$ and $\Proj_w(\End V)$, for all possible values of $i$ and $j$. 
+
+Let $w = (1,1,1,1,1,a,b,1,1,1,1,1,1,1,1)$ with $gcd(a-1,b-1) = 1$.The equivalence class of $\lambda(t)$ in $\Proj_w(\End V)$ is defined by scaling every entry by any $\mu \in \C^{\times}$, except for the sixth and seventh entires, $t^i$ and $t^j$, which are scaled by $\mu^a$ and $\mu^b$, respectively. 
+
+By inspection, for any values of $i$ and $j$, neither coordinate will have the least power, that is, a negative power of greatest absolute value among the coordinates, except when $i=j=0$. 
+
+Thus, the limit points of $\lambda^{(i,j)}(t)$ in $\Proj_w(\End V)$ are the same as the limit points in $\Proj(\End V)$, though they represent different equivalence classes. Consequently, we can completely determine the fan for $T \in \SL_3$.
+\end{exmp}
+
+The embedding for $\SL_3$ can be generalized for any $\SL_n$, as long as $w$ assigns the weights $a$, $b$ to coordinates of the torus that are not limit points in the character lattice. 
+
+\subsection{Properties of the embedding}
+
+In essence, we hope to show that the tactic used to determine the weight vector $w$ can be generalized for the compactification of $\SL_n$. That is, we should be able to choose $w$ so that the limit points of $\lambda(t)$ in $\Proj_w(\End V)$ are the same as those in $\Proj(\End V)$, and thus the fan for $Z = \overline{\psi(T)}$ will be complete and can be systematically determined. 
+
+
+\begin{theorem} Let $\psi: \SL_n \to \Proj(\End V) \times \Proj(\End V)$, where $V$ is the irreducible component of $\mathfrak{sl_n} \otimes \C^n$, so $\rho: \SL_n \to V$ is a faithful representation. Then the embedding $Z = \overline{\psi(T)}$ is compact.
+\end{theorem}
+\begin{proof}
+We show this by appealing to the geometry of the root lattice $\Lambda_w$ for the representation of $\SL_n$ on $V$. Note that $\dim \Lambda_R = n -1$, and $\rank T = n-1$, so the one-parameter subgroups are of the form $\Lambda^{\bf{v}}(t)$, where ${\bf{v}} = (v_1,v_2,\dots,v_{n-1})$. 
+
+We aim to choose $\alpha_1, \alpha_2 \in \Lambda_R$ so that $\left\langle{\alpha_i, \bf{v}}\right\rangle$, $\left\langle{\alpha_j, \bf{v}}\right\rangle < \left\langle{\alpha_l, \bf{v}}\right\rangle$, for all other roots $\alpha_l \in \Lambda_R$, where $\left\langle{\;,\;}\right\rangle$ denotes the standard inner product. When we take the irreducible component of the $\mathfrak{sl_n} \otimes \C^n$, we can always choose such $\alpha_i, \alpha_j$, namely, those that are also roots of the standard representation. 
+Then, $w$ can be constructed so that $w = (1,\ldots,1,a,\ldots,b,1,\ldots,1)$, with $gcd(a-1,b-1) = 1$ by Lemma \ref{INJ}, so that for $\rho(T) \subset  \Proj_w(\End V)$, the coordinates $t^{\left\langle{\alpha_i, \bf{v}}\right\rangle}, t^{\left\langle{\alpha_j, \bf{v}}\right\rangle}$ correspond to the weights $a$ and $b$. Then, each limit point of $\lambda^{\bf{v}}(t)$ exists, so the fan of $T$ is complete. Thus, by Theorem \ref{TV}, $Z$ is compact. 
+
+\end{proof}
+
+
+
+
+
+
+\appendix
+
+\section{Toric varieties}
+
+Here we state some useful facts about toric varieties. For a more complete treatment, see \cite{TV}.
+
+We use the following facts about toric varieties to examine the closure of our compactification of $\SL_n$. For a toric variety $X$, we can study the orbit closures of the action of the torus through computing a fan in its character lattice.  We begin by introducing some of the fundamental constructions of toric varieties. 
+
+Let M, N be $\Z$-lattices with associated vector spaces $M_\R = M\otimes_\Z \R$, $N_\R = N \otimes_\Z \R$, with finite $S \subseteq N$.
+
+\begin{enumerate}
+
+\item A $convex\; polyedral\; cone$ $\sigma$ = Cone(S) = $\left\{ {\displaystyle\sum\limits_{u\in S}\lambda_uu \; |\; \lambda_u \geq 0}\right\}\subseteq N_\R$. A cone $\sigma$ called $rational$ if S $\subseteq$ N is finite. 
+
+
+\item The $dual \; cone$ $\sigma^v = \left\{ { m \in M_\R \; | \; \left\langle{m,u}\right\rangle \geq 0\; \forall u \in \sigma }\right\}\subseteq M_\R$. 
+
+\item The $hyperplane$ associated to a vector $m \in M_\R$ is defined as $H_m = \left\{ {u \in N_\R \; | \;\left\langle{m,u}\right\rangle = 0}\right\}\subseteq N_\R$. 
+
+\item The $face$ of a cone $\sigma$ is $\tau = H_m \cap \sigma$, for some m $\in \sigma^v$. A cone is called $strongly\; convex$ if the origin is a face. 
+
+
+\end{enumerate}
+
+\begin{definition}
+A $fan$ $\Sigma$ in $N_\R$ is a finite collection of cones $\sigma \subseteq N_\R$ such that:
+\begin{enumerate}
+\item Every $\sigma \in \Sigma$ is a strongly convex rational polyhedral cone.
+\item For all $\sigma \in \Sigma$, each face of $\sigma$ is also in $\Sigma$. 
+\item For all $\sigma_1, \sigma_2 \in \Sigma$, the intersection $\sigma_1 \cap \sigma_2$ is a face of each. 
+\end{enumerate}
+\end{definition}
+
+The generators of the cones of the fan consist of the limit points of the one-parameter subgroups of the torus. After computing these limit points, we can make use of the following results. 
+
+\begin{definition} Consider a fan $\Sigma \subseteq N_\R = N \otimes_\Z \R$, where $N$ is a lattice. 
+\begin{enumerate}
+\item $\Sigma$ is $smooth$ if every cone $\sigma$ in $\Sigma$ is smooth, or its minimal generators form part of a $\Z$-basis for $N$. 
+\item $\Sigma$ is $simplicial$ if every cone $\sigma$ in $\Sigma$ is simplicial, or its minimal generators are linearly independent over $\R$. 
+\item $\Sigma$ is $complete$ if its support $\left|\Sigma\right| = \cup_{\sigma \in \Sigma}\;\sigma$ is all of $N_\R$. 
+\end{enumerate}
+\end{definition}
+
+\begin{theorem} 
+\label{TV}
+Let $X_\Sigma$ be the toric variety defined by a fan $\Sigma \subseteq N_\R$. Then:
+
+\begin{enumerate}
+\item $X_\Sigma$ is a smooth variety if and only if the fan $\Sigma$ is smooth.
+\item $X_\Sigma$ is an orbifold if and only if the fan $\Sigma$ is simplicial.
+\item $X_\Sigma$ is compact in the classical topology if and only if $\Sigma$ is complete. 
+\end{enumerate}
+\end{theorem}
 
 
 
@@ -31,14 +611,14 @@
 
 
 
+\bibliography{bib}{}
 
 
+\bibliographystyle{amsplain}
 
-
-
-
-
-\bibliography{notes}
-\bibliographystyle{alpha}
 
 \end{document}
+
+%------------------------------------------------------------------------------
+% End of journal.tex
+%------------------------------------------------------------------------------

@@ -1,0 +1,289 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{amsmath}
+
+\usepackage{amssymb} 
+\def\acts{\curvearrowright}
+
+
+\title{Modern Geometry: Lecture Notes}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+%\setcounter{section}{-1}
+
+\section{Covering Spaces}
+
+\begin{thm}
+    Any connected covering space of a topological manifold $M$ is a topological manifold, $\tilde M$, and any smooth structure
+    on $M$ induces one on $\tilde M$ such that the projection $\pi:\tilde M\to M$ is a local diffeomorphism.
+\end{thm}
+\begin{proof}
+    What it means to be a covering space is that for all $x\in M$ there exists an open neighborhood $V_x\ni x$ such that
+    $\pi^{-1}(V_x)\cong V_x\times\Lambda$ (homemorphism) where $\Lambda$ is a discrete topological space. Additionally, the homemorphism
+    must commute with the obvious projections to $V_x$. Clearly if $M$ is Hausdorff, then $\tilde M$ must be Hausdorff (draw a picture and check this!).
+    Recall from undergraduate topology that the classification of connected covering spaces is done via subgroups $\Gamma$ of the fundamental group.
+    This implies that $\Lambda$ is bijective to cosets of $\Gamma$, and hence $\Lambda$ is countable.
+    If $U_i$ is a countable basis for $M$, those $U_i\subset V_x$ evenly covered for some $V_x$ are still a countable basis; then $U_i\times\{\lambda\}$
+    are a countable basis for $\tilde M$. Finally, the fact that the covering space is locally Euclidean is obvious since it's locally homemorphic to $M$.
+
+    There exists an atlass $\phi_i:U_i\to\R^n$ for $M$ such that each $U_i\subset V_x$ for some evenly covered $V_x$. Then $\tilde\phi_{i,\lambda}:U_i\times\{\lambda\}\to\R^n$
+    constitues an atlas for $\tilde M$; compatibility of charts and smoothness of $\pi$ are obvious (due to the overlaps being exactly the same as usual, and locally $\pi$
+    being an identity).
+\end{proof}
+
+\begin{exmp}
+    Consider $M=S^1$, with fundamental group $\pi(M)\cong\Z$. If we let $\Gamma=n\Z\subset\Z$, then we get $n$-fold covers
+    $S^1\to S^1$ given by $z\mapsto z^n\in\C$. For $\Gamma=\{0\}\subset\Z$, we get the universal cover $\R\to S^1$ given by
+    $t\mapsto e^{it}$.
+\end{exmp}
+
+\section{Lie Groups}
+
+\begin{defn}
+    A \textbf{Lie group} is a group $G$ that is also a smooth manifold such that the multiplication $G\times G\to G$ and the inversion
+    $G\to G$ are smooth maps of manifolds. In other words, Lie groups are the group objects in the category of smooth manifolds.
+\end{defn}
+
+\begin{exmp}
+    There are many many obvious examples:
+    \begin{itemize}
+        \item $(\R,+), (\R^n,+)$
+        \item $(\Z,+)$
+        \item $\R^\times=(\R\setminus\{0\},\cdot)$
+        \item $\R^\times=(\C\setminus\{0\},\cdot)$
+        \item the \textbf{general linear group}, $GL(n,\R)$, the set of invertible $n\times n$ matrices, an open submanifold of $\R^{n^2}$
+        \item $GL(n,\C), GL(n,\mathbb{H})$
+    \end{itemize}
+\end{exmp}
+
+\begin{rem}
+    Given $G,H$ Lie groups, the product $G\times H$ is easily seen to be a Lie group as well.
+\end{rem}
+
+Recall from last time: if $M,N$ are smooth manifolds, $f:M\to N$ smooth, and if $M'\subset M, N'\subset N$ are regular submanifolds, and if $f(M')\subset N'$, then
+$f\bigg|_{M'}:M'\to N'$ is also smooth. Note that we could make $N'$ an immersed submanifold without harm.
+
+\begin{exmp}
+    Consider $S^1\subset\C^\times$. Multiplication, $\C^\times\times\C^\times\to\C^\times$ is smooth. One can check that $S^1\times S^1$ is a regular submanifold,
+    and hence multiplication $S^1\times S^1\to S^1$ is smooth as well. A similar observation holds for inversion. This tells us that the circle is a Lie group.
+    Hence $T^n=\prod^n_{i=1}S^1$ is also a Lie group. These are all abelian Lie groups.
+
+    Note that we can define the \textbf{special linear group} $SL(n,\R)$ as $\det^{-1}(1)$. We claim that $SL(n,\R)$ is in fact a regular submanifold.
+    This follows from last time, if 1 is a regular value of the determinant map $\det: GL(n,\R)\to\R^\times$. In other words, for all $A\in SL(n,\R)$ we need 
+    $D_A\det:T_AGL(n,\R)\to T_{\det A}\R^\times$ is surjective. Let us show this.
+    If $A=I$, we can compute the directional derivative of $\det$ along $B\in M_{n\times n}(\R)=\R^{n^2}$. This is the curve $1+tB$. We must apply the determinant:
+    \begin{align*}
+        \det(I+tB)&=1+t\tr B+O(t^2).
+    \end{align*}
+    Taking a derivative at $t=0$ gives us $\tr B$. Hence the derivative at the identity of the determinant is a trace, which is plainly surjective.
+    Consider now a general $A\in SL(n,\R)$. Multiplication by $A$ is a diffeomorphism $GL(n,\R)\to GL(n,\R)$.
+    %\begin{equation}
+    %\begin{tikzcd}
+    %    GL(n,\R)\arrow{r}{A\cdot}\arrow{dr}{(\det A)\det} & & GL(n,\R)\arrow{dl}{\det}\\        
+    %    &\R^\times&
+    %\end{tikzcd}
+    %\end{equation}
+    The derivatives satisfy another commutative diagram simply by the chain rule. Hence $D_I\det$ is surjective and hence $D_A\det$ is surjective.
+    Consequently, $SL(n,\R)$ is a regular submanifold of $GL(n,\R)$ and hence a Lie group. We could have done exactly the same thing for $SL(n,\C)$ or $SL(n,\mathbb{H})$.
+
+    One can work similarly with the \textbf{orthogonal group}, $O(n)$. In fact, not only is $O(n)$ a Lie group, it is compact as well (closed and bounded).
+    Likewise for the \textbf{unitary group}, $U(n)$ and the \textbf{symplectic group}, $Sp(n)$. Note carefully that this is the compact $Sp(n)$, with a close
+    relative, the non-compact group appearing in symplectic geometry.
+
+    Observe that even the case $n=1$ is not trivial. For example, $O(1)=\left\{ \pm 1 \right\}=S^0$, $U(1)=S^1\subset\C^\times$, $Sp(1)=S^3\subset\mathbb{H}^\times$.
+    These are in fact the only spheres with Lie group structures.
+\end{exmp}
+
+\begin{defn}
+    If $G,H$ are Lie groups, then a \textbf{Lie group homomorphism}, $f:G\to H$, is a smooth map of manifolds that is also a group homomorphism.
+\end{defn}
+\begin{exmp}
+    There are ``zillions'' of examples:
+    \begin{itemize}
+        \item $\det:GL(n,\R)\to\R^\times$
+        \item the inclusions we were mentioning earlier
+        \item the multiplcation map for any abelian Lie group
+        \item $\det:O(n)\to\left\{ \pm 1 \right\}$
+        \item consider $i:\R\to T^2$ where $i(t)=(e^{it},e^{i\alpha t}$ with $\alpha\in\R\setminus\Q$ (the dense torus). This is a Lie group homomorphism
+            and an injective immersion, but not an embedding.
+    \end{itemize}
+\end{exmp}
+
+\begin{thm}
+    Given a Lie group homomorphism $f:G\to H$ with closed image, then the image is a regular submanifold, and hence a Lie group.
+\end{thm}
+\begin{proof}
+    We will prove this later.
+\end{proof}
+
+\begin{prop}
+    If $G$ is a Lie group and $G_0$ is the (path-)component containing the identity element $e\in G$, then $G_0$ is an embedded Lie subgroup of $G$,
+    and all (path-)components are diffeomorphic to $G_0$.
+\end{prop}
+\begin{proof}
+    $G_0$ is clearly a regular submanifold, so for the first statement it suffices to show that $G_0$ is a subgroup. If $\gamma$ is a path
+    from $e$ to $g$, and $\delta$ is a path from $e$ to $h$, then $(\gamma\delta)(t)=\gamma(t)\delta(t)$ is a path from $e$ to $gh$. Hence
+    $G_0$ is closed under multiplication (and similarly for inversion). The second statement is easy since multiplication by any $g\in G$ is a
+    diffeomorphism from $G_0$ to the componenent containing $g$.
+\end{proof}
+
+\begin{defn}
+    The \textbf{special orthogonal group} $SO(n)=\det^{-1}(1)$ where $\det:O(n)\to\left\{ \pm 1 \right\}$.
+\end{defn}
+
+\begin{rem}
+    Note that $SO(n)=O(n)_0$, i.e. the identity component. Similarly, $SO(2)\cong S^1$. More generally, any closed and open subgroup of a Lie group is
+    a Lie group. Indeed, if $f:G\to H$ is a group homomorphism and a diffeomorphism, then the inverse is also a group homomorphism.
+\end{rem}
+
+\begin{thm}
+    If $G$ is a connected Lie group, then its fundamental group is abelian.
+\end{thm}
+The basic idea of this proof is quite simple. Take two loops $\gamma,\delta$ based at the identity. Then one can show $[\gamma]\cdot [\delta]=[\gamma\delta]=[\delta]\cdot[\gamma]$.
+\begin{proof}
+    Let $\gamma,\delta:[0,1]\to G$ be two loops in $G$, based at $e\in G$. We can multiply loops in two different ways: pointwise, which we denote $\gamma\delta(t)=\gamma(t)\delta(t)$,
+    or the usual concatenation, which we denote $\gamma\cdot\gamma(t)$. Note that $\gamma\delta$ is also a loop based at $e$. Let us define some homotopies (fig 1):
+    \[
+         \Gamma(s,t) =
+           \begin{cases}
+                  \gamma( (2-s)t) & \text{if } (2-s)t\leq 1 \\
+                     e       & \text{if not}
+                \end{cases}
+                \]
+    and
+    \[
+       \Delta(s,t)=
+       \begin{cases}
+           \delta( (2-s)t-(1-s)) &\text{if } (2-s)t-(1-s)\geq 0\\
+           e & \text{if not}.
+       \end{cases}
+        \]
+        Concatenating these homotopies shows that $\delta\cdot \gamma\overset{\Gamma\Delta}{\sim}\delta\gamma\overset{\Delta\Gamma}{\sim}{\gamma\cdot\delta}$,
+        and we are done.
+\end{proof}
+
+\begin{rem}
+    Note that in this argument we showed that the product in the fundamental group is the same as the pointwise product,
+    \[ [\gamma]\cdot[\delta]=[\gamma\delta]. \]
+\end{rem}
+
+\begin{thm}
+    Any connected covering space $\tilde G$ of a connected Lie group $G$ is a Lie group so that $\pi:\tilde G\to G$ is a Lie group homomorphism.
+\end{thm}
+\begin{proof}
+    For some $\Gamma\leq\pi_1(G)$, we can write
+    \[\tilde G=\left\{ \text{paths } \gamma:[0,1]\to G | \gamma(0)=e \right\}/\sim\]
+    where $\gamma \sim\delta$ if and only if $[\bar\gamma\cdot\delta]\in\Gamma$, where $\bar\gamma(t)=\gamma(1-t)$ is the \textbf{retrograde} of $\gamma$ (fig 2).
+    By the remark above, we see that pointwise multiplication of paths determines a group operation $\tilde G\times\tilde G\to\tilde G$, as one can check
+    (indeed note that if $\mathcal{G}=\left\{ \text{paths }\gamma:[0,1]\to G|\gamma(0)=e \right\}$ is a group under pointwise multiplcation; the set of
+    $\gamma\in\mathcal{G}$ such that $[\gamma]\in\Gamma$ is normal since any path $\delta$ based at the identity satisfies $\delta\sim e$ via paths based at $e$
+    so $\delta\cdot\gamma\cdot\delta\sim e\gamma e=\gamma$). Hence pointwise multiplication of paths endows $\tilde G$ with a group structure.
+
+    Smoothness of the group operations is established by looking over evenly covered sets in $G$.
+    If $\tilde g_1,\tilde g_2=\tilde g\in\tilde G$, and $\pi(\tilde g_1)=g_1\in G$ etc., let $B$ be a contractible neighborhood of $g\in G$.
+    Now let $B_1,B_2$ be contractible neighborhoods of $g_1,g_2$ such that $B_1B_2\subset B$ (existence by homework 2). Hence there exist contractible
+    $\tilde B,\tilde B_1, \tilde B_2$ that contain $\tilde g,\tilde g_1,\tilde g_2$ respectively such that $\pi|_{\tilde B}\tilde B\to B$ is a diffeomorphism and 
+    similarly for $\tilde B_1,\tilde B_2$. Then $\tilde B_1\tilde B_2\subset\tilde B$ and the following diagram commutes:
+    \[
+    \begin{tikzcd}
+        \tilde B_1\times\tilde B_2\arrow{r}{\text{mult in G}}\arrow{d}{\text{diffeo.}} & \tilde B\arrow{d}{\pi}\\
+        B_1\times B_2\arrow{r}{\text{mult in G}} & B
+    \end{tikzcd}
+    \]
+    Since multiplcation in $G$ is smooth, multiplcation in $\tilde G$ is smooth. The case for inversion holds similarly.
+\end{proof}
+
+\section{Group actions on manifolds}
+
+\begin{defn}
+    A (smooth) action of a Lie group $G$ on a (smooth) manifold $M$ is simply an action $G\times M\to M$ given by $g,m\mapsto g\cdot m$
+    (satisfying the usual properties) which is smooth as a map of manifolds.
+\end{defn}
+
+Note that this definition implies that for all $g\in G$, the map $m\mapsto g\cdot m$ defines a diffeomorphism $M\to M$. Indeed, it is a restriction
+of a smooth map and hence smooth, with inverse $m\mapsto g^{-1}\cdot m$.
+
+\begin{exmp}
+    \begin{itemize}
+        \item $GL(n,\R)\acts \R^n$ as $A\cdot v=AV$
+        \item $O(n)\acts\R^n$ using the restriction property for regular submanifolds
+        \item $O(n)\acts S^{n-1}$ for the same reason
+        \item $G\acts G$ given by left multiplcation: $g\cdot h=gh$
+        \item $G\acts G$ given by the adjoint action: $g\cdot h=ghg^{-1}$.
+    \end{itemize}
+\end{exmp}
+
+\begin{thm}[Rank theorem]
+    If $f:M\to N$ has $\text{rank} D_xf=k$ for all $x$ in some neighborhood of $p\in M$, then there exist charts $\phi:U\to V$ on $M$, $\psi:U'\to V'$
+    on $N$, such that $\phi(p)=0,\psi(f(p))=0$ and $\psi\circ f\circ\phi^{-1}(x_1,\ldots,x_m)=(x_1,\ldots,x_k,0\ldots,0)$.
+\end{thm}
+\begin{proof}
+    Without loss of generality, assume that $M=\R^m, N=\R^n,p=0\in\R^m,f(p)=0\in\R^n$. Furthermore, we can permute the coordinates such that the upper
+    left hand $k\times k$ minor of $D_0f$ is nonsingular, i.e. for $\vec u\in\R^k,\vec v\in\R^{m-k}$, $f(\vec u,\vec v)=\left( g(\vec u,\vec v),h(\vec u,\vec v) \right)$.
+    $\partial g/\partial u$ nonsingular. Define $\phi:\R^m\to\R^m$ by $\phi(\vec u,\vec v)=(g(\vec u,\vec v),\vec v)$ and now the derivative
+    $D_0\phi$ has $\partial g/\partial u$ on the top left, $\partial g/\partial v$ on the top right, zero on the bottom left, and the identity in the bottom right.
+    By the inverse function theorem, there exists a local inverse $\phi^{-1}(\vec u,\vec v)=\left( q(\vec u,\vec v),\vec v \right)$ defined on a neighborhood of $0\in\R^m$.
+    Now, by the chain rule, since we're assuming $D_xf$ has rank $k$ near 0, $D_y(f\circ \phi^{-1})$ must have rank $k$ near 0 but $f\circ\phi^{-1}(\vec u,\vec v)=(\vec u,h(q(\vec u,\vec v),\vec v))$.
+    Hence $D_y(f\circ\phi^{-1})$ is the identity on the upper left block, 0 on the upper right block, something on the bottom left, and it must have zeroes on the bottom
+    right to keep the rank $k$. But this means that the derivative of the second component with respect to $\vec v$ is zero, and hence $h(q(\vec u,\vec v),\vec v)$ is
+    independent of $\vec v$. Let us call this function $r(\vec u)$. Now $f\circ\phi^{-1}(\vec u,\vec v)=(\vec u,r(\vec u))$. Now if we let $\psi(\vec u,\vec v)=(\vec u,\vec v-r(\vec u))$,
+    then $D_0\psi$ will be invertible, and hence a local diffeomorphism by the inverse function theorem. Now precomposing, $\psi\circ f\circ\phi^{-1}(\vec u,\vec v)=(\vec u, \vec 0)$.
+\end{proof}
+
+\begin{cor}
+    If $f:M\to N$ is injective and constant rank, then $f$ is an immersion, i.e. $\text{rank} D_x f=\dim M$.
+\end{cor}
+\begin{proof}
+    If not, say with rank $k<m$, it locally looks like $(x_1,\ldots,x_m)\mapsto (x_1,\ldots,x_k,0,\ldots, 0)$, which is not even locally injective.
+\end{proof}
+
+\begin{defn}
+    For $X,Y$ topological spaces, a continuous $f:X\to Y$ is said to be \textbf{proper} if, for all compact $C\subset Y$, $f^{-1}(C)$ is compact.
+\end{defn}
+
+\begin{exmp}
+    Here are a few examples:
+    \begin{itemize}
+        \item if $C$ is closed in $Y$, then the inclusion $i:C\to Y$ is proper.
+        \item if $X$ is compact and $Y$ is Hausdorff, then any continuous $f$ is proper
+        \item compositions of proper maps are proper
+        \item any homeomorphism is proper
+        \item projection onto the first factor $X\times C\to X$ is proper iff $C$ is compact
+        \item the restriction of any proper map to a closed subset is proper
+    \end{itemize}
+    We leave it as an exercise to show that $f$ is proper iff it extends to a continuous map of the one-point compactifications.
+    Additionally, if $X,Y$ are topological manifolds, $f:X\to Y$ proper, then $f$ is closed. Hence, if $f$ is both proper and injective,
+    it is a homemorphism onto its image. A corollary is that a proper injective immersion of smooth manifolds is an embedding.
+\end{exmp}
+
+\begin{defn}
+    A group action $G\times M\to M$ is \textbf{proper} if $\mu:G\times M\to M\times M$ given by $(g,x)\mapsto (g\cdot x, x)$ is proper.
+\end{defn}
+
+\begin{exmp}
+    \begin{itemize}
+        \item Any Lie group acts properly on itself by left multiplcation. In this case the map takes $(g,h)\mapsto(gh^{-1},h)$, which is
+            a diffeomorphism.
+        \item A closed subgroup $H\subset G$ acts properly on $G$: $H\times G$ is closed in $G\times G$ and apply the examples above
+        \item $O(n)$ acts properly on $\R^n$ since if $C\subset\R^n\times \R^n$ is compact, then $\mu^{-1}(C)$ is closed and is a subset of $O(n)\times \pi_2(C)$,
+            which is a product of two compact sets. Here we really only used that $G$ is compact and that $M$ is Hausdorff. Hence any compact Lie group acts properly
+            on any manifold.
+        \item But, $GL(2,\R)\acts\R^2$ is not proper because we have a closed subgroup $\begin{pmatrix}1&t\\0&1\end{pmatrix}=G$ for $t\in \R$
+            and the inverse image of $\begin{pmatrix}1\\0\end{pmatrix},\begin{pmatrix}1\\0\end{pmatrix}\in\R^2\times\R^2=G\times \begin{pmatrix}1\\0\end{pmatrix}\subset G\times\R^2$.
+            This contradicts one of the last examples from above.
+    \end{itemize}
+\end{exmp}
+
+\begin{thm}
+    If a Lie group $G$ acts smoothly, freely, and properly, on a smooth manifold $M$, then the quotient $M/G$ is a smooth manifold of dimension $\dim M-\dim G$ so that
+    the natural projection $M\to M/G$ is smooth.
+\end{thm}
+
+\end{document}

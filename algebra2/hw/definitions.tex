@@ -1,0 +1,144 @@
+\documentclass{../../mathnotes}
+
+\usepackage{enumerate}
+
+\title{Modern Algebra II: Definitions}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+
+Let $E=\Q(\sqrt{5},\sqrt{7})$ and let $\alpha=2\sqrt{5}-\sqrt{7}\in E$. We know that $\Q(\sqrt{5},\sqrt{7})=\Q(\sqrt{5})(\sqrt{7})$.
+Since $\sqrt{5}$ and $\sqrt{7}$ are obviously algebraic over $\Q$ and $\Q(\sqrt{5})$ respectively, $E$ is a finite extension over
+$\Q$ by the theorem proved in class (of course, we should check that $\sqrt{5}\notin\Q$ and $\sqrt{7}\notin\Q(\sqrt{5})$ but this obviously holds
+via the usual divisibility arguments). Furthermore, since $\deg\irr(\sqrt{5},\Q,x)=\deg x^2-5=2$ and $\deg\irr(\sqrt{7},\Q(\sqrt{5}),x)=\deg x^2-7=2$,
+we have, $[E:\Q]=[E:\Q(\sqrt{5})][\Q(\sqrt{5}):\Q]=2\cdot2=4$. We can write a basis for $E$, then, to be $\left\{1,\sqrt{5},\sqrt{7},\sqrt{35}\right\}$.
+
+Let us now show that $E=\Q(\alpha)$. It is obvious that $\Q(\alpha)\subset E$ -- let us show that $E\subset \Q(\alpha)$. First note that
+$\sqrt{35}\in\Q(\alpha)$, as
+\begin{align*}
+    \alpha^2=(2\sqrt{5}-\sqrt{7})^2=27-4\sqrt{35}.
+\end{align*}
+Then we have $\alpha\sqrt{35}=10\sqrt{7}-7\sqrt{5}$. We can use this to show that
+\begin{align*}
+    13\sqrt{5}&=\alpha\sqrt{35}+10\alpha\\
+    27/2\cdot\sqrt{2}&=\alpha\sqrt{35}-7/2\cdot\alpha,
+\end{align*}
+i.e. $\sqrt{5}$ and $\sqrt{7}$ are in $\Q(\alpha)$. Thus, $E=\Q(\alpha)$. We then know that $\deg\irr(\alpha,\Q,x)=4$. Then, with some computation,
+we find
+\begin{align*}
+    \alpha^2&=27-4\sqrt{35}\\
+    \alpha^4&=1289-216\sqrt{35}\\
+    0&=\alpha^4-54\alpha^2+169,
+\end{align*}
+i.e. $\irr(\alpha,\Q,x)=x^4-54x^2+169$. Finally, since we know that $[\Q(\alpha)=E:\Q]=4$, $\left\{ 1,\alpha,\alpha^2,\alpha^3 \right\}$ must
+be another basis for $E$.
+
+\subsection*{Problem 2}
+
+First note that $\Q(i)$ is a 2-dimensional finite extension of $\Q$, as $i$ is algebraic over $\Q$ and $\deg\irr(i,\Q,x)=\deg x^2+1=2$.
+Furthermore, $\Q(i,\sqrt[4]{2})$ is a 4-dimensional finite extension of $\Q(i)$, as $\sqrt[4]{2}$ is clearly algebraic over (and not in) $\Q(i)$ and
+$\deg\irr(\sqrt[4]{2},\Q(i),x)=\deg x^2-4=4$. Then, $[\Q(i,\sqrt[4]{2}):\Q]=[\Q(i,\sqrt[4]{2}):\Q(i)][\Q(i):\Q]=4\cdot2=8$.
+Note that $\left\{ 1,i \right\}$ forms a $\Q$-basis for $\Q(i)$ and that $\left\{ 1,\sqrt[4]{2},\sqrt[4]{2}^2, \sqrt[4]{2}^3 \right\}$
+forms a $\Q(i)$ basis for $\Q(i,\sqrt[4]{2})$. It follows, then, that $\left\{ 1,i, \sqrt[4]{2},\sqrt[4]{2}^2, \sqrt[4]{2}^3,
+i\sqrt[4]{2},i\sqrt[4]{2}^2,i\sqrt[4]{2}^3\right\}$ forms a $\Q$-basis for $\Q(i,\sqrt[4]{2})$.
+
+If $\alpha=i+\sqrt[4]{2}$, we can compute 
+\begin{align*}
+    0&=(\alpha-i)^4-2\\
+    0&=\alpha^4-4i\alpha^3-6\alpha^2+4\alpha-1
+\end{align*}
+Squaring this yields on the right-hand side the eighth order irreducible polynomial for $\alpha$.
+
+
+\subsection*{Problem 3}
+
+Let $F$ be a field of characteristic not equal to 2. Suppose that $E$ is a finite extension field of $F$ and that $[E:F]=2$.
+Thus, $E$ is a 2-dimensional $F$-vector space. This implies the existence of an $\alpha$ not in $F$, because otherwise, $E$ would
+be 1-dimensional, as $E$ would equal $F$. Since $\alpha^2\in E$, we can write $\alpha^2-d\alpha-c=0$ for some $c,d\in F$.
+Completing the square, we find $(\alpha-d/2)^2-d^2/4-c=0$, which yields
+\[(\alpha-d/2)^2=d^2/4-c.\]
+If we define $\beta=\alpha-d/2$ and $a=d^2/4-c$, then, we have found a $\beta\notin F$ that satisfies $\beta^2=a$.
+
+Finally, let us show that $E=F(\beta)$; i.e. that every $c+d\alpha$ can be written as $e+f\beta$ for some $e,f\in F$
+(and vice versa):
+\[c+d\alpha=c+d(\beta+d/2)=cd/2+d\beta\]
+\[e+f\beta=e+f(\alpha-d/2)=-ed/2+f\alpha\]
+and we are done.
+
+\subsection*{Problem 4}
+
+Let $F$ be a field and suppose that $F$ is a subring of an integral domain $R$. Thus $R$ is a vector space over $F$.
+Suppose further that $R$ is a finite, $d$-dimensional vector space over $F$. Then, if we consider the set of vectors
+$\left\{ 1,r,r^2,\cdots \right\}$, there must be some non-trivial linear combination that yields zero, as they
+cannot all be linearly independent. Take $\sum_{i=0}^na_ir^i=0$, with $a_i\in F$ not identically zero and $n\geq d$.
+Let $m$ be the smallest $i$ such that $a_i\neq 0$. Then the sum becomes
+$\sum_{i=m}^na_ir^i=r^m\sum_{i=m}^na_ir^{i-m}=0$. Since $R$ is an integral domain, we can cancel the factor out front,
+and we get $\sum_{i=m}^na_ir^{i-m}=0$. Note that $m$ cannot equal $n$ (otherwise we'd only have one term, and that too,
+trivial, with $a_n=0$), so
+\[a_m+a_{m+1}r+\cdots+a_nr^{n-m}=0,\]
+and dividing through by $-a_m$ and factoring out an $r$ shows that $r$ times some element of $R$ is equal to 1, i.e.
+that $r$ has an inverse. This implies that $R$ is a field, as $r$ was arbitrary, and we are done.
+
+\subsection*{Problem 5}
+
+Let $E$ be a finite extension of a field $F$, and suppose that the degree $[E:F]=t$ is a prime number. Take some
+$\alpha\in E$ that is not in $F$. It should be clear that $F\leq F(\alpha)\leq E$, as $F(\alpha)$ is the smallest
+field containing $F$ and $\alpha$. Then we have
+\begin{align*}
+    [E:F]&=[E:F(\alpha)][F(\alpha):F]\\
+    t&=[E:F(\alpha)][F(\alpha):F].
+\end{align*}
+Since $t$ is prime, and $F(\alpha)\neq F$ (by construction) and so $[F(\alpha):F]\neq1$, we must have that
+$[F(\alpha):F]=t$ and $[E:F(\alpha)]=1$. Consequently, $E=F(\alpha)$ for all such $\alpha$, and $E$ must be a simple
+extension of $F$.
+
+\subsection*{Problem 6}
+
+Let $F$ be a field and let $E=F(\alpha)$ be a finite extension field of $F$ with $\alpha\notin F$ such that $[E:F]=\deg_F\alpha=2n+1$,
+$n\in\N$. It should be clear that $\alpha^2\notin F$, as otherwise $[E:F]$ would be 2, which is a contradiction. Furthermore,
+$F(\alpha^2)\leq F(\alpha)$, as $\alpha^2\in F(\alpha)$. Then we can write
+\begin{align*}
+    [F(\alpha):F]=2n+1=[F(\alpha):F(\alpha^2)][F(\alpha^2):F]
+\end{align*}
+Consider $[F(\alpha):F(\alpha^2)]=\deg_{F(\alpha^2)}\alpha=\deg\irr(\alpha,F(\alpha^2),x)$. Since this irreducible
+polynomial must divide $x^2-\alpha^2$, either $[F(\alpha):F(\alpha^2)]$ is one or two. It cannot be two, however, as
+this would contradict the above product (since an odd is always the product of two odds). Consequently, $[F(\alpha):F(\alpha^2)]=1$,
+i.e $F(\alpha)=F(\alpha^2)$.
+
+
+\subsection*{Problem 7}
+
+Let $F$ be a field and $E$ an extension field of $F$. Suppose that $\alpha,\beta\in E$ are both algebraic over $F$,
+and that $\deg_F\alpha=n,\deg_F\beta=m$. If we construct $F(\alpha),$ it should be clear that $\beta$ is algebraic
+over $F(\alpha)$, as the polynomial in $F[x]$ whose solution is $\beta$ is also in $F(\alpha)[x]$. For precisely
+this reason, $\deg_{F(\alpha)}\beta$ cannot be greater than $m$, i.e. $\deg_{F(\alpha)}=[F(\alpha,\beta):F(\alpha)]\leq m$. Then, using
+\[ [F(\alpha,\beta):F]=[F(\alpha,\beta):F(\alpha)]n,\]
+we have that $[F(\alpha,\beta):F]\leq mn$. Hence, since $F(\alpha+\beta)$ and $F(\alpha\beta)$ are in $F(\alpha,\beta)$,
+the degrees of the irreducible polynomials must divide $[F(\alpha,\beta):F]$, similar to above,
+and so we must have $\deg_F(\alpha+\beta)\leq mn$ and $\deg_F(\alpha\beta)\leq mn$.
+
+
+\subsection*{Problem 8}
+
+Let $F$ be a field and $E$ an extension field of $F$. Suppose that $\alpha\in E$ and $\beta\in E$ are both algebraic over
+$F$, and that $\deg_F\alpha=n,\deg_F\beta=m$, with $n$ and $m$ relatively prime. We can compute
+\[ [F(\alpha,\beta):F]=[F(\alpha,\beta):F(\alpha)]n \]
+and
+\[ [F(\alpha,\beta):F]=[F(\alpha,\beta):F(\beta)]m. \]
+Both $n,m$ divide $[F(\alpha,\beta):F]$, and since $n,m$ are relatively prime, this degree must be a multiple of $mn$.
+By the last problem, however, we know that the degree must be less than or equal to $mn$, and thus the degree of $F(\alpha,\beta)$
+over $F$ is $nm$.
+
+We can use this result to compute 
+\[ [\Q(\sqrt{2},\sqrt[3]{2}):\Q]=2\times3=6\]
+because $[\Q(\sqrt{2}):\Q]=2$ and $[\Q(\sqrt[3]{2}):\Q]=3$ are relatively prime.
+
+
+
+\end{document}
