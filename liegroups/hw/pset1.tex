@@ -41,7 +41,12 @@
     rotation matrix $R$ that rotates $e_1$ into $v_1$ in $W$ (and leaves $W^\perp$ unchanged). It's clear now that if we define $T_t$ to rotate in this manner
     we get a continuous path $t\mapsto T\circ T_t$ in $SO(n)$.
 
-
+    Let us now show that $SO(n)$ is compact. First let us show that $O(n)$ is closed as a subset of $\R^{n^2}$. 
+    Let $A_n$ be a sequence of orthogonal matrices that converges to $A$; hence we have that $A_n^TA_n=1$. We wish to show that $A$ is orthogonal.
+    We can do this by noting that $A_n$ converges to $A$ and $A_n^T$ converges to $A^T$ and hence $A_n^TA_n$ converges to $A^TA$. But since
+    $A_n^TA_n=1$ it's clear that $A^TA$ must converge to one as well. Now consider $SO(n)$ - it is clearly a closed subset of $O(n)$ as it is
+    an inverse image of a closed set ($\{1\}$). Additionally, the matrix elements of $SO(n)$ are obviously bounded (in $\R^{n^2}$)and hence $SO(n)$ is 
+    compact. The proof that $SU(2)$ is compact proceeds in almost exactly the same fashion, as it is closed in $U(n)$, which can shown to be compact.
 \end{proof}
 
 \begin{prop}
@@ -102,8 +107,18 @@
     $(R_h)_*v|_g=v|_{gh}$ and applying this at $g=1$ gives us the condition that $(R_h)_*v_1=(R_h)_*X=v|_h$. But this is precisely
     the statement that $\phi(X)=v$, and thus $\phi$ is surjective. Consequently we see that $\mathcal{R}\cong\fr g$ as Lie algebras.
 
-    Now consider the diffeomorphism $\psi:g\in G\mapsto\psi(g)=g^{-1}\in G$. Consider a left-invariant vector field $v$, i.e. $(L_b)_*v|_a=v|_{ba}$. The pushforward
-    by $\psi$ of $v$ gives us another vector field $w=\psi_* v$.
+    Now consider the diffeomorphism $\psi:g\in G\mapsto\psi(g)=g^{-1}\in G$. 
+    It's clear that, in general, $\phi\circ L_{g^{-1}}=R_g\circ\phi$ (consider the action on $h$ - both sides yield $h^{-1}g$. Differentiating both sides,
+    we find that upon acting on a left-invariant vector field we must have
+    \[d(\phi\circ L_{g^{-1}})|_h=d\phi_{L_{g^{-1}h}}\circ L_{g^{-1}}=d(R_g\circ \phi)|_h=dR_{g\phi(h)}\circ d\phi.\]
+    But this means that $dR_{gh^{-1}}\circ d\phi=d\phi$, i.e. our vector field must be right-invariant as well. 
+    Note additionally that if $X$ is left-invariant then $d\phi(X)$ is a vector field whose value at the identity is $-X$ since
+    \[\frac{d}{dt}\bigg|_{t=0}\phi(e^{tX})=\frac{d}{dt}\bigg|_{t=0}e^{-tX}=-X.\]
+    
+    Indeed, the map $X\mapsto d\phi(X)$ is an isomorphism of the Lie algebras of left and right-invariant vector fields on $G$
+    as $\phi$ is a diffeomorphism and hence it's derivative is an isomorphism; all that remains to check is the compatibility of the
+    Lie bracket. But this holds just as above using naturality of the Lie bracket:
+    \[d\phi([X,Y])=[d\phi(X),d\phi(Y)].\]
 \end{proof}
 
 \begin{prop}

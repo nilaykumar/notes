@@ -67,4 +67,60 @@ We can go further and differentiate this representation to obtain a Lie algebra 
     The \textbf{adjoint representation} of a Lie algebra $\fr g=\Lie G$ is $(\ad, \fr g)$ where $\ad(X)=\Ad'(e^{tX})=\frac{d}{dt}\bigg|_{t=0}\Ad(e^{tX})$.
 \end{defn}
 
+\textbf{September 25, 2013}
+
+For matrix groups, it's clear that the Adjoint representation is just conjugation (via matrix multiplication), i.e. $Ad(g)M=gMg^{-1}$.
+For such we can use a trivialization and treat Lie algebra elements as matrices, i.e. given the left-invariant vector field $X_M=(g,gM)$,
+$M$ is the associated element of the Lie algebra.
+Then the adjoint representation for matrix Lie algebras is given by the commutator $ad(X)M=[X,M]$. One can check this by computing
+\[ad(X)(Y)=\frac{d}{dt}\bigg|_{t=0}\left( e^{tX}Ye^{-tX} \right)=XY-YX\]
+
+In general, the Adjoint and adjoint representations are interesting in that they are a distinguished feature of a given Lie group/algebra.
+This will be a key fact used when trying to classify algebras.
+
+\begin{exmp}
+    Consider $G=SO(3)$ whose Lie algebra is $\Lie SO(3)=\R^3$, isomorphic to the space of anti-symmetric $3\times 3$ real matrices.
+    Choosing the usual basis $L_i$ for $\fr{so}_3$, where we have a 1 and -1 in each basis element, we see that we obtain, in some sense,
+    the cross product on $\R^3$ via the bracket operation.
+
+    We can do something similar for $G=SU(2)$, and we find (as we know from the homework) that $\fr{su}_2=\fr{so}_3$. Of course, this is a
+    rather special case; in higher dimensions there are no such isomorphism in general.
+\end{exmp}
+
+So far we have considered Lie algebras that are real vector spaces. It turns out, however, that representations are simplest for
+complex vector spaces (as diagonalizability is easiest done). Hence we wish to study the ``complexification'' of $\fr g$.
+
+\begin{defn}
+    The \textbf{complexification of $\fr g$} is the complex vector space $\fr g_\C=\fr g\otimes_\R \C=\fr g\oplus i\fr g$.
+    The Lie bracket of $\fr g$ extends straightforwardly to a Lie bracket of $\fr g_\C$.
+\end{defn}
+
+\begin{rem}
+    One can think of $\fr g_\C$ as a real Lie algebra with $\dim\fr g_\C=2\dim\fr g$. In general, when we write something like $\fr g=\Lie G$,
+    we will mostly treat $G$ as a real manifold and assume that $\fr g$ is real.
+\end{rem}
+
+\begin{defn}
+    The Lie algebras $\fr g_1,\fr g_2$ are \textbf{real forms} of a complex Lie algebra $\fr g$ if $\fr g_1\otimes_\R\C=\fr g_2\otimes_\R\C=\fr g$.
+\end{defn}
+
+\begin{exmp}
+    Take $\fr g_1=\fr{sl}_2\R$, i.e. $2\times 2$ traceless matrices. This is isomorphic to $\R^3$ as a vector space, but is not
+    isomorphic to $\fr{su}_2=\fr{so}_3$. If we complexify this Lie algebra, we obtain $\fr g_1\otimes_\R\C=\fr{sl}_2\C$, which is the space
+    of $2\times 2$ traceless complex matrices, isomorphic to $\C^3\cong\R^6$. So $\fr g_1$ is a real form of $\fr{sl}_2\C$; note that $SL(2,\R)$ is a 
+    non-compact group.
+
+    Consider $\fr g_2=\fr{su}_2$, which is the space of anti-hermitian $2\times 2$ traceless matrices. If we take $\fr g_2\oplus i\fr g_2$, we 
+    get both anti-hermitian and hermitian traceless matrices, i.e. all complex traceless matrices. Indeed, this is just $\fr{sl}_2\C$ and hence
+    $\fr g_2$ is a real form of $SL(2,\C)$. This is not isomorphic to $\fr g_1$! Since $SU(2)$ is compact, $\fr g_2$ is the ``compact real form.''
+\end{exmp}
+
+\begin{exmp}
+    Note that $\fr{so}_3\otimes_\R\C\cong\fr{sl}_2\C$. Indeed, we can define complex orthogonal groups, such as $SO(3,\C)$a, that are the transformations
+    of $\C^3$ that preserve $\langle\vec z,\vec w\rangle=z_iw^i$ (this is definitely not positive-definite!). Special to the dimension 3 is the fact that
+    $SO(3,\C)\cong SL(2,\C)$ (up to double cover issues). In general, we can define $SO(n,\C)$ that give rise to complex Lie algebras that each have
+    several real forms, including $\fr{so}(p,q)$.
+\end{exmp}
+
+
 \end{document}
