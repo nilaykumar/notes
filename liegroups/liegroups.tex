@@ -2,6 +2,7 @@
 
 \usepackage{tikz-cd}
 \usepackage{amsmath}
+\usepackage{todonotes}
 
 
 \title{Lie Groups and Representations: Notes}
@@ -121,6 +122,83 @@ complex vector spaces (as diagonalizability is easiest done). Hence we wish to s
     $SO(3,\C)\cong SL(2,\C)$ (up to double cover issues). In general, we can define $SO(n,\C)$ that give rise to complex Lie algebras that each have
     several real forms, including $\fr{so}(p,q)$.
 \end{exmp}
+
+\section{Representation Theory}
+
+We have already seen the general definition of a representation of a group $G$ and a Lie algebra $\fr g$.
+The fundamental theorem of Lie theory tells us that finite-dimensional representations of $\fr g$ life to finite-dimensional
+representations of $G$.
+
+\begin{exmp}
+    In this class we will almost always be discussing representations over $\C$, i.e. $V=\C$.
+    \begin{enumerate}[(i)]
+        \item We can always consider the trivial representation $(\pi,\C)$ such that $\pi(g)=1$;
+        \item For matrix groups $G$, we can construct the defining representation where $\pi$ is simply the inclusion map $G\subset GL(n,\C)$;
+        \item The Adjoint and adjoint representations $(\text{Ad},\fr g)$ and $(\text{ad},\fr g)$;
+        \item If $G$ acts on $M$, we can define $(\pi,\Hom(M;\C))$ such that $(\pi(g)f)(m)=f(g^{-1}m)$. Typically
+            this yields an infinite-dimensional space;
+        \item $SU(2)$ acts on $\C^2$ (by the defining representation) so we can consider $\C[z_1,z_2]$: define $(\pi(g)f)(z_1,z_2)=f(g^{-1}\cdot(z_1,z_2)$.
+            Note that this action preserves homogeneous polynomials of degree $n$ and hence, by restriction, we have a representation of $SU(2)$ of dimension $n+1$;
+        \item The group comes equipped with left and right actions on itself which yield the left and right regular representations: for the left case, we have $(\pi_L,\Hom(G;\C))$ such that
+            $(\pi_L(g)f)(g)=f(g^{-1}g_0)$. For a Lie group, this will be infinite-dimensional;
+    \end{enumerate}
+\end{exmp}
+
+\begin{defn}
+    Given two representations $V_1,V_2$ of $G$, we define $\Hom_G(V_1,V_2)$ to be the vector space of all \textbf{equivariant} or \textbf{intertwining} maps from $V_1$ to $V_2$.
+    In other words, these are maps $F$ such that the following diagram commutes:
+    \begin{equation*}
+        \begin{tikzcd}
+            V_1\arrow[swap]{d}{\pi_1(g)}\arrow{r}{F} & V_2\arrow{d}{\pi_2(g)}\\ 
+            V_1\arrow{r}{F}&V_2
+        \end{tikzcd}
+    \end{equation*}
+    Another way to think about these maps is to note that $\Hom_G(V_1,V_2)=\Hom_\C(V_1,V_2)^G$, i.e. complex vector space morphisms invariant under the action of $G$.
+    \todo{is this obvious}
+\end{defn}
+
+\begin{rem}
+    Representations of a group $G$ form a category \textbf{Rep}(G) with representations (the vector spaces) as the objects and equivariant maps as morphisms.
+\end{rem}
+
+\begin{defn}
+    Given two representations $(\pi_1,V_1),(\pi_2,V_2)$ of $G$, we can define a new, \textbf{direct sum representation}, denoted by $(\pi_3,V_1\oplus V_2)$ in the obvious way.
+    The same holds for Lie algebras.
+\end{defn}
+
+Hence it's fairly easy to construct larger representations; what is substantially more difficult is to \emph{break down} representations in some non-trivial way.
+
+\begin{defn}
+    A \textbf{subrepresentation} $(\pi_W,W)$ of $(\pi,V)$ is a representation on $W\leqslant V$ such that $W$ is invariant under the action of $G$, i.e.
+    if $w\in W$ then $\pi(g)w\in W$ for all $g\in G$. Similarly for Lie algebras.
+\end{defn}
+
+\begin{defn}
+    A representation is \textbf{irreducible} if it has no non-trivial (not zero or the full space) subrepresentations,
+    and \textbf{reducible} otherwise. A representation is called \textbf{completely reducible} if it is can be written as a direct sum
+    of irreducible subrepresentations, i.e.  $(\pi, V)=\bigoplus_I(\pi_i,V_i)$ where $(\pi_i,V_i)$ are irreducible.
+\end{defn}
+
+In general, then, we have two distinct problems - the first is computing irreducible representations, and the second is decomposing
+representations into their irreducible subrepresentations.
+Note that there is a slight subtlety in that we can have representations that are reducible
+but not completely reducible, as the following example depicts.
+
+\begin{exmp}
+    Consider the upper triangular matrices $B\leqslant GL(2,\R)$ acting on $\R^2$ (in the defining representation). It is a simple computation to check that the $x$-axis,
+    $V_1=\R$, is invariant under this action (it is dilated). We would now like to say that $V=\R^2=V_1\oplus V_2$, for some $V_2$ complementary to $V_1$ - 
+    but no such invariant subspace exists!
+
+    As another example, consider $G=\R$. We can obtain representations $\pi(t)=e^{tA}$ for $A\in M_{n\times n}$. This representation
+    is completely reducible only if $A$ is diagonalizable.
+
+    Such pathologies do not occur, for example, when the action preserves an inner product. Indeed, under the action of an orthogonal group, given any invariant subspace
+    we can simply find the orthogonal complement as an invariant subspace.
+\end{exmp}
+
+What is $\Hom_G(V,V)$? First for $V$ irreducible we claim that $\Hom_G(V,V)=\C$. To prove this we need to show that if $F$ is a linear map $V\to V$,
+commuting with $\pi(g)$ for all $g$ then $V$ irreducible implies $F=\lambda I$. Let $\lambda$ be an eigenvalue of $F$. Consider $\lambda$-eigenspace $V_\lambda\subset V$
+$v:Fv=\lambda v$. Claim: $V_\lambda$ is a subrepresentation (because $F$ commutes with all $\pi$): $F(\pi(g)v)=\pi(g)Fv=\lambda \pi(g)v$.
 
 
 \end{document}

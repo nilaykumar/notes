@@ -1,0 +1,59 @@
+\documentclass{../../mathnotes}
+
+\usepackage{enumerate}
+\usepackage{todonotes}
+\usepackage{tikz-cd}
+
+\title{Commutative Algebra: Problem Set 4}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+
+\subsection*{Problem 5}
+
+Let $A=k[x,y,z]/(x^2y^2z^2, x^3y^2z)$. We wish to compute the dimension of $A$ at the maximal ideal $(x,y,z)$.
+Since $x^2y^2z^2$ is a nonzerodivisor in $k[x,y,z]_{(x,y,z)}$, quotienting out by it yields a ring with dimension two (by lemma 46).
+Next note that after quotienting out by $x^3y^2z$ we still have a chain of primes $(x)\subset (x,y)\subset (x,y,z)$ and hence the
+dimension is two.
+
+
+\subsection*{Problem 6}
+
+Let $A=k[x,y,z]/(x^3-y^2,x^5-z^2,y^4-z^3)$. We wish to compute the dimension of $A$ at $(x,y,z)$.
+
+
+\subsection*{Problem 7}
+
+Let $k$ be a field. Let $f\in k[x,y]$ be a polynomial and $a,b\in k$ be elements such that $f(a,b)=0$.
+Let $\fr m=(x-a,y-b)$ be the corresponding maximal ideal in the ring $A=k[x,y]/(f)$. By construction, $A_\fr m$ is a local ring.
+We wish to check that it is regular, i.e. that the maximal ideal has exactly $\dim A_\fr m$ generators. In this case,
+it's clear that $\dim A_\fr m$ is one (via theorems from class) and hence the ideal $(x-a,y-b)$ must collapse to a principal
+ideal in $A_\fr m$. In other words, there must be some way of solving $f$ to write $x-a$ in terms of $y-b$ or vice versa. Of
+course, this is formally possible via the implicit function theorem as long as one of $\partial f/\partial a,\partial f/\partial b$
+is non-zero, as desired.
+
+\subsection*{Problem 9}
+
+Consider $f=xy^2+x^2y=xy(y+x)$, which has zeros at $x=y=0$ and at $x=y$. We compute $\partial_xf=y^2+2xy$ and $\partial_yf=2yx+x^2$; the only singular point, then,
+is $(0,0)$. Next consider $f=x^2-2x+y^3-3y^2+3y$; we compute $\partial_xf=2x-2$ and $\partial yf=3y^2-6y+3=3(y-1)^2$. The singular point is then $(1,1)$,
+as $f(1,1)=0$. Finally, consider $f=x^n+y^n+1$, which has $\partial_xf=nx^{n-1}, \partial_yf=ny^{n-1}$. These derivatives are never zero except at $(0,0)$, which
+is not a root of $f$, and hence $f$ has no singular points.
+
+\subsection*{Problem 10}
+
+Let $k$ an algebraically closed field. Let $f\in k[x,y]$ be a squarefree polynomial of degree 1. In other words, $f=ax+by+c$.
+Clearly $f$ can only have singular points if it is a constant, which contradicts the degree being 1, and hence has no singular points.
+Next consider degree 2: $f=ax^2+bxy+cy^2+dx+ey+f$. In this case, solving for the singular points involves simultaneously solving a linear
+system, which yields a single point. For degree 3, we solve two quadratics, and hence we expect 4 singular points. In this way, we might
+guess that in general for degree $d$ we have, at maximum, $(d-1)^2$ singular points.
+
+
+
+
+
+\end{document}
