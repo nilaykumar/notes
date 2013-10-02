@@ -18,24 +18,36 @@
 
 Let $A=k[x,y,z]/(x^2y^2z^2, x^3y^2z)$. We wish to compute the dimension of $A$ at the maximal ideal $(x,y,z)$.
 Since $x^2y^2z^2$ is a nonzerodivisor in $k[x,y,z]_{(x,y,z)}$, quotienting out by it yields a ring with dimension two (by lemma 46).
-Next note that after quotienting out by $x^3y^2z$ we still have a chain of primes $(x)\subset (x,y)\subset (x,y,z)$ and hence the
-dimension is two.
+Next note that after quotienting out by $x^3y^2z$ we still have a chain of primes $(x)\subset (x,y)\subset (x,y,z)$ where the inclusions
+are still proper (we can't get a $z$ in $(x,y)$ for example, because all we can do with $x^2y^2z^2$ is dock powers) and hence the dimension is two.
 
 
 \subsection*{Problem 6}
 
-Let $A=k[x,y,z]/(x^3-y^2,x^5-z^2,y^4-z^3)$. We wish to compute the dimension of $A$ at $(x,y,z)$.
+Let $A=k[x,y,z]/(x^3-y^2,x^5-z^2,y^5-z^3)$. We wish to compute the dimension of $A$ at $(x,y,z)$. Consider first quotienting by $x^3-y^2$, which
+is clearly prime (and a nonzerodivisor), and hence yields a domain, docking the dimension from 3 to 2. Next consider quotienting by $x^5-z^2$, which
+is no longer prime, but is still a nonzerodivisor and hence yields a ring of dimension 1. Now if we quotient out the last generator, we obtain a ring in which
 
 
 \subsection*{Problem 7}
 
 Let $k$ be a field. Let $f\in k[x,y]$ be a polynomial and $a,b\in k$ be elements such that $f(a,b)=0$.
 Let $\fr m=(x-a,y-b)$ be the corresponding maximal ideal in the ring $A=k[x,y]/(f)$. By construction, $A_\fr m$ is a local ring.
-We wish to check that it is regular, i.e. that the maximal ideal has exactly $\dim A_\fr m$ generators. In this case,
-it's clear that $\dim A_\fr m$ is one (via theorems from class) and hence the ideal $(x-a,y-b)$ must collapse to a principal
-ideal in $A_\fr m$. In other words, there must be some way of solving $f$ to write $x-a$ in terms of $y-b$ or vice versa. Of
-course, this is formally possible via the implicit function theorem as long as one of $\partial f/\partial a,\partial f/\partial b$
-is non-zero, as desired.
+We wish to check that it is regular, i.e. that the maximal ideal has exactly $\dim A_\fr m=1$ generators. The number of generators is given
+by $\dim_{A/\fr m}\fr m/\fr m^2=\dim_k\fr m/\fr m^2$. In this case it's clear that $\fr m$ is the ideal of all polynomials with root
+at $(a,b)$, i.e. every element of $\fr m$ has a finite Taylor series about $(a,b)$ given by $\sum_{i+j\geq 1}c_{ij}(x-a)^i(y-b)^j$ for $c_{ij}\in k$.
+The finiteness is obvious since we are simply dealing with polynomials.
+It follows, then, that elements of $\fr m^2$ look like $\sum_{i+j\geq 2}d_{ij}(x-a)^i(y-b)^j$ for $d_{ij}\in k$, as we have squared away linear terms.
+The quotient $\fr m/\fr m^2$ is then composed of elements of the form $c_{10}(x-a)+c_{01}(y-b)$, which is 2-dimensional as a vector space and isomorphic to $k^2$;
+we must be careful to note, however that $(f)$
+is zero in our original ring and hence its image in $\fr m/\fr m^2$, $(\partial_x f(a,b)(x-a)+\partial_y f(a,b)(y-b))$ must also be zero, which is a dimension one subspace. Hence we see that
+the dimension of $\fr m/\fr m^2$ must be $2-1=1$, as desired.
+
+%In this case,
+%it's clear that $\dim A_\fr m$ is one (via theorems from class) and hence the ideal $(x-a,y-b)$ must collapse to a principal
+%ideal in $A_\fr m$. In other words, there must be some way of solving $f$ to write $x-a$ in terms of $y-b$ or vice versa. Of
+%course, this is formally possible via the implicit function theorem as long as one of $\partial f/\partial a,\partial f/\partial b$
+%is non-zero, as desired.
 
 \subsection*{Problem 9}
 
@@ -49,7 +61,11 @@ is not a root of $f$, and hence $f$ has no singular points.
 Let $k$ an algebraically closed field. Let $f\in k[x,y]$ be a squarefree polynomial of degree 1. In other words, $f=ax+by+c$.
 Clearly $f$ can only have singular points if it is a constant, which contradicts the degree being 1, and hence has no singular points.
 Next consider degree 2: $f=ax^2+bxy+cy^2+dx+ey+f$. In this case, solving for the singular points involves simultaneously solving a linear
-system, which yields a single point. For degree 3, we solve two quadratics, and hence we expect 4 singular points. In this way, we might
+system, which yields a single point. We can assume that the system is non-degenerate because of the squarefree condition; if it were, it is
+straightforward but tedious to show that $f$ can then be written as $(\sqrt{a}x\pm\sqrt{b}y+d/2)^2$, a square. Finally, we want our singular point
+to land on the curve - this can always be done by adjusting $f$.
+
+For degree 3, we solve two quadratics, and hence we expect 4 singular points, and again, not an infinite number due to the squarefree condition. In this way, we might
 guess that in general for degree $d$ we have, at maximum, $(d-1)^2$ singular points.
 
 

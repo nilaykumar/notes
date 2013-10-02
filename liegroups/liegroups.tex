@@ -199,6 +199,132 @@ but not completely reducible, as the following example depicts.
 What is $\Hom_G(V,V)$? First for $V$ irreducible we claim that $\Hom_G(V,V)=\C$. To prove this we need to show that if $F$ is a linear map $V\to V$,
 commuting with $\pi(g)$ for all $g$ then $V$ irreducible implies $F=\lambda I$. Let $\lambda$ be an eigenvalue of $F$. Consider $\lambda$-eigenspace $V_\lambda\subset V$
 $v:Fv=\lambda v$. Claim: $V_\lambda$ is a subrepresentation (because $F$ commutes with all $\pi$): $F(\pi(g)v)=\pi(g)Fv=\lambda \pi(g)v$.
+\todo{what happened here?}
 
+\begin{lem}[Schur's lemma]
+    If $V$ is an irreducible representation of $G$, then $\Hom_G(V,V)=\C$. In words, ever linear map $F:V\to V$ commuting
+    with all $\pi(g)$ is $\lambda I$ for $\lambda\in\C$.
+\end{lem}
+
+\begin{defn}
+    We say that two representations are \textbf{equivalent}, $V_1\approx V_2$, if there exists an morphism $M:V_2\to V_1$ such that $\pi_1(g)=M\pi_2(g)M^{-1}$
+    for all $g\in G$.
+\end{defn}
+
+\begin{lem}
+    If $V_1,V_2$ are both irreducible and not equivalent, then $\Hom_G(V_1,V_2)=0$.
+\end{lem}
+\begin{proof}
+    Consider such an $F:V_1\to V_2$. Since $F$ commutes with the group action, $\ker F\subset V_1$ is a subrepresentation
+    and $\text{Im } F\subset V_2$ is a subrepresentation. By irreducibility, we see that $\ker F$ and $\text{Im} F$ are
+    either $0$ and $V_1$ or $0$ and $V_2$ respectively. Hence the only possibility for $F$ is 0.
+\end{proof}
+
+More generally, suppose that $V=\bigoplus_{i\in\text{Irr}}n_i\cdot V_i$, i.e. we can completely split into irreducibles.
+Then $n_i$ is called the \textbf{multiplicity} of $V_i$.  We can now write
+\begin{align*}
+    \Hom_G(V,V)&=\bigoplus_{i\in\text{Irr}}\Hom_G(n_i\cdot V_i,n_i\cdot V_i)\\
+    &=\bigoplus_{i\in\text{Irr}}\End\C^{n_i}.
+\end{align*}
+
+\begin{cor}
+    All irreducible representations of $G$ are one-dimensional if $G$ is commutative.
+\end{cor}
+\begin{proof}
+    If $V$ is irreducible then all $\pi(g)$ commute with the action of $G$, i.e. for all $\pi(g_0)$ (for $g_0\in G$),
+    we have that $\pi(g)\pi(g_0)=\pi(g_0)\pi(g)$. Schur's lemma now implies that $\pi(g)=\lambda_g$ for some $\lambda_g\in\C^\times$.
+\end{proof}
+
+\begin{exmp}
+    Consider $G=U(1)$: irreducible representations are $\pi_n(e^{i\theta})=e^{in\theta}$ for $n\in\Z$.
+    For $G=\R$, on the other hand, irreducible representations are $\pi_k(x)=e^{ikx}$ for $k\in\R$.
+\end{exmp}
+
+\begin{defn}
+    Given $V_1,V_2$ representations of $G$, we can construct a \textbf{tensor product representation} on $V_1\otimes V_2$ by defining in the obvious way
+    \[\pi(g)(v_1\otimes v_2)=\pi_{1}(g)v_1\otimes \pi_2(g)(v_2),\]
+    for $v_1\in V_1$ and $v_2\in V_2$.
+\end{defn}
+
+This raises a big question: how does $V_1\otimes V_2$ decompose into irreducibles? For $V_1,V_2$ irreducible, $V_1\otimes V_2=\bigoplus_i n_i\cdot V_i$; what are the $n_i$?
+
+\begin{defn}
+    For a Lie algebra $\fr g$, given two representations $V_1,V_2$, we can construct a \textbf{tensor product representation} $V_1\otimes V_2$
+    \begin{align*}
+        \phi(X)=\phi_1\otimes 1 + 1\otimes \phi_2(X),
+    \end{align*}
+    which follows from the derivative of the tensor product representation at the group level.
+\end{defn}
+
+\begin{defn}
+    Given $V_1,V_2$ representations of $G$, we can construct a representation on $\Hom_\C(V_1,V_2)$ given by
+    \begin{align*}
+        \pi(g)(L)=\pi_2(g)L\pi_1(g^{-1}),
+    \end{align*}
+    for some $L\in\Hom_\C(V_1,V_2)$. In the special case that $V_2$ is the trivial representation $V_2=\C$, then we have
+    a representation on $V^*=\Hom(V_1,\C)$ given by the inverse transpose
+    \begin{align*}
+        \pi(g)(L)=L\pi_1(g)^{-1}.
+    \end{align*}
+    This is the dual representation.
+\end{defn}
+
+\begin{defn}
+    We say that a representation of $G$, $(\pi, V)$, is \textbf{unitary} if $\pi(g)\in U(n)$ for all $g\in G$, i.e. all $\pi(g)$ preserve the standard Hermitian form.
+    At the Lie algebra level, we say that a representation $(\phi,V)$ is \textbf{unitary} if $\phi(X)=-\phi(X)^\dagger$.
+\end{defn}
+
+From now on, let us focus on finite-dimensional representations.
+
+\begin{thm}
+    Unitary representations are completely reducible.
+\end{thm}
+\begin{proof}
+    If $V_1\subset V$ is a subrepresentation, then we claim that $V_1^\perp$ is also a subrepresentation. If $V_2$ is a subrepresentation
+    then $V=V_1\oplus V_2$, which is a sum of subrepresentations, and we can continue this process until we are left with irreducibles.
+    Now let us prove the claim. Note that $V_1^\perp$ is preserved by $\pi(g)$ because
+    \begin{align*}
+        0=\langle\pi(g)v,v_1\rangle=\langle(\pi(g)^{-1}\pi(g)v,\pi(g)^{-1}v_1\rangle=\langle v,v_1'\rangle
+    \end{align*}
+    for some $v_1'\in V_1$. This implies that $v\in V_1^\perp$ implies that $\pi(g)v\in V_1^\perp$, as desired.
+\end{proof}
+
+\begin{cor}
+    All representations of a finite group $G$ are completely reducible.
+\end{cor}
+\begin{proof}
+    It suffices to show that there exists a $G$-invariant Hermitian inner product on $V$. Start with any Hermitian inner product $B(\cdot,\cdot)$ on $V$. 
+    Then we define
+    \[\langle\cdot,\cdot\rangle=\frac{1}{|G|}\sum_{g\in G}B(\pi(g)\cdot,\pi(g)\cdot).\]
+    Then it's clear that 
+    \[\langle\pi(u)v,\pi(u)w\rangle=\frac{1}{|G|}\sum_{g\in G}B(\pi(g)\pi(u)v,\pi(g)\pi(u)w)=\frac{1}{|G|}\sum_{g\in G}B(\pi(g)v,\pi(g)w)\]
+    by the homomorphism property and relabeling, and we are done.
+\end{proof}
+
+This ``averaging trick'' is quite powerful, and can in fact be extended to compact Lie groups, as we shall see shortly.
+
+\begin{defn}
+    If $(\pi,V)$ is a representation of $G$, it's \textbf{character} is a function on $G$ given by
+    \[\chi_V(g)=\tr \pi(g).\]
+    Note that $\chi_V$ is in fact a function on the conjugacy classes of $G$. Additionally, it is easy to see that
+    \begin{align*}
+        \chi_{V_1\oplus V_2}&=\chi_{V_1}+\chi_{V_2}\\
+        \chi_{V_1\otimes V_2}&=\chi_{V_1}\cdot\chi_{V_2}\\
+        \chi_{(V_1,\C)}&=1
+    \end{align*}
+\end{defn}
+
+\begin{defn}
+    The \textbf{representation ring} $R(G)$ of a group $G$ is the ring with elements equivalence classes of representations $[V]$
+    with $[V_1]+[V_2]=[V_1\oplus V_2]$ and $[V_1][V_2]=[V_1\otimes V_2]$. The inverses for the additive operation are given by ``formal
+    differences'' with the equivalence relation $([V_1],[V_2])\sim([V_1]+[V],[V_2]+[V])$.
+\end{defn}
+
+\begin{lem}
+    The complexified representation ring is precisely the functions on $G$ invariant on $G$: $R(G)\otimes_\Z\C=\text{Fun}(G)^G$.
+\end{lem}
+
+Let us now consider how to construct irreducible representations of finite; we will start by using functions on the group, i.e. the regular representation.
+Later we will generalize this compact groups.
 
 \end{document}
