@@ -16,6 +16,7 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\F}{\mathbb{F}}
+\newcommand{\HH}{\mathbb{H}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\CP}{\mathbb{C}\mathbb{P}}
 \newcommand{\RP}{\mathbb{R}\mathbb{P}}
@@ -42,11 +43,15 @@
 \DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\irr}{irr}
 \DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\trdeg}{trdeg}
+\DeclareMathOperator{\Nm}{Nm}
 \DeclareMathOperator{\Spec}{Spec}
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}
+\newtheorem*{thm*}{Theorem}
 \newtheorem{lem}[thm]{Lemma}
 \newtheorem{cor}[thm]{Corollary}
+\newtheorem*{cor*}{Corollary}
 \newtheorem{prop}{Proposition}
 \newtheorem{exc}{Exercise}
 

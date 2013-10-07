@@ -321,10 +321,84 @@ This ``averaging trick'' is quite powerful, and can in fact be extended to compa
 \end{defn}
 
 \begin{lem}
-    The complexified representation ring is precisely the functions on $G$ invariant on $G$: $R(G)\otimes_\Z\C=\text{Fun}(G)^G$.
+    The complexified representation ring is precisely the functions on $G$ conjugation-invariant on $G$: $R(G)\otimes_\Z\C=\text{Fun}(G)^G$.
 \end{lem}
 
 Let us now consider how to construct irreducible representations of finite; we will start by using functions on the group, i.e. the regular representation.
 Later we will generalize this compact groups.
+
+There exists a left and right invariant Hermitian inner product on $Fun(G)$:
+\begin{align*}
+    \langle f_1,f_2\rangle =\frac{1}{|G|}\sum_{g\in G}\bar f_1(g)f_2(g).
+\end{align*}
+This implies that the left and right actions on $Fun(G)$ are unitary. We will prove that the $\chi_{V_i}$, for $V_i$ irreducible, yield
+an orthonormal basis of the conjugation invariant functions $Fun(G)^G$. Indeed, the following theorem holds:
+    
+\begin{thm}
+$\langle \chi_{V_1},\chi_{V_j}\rangle=\delta_{ij}$.
+\end{thm}
+
+
+As an aside, note that for $V$ an irreducible representation of $G$ a vector space over any field $k$, then $\End_G(V,V)$ is a division
+algebra over $k$. This can be shown as follows. First note that $\End_G(v,V)$ are an algebra over $k$, where the product is composition.
+If $F\in\End_G(V,V)$ then irreducibility of $V$ implies that $\ker F,\text{Im }F$ are $G$-invariant subspaces. If $\ker F=0$, we see that $F$
+is an isomorphism and is thus invertible. Otherwise, if $\ker F=V$, then $F=0$. Of course, we can no longer use the proof of Schur's lemma
+using eigenvalues, as our field $k$ is not necessarily closed; one way to proceed is to note that there is only one division algebra over $\C$ for
+the case $k=\C$. If $k=\R$, there exist three division algebras over $\R$, i.e. $\R,\C,\HH$. This implies that $V$ irreducible yields three
+possibilities for $\End_G(V,V)$. For this reason, we will stick to dealing with $\C$, as it is generally simpler.
+
+\begin{cor}
+    Given the decomposition $V=\oplus_i n_iV_i$, where $n_i\in\N$ is the multiplicity of $V_i$, then $\langle\chi_{V},\chi_{V_i}\rangle=n_i=\frac{1}{|G|}\sum_{g\in G}\bar\chi_V(g)\chi_{V_i}(g)$.
+\end{cor}
+
+Let us now try to prove the theorem above. The following theorem will be useful.
+
+\begin{thm}
+    If $(\pi^V,v),(\pi^W,W)$ are two irreducible representations of $G$ then $\langle \pi^V_{ab},\pi^W_{cd}\rangle$ is $\delta_{ac}\delta_{bd}/\dim V$ if $V$ is
+    equivalent to $W$ and 0 otherwise, i.e. the matrix elements of irreducible representations are orthogonal.
+\end{thm}
+\begin{proof}
+    Given a linear map $F:V\to W$, consider $\tilde F=\frac{1}{|G|}\sum_{g\in G}\pi^W(g)\pi^V(g^{-1})$. One can check that $\pi^W\circ \tilde F=\tilde F\circ \pi^V$,
+    i.e. $\tilde F$ is an intertwining operator. Schur's lemma implies that $\tilde F=0$ if $V$ and $W$ are not equivalent but $\tilde F=\lambda I$ if they are.
+    Then $\tr\tilde F=\lambda\dim V=\tr F$. This implies that $\tilde F=\tr F/\dim V \cdot I$.
+\end{proof}
+
+\begin{proof}
+    We first show the orthogonality of matrix elements. Given a basis of $V$, $\pi_V(g)$ is a $\dim V\times \dim V$ matrix that
+    gives $(\dim V)^2$ functions on $G$. Pick $F=F_{ac}$ which is 1 at $a,c$ and 0 otherwise. Then
+    \begin{align*}
+        \tilde F_{ac}=\frac{1}{|G|}\sum_{g\in G}\pi^W(g)F_{ac}\pi^V(g)=0\text{ if }V\nsim W.
+    \end{align*}
+    We can write this as a matrix formula for $(F_{ac})_{ij}(\tilde F_{ac})_{bd}=\frac{1}{|G|}\sum_{g\in G}\pi^W_{ba}(g)\bar{\pi}^V_{dc}(g)=0$,
+    which is precisely the orthogonality relation for the matrix elements if $V,W$ are not equivalent. On the other hand, if $V,W$ are equivalent,
+    Schur's lemma via the above theorem implies that $(\tilde F_{ac})_{bd}=\delta_{bd}\tr F_{ac}/\dim V=\delta_{bd}\delta_{ac}/\dim V$, which yields 
+    the orthogonality.
+
+    Now let us prove the theorem. $\langle\chi_V,\chi_W\rangle=\frac{1}{|G|}\sum_{g\in G}\sum_a\bar\pi_{aa}^V\sum_c\pi^W_{cc}$ is zero if $V\nsim W$
+    and is $\sum_{a,c}\delta_{ac}/\dim V$ if $V\sim W$, and we are done.
+\end{proof}
+
+This leaves a few questions. First of all, what is the set $\hat G$ of inequivalent irreducible representations? Second, what are the functions $\chi_{V_i}$?
+Moreover, what are the actual matrices $\pi_{V_i}(g)$ (upto conjugation)?
+
+
+One might ask how to construct representations - i.e. how to produce linear spaces on which a group acts. One obvious thing to do is to consider the space
+of functions on $G$, $Fun(G)$. We wish to find such irreducible representations. Note that $Fun(G)$ carries a representation of $G\times G$, the \textbf{regular
+representation} $\pi_r$, given by $(\pi_r(g_l,g_r)f)(g)=f(g_l^{-1}gg_r).$ However, for any representation $\pi_V$ of $G$, we also have a representation of $G\times G$
+on $V^*\otimes V$ by $\Phi(v)(g_l,g_r)(v^*\otimes v)=\pi_{V^*}(g_l)v^*\otimes \pi_V(g_r)v$ where $v^*\in V^*,v\in V$.
+One thing to notice is that $V^*\otimes V=\End V$.
+
+We claim that there exists an isomorphism of these two $G\times G$ representations given by $\oplus_{i\in\hat G}V_i^*\otimes V_i\leftrightarrow Fun(G)$.
+Mapping from left to right (call it $m$), take $v^*\in V^*,v\in V$, let $m(v^*\otimes v)=v^*(\pi_V(g)v)\in Fun(G)$, which is simply a matrix element.
+One can show that this $G\times G$ map is injective and surjective and that the orthogonality of matrix elements implies that this is a unitary map.
+
+Another, more algebraic point of view, of the same fact is to consider $\C(G)$ as the algebra of complex-valued functions on $G$ with convolutions
+as the product:
+\[f_1\cdot f_2(g)=\frac{1}{|G|}\sum_{g\in G}f_1(gh^{-1})f_2(h).\]
+This is an associative algebra of finite dimension over $\C$. Wedderburn's theorem tells us that $\C(G)=\oplus_i M(d_i,\C)$, i.e. this breaks up
+into matrix algebras. One then finds that the dimensions of both side must be the same, i.e. $\dim\C(G)=|G|=\sum_id_i^2$. PIcking the right action
+we get a representation $\pi$ on $Fun(G)$ (not irreducible) $\pi(g)f(h)=f(gh)$ with $Fun(G)=\oplus_{i\in\hat G}n_iV_i$ where $n_i=\dim V_i=\oplus_{i\in\hat G}V_i\otimes\Hom_G(V_i,Fun(G))$.
+
+
 
 \end{document}

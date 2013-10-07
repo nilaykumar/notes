@@ -26,7 +26,14 @@ are still proper (we can't get a $z$ in $(x,y)$ for example, because all we can 
 
 Let $A=k[x,y,z]/(x^3-y^2,x^5-z^2,y^5-z^3)$. We wish to compute the dimension of $A$ at $(x,y,z)$. Consider first quotienting by $x^3-y^2$, which
 is clearly prime (and a nonzerodivisor), and hence yields a domain, docking the dimension from 3 to 2. Next consider quotienting by $x^5-z^2$, which
-is no longer prime, but is still a nonzerodivisor and hence yields a ring of dimension 1. Now if we quotient out the last generator, we obtain a ring in which
+is no longer prime, but is still a nonzerodivisor and hence yields a ring of dimension 1. Furthermore, if we now quotient out the last generator,
+we will obtain a ring of dimension either 1 or 0. We claim that $\dim A$ is in fact 1. It suffices to show that there exists an integral
+map $A\to k[t]$, as this will imply that $\dim A\geq \dim k[t]=1$, thus ruling out the possibility $\dim A=0$. We can construct such a map,
+call it $\phi$, by sending $x\mapsto t^2,y\mapsto t^3,$ and $z\mapsto t^5$. It's clear that $\phi$ is a morphism of rings. 
+Moreover, since
+using $t^3$ and $t^5$ we can write any $t^n$ for $n\geq 2$ as $\phi(x^iy^j)$ for some $i,j\geq 0$. This shows that everything in $k[t]$ is integral
+over $A$ except for $t$ (take $t^n-\phi(x^iy^j)=0$). But $t$ is clearly integral as well, because $t^2-\phi(x)=0$. Hence $\phi$ is integral, 
+and we are done.
 
 
 \subsection*{Problem 7}

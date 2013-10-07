@@ -1,0 +1,96 @@
+\documentclass{../../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\title{Lie Groups PSET 2}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{prop}
+    Kirillov 2.15
+\end{prop}
+\begin{proof}
+    Let us first show that $\End_\HH\HH^n$ is naturally identified with the algebra of $n\times n$ quaternionic matrices.
+    Let $\left\{ e_\alpha \right\}$ be an orthonormal basis for $\HH^n$ over $\HH$ (the orthonormality condition will be useful later).
+    Then we may write any $\vec h=\sum_\alpha e_\alpha h_\alpha$, as we are considering
+    $\HH^n$ as a right $\HH$-module. Applying an endomorphism $A$, we find that $A(\vec h)=A\left( \sum_\alpha e_\alpha h_\alpha \right)
+    =\sum_\alpha A(e_\alpha h_\alpha)=\sum_\alpha A(e_\alpha) h_\alpha$. Denoting the $\beta$ component of $A(e_\alpha)$ by the quaternion $A_{\beta\alpha}$,
+    we can rewrite
+    \[A(\vec h)=\sum_{\alpha,\beta}e_\beta A_{\beta\alpha}h_\alpha.\]
+    From this, it is clear that the endomorphism is characterized precisely by this $n\times n$ matrix $A_{\beta\alpha}$ of quaternions.
+
+    Now let us define an $\HH$-valued form on $\HH^n$ given by
+    \[(\vec h,\vec h')=\sum_i\bar h_i h_i'\]
+    and let $U(n,\HH)$ be the group of unitary quaternionic transformations:
+    \[U(n,\HH)=\left\{ A\in\End_\HH\HH^n | (A\vec h,A\vec h')=(\vec h,\vec h') \right\}.\]
+    It's clear that $U(n,\HH)$ is indeed a group - composing two transformations yields another such transformation, and the identity is contained in the
+    group. The inverses are given by just the matrix inverses (that clearly exist because no $A\in U(n,\HH)$ has determinant 0):
+    \[(\vec h,\vec h')=(AA^{-1}\vec h,AA^{-1}\vec h')=(A^{-1}\vec h,A^{-1}\vec h').\]
+    Using the identification of endomorphisms with matrices that we established in the previous paragraph, let us find a matrix characterization
+    for elements of $U(n,\HH)$:
+    \begin{align*}
+        (A\vec h, A\vec h')&=\left( \sum_{\alpha,\beta}e_\beta A_{\beta\alpha}h_{\alpha},\sum_{\gamma,\delta}e_\gamma A_{\gamma\delta} h'_\delta \right)\\
+        &=\sum_{\beta,\gamma}(e_\beta,e_\gamma)\left( \overline{\sum_\alpha A_{\beta\alpha}h_\alpha} \right)\left( \sum_\delta A_{\gamma\delta}h_\delta' \right)\\
+        &=\sum_{\alpha,\beta,\delta}\overline{A_{\beta\alpha} h_\alpha}A_{\beta\delta}h'_\delta
+        =\sum_{\alpha,\beta,\delta}\overline{h_\alpha}\cdot\overline{A_{\beta\alpha}}A_{\beta\delta}h'_\delta.
+    \end{align*}
+    But this is precisely $(\vec h,\vec h')$ if and only if the middle terms sum to the identity, i.e. $A^*A=1$.
+
+    Define now a map $\phi:\C^{2n}\to\HH^n$ given by $(z_1,\ldots, z_{2n})\mapsto(z_1+jz_{n+1},\ldots,z_n+jz_{2n})$. If we treat $\HH^n$ as a complex vector
+    space via the scalar multiplication $z(h_1,\ldots,h_n)=(h_1z,\ldots,h_nz)$, $\phi$ is in fact an isomorphism of complex vector spaces. To see this, it suffices
+    to show that $\phi$ is injective, but this is obvious because $z_i+jz_{n+1}=a_i+ib_i+ja_{n+i}-kb_{n+i}=0$ implies that the $a_i=a_{n+i}=b_i=b_{n+i}=0$,
+    and hence that $z_i=z_{n+i}=0$, i.e. $\ker\phi=\{\vec 0\}$. Next let us show that this isomorphism identifies $\End_\HH\HH^n$ with
+    $\{A\in\End_\C\C^{2n} | \bar A=J^{-1}AJ\}$ where
+    \[J=\begin{pmatrix}0&-I_n\\I_n&0\end{pmatrix}.\]
+    First note that the map $\vec h\mapsto\vec hj$ is identified with $\vec z\mapsto J\vec{\bar z}$, because quaternionic multiplcation by $j$ is equivalent
+    to multiplying $(z_i+jz_{n+i})j=z_ij+jz_{n+i}j=-\bar z_{n+i}+j\bar z_i$.\todo{finish this}
+
+    Under the identification $\C^{2n}\cong\HH^n$ above, the quaternionic form simplifies as follows. Let $h_i=z_i+jz_{n+i}$ and $h'_i=z_i'+jz_{n+1}'$.
+    Then, by definition,
+    \begin{align*}
+        (\vec h,\vec h')&=\sum_l (\bar z_l+\overline{jz_{n+l}})(z_l'+jz_{n+l}')\\
+        &=\sum_l\left( \bar z_lz_l'+\bar z_{n+l}z'_{n+l}-\bar z_{n+l}jz'_l+\bar z_l j z'_{n+l} \right).
+    \end{align*}
+    Anti-commuting the $j$ and factoring it out of the last two terms, we see that the first term is the usual Hermitian inner product and the last terms
+    are the standard bilinear skew-symmetric form in $\C^{2n}$ (multiplied by $j$). For the whole form to be preserved, each form must be preserved, and hence
+    we see that $Sp(n)=Sp(n,\C)\cap SU(2n)$.
+
+\end{proof}
+
+\begin{prop}
+    Kirillov 3.16
+\end{prop}
+\begin{proof}
+    We wish to show that $\fr{sp}(n)_\C=\fr{sp}(n,\C)$. Note that (from Kirillov) $\fr{sp}(n,\C)$ is the set of $2n\times 2n$ complex matrices $x$ such that $x+J^{-1}x^tJ=0$.
+    As $Sp(n)$ is the intersection of $Sp(n,\C)$ and $SU(2n)$, it's clear that $\fr{sp}(n)$ is the set of matrices that satsify this condition in addition
+    to the condition that $x^\dagger=-x$. If we now complexify and consider $\fr{sp}(n)_\C=\fr{sp}(n)\oplus i\fr{sp}(n)$, the first condition $x+J^{-1}x^tJ=0$
+    still holds (by linearity) but the second no longer holds, as $(ix)^\dagger=-ix^\dagger=ix$ instead of $-ix$. This is precisely what we wanted to show.
+\end{proof}
+
+\begin{prop}
+    Kirillov 3.1
+\end{prop}
+\begin{proof}
+    Let $X=\begin{pmatrix}-1&1\\0&-1\end{pmatrix}$. Suppose $x\in\fr{sl}(2,\R)$ such that $\exp(x)=X$. It's clear that the eigenvalues of $x$
+    must exponentiate to the eigenvalues of $X$, as eigenvalues of powers are simply powers of eigenvalues. Hence we see that if $\lambda_1,\lambda_2\in\C$
+    are the eigenvalues of $x$ then $e^{\lambda_1}=e^{\lambda_2}=-1$. This yields
+    \begin{align*}
+        \lambda_1&=(2n+1)\pi i\\
+        \lambda_2&=(2m+1)\pi i
+    \end{align*}
+    for some $m,n\in\Z$. The condition that $x\in\fr{sl}(2,\R)$ requires that $\lambda_1+\lambda_2=0$, i.e. that $m=-(n+1)$. Hence the $\lambda_1,\lambda_2$ must be
+    distinct, i.e. diagonalizable over the complex numbers. In other words, we have that $P^{-1}xP=\lambda$ where $\lambda$ is diagonal with $\lambda_1,\lambda_2$.
+    Exponentiating, we find that
+    \begin{align*}
+        P^{-1}\exp(x)P=\begin{pmatrix}-1&0\\0&-1\end{pmatrix}.
+    \end{align*}
+    Moving the $P$'s to the other side, we find that $\exp(x)=-I$, which is clearly not equal to $X$. Hence we obtain a contradiction - there can exist no such $x$.
+\end{proof}
+
+\end{document}
