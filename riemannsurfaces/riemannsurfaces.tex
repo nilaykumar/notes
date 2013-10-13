@@ -142,6 +142,57 @@ We leave it as an exercise to show that
     \sigma(z)=\omega_1\exp\left( \eta_1\frac{z^2}{\omega_1}\right)\frac{\theta_1\left( \frac{z}{\omega_1}|\tau \right)}{\theta_1'(0|\tau)}
 \end{align*}
 
+\section*{Class 11}
 
+We claim that the theta-function theory is more powerful than what we have been using so far - to see this, let us prove Abel's theorem.
+Recall that the theorem states that there exists a meromorphic $f$ with zeroes at $P_i$ and poles and $Q_j$ if and only if $N=M$ and $\sum_i A(P_i)=\sum_j A(Q_j)$.
+The idea is to express
+\begin{align*}
+    f(z)=\frac{\prod_{i=1}^N\theta_1(x-P_i)}{\prod_{i=1}^N\theta_1(z-Q_i)}
+\end{align*}
+and check double-periodicity. It is an exercise to check that
+\begin{align*}
+    \theta_1(z+1|\tau)&=-\theta_1(z|\tau)\\
+    \theta_1(z+\tau|\tau)&=\exp\left( -\pi i\tau-2\pi i(z+1/2) \right)\theta_1(z|\tau),
+\end{align*}
+from which periodicity follows easily. Of course, we must be careful to note that the $P_i,Q_i$ used here are in fact chosen representatives.
+
+Next let us define a meromorphic form
+\begin{align*}
+    \omega_{PQ}=\partial_z\log\frac{\theta_1(z-P)}{\theta_1(z-Q)}dz,
+\end{align*}
+which, it is easy to check, has poles at $P,Q$ with opposite residues. Additionally, one can check that this expression is well-defined on the lattice, 
+i.e. invariant under a shift. We leave it as a simple exercise to show that
+\[\omega_P(z)=\partial^2_z\log\frac{\theta_1(z-P|\tau)}{\theta_1'(0|\tau)}dz\]
+is a meromorphic form with a double pole at $P$ and is well-defined on the lattice.
+
+But in fact, we can go even farther with this theta-function. Indeed, one attractive feature is that there exists a product expansion for $\theta(z|\tau)$.
+\begin{thm}
+    We can expand
+    \begin{align*}
+        \theta(z|\tau)=\prod_{n=1}^\infty (1-q^{2n)}(1+q^{2n-1}e^{2\pi iz})(1+q^{2n-1}e^{-2\pi iz})
+    \end{align*}
+    where $q\equiv e^{\pi i\tau}$.
+\end{thm}
+\begin{proof}
+    Define
+    \begin{align*}
+        T(z|\tau)=\prod_{n=1}^\infty (1-q^{2n)}(1+q^{2n-1}e^{2\pi iz})(1+q^{2n-1}e^{-2\pi iz}).
+    \end{align*}
+    We claim that $T(z|\tau)$ is equal to zero exactly when $z$ is $(1+\tau)/2\mod\Lambda$ and that the zeros are simple. This can be
+    checked by some simple algebra. It's also easy to show that $T(z|\tau)$ is holomorphic in $\C$ and that $\tau(z+1|\tau)=T(z|\tau)$.
+    Moreover
+    \begin{align*}
+        T(z+\tau|\tau)&=\prod_{n=1}^\infty (1-q^{2n})\prod\left( 1+q^{2n+1}e^{2\pi iz} \right)\left( 1+q^{2n-3}e^{-2\pi iz}q^{-2} \right)\\
+        &=\prod_{n=1}^\infty (1-q^{2n})\frac{\prod_{n=1}^\infty\left( 1+q^{2n-1}e^{2\pi i z} \right)}{1+qe^{2\pi iz}}\prod_{n=1}^\infty\left( 1+q^{2n-1}e^{-2\pi iz} \right)
+        &=\frac{1-q^{-1}e^{-2\pi iz}}{1-qe^{2\pi iz}}T(z|\tau)=q^{-1}e^{-2\pi iz}.
+    \end{align*}
+    Recall that $\theta$ followd a similar condition. This shows that $\theta(z|\tau)/T(z|\tau)=c$,
+    where $c$ is a constant independent of $z$ that can depend on $\tau$. Next we claim that $c(\tau)=1$. For this we show that there exists a $c$ such that $c(\tau)=c(4\tau)=c(4^k\tau)$
+    and $c(\tau)=\lim_{k\to\infty}c(4^k\tau)=1$, which shows the proof. Hence let us prove that $c(\tau)=c(4\tau)$ using $\theta(z|\tau)=C(\tau)T(z|\tau)$.
+
+    Take $z=1/2$. Then $e^{2\pi iz=e^{\pi i}}\geq 1-$ and $\theta(1/2|\tau)=\sum_{n\in\Z}e^{\pi i n^2\tau}(-1)^n$ but $T(1/2|\tau)=\prod^{\infty}_{n=1}(1-q^{2n)(1-q^{2n-1}}(1-q^{2n-1})$.
+    and hence $c(\tau)=\sun e^{\pi in\tau}(-1)^n/\prod(1-q^n)(1-q^{2n-1})$. Next take $z=1/4$
+\end{proof}
 
 \end{document}

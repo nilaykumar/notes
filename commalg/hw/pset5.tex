@@ -1,0 +1,80 @@
+\documentclass{../../mathnotes}
+
+\usepackage{enumerate}
+\usepackage{todonotes}
+\usepackage{tikz-cd}
+
+\title{Commutative Algebra: Problem Set 5}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 3}
+
+Let $A=k[x,y,z]$ and $I=(z^6-z^2y^3)$ be an ideal of $A$. 
+Consider, in the field of fractions of $A/I$, $t=xy/z^2$ and $s=z^3/xy$. It is easy to see that $t^3=x$, $s^2=y$, and $st=z$. 
+If we consider a map $\phi: A/I\to k[s,t]$ given by $x\mapsto t^3$, $y\mapsto s^2,$ and $z\mapsto st$ (this is clearly well-defined)
+then it is easy to see that $s,t$ are integral. Thus $s,t$ are both in the integral closure and in the field of fractions. Moreover,
+the induced map between the fraction fields is surjective because we know how to express $s,t$ in terms of fractions of $x,y,z$.
+It is also clearly injective because it is a map of fields.
+
+\subsection*{Problem 4}
+
+Consider the domain $R=k[x_1,x_2,\ldots]/I$ where $I$ is the ideal $(x_2^2-x_1^3,x_4^2-x_3^3,\ldots)$ (domain follows from primenes).
+We claim that the integral closure of $R$ in its fraction field is not finite over $R$. Given the example from class where we showed
+that $y/x=x^{1/2}$ is both in the integral closure and in the field of fractions of $k[x,y]/(y^2-x^3)$, we see that in our case each
+pair of variables gives us a fraction that is integral over $R$. Hence, since there are an infinite number of such pairs, the integral
+closure of $R$ is clearly not finite over $R$.
+
+\subsection*{Problem 6}
+
+Let $B=k[x,y]$ with grading determined by $\deg x=2, \deg y=3$. Denote by $H$ the Hilbert function for $B$. The number of linearly independent
+polynomials in $B_n$ should correspond to $H(n)$ as well as to the number of solutions to the equation $2a+3b=n$, with $a,b\in\N$. We can visualize the solution
+by graphing the line $b=(n-2a)/3$ for all integer $n$ (for which the line intersects the first quadrant, as $a,b\in\N$) and counting, for each line (i.e. for each $n$)
+the number of lattice points that lie on said line (see below). From this, it is quite easy to see that the Hilbert function follows a pattern defined modulo 6; of course one can show this as well
+by computing by hand the first few simple cases:
+\begin{align*}
+    H(0)&=1\\
+    H(1)&=0\\
+    H(2)&=1\\
+    H(3)&=1\\
+    H(4)&=1\\
+    H(5)&=1\\
+    H(6)&=2\\
+    H(7)&=1\\
+    H(8)&=2\\
+    &\vdots
+\end{align*}
+where $H(1)=0$ is defined by convention as there simply is no graded piece $B_1$, and hence no chains. By an induction that I can't quite figure out, then, it follows that
+given $n=6k+r$, $H(n)=k$ if $r=1$ and $H(n)=1+k$ otherwise. This behavior is clearly not polynomial, even for $n\gg 0$.
+
+Graphically, however, the induction is quite obvious, as transition from $k$ to $k+1$ is analagous to transitioning from the red triangle on the left to the
+bigger, black triangle. To find the number of lattice points crossed on each line of the black triangle, simply note that the red triangle on the right is simply a translate of
+the other red triangle and hence contains the same number of crossings, while in the parallelogram precisely one extra point is hit on each line (one can prove this simply by computing
+by hand the values of $H$ up to $n=12$). This argument can be applied inductively to get the general behavior of adding one more crossing every time one adds one to $k$.
+
+\subsection*{Problem 7}
+
+Let $B=k[x,y]/(x^2,xy)$ with grading determined by $\deg x=2,\deg y=3$. It's clear that the only monomials in this ring
+are terms with any number of $y$ powers or one power of $x$. Thus the $n$th graded piece, as the dimension of the $n$th graded piece for $n\gg 0$ will be 0 if not divisible by
+3 (the degree of $y$) and $1$ otherwise (just the chain $(0)\subset (y^n)$) . This is clearly not polynomial behavior.
+
+\subsection*{Problem 8}
+
+Let $B=k[x,y,z]/(x^d+y^d+z^d)$ with grading determined by $\deg x=\deg y=\deg z=1$. We know, of course, that for $k[x,y,z]$ the Hilbert function evaluated at $n$
+is simply the binomial coefficient $\binom{n+2}{2}$. Let us see how quotienting by $(x^d+y^d+z^d)$ changes the dimension of the $n$th graded piece. 
+We can think of the dimension as simply the number of linearly independent polynomials that are present in a given component (because we essentially have
+vector spaces other than what we are modding out by).
+So note that for $n\leq d$ there is no change - the Hilbert function is exactly as before, because there is no reduction. Next consider the case $n=d$; here we have
+the homogeneous polynomials of degree $d$ and we lose only one polynomial $x^d+y^d+z^d$. For $n=d+1$, on the other hand, we lose three because we lose
+$x^{d+1}+xy^{d}+xz^{d},yx^d+y^{d+1}+yz^d,$ and $zx^d+zy^d+z^{d+1}$. For $n=d+2$ we will then lose six because we can multiply $x^d+y^d+z^d$ by any degree 2 homogeneous polynomial.
+It's clear, by an easy induction, then, that the the Hilbert function evaluated at the $n$th graded piece is then $\binom{n+2}{2}-\binom{n-d+2}{2}$. This simplifies to
+$dn+\frac{3d-d^2}{2}$, which is linear in $n$ and hence we also see that the Hilbert function is in fact a polynomial (for $n\geq d$ though it is in fact a quadratic
+for $n\leq d$).
+
+
+\end{document}

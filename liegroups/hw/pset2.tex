@@ -49,7 +49,7 @@
     $\{A\in\End_\C\C^{2n} | \bar A=J^{-1}AJ\}$ where
     \[J=\begin{pmatrix}0&-I_n\\I_n&0\end{pmatrix}.\]
     First note that the map $\vec h\mapsto\vec hj$ is identified with $\vec z\mapsto J\vec{\bar z}$, because quaternionic multiplcation by $j$ is equivalent
-    to multiplying $(z_i+jz_{n+i})j=z_ij+jz_{n+i}j=-\bar z_{n+i}+j\bar z_i$.\todo{finish this}
+    to multiplying $(z_i+jz_{n+i})j=z_ij+jz_{n+i}j=-\bar z_{n+i}+j\bar z_i$.
 
     Under the identification $\C^{2n}\cong\HH^n$ above, the quaternionic form simplifies as follows. Let $h_i=z_i+jz_{n+i}$ and $h'_i=z_i'+jz_{n+1}'$.
     Then, by definition,
@@ -60,7 +60,6 @@
     Anti-commuting the $j$ and factoring it out of the last two terms, we see that the first term is the usual Hermitian inner product and the last terms
     are the standard bilinear skew-symmetric form in $\C^{2n}$ (multiplied by $j$). For the whole form to be preserved, each form must be preserved, and hence
     we see that $Sp(n)=Sp(n,\C)\cap SU(2n)$.
-
 \end{proof}
 
 \begin{prop}
@@ -92,5 +91,106 @@
     \end{align*}
     Moving the $P$'s to the other side, we find that $\exp(x)=-I$, which is clearly not equal to $X$. Hence we obtain a contradiction - there can exist no such $x$.
 \end{proof}
+
+\begin{prop}
+    Kirillov 3.5
+\end{prop}
+\begin{proof}
+    Consider $\R^3$ as a vector space with a Lie bracket given by the cross-product. It's clear that this is indeed a Lie bracket, because
+    for $\vec v,\vec w,\vec u\in\R^3$, the cross product is clearly bilinear, and satisfies $\vec v\times\vec w=-\vec v\times \vec w$. The Jacobi identity
+    follows by first noting that for $\vec a,\vec b,\vec c\in\R^3$, the triple vector product rule gives us $\vec a\times (\vec b\times \vec c)=\vec b(\vec a\cdot \vec c)-c(\vec a\cdot \vec b)$ where
+    the product is the usual inner product. Then, permuting the orders, we find that
+    \begin{align*}
+       \vec a\times(\vec b\times \vec c)+\vec b\times(\vec c\times\vec a)+\vec c\times(\vec a\times\vec b)=0 
+    \end{align*}
+    where the cancellations are acheieved by the commutativity of the inner product. Hence $\R^3$ with the cross product forms a Lie algebra.
+
+    Now consider the usual basis for $\fr{so}(3,\R)$ denoted by $J_x,J_y,J_z$ and the basis for $\R^3$ denoted by $x,y,z$. Let $\phi$ be the vector
+    isomorphism that takes $J_x$ to $x$, $J_y$ to $y$, and $J_z$ to $z$. Moreover, $\phi$ is a Lie algebra homomorphism as one can check (it is straightforward
+    but tedious), as the basis of $\fr{so}(3,\R)$ follows precisely the same commutation relations as does the basis for $\R^3$.
+
+    Consider the standard action of $\fr{so}(3,\R)$ on $\R^3$ given by matrix multiplication $a\cdot\vec v=\phi(a)\times\vec v$. We wish to show that
+    this action coincides with the action of $\R^3$ on itself via the cross product: $a\cdot\vec v=\phi(a)\times \vec v$. To do this, first note that:
+    \begin{align*}
+        J_x\cdot x&=\begin{pmatrix}0&0&0\\0&0&-1\\0&1&0\end{pmatrix}
+            \begin{pmatrix}
+                1\\0\\0
+            \end{pmatrix}
+            =\vec 0\\
+        J_x\cdot y&=z\\
+        J_x\cdot z&=-y\\
+        J_y\cdot x&=\begin{pmatrix}0&0&1\\0&0&0\\-1&0&0\end{pmatrix}
+            \begin{pmatrix}
+                1\\0\\0
+            \end{pmatrix}
+            =-z\\
+        J_y\cdot y&=\vec 0\\
+        J_y\cdot z&=x\\
+        J_z\cdot x&=\begin{pmatrix}0&-1&0\\1&0&0\\0&0&0\end{pmatrix}
+            \begin{pmatrix}
+                1\\0\\0
+            \end{pmatrix}
+            =y\\
+        J_z\cdot y&=-x\\
+        J_z\cdot z&=\vec 0
+    \end{align*}
+    which we can use to simplify
+    \begin{align*}
+        a\cdot v&=\left( \alpha J_x+\beta J_y+\gamma J_z \right)\cdot (v_xx+v_yy+v_zz)\\
+        &=\alpha\left( v_yz-v_zy \right)+\beta\left( -v_xz+v_zx \right)+\gamma\left( v_xy-v_yx \right)\\
+        &=\left( \beta v_z-\gamma v_y \right)x+\left( \gamma v_x-\alpha v_z \right)y+\left( \alpha v_y-\beta v_z \right)z.
+    \end{align*}
+    But this is precisely the formula for the cross product of the two vectors $\phi(a)$ and $v$, as desired.
+\end{proof}
+
+
+\begin{prop}
+    Kirillov 3.8
+\end{prop}
+\begin{proof}
+    Consider the open cell $U=\C\subset\CP^1$ with coordinates given by $t=x/y$. The action of $SL(2,\C)$ on a point in $U$ is given by
+    \begin{align*}
+        A(x:y)=\begin{pmatrix}
+            a & b\\c & d
+        \end{pmatrix}
+        (x:y)=(ax+by:cx+dy)=(at+b:ct+d)
+    \end{align*}
+    which we will denote by $[\frac{at+b}{ct+d}]$. Denoting the representation as $\pi$, we can consider the usual action of $SL(2,\C)$ on functions
+    defined on $U$:
+    \begin{align*}
+        \pi(A)(f)([t])=f(\pi(A^{-1})[t]).
+    \end{align*}
+    The induced action of $\fr g$ by vector fields on functions defined on $\CP^1$ is then given:
+    \begin{align*}
+        \pi'(X)(f)([t])=\frac{d}{ds}\bigg|_{s=0}f(\pi(e^{-sX})[t])=\frac{d}{ds}\bigg|_{t=0}\left( \pi(e^{-sX})([t]) \right)\frac{df}{dt}([t]),
+    \end{align*}
+    which we can evaluate for the basis $\left\{ H,X,Y \right\}\subset \fr{sl}_2\C$:
+    \begin{align*}
+        H=\begin{pmatrix}1&0\\0&-1\end{pmatrix},\;
+            X=\begin{pmatrix}0&1\\0&0\end{pmatrix},\;
+                Y=\begin{pmatrix}0&0\\1&0\end{pmatrix}
+    \end{align*}
+    whose exponentials yield:
+    \begin{align*}
+        \exp(-sH)=\begin{pmatrix}e^{-s}&0\\0&e^{s}\end{pmatrix},\;
+            \exp(-sX)=\begin{pmatrix}1&-s\\0&1\end{pmatrix},\;
+                \exp(-sY)=\begin{pmatrix}1&0\\-s&1\end{pmatrix}.
+    \end{align*}
+    Let us now compute the coefficient in front of $df/dt$ in the expression for $\pi'$ above for the various basis elements:
+    \begin{align*}
+        \frac{d}{ds}\bigg|_{t=0}\pi\begin{pmatrix}e^{-s}&0\\0&e^{s}\end{pmatrix}([t])&=\frac{d}{ds}\bigg|_{t=0}\left[ e^{-2s}t \right]=[-2t]\\
+        \frac{d}{ds}\bigg|_{t=0}\pi\begin{pmatrix}1&-s\\0&1\end{pmatrix}([t])&=\frac{d}{ds}\bigg|_{t=0}\left[ t-s \right]=[-1]\\
+            \frac{d}{ds}\bigg|_{t=0}\pi\begin{pmatrix}1&0\\-s&1\end{pmatrix}([t])&=\frac{d}{ds}\bigg|_{t=0}\left[ \frac{t}{-st+1} \right]=[t^2].
+    \end{align*}
+    Hence we see, in local coordinates $t$ for $U$, that the vector fields corresponding to $H,X,Y$ are precisely
+    \begin{align*}
+        H&\longleftrightarrow -2t\frac{d}{d t}\\
+        X&\longleftrightarrow -\frac{d}{d t}\\
+        Y&\longleftrightarrow t^2\frac{d}{d t}.
+    \end{align*}
+\end{proof}
+
+
+
 
 \end{document}

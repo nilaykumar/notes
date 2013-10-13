@@ -1,0 +1,36 @@
+\documentclass{../../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\title{Riemann Surfaces PSET 1}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+
+\section*{Problem 2}
+
+Define $g(z):\Omega\to\C$ as $0$ at $z=0$ and $z^2f(z)$ on $\Omega\setminus 0$. As $f(z)$ is holomorphic on $\Omega\setminus0$, it is clear that
+$g(z)$ is holomorphic on $\Omega\setminus0$ as well. It is easy to see that $g(z)$ is in fact holomorphic at $z=0$ as well:
+\begin{align*}
+    g'(0)=\lim_{h\to 0}\frac{g(h)-g(0)}{h}=\lim_{h\to 0}\frac{g(h)}{h}=\lim_{h\to 0}hf(h)=0
+\end{align*}
+where in the last step we have used the boundedness of $f(z)$ in the neighborhood of $z=0$. We can now write out a power series for $g(z)$
+on $\Omega$ (about $z=0$), $g(z)=a_0+a_1z+a_2z^2+\ldots$. Note, however, that $g(0)=0$ and hence $a_0=0$. In fact, $a_1=0$ as well; suppose it were
+not: then $f(z)=g(z)/z^2=a_1/z+a_2+\ldots$ on $\Omega\setminus0$, which contradicts the boundedness of $f$ at 0. Hence we see that 
+\begin{align*}
+    g(z)&=a_2z^2+a_3z^3+\ldots\\
+    f(z)&=a_2+a_3z+\ldots\text{ on } \Omega\setminus0,
+\end{align*}
+which implies that $f(z)$ can be holomorphically extended to $\Omega$ by simply defining it to take the value $a_2$ at $z=0$.
+
+
+
+\end{document}
