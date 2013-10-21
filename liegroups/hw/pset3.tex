@@ -1,0 +1,165 @@
+\documentclass{../../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\title{Lie Groups PSET 3}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+
+Let $V,W$ be irreducible representations of a Lie group $G$. Note that $V\otimes W^*$ is simply $\Hom(W;V)$ and $V\otimes V^*$
+is simply $\Hom(V;V)$. With the restriction of $G$-equivariance, then, we see that the statement reduces to Schur's lemma. In
+other words, since both $\ker\phi$ and $\text{im }\phi$ are invariant under the action of $G$, for some $G$-equivariant morphism $\phi,$
+and $V,W$ are irreducible, they must be either 0 or the whole space. Moreover, if $V=W$, $\phi$ must have an eigenvalue $\lambda\in\C$ as
+we are working over $\C$ and hence $\phi-\lambda I$ has a non-trivial kernel, which implies that it must be zero, i.e. $\phi=\lambda I$.
+Of course, this is simply isomorphic to $\C$.
+
+
+We are given that $V$ is an irreducible representation of a Lie algebra $\fr g$, and we wish to show that $V^*$, the dual representation, is
+irreducible as well. Denote by $(\rho,V)$ the original representation. Suppose the contrary: if $V^*$ is reducible, there must exist a subspace $W^*\subset V^*$ invariant under the action of $\fr g$.
+Now take the space $W=\{v\in V \mid w(v)=1\text{ for some } w\in W^*\}$. We obtain a contradiction if $W$ is invariant under $\fr g$. To show this,
+we must find a $w^*\in W^*$ such that $w^*(\rho(g))=1$. But we may simply choose the dual of $v$:
+\[\left(\pi(g)v^*\right)(\rho(g)v)=v^*(v)=1.\]
+Hence $V^*$ must be irreducible.
+
+
+We can view the space of bilinear forms on $V$ as $V^*\otimes V^*=\Hom(V;V^*)$. Then, by the above, we see that since both $V,V^*$ are
+irreducible representations, either the maps (and hence the forms) must be zero, or they must be isomorphic to $\C$, i.e. one-dimensional.
+Note that the above statements held for group actions, but it is quite clear that nowhere did we use ideas specific to groups - Schur's lemma
+holds just as well for Lie algebra actions.
+
+\subsection*{Problem 2}
+Consider the map $\pi:\R\to GL_2\C$ given by
+\[t\mapsto \begin{pmatrix}1&t\\&1\end{pmatrix}.\]
+It is easy to see that $\pi$ is in fact a representation of $\R$ on $\C^2$, as it is a group homomorphism:
+\[\pi(a+b)=\begin{pmatrix}1&a+b\\&1\end{pmatrix}=\begin{pmatrix}1&a\\&1\end{pmatrix}\begin{pmatrix}1&b\\&1\end{pmatrix}=\pi(a)\pi(b).\]
+Furthermore, all proper non-trivial subrepresentations are clearly one-dimensional, and hence can be found by computing the eigenvectors
+of the above matrix. The eigenvalues are clearly 1 and 1, and thus we solve
+\[\begin{pmatrix}0&t\\&0\end{pmatrix}\begin{pmatrix}\alpha\\\beta\end{pmatrix}=\begin{pmatrix}0\\0\end{pmatrix}\]
+to find that the only subrepresentation is the one-dimensional space spanned by $\begin{pmatrix}1\\0\end{pmatrix}$.
+
+Note, however, that the orthogonal complement of this subspace - the space spanned by $\begin{pmatrix}0\\1\end{pmatrix}$ - is not a subrepresentation:
+\[\begin{pmatrix}1&t\\&1\end{pmatrix}\begin{pmatrix}0\\1\end{pmatrix}=\begin{pmatrix}t\\1\end{pmatrix},\]
+and hence, while $\pi$ is a reducible representation, it is not completely reducible as it cannot be written as a direct sum of irreducibles.
+
+Furthermore, this representation is not unitary with repsect to the standard Hermitian inner product on $\C^2$ defined by $\langle \vec v,\vec w\rangle=\sum_iv_i\bar w_i$.
+To see this, let $e_1,e_2$ be the two basis vectors (as decomposed above) and compute
+\begin{align*}
+    \langle e_1,e_2\rangle&=0\\
+    \langle \pi(a)e_1,\pi(a)e_2\rangle&=\langle\begin{pmatrix}1\\0\end{pmatrix},\begin{pmatrix}a\\1\end{pmatrix}\rangle=a,
+\end{align*}
+which are not equal in general.
+
+\subsection*{Problem 3}
+
+Take $\omega\in(\fr g^*)^{\otimes 3}$ given by
+\[\omega(x,y,z)=([x,y],z),\]
+with the form symmetric and ad-invariant. We wish to show that $\omega$ is skew-symmetric and ad-invariant.
+To show skew-symmetry, we must show:
+\begin{align*}
+    \omega(x,y,z)&=-\omega(y,x,z)\\
+    \omega(x,y,z)&=-\omega(z,y,x)\\
+    \omega(x,y,z)&=-\omega(x,z,y).
+\end{align*}
+The first identity follows trivially from the skew-symmetry of the Lie bracket. For the next identity we use ad-invariance of the bracket
+$([a,b],c)+(b,[a,c])=0$ to obtain
+\[\omega(x,y,z)=([x,y],z)=(z,[x,y])=-(z,[y,x])=-\omega(z,y,x).\]
+The third identity is derived similarly:
+\[\omega(x,y,z)=([x,y],z)=-([y,x],z)=(x,[y,z])=-(x,[z,y])=-\omega(x,z,y).\]
+Next we wish to show ad-invariance of $\omega$:
+\[\omega([w,x],y,z)+\omega(x,[w,y],z)+\omega(x,y,[w,z])=0.\]
+We simply apply the symmetry and ad-invariance of the form as well as the Jacobi identity:
+\begin{align*}
+    \omega([w,x],y,z)&+\omega(x,[w,y],z)+\omega(x,y,[w,z])=([ [w,x],y],z)+([x,[w,y]],z)+([x,y],[w,z])\\
+    &=([ [w,x],y]+[ [y,w],x],z)+([x,y],[w,z])\\
+    &=-([ [x,y],w],z)+([x,y],[w,z])\\
+    &=([ w,[x,y]],z)+([x,y],[w,x])\\&=0,
+\end{align*}
+as desired.
+
+\subsection*{Problem 4}
+
+Let $G=SU(2)$. We can consider $G$ as the group of unit quaternions sitting inside $\R^4$. From this point of view we can treat elements of $\R^4$ as
+quaternions and extend the action of $G$ on itself (left-quaternionic-multiplication) to an action on all of $\R^4$ given by quaternionic left-multiplication.
+These yield orthogonal transformations, as multiplication by a unit quaternionic preserves the inner product $\text{Re }\bar q_1q_2$ (since the inner product on $\R^4$ is precisely
+that defined on quaternions).
+
+Next, let $\omega\in\Omega^3(G)$ be a left-invariant 3-form whose value at $1\in G$ is defined by
+\[\omega(x_1,x_2,x_3)=\tr ([x_1,x_2]x_3)\]
+where $x_i\in\fr g$. Note carefully that the correspondence between $\fr{su}_2$ and $\HH$ is given by
+\[w_0+w_1i+w_2j+w_3k \longleftrightarrow \begin{pmatrix}-iw_3&-w_2-iw_1\\w_2-iw_1&iw_3\end{pmatrix}.\]
+It follows that we can construct an orthonormal basis for $\fr{su}_2$ in the context of quaternions to be $\{i,j,k\}$ (one can check this
+by computing against the inner product $\tr(a\bar b)/2$). Let us now compute $\omega$ at the identity:
+\begin{align*}
+    \omega(i,j,k)&=\tr([i,j]k)=\tr(ijk-jik)=2\tr(k^2)\\
+    &=2\tr\begin{pmatrix}-i&\\&i\end{pmatrix}^2=\begin{pmatrix}-1&\\&-1\end{pmatrix}=-4.
+\end{align*}
+But this is precisely -4 times the value of the volume form (by definition) at the identity. By left-invariance, we see that this equality
+extends to the whole sphere (the volume form is left-invariant because pulling back by a diffeomorphism is by definition evaluation at pushforwards
+of vectors - but the pushforward is an isomorphism and takes basis to basis, and hence the volume form still evaluates to 1).
+
+Finally, let us show that $\omega/8\pi^2$ is a bi-invariant form on $G$ such that $\int_G\omega/8\pi^2=1$.
+Bi-invariance is obvious, as $\omega$ is proportional to the volume form on $G$, which is bi-invariant by its construction (the same argument holds as for
+left-invariance).
+By above, we have
+\[\frac{1}{8\pi^2}\int_G\omega=-\frac{1}{2\pi^2}\int_G dV\]
+and thus it suffices to show that $\int_{S^3} dV=2\pi^2$ (the sign is a matter of orientation). But this is a simple calculation in analogy to computing
+the surface area of $S^2$:
+\begin{align*}
+    \int_{S^3} dV&=\int_{-\pi/2}^{\pi/2}4\pi r^2 d\theta=4\pi\int_{-\pi/2}^{\pi/2}\cos^2\theta d\theta\\
+    &=4\pi\int_{-\pi/2}^{\pi/2}\frac{1-\cos2\theta}{2}d\theta=2\pi^2,
+\end{align*}
+as desired.
+
+\subsection*{Problem 5}
+
+Consider the Frobenius-Schur indicator,
+\[I(\chi_V)=\frac{1}{|G|}\sum_{g\in G}\chi_V(g^2).\]
+We will use the following theorem to show that $I(\chi_V)$ takes values only in $\left\{ -1,0,1 \right\}$ for $V$ irreducible.
+\begin{thm*}
+    An irreducible representation $V$ is one and only one of the following:
+    \begin{enumerate}[(i)]
+        \item Complex: $\chi_V$ is not real-valued; $V$ does not have a $G$-invariant nondegenerate bilinear form;
+        \item Real: $V=V_0\otimes \C$, a real representation; $V$ has a $G$-invariant symmetric nondegenerate bilinear form;
+        \item Quaternionic: $\chi_V$ is real, but $V$ is not real; $V$ has a $G$-invariant skew-symmetric nondegenerate bilinear form.
+    \end{enumerate}
+\end{thm*}
+\begin{proof}
+    Omitted. See \cite{F-H}, Theorem 3.37.
+\end{proof}
+
+To relate $I(\chi_V)$ to the spaces of bilinear forms on $V$ we note first that $\chi_{V^*}=\bar\chi_V$ and hence by character theory (see \cite{F-H}, $\S 2.1$),
+\begin{align*}
+    \chi_{\Lambda^2V^*}(g)&=\frac{\chi_{V^*}(g)^2-\chi_{V^*}(g^2)}{2}=\frac{1}{2}\left(\overline{\chi_{V}(g)^2-\chi_{V}(g^2)}\right)\\
+    \chi_{\Sym^2V^*}(g)&=\frac{\chi_{V^*}(g)^2+\chi_{V^*}(g^2)}{2}=\frac{1}{2}\left(\overline{\chi_{V}(g)^2+\chi_{V}(g^2)}\right).
+\end{align*}
+But now note that
+\[\chi_{\Sym^2 V^*}(g)-\chi_{\Lambda^2 V^*}(g)=\overline{\chi_V(g^2)},\]
+which we can average over $G$ to obtain
+\[\frac{1}{|G|}\sum_{g\in G}\chi_{\Sym^2 V^*}(g)-\frac{1}{|G|}\sum_{g\in G}\chi_{\Lambda^2 V^*}(g)=\frac{1}{|G|}\sum_{g\in G}\overline{\chi_V(g^2)}.\]
+Conjugating, we find that
+\[\frac{1}{|G|}\sum_{g\in G}\chi_V(g^2)=\frac{1}{|G|}\sum_{g\in G}\overline{\chi_{\Sym^2 V^*}(g)}-\frac{1}{|G|}\sum_{g\in G}\overline{\chi_{\Lambda^2 V^*}(g)}.\]
+But note that the terms on the right are simply projecting onto the spaces of $G$-invariant symmetric and alternating bilinear forms, respectively (see \cite{F-H}, $\S2.4$).
+Hence we obtain
+\[I(\chi_V)=\frac{1}{|G|}\sum_{g\in G}\chi_V(g^2)=\dim\left( \Sym^2 V^* \right)^G-\dim\left( \Lambda^2 V^* \right)^G.\]
+Using the theorem above, we now see that if $V$ is complex then $I(\chi_V)=0$, but if $V$ is real then $I(\chi_V)=1$, and if $V$ is quaternionic then
+$I(\chi_V)=-1$.
+
+Now let us consider the $G$-equivariant endomorphisms of $V$, $\Hom_G(V;V)$, for each case above. By Schur's lemma, in each case, any $\phi\in\Hom_G(V;V)$ must
+be of the form $\phi=\lambda \text{Id}$ for some $\lambda\in\C$.
+
+
+
+
+\bibliography{notes}
+\bibliographystyle{alpha}
+
+
+\end{document}

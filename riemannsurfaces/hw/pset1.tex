@@ -14,6 +14,18 @@
 
 \section*{Problem 1}
 
+As $D$ is a compact regular domain in $\R^2$, we can apply Stoke's theorem (equivalently, Green's theorem), $\int_{\partial D}\omega=\int_Dd\omega$.
+We have $\omega=f(z)dz$ and thus
+\begin{align*}
+    d\omega=d(f(z)dz)=d(f(z))\wedge dz=\left( \frac{\partial f}{\partial z}dz+\frac{\partial f}{\partial \bar z}d\bar z \right)\wedge dz=\frac{\partial f}{\partial \bar z}d\bar z\wedge dz,
+\end{align*}
+which yields
+\begin{align*}
+    \int_{\partial D}f(z)dz=\int_{D}\frac{\partial f}{\partial \bar z}d\bar z\wedge dz,
+\end{align*}
+as desired.
+
+
 
 \section*{Problem 2}
 
@@ -30,6 +42,11 @@ not: then $f(z)=g(z)/z^2=a_1/z+a_2+\ldots$ on $\Omega\setminus0$, which contradi
     f(z)&=a_2+a_3z+\ldots\text{ on } \Omega\setminus0,
 \end{align*}
 which implies that $f(z)$ can be holomorphically extended to $\Omega$ by simply defining it to take the value $a_2$ at $z=0$.
+
+
+\section*{Problem 3}
+
+Define $I(z)=\int_0^1 f(x)x^{z-1}dx$. 
 
 
 

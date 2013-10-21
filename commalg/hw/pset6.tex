@@ -1,0 +1,150 @@
+\documentclass{../../mathnotes}
+
+\usepackage{enumerate}
+\usepackage{todonotes}
+\usepackage{tikz-cd}
+
+\title{Commutative Algebra: Problem Set 6}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 2}
+
+This solution is based off of Rankeya Datta's solution, available on de Jong's REU webpage.
+
+Let us assume a third axiom: there are four distinct points, where no three are incident to any line.
+We proceed to prove this statement in cases. The first case is for when either the number of lines or points is infinite,
+and the second case is when both of these numbers is finite. Throughout, we will denote the set of lines in our projective space $\Proj$
+as $\mathcal{L}$ and the set of points as $\mathcal{P}$.
+
+Now suppose that $\mathcal{L}$ is infinite. Then by the axioms, $\mathcal{P}$ must be infinite as well. Conversely, suppose that $\mathcal{P}$ is
+infinite and $\mathcal{L}$ is finite. Every point must lie on some line and so there must be at least one line $\ell\in\mathcal{L}$ incident to
+an infinite number of points. By the additional axiom we find that there must exist a point $p$ not incident to $\ell$, which induces
+an infinite number of lines incident to $p$ and the infinite (unique) points on $\ell$. Thus we see that if either of $\mathcal{P},\mathcal{L}$ is infinite
+then both must be. Let us treat the infinite case first.
+
+Denote by $\Delta_\mathcal{P},\Delta_{\mathcal{L}}$ the diagonals of $\mathcal{P}\times\mathcal{P},\mathcal{L}\times\mathcal{L}$ respectively. As we have an infinite number
+of points and lines, we see that
+\begin{align*}
+    |\mathcal{L}|&=|\mathcal{L}\times\mathcal{L}|=|\mathcal{L}\times\mathcal{L}-\Delta_\mathcal{L}|\\
+    |\mathcal{P}|&=|\mathcal{P}\times\mathcal{P}|=|\mathcal{P}\times\mathcal{P}-\Delta_\mathcal{P}|.
+\end{align*}
+Next note that the axioms yield the injective maps
+\begin{align*}
+    \pi_1:\mathcal{L}\times\mathcal{L}-\Delta_\mathcal{L}\to\mathcal{P} &\hspace{10mm} (l_1,l_2)\mapsto l_1\cap l_2\\
+    \pi_2:\mathcal{P}\times\mathcal{P}-\Delta_\mathcal{P}\to\mathcal{L} &\hspace{10mm} (p,q)\mapsto \overline{pq}
+\end{align*}
+where the intersection in $\pi_1$ is incidence and $\overline{pq}$ in $\pi_2$ is the line incident with $p$ and $q$.
+It now suffices to show that $\pi_1,\pi_2$ are surjective, which is quite easy. The surjectivity of $\pi_2$ follows from noting
+that any line $l\in\mathcal{L}$ must contain at least two distinct points $p$ and $q$, which yield $\pi_2(p,q)=\overline{pq}=l$.
+Similarly, to show the surjectivity of $\pi_1$ take some $p\in \mathcal{P}$ and two distinct points $q$ and $r$ such that $p,q,r$ are not collinear
+(again by the axioms). Then, since $\overline{pq}\neq\overline{pr}$, we see that $\pi_1(\overline{pq},\overline{pr})=p$. This concludes the infinite case.
+
+Now suppose that both $\mathcal{P},\mathcal{L}$ are finite. We first prove two auxillary lemmas and then use them to prove the main claim.
+
+\begin{lem}
+    Let $p\in\mathcal{P}$. If $\mathcal{L}_p$ denotes the set of all lines passing through $p$, then $|\mathcal{L}_p|$ is indpendent
+    of the choice of $p$.
+\end{lem}
+\begin{proof}
+    Choose two distinct points $p,q\in\mathcal{P}$. It suffices to show that $|\mathcal{L}_p|=|\mathcal{L}_q|$. Note that there exists a
+    unique line $\overline{pq}$ incident with $p$ and $q$ and a point $r$ on $\overline{pq}$ distinct from $p$ and $q$. Let $l\in\mathcal{L}_p-\{\overline{pq}\}$
+    and $m\in\mathcal{L}_r-\{\overline{pq}\}$ - note that these two lines are distinct. Hence $l\cap m$ is a point not on $\overline{pq}$. Let $\mathcal{P}_{\Proj-\{\overline{pq}\}}$
+    denote the set of points of $\Proj$ not on $\overline{pq}$. Hence we get a map
+    $\phi:\left( \mathcal{L}_p-\{\overline{pq}\} \right)\times\left( \mathcal{L}_r-\{\overline{pq}\} \right)\to\mathcal{P}_{\Proj-\{\overline{pq}\}}$ defined by
+    $(l,m)\mapsto l\cap m$. Note that the codomain is not $\varnothing$ by the axiom above and that $\phi$ is a bijection with inverse given by $s\mapsto (\overline{ps},\overline{rs})$.
+    Hence we see that $(|\mathcal{L}_p-1|)^2=|\mathcal{P}_{\Proj-\{\overline{pq}\}}|$. One can show the same for $\mathcal{L}_q$ and hence we find that $|\mathcal{L}_p|=|\mathcal{L}_q|$.
+\end{proof}
+
+Let us denote the number of lines through any point by $c$.
+
+\begin{lem}
+    Let $l\in\mathcal{L}$. Let $\mathcal{P}_l$ be the set of points in $\Proj$ incident with $l$. Then $|\mathcal{P}_l|$ is independent of $l$ and $|\mathcal{P}_l|=c$ for all $l\in\mathcal{L}$.
+\end{lem}
+\begin{proof}
+    Let $p$ be a point not incident with $l$. Then, $l\notin \mathcal{L}_p$. Define the map $\chi:\mathcal{L}_p\to\mathcal{P}_l$ where $\chi(m)=l\cap m$.
+    Then $\chi$ has an inverse $\chi^{-1}:\mathcal{P}_l\to\mathcal{L}_p$ given by $s\mapsto \overline{ps}$. Hence $|\mathcal{P}_l|=|\mathcal{L}_p|=c$,
+    and we are done.
+\end{proof}
+
+Now, since $\mathcal{P}=\mathcal{P}_{\Proj-\{\overline{pq}\}}\cup \mathcal{P}_{\{\overline{pq}\}}$ (disjoint), we see that we have $|\mathcal{P}|=(c-1)(c-1)+c=c(c-1)+1$.
+Precisely the same argument can be made for $\mathcal{L}$, and we are done.
+
+
+
+\subsection*{Problem 3}
+
+Let $P,Q,R$ be three pairwise distinct points in $\Proj^1$. We wish to find a matrix that sends $P,Q,R$ to
+$(1:0),(0:1),(1:1)$. Let us solve for such a matrix $A$, imposing
+\begin{align*}
+    \begin{pmatrix}a&b\\c&d\end{pmatrix}\begin{pmatrix}p_0\\p_1\end{pmatrix}&=\begin{pmatrix}\lambda\\0\end{pmatrix}\\
+    \begin{pmatrix}a&b\\c&d\end{pmatrix}\begin{pmatrix}q_0\\q_1\end{pmatrix}&=\begin{pmatrix}0\\\mu\end{pmatrix}
+\end{align*}
+for some constants $\lambda,\mu$ and solving to find
+\begin{align*}
+    A=\frac{\kappa}{p_0q_1-p_1q_0}\begin{pmatrix} q_1\lambda&-q_0\lambda\\-p_1\mu&p_0\mu\end{pmatrix}.
+\end{align*}
+with $\kappa$ some constant (as $A$ is defined up to scaling). Finally, we solve
+\begin{align*}
+    A
+        \begin{pmatrix}
+            r_0\\r_1
+        \end{pmatrix}
+        = \begin{pmatrix}
+            \gamma\\\gamma
+        \end{pmatrix}.
+\end{align*}
+to find that
+\begin{align*}
+    A=\gamma\begin{pmatrix}\frac{-q_1}{q_0r_1-q_1r_0}&\frac{q_0}{q_0r_1-q_1r_0}\\\frac{p_1}{p_1r_0-p_0r_1}&\frac{-p_0}{p_1r_0-p_0r_1}\end{pmatrix}.
+\end{align*}
+Note that none of the denominators cause problems, due to the points being distinct.
+
+\subsection*{Problem 4}
+
+We wish to find a field $K$ and a conic over $K$ with no points. Take $K=\R$ and the conic to be given by
+\[F=x_0^2+x_1^2+x_2^2\]
+We see that a root must have $x_0=x_1=x_2=0$. As $(0,0,0)\in\R^3$ is not contained in projective space, this conic has no points.
+
+\subsection*{Problem 5}
+
+A degree 2 morphism from $\Proj^1\to\Proj^2$ is given by a triple $G_0,G_1,G_2$ of relatively prime quadratics. It is clear that if the
+morphism is into a line or a conic, it will be onto, as it is non-constant. Let us show that the morphism is into, i.e. there exists
+a line or conic such that when evaluated at the triple, yields zero. We claim that the case of the line is included in that of the conic; to see
+this note that the equation for a line in projective space is given by $Ax_0+Bx_1+Cx_2=0$, which can simply be squared to get the associated
+conic. For the morphism to be into a conic we must require that 
+\[\sum_{i\leq j}\lambda_{ij}G_iG_j=0\]
+where we are free to pick the six $\lambda_{ij}$. Note that each of the $G_i$s is a homogeneous polynomial of degree 2 in the coordinates $x_0,x_1$
+of $\Proj^1$, and hence inserting $x_0,x_1$ into the above constraint, we find a homogeneous polynomial of degree 4 equal to zero. 
+For this to happen we must fix $\lambda_{ij}$, by the relative primeness of the quadratics, i.e. we must solve 5 equations (this is the dimension
+of the space of homogeneous polynomials of degree 4) with the six $\lambda_{ij}$. As the system is consistent (the augmented matrix clearly has the same
+rank as the matrix of coefficients) it has a solution, and we are done.
+
+\subsection*{Problem 6}
+
+Consider $k[t]\subset k(t)\subset K$ where $k(t)\subset K$ is a finite extension. As $k[t]$ is a UFD, it is of course
+integrally closed in $k(t)$, its field of fractions. As $K$ is finite over $k(t)$, there must be a finite number of elements
+$\alpha_n\in K$ not contained in $k(t)$ that are algebraic over $k(t)$. Some subset of these will be integral over $k(t)$,
+and hence integral over $k[t]\subset k(t)$. Thus it is clear that the integral closure of $k[t]$ in $K$ must be finite over
+$k[t]$ (as we can simply take these elements as generators).
+
+Next let us prove that for every discrete valuation $v$ on $k(t)$ there are finitely many discrete valuations $w_i$ on $K$ whose
+restriction to $k(t)$ is $e_iv$ for some integer $e_i$. We suppose for now that there exists at least one discrete valuation that extends
+(we prove this in the next part). Suppose we have pairwise distinct $w_1,\ldots,w_r$ on $K$ extending $v$. Pick (by a lemma
+proved in class) a set of elements $\{f_i\}_{i=1}^n\in K$ (with $[K:k(t)]=n$) such that $w_i(f_i)>0,w_j(f_i)<0$ for $i\neq j$. If we can show that 
+the $f_i^{-1}$ are linearly linearly independent to each other, we are done, as there can be no more than $n$ such $f_i$s in an extension of degree $n$
+and hence no more than $n$ extensions $w$. Suppose $\sum_ia_if^{-1}=0$ for some $a_1,\ldots, a_n\in k(t)$.
+Clearing denominators, we may assume that $a_i\in\mathcal{O}_v$ and that $a_{i_0}\notin\fr m_r$ for some $i_0$. Then
+\[w_{i_0}\left(\sum_i a_if^{-1}_i\right)\geq\min w_{i_0}(a_if^{-1}_i)\geq\min e_{i_0}v(a_i)+w_{i_0}(f_i^{-1}).\]
+But the first term is greater than or equal to zero (equal if $i=j$) and the second is always greater than equal to zero (equal if $i=i_0$).
+Hence this could not have been zero. So $\sum_i a_if_i^{-1}\neq 0$, as desired.
+
+
+
+
+\end{document}
