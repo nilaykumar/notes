@@ -401,4 +401,35 @@ we get a representation $\pi$ on $Fun(G)$ (not irreducible) $\pi(g)f(h)=f(gh)$ w
 
 
 
+\textbf{a few classes later}
+
+\section{Representations of $\fr{sl}_2\C$}
+
+We wish to find the irreducible representations of $SU(2)$ by purely algebraic methods, as we found last class a series of representations, but it was not clear
+that these were all of them. Note that for finite-dimensional representations of $SU(2)$ we have a one-to-one correspondence with representations of $\fr{su}_2$
+(note carefully that this is not true for infinite-dimensional representations). Furthermore, we will in fact study the complexified representation: those of $\fr{sl}_2\C$,
+i.e. all traceless $2\times 2$ complex matrices. In fact there is an equivalence of categories between representations of $\fr{su}_2\C$ and $\fr{sl}_2\C$: one direction
+is given by restriction and the other is given by complexification.
+
+\begin{thm}
+    The finite-dimensional representations of $\fr{sl}_2\C$ are completely reducible.
+\end{thm}
+\begin{proof}
+    One can use the equivalence of categories above along with the fact that representations of compact groups is completely reducible (via Haar measure).
+    This proof is often called Weyl's unitary trick. There is a more algebraic proof, but we will consider this later.
+\end{proof}
+
+Let us pick now pick the standard basis of $\fr{sl}_2\C$ to be $e,f,h$ where $[e,f]=h,[h,e]=2e,$ and $[h,f]=-2f$. The plan of attack will be to first concentrate
+on the action of $h$ on the representation ($h$ exponentiates to an abelian $\C^\times$).
+\begin{defn}
+    We say that $v\in V$ has \textbf{weight} $\lambda$ if $hv=\lambda v$. In other words, $\lambda$ is an eigenvalue of the $h$ action. Then set
+    $V(\lambda)\subset V$ of vectors of weight $\lambda$ to be the $\lambda$-weight space of $V$.
+\end{defn}
+
+We claim that $eV(\lambda)=V(\lambda+2)$ and that $fV(\lambda)\subset V(\lambda-2)$. This is a simple computation.
+
+\begin{defn}
+    We say that $\lambda$ is a \textbf{highest weight} if $\text{Re}\lambda'\leq\text{Re}\lambda$ for all weights $\lambda'$.
+\end{defn}
+
 \end{document}
