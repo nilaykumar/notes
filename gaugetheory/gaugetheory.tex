@@ -1,0 +1,541 @@
+\documentclass{book}
+\usepackage[utf8]{inputenc}
+
+\usepackage{todonotes}
+\usepackage{tikz-cd}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+
+\newcommand{\nm}[1]{\;\textnormal{#1}\;}
+\newcommand{\ra}[0]{\rightarrow}
+\newcommand{\fa}[0]{\;\forall}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\CP}{\mathbb{C}\mathbb{P}}
+\newcommand{\RP}{\mathbb{R}\mathbb{P}}
+\newcommand{\Proj}{\mathbb{P}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\p}{\partial}
+\newcommand{\fr}{\mathfrak}
+
+
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\length}{length}
+\DeclareMathOperator{\res}{Res}
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Lie}{Lie}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\id}{Id}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\irr}{irr}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\OO}{OO}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\Ad}{Ad}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{exc}{Exercise}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{exmp}{Example}
+\theoremstyle{remark}
+\newtheorem*{rmk}{Remark}
+
+\title{An Introduction to Gauge Theory and its Applications}
+\author{Matei Ionita and Nilay Kumar}
+\date{Fall 2013}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\chapter{Introduction}
+
+% Prerequisite knowledge:
+% - Working knowledge of differential topology (manifolds, vector bundles, fields and forms), rudiments of geometry (metrics, etc.)
+% Basic algebraic topology, i.e. fundamental group
+% - Basic familiarity with Lie groups, lie algebras, group actions, and representations.
+% - Physics knowledge: Maxwell's equations, quantum mechanics, and basics of quantum field theory
+
+\chapter{Principal Bundles}
+
+\section{Definition and examples}
+
+Let $G$ be a Lie group with identity $e$. A \textbf{left $G$-space} is a smooth manifold $X$ equipped with a smooth left action $G\times X\to X$. 
+A \textbf{right $G$-space} is defined similarly.  We will typically denote the action of $G$ on a $G$-space by a ``$\cdot$'', even when there may
+be multiple $G$-spaces present, as the particular action should be clear from the context.
+If $X$ and $Y$ are two (right) $G$-spaces, a map $\phi:X\to Y$ is said to be \textbf{$G$-equivariant} if the diagram
+\[\begin{tikzcd}
+        X\arrow[swap]{d}{g}\arrow{r}{\phi}&Y\arrow{d}{g}\\
+        X\arrow{r}{\phi}&Y
+\end{tikzcd}\]
+commutes, i.e. $\phi(x\cdot g)=\phi(x)\cdot g$ in the case of left $G$-spaces.
+
+\begin{defn}
+    Let $X$ and $P$ be right $G$-spaces and $\pi: P\to X$ be a smooth $G$-equivariant projection onto $X$.
+    We say that $(P,\pi)$ is a \textbf{principal $G$-bundle over the base space} $X$ if the following two conditions hold:
+    \begin{enumerate}[(i)]
+        \item $G$ acts trivially on $X$, i.e. $x\cdot g=x$ for all $x\in X$ and $g\in G$;
+        \item $X$ has an open cover $\{U_\alpha\}_{\alpha\in A}$ for which there exist $G$-equivariant diffeomorphisms $\phi_\alpha:\pi^{-1}(U_\alpha)\to U_\alpha\times G$ called \textbf{local trivializations} such that the diagram
+            \[\begin{tikzcd}[column sep=small]
+                \pi^{-1}(U_\alpha)\arrow[swap]{dr}{\pi}\arrow{rr}{\phi_\alpha}&&U\times G\arrow{dl}{\pi_\alpha}\\
+                &U_\alpha&
+            \end{tikzcd}\]
+            commutes, where $\pi_\alpha$ is projection onto the first component. Here, $U\times G$ has the structure of a right $G$-space such that $(u,g)\cdot h=(u,gh)$.
+    \end{enumerate}
+    We will also often denote the bundle $(P,\pi)$ as $G\to P\to X$.
+\end{defn}
+
+Note that the first condition above is equivalent to requiring the action of $G$ to preserve the fibers of $\pi$,
+\[\pi(p\cdot g)=\pi(p)\cdot g=\pi(p).\]
+In fact, we can say more, as the following lemma shows.
+
+\begin{lem}
+    Given an $x\in X$ and some $p\in\pi^{-1}(x)$ above $x$, the orbit of $p$ under the action of $G$ is the whole fiber:
+    \[\pi^{-1}(x)=\{p\cdot g: g\in G\}=p\cdot G.\]
+\end{lem}
+\begin{proof}
+    The inclusion $p\cdot G\subseteq \pi^{-1}(x)$ holds due to condition (i). To show the reverse inclusion, $\pi^{-1}(x)\subseteq p\cdot G$, it suffices to show that for any $q\in\pi^{-1}(x)$, there exists an $h\in G$ such that $p\cdot h=q$. Using condition (ii) we can take advantage of the equivariant local trivialization and work instead in local coordinates, $\phi(p)=(x, g_1)$ and $\phi(q)=(x,g_2)$, for some $g_1,g_2\in G$. Then $\phi(p)\cdot (g_1^{-1}g_2)=\phi(q)$, which implies (by injectivity of $\phi$) that $p\cdot h=q$ for $h=g_1^{-1}g_2$.
+\end{proof}
+
+Hence we may identify the fibers of $\pi$ with the group $G$.
+Informally, then, one can think of a principal bundle as a space that is locally just the product of a base manifold $X$ with a Lie group $G$.
+Globally, however, there may exist topological complications; consider, for example, the (infinite) M\"obius strip $M$.
+Locally $M$ is just $S^1\times \R$, but globally there is some kind of un-productlike twisting. Those familiar with vector bundles
+may have found the M\"obius strip a good example to keep in mind - in fact, as we shall show shortly, $M$ can also be
+treated as a principal bundle. 
+
+Before we move on to some examples of principal bundles, let us prove the following useful lemma.
+
+\begin{lem}
+    $G$ acts freely on $P$.
+\end{lem}
+\begin{proof}
+    Let us compute the stabilizer of some $p\in P$ where $\phi(p)=(x,g)$.
+    In coordinates, the requirement that $h\in\Stab_p$ is
+    $\phi(p\cdot h)=(x,gh)=(x,g)=\phi(p).$
+    This, of course, implies that $h=e$.
+\end{proof}
+
+To be more explicit, let us now consider some examples.
+
+\begin{exmp}
+    The obvious example of a principal bundle is, of course, a bundle that is globally just a product. In other words, given
+    a Lie group $G$ and a smooth manifold $X$, we can construct the \textbf{trivial $G$-bundle over $X$} to be
+    $G\to X\times G\overset{\pi}{\to} X$ where $\pi$ is simply the projection onto the first factor and $X\times G$ is treated as
+    a $G$-space under the action $(x,g)\cdot h=(x,gh)$.
+\end{exmp}
+
+\begin{exmp}
+    The reader familiar with projective spaces will recall that the sphere $S^n$ is a double cover of the real projective space $\RP^n$.
+    Thus we may consider the natural action of $O(1)=\Z_2=\left\{ 1,-1 \right\}$ (given the discrete topology) on $S^n$ identifying antipodal points,
+    i.e. for any $p\in S^n$,
+    \[p\cdot (\pm 1)=(x^1,\ldots, x^{n+1})\cdot (\pm 1)=\pm (x^1,\ldots,x^{n+1}).\]
+    We can thus construct the principal bundle $O(1)\to S^{n+1}\overset{\pi}{\to} \RP^{n+1}$. Let us check that the required properties are satisfied.
+    First note that $O(1)$ does indeed act trivially on the base space, as multiplication by a scalar preserves, by construction, points in $\RP^{n+1}$.
+    Next let us construct local trivializations, i.e. $O(1)$-equivariant diffeomorphisms $\phi_\alpha:\pi^{-1}(U_\alpha)\to U_\alpha\times G$ where
+    $U_\alpha$ for $\alpha\in\{1,\ldots, n+1\}$ are the usual charts on $\RP^n$ given by the non-vanishing of the $\alpha$th homogeneous coordinate.
+    If we now consider the graphical charts for the sphere given by 
+    \begin{align*}
+        V_\beta^+&=\left\{ (x^1,\ldots,x^{n+1})\in S^n\mid x^\beta>0 \right\}\\
+        V_\beta^-&=\left\{ (x^1,\ldots,x^{n+1})\in S^n\mid x^\beta<0 \right\},
+    \end{align*}
+    we see that
+    \[\pi^{-1}(U_\alpha)=V_\alpha^+\cup V_\alpha^-.\]
+    Hence we define the map $\phi_\alpha:\pi^{-1}(U_\alpha)\to U_\alpha\times O(1)$ as
+    \[\phi_\alpha\left( (x^1,\ldots,x^{n+1}) \right)=\left( [x^1:\ldots:x^{n+1}], \sgn x^{\alpha} \right).\]
+    Note first that $\phi_\alpha$ is indeed equivariant,
+    \[\phi_\alpha(x\cdot \pm 1)=\phi_\alpha(\pm x)=([x],\sgn \pm x^\alpha)=([x],\pm \sgn x^\alpha)=\phi_\alpha(x)\cdot (\pm 1),\]
+    and smooth as the first component is simply a smooth projection and the second component is constant and hence smooth in the disjoint $V_\beta^+$
+    and $V_\beta^-$ each. Moreover, $\phi_\alpha$ has an inverse given simply by treating a point in projective space as a point in the sphere
+    and multiplying by the given sign. This is certainly smooth - hence $\phi_\alpha$ is indeed a local trivializtion, and $S^n$ forms a principal
+    $O(1)$-bundle over $\RP^n$.
+
+    We leave it as an exercise at the end of the chapter to construct similar bundles over the complex and quaternionic projective spaces $\CP^n$ and $\HH\Proj^n$.
+\end{exmp}
+
+\begin{exmp}
+    Let $G$ be a Lie group, with $H$ a closed subgroup. Let us show that $G$ is a principal $H$-bundle over the coset space $G/H$.
+    Let us treat $G$ and $G/H$ as right $H$-spaces with the obvious right-multiplication. Then the action of $H$ on $G/H$ is trivial:
+    \[gH\cdot h = gH\]
+    for all $g\in G$ and $h\in H$. Showing local triviality is a little trickier. The interested reader may find a proof in \todo{Brocker-Dieck, thm 4.3}.
+\end{exmp}
+
+\begin{exmp}
+    Let $E\to X$ be a real vector bundle of rank $k$ over a smooth manifold $X$.
+    Define a \textbf{frame} at a point $x\in X$, denoted by $F_x$, to be an ordered basis for the fiber above $x$. In the interests of producing a fiber bundle,
+    we note that choosing a frame for $\pi^{-1}(x)$ is equivalent to choosing a linear isomorphism from $\R^k$ to $\pi^{-1}(x)$, i.e. choosing an
+    element of $\GL(k)$ that takes the usual orthonormal basis of $\R^k$ to the chosen frame. Of course, $F_x$ is equipped with a natural right action by
+    $\GL(k)$ (given by right-multiplication), which is free and transitive. In this sense, the set of frames $F_x$ is, when viewed as a Lie group, diffeomorphic to $\GL(k)$.
+    \todo{finish frame bundles, see DuPont}
+\end{exmp}
+
+Now that we have worked through a few concrete examples of principal bundles, it should be quite obvious that trivial bundles are as pleasant as can be,
+while non-trivial bundles are quite the opposite. With this in mind, let us approach the theory of principal bundles by asking exactly how a
+given bundle fails to be trivial. This can be done via \textbf{transition functions}, in analogy to those used in the defining smooth manifolds.
+In particular, we investigate how the local coordinates of a point in the principal bundle depend on the choice of local trivialization (assuming, of
+course, that the point is in a region of overlap $U_\alpha\cap U_\beta$).
+
+\begin{defn}
+    Let $P$ be a principal $G$-bundle over $X$ with local trivializations $\Phi_\alpha$ defined over an open cover $X=\{U_\alpha\}$. \todo{finish}
+\end{defn}
+
+\todo{tr. func. example}
+
+\todo{reconstruction theorem}
+
+
+\section{Morphisms and sections}
+
+We may define morphisms between princpal $G$-bundles, thus defining the category of principal $G$-bundles.
+\begin{defn}
+    Let $G\overset{\pi_1}{\to}P_1\to X_1$ and $G\overset{\pi_2}{\to}P_2\to X_2$ be two principal $G$-bundles. We define a \textbf{bundle
+    map} between $P_1$ and $P_2$ to be a smooth $G$-equivariant map $\Phi:P_1\to P_2$:
+    \[\Phi(p\cdot g)=\Phi(p)\cdot g,\]
+    for all $p\in P_1, g\in G$, with the group action on both $P_1,P_2$ denoted by ``$\cdot$''. Note that bundle maps preserve fibers.
+\end{defn}
+
+We will be concerned primarily with maps between bundles with the same base space. This is quite a special case, as the following theorem shows.
+\begin{thm}
+    A bundle map $f$ between two principal $G$-bundles $P_1$ and $P_2$ over the same base $X$ is an isomorphism.
+\end{thm}
+\begin{proof}
+    Let us first suppose that $P_1,P_2$ are both trivial, i.e. $P_1=P_2=X\times G$. Then, since $f$ must preserve fibers, we see that
+    \[f(x,g)=(x,\sigma(x)g)\]
+    for some function $\sigma:X\to G$.
+    \todo{finish}
+\end{proof}
+Indeed, this result suggests how strong the condition of being a principal bundle is.
+
+
+% Bundle maps
+
+Just as with vector bundle, we can construct ``sections'' of a principal bundle, i.e. globally twisted functions on our base manifold.
+
+\begin{defn}
+    Let $G\to P\overset{\pi}{\to} X$ be a principal $G$-bundle and $U$ be an open neighborhood of $X$. A \textbf{local section} (sometimes \textbf{cross-section}) of $\pi$ is a continuous map $\sigma: U\to P$ such that $\pi(\sigma(x))$. If $U=X$, we say that $\sigma$ is a \textbf{global section}.
+\end{defn}
+
+\begin{exmp}
+    Given a local trivialization $\Psi:\pi^{-1}(U)\to U\times G$, we can define a local section $\sigma:U\to P$ as $\sigma(x)=\Psi^{-1}(x,e)$. In words, we simply take the identity section in our local trivialization (that assigns to each point $x$ on the manifold the identity element in the copy of $G$ above $x$) and then pull it back onto the bundle. As the section is continuous in the local trivialization and because $\Psi$ is continuous and takes fiber to fiber, we see that $\sigma$ is indeed a local section. We will refer to this section as the \textbf{canonical section} associated to the trivialization $\Psi$.
+\end{exmp}
+
+\begin{thm}
+    A principal bundle $G\to P\overset{\pi}{\to} X$ is trivial iff it has a global section.
+\end{thm}
+\begin{proof}
+    Let $\sigma:X\to P$ be a global section. Consider now the trivial bundle $G\to X\times G\overset{\rho}{\to}X$; it suffices to find a bundle map $\Theta: X\times G\to P$ making the diagram 
+    \begin{equation*}
+        \begin{tikzcd}
+            X\times G\arrow{rr}{\Theta}\arrow[swap]{rd}{\rho}&&P\arrow[bend left]{ld}{\pi}\\
+            &X\arrow[bend left]{ru}{\sigma}&
+        \end{tikzcd}
+    \end{equation*}
+    commute. Define the map $\Theta:X\times G\to P$ by
+    \[\Theta(x,g)=\sigma(x)\cdot g.\]
+    This map clearly takes fiber to fiber and is $G$-equivariant, as
+    \[\Theta(x,gh)=\sigma(x)\cdot (gh)=(\sigma(x)\cdot g)\cdot g.\]
+    Hence $\Theta$ defines a bundle equivalence between $X\times G$ and $P$, and we are done. Intuitively, one thinks of the given global
+    section $\sigma$ as a (non-canonical) choice of a reference ``identity'' section.
+
+    Conversely, suppose $P\cong X\times G$. We can easily construct the global identity section $\sigma: X\to X\times G$ given by $\sigma(x)=(x,e)$.
+\end{proof}
+
+\section{Exercises}
+
+
+\chapter{Connections on principal bundles}
+
+\section{Background and definitions}
+
+It is intuitive to think of a principal bundle as having ``vertical''  and ``horizontal'' components, namely the directions along the fiber and the base manifold,
+respectively. The theory of connections and curvature that we detail below formalizes these notions. Though their basic idea may seem rather
+innocuous, connections as we shall see are surprisingly sophisticated and have a large number of important applications. \todo{put in applications}
+
+Before we discuss connections, however, we will define a few preliminary concepts that the reader may find familiar from Lie theory.
+We shall omit the proofs of some of the statements below. For a more thorough treatment, we suggest \todo{Lee}.
+
+\begin{defn}
+    Let $G$ be a Lie group. Define the left and right-translation maps as
+    \[
+        \begin{array}{ccc}
+            L_g(h)=gh & \text{and} & R_g(h)=hg.
+        \end{array}
+    \]
+    Both of these maps are diffeomorphisms (multiplication and inversion are smooth) and hence the pushforwards $(L_g)_*$ and $(R_g)_*$
+    acting on smooth vector fields are vector space isomorphisms. We say that a vector field $X\in\Gamma(TG)$ is \textbf{left} or \textbf{right-invariant} if
+    \[
+        \begin{array}{ccc}
+            (L_g)_*X|_h=X|_{gh} & \text{or} & (R_g)_*X|_h=X|_{hg},
+        \end{array}
+    \]
+    respectively, for all $g,h\in G$.
+    Similarly, we say that a one-form $\omega\in\Gamma(T^*G)$ is \textbf{left} or \textbf{right-invariant} if\todo{is this correct?}
+    \[
+        \begin{array}{ccc}
+            \omega(g)=\left( L_{hg^{-1}} \right)^*\omega(h) & \text{or} & \omega(g)=\left( R_{g^{-1}h} \right)^*\omega(h),
+        \end{array}
+    \]
+    respectively, for all $g,h\in G$.
+    %Invariance for one-forms is a little harder to visualize than for vectors fields, so let us justify
+    %this definition. Evaluating $\omega$ on a vector $v\in T_gG$,
+    %\begin{align*}
+    %    \omega(g)(v)=\left( (L_{hg^{-1}})^*\omega(h) \right)(v)=\omega(h)\left( (L_{hg^{-1}})_*v \right)
+    %\end{align*}
+\end{defn}
+
+\begin{lem}
+    Let $G$ be a Lie group and $X,Y$ be left-invariant vector fields on $G$. Then their Lie bracket $[X,Y]$ is also left-invariant.
+\end{lem}
+\begin{proof}
+    This follows straightforwardly from the naturality of the Lie bracket.\todo{refer to Lee, or do this proof}
+\end{proof}
+
+\begin{thm}
+    The space of left-invariant vector fields of a Lie group $G$ forms a Lie algebra, and is in fact isomorphic (as a Lie algebra) to the Lie algebra
+    $\Lie G=\fr g$ of $G$.
+\end{thm}
+\begin{proof}
+    Omitted.\todo{make this into an exercise in the back}
+\end{proof}
+
+\todo{Adjoint and adjoint actions}
+
+\begin{defn}
+    Let $P$ be a principal $G$-bundle over $M$. Let $p\in P$ be a point in the fiber above $x\in M$. Let $T_pP$ denote the tangent space to $P$ to $p$
+    and denote by $V_p$ the tangent space to the fiber $\pi^{-1}(x)$ treated as a subspace of $T_pP$. We call $V_p$ the \textbf{vertical subspace} of
+    $T_pP$. A \textbf{connection} $\Gamma$ on $P$ is an assignment of a \textbf{horizontal subspace} $H_p$ to each $p\in P$ such that
+    \begin{enumerate}[(i)]
+        \item there is a direct sum decomposition $T_pP=V_p\oplus H_p;$
+        \item $H_p$ depends smoothly on $p$, as defined below.
+        \item $H_{pg}=(R_g)_*H_p$ for every $g\in G$;
+    \end{enumerate}
+    A tangent vector $X\in T_pP$ is called \textbf{vertical} (resp. \textbf{horizontal}) if it lies in $V_p$ (resp. $H_p$). By 
+    $(i)$ we see that any vector can uniquely be decomposed into vertical and horizontal components: $X=X_v+X_h$ with
+    $X_v\in V_p$ and $X_h\in H_p$. This definition extends naturally to the idea of vertical and horizontal vector fields.
+    Indeed, by saying that $H_p$ depends smoothly on $p$ in $(ii)$, we mean that for any smooth vector field $X\in \Gamma(TP)$, the vertical
+    and horizontal components $X_v$ and $X_h$ are smooth as well. Finally, $(iii)$ requires that the choice of horizontal subspace is equivariant along the fiber direction.
+\end{defn}
+
+The above definition of a connection is reasonable, as given a vector space without an inner product defined on it, there is no canonical choice
+of a horizontal subspace given an arbitrary vertical subspace. If, by chance, we are given a Riemannian metric $\eta$ on $P$, we may choose the horizontal
+subspaces according to the orthogonal complement given by $\eta$. Hence the choice of metric induces a choice of connection.
+We will return to this case later, for now working in full generality.
+
+Unfortunately, thinking of a connection as a choice of horizontal subspaces,
+while intuitive, is rather difficult to compute with. Hence we provide an alternate definition in terms of Lie algebra-valued one-forms, and we
+prove that the two definitions are equivalent. Before we do so, let us familiarize ourselves a little bit with vector-valued forms.
+
+\begin{defn}
+    Let $V$ be a $d$-dimensional vector space and $M$ a smooth manifold. Denote by $E=M\times V$ the trivial bundle over $M$ and by $\Lambda^pT^*M$ the
+    $p$th exterior power of the cotangent bundle of $M$.
+    We define a \textbf{$V$-valued $p$-form} on $M$ to be a section of the tensor product bundle of $\Lambda^pT^*M$ and $E$.
+    More explicitly, fixing a basis $\left\{ e_1,\ldots,e_d \right\}$ for $V$ (equivalently a global frame for $E$) we can write any $V$-valued $p$ form as:
+    \[\mu_x(v_1,\ldots,v_p)=\mu_x^1(v_1,\ldots,v_p)e_1+\ldots+\mu_x^d(v_1,\ldots,v_p)e_d\]
+    for all $x\in M$ and $v_i\in T_xM$, where the $\mu^i\in\Gamma(\Lambda^pT^*M)$ are the \textbf{components} of $\mu$. We say that a $V$-valued
+    form is smooth if and only if its components are smooth in the usual sense of forms (we leave it as an exercise to the reader to show
+    that this definition is independent of basis).\todo{exercise}
+    We denote the space of smooth such sections on $M$ by $\Omega^p(M;V).$
+
+    For $p=0$, we define by convention $\Omega^0(M;V)$ to be the space of smooth vector-valued functions on $M$.
+    For $p=1$, we get smooth $V$-valued one-forms: if $\mu$ is such a form then for $x\in M$, $\mu_x$
+    is a linear transformation from $T_xM$ to $V$, i.e. $\mu_x\in\Hom(T_xM;V).$ In this sense, ordinary one-forms on $M$
+    may be seen as $\R$-valued one-forms.
+\end{defn}
+
+Just as with usual forms, we may pullback vector-valued forms.
+\begin{defn}
+    Let $M,N$ be smooth manifolds and $f:M\to N$ a smooth map. If $\mu$ is a $V$-valued $p$-form on $N$ we define the \textbf{pullback of $\mu$ by $f$}
+    to be the $V$-valued $p$-form $f^*\mu$ on $M$ defined by
+    \[(f^*\mu)_x(v_1,\ldots,v_p)=\mu_{f(x)}(f_*v_1,\ldots,f_*v_p)\]
+    with $v_i\in T_xM$, for all $x\in M$. Note that if $\mu=\mu^ie_i$ then\todo{prove this} $f^*\mu=(f^*\mu^i)e_i$; hence if $\mu$ is smooth, so is $f^*\mu$.
+\end{defn}
+
+We now introduce the Maurer-Cartan form, a Lie algebra-valued form on a Lie group, which will be useful for redefining connections on principal bundles.
+\begin{defn}
+    The \textbf{Maurer-Cartan form} $\mu$ on a Lie group $G$ is the unique Lie algebra-valued one-form $\mu \in \Omega^1(G; \fr g)$
+    that is left-invariant and acts as the identity map on $T_eG$. Uniqueness is clear: if two such forms exist they agree, by definiton, at
+    the identity; subsequently, left-invariance forces the two forms to agree everywhere. We can in fact write out the action of $\mu$
+    completely explicitly using just the definition. For some $v\in T_gG$,
+    \[\mu(g)(v)=\left( (L_{g^{-1}})^*\mu(e) \right)(v)=(L_{g^{-1}})_{*g}(v).\]
+\end{defn}
+
+The following lemma relates a given basis of the Lie algebra to the Maurer-Cartan form.
+\begin{lem}
+    \label{LMC}
+    Fix a basis $\{e^i\}$ for $\fr g=T_eG$ and hence a dual basis $\left\{ \mu^i(e) \right\}$ for $\fr g^*=T_e^*G$.
+    By construction, $\mu^i(e)(e_j)=\delta^i_j$. If we denote by $\mu^i$ the left-invariant vector fields generated by $\mu^i(e)$, then 
+    the Maurer-Cartan form is written
+    \[\mu(g)=\sum_i\mu^i(g)e_i.\]
+\end{lem}
+\begin{proof}
+    Let us start with the right-hand side of the identity and show that it evaluates everywhere to the left-hand side.
+    Take any $v\in T_gG$ and denote by $w$ the pushforward $(L_{g^{-1}})_*v$. Then
+    \begin{align*}
+        \left(\sum_i\mu^ie_i\right)(v)&=\sum_i\mu^i(g)(v)e_i=\sum_i\left((L_{g^{-1}})^*\mu^i(e)\right)(v)e_i\\
+        &=\sum_i \mu^i(e)(w)e_i=\sum_i\mu^i(e)( \sum_j w^j e_j )\\
+        &=\sum_{i,j}w_j\mu^i(e)(e_j)e_i=\sum_iw^ie_i=w\\
+        &=(L_{g^{-1}})_{*}v=\mu(g)(v),
+    \end{align*}
+    as desired.
+\end{proof}
+
+\begin{exmp}
+    We now follow [Naber] in computing the Maurer-Cartan form $\mu$ for $G=\GL_n\R$ as an example. 
+
+    We denote by $x^{ij}$ the coordinate functions of $\R^{n^2}$ such that $x^{ij}(g)=g^{ij}$ for $g\in\GL_n\R$. Recall that $\fr{gl}_n\R$ is the space of
+    all $n\times n$ matrices. Fix a basis for $\fr {gl}_n\R$ to be $\left\{ \partial/\partial x^{ij}|_{e} \right\}_{i,j=1,\ldots n}$.
+    The corresponding dual basis is $\left\{ dx^{ij}(e) \right\}_{i,j=1,\ldots n}$; to find (the components of) $\mu$, we wish to
+    find left-invariant $\R$-valued one-forms $\mu^{ij}$ satisfying $\mu^{ij}(e)=dx^{ij}(e)$. Recall that left-invariance of $\mu^{ij}$ requires that
+    $\mu^{ij}(g)=\left( L_{g^{-1}} \right)^*(\mu^{ij}(e))$. Let $v\in T_g\GL_n\R$ be the tangent vector to a curve $\gamma:(-\varepsilon,\varepsilon)\to\GL_n\R$,
+    i.e. $\gamma'(0)=v$. Then we have
+    \begin{align*}
+        \mu^{ij}(g)(v)&=\mu^{ij}(e)\left( (L_{g^{-1}})_*v \right)=dx^{ij}(e)\left( (L_{g^{-1}})_*v \right)\\
+        &=dx^{ij}(e)\left( (L_{g^{-1}}\circ\gamma)'(0) \right)=dx^{ij}(e)\left(\frac{d}{dt}\bigg|_{t=0}(g^{-1}\gamma(t))  \right)\\
+        &=\sum_k\left(g^{-1}\right)^{ik}v^{kj}
+    \end{align*}
+    Rewriting this as
+    \begin{align*}
+        \mu^{ij}(g)(v)=\sum_k\left(g^{-1}\right)^{ik}v^{kj}=\sum_k(g^{-1})^{ik}dx^{kj}(g)(v),
+    \end{align*}
+    we find that
+    \[\mu^{ij}(g)=\sum_k (g^{-1})^{ik}dx^{kj}(g).\]
+    Using Lemma \ref{LMC} we conclude
+    \[\mu(g)=\sum_{i,j=1}^n\mu^{ij}(g)\frac{\partial}{\partial x^{ij}}\bigg|_{e}=\sum_{i,j,k=1}^nx^{ik}(g^{-1})dx^{kj}(g)\frac{\partial}{\partial x^{ij}}\bigg|_{e}\]
+    This is often rather slickly abbreviated as $\mu(g)=g^{-1}dg$. Let us now apply this to the simple case of $\GL_2\R$. Writing
+    \[g=\begin{pmatrix}
+            a&b\\c&d
+        \end{pmatrix}\text{ and }g^{-1}=\frac{1}{ad-bc}\begin{pmatrix}
+            d&-b\\-c&a
+        \end{pmatrix},
+    \]
+    we can express the Maurer-Cartan form as
+    \begin{align*}
+        \mu(g)&=g^{-1}dg=\frac{1}{ad-bc}\begin{pmatrix}
+            d&-b\\-c&a
+        \end{pmatrix}\begin{pmatrix}
+            dx^{11}&dx^{12}\\dx^{21}&dx^{22}
+        \end{pmatrix}\\
+        &=\frac{1}{ad-bc}\begin{pmatrix}
+            d\;dx^{11}-b\;dx^{21}&d\;dx^{12}-b\;dx^{22}\\-c\;dx^{11}+a\;dx^{21}&-c\;dx^{12}+a\;dx^{22}.
+        \end{pmatrix}
+    \end{align*}
+\end{exmp}
+
+\begin{defn}
+    Let $G$ be a Lie group and $\fr g$ be its Lie algebra. We say that a $\fr g$-valued one-form $\mu$ is right equivariant if
+    \[(R_g)^*\mu=\ad(g^{-1})\circ \mu\]
+    for all $g\in G$. More generally, let $P$ be a manifold equipped with smooth right action $\sigma(p,g)=p\cdot g$ of $G$ and let $\mu$ be a $\fr g$-valued one-form
+    on $P$. Then we say that $\mu$ is \textbf{right-equivariant under $\sigma$} if
+    \[(\sigma_g)^*\mu=\ad(g^{-1})\circ \mu\]
+    for all $g\in G$.
+\end{defn}
+
+\begin{lem}
+    The Maurer-Cartan form is right-invariant.
+\end{lem}
+\begin{proof}
+    Take $g,h\in G$ and a vector $v\in T_{hg^{-1}}G$. It suffices to show right-equivariance for this case:
+    \begin{align*}
+        \mu(h)\left( (R_g)_*v \right)&=(L_{h^{-1}})_*\left( (R_g)_*v \right)\\
+        &=(L_{g^{-1}}\circ L_{gh^{-1}})_*\left( (R_g)_*v \right)\\
+        &=(L_{g^{-1}})_*\left( (L_{gh^{-1}}\circ R_g)_*v \right)\\
+        &=(L_{g^{-1}})_*\left( (R_g\circ L_{gh^{-1}})_*v\right)\\
+        &=\ad(g^{-1})\circ (L_{gh^{-1}})_*v\\
+        &=\ad(g^{-1})\circ \mu(hg^{-1})(v),
+    \end{align*}
+    as desired. Note that we have used the covariance of the pushforward together with the fact that the left and right actions
+    commute.
+\end{proof}
+
+Let us finally return to connections.
+\begin{defn}
+    Given a connection $\Gamma$ on a principal $G$-bundle $P$ over $M$, we define the corresponding \textbf{connection one-form} $\omega\in \Omega^1(P;\fr g)$
+    as follows. Recall that the elements of $\fr g$ are in one-to-one correspondence with left-invariant vector fields on $G$. Given a Lie algebra
+    element $X$, denote by $\tilde X$ its corresponding left-invariant vector field. Note that when $\tilde X$ is considered
+    as a vector field on $P$ it is a purely vertical vector field. Thus, for some vector $Y\in T_pP$ with vertical component $Y_v$ we define
+    $\omega(p)(Y)$ to be the (unique) Lie algebra element $X$ such that $\tilde X(p)=Y_v$.
+\end{defn}
+
+
+
+
+
+
+
+
+
+
+
+We have seen how the tangent space at a point $p$ of a principal bundle $P$ contains vectors that can be naturally called vertical: those that are in the kernel of the projection pushforward $\pi_*$, or that ``point in the direction of the fiber''. However, principal bundles are not a priori equipped with horizontal vectors. In other words, there is no canonical way of moving from a fiber to the next, and no way to tell where exactly on that fiber one would reach by moving. In order to talk about a horizontal direction, we need to define the concept of a connection. We will see that connections on principal bundles give rise to tools that are crucial in differential geometry and mathematical physics. Among such, we can pullback a connection to the base space in order to obtain a generalization of the electromagnetic vector potential. We will also use connections to define parallel transport and covariant differentiation. Before we define connections, it's useful to define a 1-form on the tangent spaces of the group $G$:
+
+\begin{defn}
+    The \emph{Maurer-Cartan form} on a Lie group $G$ is the one-form $\omega_{MC} \in \Omega^1(G, \fr g)$ which is invariant under left multiplication by group elements and which acts as the identity map on $T_eG$, the tangent space at the identity.
+\end{defn}
+
+In the formulation of this definition we assume that there exists a unique 1-form with the required properties. The proof of this claim is easy. The left-invariance of $\omega_{MC}$ means that:
+\[    \omega_{MC} (X) =  (L_g^* \omega_{MC}) (X) = \omega_{MC} (L_{g*} X)     \]
+This gives an intuitive picture of the way the Maurer-Cartan form acts: it left-translates vectors to $T_eG$. This is the same as constructing a left-invariant vector field from the vector $X$, and then evaluating this field at the identity. Since the tangent space at the identity is isomorphic as a Lie algebra to the space of left-invariant vector fields (you can see a proof of this in John Lee \todo{reference}), the Maurer-Cartan form is unique.
+\\
+\\
+Now we are ready to define connections, following Spivak \todo{reference}.
+
+\begin{defn}
+    A \emph{connection} in a principal bundle $\pi: P \to M$ with group $G$ is a $\C^{\infty}$ $\fr g$-valued 1-form $\omega$ on $P$ such that:
+    \begin{enumerate}[(1)]
+        \item $R_p^*(\omega) = \omega_{MC}$, where $R_p$ is an embedding of $G$ in $P$, given by $R_p(g) = p \cdot g$;
+        \item $\omega(R_{g*} Y) = \text{Ad}(g^{-1})\omega(Y)$ for all $g\in G$ and all tangent vectors on $P$.
+    \end{enumerate}
+\end{defn}
+Before we move on, we should unravel the meaning behind this cryptic definition, which puzzled the authors for a long time before they finally understood it. Condition $(1)$ simply gives the way in which the connection acts on vertical vectors. Indeed, pulling back by $R_p$ gives a form on the fiber that the vertical vector belongs to, and $R_p^*(\omega) = \omega_{MC}$ is saying that $\omega$ will left-translate the vector to the tangent space at the identity of the fiber. An alternate way to think about this condition is in a local trivialization: here the fiber is explicitly identified, and left-translation should be intuitive. Condition $(2)$ expresses the way in which $\omega$ changes under right actions. Pushing forward by $R_g$ moves the vector along the fiber, and the value of $\omega$ at the new vector is simply the old value acted on by the adjoint action.
+\\
+\\
+We should also explain in what sense $\omega$ gives a canonical way of moving from one fiber to another. If the base manifold $M$ is $m$-dimensional and the group $G$ is $n$-dimensional (as a manifold), then $\omega$ acts on the $m+n$-dimensional tangent space at $p\in P$, and it takes values in the $n$-dimensional Lie algebra $\fr g$. By the rank-nullity theorem of linear algebra, the kernel of $\omega$ is $m$-dimensional, and therefore can be thought of as ``parallel'' to the base manifold, or horizontal. In fact, as the following proposition shows, a connection on a principal bundle is equivalent to a collection of horizontal spaces. For this reason, some authors define connections as a choice of horizontal subspace in every tangent space to $P$. In the next proposition and throughout the section, if $u\in P$, then we denote by $V_u$ and $H_u$ the space of vertical and horizontal vectors at $u$ respectively.
+
+\begin{prop}
+    If $H_u$ is the horizontal subspace at $u\in P$ determined by the connection $\omega$, then:
+    \begin{enumerate} [(a)]
+        \item $T_uP = V_u \oplus H_u$
+        \item $H_{u\cdot g} = (R_g)_* H_u$
+    \end{enumerate}
+    Conversely, a collection of subspaces $H_u$ at every point $u\in P$ determines a unique connection $\omega$ on $P$.
+\end{prop}
+
+\section{Lifts}
+\section{The space of connections}
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+

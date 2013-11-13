@@ -1,0 +1,261 @@
+\documentclass{../../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\title{Lie Groups PSET 4}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+
+Let $V=\C^2$ be the standard two-dimensional representation of the Lie algebra $\fr{sl}_2\C$ and let $\Sym^kV$ be the symmetric power of $V$.
+\begin{enumerate}
+    \item Let us write explicitly the action of $e,f,h\in\fr{sl}_2\C$ on $\Sym^kV$ in the natural basis $e_1^i\cdot e_2^{k-i}$.
+        Note first that we can write
+        \[
+            h=\begin{pmatrix}
+                1&\\&-1
+            \end{pmatrix},
+            e=\begin{pmatrix}
+                &1\\&
+            \end{pmatrix},
+            f=\begin{pmatrix}
+                &\\1&
+            \end{pmatrix},
+        \]
+        and hence the action of $\fr{sl}_2\C$ on $V$, given by matrix multiplication, is simply as follows:
+        \begin{align*}
+            he_1=e_1,&\, he_2=-e_2\\
+            ee_1=0,&\, ee_2=e_1\\
+            fe_1=e_2,&\, fe_2=0.
+        \end{align*}
+        Recall that Lie algebra actions act as derivations
+        on tensor product representations. Of course, the $k$th symmetric product of $V$ is simply a symmetrized tensor product and it is easy
+        to see that Lie algebra actions act on derivations across this symmetric product as well. In particular, for $\Sym^2V$:
+        \begin{align*}
+            X(a\cdot b)&=\frac{1}{2}X(a\otimes b+b\otimes a)\\
+            &=\frac{1}{2}(Xa\otimes b+a\otimes Xb+Xb\otimes a+b\otimes Xa)\\
+            &=\frac{1}{2}(Xa\otimes b+b\otimes Xa)+\frac{1}{2}(a\otimes Xb+Xb\otimes a)\\
+            &=Xa\cdot b+a\cdot Xb.
+        \end{align*}
+        This clearly extends to $\Sym^kV$ by induction. Using this fact, we can now compute the action of $\fr{sl}_2\C$ on $\Sym^kV$ (supressing
+        the symmetric product $\cdot$ for clarity):
+        \begin{align*}
+            h(e_1^ie_2^{k-i})&=(2i-k)e_1^ie_2^{k-i}\\
+            e(e_1^ie_2^{k-i})&=(k-i)e_1^{i+1}e_2^{k-i-1}\\
+            f(e^ie_2^{k-i})&=ie_1^{i-1}e_2^{k-i+1}.
+        \end{align*}
+        These follow simply by induction on the action of $\fr{sl}_2\C$ on $V$ together with the derivation property.
+    \item Consider in particular the case of $k=2$, i.e. $W=\Sym^2\C^2$ as a $\fr{sl}_2\C$ representation. We claim that $W$ is in fact
+        isomorphic to the adjoint representation $A$ of $\fr{sl}_2\C$. Typically one would look for an $\fr{sl}_2\C$-equivariant linear isomorphism,
+        from $W$ to $A$, but in this case, we can explicitly write out the actions of $\fr{sl}_2\C$ on the respective bases and show that they
+        are identical. In particular, we find (using the rules derived above for $W$ and using the commutation relations for $A$)
+        \begin{equation*}
+            \begin{aligned}[c]
+                h(e_1^2)&=2e_1^2\\
+                h(e_1e_2)&=0\\
+                h(e_2^2)&=-2e_2^2\\
+                e(e_1^2)&=0\\
+                e(e_1e_2)&=e_1^2\\
+                e(e_2^2)&=2e_1e_2\\
+                f(e_1^2)&=2e_1e_2\\
+                f(e_1e_2)&=e_2^2\\
+                f(e_2^2)&=0
+            \end{aligned}
+            \qquad\Longleftrightarrow\qquad
+            \begin{aligned}[c]
+                [h,e]&=2e\\
+                [h,h]&=0\\
+                [h,f]&=-2f\\
+                [e,e]&=0\\
+                [e,h]&=-2e\\
+                [e,f]&=h\\
+                [f,e]&=-h\\
+                [f,h]&=-2f\\
+                [f,f]&=0
+            \end{aligned}
+        \end{equation*}
+        Up to scaling $h$ and $f$ by constant factors of 2 and -1, we see that these representations are identical.
+    \item By the results of Kirillov problem 4.1, we see that representations of $\text{SO}_3\R$ are precisely those representations of $\fr{sl}_2\C$ satisfying
+        $e^{\pi i\rho(h)}=\text{id}$. Using our result above for the way $\rho(h)$ looks, we see that we obtain the identity if and only if $k$ is even; hence
+        the representation lifts only for $k$ even.
+\end{enumerate}
+
+\subsection*{Problem 2}
+
+We wish to show that $\Lambda^n\C^n\cong \C$ as a representation of $\fr{sl}_n\C$. Note first that $\C$ is the trivial
+representation of $\fr{sl}_n\C$ and has one basis vector, i.e. the basis of the Lie algebra acts as zero.
+Let us show that the same happens for $\Lambda^n\C^n$. Note first that the $n$th exterior power of an $n$-dimensional vector space
+is one-dimensional as well, as there is only one linearly independent $n$-form, i.e. $\omega=e_1\wedge\cdots\wedge e_n$. If we write out $e_i$ as
+the usual basis column vectors, we see that the matrix multiplication action of every off-diagonal basis element on $\omega$ is zero.
+This is simply because the off-diagonal interaction converts an $e_i$ into an $e_j$ for $i\neq j$, and hence the wedge product yields zero
+(using the derivation property).
+Similarly, the action of any of the diagonal Lie algebra basis elements, $h_i$, contains both a 1 and a -1, and hence when acted on the wedge product,
+produces two terms that cancel each other out. Thus we see that these two representations are equivalent. More generally, we can note that the
+action of the Lie algebra brings yields the trace of the chosen operator, but the Lie algebra consists of traceless matrices.
+
+The same reasoning does not hold for $\fr{gl}_n\C$, as the Lie algebra is the space of all $n\times n$ matrices, and hence there are basis elements that
+will act non-trivially on $\omega$, i.e. basis matrices with a single 1 somewhere on the diagonal. Indeed, the trace is not necessarily zero.
+
+\subsection*{Problem 3}
+
+If we let $G$ be the group of symmetries of the cube, it will act on functions on the cube $f\in V$ as
+\[(gf)(\sigma)=f(g^{-1}\sigma).\]
+We wish to show that the action of $G$ commutes with the action of $A$. First note that if we denote by $g_1,g_2,g_3$ the rotations
+by $\pi/2$ we may write the action of $A$ as an average over actions by different generators (and inverses); we must be careful to note,
+however that the precise expression for $A$ depends on where the function is being evaluated. For example, we might show
+\[((A\circ g_1)f)(\sigma)=((g_1\circ A)f)(\sigma).\]
+More explicitly, we can start with the left-hand side:
+\begin{align*}
+    ((A\circ g_1)f)(\sigma)=Af(g_1^{-1}\sigma)=\frac{1}{4}\left( f(\sigma)+f(g^{-1}_1g^{-1}_1\sigma)+f(g_3g_1^{-1}\sigma)+f(g_3^{-1}g_1^{-1}\sigma) \right)
+\end{align*}
+whereas the right-hand side yields:
+\begin{align*}
+    ( (g_1\circ A)f)(\sigma)&=\frac{g_1}{4}\left( f(g_1\sigma)+f(g_1^{-1}\sigma)+f(g_2\sigma)+f(g_2^{-1}\sigma) \right)\\
+    &=\frac{1}{4}\left(f(\sigma)+f(g_1^{-1}g_1^{-1}\sigma)+f(g_1^{-1}g_2\sigma)+f(g_1^{-1}g_2^{-1}\sigma)\right)
+\end{align*}
+These two are in fact equivalent, as the second two terms on the left yield the same cube faces as do the second two terms on the right.
+One can show this similarly for other combinations (not just for $g_1$, as well as for inversion $z$, which is not generated by $g_i$).
+
+Let $z=-I\in G$; it's clear that $z$ swaps all opposing faces. Writing any $f\in V$ in terms of its values as $(a,b,c,d,e,f)$, we can symmetrize
+and antisymmetrize:
+\[(a,b,c,d,e,f)=\left(\frac{a+b}{2},\frac{a+b}{2},\ldots \right)+\left(\frac{a-b}{2},-\frac{a-b}{2},\ldots\right).\]
+This clearly yields a direct sum decomposition, as this is unique.
+
+Let us now show that $V_+$ can be decomposed into a direct sum $V_+=V_+^0\oplus V_+^1$ where
+\[V_+^0=\left\{ f\in V_+\mid \sum_\sigma f(\sigma)=0 \right\}, \qquad V_+^1=\C\cdot 1.\]
+We may write, using symmetry, $f\in V_+$ as three components $f=(a,b,c)$. This three-dimensional space can be decomposed into those above by noting that
+\[(a,b,c)=(x,y,-x-y)+(t,t,t)\]
+if $t=(a+b+c)/3$. Furthermore, these subspaces are invariant under the action of $G$, as if $\sum f(\sigma)=0$, clearly $\sum f(g^{-1}\sigma)=0$ as well, and
+if the function is constant, then rotation has no effect.
+
+The eigenvalue of $A$ on $V_+^1$ is clearly 1, as if the function is constant, averaging the neighbors will simply yield back that constant.
+On the other hand, the eigenvalue of $A$ on $V_-$ is zero, due to the complete antisymmetry. Finally, the eigenvalue on $V_+$ is $-1/2$, because
+\[A(x,y,-x-y)|_x=\frac{1}{4}\left(2y+2(-x-y)\right)=-\frac{x}{2}.\]
+
+\subsection*{Problem 4}
+
+
+%Let us study the complex representations of $\fr{so}_3\R$. We can, by Kirillov lemma 4.4, instead study the complexified Lie algebra.
+%Consider first the basis
+%\[
+%    J_x=i\begin{pmatrix}
+%        &&\\&&-1\\&1&
+%    \end{pmatrix},
+%    J_y=i\begin{pmatrix}
+%        &&1\\&&\\-1&&
+%    \end{pmatrix},
+%    J_z=i\begin{pmatrix}
+%        &-1&\\1&&\\&&
+%    \end{pmatrix}
+%\]
+%and $V$ a complex representation of the complexified Lie algebra.
+%Instead, choose the basis $J_z,J_+=J_x+iJ_y,J_-=J_x-iJ_y$, which will be useful to emulate the case of $\fr{sl}_2\C$.
+%Let us call $v$ a vector of weight $\lambda$ if $J_zv=\lambda v$ and $V[\lambda]$ be the subspace of such vectors. Note that
+%we have the commutation relation $[J_z,J_{\pm}]=\pm J_{\pm}$, and hence
+%\begin{align*}
+%    J_zJ_{\pm}v&=[J_z,J_\pm]v+J_\pm J_zv=(\lambda\pm 1)J_\pm v.
+%\end{align*}
+%In other words, we see that $J_{\pm}$ raise and lower the weights. Before we proceed any further, note that every representation of
+%$\fr{so}_3\R\otimes\C$ is completely reducible, as the category of representations is equivalent $\fr{so}_3\R$, which in turn is equivalent
+%to the category of representations of $\fr{su}_2$, which is the Lie algebra of a compact, connected, simply connected Lie group.
+%Hence it suffices to investigate irreducible complex representations $V$. We can now claim that every finite dimensional complex representation
+%of the complexified Lie algebra can be written in the form $V=\oplus_\lambda V[\lambda]$. To see this, let $V'=\sum_\lambda V[\lambda]$ be the subspace
+%of $V$ spanned by the eigenvectors of $J_z$. Since these eigenvalues are distinct, the eigenvectors are independent, and hence this sum is in fact a direct
+%sum. It's clear that $V'$ is invariant under the action of the algebra (by the computation above) and hence $V'=V$ (since $V'\neq 0$).
+%
+%Now let a highest weight $\lambda$ be a weight such that $\text{Re }\lambda\geq \text{Re }\lambda'$ for all weights $\lambda'$. 
+%It's clear that if $v$ is a highest-weight vector then $J_+v=0$. Furthermore, if we write
+%\[v^k=\frac{J_-^k}{k!}v\]
+%for $k\geq 0$, we have
+%\begin{align*}
+%    J_zv^k&=(\lambda-k)v^k\\
+%    J_-v^k&=(k+1)v^{k+1}\\
+%    J_+v^k&=(2\lambda-k+1)v^{k-1}, k>0.
+%\end{align*}
+%The first two are clear from above computation and the definition of $v^k$. The last follows by induction. For $k=1$ we see that
+%\[J_+v^1=J_+J_-v=[J_+,J_-]v+J_-J_+v=2J_zv=2\lambda v.\]
+%For the induction step,
+%\begin{align*}
+%    J_+v^{k+1}&=\frac{1}{k+1}J_+J_-v^k=\frac{1}{k+1}(J_zv^k+J_-J_+v^k)\\
+%    &=\frac{1}{k+1}\left( (\lambda-k)v^k+(2\lambda-k+1)J_-v^{k-1} \right)\\
+%    &=\frac{1}{k+1}\left( \lambda-k+2\lambda k-k^2+k \right)v^k\\
+%    &=\frac{-k^2+2\lambda k+\lambda}{k+1}v^k=
+%\end{align*}
+%We can now follow Kirillov and note that if we define $M_\lambda$ to be the infinite-dimensional vector space with basis $v_0,v_1,\ldots$
+%and then $M_\lambda$ becomes becomes a representation of $\fr{so}_3\R\otimes\C$. Additionally, if $V$ is an irreducible finite-dimensional representation
+%of $\fr{so}_3\R\otimes\C$ which contains a non-zero highest weight vector of highest weight $\lambda$ then $V=M_\lambda/W$ for some subrepresentation $W$
+%of $M_\lambda$ (this follows directly from the computations above).
+%
+%We can prove the analog to Kirillov theorem 4.59. Namely,
+%\begin{enumerate}
+%    \item For any $n\geq 0$ let $V_n$ be the finite-dimensional vector space with basis $v_0,\ldots,v_n$. Define the action of $\fr{so}_3\R\otimes\C$ by
+%        \begin{align*}
+%            J_zv^k&=(n/2-k)v^k\\
+%            J_-v^k&=(k+1)v^{k+1}, k<n; J_-v^n=0\\
+%            J_+v^k&=(n-k+1)v^{k-1}, k>0; J_+v^0=0.
+%        \end{align*}
+%        Then $V_n$ is an irreducible representation of $\fr{so}_3\R\otimes\C$; we will call it the irreducible representation with highest weight $n$
+%    \item For $n\neq m$, the representations $V_n$ and $V_m$ are non-isomorphic
+%    \item Every finite-dimensional irreducible representation of $\fr{so}_3\R\otimes\C$ is isomorphic to one of the representations $V_n$.
+%\end{enumerate}
+%The proof is almost exactly the same as for the case of $\fr{sl}_2\C$. First consider the infinite-dimensional representation $M_\lambda$ defined above.
+%If $\lambda=n$ is a non-negative integer, consider the subspace $M'\subset M_n$ spanned by vectors $v^{n+1},v^{n+2},\ldots$. This subspace is in fact
+%a subrepresentation as it is clearly stable under $J_z,J_-$, and as one can check, 
+
+Recall that we have a basis for $\fr{so}_3\R$ given by $\left\{ J_x,J_y,J_z \right\}$. Using the isomorphism $\fr{su}_2\cong\fr{so}_3\R$, we
+deduce that the complexification
+\[\fr{so}_3\C\cong \fr{su}_2\otimes\C\cong \fr{sl}_2\C.\]
+More explicitly, we can define the isomorphism $\psi:\fr{so}_3\C\to\fr{sl}_2\C$ as 
+\begin{align*}
+    J_x &\mapsto -\frac{1}{2}(e+f)\\
+    J_y &\mapsto \frac{1}{2}(f-e)\\
+    J_z &\mapsto -\frac{i}{2}h
+\end{align*}
+where $\left\{ e,f,h \right\}$ is the usual basis for $\fr{sl}_2\C$. It is easy to check that the Lie bracket is preserved.
+Now consider a finite-dimensional complex representation $V$ of $\fr{so}_3\R$. By Kirillov 4.4, $V$ can be viewed uniquely as a representation
+of $\fr{so}_3\C$ as well; let $\pi:\fr{so}_3\C\to\fr{gl}V$ denote this representation. Now the composition $\pi\circ\psi^{-1}$ gives $V$ the structure of an 
+$\fr{sl}_2\C$ representation. Applying Kirillov's theorem 4.60, we find a weight decomposition
+\[V=\bigoplus_{n\in\Z} V[n].\]
+To compute the weights of each of these weight subspaces note that $(\pi\circ \psi^{-1}(h))v=\pi(2iJ_z)v$, which must be $nv$ for all $v\in V[n]$
+and hence we see that every finite-dimensional representation of $\fr{so}_3\R$ admits such a weight decomposition where
+\[V[n]=\left\{ v\in V\mid J_zv=\frac{in}{2}v \right\}.\]
+
+Again by Kirillov problem 4.1, we know that representations of $\fr{sl}_2\C$ lift to representations of $\text{SO}_3\R$ if and only if
+$e^{\pi i\pi(\psi^{-1}((h))}=\text{Id}$. In our case, this reduces to $e^{\pi i \pi(2iJ_z)}$. But since $J_z$ acts as $in/2$ on each subspace,
+it's clear the the exponential yields $\text{Id}$ if and only if each of the weights is even.
+
+\subsection*{Problem 5}
+
+Let $G$ be a finite group, and $H$ a subgroup. Let $(\rho, W)$ be a representation of $H$ and $\text{Ind}_H^G W$ be the induced representation.
+We wish to prove Frobenius reciprocity
+\[\Hom_G(V,\text{Ind}_H^G W)=\Hom_H(\text{Res}_H^G V,W).\]
+where $V$ is an arbitrary representation of $G$ and $\text{Res}_H^G V$ is the restriction of $V$ to a representation of $H$.
+Note that for finite groups, induction and coinduction are identical, and hence we may prove
+\[\Hom_G(\text{Ind}_H^G W,V)=\Hom_H(W,\text{Res}_H^G V)\]
+instead. Recall first that by the definition of induction, we may write
+\[\text{Ind}_H^GW=\bigoplus_{\sigma\in G/H}\sigma\cdot W.\]
+Given a $\phi\in\Hom_H(W,\text{Res}_H^G V)$, let us define the associated $\tilde \phi\in\Hom_G(\text{Ind}_H^G W,V)$ on each $\sigma\cdot W$ as
+\[\sigma\cdot W\overset{g_\sigma^{-1}}{\longrightarrow} W\overset{\phi}{\longrightarrow} \text{Res}_H^GV\overset{g_\sigma}{\longrightarrow} V\]
+for some representative $g_\sigma\in g_\sigma H$.
+
+We must check that $\tilde \phi$ is indeed $G$-equivariant and independent of $g_\sigma$ and that the map $\phi\mapsto\tilde\phi$ is bijective.
+Independence of representative follows simply because $\phi$ is $H$-linear.
+To show equivariance, it suffices to show that $\tilde\phi(gg_\sigma\cdot w)=g\tilde\phi(g_\sigma\cdot w)$. First write $gg_\sigma=g_\tau h$ for $g_\tau\in G,h\in H$.
+Note that right-hand side can be rewritten $gg_\sigma\phi(w)$ simply by definition of $\tilde\phi$. The left-hand side, meanwhile, obeys:
+\[\tilde\phi\left( (g_\tau h)\cdot w \right)=\tilde\phi(g_\tau\cdot w')=g_\tau\phi(w')=g_\tau h\phi(w)\]
+using the definitions and the $H$-equivariance of $\phi$. But this is precisely the right-hand side, and we are done.
+Injectivity follows from noting that if there exists another $\tilde \psi$ that is associated to $\phi$ then it must agree with $\phi$ when evaluated on
+$W$, call the restriction $\psi$. But then we may extend $\psi$ using the map above, and we will simply get back $\tilde\phi$.
+This also shows surjectivity,
+as and $\tilde\psi$ can be restricted and then said restriction will be sent to $\tilde\psi$.
+
+
+
+\end{document}

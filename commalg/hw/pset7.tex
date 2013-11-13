@@ -31,7 +31,36 @@ For exactly the same reasons as above, we see that this gives us a basis for $L(
 
 \subsection*{Problem 3}
 
-\subsection*{Problem 4}
+For simplicity, let us consider the case of $k=\C$. Then any squarefree cubic may be written as $f(t)=\prod_{i=1}^3(x-\lambda_i)$ for $\lambda_i$
+distinct. We wish to classify the discrete valuations on $K=\text{Frac}\left(\C[x,y]/(y^2-\prod_{i=1}^3(x-\lambda_i))\right)$ over $\C(x)$. Note first
+that we have a degree two extension and hence for every discrete valuation $v$ on $\C(x)$ we must have finitely many extensions $w_i$ on $K$ of $v$
+such that $w_i=e_iv$. However, we also know that $\sum_i e_i=2$, and hence there are only two possibilities: given an valuation $v$ on $\C(x)$, there
+is either one valuation on $K$ that restricts to $v$ with ramification 2 or there are two valuations on $K$ that restrict to $v$ each with ramification 1.
+Let us proceed in cases.
+
+Let $w$ be a valuation on $K$. Suppose $w(x-\lambda_j)>0$ for some $j$. Then, restricting to $\C(x)$, we see that $w|_{\C(x)}=\text{ord}_{t=\lambda_j}$.
+But then we see that
+\begin{align*}
+    2w(y)&=w(y^2)=n\left(w(x-\lambda_1)+w(x-\lambda_2)+w(x-\lambda_3)\right)=n
+\end{align*}
+for some integral $n\leq 2$.
+But this implies that $n=2$ (given the bound earlier). Hence $w$ is the only valuation lying over $\text{ord}_{t=\lambda_j}$. Indeed, we can
+use this now to obtain exactly what $w$ does to all elements in $K$, i.e. $w(y)=1$, etc.
+
+The other case is that $w(x-\lambda_j)<0$ (as $w(x-\lambda_j)\neq 0$). Restricting to $\C(x)$ we see that $w|_{\C(x)}=\text{ord}_{t=\infty}$.
+But then we see that
+\begin{align*}
+    2w(y)=w(y^2)=m\left( w(x-\lambda_1)+w(x-\lambda_2)+w(x-\lambda_3) \right)=-3m
+\end{align*}
+for some integral $m\leq 2$. But this implies that $m=2$, as otherwise $w(y)$ will not be integral. Thus $w$ is the only valuation
+lying over $\text{ord}_{t=\lambda_j}$. Indeed, $w(y)=-3$ and we can deduce the value of $w$ on all elements in $K$.
+
+So far we have examined the valuations that lie over $\lambda_i$ and $\infty$. But what about valuations lying over other points in $\Proj^1$?
+It turns out that there are two unique valuations lying over every other such point, i.e. these points in $K$ are not ramified. To see this, let
+us appeal to some geometric reasoning. In terms of complex geometry, we see that $y^2=\prod_{i=1}^3(x-\lambda_i)$ is simply a Riemann surface
+upon which $y$ is holomorphic. It is easy graphically to see that this surface is a torus (and can be more rigorously shown via Abel's map and
+Jacobi inversion) and thus has one handle. But the number of ramified valuations in such a Riemann surface is simply four, as one can see in the
+diagrams below - these are precisely the $\lambda_i$ and $\infty$. Hence the other points must each have two distinct valuations lying over them.
 
 
 

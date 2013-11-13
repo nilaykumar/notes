@@ -1,0 +1,248 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{amsmath}
+\usepackage{todonotes}
+
+
+\title{Complex Analysis and Riemann Surfaces: Midterm}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+Consider the function $w=\sqrt{\prod_{j=1}^5(z-a_j)}$, where $a_j$ (for $j=1,\ldots,5$) are pairwise distinct complex numbers. Let us order $a_j$
+increasing in magnitude.
+Let us construct the Riemann surface of $w$. We start by considering the behavior of $w$ in the complex plane $\C$. Note first that $w$
+is clearly well-defined and holomorphic in the disc $D_{|a_1|}(0)$ (of course, if $a_1=0$, this is not true), because we can write
+\[w=\exp\left( \frac{1}{2}\sum_j \ln(z-a_j) \right),\]
+where, as usual, we view the first logarithm with a branch cut along the ray incident with the origin and $a_1$. Note, however, that
+in the annulus $D_{|a_2|}(0)-\overline{D_{|a_1|}(0)}$, $w$ is not holomorphic, as we obtain a discontinuity along a curve from $a_1$ to $a_2$
+(the curve depends on the branch cut chosen for $\ln(z-a_1)$, so for our purposes we will keep it simple and pick such that the discontinuities are straight lines):
+along this discontinuity it is easy to see that $w$ jumps to $-w$. One might expect to encounter a similar discontinuity in the annulus $D_{|a_3|}(0)-\overline{D_{|a_2|}(0)}$,
+but in fact, because both $\sqrt{z-a_1}$ and $\sqrt{z-a_2}$ take $w\mapsto -w$, the signs cancel out and hence $w$ is in fact holomorphic in that domain.
+Going out a little further, we again will see a sign discontinuity (as the signs do not cancel out this time) in the annulus $D_{|a_4|}(0)-\overline{D_{|a_3|}(0)}$,
+none in $D_{|a_5|}(0)-\overline{D_{|a_4|}(0)}$, and a sign discontinuity starting from $a_5$ and going out to infinity.
+
+Thus to maximize the domain of definition one which $w$ is holomorphic, we take two copies of the ``cut'' complex plane that we have been discussing - call them $\C_1$
+and $\C_2$ on which we define $w=\sqrt{\prod_{j=1}^5(z-a_j)}$ and $w=-\sqrt{\prod_{j=1}^5(z-a_j)}$ respectively. We can now glue the two planes together in a way
+such that $w$ will, in fact, be continuous, as the sign changes will now be compensated for. Before we do this, let us simplify the visual picture by
+thinking in terms of stereographic projections - each copy of the plane can be seen as topologically just the Riemann sphere with some arcs and the north pole cut out.
+Expanding the cuts to holes continuously we see that gluing together $\C_1$ and $\C_2$ in this sense will yield a surface with 2 handles. We claim that the resulting
+topology $\Sigma$ is in fact a one-dimensional complex manifold in the sense that it is locally homeomorphic to $\C$. In fact, we can even compactify by adding
+the north pole (as the point at $\infty$) as we did in class, resulting in the compact surface $\hat\Sigma$, which is also topologically a manifold. To see this,
+let us examine the (structure of) open neighborhoods of varous points in $\hat\Sigma$. There are four cases: away from any cuts, at an $a_i$, on a cut, and at $\infty$.
+
+It is clear that points away from discontinuities admit neighbhorhoods that can be holomorphically (and in a 1-to-1 fashion) mapped to a disc in the complex plane.
+Next, consider the case where we have a point $z_0$ physically on the cut. Then we can simply take two half-discs (one from each copy) and glue them together - this clearly
+yields a disc. Furthermore, if $z_0$ is one of the points $a_i$, we see that there is an almost-full disc about $z_0$ contained in each copy $\C_i$. To glue these together 
+we have to be a little more careful, and we construct our chart to send a $z$ in the neighborhood of $z_0$ to $t=\sqrt{z-a_i}$ on $\C_1$ and $t=-\sqrt{z-a_i}$ on $\C_2$.
+In other words, we are taking these almost-full discs to half discs at the origin in $\C$ and gluing them together to obtain a full disc. Finally we must deal with the
+point at infinity. This is done almost identically as was done with the $a_i$, except we take a reciprocal for the coordinates to get a well-defined disc: $1/\sqrt{z}$ on $\C_1$
+and $-1/\sqrt{z}$ on $\C_2$.
+
+Note that we have two meromorphic functions defined on $\hat\Sigma$. The first is simply $w$, which flips sign under the involution that switches $\C_1$ and $\C_2$. 
+Note that $w$ has a pole of order 5 at infinity:
+\[w=\sqrt{\prod_{j=1}^5(z-a_j)}=\sqrt{\prod_{j=1}^5\left(\frac{1}{t^2}-a_j\right)}=\frac{1}{t^5}\sqrt{\prod_{j=1}^5\left( 1-t^2a_j \right)}.\]
+Furthermore, $w$ has a simple zero at each $a_i$, because near $a_i$ we see that:
+\[w=\sqrt{\prod_{j=1}^5(z-a_j)}=\sqrt{\prod_{j=1}^5\left(t^2+a_i-a_j\right)}=t\sqrt{\prod_{j\neq i}^5\left( t^2+a_i-a_j \right)},\]
+which is an order one zero because what is left is holomorphic (in the local coordinate patch) and because the $a_i$ are distinct.
+Similarly, the function $z$ at infinity is locally $1/t^2$ and hence has a pole of order 2, and near zero is $t^2$ and hence has a zero of order 2.
+
+Let us now show that the forms given by $\omega_1=dz/w$ and $\omega_2=zdz/w$ are holomorphic. First, near an $a_i$, since $z=t^2+a_i$, we find that
+\begin{align*}
+    \omega_1=\frac{dz}{w}=\frac{2tdt}{t\sqrt{\prod_{j\neq i}\left( t^2+a_i-a_j \right)}}=\frac{2dt}{\sqrt{\prod_{j\neq i}\left( t^2+a_i-a_j \right)}},
+\end{align*}
+which is clearly holomorphic in this local chart. On the other hand, near infinity we have that $z=1/t^2$ and hence we get
+\begin{align*}
+    \omega_1=\frac{dz}{w}=\frac{-2dt/t^3}{\frac{1}{t^5}\sqrt{\prod_{j=1}^5\left( 1-t^2a_j \right)}}&=\frac{-2t^2dt}{\sqrt{\prod_{j=1}^5(1-t^2a_j)}},
+\end{align*}
+which is holomorphic in the chart near infinity. Similarly, for $\omega_2$, near $a_i$ and $\infty$:
+\begin{align*}
+    \omega_2&=\frac{zdz}{w}=\frac{t^2\cdot 2tdt}{t\sqrt{\prod_{j\neq i}\left( t^2+a_i-a_j \right)}}=\frac{2t^2dt}{\sqrt{\prod_{j\neq i}\left( t^2+a_i-a_j \right)}}\\
+    \omega_2&=\frac{zdz}{w}=\frac{1/t^2\cdot-2dt/t^3}{\frac{1}{t^5}\sqrt{\prod_{j=1}^5\left( 1-t^2a_j \right)}}=\frac{-2dt}{\sqrt{\prod_{j=1}^5(1-t^2a_j)}},
+\end{align*}
+both of which are clearly holomorphic. Hence, since these forms are holomorphic in their local coordinate charts, they define holomorphic forms on $\hat\Sigma$.
+
+We can, in fact, construct a meromorphic form $\omega_P(z)$ on $\hat\Sigma$ which has a double pole at the point $P=a_i$ but is holomorphic everywhere else.
+To do so, note that near $a_i$, the function $z$ takes the form $t^2+a_i$; hence if we take a holomorphic form and multiply by $1/(z-z(a_i))$ the $a_i$'s will
+cancel and yield a double pole at the coordinate $t=0$, i.e. $P=a_i$. In particular, consider
+\[\omega_P(z)=\frac{1}{z-z(a_i)}\omega_1(z)=\frac{1}{z-z(a_i)}\frac{dz}{w}.\]
+In coordinates near $a_i$, it's clear (by looking at the equation for $\omega_1$ in coordinates above) that we have a double pole. Near another $a_j$, we
+have neither a zero or a pole as the $a_i$ are all distinct (and so the denominator out front does not blow up). Finally, at infinity, the factor out front
+becomes $1/\left( 1/t^2-a_i \right)=t^2/\left( 1-a_it^2 \right)$, which has a zero of order 2 at infinity (while the factor of $\omega_1$ does not vanish as
+one can check above). Hence $\omega_P(z)$ is indeed a meromorphic form with a double pole at $a_i$.
+
+Finally, note that although we have constructed a meromorphic form with a double pole at one point, it is impossible for a meromorphic form on $\hat\Sigma$ to have a single pole.
+This follows from the statement we proved in class that any meromorphic form $\omega$ on a compact Riemann surface must have residues that add up to zero; of course,
+if a form has only one pole, the residue will be nonzero, which is a direct contradiction. We proved this by applying Stoke's theorem the integral of $\omega$
+about the boundary of the complement of the union of little neighborhoods around the poles (since $\omega$ is holomorphic there).
+
+\section*{Problem 2}
+
+Let $\Lambda=\left\{ m\omega_1+n\omega_2;m,n\in\Z \right\}$ be the lattice generated by $\omega_1,\omega_2$, where $\omega_1,\omega_2$ are complex numbers
+which are linearly independent over $\R$ and let $\Lambda^\times=\Lambda\setminus 0$. Define the function $\sigma(z)$ on $\C$ by
+\[\sigma(z)=z\prod_{\omega\in\Lambda^\times}\left( 1- \frac{z}{w}\right)e^{\frac{z}{w}+\frac{z^2}{2w^2}}.\]
+Let us first show that $\sigma$ is well-defined in that it converges. To check if this product converges, we take a logarithm (picking a branch cut on $\C$):
+\begin{align*}
+    \log\sigma(z)&=\log z+\sum_{w\in\Lambda^\times}\left( \log\left(1-\frac{z}{w}\right)+\frac{z}{w}+\frac{z^2}{2w^2} \right)\\
+    &=\log z+\sum_{w\in\Lambda^\times}\left( \frac{z}{w}-\frac{1}{2}\frac{z^2}{w^2}+O(\frac{1}{|w|^3})+\frac{z}{w}+\frac{z^2}{2w^2} \right)\\
+    &=\log z+\sum_{w\in\Lambda^\times}O(\frac{1}{|w|^3}),
+\end{align*}
+which clearly converges. Note that here we have used the Taylor expansion for the logarithm. One may inquire as to the zeroes of $\sigma(z)$ - if $z=0$ or
+any term in the product is zero, the whole function $\sigma(z)$ goes to zero. This, of course, only happens when $z=w$, i.e. $z=0\mod\Lambda$.
+Next let us determine the transformation law for $\sigma(z)$ when $z\mapsto z+\omega_a$ for $a=1,2$. Recall how we defined the function
+\[\zeta(z)=\frac{1}{z}+\sum_{w\in\Lambda^\times}\left( \frac{1}{z+w}-\frac{1}{w}+\frac{z}{w^2} \right).\]
+From this, it is easy to see that we can write $\zeta(z)=\sigma'(z)/\sigma(z)$. But note that the periodicity condition for $\zeta$ we have that
+$\zeta(z+\omega_a)-\zeta(z)=\eta_a$, which becomes
+\[\eta=\frac{\sigma'(z+\omega_a)}{\sigma(z+\omega_a)}-\frac{\sigma'(z)}{\sigma(z)}=\partial_z\log\sigma(z+\omega_a)-\partial_z\log\sigma(z).\]
+Integrating both sides with respect to $z$ and exponentiating, we find that
+\[\sigma(z+\omega_a)=\sigma(z)e^{\eta_az+c_a}\]
+with $c_a$ a constant of integration, which we can find by taking $z=-\omega_a/2$ and using the fact that $\omega$ is odd,
+\[\sigma(\omega_a/2)=\sigma(-\omega_a/2)e^{-\eta_a\omega_a/2+c_a},\]
+which yields
+\[\sigma(z+\omega_a)=-\sigma(z)e^{\eta_a(z+\omega_a/2)}.\]
+Let us now give another proof of Abel's theorem (for $\hat\Sigma=\C/\Lambda)$. First recall our previous statement of
+Abel's theorem.
+
+\begin{thm}[Abel's theorem]
+    Let $P_1,\ldots,P_M,Q_1,\ldots,Q_N$ be points in $\C$. Then there exists a meromorphic $f$ with zeroes at $P_i$ and poles at $Q_i$
+    if and only if $M=N$ and $\sum_{i=1}^MA(P_i)=\sum_{i=1}^NA(Q_i)$.
+\end{thm}
+Recall that the Abel map takes $\C/\Lambda\ni p\mapsto A(p)=\int_{p_0}^p\omega$ where the value of the integral is taken modulo the lattice
+generated by $\oint_A\omega,\oint_B\omega$. Take $p_0=0$ and $\omega=dz$, which is a well-defined form, and if we take $A$ to align with $\omega_2$
+and $B$ to align with $\omega_1$, we see that $\oint_A\omega=\oint_A dz=\omega_1$ and similarly $\oint_B\omega=\omega_2$. Hence the map simply
+takes $p$ to $\int_0^p dz \mod\Lambda=p$ where $p$ is viewed as a complex number.
+
+Let us now restate Abel's theorem in the context of this fact.
+\begin{thm}[Abel's theorem, v.2]
+    Let $P_1,\ldots,P_M,Q_1,\ldots,Q_N$ be points in $\C$. Then there exists a meromorphic $f$ with zeroes at $P_i$ and poles at $Q_i$
+    if and only if $M=N$ and $\sum_{i=1}^M P_i=\sum_{i=1}^NQ_i\mod\Lambda$.
+\end{thm}
+\begin{proof}
+    Consider the function
+    \begin{align*}
+        f(z)=\frac{\prod_{i=1}^M\sigma(z-P_i)}{\prod_{i=1}^N\sigma(z-Q_i)}.
+    \end{align*}
+    We should be a little careful to note that $\sigma$ is a function not on the torus $\C/\Lambda$, but a function on $\C$ (it transforms under a lattice
+    translation!). Hence we must be cognizant of the fact that $P_i,Q_i$ here are some chosen representatives in $\C$ of the equivalence classes of the points $P_i,Q_i$.
+    It should be clear that $f(z)$ is meromorphic with zeroes at every representative of each $P_i$s and poles at every representative of each $Q_i$.
+    The natural question, now, is whether this function extends to a function on the torus. 
+    To check this, let us see whether it is doubly periodic using what we know about $\sigma$:
+    \begin{align*}
+        f(z+\omega_a)&=f(z)\frac{\prod_{i=1}^Me^{\eta_a(z-P_i)}}{\prod_{i=1}^Ne^{\eta_a(z-Q_i)}}\\
+        &=f(z)e^{-\eta_a\left( \sum_{i=1}^MP_i-\sum_{i=1}^NQ_i \right)}.
+    \end{align*}
+    Hence we wish to choose $P_i,Q_i$ representatives such that the exponential becomes unity. By hypothesis, this can be done (by shifting one, if necessary).
+\end{proof}
+
+\section*{Problem 3}
+
+Let now $\omega_1=1,\omega_2=\tau,$ with $\text{Im }\tau>0$. Define the function
+\[\theta_1(z|\tau)=\sum_{n\in\Z}\exp\left( \pi i\left( n+\frac{1}{2} \right)^2\tau+2\pi i\left( n+\frac{1}{2} \right)\left( z+\frac{1}{2} \right) \right).\]
+The presence of an $(n+1/2)^2$ in the first term of the exponential dominates, as for large $|n|$ it is the leading order term, and it decays rapidly. More explicitly,
+we have the $n^2$ terms
+\[|e^{\pi in^2(\tau_1+i\tau_2)}|=|e^{\pi in^2\tau_1}e^{-\pi n^2\tau_2}|=e^{-\pi n^2\tau_2},\]
+where we have written $\tau=\tau_1+i\tau_2$. Due to this decay, it's clear that the sum converges (one might use the integral test) and hence $\theta_1(z|\tau)$ is holomorphic. Next let us show
+that $\theta_1(z|\tau)=0$ only at $z=0\mod\Lambda$.
+Hence let us verify that $\theta_1$ is odd; switching $z\mapsto-z$ yields in the exponent
+\begin{align*}
+    \log\theta_1(z|\tau)=\pi i\left( n+\frac{1}{2} \right)^2\tau+2\pi i\left( n+\frac{1}{2} \right)\left( -z+\frac{1}{2} \right).
+\end{align*}
+If we switch the indices $n\mapsto m$ such that $n+\frac{1}{2}=-\left( m+\frac{1}{2} \right)$, we find that the exponent is now
+\begin{align*}
+    \log\theta_1(z|\tau)=\pi i\left( m+\frac{1}{2} \right)^2\tau+2\pi i\left( m+\frac{1}{2} \right)\left(\left( z+\frac{1}{2} \right)-2\pi i\left( m+\frac{1}{2} \right)\right),
+\end{align*}
+and hence $\theta_1$ is odd. To see that this is indeed the only zero, we recall that we can compute an integral to count the number of zeroes
+enclosed (as $\theta_1$ is holomorphic):
+\begin{align*}
+    \oint_C \frac{\theta_1'(z,\tau)}{\theta_1(z, \tau)}  dz  &=  \oint_B \left( - \frac{\theta_1'(z,\tau)}{\theta_1(z, \tau)} + \frac{\theta_1'(z+1,\tau)}{\theta_1(z+1, \tau)} \right) dz   +  \oint_A \left( \frac{\theta_1'(z,\tau)}{\theta_1(z, \tau)} - \frac{\theta_1'(z+ \tau,\tau)}{\theta_1(z+ \tau, \tau)} \right) dz\\
+    &=2\pi i\oint_A dz=2\pi i,
+\end{align*}
+where we have used the transformation properties of $\theta_1$ that we will derive shortly. But recall that this integral gives us $2\pi i$ times the number of zeroes (for a holomorphic
+function) and hence $z=0\mod\Lambda$ is in fact the only zero.
+
+
+Let us compute two transformation properties of the $\theta_1$ function that we used above (and will use below). First note that we can write
+\[\theta_1(z)=e^{\pi i/2}\sum_{n=-\infty}^\infty\exp\left( i\pi\tau(n+\frac{1}{2})^2+2\pi i(n+\frac{1}{2})z \right)(-1)^n.\]
+Then we can compute what happens under translations:
+\begin{align*}
+    \theta_1(z+1)&=e^{\pi i/2}\sum_{n=-\infty}^\infty\exp\left( i\pi\tau(n+\frac{1}{2})^2+2\pi i(n+\frac{1}{2})z +2\pi i(n+\frac{1}{2})\right)(-1)^n\\
+    &=-e^{\pi i/2}\sum_{n=-\infty}^\infty\exp\left( i\pi\tau(n+\frac{1}{2})^2+2\pi i(n+\frac{1}{2})z \right)(-1)^n\\
+    &=-\theta_1(z)\\
+    \theta_1(z+\tau)&=e^{\pi i/2}\sum_{n=-\infty}^\infty\exp\left( i\pi\tau(n+\frac{1}{2})^2+2\pi i(n+\frac{1}{2})(z+\tau) \right)(-1)^n\\
+    &=-e^{\pi i/2}\sum_{n=-\infty}^\infty\exp\left( i\pi\tau(n+\frac{1}{2})^2+2\pi i\tau(n+\frac{1}{2})+2\pi i(n+\frac{1}{2}+1)z-2\pi iz \right)(-1)^{n+1}\\
+    &=-e^{\pi i/2}e^{-\pi i\tau-2\pi iz}\sum_{n=-\infty}^\infty\exp\left( i\pi\tau(n+\frac{1}{2}+1)^2+2\pi i(n+\frac{1}{2}+1)z\right)(-1)^{n+1}\\
+    &=-e^{-\pi i\tau-2\pi i z}\theta_1(z)
+\end{align*}
+
+
+Let us now prove Abel's theorem using the machinery of $\theta$-functions. In other words, $\sum_{i=1}^NA(P_i)=\sum_{j=1}^NA(Q_j)$ if and only if
+there exists an $f$ meromorphic with zeros at $P_i$ and poles at $Q_j$. Note first that we can write $\sum_i P_i=\sum_j Q_j+n+m\tau$. To construct
+$f$, let us try
+\[f(z)=\frac{\prod_{i=1}^N\theta_1(z-P_i)}{\prod_{j=1}^N\theta_1(z-Q_j)}.\]
+From the result about the zeros of $\theta_1$ above, it is clear that this function should have the appropriate zero and pole behavior. It remains to
+check that $\theta_1$ is well-defined on $\C/\Lambda$, i.e. doubly-periodic. First note that, using the periodicity properties of the $\theta_1$ function,
+\begin{align*}
+    f(z+1)&=\frac{\prod_{i=1}^N\theta_1(z+1-P_i)}{\prod_{j=1}^N\theta_1(z+1-Q_j)}=\frac{(-1)^N\prod_{i=1}^N\theta_1(z-P_i)}{(-1)^N\prod_{j=1}^N\theta_1(z-Q_j)}\\
+    &=f(z).
+\end{align*}
+Next,
+\begin{align*}
+    f(z+\tau)&=\frac{\prod_{i=1}^N\theta_1\left( z+\tau-P_i \right)}{\prod_{j=1}^N\theta_1(z+\tau-Q_j)}=\frac{(-1)^N\prod_{i=1}^N\theta_1\left( z-P_i \right)e^{-2\pi i(z-P_i)-\pi i\tau}}{(-1)^N\prod_{j=1}^N\theta_1\left( z-Q_j \right)e^{-2\pi i(z-Q_j)-\pi i\tau}}\\
+    &=e^{2\pi i(\sum_j Q_j-\sum_i P_i)}f(z).
+\end{align*}
+Hence we may replace one of the points, say $Q_1$, by $\tilde Q_1+n+m\tau$, thus enforcing $\sum_i P_i=\sum_jQ_j$ and the result follows.
+
+\section*{Problem 4}
+
+Let $L\to X$ be a holomorphic line bundle over a compact Riemann surface $X$, defined by the transition functions $t_{\alpha\beta}(z)$ on $X_\alpha\cap X_\beta$,
+where $X=\cup_{\alpha}X_\alpha$ is a covering of $X$ by holomorphic charts. A smooth metric $h$ on $L$ is a smooth section of $L^{-1}\otimes \overline{L}^{-1}$ that is strictly positive.
+Given any two metrics, $h$ and $h'$, it is clear that we can relate them by $h'=e^{-\phi}h$ for some smooth $\phi$ a scalar function on $X$. This follows simply because we may choose
+$\phi=-\log(h'/h)$. As $h,h'$ are strictly positive everywhere, this is well-defined and $\phi$ is smooth.
+
+Next let $F_{\bar zz},F_{\bar zz}'$ be the curvatures of $L$ with respect to the metrics $h$ and $h'$ respectively. Recall that the curvature is given explicitly as
+$F_{\bar zz}=-\partial_{\bar z}\Gamma=-\partial_{\bar z}\partial_{z}\log h$ in terms of the metric $h$. Writing it instead in terms of the curvature $h'=e^{-\phi}h$,
+we find that
+\begin{align*}
+    F_{\bar zz}'&=-\partial_{\bar z}\partial_{z}\log\left( e^{-\phi}h \right)=\partial_{\bar z}\partial_z\phi+F_{\bar zz}
+\end{align*}
+If we now compute the Chern class $c_1(L)$ using each of these curvatures we find that
+\begin{align*}
+    c_1(L)&=\frac{i}{2\pi}\int_X F_{\bar zz}dz\wedge d\bar z\\
+    c_1'(L)=\frac{i}{2\pi}\int_X F_{\bar zz}'dz\wedge d\bar z&=\frac{i}{2\pi}\int_XF_{\bar zz}+\partial_{\bar z}\partial_z\phi dz\wedge d\bar z\\
+    &=c_1(L)+\frac{i}{2\pi}\int_X \partial_{\bar z}\partial_z\phi dz\wedge d\bar z\\
+    &=c_1(L)+\frac{i}{2\pi}\int_X d\left( \partial_{\bar z}\phi d\bar z \right)\\
+    &=c_1(L)
+\end{align*}
+and hence the curvature is independent of the choice of metric.
+
+\section*{Problem 5}
+
+\begin{thm}[Riemann-Roch]
+    Let $X$ be a Riemann surface and $H^0(X,L)$ denote the space of holomorphic sections of a line bundle $L$ over $X$. Furthermore let $K_X$ be the canonical line bundle over $X$ and
+    $c_1(L)$ be the first Chern class of a line bundle $L$. Then
+    \[\dim H^0(X,L)-\dim H^0(X,K_X\otimes L^{-1})=c_1(L)+\frac{1}{2}c_1(K_X^{-1}).\]
+\end{thm}
+
+To deduce that a line bundle $L$ over $X$ always admits non-trivial meromorphic sections, recall the construction of point bundles. For some $p\in X$
+pick a coordinate system in a neighborhood $X_0$ of $p$, and set $X_\infty=X\setminus\{p\}$. Let $L$ be $\{t_{0\infty}(z)=z\text{ on }X_0\cap X_\infty\}$. This defines
+a holomorphic line bundle which admits a holomorphic section $1_p=1$ on $X_\infty$; $z$ on $X_0$, and $1_p|_{X_0}=z=z\cdot 1=t_{0\infty}\cdot 1_p|_{x_\infty}$.
+Hence we see that $1_p$ is a holomorphic section of $L\equiv [p]$ and has exactly one zero at $p$. In particular, $c_1(L)=1$ here. Similarly, we may define, for any
+integer $n$, the bundle $[np]$ by the transition function $\left\{ z^n \right\}$. It is easy to see that $c_1([np])=n$. Let us now proceed to prove the existence of
+a non-trivial section. Pick a point $p$ and consider the bundle $L\otimes [np]$. It's clear that $c_1(L\otimes [np])=c_1(L)+n$. Then, by the Riemann-Roch theorem,
+we find that
+\[\dim H^0(X,L\otimes [np])-\dim H^0(X,L^{-1}\otimes [-np]\otimes K)=c_1(L)+n-\frac{1}{2}\chi(X)\]
+where $\chi$ is the Euler characteristic as usual. But now we can take $n\gg 0$ arbitrarily large, and since dimensions are positive and the Chern class
+and Euler characteristic are independent of the point bundle chosen, we see that
+\[\dim H^0(X,L\otimes[np])>0,\]
+which implies that there exists a non-trivial holomorphic section of $L\otimes [np]$. Finally we note that multiplying this section by $1_{-np}$ yields a non-zero
+meromorphic section of $L$, and we are done.
+
+%\setcounter{section}{-1}
+\end{document}

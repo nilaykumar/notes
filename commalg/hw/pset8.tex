@@ -1,0 +1,71 @@
+\documentclass{../../mathnotes}
+
+\usepackage{enumerate}
+\usepackage{todonotes}
+\usepackage{tikz-cd}
+
+\title{Commutative Algebra: Problem Set 8}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 2}
+
+Let $k$ be an algebraically closed field. Let $A=k[x,y]/(f)$ where $f$ is an irreducible polynomial. Let $K$ be
+the fraction field of $A$. Let $C=\left\{ (s,t)\in k^2\mid f(s,t)=0 \right\}.$ Recall that the maximal ideals of
+$A$ correspond one-to-one with points of the curve $C$. Now suppose that every point of $C$ is nonsingular. Fix any
+point $p\in C$ (equivalently a maximal ideal $\fr m$). By a previous homework exercise, we see that the ring $A_\fr m$
+is a regular local ring. Moreover, it is a domain, as $(f)$ is prime. Hence, since the dimension of $k[x,y]$ is 2 and $f$
+is a nonzerodivisor, $A=k[x,y]/(f)$ has dimension one. By Tag 00PD of the Stacks Project we find that $A$ is in fact
+a discrete valuation ring. The discrete valuation ring comes equipped with a valuation that is centered on $A$ (one can
+see this by looking at the uniformizer); this valuation is, in fact, unique. One way to see this is to simply look at the definition
+of a valuation as a projection from $K^*$ to $K^*/A^*$ (see Tag 00I8). This establishes the claim.
+
+Let us consider the self-intersecting curve $C$ given by $y^2-x^3-x^2$ as an example of a singularity (at $x=y=0$) for which this theorem
+does not hold. Note that we can consider the function field of $C$, $\text{Frac}(k[x,y]/(y^2-x^3-x^2))$, as a field extension of degree
+three over $k(t)$ and $k(s)$ with the injective maps given by $t\mapsto x+y$, $s\mapsto x-y$. To see why this must be degree three,
+simply note that we can rewrite the defining equation of the curve as $(x+y)(x+y)-2(x+y)-x^3$, and similarly for $x-y$, which shows that we
+are adding the element $x$ via a degree three polynomial. Graphically we can now obviously see that there is more than one valuation
+at $(0,0)$, as one can take the order of vanishing in $(x-y)$ and the order of vanishing in $(x+y)$, which is geometrically just
+the order of vanishing after projecting the singularity onto the lines $y=\pm x$. We can also show this more formally, but this is rather tedious.
+First note that we have an automorphism that takes $y\mapsto -y$ and hence we must have that $v_1(x-y)=v_2(x+y)$. Thus it suffices to show
+that $v_1(x-y)\neq v_1(x+y)$.
+Also note that since the singular point is clearly centered above $\text{ord}_{t=s=0}$, we have that $v_1(x-y)=v_2(x+y)=e\cdot 1$ for $1\leq e\leq 3$.
+To proceed, we will make use of the following three use facts:
+\begin{enumerate}[(i)]
+    \item $v_1(x+y)+v_1(x-y)=3v_1(x)$;
+    \item $2x(y+x)+x^3=(y+x)^2$;
+    \item $v_1(x+y)\in\left\{ 1,2,3 \right\}$.
+\end{enumerate}
+Let us proceed by cases. If $v_1(x+y)=1$ then $(i)$ implies that $v_1(x-y)\neq 1$ by simple divisbility arguments, and we are done.
+Next, if $v_1(x+y)=2$ then $(i)$ implies that $v_1(x-y)\neq 2)$ by similar arguments, and we are done. Finally, consider what happens
+when $v_1(x+y)=3$. Then, if further $v_1(x)=1$, then $(ii)$ yields a contradiction $3=6$. If instead $v_1(x)\geq 2$, let $v_1(x)=a$.
+Since $3+a<3a$, $(ii)$ now yields that $3+a=6\implies a=3$. But then $(i)$ implies that $v_1(x-y)=9-3=6\neq v_!(x+y)$, and we are done.
+
+
+
+%In summary, if we denote the valuations for $x+y,x-y$ by $v_1,v_2$ respectively, we note by extension theory for valuations that
+%the sum of ramification indices must be 3 due to the extension being degree three. We now wish to show that $v_1$ and $v_2$ are in
+%fact distinct; we can do this with a bit of casework by checking that 
+
+
+\subsection*{Problem 3}
+
+Let $k=\C$ be the field of complex numbers. Let $f=1+x^n+y^n\in k[x,y]$ for some positive integer $n$. Let $K$ be the
+fraction field of $A=k[x,y]/(f)$. It is clear that the algebraic curve defined by $f$ is nonsingular (we showed this in a previous
+homework exercise), and hence the valuations of $K$ centered on $A$ are in one-to-one correspondence with points of the curve.
+Hence the only missing valuation in this case should be the valuation at infinity, as it will evaluate orders of vanishing to be negative.
+%The valuations of $K/k$ in general should be  
+
+Given the discussion in the previous exercise, we would expect that every singularity yields extra valuations centered at $A$, thus ruining
+the one-to-one correspondence. However, this guess would be incorrect, as the curve $C$ given by $y^2=x^3$ shows. This is the cuspidal cubic, which
+at the cusp has tangent lines that limit to a horizontal line. Thus, geometrically speaking (or more formally using the arguments of the previous
+exercise), it is clear that we are projecting only onto this one horizontal line to determine orders of vanishing, and hence, unlike the previous
+example where we had two lines $y=\pm x$ and thus two valuations, in this case we will have only one.
+
+
+\end{document}
