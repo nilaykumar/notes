@@ -468,4 +468,21 @@ Define $v^k=f^kv_\lambda/k!$. One can check that $hv^k=(\lambda-2k)v_\lambda$, a
 linearly independent. Unfortunately, we do not know if any of these $v^k$ is zero, because if so, the higher terms will be zero as well.
 It is easy to see that $fv^k=(k+1)v^{k+1}$. Finally, we claim that $ev^k=\left( \lambda-k+1 \right)v^{k-1}$ (this can be done via induction).
 
+\textbf{November 18, 2013}
+
+\section{Cartan subalgebras}
+
+Plan: classify complex simple Lie algebras.
+We will do this by considering the adjoint representation and find constraints needed for this to be an irreducible representation.
+Given $X\in\fr g$ we will consider the action of $\ad X$ and try to diagonalize it. Then we try to find as many such commuting $X$ as possible.
+
+\begin{defn}
+    $X$ is a \textbf{semi-simple} element of $\fr g$ if $\ad X$ is a semi-simple operator (over $\C$, diagonalizable).
+    $X$ is a \textbf{nilpotent} element of $\fr g$ if $(\ad X)^n=0$ for some $n$.
+\end{defn}
+
+We will not prove the Jordan decomposition here, i.e. that
+\[\ad X=(\ad X)_{ss}+(\ad X)_n\]
+and that more generally there is a unique decomposition $X=X_{ss}+X_n$ with $[X_{ss},X_n]=0$.
+
 \end{document}

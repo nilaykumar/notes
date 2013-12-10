@@ -1,0 +1,157 @@
+\documentclass{../../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\title{Lie Groups PSET 5}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+
+Let $\fr g=\fr{sl}_n\C$. Consider the Killing form $K(x,y)=\tr(\ad x\ad y)$ for $x,y\in\fr{sl}_n\C$.
+Note that the adjoint representation $V$ is irreducible, as $\fr{sl}_n\C$ is simple, and hence contains no ideals.
+But then, by a previous exercise (Kirillov 4.5) we find that the space of $\fr{sl}_n\C$-invariant bilinear forms on $V$
+is either zero or one-dimensional. On the other hand, if we consider the defining representation of $\fr{sl}_n\C$,
+we note that the bilinear form given by $\tr(xy)$ is also an invariant bilinear form (see Kirillov 5.47). But by
+the earlier remark we may write
+\begin{equation}
+    K(x,y)=\tr(\ad x\ad y)=c\tr(xy)
+    \label{eq:forms}
+\end{equation}
+for some constant $c\in\C$ (note that the case $c=0$ corresponds to the zero-dimensional case). It now remains
+to compute $c$. To do so, let us compute it in the case of the basis element $x=y=h_1$ with
+\begin{equation*}
+    h_1=\begin{pmatrix}
+        1&&\\&-1&\\&&\ddots
+    \end{pmatrix}.
+\end{equation*}
+where the ellipsis denotes zeros along the rest of the diagonal.
+The right-hand side of Eq. \ref{eq:forms} is easy to compute:
+\begin{align*}
+    c\tr(h_1^2)=c\tr
+    \begin{pmatrix}
+        1&&\\&1&\\&&\ddots
+    \end{pmatrix}
+    =2c.
+\end{align*}
+The left-hand side requires us to compute the matrix representation of the adjoint action of $h_1$, which is not trivial,
+as it depends on $n$ and requires some matrix multiplication\footnote{This method is computational, but I couldn't find a better approach.}.
+Let us write out the basis for $\fr{sl}_n\C$ for the cases $n=2,3,4$ rather schematically as:
+\begin{align*}
+    n=2: &
+    \begin{pmatrix}
+        h_1&^{\color{red}{2}}x_1\\y_1&-h_1
+    \end{pmatrix}\\
+    n=3: &
+    \begin{pmatrix}
+        h_1&^{\color{red}{2}}x_1&^{\color{red}{1}}x_3\\y_1&h_2-h_1&^{\color{red}{-1}}x_2\\y_3&y_2&-h_2
+    \end{pmatrix}\\
+    n=4: &
+    \begin{pmatrix}
+        h_1&^{\color{red}{2}}x_1&^{\color{red}{1}}x_4&^{\color{red}{1}}x_6\\y_1&h_2-h_1&^{\color{red}{-1}}x_2&^{\color{red}{-1}}x_5\\y_4&y_2&h_3-h_2&^{\color{red}{0}}x_3\\y_6&y_5&y_3&-h_3
+    \end{pmatrix}
+\end{align*}
+The number in red above $x_1$ represents the result of the computation $[h_1,x_1]$, etc. Summing up the squares of these numbers (including the
+symmetric counterparts for the $y_i$'s up to sign before squaring) clearly yields $\tr(\ad h_1\ad h_1)$. Just from the way matrix multiplication against
+$h_1$ works out, it is clear that the computed roots (brackets) of $x_i$ will always be 1 in the first row (except for the special case $x_1$),
+-1 in the second row, and 0 everywhere below that. Simple counting gives us the formula
+\[\tr(\ad h_1\ad h_1)=2\left( 2^2+(n-2)+(-1)^2(n-2) \right)=4n.\]
+This proves that the constant $c$ above has the value $2n$, and thus, in general, the Killing form on $\fr{sl}_n\C$ can be expressed as 
+\[K(x,y)=\tr(\ad x\ad y)=2n\tr(xy).\]
+
+\subsection*{Problem 2}
+
+Let $\fr g\subset \fr{gl}_n\C$ be the subspace consisting of block-triangular matrices:
+\[\fr g=\left\{ \begin{pmatrix}A&B\\&D\end{pmatrix}\right\}\]
+where $A$ is a $k\times k$ matrix, $B$ is a $k\times(n-k)$ matrix, and $D$ is a $(n-k)\times(n-k)$ matrix.
+It easy to see that $\fr g$ in fact forms a subalgebra (a parabolic subalgebra):
+\begin{align*}
+    \left[
+    \begin{pmatrix}
+        A&B\\&D
+    \end{pmatrix},
+    \begin{pmatrix}
+        E&F\\&H
+    \end{pmatrix}
+    \right]&=
+    \begin{pmatrix}
+        AE&AF+BH\\&DH
+    \end{pmatrix}
+    -
+    \begin{pmatrix}
+        EA&EB+FD\\&HD
+    \end{pmatrix}\\
+    &=
+    \begin{pmatrix}
+        [A,E]&AF+BH-EB-FD\\&[D,H]
+    \end{pmatrix}.
+\end{align*}
+The radical $\fr{rad}(\fr g)$ clearly contains everything of the form $\fr h=\begin{pmatrix}\lambda I&B\\0&\mu I \end{pmatrix}$, as the derived
+series $D^i\fr h$ eventually becomes zero (evident because $[\fr h,\fr h]$ is nilpotent, i.e. strictly upper triangular from the formula above).
+The converse is a little bit more computational - we wish to find the maximal solvable ideal of $\fr g$, i.e. an ideal whose
+elements vanish after successive commutators. But looking at the above formula for the commutator of two elements of the parabolic subalgebra,
+we see that the matrices on the diagonal must be in the radical of $\fr{gl}_n\C$. But this is simply the center of $\fr{gl}_n\C$, by reductivity
+and hence the diagonal matrices must be scalar matrices. In the interests of finding the maximal such ideal we note that the upper-right matrix
+can be left free, as taking commutators will yield a nilpotent regardless (and hence give us solvability).
+
+Another way of seeing this is to note that since this ideal is clearly solvable, Kirillov 5.40, if we can show that $\fr g$ quotiented by
+this ideal yields a semisimple Lie alegbra. But the quotient is simply the set of block diagonal matrices $A,D$ contained in the parabolic subalgebra
+above where the matrices $A,D$ are in $\fr{gl}_n\C/\lambda I=\fr{sl}_n\C$. Hence we see that the quotient is $\fr{sl}_n\C\oplus\fr{sl}_n\C$, which
+is clearly semisimple. Hence that ideal is in fact the radical $\fr{rad}(\fr g)$.
+
+\subsection*{Problem 3}
+
+Let us show that the bilinear form $\tr(xy)$ on the symplectic Lie algebra $\fr{sp}_n\C$ is non-degenerate. Suppose
+there exists an $x\in\fr{sp}_n\C$ such that
+\[\tr(xy)=\sum_{i,j}x_{ij}y_{ji}=0\]
+for all $y\in\fr{sp}_n\C$. It suffices to show that $x$ is zero. To do this, we will take $y$ to be the conjugate transpose $x^\dagger$.
+However, we must first show that $x^\dagger\in\fr{sp}_n\C$. Recall that for an element $a\in\fr{sp}_n\C$ must satisfy
+\[a+J^{-1}a^\intercal J=0\]
+where $J$ is $\begin{pmatrix}0&I_n\\-I_n&0\end{pmatrix}$, which satisfies $J^{-1}=J^\intercal=-J$. Simply taking the conjugate transpose of this equation gives us
+\[a^\dagger+J^{-1}\bar a J=0,\]
+as desired. We now see that
+\[\tr(xx^\dagger)=\sum_{i,j}x_{ij}\bar x_{ij}=\sum_{i,j}|x_{ij}|^2,\]
+but this is a purely positive quantity and hence cannot be zero (as required above) unless $x=0$. This proves that $\tr(xy)$ is nondegenerate
+on $\fr{sp}_n\C$.
+
+\subsection*{Problem 4}
+
+Let $\fr g$ be a real Lie algebra with a positive definite Killing form. The ad-invariance of the Killing form implies that the adjoint action
+acts as antisymmetric matrices, i.e. $\fr g\subset \fr{so}(\fr g)$. But this in fact forces the Killing form to be negative-definite:
+\begin{align*}
+    K(\ad X\ad X)=\sum_{i,j} (\ad X)_{ij}(\ad X)_{ji}=-\sum_{i,j}(\ad X)_{ij}^2<0,
+\end{align*}
+and hence $\fr g=0$.
+
+\subsection*{Problem 5}
+
+Let $\fr g=\fr{so}_3\R$ and $K(x,y)=\tr(\ad x\ad y)$ the Killing form on $\fr g$. For the purposes of determining the Casimir operator on $\fr g$ let
+us compute the dual basis to the usual basis $J_x,J_y,J_z$. First note that the commutation relations
+\begin{align*}
+    [J_x,J_y]&=J_z\\
+    [J_y,J_z]&=J_x\\
+    [J_z,J_x]&=J_y
+\end{align*}
+yield the adjoint representations:
+\begin{align*}
+    \ad J_x&=\begin{pmatrix}0&0&0\\0&0&-1\\0&1&0\end{pmatrix}\\
+    \ad J_y&=\begin{pmatrix}0&0&1\\0&0&0\\-1&0&0\end{pmatrix}\\
+    \ad J_z&=\begin{pmatrix}0&-1&0\\1&0&0\\0&0&0\end{pmatrix}.
+\end{align*}
+Using this, we find that
+\begin{align*}
+    \tr(\ad J_x\ad J_x)&=\tr\begin{pmatrix}0&0&0\\0&-1&0\\0&0&-1\end{pmatrix}=-2\\
+    \tr(\ad J_y\ad J_y)&=\tr\begin{pmatrix}-1&0&0\\0&0&0\\0&0&-1\end{pmatrix}=-2\\
+    \tr(\ad J_z\ad J_z)&=\tr\begin{pmatrix}-1&0&0\\0&-1&0\\0&0&0\end{pmatrix}=-2,
+\end{align*}
+while all the other inner products are zero, as is easily computed. Rescaling by a factor to obtain the dual basis, we find the Casimir operator to be
+\[C_K=\frac{1}{2}\left(J_x^2+J_y^2+J_z^2\right)\in U\fr{g}.\]
+
+
+\end{document}

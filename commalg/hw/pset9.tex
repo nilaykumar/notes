@@ -1,0 +1,73 @@
+\documentclass{../../mathnotes}
+
+\usepackage{enumerate}
+\usepackage{todonotes}
+\usepackage{tikz-cd}
+
+\title{Commutative Algebra: Problem Set 9}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 2}
+
+Let $C$ be a hyperelliptic curve with function field $K/k$. We wish to show that $C$ is birational to a curve $D$ of the form $y^2=f(x)$
+with $f\in k[x]$ some monic squarefree polynomial. We may write, without loss of generality,
+\[K=\text{frac}\left(k[x,y]/(f_0(x)y^2+f_1(x)y+f_2(x)\right)\]
+for some $f_i(x)\in k[x]$ with no common factor. Let us first find a rational map $C\to D$, i.e. a map that takes points on $C$ and gives us points satisfying $y^2-f(x)=0$.
+Completing the square yields
+\begin{align*}
+    0&=f_0(x)\left( y^2+\frac{f_1(x)}{f_0(x)}y+\frac{f_2(x)}{f_0(x)} \right)\\
+    &=f_0(x)\left( y +\frac{f_1(x)}{2f_0(x)} \right)^2+f_2(x)-\frac{f_1^2(x)}{4f_0(x)}\\
+    &=\left(2f_0(x)y+f_1(x)  \right)^2+4f_0(x)f_2(x)+f_1^2(x)
+\end{align*}
+Hence we see that the map $(x,y)\overset{\phi}{\mapsto} (x,2f_0(x)y+f_1(x))$ for points $(x,y)$ on $C$ lands in $D$. This is clearly a rational map,
+and we see that $f(x)=-4f_0(x)f_2(x)-f_1^2(x)$, which is squarefree as the $f_i$ have no common factor.
+We now wish to show that $\phi$ has a rational inverse. But from above, we can simply take $(x',y')\overset{\phi}{\mapsto}(x',(y'-f_1(x))/2f_0(x))$.
+for some point $(x',y')\in D$. This is rational as well, and hence $\phi$ is birational.
+
+\subsection*{Problem 3}
+
+This is obvious from previous problem. Given any squarefree $f\in k[x]$, we may simply consider the function field $K$
+as
+\[K=\text{frac}\left( k[x,y]/(y^2-f(x)) \right).\]
+
+\subsection*{Problem 4}
+
+Consider the two monic squarefree polynomials $x$ and $x-1$. The hyperelliptic curves defined by $y^2=x$ and $y^2=x-1$ are clearly
+birational to each other via the map $(x,y)\mapsto(x-1,y)$.
+
+
+\subsection*{Problem 5}
+
+Let $C$ be a hyperelliptic curve with $D$ the zero divisor of $x$ on $C$. The degree of $D$ is 2. Let us show that
+$\ell(D)=2$ if $g>0$. By Lemma 78 of our class notes, we see that $\ell(D)\leq \deg(D)+1=3$. It's clear that $\ell(D)>1$,
+as $L(D)$ contains both 1 and $1/x$. Let us now suppose $\ell(D)=3$ and reach a contradiction. Since $D=P+Q$ for some $P,Q$ on $C$,
+we see that $\ell(P)\geq 3$, i.e. we have contained in $L(P)$ some $f\neq 1$. Hence we can consider, at least, the set
+$\left\{ 1,f,\ldots,f^n \right\}\subset L(nP)$. By Riemann-Roch applied to $nP$ we see that
+\[\ell(nP)=n-g+1\]
+if we take $n$ arbitrarily large (as $\ell(K-nP)$ will go to zero). But this gives us that
+\[n+1\leq\ell(nP)=N-g+1,\]
+which implies that $g=0$, a contradiction. Hence $\ell(D)=2$.
+
+
+\subsection*{Problem 6}
+
+Consider the map $C\to\Proj^{\ell(D)-1}=\Proj^1$. As $C$ has a degree 2 divisor, the map has degree 2, and we see that the function field of $K$
+is a degree two extension of $k(x)$, and hence we get a hyperelliptic curve.
+
+
+\subsection*{Problem 7}
+
+Let $C:y^2=f(x)$ as above. Consider the differential form $\omega=dx$, which is clearly $dx=2ydy/f'(x)$.
+
+
+
+
+
+
+\end{document}
