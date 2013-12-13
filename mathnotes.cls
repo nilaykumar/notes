@@ -9,6 +9,8 @@
 \usepackage{amsthm}
 \usepackage{enumerate}
 
+\newcommand{\catname}[1]{{ \normalfont\textbf{#1}}}
+
 \newcommand{\nm}[1]{\;\textnormal{#1}\;}
 \newcommand{\ra}[0]{\rightarrow}
 \newcommand{\fa}[0]{\;\forall}
@@ -27,6 +29,7 @@
 
 
 \DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Mor}{Mor}
 \DeclareMathOperator{\length}{length}
 \DeclareMathOperator{\res}{Res}
 \DeclareMathOperator{\Int}{Int}

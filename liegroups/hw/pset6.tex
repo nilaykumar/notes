@@ -1,0 +1,199 @@
+\documentclass{../../mathnotes}
+
+\usepackage{todonotes}
+
+\title{Lie Groups PSET 6}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+    
+Let $\fr h\subset\fr g= \fr{so}_4\C$ be the subalgebra consisting of matrices of the form
+$\begin{pmatrix}aJ&\\&bJ\end{pmatrix}$ for $J=\begin{pmatrix}&1\\-1&\end{pmatrix}$
+and $a,b\in\C$.  We wish to show that $\fr h$ is a Cartan subalgebra of $\fr g$. We first show
+that the centralizer of $\fr h$ in $\fr g$ is $\fr h$. Recall first that $\fr{so}_4\C$ consists
+of antisymmetric matrices. The centralizer of $\fr h$ in $\fr g$ is the maximal subalgebra $C(\fr h)$
+that commutes with $\fr h$. Let us solve for the centralizer. Let $\begin{pmatrix}A&B\\C&D\end{pmatrix}$
+be an element of $C(\fr h)$. Then
+\begin{align*}
+    0&=\begin{pmatrix}
+        aJ&\\&bJ
+    \end{pmatrix}
+    \begin{pmatrix}
+        A&B\\C&D
+    \end{pmatrix}
+    - 
+    \begin{pmatrix}
+        A&B\\C&D
+    \end{pmatrix}
+    \begin{pmatrix}
+        aJ&\\&bJ
+    \end{pmatrix}\\
+    &=
+    \begin{pmatrix}
+        a[J,A]&aJB-bBJ\\
+        bJC-aCJ&b[J,D]
+    \end{pmatrix}.
+\end{align*}
+But $A$ and $D$ must be multiples of $J$ as the whole matrix must be in $\fr g$, and hence the diagonal
+vanishes. By antisymmetry, it now suffices to solve $aJB-bBJ=0$ for $B$. This requires that
+\begin{align*}
+    \begin{pmatrix}
+        ab_3+bb_2&ab_4-bb_1\\
+        -ab_1+bb_4&-ab_2-bb_3
+    \end{pmatrix}
+    =0,
+\end{align*}
+which forces $B=0$ if this it hold for all $a,b\in\C$. Hence we see that $C(\fr h)=\fr h$. It now suffices
+to show that every element of $\fr h$ is semisimple, i.e. that we can obtain a root space decomposition.
+Let $H_j=\begin{pmatrix}&-h_j\\h_j&\end{pmatrix}$ and $H_{jk}=\begin{pmatrix}H_j&\\&H_k\end{pmatrix}$.
+Define $M=\begin{pmatrix}1&i\\-i&1\end{pmatrix},N=\begin{pmatrix}1&i\\i&-1\end{pmatrix}$,
+$P=\begin{pmatrix}1&-i\\i&1\end{pmatrix}, Q=\begin{pmatrix}-1&i\\i&1\end{pmatrix}$.
+Finally, take $X=\begin{pmatrix}&M\\-M^\intercal&\end{pmatrix}$, $Y=\begin{pmatrix}&N\\-N^\intercal&\end{pmatrix}$,
+$Z=\begin{pmatrix}&P\\-P^\intercal&\end{pmatrix}$, and $W=\begin{pmatrix}&Q\\-Q^\intercal&\end{pmatrix}$. Then,
+\begin{align*}
+    [H_{jk},X]&=i(h_j-h_k)X\\
+    [H_{jk},Y]&=i(h_j+h_k)Y\\
+    [H_{jk},Z]&=i(h_k-h_j)X\\
+    [H_{jk},W]&=-i(h_j+h_k)Y,
+\end{align*}
+and we obtain a root space decomposition
+\[\fr g=\fr h \oplus \fr g_X\oplus\fr g_Y\oplus\fr g_Z\oplus\fr g_W.\]
+
+
+\subsection*{Problem 2}
+
+\begin{enumerate}[(a)]
+    \item Recall that for $\alpha,\beta\in R$ we took
+        \[(\beta,\alpha)=\langle\beta,H_\alpha\rangle=(H_\beta,H_\alpha).\]
+        We define the coroot $\alpha^\vee$ such that
+        \[\alpha^\vee=\frac{2H_\alpha}{(\alpha,\alpha)}\]
+        and hence we find that
+        \[(\alpha^\vee,\beta^\vee)=\frac{4}{(\alpha,\alpha)(\beta,\beta)}(\alpha,\beta)\]
+        and that
+        \[\langle \alpha^\vee,\beta\rangle=\frac{2(\beta,\alpha)}{(\alpha,\alpha)}.\]
+        Note that the inner product induced on the coroots is simply a positive multiple of the original inner product
+        and hence it's clear that the coroots span $E^*$. Furthermore, $n_{\alpha^\vee\beta^\vee}$ is integral:
+        \begin{align*}
+            n_{\alpha^\vee\beta^\vee}&=\frac{2(\alpha^\vee,\beta^\vee)}{(\beta^\vee,\beta^\vee)}\\
+            &=\frac{2}{(\beta,\beta)}\frac{4(\alpha,\beta)}{(\alpha,\alpha)}\frac{(\beta,\beta)}{4}\\
+            &=\frac{2(\alpha,\beta)}{(\alpha,\alpha)},
+        \end{align*}
+        which is integral as $\alpha,\beta$ are roots. Next we check that the coroots are closed under reflection.
+        We define the reflection to act as
+        \[s_{\alpha^\vee}(\beta^\vee)=\beta^\vee-\frac{2(\alpha^\vee\beta^\vee}{(\alpha^\vee,\alpha^\vee)}\alpha^\vee,\]
+        and wish to show that $s_{\alpha^\vee}(\beta^{\vee})\in R^\vee$. To do this, we use the definition of the coroot,
+        i.e. we check for arbitrary $\gamma\in R$ (skipping a few steps):
+        \begin{align*}
+            \langle \gamma,s_{\alpha^\vee}(\beta^\vee)\rangle&=\frac{2(\gamma,\beta)}{(\beta,\beta)}-\frac{4(\alpha,\beta)(\alpha,\gamma)}{(\alpha,\alpha)(\beta,\beta)}.
+        \end{align*}
+        We claim that this is simply $\langle\gamma,(s_\alpha(\beta))^\vee\rangle$, which will show that the coroots are indeed
+        closed under reflection:
+        \begin{align*}
+            \langle \gamma,(s_\alpha(\beta))^\vee\rangle&=\frac{2(\gamma,s_\alpha(\beta))}{(s_\alpha(\beta),s_\alpha(\beta))}\\
+            &=\frac{2(\beta,\gamma)(\alpha,\alpha)-4(\alpha,\beta)(\alpha,\gamma)}{(\alpha,\alpha)(\beta,\beta)}
+        \end{align*}
+        which is precisely what we had above. Hence we see that the coroots in fact form a root system.
+    \item Now let $\Pi=\left\{ \alpha_1,\ldots,\alpha_r \right\}\subset R$ be the set of simple roots. We wish to show
+        that the set $\Pi^\vee=\left\{ \alpha_1^\vee,\ldots,\alpha_r^\vee \right\}\subset R^\vee$ is the set of
+        simple roots of $R^\vee$. First note that given a $t\in E$ with $(t,\alpha)\neq 0$ for all $\alpha\in R$ we obtain
+        the set of positive roots $\lambda$: $(\lambda,t)>0$. We claim that $t^\vee$ yields a choice of positive coroots.
+        This is simply because $(t^\vee,\alpha^\vee)>0$ if $(t,\alpha)$ is (by the inner product defined above).
+        Now note that
+        \begin{align*}
+            C_+&=\left\{ \lambda^\vee\in E^*\mid(\lambda^\vee,\alpha^\vee)>0\; \forall \alpha^\vee\in R_+^\vee \right\}\\
+            &=\left\{ \lambda^\vee\in E^*\mid\frac{4}{(\alpha,\alpha)(\lambda,\lambda)}(\alpha,\lambda)>0 \right\}\\
+            &=\left\{ \lambda^\vee\in E^*\mid (\lambda,\alpha)>0\; \forall\alpha\in R_+ \right\}\\
+            &=\left\{ \lambda^\vee\in E^*\mid (\lambda,\alpha)>0\; \forall\alpha\in \Pi \right\}\\
+            &=\left\{ \lambda^\vee\in E^*\mid (\lambda^\vee,\alpha^\vee)>0\; \forall\alpha\in \Pi \right\}
+        \end{align*}
+        and since there are $r$ such coroots (by dimensionality) we obtain a set of simple coroots $\Pi^\vee$.
+\end{enumerate}
+
+\subsection*{Problem 3}
+
+\begin{enumerate}[(a)]
+    \item Let $R$ be a reduced root system of rank 2, with simple roots $\alpha_1,\alpha_2$. By Kirillov Lemma 7.39,
+        we know that the longest element of the Weyl group is the $w_0\in W$ such that $w_0(C_+)=-C_+$. This is also
+        geometrically rather obvious for the rank 2 case. Of course, since we know that reflections via simple roots moves
+        a Weyl chamber to one adjacent to it, it will take precisely $m$ reflections to move $C_+$ to $-C_+$, where
+        each angle is $\pi/m$. And of course, the reflection must be a product of $s_1s_2s_1\ldots$ as $s_1^2=s_2^2=1$.
+        This proves the result for the rank 2 systems.
+    \item The first Coxeter relation $s_i^2=1$ is obvious simply be the properties of transpositions. We now wish to show
+        that $(s_is_j)^{m_{ij}}=1$ where $m_{ij}$ is determined by the angle between $\alpha_i,\alpha_j$ in the same way as
+        the previous part.
+        
+        
+        %But this follows essentially directly from the previous problem (and in fact holds for any rank,
+        %as we did not , as this total permutation
+        %is simply $w_0^2$, which takes $w_0^2(C_+)=-w_0(C_+)=C_+$, and similarly for any Weyl chamber. Hence, since the Weyl
+        %group action is simply transitive (free and transitive) on the set of Weyl chambers (Kirillov Corollary 7.38), we find
+        %that $w_0^2=1$.
+\end{enumerate}
+
+\subsection*{Problem 4}
+
+\begin{enumerate}[(a)]
+    \item Consider a complex semisimple Lie algebra $\fr g$ with a root space decomposition $\fr g=\fr n_-\oplus\fr h\oplus\fr n_+$
+        where $\fr n_{\pm}=\oplus_{\alpha\in R_\pm}\fr g_\alpha$. It is obvious that $\fr n_\pm$ are nilpotent, as the commutator
+        $[\fr g_\alpha,\fr g_\beta]\subset \fr g_{\alpha+\beta}$ and hence, in the $\fr n_+$ case, successive commutators will
+        keep increasing the root, but since the root system is finite, there is an upper bound, and hence we must obtain zero.
+        The same argument holds for $\fr n_-$ but with a lower bound.
+    \item If we instead consider $\fr b=\fr n_+\oplus\fr h$, we find that $\fr b$ is in fact solvable. To see this, note that
+        any two elements of $\fr b$ can be written $b_1=e_1+h_1,b_2=e_2+h_2$, and hence
+        \begin{align*}
+            [b_1,b_2]&=[e_1,e_1]+[h_1,e_2]+[e_1,h_2]\\
+            &=[e_1,e_2]+a_{12}e_2-a_{21}e_1,
+        \end{align*}
+        but now further applications of commutators with elements of $\fr b$ will simply yield commutators of $e_i$ with $e_j$ and
+        hence by part (a) above, we are done.
+\end{enumerate}
+
+\subsection*{Problem 5}
+
+Let $G$ be a connected complex Lie group such that $\fr g$ is semisimple. Fix a root decomposition of $\fr g$.
+\begin{enumerate}[(a)]
+    \item Choose $\alpha\in R$ and let $i_\alpha:\fr{sl}_2\C\to\fr g$ be the embedding constructed in Kirillov Lemma 6.42.
+        By Kirillov Theorem 3.41, this embedding can be lifted to a morphism $i_\alpha:SL(2,\C)\to G$.
+        Let
+        \[
+            S_\alpha=i_\alpha\begin{pmatrix}0&-1\\1&0\end{pmatrix}=\exp\left( \frac{\pi}{2}(f_\alpha-e_\alpha) \right)\in G.
+        \]
+        Then $\Ad S_\alpha(h_\alpha)=-h_\alpha$ because
+        \begin{align*}
+            \Ad S_\alpha(h_\alpha)&=\frac{d}{dt}\bigg|_{t=0}\left( i_\alpha\begin{pmatrix}&-1\\1&\end{pmatrix}e^{ti_\alpha\begin{pmatrix}1&\\&-1\end{pmatrix}}i_\alpha\begin{pmatrix}&1\\-1&\end{pmatrix} \right)\\
+            &=\frac{d}{dt}\bigg|_{t=0}\left( i_\alpha\begin{pmatrix}&-1\\1&\end{pmatrix}i_\alpha\left(e^{t\begin{pmatrix}1&\\&-1\end{pmatrix}}\right)i_\alpha\begin{pmatrix}&1\\-1&\end{pmatrix} \right)\\
+            &=\frac{d}{dt}\bigg|_{t=0}i_\alpha\begin{pmatrix}e^{-t}&\\&e^t\end{pmatrix}\\
+            &=i_\alpha\begin{pmatrix}1&\\&-1\end{pmatrix}=h_\alpha
+        \end{align*}
+
+        Note also that if $h\in\fr h$ with $\langle h,\alpha\rangle=0$, then, by the Serre relations, since
+        \[ [h_i,e_j]=a_{ij}e_j\text{ and }[h_i,f_j]=-a_{ij}f_j  \]
+        where $a_{ij}=n_{\alpha_j,\alpha_i}=\langle\alpha_i^\vee,\alpha_j\rangle$, which is zero in our case, and hence
+        $h$ commutes with $S_\alpha=\exp(\pi/2(f_\alpha-e_\alpha))$ and thus we find that the adjoint action simply yields
+        \begin{align*}
+            \Ad S_\alpha(h)&=\frac{d}{dt}\bigg|_{t=0}\left( S_\alpha e^{th} S_\alpha^{-1}\right)\\
+            &=\frac{d}{dt}\bigg|_{t=0} e^{th}=h,
+        \end{align*}
+        as desired. This naturally induces the action on the dual, and hence we see that the action of $S_\alpha$ on $\fr g^*$ preserves
+        $\fr h^*$ and that the restriction of $\Ad S_\alpha$ to $\fr h^*$ coincides with the reflection $s_\alpha$.
+
+    \item An element of the Weyl group can, in general, be written as a product of $s_{\alpha_i}$ where the $\alpha_i$ are simple roots.
+        By part (a) above we know that the action of $\Ad S_\alpha$ (when restricted to $\fr h^*$) coincides with the reflection $s_\alpha$,
+        and hence if $w$ is written as a product of simple reflections, we may simply compose multiple adjoint actions:
+        \begin{align*}
+            \Ad S_\alpha\circ\Ad S_\beta&=s_\alpha\circ s_\beta\\
+            \Ad\left( S_\alpha S_\beta \right)&=s_\alpha\circ s_\beta
+        \end{align*}
+        where we have used the homomorphism property of the Adjoint representation. Hence, for cases higher than 2, i.e. when
+        $w$ is written as a product of $n$ simple reflections, we can simply use the homorphism property to find the element
+        in $G$ that acts as $w$.
+\end{enumerate}
+
+
+\end{document}

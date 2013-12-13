@@ -1,0 +1,36 @@
+\documentclass{../../mathnotes}
+
+\usepackage{enumerate}
+\usepackage{todonotes}
+
+\title{Commutative Algebra: Problem Set 13}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 2}
+
+Consider the inclusion $\phi:\R\to\C$. We obtain an induced (surjective) map on spectra $f:\Spec\C\to\Spec\R$ that is
+clearly continuous as a map of topologies. As schemes, the morphism on sheaves is $f^\#:\mathcal{O}_{\Spec \R}\to f_*\mathcal{O}_{\Spec \C}$
+but since the only open sets are all of $\R$ and all of $\C$, we get just the inclusion $\phi:\R\to\C$ on global sections.
+Note, however, that for there to be a right-inverse of $f$ there must be a morphism of schemes $g:\Spec\R\to\Spec\C$. That
+there is a continuous map on topologies is clear, but there is no well-defined morphism on the structure sheaves, as this would require
+a ring map $\C\to\R$, which does not exist, as $i$ cannot be sent to anything in $\R$ (lest it violate the homomorphism property).
+
+\section*{Problem 5}
+
+Let $X_1,X_2,X_3,\ldots$ be a sequence of affine schemes. Let $F:\catname{Sch}^{op}\to\catname{Set}$ be the contravariant functor
+that takes a scheme $T$ to the product $\Pi_i\Mor_{\catname{Sch}}(T,X_i)$. We wish to show that $F$ is representable by an affine scheme. Note
+first that $\Mor_{\catname{Sch}}(T,X_i)=\Mor_{\catname{CRing}}(A_i,B)$ where $A_i$ (resp. $B$) are the coordinate rings of $X_i$ (resp. $T$).
+Hence, for $F$ to be representable we must find an affine scheme $Y$ with coordinate ring $\mathcal{O}_Y(Y)$ such that
+\[ \Mor_{\catname{Ring}}(\mathcal{O}_Y(Y),B)=\prod_i\Mor_{\catname{CRing}}(A_i,B). \]
+But this is simply the definition of the coproduct in the category $\catname{CRing}$: $\mathcal{O}_Y(Y)=\coprod_iA_i$
+and hence $F$ is representable by the affine scheme $\Spec\coprod_i A_i=\Spec\coprod_i\mathcal{O}_{X_i}(X_i)$.
+
+
+
+\end{document}
