@@ -1,0 +1,66 @@
+\documentclass{../../mathnotes}
+
+\usepackage{enumerate}
+\usepackage{todonotes}
+
+\title{Commutative Algebra: Problem Set 11}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+Consider the polynomial $F=X_0^2X_1^2+X_1^2X_2^2+X_2^2X_0^2$ and the curve $D=V(F)$ in $\Proj^2$.
+Let us determine the singular points of $F$.
+Note first that $\nabla F=\langle2X_0X_1^2+2X_0X_2^2,2X_1X_0^2+2X_1X_2^2,2X_2X_1^2+2X_2X_0^2\rangle$. In the
+open where $X_0\neq0$, for $\nabla F=0$, we see that $X_1=X_2=0$ and hence $[1:0:0]$ is a singular point,
+as it clearly lies on $D$. Similarly, it is easy to see that $[0:1:0]$ and $[0:0:1]$ are singular as well.
+
+\section*{Problem 2}
+
+Let us determine the genus of the curve $D=V(F)$ above. Recall from class that we have the genus-degree
+formula $g=(d-1)(d-2)/2=3$ if $D$ were nonsingular. However, since $D$ has 3 singularities, the genus must
+fall by at least 3 and hence $g=0$.
+
+\section*{Problem 3}
+
+Consider the curve $D=V(X_0^2+X_1^2+X_2^2+X_3^2,X_0^3+X_1^3+X_2^3+X_3^3)$.
+\begin{enumerate}[(a)]
+    \item A sharp upper bound for the number of intersection points of a plane in $\Proj^3$ with $D$
+        is 6. This bound is achieved by the plane $X_3=0$, for which we find that
+        $(X_0^3+X_1^3)^2+(X_0^2+X_1^2)^3=0,$ and hence we obtain the equation:
+        \[2X_0^6+3X_0^4X_1^2+2X_0^3X_1^3+3X_0^2X_1^4+2X_1^6=0,\]
+        which has 6 distinct roots (which can be checked either numerically or by taking derivatives).
+    \item We wish to find an irreducible curve $D'$ in $\Proj^2$ that is birational to $D$ by projection.
+        In particular, we consider the map $\pi(X_0,X_1,X_2,X_3)=(X_0,X_1,X_2)$. Note that we can
+        eliminate $X_3$ from the two polynomials defining $D$:
+        \begin{align*}
+            0&=X_0^2+X_1^2+X_2^2+X_3^2\\
+            X_3^2&=-(X_0^2+X_1^2+X_2^2)\\
+            0&=X_0^3+X_1^3+X_2^3+X_3^3\\
+            X_3^3&=-(X_0^3+X_1^3+X_2^3)
+        \end{align*}
+        to obtain
+        \[F(X_0,X_1,X_2)=(X_0^3+X_1^3+X_2^3)^2+(X_0^2+X_1^2+X_2^2)^3=0.\]
+        This gives us the equation for $D'$ in $\Proj^2$. It is now easy to see that the preimage is given by
+        \[\pi^{-1}(X_0,X_1,X_2)=\left(X_0,X_1,X_2,\frac{X_0^3+X_1^3+X_2^3}{X_0^2+X_1^2+X_2^2}\right).\]
+        Of course, for this to be well-defined, we must have $X_0^2+X_1^2+X_2^2\neq 0$ or equivalently,
+        $X_3\neq0$. Hence we see that for $X_3\neq0$, points in $D'$ have a single preimage in $D$, but
+        if $X_3=0$, there are a number of solutions, as seen in (a).
+    \item $D'$ has degree 6.
+    \item To compute the singularities of $D'$, we compute:
+        \begin{align*}
+            \frac{\partial F}{\partial X_i}=0&=6X_i^2(X_0^3+X_1^3+X_2^3)+6X_i(X_0^2+X_1^2+X_2^2)\\
+            0&=6(X_0^2+X_1^2+X_2^2)(X_0^3+X_1^3+X_2^3+(X_0^2+X_1^2+X_2^2)(X_0+X_1+X_2))
+        \end{align*}
+        Note that if $X_0^2+X_1^2+X_2^2=0$ we recover the points mentioned in part (a), i.e. the points intersecting
+        the plane $X_3=0$ are singular. It is fairly easy to see that the second term has no solution in $\Proj^2$ and
+        hence $D'$ has only these 6 singularities.
+    \item One would guess the genus, similar to above, as $5\cdot 4/2-6=4$.
+\end{enumerate}
+
+\end{document}
