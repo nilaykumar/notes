@@ -9,6 +9,12 @@
 \usepackage{amsthm}
 \usepackage{enumerate}
 
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks = true,
+    citecolor = gray
+}
+
 \newcommand{\nm}[1]{\;\textnormal{#1}\;}
 \newcommand{\ra}[0]{\rightarrow}
 \newcommand{\fa}[0]{\;\forall}
@@ -26,6 +32,8 @@
 \newcommand{\fr}{\mathfrak}
 
 
+\DeclareMathOperator{\Real}{Re}
+\DeclareMathOperator{\Imag}{Im}
 \DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\length}{length}
 \DeclareMathOperator{\res}{Res}
@@ -53,14 +61,14 @@
 \newtheorem{lem}[thm]{Lemma}
 \newtheorem{cor}[thm]{Corollary}
 \newtheorem{prop}[thm]{Proposition}
-\newtheorem{exc}{Exercise}
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}
+\newtheorem{exc}{Exercise}
 \newtheorem{exmp}{Example}
 \theoremstyle{remark}
 \newtheorem*{rmk}{Remark}
 
-\title{An Introduction to Gauge Theory and its Applications}
+\title{Notes on Gauge Theory}
 \author{Matei Ionita and Nilay Kumar}
 \date{Fall 2013}
 
@@ -69,6 +77,10 @@
 \maketitle
 
 \tableofcontents
+
+\hypersetup{linkcolor=blue}
+
+\setcounter{chapter}{-1}
 
 \newpage
 
@@ -200,13 +212,25 @@ In particular, we investigate how the local coordinates of a point in the princi
 course, that the point is in a region of overlap $U_\alpha\cap U_\beta$).
 
 \begin{defn}
-    Let $P$ be a principal $G$-bundle over $X$ with local trivializations $\Phi_\alpha$ defined over an open cover $X=\{U_\alpha\}$. \todo{finish}
+    Let $P$ be a principal $G$-bundle over $X$ with local trivializations $\Psi_\alpha$ defined over an open cover $X=\{U_\alpha\}$.
+    Fix $\alpha,\beta$ such that $U_\alpha\cap U_\beta$ is non-empty. 
+    On the overlap, consider
+    \[\Psi_\beta\circ\Psi_\alpha^{-1}:(U_\alpha\cap U_\beta)\times G\to (U_\alpha\cap U_\beta)\times G,\]
+    which takes
+    \[(\Psi_\beta\circ\Psi_\alpha^{-1})(x,g)=(x,h)\]
+    for some $x\in X$ and $g,h\in G$. As $\Psi_\beta\circ\Psi_\alpha$ is a diffeomorphism, $h$ must depend smoothly on $g$,
+    and hence we may write
+    \[(\Psi_\beta\circ\Psi_\alpha^{-1})(x,g)=(x,g_{\beta\alpha}(x)h),\]
+    where $g_{\beta\alpha}$ is a smooth map $U_\alpha\cap U_\beta\to G$ called the \textbf{transition function} $g_{\beta\alpha}$. 
+    It should be clear that these transition functions satisfy the so-called \textbf{cocycle condition}:
+    \[g_{\alpha\beta}(x)\cdot g_{\beta\gamma}(x)=g_{\alpha\gamma}(x),\]
+    for all $\alpha,\beta,\gamma$.
 \end{defn}
 
-\todo{tr. func. example}
-
-\todo{reconstruction theorem}
-
+Though perhaps not evident at first, these transition functions (defined over some open cover of the base manifold) hold enough
+information to recreate the principal bundle in its entirety. Intuitively, this is because the bundle can be thought of
+as a set of local products $U_\alpha\times G$ that is glued together in a non-trivial way via the transition functions in order to
+form the global structure of the bundle. We leave this as an exercise that the reader is urged to carry out (see \hyperref[exc:bundleconst]{Exercise \ref*{exc:bundleconst}}).
 
 \section{Morphisms and sections}
 
@@ -215,7 +239,7 @@ We may define morphisms between princpal $G$-bundles, thus defining the category
     Let $G\overset{\pi_1}{\to}P_1\to X_1$ and $G\overset{\pi_2}{\to}P_2\to X_2$ be two principal $G$-bundles. We define a \textbf{bundle
     map} between $P_1$ and $P_2$ to be a smooth $G$-equivariant map $\Phi:P_1\to P_2$:
     \[\Phi(p\cdot g)=\Phi(p)\cdot g,\]
-    for all $p\in P_1, g\in G$, with the group action on both $P_1,P_2$ denoted by ``$\cdot$''. Note that bundle maps preserve fibers.
+    for all $p\in P_1, g\in G$, with the group action on both $P_1,P_2$ denoted by `$\cdot$'. Note that bundle maps preserve fibers.
 \end{defn}
 
 We will be concerned primarily with maps between bundles with the same base space. This is quite a special case, as the following theorem shows.
@@ -264,12 +288,120 @@ Just as with vector bundle, we can construct ``sections'' of a principal bundle,
     Conversely, suppose $P\cong X\times G$. We can easily construct the global identity section $\sigma: X\to X\times G$ given by $\sigma(x)=(x,e)$.
 \end{proof}
 
+\section{Pullback bundles}
+
+\section{Associated bundles}
+
+Throughout this section, we fix a principal bundle $G\to P\xrightarrow{\pi}X$, as well as a 
+left $G$-space $F$. \todo{motivation?}\todo{cite Naber}
+
+\begin{defn}
+Consider the product manifold $P\times F$ as a right $G$-space, with a joint action defined as follows:
+\[(p,v)\cdot g\equiv(p\cdot g, \rho(g^{-1})\cdot y),\]
+for $p\in P,y\in V$, and $g\in G$. We define the \textbf{fiber bundle associated to $P$ with fiber $F$} to be the orbit space
+\[P\times_G F\equiv (P\times F)/G,\]
+i.e. the quotient of the product $P\times F$ by the action defined above. The following lemma
+justifies the name.
+\end{defn}
+
+\begin{lem}
+    The fiber bundle associated to $P$ as above forms a smooth, locally trivial bundle with base space $X$ and fiber $F$
+    written as $F\to P\times_GF\xrightarrow{\mu}X$. This structure is unique\todo{why?}.
+\end{lem}
+\begin{proof}
+    Concretely, we may write the points of the quotient $P\times_G F$ as equivalence classes $[p,y]$ under the relation
+    \[[p,y]=[p\cdot g,g^{-1}\cdot y].\]
+    If we denote by $q:P\times F\to P\times_G F$ the quotient map given by
+    \[q(p,y)=[p,y],\]
+    we can give $P\times_G F$ the induced quotient topology. Furthermore, we can define $\mu:P\times_G F\to X$ by
+    \[\mu([p,y])=[\pi(p)],\]
+    which is well-defined: $\mu([p\cdot g,g^{-1}\cdot y])=\pi(p\cdot g)=\pi(p)$. Finally, defining
+    $\pi_P:P\times F\to P$ to be the obvious projection, we find that the diagram
+    \begin{equation*}
+        \begin{tikzcd}
+            P\times F\arrow{r}{q}\arrow{d}{\pi_P}&P\times_\rho F\arrow{d}{\mu}\\
+            P\arrow{r}{\pi}&X
+        \end{tikzcd}
+    \end{equation*}
+    commutes, implying that $\mu$ is in fact a continuous map (characteristic property of quotients).
+    
+    Let us now construct the necessary local trivializations for $P\times_G F$.
+    Fix an open set $U$ in $X$. Associated to $U$ we have a local trivialization of $P$
+    given by $\Psi:\pi^{-1}(U)\to U\times G$:
+    \[\Psi(p)=(\pi(p),\psi(p)),\]
+    where $\psi(p\cdot g)=\psi(p)g$ is the projection onto the group component for all $p\in\pi^{-1}(U)$ and $g\in G$.
+    If we denote by $s:U\to\pi^{-1}(U)$ the canonical section $s(x)=\Psi^{-1}(x,e)$, we can construct a map
+    $\tilde\Phi:U\times F\to\mu^{-1}(U)$ by
+    \[\tilde\Phi(x,y)=[s(x),y].\]
+    For $\tilde\Phi$ to be a local trivialization it must first be a homeomorphism. It is clearly continuous - it
+    suffices to show that it is bijective with continuous inverse.
+    Note first that for any $x\in X$ with $p\in\pi^{-1}(x)$,
+    the preimage $\pi_P^{-1}(p)$ is sent by $q$ to elements of the form $[p,y]$ for some $y\in F$ and hence
+    $\mu^{-1}(x)=\left\{ [p,y]\mid y\in F \right\}$. 
+    Thus we can write
+    \begin{align*}
+        \mu^{-1}(U)&=\bigcup_{x\in U}\mu^{-1}(x)\\
+        &=\bigcup_{x\in U}\left\{ [p,y]\mid \pi(p)=x,y\in F \right\}\\
+        &=q(\pi^{-1}(U)\times F).
+    \end{align*}
+    We first show that $\tilde\Phi$ is surjective. Fix $[p,y]\in \mu^{-1}(U)$ for $p\in P, y\in F$
+    and let $\pi(p)=x=\pi(s(x))$. As there exists some $g\in G$ for which $p=s(x)\cdot g$ it follows that
+    \[\tilde\Phi(x,g\cdot y)=[s(x),g\cdot y]=[s(x)\cdot g,(g^{-1}g)\cdot y]=[p,y].\]
+    Next, we show injectivity. Suppose $\tilde\Phi(x,y)=\tilde\Phi(x',y')$. Then, by definition of $\tilde\Phi$,
+    we must have that $[s(x),y]=[s(x'),y']$, and in particular, that $\pi(s(x))=\pi(s(x'))\implies x=x'$.
+    Consequently, $[s(x),y]=[s(x),y']$, i.e. there exists some $g\in G$ such that $s(x)\cdot g=s(x)$
+    and $y'=g^{-1}\cdot y$. The action of $G$ on a fiber of $P$ is free, and hence $g=e$, implying that
+    $y=y'$. Thus $\tilde\Phi$ is bijective with inverse is given by
+    \[\tilde\Psi([p,y])=(\pi(p), g\cdot y),\]
+    where $p=s(\pi(p))\cdot g$ (check this!). Using the characteristic property of quotient maps, $\tilde\Psi$
+    is continuous because the map $\tilde\Psi\circ q:q^{-1}(\mu^{-1}(U))=\pi^{-1}(U)\times F\to U\times F$ given
+    by $(p,y)\to(\pi(p),g\cdot y)$ is continuous.
+
+    Note that $\mu(\tilde\Phi(x,y))=\mu([s(x),y])=\pi(s(x))=x$ and hence $\tilde\Phi$ is (the inverse of) a local trivialization
+    for the bundle $F\to P\times_GF\xrightarrow{\mu}X$ (we leave it as an exercise to show that $P\times_GF$
+    is Hausdorff\todo{exercise: Naber 1.3.23}). It now suffices to construct a differentiable structure on $P\times_GF$
+    in respect to which $\mu$ is smooth and the maps $\tilde\Psi_\alpha:\mu^{-1}(U_\alpha)\to U_\alpha\times F$
+    are diffeomorphisms for an open cover $X=\left\{ U_\alpha \right\}$. Consider first two local trivializations
+    $\Psi_\alpha,\Psi_\beta$ (with $U_\alpha\cap U_\beta$ non-empty) for $P$ with let $s_\alpha,s_\beta$ the
+    corresponding canonical local sections and $g_{\beta\alpha}:U_\alpha\cap U_\beta\to G$ the transition function.
+    By the above procedure, we obtain the homeomorphisms $\tilde\Psi_\alpha:\mu^{-1}(U_\alpha)\to U_\alpha\times F$
+    and $\tilde\Psi_\beta:\mu^{-1}(U_\beta)\to U_\beta\times F$. Consider now the map
+    \[\tilde\Psi_\beta\circ\tilde\Psi_\alpha^{-1}:(U_\alpha\cap U_\beta)\times F\to(U_\alpha\cap U_\beta)\times F,\]
+    which, for $(x,y)\in(U_\alpha\cap U_\beta)\times F$, takes
+    \begin{align*}
+        \tilde\Psi_\beta\circ\tilde\Psi_\alpha^{-1}(x,y)&=\tilde\Psi_\beta\left( \tilde\Phi_\alpha(x,y) \right)\\
+        &=\tilde\Psi_\beta([s_\alpha(x),y])=\tilde\Psi_\beta([s_\beta(x)\cdot g_{\beta\alpha}(x),y])\\
+        &=\tilde\Psi_\beta([s_\beta(x)\cdot g_{\beta\alpha}(x),g_{\beta\alpha}^{-1}(x)\cdot(g_{\beta\alpha}(x)\cdot y)])\\
+        &=\tilde\Psi_\beta([s_\beta(x),g_{\beta\alpha}(x)\cdot y])\\
+        &=(x,g_{\beta\alpha}(x),y).
+    \end{align*}
+    This computation shows that $\tilde\Psi_\beta\circ\tilde\Psi_\alpha^{-1}$ is in fact a diffeomorphism, as it
+    is smooth and clearly has a smooth inverse.
+    %Note additionally that since $\left\{ U_\alpha \right\}$ is an open
+    %cover for $X$, $\left\{ \mu^{-1}(U_\alpha) \right\}$ is an open cover for $P\times_GF$. We can now define a smooth
+    %structure on $P\times_GF$ by taking $(\mu^{-1}(U_\alpha),\tilde\Psi_\alpha)$ as the charts (which are smoothly
+    %compatible by the above calculation).
+    \todo{finish; see Lee lem 10.6}
+\end{proof}
+
+\section{References}
 \section{Exercises}
 
+\begin{exc}
+    \label{exc:bundleconst}
+    Let $X$ be a smooth manifold and let $\left\{ U_\alpha \right\}$ be an open cover of $X$. Suppose for each
+    $\alpha,\beta$ we have smooth smooth transition functions $g_{\alpha\beta}:U_\alpha\cap U\beta\to G$ that
+    satisfy the cocycle condition. Show that there is a smooth principal $G$-bundle $P\xrightarrow{\pi} X$ with smooth local
+    trivializations $\Psi_\alpha:\pi^{-1}(U_\alpha)\to U_\alpha\times G$ whose transition functions are the given maps
+    $g_{\alpha\beta}$. (Hint: show that the transition functions give an equivalence relation on the disjoint union
+    $\coprod U_\alpha\times G$ and that quotienting by this relation yields a principal bundle.)
+\end{exc}
 
-\chapter{Connections on principal bundles}
 
-\section{Background and definitions}
+
+\chapter{Connections and Curvature}
+
+\section{Basic definitions}
 
 It is intuitive to think of a principal bundle as having ``vertical''  and ``horizontal'' components, namely the directions along the fiber and the base manifold,
 respectively. The theory of connections and curvature that we detail below formalizes these notions. Though their basic idea may seem rather
@@ -446,16 +578,16 @@ The following lemma relates a given basis of the Lie algebra to the Maurer-Carta
 \end{exmp}
 
 \begin{defn}
-    Let $G$ be a Lie group and $\fr g$ be its Lie algebra. We say that a $\fr g$-valued one-form $\mu$ is right equivariant if
+    Let $G$ be a Lie group and $\fr g$ be its Lie algebra. We say that a $\fr g$-valued one-form $\mu$ is right-equivariant if
     \[(R_g)^*\mu=\ad(g^{-1})\circ \mu\]
     for all $g\in G$. More generally, let $P$ be a manifold equipped with smooth right action $\sigma(p,g)=p\cdot g$ of $G$ and let $\mu$ be a $\fr g$-valued one-form
     on $P$. Then we say that $\mu$ is \textbf{right-equivariant under $\sigma$} if
     \[(\sigma_g)^*\mu=\ad(g^{-1})\circ \mu\]
-    for all $g\in G$.
+    for all $g\in G$.\todo{change notation to $R_g$}
 \end{defn}
 
 \begin{lem}
-    The Maurer-Cartan form is right-invariant.
+    The Maurer-Cartan form is right-equivariant.
 \end{lem}
 \begin{proof}
     Take $g,h\in G$ and a vector $v\in T_{hg^{-1}}G$. It suffices to show right-equivariance for this case:
@@ -477,9 +609,108 @@ Let us finally return to connections.
     as follows. Recall that the elements of $\fr g$ are in one-to-one correspondence with left-invariant vector fields on $G$. Given a Lie algebra
     element $X$, denote by $\tilde X$ its corresponding left-invariant vector field. Note that when $\tilde X$ is considered
     as a vector field on $P$ it is a purely vertical vector field. Thus, for some vector $Y\in T_pP$ with vertical component $Y_v$ we define
-    $\omega(p)(Y)$ to be the (unique) Lie algebra element $X$ such that $\tilde X(p)=Y_v$.
+    $\omega(p)(Y)$ to be the (unique)\todo{why?} Lie algebra element $X$ such that $\tilde X(p)=Y_v$.\todo{smoothness?}
 \end{defn}
 
+The next theorem shows us that a connection one-form is in fact enough information to recover the connection. Of course, this had better be the case, otherwise studying vector-valued one-forms would have been a waste of time! 
+
+\begin{thm}
+Let $P$ be a principal $G$-bundle over $M$ with a connection $\Gamma$ and associated connection form $\omega$. Then the connection form satisfies:
+\begin{enumerate}[(i)]
+\item $\omega(\tilde X)=X$ for all $X\in\fr g$;
+\item $(R_g)^*\omega=\ad(g^{-1})\circ \omega$, i.e. $\omega$ is right-equivariant.
+\end{enumerate}
+
+Conversely, given a $\fr g$-valued one-form $\omega$ on $P$ satisfying $(i)$ and $(ii)$,
+there is a unique connection $\Gamma$ on $P$ whose connection form is $\omega$.
+\end{thm}
+\begin{proof}
+\todo{Understand this}The first property follows straight from the definition of the connection form above.
+We show the second property in cases; in particular, we show that the left and right-hand sides are equal when evaluated on a vector field $X$ that is either horizontal or vertical (as defined by $\Gamma$).
+In the case where $X=X_h$ is horizontal, we note that the right-hand side is zero simply by definition of the connection form.
+On the left-hand side we also obtain zero, as $((R_g)^*\omega)(X)$ must be horizontal as well, by condition (iii) in the definition of $\Gamma$.
+Now suppose $X=X_v$ is vertical with respect to $\Gamma$. Then $X=\tilde Y$ for some $Y\in\fr g$, i.e. $X$ is the fundamental vector field associated to $Y$.
+Then $(R_g)_*X$ is the fundamental vector field corresponding to $\ad(g^{-1})Y$.
+ Hence we see that
+\[(R_g^*\omega)_p(X)=\omega_{pg}((R_g)_*X)=\ad(g^{-1})Y=\ad(g^{-1})(\omega_p(X)),\]
+as desired.
+
+Conversely, given a form $\omega$ satisfying these two properties, we define
+\[H_p=\{X\in T_pP\mid \omega(X)=0\}.\]
+It now suffices to show that this choice of horizontal subspace for each $p\in P$ satisfies conditions (i)-(iii) of the connection.
+It is clear that by defining $H_p$ as above we obtain a direct sum decomposition $T_pP=V_p\oplus H_p$ (as $\omega(p)$ maps onto $\fr g$). Right equivariance of the subspaces follows easily: take $X\in H_p$. Then
+\begin{align*}
+\omega(p\cdot g)((R_g)_*X)&=\omega((R_g)_*X)\\
+&=\Ad(g^{-1})\circ\omega(X)\\
+&=0,
+\end{align*}
+so $(R_g)_*X\in H_{p\cdot g}$. But by the injectivity of $(R_g)_*$ and the fact that $\dim H_p=\dim H_{p\cdot g}$, we find that $H_{p\cdot g}=(R_g)_*H_p$.
+To show that this choice of horizontal subspaces varies smoothly over $P$ we must show that for any smooth vector field $X$ on $P$, the horizontal component vector field $X_h$ is smooth as well. But note that we can write, at any point $p\in P$:
+\begin{align*}
+X_h|_p&=X|_p-X_v|_p\\
+&=X|_p-\widetilde{\omega_p(X)}|_p.
+\end{align*}
+Here we have found the vertical component $X_v$ by using the definition of the connection one-form.
+Of course, $\omega$ is smoot so the map $X\mapsto \omega_p(X)$ is smooth, and since the tilde operation is an isomorphism, the map $X\mapsto \widetilde{\omega_p(X)}$ is smooth as well, and we are done.
+\end{proof}
+
+
+
+
+
+
+\section{The BPST connection: a first example}
+Now that we introduced connections, we work through a particularly important connection 1-form on the quaternionic Hopf bundle, $Sp(1) \to S^7 \to S^4$. We will see later that this connection will give the gauge fields associated to the physical notion of isotopic spin. A family of solutions to the Yang-Mills equations for this problem is the BPST instanton solutions, hence the name ``BPST connection'' for the connection we are describing in this section. In order to perform this computation, we regard $S^7$ as unit length elements of $\HH^2$, and we denote the inclusion map by $i : S^7 \to \HH^2$. We start by defining an $\Imag \HH$-valued 1-form $\tilde \omega$ on $\HH^2$:
+\[      \tilde \omega = \Imag(\bar q^1 dq^1 + \bar q^2 dq^2)     \]
+Then define $\omega$ on $S^7$ by $\omega = i^* \tilde \omega$. This apparently arbitrary definition will be motivated shortly. After we work out the explicit action of this 1-form on tangent vectors, we will show that the horizontal subspaces that it generates are the orthogonal complements of $V_p S^7$ with respect to the usual quaternionic inner product. Therefore $\omega$ is a particularly nice candidate for a connection 1-form on $S^7$, as its horizontal subspaces are easy to visualize. With this motivation in mind, we work from the definition of $\omega$ as a pullback. For every $p \in S^7$ and every $X \in T_p S^7$, we have:
+\[     \omega_p (X) = \tilde \omega_p (i_{*p} X)    \]
+In order to unpack this notation, we write $p = (p^1, p^2) \in S^7 \subset \HH^2$, and $X = (X^1, X^2) \in T_p(S^7) \subset T_p(\HH^2) = T_{p^1} (\HH) \times T_{p^2} (\HH)$. Then:
+\begin{align*}
+\omega_p(X) &= \Imag(\bar q^1 dq^1 + \bar q^2 dq^2)(p^1, p^2)(X^1, X^2)  \\
+&= \Imag[\bar p^1 dq^1(X^1, X^2) + \bar p^2 dq^2(X^1, X^2)] 
+\end{align*}
+But note that:
+\[   dq^j(X^1, X^2) = (X^1(q^j), X^2(q^j)) = x^1 \frac{\p q^j}{\p q^1} + x^2 \frac{\p q^j}{\p q^2} = x^1 \delta_{j1} + x^2 \delta_{j2} \]
+On the left side of the second equal sign, $X^i$ are tangent vectors, that can act on the smooth function $q^j$ and return another smooth function. On the right side of the second equal sign, $x^i$ are the components of $X^i$ in the $\frac{\p}{\p q^i}$ direction. Obviously, each $X^i$ only has a component in the $\frac{\p}{\p q^i}$ direction, because it belongs to the tangent space $T_{p^i}\HH$. Then our expression for the action of $\omega$ simplifies to:
+\[       \omega_p(X) = \Imag(\bar p^1 x^1 + \bar p^2 x^2)  \]
+From here we can prove that $\omega$ has the properties of a connection on $S^7$. Before we do this, though, we prove the claim made earlier that the horizontal subspaces given by $\omega$ are orthogonal complements to $V_p S^7$. For this we need compute the orthogonal complement, and show that it is equal to the kernel of $\omega$, i.e. the vectors $X \in T_p S^7$ such that $\Imag(\bar p^1 x^1 + \bar p^2 x^2) = 0$. Recall that the usual inner product on $\HH^2$ is $\langle  (p^1, p^2) , (X^1, X^2) \rangle = \Real(\bar p^1 X^1 + \bar p^2 X^2)$. We now consider $V_p S^7$, which is the same as the subspace of $T_p S^7$ that is also tangent to the fiber of $\mathcal{P}$ containing $p$. Since the fiber is $\{ (p^1 g, p^2 g) : g\in Sp(1) \}$, we can write $V_p S^7$ as $\{ (p^1 a, p^2 a) : a \in \mathfrak{sp}(1) = \Imag \HH \}$. Then the orthogonal complement to $V_p S^7$ is the set of $(v^1, v^2) \in T_p S^7$ such that:
+\begin{align*}
+0 &= \langle (p^1 a, p^2 a), (v^1, v^2) \rangle \\
+&= \Real(\overline{p^1 a} v^1 + \overline{p^2 a} v^2) \\
+&= \Real[\bar a (\bar p^1 v^1 + \bar p^2 v^2)]
+\end{align*}
+But $\bar a$ is purely imaginary, so this means $\Imag(\bar p^1 v^1 + \bar p^2 v^2) = 0$. But this is precisely the kernel of $\omega$.
+
+Having established this, we can finally show that $\omega$ has the properties of a connection 1-form on $S^7$. First we show that it is right equivariant under the standard action $\sigma$ of $Sp(1)$ on $S^7$. (By the standard action we mean $\sigma_g(q^1, q^2) = (q^1 g, q^2 g)$.) In other words, we need to show that for each $g \in Sp(1), p \in S^7, X \in T_{p \cdot g^{-1}}(S^7)$, the following holds:
+\[     \omega_p\big((\sigma_g)_{*p\cdot g^{-1}}(X)\big) = \Ad_{g^{-1}}\big(\omega_{p\cdot g^{-1}} (v)\big)   \]
+Let's first work with the LHS. Let $\gamma_1(t), \gamma_2(t)$ be two curves in $\HH$ such that $\dot \gamma_1|_{t=0} = X^1$ and $\dot \gamma_2|_{t=0} = X^2$. Then:
+\begin{align*}      
+(\sigma_g)_{*p\cdot g^{-1}}(X) &= (\sigma_g)_{*p\cdot g^{-1}}(X^1, X^2) \\
+&= \left. \frac{\p}{\p t} \right|_{t=0} \sigma_g (\gamma_1(t), \gamma_2(t)) \\
+&= \left. \frac{\p}{\p t} \right|_{t=0} (\gamma_1(t) g, \gamma_2(t) g) \\
+&= (X^1 g, X^2 g)
+\end{align*}
+Under the standard identification of $T_p \HH$ with $\HH$, we rewrite this as $(x^1 g, x^2g)$, where $x^1, x^2$ are the components of $X^1, X^2$. Therefore the LHS becomes $\omega_p(x^1 g, x^2g) = \Imag(\bar p^1 x^1 g + \bar p^2 x^2 g)$. On the other hand we have on the RHS:
+\begin{align*}
+\omega_{p\cdot g^{-1}} (X) &= \Imag(\overline{p^1 g^{-1}}x^1 + \overline{p^2 g^{-1}} x^2) \\
+&= \Imag(\overline{g^{-1}} \bar p^1 x^1 + \overline{g^{-1}} \bar p^2 x^2) \\
+&= \Imag(g \bar p^1 x^1 + g \bar p^2 x^2)
+\end{align*}
+Since $g\in Sp(1)$ implies $g = \overline{g^{-1}}$. Then we have:
+\[     RHS = g^{-1} \Imag(g \bar p^1 x^1 + g \bar p^2 x^2) g  = \Imag( \bar p^1 x^1 g +  \bar p^2 x^2 g)     \]
+Therefore $LHS = RHS$, and this shows that $\omega$ is right equivariant.
+
+The other property we need to check is that $\omega$ acts trivially on fundamental vector fields, i.e. $\omega_p (\tilde A (p)) = A$. This is a simple consequence of the definition of $\tilde A$ as the velocity vector at $t=0$ of the curve:
+\[ \gamma_p(t) = p \cdot \exp(tA) =  \big(p^1 \exp(tA) , p^2 \exp(tA)\big) \]
+Explicitly computing the velocity vector gives $\tilde A(p) = (p^1 A, p^2 A)$. Then:
+\[    \omega_p(\tilde A(p)) = \Imag( \bar p^1 p^1 A + \bar p^2 p^2 A ) = \Imag((|p^1|^2 + |p^2|^2 )A) = \Imag(A) = A   \]
+This finishes the proof that $\omega$ is a connection on the bundle $Sp(1) \to S^7 \to S^4$. In later sections we will come back to this principal bundle and the BPST connection $\omega$, and use them to study the isotopic spin of a physical system.
+
+We briefly mention here that an analogous construction exists for the complex Hopf bundle, $U(1) \to S^3 \to S^2$. Here we regard $S^3$ as unit length vectors in $\C^2$, we let $i:S^3 \to \C^2$ be the inclusion map and we define a 1-form on $S^3$ as:
+\[       \omega = i^* (\bar z^1 dz^1 + \bar z^2 dz^2)       \]
+One can then show that this 1-form is a connection, and that it is the natural connection for $S^3$, in the sense that its horizontal subspaces are orthogonal complements in $\C^2$ to $V_p S^3$. We leave these calculations as exercise. We note, however, the beautiful similarity between the connections for the quaternionic and complex Hopf bundles. Modulo some issues of noncommutativity for quaternions, one can go from one to the other by simply exchanging the quaternions $q$ for complex numbers $z$ and viceversa.
+
+We will also work with the complex Hopf bundle and its natural connection in the later sections. Concretely, we will use it to describle the electrodynamics of a magnetic monopole.
 
 
 
@@ -490,44 +721,70 @@ Let us finally return to connections.
 
 
 
-We have seen how the tangent space at a point $p$ of a principal bundle $P$ contains vectors that can be naturally called vertical: those that are in the kernel of the projection pushforward $\pi_*$, or that ``point in the direction of the fiber''. However, principal bundles are not a priori equipped with horizontal vectors. In other words, there is no canonical way of moving from a fiber to the next, and no way to tell where exactly on that fiber one would reach by moving. In order to talk about a horizontal direction, we need to define the concept of a connection. We will see that connections on principal bundles give rise to tools that are crucial in differential geometry and mathematical physics. Among such, we can pullback a connection to the base space in order to obtain a generalization of the electromagnetic vector potential. We will also use connections to define parallel transport and covariant differentiation. Before we define connections, it's useful to define a 1-form on the tangent spaces of the group $G$:
+
+
+
+
+
+
+
+
+\section{Curvature}
+
+Now that we are somewhat familiar with connections on principal bundles, the next object
+of interest will be the curvature associated to a connection. At this point in time we lack
+the background to justify the choice of name `curvature,' but we shall forge ahead regardless. 
+Before we define the curvature, however, it will be useful to state some generalities concerning
+exterior derivatives and wedge products of vector-valued forms.
 
 \begin{defn}
-    The \emph{Maurer-Cartan form} on a Lie group $G$ is the one-form $\omega_{MC} \in \Omega^1(G, \fr g)$ which is invariant under left multiplication by group elements and which acts as the identity map on $T_eG$, the tangent space at the identity.
+Let $\omega$ be a $\fr g$-valued $p$-form on $\omega$ a manifold $P$ and $X_i$ be vector fields on $P$.
+We define the \textbf{exterior derivative of} $\omega$ to be the $(p+1)$-form given in coordinates as
+\[d\omega = (d\omega^i)e_i\]
+where $\{e_i\}$ is a basis for $\fr g$, and $d$ is the usual exterior derivative.
 \end{defn}
-
-In the formulation of this definition we assume that there exists a unique 1-form with the required properties. The proof of this claim is easy. The left-invariance of $\omega_{MC}$ means that:
-\[    \omega_{MC} (X) =  (L_g^* \omega_{MC}) (X) = \omega_{MC} (L_{g*} X)     \]
-This gives an intuitive picture of the way the Maurer-Cartan form acts: it left-translates vectors to $T_eG$. This is the same as constructing a left-invariant vector field from the vector $X$, and then evaluating this field at the identity. Since the tangent space at the identity is isomorphic as a Lie algebra to the space of left-invariant vector fields (you can see a proof of this in John Lee \todo{reference}), the Maurer-Cartan form is unique.
-\\
-\\
-Now we are ready to define connections, following Spivak \todo{reference}.
 
 \begin{defn}
-    A \emph{connection} in a principal bundle $\pi: P \to M$ with group $G$ is a $\C^{\infty}$ $\fr g$-valued 1-form $\omega$ on $P$ such that:
-    \begin{enumerate}[(1)]
-        \item $R_p^*(\omega) = \omega_{MC}$, where $R_p$ is an embedding of $G$ in $P$, given by $R_p(g) = p \cdot g$;
-        \item $\omega(R_{g*} Y) = \text{Ad}(g^{-1})\omega(Y)$ for all $g\in G$ and all tangent vectors on $P$.
-    \end{enumerate}
+We define the \textbf{curvature} $\Omega$ of a connection one-form $\omega$ as follows. For each $p\in P$ (for $P$ a principal $G$-bundle over $M$) and for all $X,Y\in T_pP$, we let $\Omega$ be the $\fr g$-valued two-form given by
+\[\Omega_p(X,Y)=(d\omega)_p(X_h,Y_h),\]
+i.e. the exterior derivative of the connection evaluated on the horizontal components of its arguments.\todo{smoothness?}
 \end{defn}
-Before we move on, we should unravel the meaning behind this cryptic definition, which puzzled the authors for a long time before they finally understood it. Condition $(1)$ simply gives the way in which the connection acts on vertical vectors. Indeed, pulling back by $R_p$ gives a form on the fiber that the vertical vector belongs to, and $R_p^*(\omega) = \omega_{MC}$ is saying that $\omega$ will left-translate the vector to the tangent space at the identity of the fiber. An alternate way to think about this condition is in a local trivialization: here the fiber is explicitly identified, and left-translation should be intuitive. Condition $(2)$ expresses the way in which $\omega$ changes under right actions. Pushing forward by $R_g$ moves the vector along the fiber, and the value of $\omega$ at the new vector is simply the old value acted on by the adjoint action.
-\\
-\\
-We should also explain in what sense $\omega$ gives a canonical way of moving from one fiber to another. If the base manifold $M$ is $m$-dimensional and the group $G$ is $n$-dimensional (as a manifold), then $\omega$ acts on the $m+n$-dimensional tangent space at $p\in P$, and it takes values in the $n$-dimensional Lie algebra $\fr g$. By the rank-nullity theorem of linear algebra, the kernel of $\omega$ is $m$-dimensional, and therefore can be thought of as ``parallel'' to the base manifold, or horizontal. In fact, as the following proposition shows, a connection on a principal bundle is equivalent to a collection of horizontal spaces. For this reason, some authors define connections as a choice of horizontal subspace in every tangent space to $P$. In the next proposition and throughout the section, if $u\in P$, then we denote by $V_u$ and $H_u$ the space of vertical and horizontal vectors at $u$ respectively.
 
-\begin{prop}
-    If $H_u$ is the horizontal subspace at $u\in P$ determined by the connection $\omega$, then:
-    \begin{enumerate} [(a)]
-        \item $T_uP = V_u \oplus H_u$
-        \item $H_{u\cdot g} = (R_g)_* H_u$
-    \end{enumerate}
-    Conversely, a collection of subspaces $H_u$ at every point $u\in P$ determines a unique connection $\omega$ on $P$.
-\end{prop}
+\begin{lem}
+The curvature $\Omega$ of a connection one-form $\omega$ is right-equivariant:
+\[(R_g)^*\Omega(X,Y)=\ad(g^{-1})\circ \Omega(X,Y).\]
+\end{lem}
+\begin{proof}
+As the exterior derivative commutes with pullbacks by smooth maps, we have that
+\begin{align*}
+(R_g)^*\Omega(X,Y)&=R_g^*(d\omega)(X_h,Y_h)\\
+&=d((R_g)^*\omega)(X_h,Y_h)\\
+&=d(\ad(g^{-1})\omega)(X_h,Y_h)\\
+&=\ad(g^{-1})d\omega(X_h,Y_h)\\
+&=\ad(g^{-1})\Omega(X,Y)
+\end{align*}
+\end{proof}
 
-\section{Lifts}
-\section{The space of connections}
+
+\section{Local descriptions}
+\section{References}
+\section{Exercises}
 
 
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Yang-Mills and Instantons}
+\section{References}
+\section{Exercises}
 
 
 \end{document}
