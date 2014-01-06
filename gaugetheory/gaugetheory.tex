@@ -94,12 +94,13 @@
 
 \chapter{Principal Bundles}
 
-\section{Definition and examples}
+\section{Definition and examples}\todo{add more basic content}
 
-Let $G$ be a Lie group with identity $e$. A \textbf{left $G$-space} is a smooth manifold $X$ equipped with a smooth left action $G\times X\to X$. 
-A \textbf{right $G$-space} is defined similarly.  We will typically denote the action of $G$ on a $G$-space by a ``$\cdot$'', even when there may
+Let $G$ be a Lie group with identity $e$. A \textbf{right $G$-space} is a smooth manifold $X$ equipped with a smooth right action $X\times G\to X$. 
+A \textbf{left $G$-space} is defined similarly, though we will primarily deal with right $G$-spaces in these notes\todo{add footnote about conventions, see Naber}.
+We will typically denote the action of $G$ on a $G$-space by a ``$\cdot$'', even when there may
 be multiple $G$-spaces present, as the particular action should be clear from the context.
-If $X$ and $Y$ are two (right) $G$-spaces, a map $\phi:X\to Y$ is said to be \textbf{$G$-equivariant} if the diagram
+If $X$ and $Y$ are two right $G$-spaces, a map $\phi:X\to Y$ is said to be \textbf{$G$-equivariant} (or equivalently, a map of right $G$-spaces) if the diagram
 \[\begin{tikzcd}
         X\arrow[swap]{d}{g}\arrow{r}{\phi}&Y\arrow{d}{g}\\
         X\arrow{r}{\phi}&Y
@@ -152,13 +153,13 @@ Before we move on to some examples of principal bundles, let us prove the follow
     This, of course, implies that $h=e$.
 \end{proof}
 
-To be more explicit, let us now consider some examples.
+To be more explicit, let us now consider some examples, a few of which will become important later on.\todo{be careful about smooth actions}\todo{add more examples}
 
 \begin{exmp}
-    The obvious example of a principal bundle is, of course, a bundle that is globally just a product. In other words, given
+    The obvious example of a principal bundle is a bundle that is globally just a product. In other words, given
     a Lie group $G$ and a smooth manifold $X$, we can construct the \textbf{trivial $G$-bundle over $X$} to be
     $G\to X\times G\overset{\pi}{\to} X$ where $\pi$ is simply the projection onto the first factor and $X\times G$ is treated as
-    a $G$-space under the action $(x,g)\cdot h=(x,gh)$.
+    a $G$-space under the action $(x,g)\cdot h=(x,gh)$. 
 \end{exmp}
 
 \begin{exmp}
@@ -198,17 +199,47 @@ To be more explicit, let us now consider some examples.
 
 \begin{exmp}
     Let $E\to X$ be a real vector bundle of rank $k$ over a smooth manifold $X$.
-    Define a \textbf{frame} at a point $x\in X$, denoted by $F_x$, to be an ordered basis for the fiber above $x$. In the interests of producing a fiber bundle,
-    we note that choosing a frame for $\pi^{-1}(x)$ is equivalent to choosing a linear isomorphism from $\R^k$ to $\pi^{-1}(x)$, i.e. choosing an
-    element of $\GL(k)$ that takes the usual orthonormal basis of $\R^k$ to the chosen frame. Of course, $F_x$ is equipped with a natural right action by
-    $\GL(k)$ (given by right-multiplication), which is free and transitive. In this sense, the set of frames $F_x$ is, when viewed as a Lie group, diffeomorphic to $\GL(k)$.
-    \todo{finish frame bundles, see DuPont}
+    Define a \textbf{frame} at a point $x\in X$, to be an ordered basis $f=(f_1,\ldots, f_k)$ for the fiber $E_x$ above $x$. Denote the set of such frames by $F_x$.
+    Consider now the set $F(E)=\coprod_{x\in X} F_x$, known as the \textbf{frame bundle associated to $E$}. We claim that $F(E)$ is a principal
+    $\GL_k$-bundle over $X$, with the projection map given by $\pi(f)=x$ for $f\in F_x$.
+
+    Leaving aside issues concerning the smooth structure of $F(E)$ for a moment, let us instead begin by defining the action of $\GL_k$ on $F(E)$:
+    intuitively, the set of bases of $E_x$ comes equipped with a natural action of $\GL_k$.
+    Hence, for $f\in F(E), g\in\GL_k$, we define via the usual matrix multiplication,
+    \[(f\cdot g)_i=\sum_{j=1}^kg_{ij}f_j.\]
+    Note that this action takes
+    frames at $x$ to frames at $x$ since $\pi(f\cdot g)=\pi(f)$, thus rendering the action trivial on $X$ (and making $\pi$ equivariant). Next, in order to construct
+    local trivializations for $F(E)$, (again modulo smoothness) we must construct bijections $\phi_\alpha:\pi^{-1}(U_\alpha)\to U_\alpha\times\GL_k$,
+    where $\{U_\alpha\}$ is an open cover of $X$. Fixing a frame $e_x\in E_x$ at each $x\in U_\alpha$, we define, for $f_x\in F_x=\pi^{-1}(x)$
+    \[\phi_\alpha(f_x)=(x, g_x),\]
+    where $g_x\in\GL_k$ satisfies $f=e_x\cdot g_x$. In other words, we've fixed a `reference' or `identity' frame in each fiber, and are parameterizing
+    frames $f$ by the element in $\GL_k$ that takes the reference frame to $f$ (and $x$, of course). Thus defined, $\phi_\alpha$ commutes with the
+    necessary projection maps and is a bijection (this follows by linear algebra: given one frame at $x$, one can reach any other frame at $x$ uniquely. Indeed,
+    the action of $\GL_k$ on $F_x$ is free and transitive, though the lack of a preferred frame renders the bijection non-canonical).
+    Furthermore, $\phi_\alpha$ is equivariant with respect to the natural right $\GL_k$-action defined on $U_\alpha\times\GL_k$.
+
+    It now remains to equip $F(E)$ with a smooth structure such that $\pi$ is smooth, the action of $\GL_k$ is smooth, and $\phi_\alpha$ are
+    diffeomorphisms. \todo{finish smoothness results}
+    
+    %To see why $F_x$ should have the structure of $\GL_k$, note first that a frame $f=(e_1,\ldots,e_k)\in F_x$
+    %can be viewed as a linear isomorphism $f_x:\R^k\to E_x$ given by $f(a^1,\ldots, a^k)=a^1e_1+\cdots a^ke_k$. Then $F_x$ is naturally
+    %equipped with a right-action of $\GL_k$ given by composition: $f\cdot g=f\circ g:\R^k\to E_x$. As is well-known from linear algebra,
+    %there is a unique linear transformation sending one basis to any other, and hence this right-action is both free and transitive.
+    %
+    %To see this, note first that $\GL_k\R$ acts transitively 
+    %and freely on the set of frames at $x$ (the us) on each $F_x$, giving $F_x$ the structure of $\GL_k$.
+
+    %%choosing a frame for $E_x$ is equivalent to choosing a linear isomorphism from $\R^k$ to $\pi^{-1}(x)$, i.e. choosing an
+    %element of $\GL(k)$ that takes the usual orthonormal basis of $\R^k$ to the chosen frame.
+    %Of course, $F_x$ is equipped with a natural right action by
+    %$\GL(k)$ (given by right-multiplication), which is free and transitive. In this sense, the set of frames $F_x$ is, when viewed as a Lie group, diffeomorphic to $\GL(k)$.
+    %\todo{finish frame bundles, see DuPont}
 \end{exmp}
 
-Now that we have worked through a few concrete examples of principal bundles, it should be quite obvious that trivial bundles are as pleasant as can be,
-while non-trivial bundles are quite the opposite. With this in mind, let us approach the theory of principal bundles by asking exactly how a
-given bundle fails to be trivial. This can be done via \textbf{transition functions}, in analogy to those used in the defining smooth manifolds.
-In particular, we investigate how the local coordinates of a point in the principal bundle depend on the choice of local trivialization (assuming, of
+Now that we have worked through a few concrete examples of principal bundles, it should be clear that non-trivial bundles are precisely that: non-trivial.
+With this in mind, one might ask exactly how a
+given bundle fails to be trivial. This can be done via \textbf{transition functions}, in analogy to those used in defining smooth manifolds.
+In particular, we investigate how the local coordinates of a point in a principal bundle depend on the choice of local trivialization (assuming, of
 course, that the point is in a region of overlap $U_\alpha\cap U_\beta$).
 
 \begin{defn}
@@ -216,7 +247,7 @@ course, that the point is in a region of overlap $U_\alpha\cap U_\beta$).
     Fix $\alpha,\beta$ such that $U_\alpha\cap U_\beta$ is non-empty. 
     On the overlap, consider
     \[\Psi_\beta\circ\Psi_\alpha^{-1}:(U_\alpha\cap U_\beta)\times G\to (U_\alpha\cap U_\beta)\times G,\]
-    which takes
+    which takes, say,
     \[(\Psi_\beta\circ\Psi_\alpha^{-1})(x,g)=(x,h)\]
     for some $x\in X$ and $g,h\in G$. As $\Psi_\beta\circ\Psi_\alpha$ is a diffeomorphism, $h$ must depend smoothly on $g$,
     and hence we may write
@@ -224,15 +255,16 @@ course, that the point is in a region of overlap $U_\alpha\cap U_\beta$).
     where $g_{\beta\alpha}$ is a smooth map $U_\alpha\cap U_\beta\to G$ called the \textbf{transition function} $g_{\beta\alpha}$. 
     It should be clear that these transition functions satisfy the so-called \textbf{cocycle condition}:
     \[g_{\alpha\beta}(x)\cdot g_{\beta\gamma}(x)=g_{\alpha\gamma}(x),\]
-    for all $\alpha,\beta,\gamma$.
+    for all $\alpha,\beta,\gamma$, with $x\in U_\alpha\cap U_\beta\cap U_\gamma$.
 \end{defn}
 
 Though perhaps not evident at first, these transition functions (defined over some open cover of the base manifold) hold enough
 information to recreate the principal bundle in its entirety. Intuitively, this is because the bundle can be thought of
 as a set of local products $U_\alpha\times G$ that is glued together in a non-trivial way via the transition functions in order to
 form the global structure of the bundle. We leave this as an exercise that the reader is urged to carry out (see \hyperref[exc:bundleconst]{Exercise \ref*{exc:bundleconst}}).
+\todo{maybe do this out}
 
-\section{Morphisms and sections}
+\section{Morphisms and sections}\todo{expand on this section}
 
 We may define morphisms between princpal $G$-bundles, thus defining the category of principal $G$-bundles.
 \begin{defn}
@@ -782,7 +814,7 @@ As the exterior derivative commutes with pullbacks by smooth maps, we have that
 
 
 
-\chapter{Yang-Mills and Instantons}
+\chapter{Yang-Mills Theory and Instantons}
 \section{References}
 \section{Exercises}
 
