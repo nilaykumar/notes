@@ -198,7 +198,7 @@ To be more explicit, let us now consider some examples, a few of which will beco
 \end{exmp}
 
 \begin{exmp}
-    Let $E\to X$ be a real vector bundle of rank $k$ over a smooth manifold $X$.
+    Let $E\to X$ be a real vector bundle of rank $k$ over a smooth $n$-dimensional manifold $X$.
     Define a \textbf{frame} at a point $x\in X$, to be an ordered basis $f=(f_1,\ldots, f_k)$ for the fiber $E_x$ above $x$. Denote the set of such frames by $F_x$.
     Consider now the set $F(E)=\coprod_{x\in X} F_x$, known as the \textbf{frame bundle associated to $E$}. We claim that $F(E)$ is a principal
     $\GL_k$-bundle over $X$, with the projection map given by $\pi(f)=x$ for $f\in F_x$.
@@ -219,7 +219,12 @@ To be more explicit, let us now consider some examples, a few of which will beco
     Furthermore, $\phi_\alpha$ is equivariant with respect to the natural right $\GL_k$-action defined on $U_\alpha\times\GL_k$.
 
     It now remains to equip $F(E)$ with a smooth structure such that $\pi$ is smooth, the action of $\GL_k$ is smooth, and $\phi_\alpha$ are
-    diffeomorphisms. \todo{finish smoothness results}
+    diffeomorphisms. To do this, we use as charts $U_\alpha\times V_i$ where $U_\alpha$ are the charts of $X$ and $V_i$ are the usual $k^2$
+    charts associated to $\GL_k$. We then have coordinates $\psi:F(E)\to\R^{n+k^2}$ given by $\psi(p)=(x_i,g_{ij})$, where $x=\pi(p)$ and $g$
+    is defined as in the trivialization above. Then $\pi$ is a smooth projection and the right action of $\GL_k$ is smooth. Finally, it is easily
+    verified that both $\phi_\alpha$ and $\phi_\alpha^{-1}$ are smooth; this concludes the proof that $F(E)$ is a principal $\GL_k$-bundle. In the
+    case of $E$ a Riemannian vector bundle (e.g. the tangent bundle of a Riemannian manifold) we may also consider the frame bundles
+    $OF(E)$ and $SOF(E)$ as the orthogonal and oriented orthogonal frame bundles, respectively.
     
     %To see why $F_x$ should have the structure of $\GL_k$, note first that a frame $f=(e_1,\ldots,e_k)\in F_x$
     %can be viewed as a linear isomorphism $f_x:\R^k\to E_x$ given by $f(a^1,\ldots, a^k)=a^1e_1+\cdots a^ke_k$. Then $F_x$ is naturally
