@@ -494,6 +494,7 @@ We shall omit the proofs of some of the statements below. For a more thorough tr
 \todo{Adjoint and adjoint actions}
 
 \begin{defn}
+    \label{defn:conn}
     Let $P$ be a principal $G$-bundle over $M$. Let $p\in P$ be a point in the fiber above $x\in M$. Let $T_pP$ denote the tangent space to $P$ to $p$
     and denote by $V_p$ the tangent space to the fiber $\pi^{-1}(x)$ treated as a subspace of $T_pP$. We call $V_p$ the \textbf{vertical subspace} of
     $T_pP$. A \textbf{connection} $\Gamma$ on $P$ is an assignment of a \textbf{horizontal subspace} $H_p$ to each $p\in P$ such that
@@ -616,10 +617,10 @@ The following lemma relates a given basis of the Lie algebra to the Maurer-Carta
 
 \begin{defn}
     Let $G$ be a Lie group and $\fr g$ be its Lie algebra. We say that a $\fr g$-valued one-form $\mu$ is right-equivariant if
-    \[(R_g)^*\mu=\ad(g^{-1})\circ \mu\]
+    \[(R_g)^*\mu=\Ad(g^{-1})\circ \mu\]
     for all $g\in G$. More generally, let $P$ be a manifold equipped with smooth right action $\sigma(p,g)=p\cdot g$ of $G$ and let $\mu$ be a $\fr g$-valued one-form
     on $P$. Then we say that $\mu$ is \textbf{right-equivariant under $\sigma$} if
-    \[(\sigma_g)^*\mu=\ad(g^{-1})\circ \mu\]
+    \[(\sigma_g)^*\mu=\Ad(g^{-1})\circ \mu\]
     for all $g\in G$.\todo{change notation to $R_g$}
 \end{defn}
 
@@ -633,8 +634,8 @@ The following lemma relates a given basis of the Lie algebra to the Maurer-Carta
         &=(L_{g^{-1}}\circ L_{gh^{-1}})_*\left( (R_g)_*v \right)\\
         &=(L_{g^{-1}})_*\left( (L_{gh^{-1}}\circ R_g)_*v \right)\\
         &=(L_{g^{-1}})_*\left( (R_g\circ L_{gh^{-1}})_*v\right)\\
-        &=\ad(g^{-1})\circ (L_{gh^{-1}})_*v\\
-        &=\ad(g^{-1})\circ \mu(hg^{-1})(v),
+        &=\Ad(g^{-1})\circ (L_{gh^{-1}})_*v\\
+        &=\Ad(g^{-1})\circ \mu(hg^{-1})(v),
     \end{align*}
     as desired. Note that we have used the covariance of the pushforward together with the fact that the left and right actions
     commute.
@@ -649,13 +650,13 @@ Let us finally return to connections.
     $\omega(p)(Y)$ to be the (unique)\todo{why?} Lie algebra element $X$ such that $\tilde X(p)=Y_v$.\todo{smoothness?}
 \end{defn}
 
-The next theorem shows us that a connection one-form is in fact enough information to recover the connection. Of course, this had better be the case, otherwise studying vector-valued one-forms would have been a waste of time! 
+The next theorem shows us that a connection one-form is in fact enough information to recover the connection, as desired.
 
 \begin{thm}
 Let $P$ be a principal $G$-bundle over $M$ with a connection $\Gamma$ and associated connection form $\omega$. Then the connection form satisfies:
 \begin{enumerate}[(i)]
 \item $\omega(\tilde X)=X$ for all $X\in\fr g$;
-\item $(R_g)^*\omega=\ad(g^{-1})\circ \omega$, i.e. $\omega$ is right-equivariant.
+\item $(R_g)^*\omega=\Ad(g^{-1})\circ \omega$, i.e. $\omega$ is right-equivariant.
 \end{enumerate}
 
 Conversely, given a $\fr g$-valued one-form $\omega$ on $P$ satisfying $(i)$ and $(ii)$,
@@ -667,9 +668,9 @@ We show the second property in cases; in particular, we show that the left and r
 In the case where $X=X_h$ is horizontal, we note that the right-hand side is zero simply by definition of the connection form.
 On the left-hand side we also obtain zero, as $((R_g)^*\omega)(X)$ must be horizontal as well, by condition (iii) in the definition of $\Gamma$.
 Now suppose $X=X_v$ is vertical with respect to $\Gamma$. Then $X=\tilde Y$ for some $Y\in\fr g$, i.e. $X$ is the fundamental vector field associated to $Y$.
-Then $(R_g)_*X$ is the fundamental vector field corresponding to $\ad(g^{-1})Y$.
+Then $(R_g)_*X$ is the fundamental vector field corresponding to $\Ad(g^{-1})Y$.
  Hence we see that
-\[(R_g^*\omega)_p(X)=\omega_{pg}((R_g)_*X)=\ad(g^{-1})Y=\ad(g^{-1})(\omega_p(X)),\]
+\[(R_g^*\omega)_p(X)=\omega_{pg}((R_g)_*X)=\Ad(g^{-1})Y=\Ad(g^{-1})(\omega_p(X)),\]
 as desired.
 
 Conversely, given a form $\omega$ satisfying these two properties, we define
@@ -772,38 +773,115 @@ Now that we are somewhat familiar with connections on principal bundles, the nex
 of interest will be the curvature associated to a connection. At this point in time we lack
 the background to justify the choice of name `curvature,' but we shall forge ahead regardless. 
 Before we define the curvature, however, it will be useful to state some generalities concerning
-exterior derivatives and wedge products of vector-valued forms.
+exterior derivatives and wedge products of vector-valued forms. Note that when not stated otherwise,
+the contents of this section will be in the context of a principal $G$-bundle $P$ over $M$.
 
 \begin{defn}
-Let $\omega$ be a $\fr g$-valued $p$-form on $\omega$ a manifold $P$ and $X_i$ be vector fields on $P$.
-We define the \textbf{exterior derivative of} $\omega$ to be the $(p+1)$-form given in coordinates as
-\[d\omega = (d\omega^i)e_i\]
-where $\{e_i\}$ is a basis for $\fr g$, and $d$ is the usual exterior derivative.
+    Let $\omega$ be a $\fr g$-valued $p$-form on $\omega$ a manifold $M$ and $X_i$ be vector fields on $M$.
+    We define the \textbf{exterior derivative of} $\omega$ to be the $(p+1)$-form given in coordinates as
+    \[d\omega = (d\omega^i)e_i\]
+    where $\{e_i\}$ is a basis for $\fr g$, and $d$ is the usual exterior derivative.
 \end{defn}
+
+\begin{defn}
+    \label{defn:wedge}
+    Let $\omega$ and $\eta$ be $V$-valued $p$- and $q$-forms, respectively. We can define a $V$-valued $(p+q)$-form
+    called the \textbf{wedge product} $[\omega\wedge\eta]$ as
+    \[ [\omega\wedge\eta](v,w)=\frac{1}{p!q!}\sum_{\sigma\in S_{p+q}}\sgn(\sigma)\big[\omega(\sigma\cdot v),\eta(\sigma\cdot w)\big],\]
+    where $[-,-]$ is a bilinear map $V\times V\to V$, $S_{p+q}$ is the symmetric group on $p+q$ letters,
+    and $v,w$ are vectors with $p$ and $q$ components each (with the action of $S_{p+q}$ being the usual permutation on components).
+    Note the similarity to the usual definition of wedge product except for the bilinear map $[-,-]$, which
+    is required as there is no product operation on vectors in general. We have kept the notation similar to
+    that of the commutator as we will primarily be working with Lie algebra valued forms.
+\end{defn}
+
+\begin{rmk}
+    Unlike for the usual wedge product, where $\omega\wedge\omega=0$ for a one-form $\omega$, the wedge product of a
+    $V$-valued one-form $\eta$ with itself is not necessarily zero:
+    \[ [\eta\wedge\eta](v,w)=[\eta(v),\eta(w)]-[\eta(w),\eta(v)=2[\eta(v),\eta(w)].\]
+\end{rmk}
 
 \begin{defn}
 We define the \textbf{curvature} $\Omega$ of a connection one-form $\omega$ as follows. For each $p\in P$ (for $P$ a principal $G$-bundle over $M$) and for all $X,Y\in T_pP$, we let $\Omega$ be the $\fr g$-valued two-form given by
 \[\Omega_p(X,Y)=(d\omega)_p(X_h,Y_h),\]
-i.e. the exterior derivative of the connection evaluated on the horizontal components of its arguments.\todo{smoothness?}
+i.e. the exterior derivative of the connection evaluated on the horizontal components of its arguments. The curvature form $\Omega$
+is indeed smooth: $d\omega$ is smooth since the connection is smooth, and $X_h,Y_h$ are smooth if $X,Y$ (as vector fields) are smooth
+by \hyperref[defn:conn]{Definition \ref*{defn:conn}}. Given two vector fields $X,Y$ on $P$, we can compute
+\begin{align*}
+    \Omega(X,Y)&=d\omega(X_h,Y_h)\\
+    &=X_h\omega(Y_h)-Y_h\omega(X_h)-\omega([X_h,Y_h])\\
+    &=-\omega([X_h,Y_h]),
+\end{align*}
+where we have used the usual formula for the exterior derivative of a one-form (convince yourself that this holds in the $\fr g$-valued
+case as well, with the vector fields acting componentwise\todo{make this an exercise?}) as well as the properties of the connection. This gives us a geometric flavor
+of what the curvature does; in particular, it returns zero if and only if $[X_h,Y_h]$ is horizontal.
 \end{defn}
 
+The following results expose some of the useful properties of $\Omega$.
+
 \begin{lem}
-The curvature $\Omega$ of a connection one-form $\omega$ is right-equivariant:
-\[(R_g)^*\Omega(X,Y)=\ad(g^{-1})\circ \Omega(X,Y).\]
+Let $P$ be a principal $G$-bundle over $M$ with $\omega$ a connection one-form. Then the curvature $\Omega$ of $\omega$ is right-equivariant:
+\[(R_g)^*\Omega(X,Y)=\Ad(g^{-1})\circ \Omega(X,Y).\]
 \end{lem}
 \begin{proof}
 As the exterior derivative commutes with pullbacks by smooth maps, we have that
 \begin{align*}
 (R_g)^*\Omega(X,Y)&=R_g^*(d\omega)(X_h,Y_h)\\
 &=d((R_g)^*\omega)(X_h,Y_h)\\
-&=d(\ad(g^{-1})\omega)(X_h,Y_h)\\
-&=\ad(g^{-1})d\omega(X_h,Y_h)\\
-&=\ad(g^{-1})\Omega(X,Y)
+&=d(\Ad(g^{-1})\omega)(X_h,Y_h)\\
+&=\Ad(g^{-1})d\omega(X_h,Y_h)\\
+&=\Ad(g^{-1})\Omega(X,Y)
 \end{align*}
 \end{proof}
 
+\begin{lem}[Structure equation]
+    \label{lem:curvature_structure}
+    The curvature $\Omega$ of a connection one-form $\omega$ satisfies 
+    \begin{equation}
+        \Omega=d\omega + \frac{1}{2}[\omega\wedge\omega].
+        \label{eq:curvature_structure}
+    \end{equation}
+\end{lem}
+\begin{proof}
+    Using the \hyperref[defn:wedge]{definition} of the wedge product, it suffices to show that
+    \[d\omega(X_h,Y_h)=d\omega(X,Y)+[\omega(X),\omega(Y)],\]
+    for all smooth vector fields $X,Y$ on $P$. Writing $X=X_h+X_v$ and $Y=Y_h+Y_v$ and expanding
+    via bilinearity, one finds that it suffices to prove the structure equation for the three cases:
+    $X,Y$ both horizontal, $X,Y$ both vertical, and $X,Y$ vertical and horiztonal respectively.
+    The first case is easy: $\omega(X)=\omega(X_h)=0$ and $\omega(Y)=\omega(Y_h)=0$. The commutator vanishes
+    and we are left with $d\omega(X_h,Y_h)=d\omega(X,Y)$, which is true in this case. For $X,Y$ both
+    vertical, we note that $X$ and $Y$ can be written in terms of fundamental vector fields, $X=\tilde A,Y=\tilde B$
+    for some $A,B\in\fr g$. In this case, using the fact that $\omega(\tilde A)=A$ and similarly for $B$, we must have that
+    \begin{align*}
+        0&=d\omega(\tilde A,\tilde B)+[\omega(\tilde A),\omega(\tilde B)]\\
+        &=\tilde AB-\tilde BA-\omega\left([\tilde A,\tilde B]\right)+[A,B]\\
+        &=-\omega\left(\widetilde{[A,B]}\right)+[A,B]\\
+        &=-[A,B]+[A,B]=0,
+    \end{align*}
+    where we have used the fact that $A$ and $B$ are constant $\fr g$-valued one-forms, thus vanishing under
+    derivation by vector fields. Finally, in the case of $X=\tilde A$ vertical and $Y$ horizontal, we find that
+    \begin{align*}
+        0&=d\omega(\tilde A,Y_h)\\
+        &=\tilde A\omega(Y_h)-Y_hA-\omega([\tilde A,Y_h])\\
+        &=-\omega([\tilde A,Y_h]).
+    \end{align*}
+    It remains to show that the Lie bracket of a vertical vector field with a horizontal vector field is again
+    horizontal. To do this, let $\alpha$ be the flow of $\tilde A$; then the Lie
+    bracket is the Lie derivative\todo{Refer to Lee for Lie derivatives}
+    \begin{align*}
+        [\tilde A, Y_h]_p=\lim_{t\to 0}\frac{d(\alpha_{-t})_{\alpha_t(p)}(Y_h)_{\alpha_t(p)}-(Y_h)_p}{t}.
+    \end{align*}
+    We can write the integral curve determined by $A$ as $\alpha_t(p)=p\cdot e^{tA}$ and thus
+    \[d(\alpha_{-t})_{\alpha_t(p)}=d(R_{e^{-tA}})_{p\cdot e^{tA}}.\]
+    By the \hyperref[defn:conn]{right-equivariance} of horizontal subspaces, since $(Y_h)_{p\cdot e^{tA}}$ is horizontal,
+    so is $d(R_{e^{-tA}})_{p\cdot e^{tA}}(Y_h)_{p\cdot e^{tA}}$ as a vector in $T_pP$; consequently, the Lie derivative $[\tilde A,Y_h]$ is a
+    horizontal vector field. This concludes the verification of the structure equation.
+\end{proof}
 
-\section{Local descriptions}
+
+
+
+\section{Local descriptions: gauge fields}
 \section{References}
 \section{Exercises}
 
