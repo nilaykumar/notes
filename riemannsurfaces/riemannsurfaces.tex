@@ -192,7 +192,96 @@ But in fact, we can go even farther with this theta-function. Indeed, one attrac
     and $c(\tau)=\lim_{k\to\infty}c(4^k\tau)=1$, which shows the proof. Hence let us prove that $c(\tau)=c(4\tau)$ using $\theta(z|\tau)=C(\tau)T(z|\tau)$.
 
     Take $z=1/2$. Then $e^{2\pi iz=e^{\pi i}}\geq 1-$ and $\theta(1/2|\tau)=\sum_{n\in\Z}e^{\pi i n^2\tau}(-1)^n$ but $T(1/2|\tau)=\prod^{\infty}_{n=1}(1-q^{2n)(1-q^{2n-1}}(1-q^{2n-1})$.
-    and hence $c(\tau)=\sun e^{\pi in\tau}(-1)^n/\prod(1-q^n)(1-q^{2n-1})$. Next take $z=1/4$
+    and hence $c(\tau)=\sum e^{\pi in\tau}(-1)^n/\prod(1-q^n)(1-q^{2n-1})$. Next take $z=1/4$
 \end{proof}
+
+\section{Semester 2}
+
+This semester we will start by describing the $L^2$ estimates of Hormander. Later we will delve into its applications,
+including the Kodaira embedding theorem, the lower bounds for the Bergman kernel, and the ideas of canonical metrics
+and stability.
+
+\subsection{Review}
+
+Let us recall some techniques from last semester. Let $X=\cup_{\mu}X_\mu$ be a complex $n$-manifold with $X_\mu$ coordinate charts.
+Hence each $X_\mu$ is homeomorphic (and thus biholomorphic) to $\C^n$ and $\Phi_\mu\circ\Phi_\nu^{-1}$ is holomorphic with invertible differentials\todo{what?}.
+Let $E\to X$ be a holomorphic vector bundle. Recall that a rank-$r$ vector bundle is completely characterized by its transition functions $t_{\mu\nu\beta}^\alpha(z)$ (matrix valued
+in general) defined on $X_\mu\cap X_\nu$ with $1\leq\alpha,\beta\leq r$. Note that the transition functions satisfy the cocycle condition.
+We denote by $\Gamma(X,E)$ the space of sections of $E$ (recall that this means that $\phi_\mu^\alpha(z_\mu)=t_{\mu\nu\beta}^\alpha(z)\phi_\nu^\beta(z_\nu)$.
+For $E$ to be holomorphic, it must have holomorphic transition functions.
+
+Given a section $\phi\in\Gamma(X,E)$, we obtain a section $\bar\partial\phi\in\Gamma(X,E\otimes\Lambda^{0,1})$ via \textbf{covariant differentiation}.
+More explicitly, on $X_\mu$, we write naively
+\[\bar\partial\phi^\alpha\equiv\left(\frac{\partial}{\partial \bar z^j_\mu}\phi_{\mu}^\alpha\right)(z_\mu).\]
+Fortunately, this is indeed a section. To see this, we note that $\phi^\alpha_\mu(z_\mu)=t_{\mu\nu\beta}^\alpha(z)\phi_\nu^\beta(z_\nu)$ and hence
+\begin{align*}
+    \frac{\partial}{\partial \bar z^j_\mu}\phi^\alpha_\mu(z_\mu)&=t_{\mu\nu\beta}^\alpha(z)\frac{\partial}{\partial \bar z^j_\mu}\left( \phi_\nu^\beta(z_\nu) \right)\\
+    &=t_{\mu\nu\beta}^\alpha(z)\overline{\frac{\partial z_\nu^k}{\partial z_\mu^j}}\frac{\partial \phi^\beta_\nu}{\partial\bar z_\nu^k}(z).
+\end{align*}
+Thus we define $\Lambda^{0,1}$ to be the (antiholomorphic) vector bundle with transition functions $\overline{\partial z_\nu^k/\partial z^j_\mu}$.
+
+Next, recall the definition of a \textbf{Hermitian metric} $H=H_{\bar \alpha\beta}(z)$ on a vector bundle $E$: we have $(H_\mu)_{\bar\alpha\beta}(z_\mu)$ on $X_\mu$
+such that it is a positive-definite matrix for each $z_\mu$ satisfying
+\[|\phi|^2_H\equiv(H_\mu)_{\bar\alpha\beta}\overline{\phi_\mu^\alpha}\phi_\mu^\beta=(H_\nu)_{\bar\gamma\delta}\overline{\phi_\nu^\gamma}\phi_\nu^\delta\]
+on $X_\mu\cap X_\nu$.
+This quantity can be thought of as the length of the vector $\phi$ with respect to the metric $H$, which is by construction invariant of coordinate chart.
+Using metrics, we can introduce covariant derivatives of sections on a holomorphic vector bundle $E$ with respect to a metric $H_{\bar\alpha\beta}$.
+Take $\phi\in\Gamma(X,E)$ and define on $X_\mu$
+\[(\nabla_j\phi)^\alpha\equiv H^{\alpha\bar\gamma}\partial_j(H_{\bar\gamma\beta}\phi_\mu^\beta),\]
+where $H^{\alpha\bar\gamma}H_{\bar\gamma\beta}=\delta^{\alpha}_\beta$. It is easy to see that $\nabla\phi\in\Gamma(X,E\otimes\Lambda^{1,0})$,
+whose transition functions are $\partial z_\nu^k/\partial z^j_\mu$.
+
+In summary, we write
+\begin{align*}
+    \nabla_{\bar j}\phi^{\alpha}&=\partial_{\bar j}\phi^\alpha\\
+    \nabla_j\phi^\alpha&=H^{\alpha\bar\gamma}\partial_j(H_{\bar\gamma\beta}\phi_\mu^\beta)\\
+    &=\partial_j\phi^\alpha+(H^{\alpha\bar\gamma}\partial_jH_{\bar\gamma\beta})\phi^{\beta}\\
+    &=\partial_j\phi^\alpha+A_{j\beta}^\alpha\phi^\beta,
+\end{align*}
+where, in matrix notation, we have the \textbf{connection} $A_j=H^{-1}\partial_j H$. It is a priori not obvious that these two derivatives
+must commute. Indeed, we define the \textbf{curvature} $F$ of the metric $H_{\bar\alpha\beta}$ on $E\to X$ to be
+\[ [\nabla_{\bar j},\nabla_k]\phi^\alpha=-F_{\bar jk\beta}^\alpha \phi^\beta.\]
+We leave it as an exercise that $[\nabla_{\bar j},\nabla_{\bar k}]=0$ and $[\nabla_j,\nabla_k]=0$. More explicitly,
+we can write
+\begin{align*}
+    [\nabla_{\bar j},\nabla_k]\phi^\alpha&=\nabla_{\bar j}\left( \nabla_k\phi^\alpha \right)-\nabla_k\left( \nabla_{\bar j}\phi^{\alpha} \right)\\
+    &=(\partial_{\bar j}A_{k\beta}^\alpha)\phi^{\beta},
+\end{align*}
+and hence $F_{\bar jk\beta}^\alpha=-\partial_{\bar j}A_{k\beta}^\alpha$. In matrix notation, we can simply write 
+\[F_{\bar jk}=-\partial_{\bar j}A_k=-\partial_{\bar j}\left( H^{-1}\partial_k H \right).\]
+We define the corresponding \textbf{curvature form} to be
+\[F=\frac{i}{2\pi}F_{\bar jk\beta}^\alpha(z)dz^k\wedge d\bar z^j\in\Gamma(X,E\otimes E^*\otimes\Lambda^{1,1})=\Gamma(X,\End(E)\otimes\Lambda^{1,1}),\]
+i.e. a $\End(E)$-valued $(1,1)$-form.
+
+\subsection{Bochner-Kodaira Formulas}
+
+Let $X$ be a complex manifold, compact without boundary. Take $E\to X$ to be a holomorphic vector bundle on $X$.
+We consider the \textbf{$\bar\partial$ complex}:
+\[\cdots\xrightarrow{\bar\partial}\Gamma(X,E\otimes\Lambda^{p,q})\xrightarrow{\bar\partial}\Gamma(X,E\otimes\Lambda^{p,q+1})\xrightarrow{\bar\partial}\cdots.\]
+
+Let us be more precise. Consider some $\phi\in\Gamma(X,E\otimes\Lambda^{p,q})$. We can write explicitly:
+\[\phi=\frac{1}{p!q!}\sum\phi_{\bar j_1,\ldots\bar j_q,i_1,\ldots,i_p}(z)dz^{i_p}\wedge\cdots\wedge dz^{i_1}\wedge d\bar z^{j_q}\wedge\cdots\wedge d\bar z^{j_i}.\]
+Now what exactly do we mean by $\bar\partial$? We define
+\begin{align*}
+    \bar\partial\phi&\equiv\frac{1}{p!q!}\sum\left(\bar\partial\phi_{\bar j_1,\ldots\bar j_q,i_1,\ldots,i_p}\right)\wedge dz^{i_p}\wedge\cdots\wedge dz^{i_1}\wedge d\bar z^{j_q}\wedge\cdots\wedge d\bar z^{j_i}\\
+    &=\frac{1}{p!q!}\sum\left(\partial_{\bar k}\phi_{\bar j_1,\ldots\bar j_q,i_1,\ldots,i_p}d\bar z^k\right)\wedge dz^{i_p}\wedge\cdots\wedge dz^{i_1}\wedge d\bar z^{j_q}\wedge\cdots\wedge     d\bar z^{j_i}.
+\end{align*}
+We leave it as an exercise for the reader to check that this is well-defined (follows as per the usual de Rham exterior derivative).
+
+\begin{exmp}
+    What is $\bar\partial$ on $\Gamma(X,E\otimes\Lambda^{0,0})=\Gamma(X,E)$? By definition, $\bar\partial\phi=\partial_{\bar k}\phi^\alpha d\bar z^k$.
+\end{exmp}
+\begin{exmp}
+    What is $\bar\partial$ on $\Gamma(X,E\otimes\Lambda^{0,1})$? Given a section, we can write $\phi=\sum \phi^\alpha_{\bar j}d\bar z^j$.
+    In this case,
+    \begin{align*}
+        \bar\partial\phi^\alpha&=\sum\left( \bar\partial \phi^\alpha_{\bar j} \right)\wedge d\bar z^j\\
+        &=\sum\left( \partial_{\bar k}\phi^{\alpha}_{\bar j}d\bar z^k \right)\wedge d\bar z^j\\
+        &=\frac{1}{2}\sum\left( \partial_{\bar k}\phi_{\bar j}^\alpha-\partial_{\bar j}\phi^{\alpha}_{\bar k} \right)d\bar z^k\wedge d\bar z^j.
+    \end{align*}
+    Hence one finds the coefficient $(\bar \phi)_{\bar j\bar k}=\partial_{\bar k}\partial_{\bar j}-\partial_{\bar j}\partial_{\bar k}$.
+\end{exmp}
+
+
 
 \end{document}
