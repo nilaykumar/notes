@@ -1,0 +1,136 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{amsmath}
+\usepackage{todonotes}
+
+
+\title{Introduction to Algebraic Topology: Class Notes}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+%\setcounter{section}{-1}
+
+\section{Class 1}
+\begin{rem}
+    The goal of algebraic geometry is to develop algebraic tools to study topological spaces. To this end, all maps are assumed
+    to be continuous unless otherwise stated.
+\end{rem}
+
+\subsection{Homotopy}
+
+\begin{defn}
+    A \textbf{deformation retract} of a space $X$ onto a subspace $A$ is a family of maps
+    $f_t:X\to X$ for $t\in I=[0,1]$ such that
+    \begin{enumerate}
+        \item $f_0=\id_X$
+        \item $f_1(X)=A$
+        \item $f_t|_A=\id_A$ for all $t$
+        \item $f_t$ is continuous as a map $X\times I\to X$ sending $(x,t)\mapsto f_t(x)$.
+    \end{enumerate}
+
+\end{defn}
+
+\begin{exmp}
+    Consider the annulus $X=\left\{ x\in\C \mid 1/2\leq|x|\leq 3/2 \right\}$ with the subspace
+    $A=\left\{ x\in\C \mid |x|=1 \right\}$. We can construct a deformation retract of $X$ onto $A$ as
+    \[f_t(x)=\frac{x}{1-t+t|x|}.\]
+\end{exmp}
+
+\begin{defn}
+    Given $f:X\to Y$, we define the \textbf{mapping cylinder} $M_f$ to be the quotient space
+    \[(X\times I)\sqcup Y/\sim\]
+    where $(x,1)\sim f(x)$. Note that $M_f$ deformation retracts to $Y$ by sliding each point $(x,t)$ along $\left\{ x \right\}\times I\subset M_f$
+    to $\left\{ x \right\}\times \left\{ 1 \right\}=f(x)\in Y$.
+\end{defn}
+
+\begin{exmp}
+    If $f:X\to Y$ is an inclusion, say of the circle into the plane, then the mapping circle is
+    simply a cylinder attached to the plane.
+\end{exmp}
+
+\begin{defn}
+    A \textbf{homotopy} is a family of maps $f_t:X\to Y$ for $t\in I$ such that $F:X\times I\to Y$ given by $F(x,y)=f_t(x)$ is continuous.
+    We say that two maps $f_0$ and $f_1$ from $X\to Y$ are \textbf{homotopic} if there exists a homotopy $f_t$ connecting them. We write
+    this as $f_0\simeq f_1$.
+\end{defn}
+
+\begin{defn}
+    A \textbf{retraction} of $X$ onto $A$ is a map $r:X\to X$ such that
+    \begin{enumerate}
+        \item $r(X)=A$
+        \item $r|_A=\id_A$
+    \end{enumerate}
+    In this case, $A$ is called a \textbf{retract} of $X$. Note that $r^2=r$, as $r$ is the identity on its image.
+    \todo{does this characterize $r$?}
+\end{defn}
+
+\begin{exmp}
+    A deformation retract is a homotopy between the identity map to a retraction.
+\end{exmp}
+
+\begin{exmp}
+    Let $X$ be any space with $x_0\in X$. Consider the map $f:X\to X$ given by $x\mapsto x_0$. This is clearly a retract.
+\end{exmp}
+
+One might ask when there exists a deformation retract $X\to \left\{ x_0 \right\}$. For example, given an annulus and some $x_0$
+inside, does there exist a deformation retract? The answer is in fact no, and later we develop some tools to show this. Similarly
+for the disjoint union of two disks, with $x_0$ contained in one of them.
+
+\begin{defn}
+    Let $A\subset X$. A homotopy $f_t:X\to Y$ such that $f_t|_A$ is independent of $t$. Then we say that $f_t$ is a \textbf{homotopy relative to $A$}.
+\end{defn}
+
+\begin{exmp}
+    For example, a deformation retract of $X$ onto $A$ is a homotopy rel $A$.
+\end{exmp}
+\begin{exmp}
+    Consider the unit disk $X=\left\{ z\in\C\mid |z|\leq 1 \right\}$ with $f_t(z)=ze^{2\pi it}$. In this case, $f_t$ is
+    a homotopy rel $O$. Note that this is a homotopy from the identity to itself.
+\end{exmp}
+
+\begin{rem}
+    Let $f_t:X\to X$ be a deformation retract of $X$ onto $A$. Let $r=f_1$ be the resulting retract and let $i:A\to X$ be
+    the inclusion. Then $r\circ i=\id_A$ and $i\circ r\simeq \id_X$ (via the homotopy $f_t$). In this sense $r$ and $i$
+    are inverses up to homotopy.
+\end{rem}
+
+\begin{defn}
+    A map $f:X\to Y$ is a \textbf{homotopy equivalence} if there exists a $g:Y\to X$ such that $f\circ g\simeq\id_Y$ and $g\circ f\simeq\id_X$.
+    Then we say that $X$ and $Y$ are \textbf{homotopy equivalent} and that they have the same \textbf{homotopy type} written $X\simeq Y$.
+\end{defn}
+
+\begin{defn}
+    A space that is homotopy equivalent to a point is called \textbf{contractible}. This is equivalent to asking that the identity
+    map be homotopic to a constant map, i.e. \textbf{nullhomotopic}.
+\end{defn}
+
+\begin{exmp}
+    The spaces $\R^n$ and $D^n$ are contractible, while $S^n$ is not.
+\end{exmp}
+
+\begin{rem}
+    It will be useful to think of the sphere as $S^n=D^n/\partial D^n$.
+\end{rem}
+
+\subsection{Operations on spaces}
+
+We are of course already familiar with products and quotients.
+
+\begin{defn}
+    Given a space $X$, we define the \textbf{cone of $X$} $CX$ to be $X\times I/X\times\left\{ 0 \right\}$.
+    The prototypical example is given by $S^1\times I/S^1\times \left\{ 0 \right\}$.
+\end{defn}
+
+\begin{defn}
+    Given a space $X$, we define the \textbf{suspension of $X$} $SX$ to be $X\times \left\{ 0 \right\}$ collapsed to a point
+    and $X\times \left\{ 1 \right\}$ collapsed to another point. Note that suspension is a functor, and we can suspend maps as
+    well.
+\end{defn}
+
+\end{document}
