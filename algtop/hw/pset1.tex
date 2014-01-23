@@ -1,0 +1,116 @@
+\documentclass{../../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\title{Introduction to Algebraic Topology PSET 1}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{prop}
+    If a space $X$ is contractible then $X$ is path-connected.
+\end{prop}
+\begin{proof}
+    Take any $x,y\in X$. It suffices to show that there exists a continuous path $\gamma:I\to X$ such that
+    $\gamma(0)=x$ and $\gamma(1)=y$. Since $X$ is contractible, the identity map $\id_X$ is homotopic to a
+    constant map. In other words, there exists a point $z\in X$ and a homotopy $f_t:X\times I\to X$ such that
+    $f_0=\id_X$ and $f_1(p)=z$ for all $p\in X$. Now consider the path $f_t(x):I\to X$. Clearly $f_0(x)=x$
+    and $f_1(x)=z$. Similarly, for $f_t(y):I\to X$, we see that $f_0(y)=y$ and $f_1(y)=z$. Both of these paths
+    $f_t(x),f_t(y)$ are continuous as they are simply restrictions of the full homotopy $f_t:X\times I\to X$.
+    But given continuous paths from $x$ to $z$ and $y$ to $z$, we can concatenate to obtain a path from
+    $x$ to $y$. This proves path-connectedness.
+\end{proof}
+
+\begin{prop}
+    Let $X,Y,Z$ be topological spaces. Consider the maps
+    \begin{equation*}
+        \begin{tikzcd}
+            X\arrow[bend left]{r}{f_0}\arrow[bend right]{r}{f_1}&Y\arrow[bend left]{r}{g_0}
+            \arrow[bend right]{r}{g_1}&Z
+        \end{tikzcd}
+    \end{equation*}
+    and suppose that $f_0\simeq f_1$ and $g_0\simeq g_1$. Then $g_0\circ f_0:X\to Z$ and $g_1\circ f_1:X\to Z$
+    are homotopic.
+\end{prop}
+\begin{proof}
+    There must exist a homotopy $F:X\times I\to Y$ such that $F_0=f_0$ and $F_1=f_1$, as well as a homotopy
+    $G:Y\times I\to Z$ such that $G_0=g_0$ and $G_1=g_1$. Now consider the composition $H:X\times I\to Z$
+    defined by $(x,t)\mapsto G_t(F_t(x))$. The composition $H$ is continuous by virtue of the continuity
+    of the homotopies $F$ and $G$.
+    Moreover, $H$ satisfies $H_0=g_0\circ f_0$ and $H_1=g_1\circ f_1$, and hence $H$ is a homotopy from
+    $g_0\circ f_0$ to $g_1\circ f_1$.
+\end{proof}
+
+\begin{prop}
+    Construct an explicit deformation retraction of $\R^n-\left\{ 0 \right\}$ onto $S^{n-1}$.
+\end{prop}
+\begin{proof}
+    Consider the function $f:\left(\R^n-\left\{ 0 \right\}\right)\times I\to \R^n-\left\{ 0 \right\}$ given by
+    \[f_t(x)=x-t\left(x - \frac{x}{|x|}\right).\]
+    It is clear that $f$ is continuous. Moreover, at $t=0$, we have $f_0(x)=x$ and hence $f_0=\id_{\R^n-\left\{ 0 \right\}}$.
+    At $t=1$, on the other hand, we see that $f_1(x)=x/|x|$, which is on $S^{n-1}$ and hence $f_1(\R^n-\left\{ 0 \right\})=S^{n-1}$
+    ($f_1$ obviously surjects onto $S^{n-1}$). Finally, note that $f_t|_{S^{n-1}}=\id_{S^{n-1}}$ for all $t$ because
+    $f_t(x)=x-tx+tx=x$ if $|x|=1$. This shows that $f$ is indeed the desired deformation retract.
+\end{proof}
+
+\begin{prop}\hspace{1mm}
+    \begin{enumerate}[(a)]
+        \item The composition of homotopy equivalences $X\to Y$ and $Y\to Z$ is a homotopy equivalence
+            $X\to Z$. Furthermore, homotopy equivalence is an equivalence relation.
+        \item The relation of homotopy among maps $X\to Y$ is an equivalence relation.
+        \item A map homotopic to a homotopy equivalence is a homotopy equivalence.
+    \end{enumerate}
+\end{prop}
+\begin{proof}\hspace{1mm}
+    \begin{enumerate}[(a)]
+        \item Let $X\simeq Y$ via $f:X\to Y$ and $g:Y\to X$ and $Y\simeq Z$ via $f':Y\to Z$ and $g':Z\to Y$.
+            In other words, $g\circ f\simeq\id_X,f\circ g\simeq\id_Y$ and $g'\circ f'\simeq\id_Y,f'\circ g'\simeq\id_Z$.
+            Note that
+            \begin{align*}
+                f'\circ f\circ g\circ g'&\simeq f'\circ \id_Y\circ g'\\
+                &\simeq f'\circ g'\\
+                &\simeq \id_Z
+            \end{align*}
+            and
+            \begin{align*}
+                g\circ g'\circ f'\circ f&\simeq g\circ\id_Y\circ f\\
+                &\simeq g\circ f\\
+                &\simeq \id_X.
+            \end{align*}
+            But this implies that $X\simeq Z$ via $f'\circ f:X\to Z$ and $g\circ g':Z\to X$, as desired. This shows that
+            homotopy equivalence is a transitive relation. In fact, homotopy equivalence is an equivalence relation because
+            $X\simeq X$ by the identity map, and if $X\simeq Y$ via $f,g$, then $Y\simeq X$ simply by switching $f,g$.
+        \item Note first that any map $\phi:X\to Y$ is homotopic to itself by the constant homotopy $f:X\times I\to Y$ given by
+            $(x,t)\mapsto\phi(x)$. Furthermore, if $f_t$ is a homotopy from $f_0$ to $f_1$, we can define a homotopy from $f_1$
+            to $f_0$ by simply taking $f_{1-t}$. Finally, let $f_t$ be a homotopy from $f_0$ to $f_1$ and $g_t$ be a homotopy
+            from $g_0$ to $g_1$, where $f_1=g_0$. We can define a homotopy $h:X\times I\to Y$ from $f_0$ to $g_1$ by traversing
+            the homotopy $f_{2t}$ followed by $g_{2t}$. Hence the relation of homotopy among maps $X\to Y$ is an
+            equivalence relation.
+        \item Let $X,Y$ be topological spaces, with $X\simeq Y$ via $h:X\to Y$ and $h':Y\to X$. Let $f_0:X\to Y$ be a map
+            homotopic to $h$, i.e. there exists a homotopy $f_t:X\times Y$ between $f_0$ and $f_1=h$. Then
+            $f_0\circ h'\simeq h\circ h'\simeq \id_Y$ and $h'\circ f_0\simeq h'\circ h\simeq\id_X$ and hence $f_0$ provides
+            a homotopy equivalence $X\simeq Y$.
+    \end{enumerate}
+\end{proof}
+
+\begin{prop}
+    A retract of a contractible space is contractible.
+\end{prop}
+\begin{proof}
+    Let $X$ be a topological space and $r:X\to X$ be a retraction of $X$ onto a subspace $A$.
+    It suffices to show that $A$ is contractible, i.e. that the identity map $\id_A$ is homotopic to a
+    constant map (on $A$). Using the contractibility of $X$, we find a homotopy $f:X\times I\to X$ such
+    that $f_0=\id_X$ and $f_1(p)=z$ for some $z\in X$. Consider the composition $r\circ f:X\times I\to X$
+    restricted to $A$.
+    It is clear that $r\circ f_0|_A=\id_A$ and that $r\circ f_1|_A=r(z)$ is a constant map on $A$.
+    As the composition (and restriction) $r\circ f|_A$ is continuous, this gives us a homotopy between
+    $\id_A$ and a constant map on $A$, proving that $A$ is contractible.
+\end{proof}
+
+
+\end{document}
