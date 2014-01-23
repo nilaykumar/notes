@@ -201,6 +201,15 @@ This semester we will start by describing the $L^2$ estimates of Hormander. Late
 including the Kodaira embedding theorem, the lower bounds for the Bergman kernel, and the ideas of canonical metrics
 and stability.
 
+\begin{rem}
+    Suppose we have a holomorphic line bundle $L\to X$. We may ask the following questions.
+    \begin{enumerate}[(a)]
+        \item $H^0(X,L)=0$?
+        \item Take some $s\in H^0(X,L)$ with $||s||_{L^2}=1$. How big can $s(z_0)$ be at a given point $z_0$?
+    \end{enumerate}
+    We will be building machinery to address these questions, which depend sensitively on the geometry.
+\end{rem}
+
 \subsection{Review}
 
 Let us recall some techniques from last semester. Let $X=\cup_{\mu}X_\mu$ be a complex $n$-manifold with $X_\mu$ coordinate charts.
@@ -255,12 +264,12 @@ i.e. a $\End(E)$-valued $(1,1)$-form.
 
 \subsection{Bochner-Kodaira Formulas}
 
-Let $X$ be a complex manifold, compact without boundary. Take $E\to X$ to be a holomorphic vector bundle on $X$.
+Let $X$ be a complex manifold, compact without boundary. Take $E\to X$ to be a holomorphic vector bundle of rank $r$ on $X$.
 We consider the \textbf{$\bar\partial$ complex}:
 \[\cdots\xrightarrow{\bar\partial}\Gamma(X,E\otimes\Lambda^{p,q})\xrightarrow{\bar\partial}\Gamma(X,E\otimes\Lambda^{p,q+1})\xrightarrow{\bar\partial}\cdots.\]
 
 Let us be more precise. Consider some $\phi\in\Gamma(X,E\otimes\Lambda^{p,q})$. We can write explicitly:
-\[\phi=\frac{1}{p!q!}\sum\phi_{\bar j_1,\ldots\bar j_q,i_1,\ldots,i_p}(z)dz^{i_p}\wedge\cdots\wedge dz^{i_1}\wedge d\bar z^{j_q}\wedge\cdots\wedge d\bar z^{j_i}.\]
+\[\phi^\alpha=\frac{1}{p!q!}\sum\phi^\alpha_{\bar j_1,\ldots\bar j_q,i_1,\ldots,i_p}(z)dz^{i_p}\wedge\cdots\wedge dz^{i_1}\wedge d\bar z^{j_q}\wedge\cdots\wedge d\bar z^{j_i}.\]
 Now what exactly do we mean by $\bar\partial$? We define
 \begin{align*}
     \bar\partial\phi&\equiv\frac{1}{p!q!}\sum\left(\bar\partial\phi_{\bar j_1,\ldots\bar j_q,i_1,\ldots,i_p}\right)\wedge dz^{i_p}\wedge\cdots\wedge dz^{i_1}\wedge d\bar z^{j_q}\wedge\cdots\wedge d\bar z^{j_i}\\
@@ -279,9 +288,80 @@ We leave it as an exercise for the reader to check that this is well-defined (fo
         &=\sum\left( \partial_{\bar k}\phi^{\alpha}_{\bar j}d\bar z^k \right)\wedge d\bar z^j\\
         &=\frac{1}{2}\sum\left( \partial_{\bar k}\phi_{\bar j}^\alpha-\partial_{\bar j}\phi^{\alpha}_{\bar k} \right)d\bar z^k\wedge d\bar z^j.
     \end{align*}
-    Hence one finds the coefficient $(\bar\partial \phi)_{\bar j\bar k}=\frac{1}{2}\left(\partial_{\bar k}\partial_{\bar j}-\partial_{\bar j}\partial_{\bar k}\right)$.
+    Hence one finds the coefficient $(\bar\partial \phi)_{\bar j\bar k}=\left(\partial_{\bar k}\partial_{\bar j}-\partial_{\bar j}\partial_{\bar k}\right)$
+    with no factor of $1/2$ out front, because we now have a two-form.
 \end{exmp}
 
+Let us now introduce a metric $H_{\bar\alpha\beta}$ on $E$ and a metric $g_{\bar kj}$ on $T^{1,0}(X)$.
+This allows us to compute scalar norms of sections as $|\phi|^2_H=H_{\bar\alpha\beta}\overline{\phi^\alpha}\phi^\beta$ for $\phi\in\Gamma(X,E)$.
+We will work with the metric and hope that in the end, our results will be independent of the metric (where lengths are not involved).
+There is an induced $L^2$ metric on $\Gamma(X,E\otimes \Lambda^{p,q})$: given $\phi,\psi\in\Gamma(X,E\otimes\Lambda^{p,q})$, we define, using
+multi-index notation,
+\begin{align*}
+    \langle \phi,\psi\rangle = \frac{1}{p!q!}\sum\int \phi^\alpha_{\bar JI}\overline{\psi^\beta_{\bar KL}}H_{\bar\beta\alpha}g^{K\bar J}g^{I\bar L}\frac{\omega^n}{n!},
+\end{align*}
+where, by definition,
+\[g^{K\bar J}=g^{k_1\bar j_1}\cdots g^{k_q\bar j_q}\]
+if $K=(k_1,\ldots, k_q)$ and $J=(j_1,\ldots,j_q)$,
+and
+\[\omega\equiv \frac{i}{2}g_{\bar kj}dz^j\wedge d\bar z^k.\]
+We now define the \textbf{formal adjoint of $\bar\partial$} by
+\begin{align*}
+    \langle \bar\partial \phi,\psi\rangle =\langle\phi,\bar\partial^\dagger\psi\rangle
+\end{align*}
+for all $\phi\in C^\infty(X,E\otimes\Gamma^{p,q})$ and $\psi\in C^\infty(X,E\otimes\Gamma^{p,q+1})$.
+Hence we can draw:
+\begin{equation*}
+    \begin{tikzcd}
+        \Gamma(X,E\otimes\Lambda^{p,q})\arrow[bend left]{r}{\bar\partial} & \Gamma(X,E\otimes\Lambda^{p,q+1})\arrow[bend left]{l}{\bar\partial^\dagger}
+    \end{tikzcd}
+\end{equation*}
+Next define the \textbf{Laplacian} $\Box:\Gamma(X,E\otimes\Lambda^{p,q})\to\Gamma(X,E\otimes\Lambda^{p,q})$ by $\Box=\bar\partial^\dagger\bar\partial+\bar\partial\bar\partial^\dagger$.
+This raises the question: when do we have that
+\[\dim\ker\Box\bigg|_{\Gamma(X,E\otimes\Lambda^{p,q})}=0?\]
+It will turn out that for $q=1$, if this is true, we will indeed be able to find sections on this bundle.
 
+To approach this question, we use the Bochner-Kodaira formulas. We claim that
+\begin{align*}
+    (\Box\phi)^\alpha_{\bar JI}=-g^{k\bar l}\nabla_k\nabla_{\bar l}\phi^\alpha_{\bar JI}+\text{t.t} + \text{c.t.}
+\end{align*}
+where t.t. and c.t. stand for torsion and curvature forms respectively. This relates a kind of geometric laplacian (lhs) to a
+more analytic laplacian (rhs) modulo certain correction terms. In practice, we will work with K\"ahler metrics, in which
+the torsion terms disappear. In this sense, we can schematically write (after integrating by parts)
+\[\langle \Box\phi,\phi\rangle=||\nabla_{\bar l}\phi_{\bar J I}^\alpha||^2+\langle\text{c.t.}\phi,\phi\rangle.\]
+This immediately implies that if the curvature terms are positive (loosely speaking), then $\ker\Box=0$.
+
+We begin by deriving the Bochner-Kodaira formula. We will simplify life by working with $(0,1)$-forms, but the results
+will extend fairly easily. Let us first compute $\bar\partial^\dagger$ more explicitly. In this case, we look at
+\begin{equation*}
+    \begin{tikzcd}
+        \Gamma(X,E\otimes\Lambda^{0,0})\arrow[bend left]{r}{\bar\partial}&\Gamma(X,E\otimes\Lambda^{0,1})\arrow[bend left]{r}{\bar\partial}\arrow[bend left]{l}{\bar\partial^\dagger} & \Gamma(X,E\otimes\Lambda^{0,2})\arrow[bend left]{l}{\bar\partial^\dagger}.
+    \end{tikzcd}
+\end{equation*}
+Pick some $\phi\in\Gamma(X,E\otimes\Lambda^{0,1})$ such that $\phi=\sum\phi_{\bar j}^\alpha d\bar z^j$. Then $\bar\partial\phi^\alpha=\sum\partial_{\bar k}\phi_{\bar j}^\alpha d\bar z^k\wedge d\bar z^j$. Also, pick $\psi=\frac{1}{2}\sum\psi_{\bar j\bar k}d\bar z^k\wedge d\bar z^j$ in $\Gamma(X,E\otimes\Lambda^{0,2})$. We impose that
+\begin{align*}
+    \langle\bar\partial\phi,\psi\rangle&=\langle \phi,\bar\partial^\dagger\psi\rangle
+\end{align*}
+The left hand side appears to be
+\[ \frac{1}{2}\left( \int(\partial_{\bar p}\phi_{\bar m}^\alpha-\partial_{\bar m}\phi^\alpha_{\bar p}) \overline{\psi_{\bar j\bar k}^\beta}H_{\bar \beta\alpha}g^{j\bar m}g^{k\bar p}\frac{\omega^n}{n!} \right)
+    \]
+But recall that
+\begin{align*}
+    \nabla_{\bar p}\phi^{\alpha}_{\bar m}&=\partial_{\bar p}\phi_{\bar m}^\alpha-\Gamma^{\bar l}_{\bar p\bar m}\phi_{\bar l}^\alpha
+\end{align*}
+where $\Gamma_{\bar p\bar m}^{\bar l}=g^{k\bar l}(\partial_{\bar p}g_{\bar mk}).$ Hence we may write
+\[\partial_{\bar p}\phi^\alpha_{\bar m}-\partial_{\bar m}\phi_{\bar p}^\alpha=\nabla_{\bar p}\phi^\alpha_{\bar m}-\nabla_{\bar m}\phi_{\bar p}^{\alpha}+(\Gamma^{\bar l}_{\bar p\bar m}-\Gamma^{\bar l}_{\bar m\bar p})\phi_{\bar l}^\alpha.\]
+We denote the term in the parentheses by $T^{\bar l}_{\bar p\bar m}$ and call it the \textbf{torsion of the covariant derivative $\nabla_{\bar p}$}. Let us now move to the K\"ahler case.
+The metric $g_{\bar kj}$ is said to be \textbf{K\"ahler} if $\Gamma^{\bar l}_{\bar p\bar m}=\Gamma^{\bar l}_{\bar m\bar p}$. Note that this
+condition is equivalent to $\partial_{\bar p}g_{\bar mk}=\partial_{\bar m}g_{\bar pk}$ or $\partial_pg_{\bar km}=\partial_m g_{\bar kp}$.
+Henceforth we assume that $g_{\bar kj}$ is K\"ahler.
+
+Now in the computation of the formal adjoint above, we can write
+\begin{align*}
+    \langle\bar\partial\phi,\psi\rangle&=\int (\nabla_{\bar p}\phi^\alpha_{\bar m})\overline{\psi^\beta_{\bar j\bar k}}H_{\bar\beta\alpha}g^{j\bar p}g^{k\bar m}\frac{\omega^n}{n!}\\
+    &=\int\phi^\alpha_{\bar m}\overline{(-g^{p\bar j}\nabla_p\psi^{\beta}_{\bar j\bar k})}H_{\bar\beta\alpha}g^{k\bar m}\frac{\omega^n}{n!},
+\end{align*}
+where we have de-antisymmetrized the covariant derivatives and then integrated by parts. This yields immediately the expression for the formal adjoint:
+\[(\bar\partial^\dagger\psi)_{\bar k}^\beta=-g^{p\bar j}\nabla_p\psi^{\beta}_{\bar j\bar k}.\]
 
 \end{document}
