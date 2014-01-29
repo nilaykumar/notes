@@ -133,4 +133,171 @@ We are of course already familiar with products and quotients.
     well.
 \end{defn}
 
+\section{Class 2}
+
+\begin{defn}
+    We define the \textbf{wedge sum} of two topological spaces as follows. Pick $x_0\in X,y_0\in Y$, and define
+    \[X\vee Y=X\sqcup Y/\sim\]
+    where $x_0\sim y_0$.
+\end{defn}
+
+\begin{defn}
+    We define the \textbf{join} of two spaces to be
+    \[X*Y=X\times Y\times I/\sim\]
+    where $(x,y_1,0)\sim (x,y_2,0)$ and $(x_1,y,1)\sim (x_2,y,1)$. In other words, at $t=0$,
+    the product collapses to $X$ while at $t=1$, it collapses to $Y$. As an example, consider $X=Y=I$.
+    In this case, the product is a cube and the join becomes a tetrahedron. Note that one can also
+    consider the join $X*Y$ as formal convex linear combinations of points of $X$ and $Y$.
+\end{defn}
+
+\begin{defn}
+    We define the \textbf{smash product} of two spaces with $x_0\in X,y_0\in Y$ as
+    \[X\wedge Y=X\times Y/X\vee Y,\]
+    where the wedge sum is taken at $x_0,y_0$ and we are consider $X\vee Y=X\times \left\{ y_0 \right\}\cup \left\{ x_0 \right\}\times Y$
+    as sitting inside $X\times Y$. One can it is true that $S^n\wedge S^m=S^{n+m}$.
+\end{defn}
+
+\subsection{CW-complexes}
+
+The motivation of CW-complexes is to build higher dimensional surfaces from polygons. The analogy is to
+the torus, which can be represented by a square in the plane with opposite edges oriented. This, in fact,
+can be extended to higher-genus surfaces. Note that the interior of such a polygon is a 2-cell, i.e. open 2-disk.
+The edges, on the other hand, are 1-cells, i.e. open 1-disks/intervals. Finally, we also have 0-cells as points.
+To build a torus, then, we take a 0-cell and add two 1-cells as the characteristic circles of the torus, and
+we attach a 2-cell to the 1-cells in the appropriate manner.
+
+\begin{defn}
+    We define a \textbf{cell complex} (or \textbf{CW-complex}), built inductively as follows:
+    \begin{enumerate}
+        \item Start with $X^0$, as discrete set of points;
+        \item Form the \textbf{$n$-skeleton} $X^{n}$ from $X^{n-1}$ by attaching $n$-cells $e_\alpha^n$
+            via maps $\phi:S^{n-1}=\partial D^n\to X^{n-1}$. Hence $X^n=X^{n-1}\sqcup D^n_\alpha/x\sim \phi_\alpha(x)$,
+            where $x\in\partial D^n$. Hence, setwise $X^n=X^{n-1}\sqcup e^n_\alpha$ where each $e^n_\alpha$ is an open $n$-disk.
+        \item Stop at some finite $n$ to obtain a \textbf{finitely-generated cell complex} $X=X^n$ or continue indefinitely to
+            obtain a cell complex $X=\cap_{n=0}^\infty X^n$. In the infinite case, we consider the \textbf{weak topology}, where
+            $A\subset X$ is open if and only if $A\cap X^n$ is open for all $n$.
+    \end{enumerate}
+\end{defn}
+
+\begin{exmp}
+    Let us consider some examples of cell complexes. The most obvious such example is a graph, which is a 1-dimensional
+    complex, with vertices as 0-cells and edges as 1-cells. We can construct a sphere $S^1$ by simply taking a 0-cell $x_0$ and
+    attaching a 1-cell (via the constant attaching map sending boundaries to $x_0$). The same holds for $S^n$, where we take an
+    $n$-cell and attach its boundary to a 0-cell (the attaching map again constant).
+
+    Next, we can construct the torus via a 0-cell $e^0$, 2 1-cells $e^1_1$ and $e^1_2$, and a 2-cell $e^2$.
+    The attaching maps for the 1-cells are obvious. The boundary $S^1$ of $e^2$ is attached by going first positively
+    along $e^1_1$, then positively along $e^1_2$, then negatively along $e^1_1$, and finally, negatively along $e^1_2$.
+
+    As a final example, recall the definition of the real projective space $\R P^n$. We can treat it as a quotient of
+    $D^n$ by identifying antipodal points. But this is simply $D^n$ with antipodal boundary points identified. But the boundary
+    is simply $S^{n-1}$, and hence identifying its boundary's antipodal points yields $\R P^{n-1}$. In this sense, we can consider
+    $\R P^n$ as $\R P^{n-1}\sqcup D^n/x\sim\phi(x)$ where $\phi:S^{n-1}\to\R P^{n-1}$ is the quotient map. Hence we can start with
+    a 0-cell and then attach a 1-cell by the antipodal quotient map to get $\R P^1$. More generally, we can write $\R P^n$
+    as the complex consisting of a 0-cell, 1-cell, 2-cell, \ldots, $n$-cell, where the attaching maps are all antipodal quotient maps.
+\end{exmp}
+
+\begin{defn}
+    Given a CW-complex $X$, each cell $e_\alpha^n$ has a \textbf{characteristic map} $\Phi_\alpha:D^n\to X$ which 
+    \begin{enumerate}
+        \item extends the attaching map $\phi_\alpha:S^{n-1}\to X^{n-1}$;
+        \item is a homeomorphism from the interior of $D^n_\alpha$ to the cell $e^n_\alpha$.
+    \end{enumerate}
+    Note that $\Phi_\alpha$ is the composition
+    $D^n_\alpha\hookrightarrow X^{n-1}\coprod_\alpha D^n_\alpha\to X^n\hookrightarrow X.$
+\end{defn}
+
+\begin{exmp}
+    For the sphere, the characteristic map is $\Phi:D^n\to S^n$, which collapses $\partial D^n$ to a point.
+    For $\R P^n$, on the other hand, the characteristic map is $\Phi:D^i\hookrightarrow \R P^i\subset\R P^n$ which
+    identifies antipodal points on $\partial D^i$.
+\end{exmp}
+
+\begin{defn}
+    A \textbf{subcomplex} of a CW-complex $X$ is a closed subspace $A\subset X$ that is a union of cells of $X$.
+    We call $(X,A)$ a \textbf{CW pair}.
+\end{defn}
+
+\begin{rem}
+    Note that $A$ is itself a CW-complex.
+\end{rem}
+
+\begin{exmp}
+    Consider one of the 1-cells in the cell decomposition for the torus. This 1-cell, together with the 0-cell of the torus, yields
+    a subcomplex. As another example, note that $\R P^k\subset\R P^n$ for $k\leq n$ is a subcomplex.
+
+    As a non-example, note that $S^1$ is not a subcomplex of $S^2$ with the usual cell structure, though it is a subspace. However,
+    one can choose a different cell structure for $S^2$ in which we create the equator from two 0-cells and two 1-cells and two 2-cells
+    (the northern and southern hemispheres), and in this structure, $S^1$ is indeed a subcomplex of $S^2$.
+More generally, one can obtain a CW-complex for $S^n$ by attaching two $n$-cells to $S^{n-1}$, though this becomes difficult to visualize.
+\end{exmp}
+
+\begin{defn}
+    If $X,Y$ are CW complexes, their \textbf{product} $X\times Y$ has the structure of a CW complex with cells $e^m_\alpha\times e^n_\beta$
+    where $e^m_\alpha$ ranges over cells in $X$ and $e^n_\beta$ ranges over cells in $Y$.
+\end{defn}
+
+\begin{exmp}
+    The cell decomposition of $S^1\times S^1$ will be $\left\{ e^0,e^1 \right\}\times \left\{ e^0,e^1 \right\}=\left\{ e^0,e_1^1,e_2^1,e^2 \right\}$,
+    which is the usual decomposition we have for the torus.
+\end{exmp}
+
+\begin{defn}
+    If $(X,A)$ is a CW pair, then the \textbf{quotient} $X/A$ inherits a natural CW structure which is the usual cells structure away from $A$
+    but has $e^0$ replacing $A$.
+\end{defn}
+
+\begin{exmp}
+    If we take a 0-cell and a 1-cell of the torus as a subcomplex and quotient by it, we obtain a 2-sphere, as we are left with
+    $\{e^0,e^2\}$.
+\end{exmp}
+
+\subsection{Homotopy equivalence}
+
+Let us now present two criteria for determining homotopy equivalence.
+
+\begin{lem}
+    If $(X,A)$ is a CW pair consisting of a CW complex $X$ and a contractible subspace $A$, then the quotient map $X\to X/A$ is a homotopy
+    equivalence.
+\end{lem}
+
+\begin{exmp}
+    For example, one might use this to determine homotopy equivalence for graphs. Indeed, if an edge has distinct endpoints, one can simply collapses the edge
+    to a point. After repeatedly applying the above, all edge are loops, and each component of $X$ is either a single vertex or a wedge of circles $\vee_m S^1$.
+    Hence the question becomes: how can we prove that $\vee_m S^1\simeq\vee_n S^1$ if and only if $m=n$? We will soon develop the tools needed to answer this question.
+\end{exmp}
+
+\begin{exmp}
+    Consider the space $X$ which is a union of a torus with a disk embedded inside it. Then $X/A$ is homotopy equivalent to $X$, and we get a croissant shape.
+\end{exmp}
+
+\begin{lem}
+    Given spaces $X_0$ and $X_1$, we can attach $X_0$ to $X_1$ by identifying points in a subspace $A\subset X_1$ with points in $X_0$.
+    That is, given a map from $A\to X_0$, we form a quotient space $X_0\sqcup_f X_1\equiv X_0\coprod X_1/a\sim f(a)$ for all $a\in A$.
+    If $(X_1, A)$ is a CW pair and the two attaching maps $f,g:A\to X_0$ are homotopic then $X_0\sqcup_f X_1\simeq X_0\sqcup_g X_1$.
+\end{lem}
+
+\begin{exmp}
+    Recall the mapping cylinder of two spaces $X$ and $Y$ with $f:X\to Y$. We consider $X_1=X\times I, A=X\times \{1\},X_0=Y$.
+
+    Another example is given by $X_0=X_1=S^1\times D^2$ and $A=\partial X_1$. Taking $f:\partial X_1\to \partial X_0\subset X_0$ by
+    $(x,y)\mapsto (y,x)$. Then $X_0\sqcup_f X_1=S^3$.
+
+    Consider the 2-sphere with a subcomplex $A$ be an arc from the north to the south pole. Take this arc and send its points to $S^1$
+    in a way that wraps around all of $S^1$. The attachment via this map yields another croissant. Of course, this map is homotopic to
+    a constant map (since $A$ is contractible). Attaching via this constant map yields the wedge $S^2\vee S^1$. This shows that the croissant
+    is homotopy equivalent to $S^2\vee S^1$.
+\end{exmp}
+
+\subsection{The fundamental group}
+
+We will be associating topological spaces to algebraic structures (such as groups or rings) and
+continuous maps get associated to group homomorphisms. In the case of the fundamental group, for example
+we will obtain a covariant functor. The fundamental group will be useful as something that can tell various
+spaces apart.
+
+
+
+
+
 \end{document}
