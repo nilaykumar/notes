@@ -338,7 +338,7 @@ will extend fairly easily. Let us first compute $\bar\partial^\dagger$ more expl
         \Gamma(X,E\otimes\Lambda^{0,0})\arrow[bend left]{r}{\bar\partial}&\Gamma(X,E\otimes\Lambda^{0,1})\arrow[bend left]{r}{\bar\partial}\arrow[bend left]{l}{\bar\partial^\dagger} & \Gamma(X,E\otimes\Lambda^{0,2})\arrow[bend left]{l}{\bar\partial^\dagger}.
     \end{tikzcd}
 \end{equation*}
-Pick some $\phi\in\Gamma(X,E\otimes\Lambda^{0,1})$ such that $\phi=\sum\phi_{\bar j}^\alpha d\bar z^j$. Then $\bar\partial\phi^\alpha=\sum\partial_{\bar k}\phi_{\bar j}^\alpha d\bar z^k\wedge d\bar z^j$. Also, pick $\psi=\frac{1}{2}\sum\psi_{\bar j\bar k}d\bar z^k\wedge d\bar z^j$ in $\Gamma(X,E\otimes\Lambda^{0,2})$. We impose that
+Let us compute the second formal adjoint that appears in the diagram. Pick some $\phi\in\Gamma(X,E\otimes\Lambda^{0,1})$ such that $\phi=\sum\phi_{\bar j}^\alpha d\bar z^j$. Then $\bar\partial\phi^\alpha=\sum\partial_{\bar k}\phi_{\bar j}^\alpha d\bar z^k\wedge d\bar z^j$. Also, pick $\psi=\frac{1}{2}\sum\psi_{\bar j\bar k}d\bar z^k\wedge d\bar z^j$ in $\Gamma(X,E\otimes\Lambda^{0,2})$. We impose that
 \begin{align*}
     \langle\bar\partial\phi,\psi\rangle&=\langle \phi,\bar\partial^\dagger\psi\rangle
 \end{align*}
@@ -363,5 +363,94 @@ Now in the computation of the formal adjoint above, we can write
 \end{align*}
 where we have de-antisymmetrized the covariant derivatives and then integrated by parts. This yields immediately the expression for the formal adjoint:
 \[(\bar\partial^\dagger\psi)_{\bar k}^\beta=-g^{p\bar j}\nabla_p\psi^{\beta}_{\bar j\bar k}.\]
+To see this in more detail, see the next paragraph, where we will perform the computation explicitly for the other formal adjoint.
+So much for the computation of the second formal adjoint in the diagram above.\todo{check this!}
+
+Let us now compute the first formal adjoint. Of course,
+\[\langle\bar\partial\phi,\psi\rangle=\langle\phi,\bar\partial^\dagger\psi\rangle\]
+for $\phi\in C^\infty(X,E)$ and $\psi\in C^\infty(X,E\otimes\Lambda^{0,1})$. We can write $\bar\partial\phi=\partial_{\bar j}\phi^\alpha d\bar z^j$
+and $\psi=\psi^{\alpha}_{\bar k}d\bar z^k$. The above equation requires
+\begin{align*}
+    \int \partial_{\bar j}\phi^\alpha\overline{\psi^\beta_{\bar k}}H_{\bar \beta\alpha}g^{k\bar j}\frac{\omega^n}{n!}=\int\phi^\alpha\overline{\left( \bar\partial^\dagger\psi \right)^\beta}H_{\bar\beta\alpha}\frac{\omega^n}{n!}.
+\end{align*}
+Let us for now define $W_\alpha^{\bar j}\equiv \overline{\psi^\beta_{\bar k}H_{\bar\alpha\beta}g^{j\bar k}}$. Observe now that
+\begin{align*}
+    \left( \partial_{\bar j}\phi^\alpha \right)W^{\bar j}_\alpha&\equiv\left( \nabla_{\bar j}\phi^\alpha \right)W^{\bar j}_\alpha\\
+    &=\nabla_{\bar j}\left( \phi^\alpha W^{\bar j}_\alpha \right)-\phi^\alpha\left( \nabla_{\bar j} W^{\bar j}_\alpha\right).
+\end{align*}
+This will be useful when integrating by parts.
+Now note that the $n$th wedge power of $\omega$ simplifies to yield
+\begin{align*}
+    \int\left( \partial_{\bar j}\phi^\alpha \right)W_\alpha^{\bar j}\left( \det g_{\bar qp} \right)&=\int\nabla_{\bar j}\left( \phi^\alpha W^{\bar j}_\alpha \right)\det g_{\bar qp}
+    -\int \phi^\alpha\left( \nabla_{\bar j}W^{\bar j}_\alpha \right).
+\end{align*}
+We claim that if the metric $g_{\bar kj}$ is K\"ahler, then $\int \nabla_{\bar j}(\phi^\alpha W_\alpha^{\bar j})\det g_{\bar qp}=0$. To see this, first define
+$V^{\bar j}=\phi^\alpha W_\alpha^{\bar j}$. Consider
+\begin{align*}
+    \left( \nabla_{\bar j}V^{\bar j} \right)\det g_{\bar qp}&=\left(\partial_{\bar j}V^{\bar j}+\Gamma^{\bar j}_{\bar j\bar k}V^{\bar k}\right)\det g_{\bar qp}\\
+    &=\partial_{\bar j}\left( V^{\bar j}\det g_{\bar qp} \right)-V^{\bar j}\left( \partial_{\bar j}\det g_{\bar qp} \right)+\Gamma^{\bar j}_{\bar j\bar k}V^{\bar k}\det g_{\bar qp}.
+\end{align*}
+Now note that
+\begin{align*}
+    \partial_{\bar j}\det g_{\bar qp}=\left( \det g_{\bar qp}\right)g^{l\bar n}\partial_{\bar j}g_{\bar nl},
+\end{align*}
+which comes from the fact that
+\begin{align*}
+    \delta\log\left( \det A \right)&=\sum\frac{\delta \lambda_j}{\lambda_j}\\
+    &=\tr\left( A^{-1}\delta A \right).
+\end{align*}
+But now recall that for $g_{\bar kj}$ is K\"ahler if and only if $\Gamma^{\bar j}_{\bar k\bar m}=\Gamma^{\bar j}_{\bar m\bar k}$,
+and hence the we see the last two terms in  the expression above cancel. Hence the term picked up by integration by parts vanishes.
+Hence we are left with the equality
+\begin{align*}
+    -\int\phi^\alpha\nabla_{\bar j}\overline{\left( \psi^{\beta}_{\bar k}H_{\bar\alpha\beta}g^{j\bar k} \right)}\frac{\omega^n}{n!}&=
+    \int\phi^\alpha\overline{\left( -g^{j\bar k}\nabla_j\psi^\beta_{\bar k} \right)}H_{\bar \beta\alpha}\frac{\omega^n}{n!}.
+\end{align*}
+This yields the desired formula:
+\begin{align*}
+    ( \bar\partial^\dagger\psi )^{\beta}=-g^{j\bar k}\nabla_j\psi^\beta_{\bar k}.
+\end{align*}
+
+Now let us compute the Laplacian $\Box=\bar\partial\bar\partial^\dagger+\bar\partial^\dagger\bar\partial$. Set $\phi=\sum \phi^\alpha_{\bar j}d\bar z^j\in\Gamma(X,E\otimes\Lambda^{0,1})$.
+First note that
+\begin{align*}
+    \left( \bar\partial\bar\partial^{\dagger}\phi \right)&=\bar\partial\left( -g^{j\bar k}\nabla_j\phi^{\alpha}_{\bar k} \right)\\
+    &=\partial_{\bar l}\left( -g^{j\bar k}\nabla_j\phi_{\bar k}^\alpha \right)d\bar z^l.
+\end{align*}
+Hence, noting that the expression in parentheses is a section of a holomorphic bundle, the $\partial_j$ is simply a covariant derviative, which
+commutes with the metric, and we can write
+\[\left( \bar\partial\bar\partial^{\dagger}\phi \right)^\alpha_{\bar l}=-g^{j\bar k}\nabla_{\bar l}\nabla_{j}\phi^\alpha_{\bar k}.\]
+Next note that
+\begin{align*}
+    \bar\partial\phi^\alpha=\frac{1}{2}\sum\left( \nabla_{\bar k}\phi^\alpha_{\bar j}-\nabla_{\bar j}\phi^\alpha_{\bar k} \right)d\bar z^k\wedge d\bar z^j
+\end{align*}
+for $g_{\bar kj}$ K\"ahler. Hence we can write
+\begin{align*}
+    \left( \bar\partial^\dagger\bar\partial\phi \right)^\beta_{\bar l}&=-g^{k\bar m}\nabla_{k}(\bar\partial\phi)^\beta_{\bar l\bar m}\\
+    &=-g^{k\bar m}\nabla_k\left( \nabla_{\bar m}\phi^\alpha_{\bar l}-\nabla_{\bar l}\phi^\alpha_{\bar m} \right)\\
+    &=-g^{k\bar m}\nabla_k\nabla_{\bar m}\phi^\alpha_{\bar l}+g^{k\bar m}\nabla_k\nabla_{\bar l}\phi^\alpha_{\bar m}.
+\end{align*}
+Summing the two terms of the Laplacian and switching appropriate dummy indices, we find that
+\begin{align*}
+    (\Box\phi)^\alpha_{\bar l}&=-g^{k\bar m}\nabla_k\nabla_{\bar m}\phi^\alpha_{\bar l}+g^{k\bar m}\nabla_k\nabla_{\bar l}\phi^\alpha_{\bar m}-g^{k\bar m}\nabla_{\bar l}\nabla_{\bar k}\phi^\alpha_{\bar m}\\
+    &=-g^{k\bar m}\nabla_k\nabla_{\bar m}\phi^\alpha_{\bar l}+g^{k\bar m}[\nabla_k,\nabla_{\bar l}]\phi^\alpha_{\bar m}\\
+    &=-g^{k\bar m}\nabla_k\nabla_{\bar m}\phi^\alpha_{\bar l}+g^{k\bar m}\left( F_{\bar lk\beta}^\alpha\phi^\beta_{\bar m}+R_{\bar lk\bar m}^{\bar p}\phi^\alpha_{\bar p} \right),
+\end{align*}
+where as usual $F_{\bar lk\beta}^\alpha=-\partial_{\bar l}\left( J^{\alpha\bar\gamma}\partial_k H_{\bar\gamma\beta} \right)$
+and $R_{\bar lk\bar m}^{\bar p}=g^{\bar pq}R_{\bar lkq}^rg_{\bar mr}$ where $R_{\bar lkq}^r=-\partial_{\bar l}\left( g^{r\bar s}\partial_kg_{\bar sq} \right)$.
+We can simplify this a little bit more, obtaining
+\begin{align}
+    (\Box\phi)^\alpha_{\bar l}=-g^{k\bar m}\nabla_k\nabla_{\bar m}\phi^\alpha_{\bar l}+F_{\bar l\beta}^{\bar m\alpha}\phi^\beta_{\bar m}+R_{\bar l}^{\bar p}\phi^\alpha_{\bar p},
+\end{align}
+where $R_{\bar l}^{\bar p}\equiv g^{k\bar m}R_{\bar lk\bar m}^{\bar p}$ is the \textbf{Ricci curvature}.
+
+Let us state a simple corollary. Let $L\to X$ be a \textbf{positive} holomorphic line bundle over a compact manifold $X$, i.e. there exists a metric $h$ on $L$
+with $-\partial_{j}\partial_{\bar k}\log h>0$. Set $\omega=-\frac{i}{2}\partial\bar\partial\log h$ (as coefficients). Since $L$ is positive, $\omega$ is a metric, which
+is automatically K\"ahler:
+\[\partial_l g_{\bar kj}=-\partial_l\partial_j\partial_{\bar k}\log h=\partial_j g_{\bar kl}.\]
+Then for $m\geq 1$, we see that
+\[\ker\Box\bigg|_{\Gamma(X,L^m\otimes\Lambda^{0,1})}=0.\]
+Why?
+
 
 \end{document}
