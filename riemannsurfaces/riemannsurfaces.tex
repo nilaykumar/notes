@@ -444,13 +444,111 @@ We can simplify this a little bit more, obtaining
 \end{align}
 where $R_{\bar l}^{\bar p}\equiv g^{k\bar m}R_{\bar lk\bar m}^{\bar p}$ is the \textbf{Ricci curvature}.
 
-Let us state a simple corollary. Let $L\to X$ be a \textbf{positive} holomorphic line bundle over a compact manifold $X$, i.e. there exists a metric $h$ on $L$
+Consider now the inner product with $\phi$:
+\begin{align*}
+    \int (\Box\phi)^{\alpha}_{\bar l}\overline{\phi^\beta_{\bar m}}H_{\bar \beta\alpha}g^{m\bar l}\frac{\omega^n}{n!}&=-\int g^{j\bar k}\nabla_j\nabla_{\bar k}\phi^\alpha_{\bar l}\overline{\phi^\beta_{\bar m}}H_{\bar\beta\alpha}g^{m\bar l}\frac{\omega^n}{n!}+\int (F_{\bar l\gamma}^{\bar p\alpha}\phi^\gamma_{\bar p}+R_{\bar l}^{\bar p}\phi^\alpha_{\bar p})\overline{\phi^\beta_{\bar m}}H_{\bar\beta\alpha}g^{m\bar l}\frac{\omega^n}{n!}\\
+    \langle\Box\phi,\phi\rangle&=\int \nabla_{\bar k}\phi^\alpha_{\bar l}\overline{\nabla_{\bar j}\phi^\beta_{\bar m}}g^{j\bar k}H_{\bar\beta\alpha}g^{m\bar l}\frac{\omega^n}{n!}+\int F^{m\bar p}_{\bar\beta\alpha}\phi_{\bar p}^\alpha\overline{\phi^\beta_{\bar m}}+(R^{m\bar p}H_{\bar\beta\alpha})\phi^\alpha_{\bar p}\overline{\phi^\beta_{\bar m}}\frac{\omega^n}{n!}\\
+    \langle\Box\phi,\phi\rangle&=||\bar\nabla\phi||^2+\int (F^{m\bar p}_{\bar\beta\alpha}+R^{m\bar p}H_{\bar\beta\alpha})\phi^\alpha_{\bar p}\overline{\phi^\beta_{\bar m}}\frac{\omega^n}{n!}.
+\end{align*}
+This yields the following simple corollary.
+
+\begin{cor}
+If $F^{m\bar p}_{\bar\beta\alpha}+R^{m\bar p}_{\bar\beta\alpha}>0$, then $\ker\Box\bigg|_{\Gamma(X,E\otimes\Lambda^{0,1})}=0.$
+\end{cor}
+
+Further, we can prove the following result.
+
+\begin{cor}
+Let $L\to X$ be a \textbf{positive} holomorphic line bundle over a compact manifold $X$, i.e. there exists a metric $h$ on $L$
 with $-\partial_{j}\partial_{\bar k}\log h>0$. Set $\omega=-\frac{i}{2}\partial\bar\partial\log h$ (as coefficients). Since $L$ is positive, $\omega$ is a metric, which
 is automatically K\"ahler:
 \[\partial_l g_{\bar kj}=-\partial_l\partial_j\partial_{\bar k}\log h=\partial_j g_{\bar kl}.\]
-Then for $m\geq 1$, we see that
+Equip $X$ with the K\"ahler metric $\omega$ and consider $\Box$ on $L^M\otimes\Lambda^{0,1}$.
+Then for $M\geq 1$,
 \[\ker\Box\bigg|_{\Gamma(X,L^m\otimes\Lambda^{0,1})}=0.\]
-Why?
+\end{cor}
+\begin{proof}
+    When $E=L$, we can write
+    \begin{align*}
+        F_{\bar kj}=-\partial_j\partial_{\bar k}\log h
+    \end{align*}
+    and hence in the case of line bundles, we have that
+    \begin{align*}
+        F^{m\bar p}\equiv F^{m\bar p}_{\bar\beta\alpha}=g^{m\bar k}g^{j\bar p}F_{\bar kj}h.
+    \end{align*}
+    Hence the Bochner-Kodaira formula simplifies to
+    \begin{align*}
+        \langle\Box\phi,\phi\rangle=||\bar\nabla\phi||^2+\int (F^{m\bar p}+R^{m\bar p})\phi_{\bar p}\overline{\phi_{\bar m}}h\frac{\omega^n}{n!}.
+    \end{align*}
+    Now if we take $L\mapsto L^M$, $R$ does not change, as it is the Ricci curvature of the metric on the base manifold. On the other hand,
+    the curvature $F$ of $L$ is now multiplied by $M$, as the curvature is given by the logarithm above (and hence the power $M$ becomes
+    multiplicative). For $L^M\to X$, then, the Bochner-Kodaira formula reads:
+    \begin{align*}
+        \langle\Box\phi,\phi\rangle=||\bar\nabla\phi||^2+\int (MF^{m\bar p}+R^{m\bar p})\phi_{\bar p}\overline{\phi_{\bar m}}h\frac{\omega^n}{n!}.
+    \end{align*}
+    In the case of positive line bundle $L$, we have a K\"ahler metric on $X$, which is precisely the curvature of the metric on $L$, $\omega$,
+    which yields the fact that
+    \[F^{m\bar p}=g^{m\bar p}.\]
+    On $L^M\to X$, then, we can further simplify the Bochner-Kodaira formula to
+    \begin{align*}
+        \langle\Box\phi,\phi\rangle&=||\bar\nabla\phi||^2+\int (Mg^{m\bar p}+R^{m\bar p})\phi_{\bar p}\overline{\phi_{\bar m}}h\frac{\omega^n}{n!}.
+    \end{align*}
+    Since $g^{m\bar p}>0$, we can choose $M$ large enough such that
+    \[Mg^{m\bar p}+R^{m\bar p}>0,\]
+    which concludes the proof.
+\end{proof}
+
+\begin{exc}
+    Derive the Bochner-Kodaira formula for the case of $\Lambda^{0,2}$. It will be good for your soul.
+\end{exc}
+
+\subsection{Other Bochner-Kodaira Formulae}
+
+\begin{defn}
+    Define the \textbf{Hodge} operator $\Lambda$ as follows.
+    Let $\Phi\in\Gamma(X,E\otimes\Lambda^{p+1,q+1})$ for some
+    bundle $E\to X$. Then $(\Lambda\Phi)_{\bar KJ}=g^{l\bar p}\Phi^\alpha_{p\bar l\bar KJ}\in\Gamma(X,E\otimes\Lambda^{p,q})$.
+\end{defn}
+
+\begin{exc}
+    Show that $[\partial,\Lambda]=\bar\partial^\dagger$ and $[\bar\partial,\Lambda]=-\partial^\dagger$.
+\end{exc}
+
+Now consider $\bar\Box=\partial\partial^\dagger+\partial^\dagger\partial$ on $\Gamma(X,E\otimes\Lambda^{p,q})$.
+\begin{thm}[Kodaira-Akizuki-Nakano]
+    Let $L\to X$ be a line bundle. Then
+    \[\Box=\bar\Box+[F,\Lambda].\]
+\end{thm}
+\begin{proof}
+    We sketch the proof: 
+    \begin{align*}
+        \Box-\bar\Box&=[\partial,\Lambda]\bar\partial+\bar\partial[\partial,\Lambda]+[\bar\partial,\Lambda]\partial+\partial[\bar\partial,\Lambda]\\
+        &=(\bar\partial\partial+\partial\bar\partial)\Lambda-\Lambda(\bar\partial\partial+\partial\bar\partial)\\
+        &=[\bar\partial\partial+\partial\bar\partial,\Lambda]\\
+        &=[F,\Lambda]
+    \end{align*}
+\end{proof}
+
+In practice, we use the following lemma when we apply the KAN theorem, which gives us a handle on positivity.
+\begin{lem}
+    Let $\omega$ and $F$ be simultaneously diagonalized, i.e. if $\zeta^a=\zeta^a_j dz^j$ is a basis of forms, then
+    $\omega=\frac{i}{2}\sum_a\zeta^a\wedge\overline{\zeta^a}$ and $F=\frac{i}{2}\sum_a\lambda_a\zeta^a\wedge\overline{\zeta^a}$.
+    Then
+    \begin{align*}
+        \langle[F,\Lambda]\Psi,\Psi\rangle&=\frac{1}{2}\sum_{KJ}\left(\sum_{a\in J}\lambda_a+\sum_{b\in K}\lambda_b-\sum_{c=1}^n\lambda_c\right)|\Psi_{\bar KJ}|^2.
+    \end{align*}
+\end{lem}
+Positivity can be tested directly from the term in parentheses. In particular, on positive line bundles, the sums are particularly simple: $p+q-n$.
+Hence we find via this lemma that for a positive line bundle $L$,
+\[\ker\Box\bigg|_{L\otimes\Lambda^{p,q}}=0\]
+when $p+q-n>0$.
+
+This concludes the easy part of this theory. Now we will turn to the cohomology of the $\bar\partial$ complexes.
+
+
+
+
+
 
 
 \end{document}
