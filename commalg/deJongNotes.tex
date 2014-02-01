@@ -6,7 +6,6 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{enumerate}
-\usepackage{todonotes}
 \usepackage{tikz-cd}
 
 \newcommand{\nm}[1]{\;\textnormal{#1}\;}
@@ -225,7 +224,7 @@ Next we wish to invert some elements in $B/\fr p B$. More specifically, since we
     The ring map $A\to S^{-1}A$ given by $a\mapsto \frac{a}{1}$ induces a bijection $\Spec(S^{-1}A)\leftrightarrow\left\{ \fr p\subset A|S\cap \fr p=\varnothing \right\}$.
 \end{lem}
 \begin{proof}
-It's easy to show that $\Spec(\phi) (S^{-1}(A)) \subset \{ \fr p\subset A|S\cap \fr p=\varnothing \}$. Let $\fr q$ be a prime in $S^{-1}A$; if $\phi^{-1}$ contains some $s\in S$, then $\phi(s) \in \fr q$. But $\phi(s)$ is a unit, so $\fr q = S^{-1}A$. For the converse, \todo{how did this work again?}
+It's easy to show that $\Spec(\phi) (S^{-1}(A)) \subset \{ \fr p\subset A|S\cap \fr p=\varnothing \}$. Let $\fr q$ be a prime in $S^{-1}A$; if $\phi^{-1}$ contains some $s\in S$, then $\phi(s) \in \fr q$. But $\phi(s)$ is a unit, so $\fr q = S^{-1}A$. We omit the proof of the converse.
 \end{proof}
 Note that any element of $S$ becomes invertible in $S^{-1}A$ so it is not in any prime ideal of $S^{-1}A$. 
 
@@ -487,7 +486,6 @@ Let $A \to B$ be a ring map. Set $T = \text{Im} \big(\Spec(B) \to \Spec(A) \big)
 Suppose $\fr p\in\bar T$. Then every open neighborhood of $\fr p$ contains a point of $T$. Now pick $f\in A\setminus{\fr p}$. Then $D(f)\subset\Spec A$ is an open neighborhood of $\fr p$. Then there exists a $\fr q\subset B$ with $\Spec(\phi)(\fr q)\in D(f)$, which implies that ther exists a $\fr q\subset B$ such that $\phi(f)\neq\fr q$. Hence $B_f\neq 0$.
 
 Thus we see $\phi(f)\cdot 1\neq 0$ for all $f\in A\setminus\fr p$. Hence $B_\fr p\neq 0$ ($1\neq 0$) and thus $\Spec(B_\fr p)\neq\varnothing$. We conclude (Lemma \ref{L21}) that there exists a $\fr q'\subset B$ such that $\fr p'=\phi^{-1}(\fr q')\in T$ is a generalization of $\fr p$, i.e. $\fr p$ is a specialization of a point of $T$, and we conclude that $\fr p\in T$.
-\todo{understand this}
 \end{proof}
 
 \begin{lem}
@@ -510,7 +508,6 @@ B & & J\arrow[hook]{r} & q'\arrow{d}\arrow[dashed, hook]{r} & ?\arrow[dashed]{d}
 A\arrow{u} & &   & p'\arrow[hook]{r} & p
 \end{tikzcd}
 \]
-\todo{understand this}
 \end{proof}
 
 
@@ -1176,7 +1173,7 @@ If we take $A=k[x_1,\ldots,x_d]$ and $A_d$ to be the homogeneous polynomials of 
 
 \begin{thm}
 \label{L65}
-Let $M$ be a finitely-generated, graded, $A$-module, where $A$ is a graded $k$-algebra which is generated (as a $k$-algebra) by a finite number of elements of degree \todo{$\trdeg$?} 1. Then the function $d\mapsto \dim_k(M_d)$ is a numerical polynomial. This function is known as the \textbf{Hilbert polynomial}.
+Let $M$ be a finitely-generated, graded, $A$-module, where $A$ is a graded $k$-algebra which is generated (as a $k$-algebra) by a finite number of elements of degree 1. Then the function $d\mapsto \dim_k(M_d)$ is a numerical polynomial. This function is known as the \textbf{Hilbert polynomial}.
 \end{thm}
 
 \begin{defn}
@@ -1197,7 +1194,7 @@ We may assume that $A=k[x_1,\ldots, x_d]$, graded as in the above example. The p
 \[0\to M\overset{x_n}{\to}M\to M/x_nM\to 0.\]
 Note that the multiplication by $x_n$ shifts the grading by 1 and that
 \[-\dim M_{d-1}+\dim M_d-\dim \left( M/x_nM\right)_d=0.\]
-Now $M/x_nM$ is a finitely-generated graded module \todo{why? morphism shifts grading} as $k[x_1,\ldots,x_{d-1}]$ so we are done by induction and Lemma \ref{L66}.
+Now $M/x_nM$ is a finitely-generated graded module as $k[x_1,\ldots,x_{d-1}]$ so we are done by induction and Lemma \ref{L66}.
 
 Next consider the case where $x_n^eM=0$ for some $e\geq 0$. In this case we get a short exact sequence
 \[0\to x_nM\to M\to M/x_nM\to 0.\]
@@ -1524,7 +1521,7 @@ For $1\leq i \leq r$ and $1\leq j \leq n_r$ pick $z_{ij} \in K$ such that $z_{ij
 \hspace{1mm}
 \label{L81} 
 \begin{enumerate}
-\item \todo{how do you do formatting here?}The degree of a principal divisor is 0.
+\item The degree of a principal divisor is 0.
 \item If $D\sim_{\text{rat}} D'$ then $\deg(D) = \deg(D')$.
 \end{enumerate}
 \end{cor}
@@ -1822,7 +1819,7 @@ Let us now prove this theorem (for characteristic zero).
 \begin{proof}
 Let us split this into two cases. For this first, assume $K=k(t)$. In this case
 \[\omega=f(t)dt=\sum\]
-\todo{add here}
+Missing notes here
 \end{proof}
 
 
@@ -1931,7 +1928,6 @@ is Zariski closed.
 \begin{proof}
 Pick $a\in\{0,\ldots, r\}$. Then consider
 $k[x_0/x_i,\ldots, x_r/x_i]\to K$ given by $x_j/x_i\mapsto f_j/f_i$. The image is a finite-type $k$-algebra $B\subset K$. Let $B\subset A\subset K$ be the integral closure. Then $A$ is of finite-type over $k$ [Ha, 3.9A]. Then $A$ is a normal Noetherian domain of dimension one with fraction field $K$. Then $\fr m\in\text{MaxSpec } A$ yields a DVR $A_\fr m$ in $C$ with a valuatoin on $K/k$. By Lemma \ref{L15} we get a surjective map from $\text{MaxSpec } A\twoheadrightarrow \text{MaxSpec } B\subset\text{MaxSpec }k[x_0/x_i,\ldots,x_r/x_i]=\Proj^r-V(x_i)\subset\Proj^r$ and the diagram commutes (proof omitted).
-\todo{add diagram}
 \end{proof}
 
 \begin{rem}
@@ -2077,7 +2073,7 @@ By similar reasoning, this has no zeros or poles. In conclusion, our $C$ has a g
 \begin{rem}
 If $\deg F = d>3$, then we get:
 \[      \omega = \frac{dx}{f_y} = - u^{\deg(F) - 3} \frac{du}{g_v}    \]
-Assume we chose coordinates such that $C \cap V(x_0) \cap V(x_1) = \emptyset$. Then $(u=0) \cap (C\cap (\Proj^2 - V(x_1))) = V(x_0) \cap C$. This is a divisor of degree $d$. \todo{figure out why} In conclusion, if $d>3$ then there exists a regular differential form whose divisor of zeros is $(d-3) \cdot$ divisor at $\infty$. This has degree $d(d-3)$. Then:
+Assume we chose coordinates such that $C \cap V(x_0) \cap V(x_1) = \emptyset$. Then $(u=0) \cap (C\cap (\Proj^2 - V(x_1))) = V(x_0) \cap C$. This is a divisor of degree $d$. In conclusion, if $d>3$ then there exists a regular differential form whose divisor of zeros is $(d-3) \cdot$ divisor at $\infty$. This has degree $d(d-3)$. Then:
 \[      2g_C - 2 = d(d-3) \Rightarrow g_C = \frac{(d-1)(d-2)}{2}    \]
 \end{rem}
 
@@ -2584,30 +2580,4 @@ Immediate consequence of the lemma above.
 \end{proof}
 
 \end{document}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

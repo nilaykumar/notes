@@ -15,6 +15,7 @@
 \newcommand{\ra}[0]{\rightarrow}
 \newcommand{\fa}[0]{\;\forall}
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathbb{A}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\F}{\mathbb{F}}

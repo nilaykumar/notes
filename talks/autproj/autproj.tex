@@ -1,0 +1,68 @@
+\documentclass{../../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{amsmath}
+\usepackage{todonotes}
+
+
+\title{An Introduction to Automorphisms of $\Proj^n$}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+%\setcounter{section}{-1}
+
+Recall the definition of projective space $\Proj^n$ from last week.
+\begin{defn}
+    We denote by $\Proj^n$ the space of lines passing through the origin of $\A^{n+1}$.
+    More precisely, let $\A^*$ act on $\A^{n+1}-\{0\}$ by scaling as $\lambda\cdot(x_0,\cdots,x_n)=(\lambda x_0,\cdots, \lambda x_n)$
+    and define \textbf{projective $n$-space} to be the quotient $\Proj^n=\A^{n+1}-\{0\}/\A^*$ by this action.
+\end{defn}
+
+Thinking of projective space as parametrizing a set of lines can be confusing at times, as it somewhat
+obscures the fact that $\Proj^n$ is simply $\A^n$ with extra ``stuff'' added at infinity. Let us thus think
+of projective space in terms of its coordinates.
+
+\begin{defn}
+    Consider a point $p\in\Proj^n$. Treating $\Proj^n$ as a quotient space, we can think of $p$ as the equivalence class
+    of points on a line through $\A^{n+1}$. Suppose that this line passes through the point $\vec x=(x_0,\ldots, x_n)\in\A^{n+1}$.
+    We write \textbf{homogeneous coordinates} for $p$ as
+    \[p=[x_0:\cdots:x_n]=[\lambda x_0:\cdots:\lambda x_n],\]
+    for any $\lambda\in\A^*$. Note that these coordinates respect the action of $\A^*$ defining $\Proj^n$ and hence are well-defined.
+    Moreover, not all $x_i$ can be zero.
+\end{defn}
+
+With this coordinate system in hand, let us try to build an intuitive picture of projective space
+in the next few examples.
+
+\begin{exmp}[Real projective line]
+    Let $\A=\R$ and consider $\Proj^1_{\R}$, the space of lines through the origin of $\R^2$. It is clear that we can
+    parametrize this space by the slopes of the lines everywhere except for the vertical line. This yields an $\R$'s worth
+    of points, giving us the real line. If we now take the slope of the vertical line to be ``infinity,'' we obtain
+    the whole projective space $\Proj^1_\R$. This is formalized by the homogeneous coordinates defined on $\Proj^1_\R$.
+
+    Consider a point $[x:y]\in\Proj^1_\R$. Suppose $y\neq0$. Then, letting $\lambda=y^{-1}$,
+    \[ [x:y]=y^{-1}\cdot[x,y]=[x/y:1]. \]
+    If we now note that $x$ is free to range over all values in $\R$, we recover a copy of $\R$ embedding in $\Proj_\R^1$.
+    We can think of this as the set of lines with finite slopes. If $y=0$, on the other hand, we can write
+    \[ [x:0]=x^{-1}\cdot [x:0]=[1:0]. \]
+    This implies that there is only one point in $\Proj^1_\R$ with $y=0$, which can be thought of as the ``point
+    at infinity.'' It is important to note that the point at infinity is fundamentally no ``different'' than the other points
+    in $\Proj_\R^1$ -- a concept that will become clear when we show that automorphisms of projective space can swap points
+    at infinity with, say, the origin (in this case $[0:1]$). In this sense, we can think of the projective line as a disjoint union 
+    or a ``compactification''
+    $\Proj^1_\R=\R\cup\{\infty\}$
+    (with the topology extended to the quotient topology of $\R^2/\R^*$).
+\end{exmp}
+
+\begin{exmp}[Real projective plane]
+    Let $\A=\R$ and consider $\Proj^2_\R$, the space of lines through the origin of $\R^3$. Using homogeneous coordinates,
+    take a point $[x:y:z]\in\Proj^2_\R$.
+\end{exmp}
+
+
+\end{document}
