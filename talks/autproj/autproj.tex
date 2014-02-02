@@ -5,9 +5,9 @@
 \usepackage{todonotes}
 
 
-\title{An Introduction to Automorphisms of $\Proj^n$}
+\title{A Note on Automorphisms of $\Proj^n_\A$}
 \author{Nilay Kumar}
-\date{Last updated: \today}
+\date{February 7, 2014}
 
 
 \begin{document}
@@ -16,23 +16,27 @@
 
 %\setcounter{section}{-1}
 
-Recall the definition of projective space $\Proj^n$ from last week.
+Throughout this note, $\A=k$ denotes a field and $\A^n$ denotes the affine $n$-space over $k$.
+
+\subsection*{Projective spaces}
+
+Let us start by recalling the definition of projective space $\Proj^n_\A$ from last week.
 \begin{defn}
-    We denote by $\Proj^n$ the space of lines passing through the origin of $\A^{n+1}$.
+    We denote by $\Proj_\A^n$ the space of lines passing through the origin of $\A^{n+1}$.
     More precisely, let $\A^*$ act on $\A^{n+1}-\{0\}$ by scaling as $\lambda\cdot(x_0,\cdots,x_n)=(\lambda x_0,\cdots, \lambda x_n)$
-    and define \textbf{projective $n$-space} to be the quotient $\Proj^n=\A^{n+1}-\{0\}/\A^*$ by this action.
+    and define \textbf{projective $n$-space} to be the quotient $\Proj_\A^n=\A^{n+1}-\{0\}/\A^*$ by this action.
 \end{defn}
 
 Thinking of projective space as parametrizing a set of lines can be confusing at times, as it somewhat
-obscures the fact that $\Proj^n$ is simply $\A^n$ with extra ``stuff'' added at infinity. Let us thus think
+obscures the fact that $\Proj_\A^n$ is simply $\A^n$ with extra ``stuff'' added at infinity. Let us thus think
 of projective space in terms of its coordinates.
 
 \begin{defn}
-    Consider a point $p\in\Proj^n$. Treating $\Proj^n$ as a quotient space, we can think of $p$ as the equivalence class
+    Consider a point $p\in\Proj_\A^n$. Treating $\Proj_\A^n$ as a quotient space, we can think of $p$ as the equivalence class
     of points on a line through $\A^{n+1}$. Suppose that this line passes through the point $\vec x=(x_0,\ldots, x_n)\in\A^{n+1}$.
     We write \textbf{homogeneous coordinates} for $p$ as
     \[p=[x_0:\cdots:x_n]=[\lambda x_0:\cdots:\lambda x_n],\]
-    for any $\lambda\in\A^*$. Note that these coordinates respect the action of $\A^*$ defining $\Proj^n$ and hence are well-defined.
+    for any $\lambda\in\A^*$. Note that these coordinates respect the action of $\A^*$ defining $\Proj_\A^n$ and hence are well-defined.
     Moreover, not all $x_i$ can be zero.
 \end{defn}
 
@@ -55,14 +59,235 @@ in the next few examples.
     in $\Proj_\R^1$ -- a concept that will become clear when we show that automorphisms of projective space can swap points
     at infinity with, say, the origin (in this case $[0:1]$). In this sense, we can think of the projective line as a disjoint union 
     or a ``compactification''
-    $\Proj^1_\R=\R\cup\{\infty\}$
+    $\Proj^1_\R=\R^1\sqcup\{\infty\}$
     (with the topology extended to the quotient topology of $\R^2/\R^*$).
 \end{exmp}
 
 \begin{exmp}[Real projective plane]
     Let $\A=\R$ and consider $\Proj^2_\R$, the space of lines through the origin of $\R^3$. Using homogeneous coordinates,
-    take a point $[x:y:z]\in\Proj^2_\R$.
+    consider a point $[x:y:z]\in\Proj^2_\R$. If $z\neq 0$, we can scale points to be of the form $[x:y:1]$, with $x,y$ free
+    to vary in $\R^2$. This gives us a copy of $\R^2\subset\Proj^2_\R$. Now suppose $z=0$ and $y\neq 0$. In this
+    subset, we can write points as $[x:1:0]$, which gives us a copy of $\R\subset\Proj^2_\R$. This can be interpreted as
+    a ``line at infinity.'' Finally, if $z=0$ and $y=0$, we obtain a single point $[1:0:0]$, interpreted as a ``point at
+    infinity.'' As this exhausts all possibilities, we may write the projective plane as a disjoint union $\Proj^2_\R=\R^2\sqcup\R^1\sqcup\{\infty\}.$ 
 \end{exmp}
 
+\begin{exmp}[Riemann sphere]
+    Let $\A=\C$ and consider $\Proj^1_\C$, the space of ``complex lines'' through the origin of $\C^2$. Also known as the
+    complex projective line, we can analyze $\Proj^1_\C$ in much the same way we dealt with the real projective line.
+    Given a point $[z_1:z_2]\in\Proj^1_\C$, we can consider two cases: either $z_2=0$, in which case we have a single point
+    $[1:0]$, or $z_2\neq0$, in which case we get a complex line (or plane, depending on your terminology) of points $[z_1:1]$.
+    In analogy to the real case, we can think of $\Proj^1_\C$ as the usual complex plane along with a point at infinity.
+
+    One way to visualize the complex projective line is through what is known as the Riemann sphere. Consider a sphere $S^2$
+    sitting tangent to the origin above the complex plane. It is easy to check that lines passing through both the north
+    pole of the sphere and the complex plane give a bijection between $S^2\setminus\{N\}$ and $\C$ -- this is known as the
+    stereographic projection. This bijection can be extended to a bijection between the whole sphere $S^2$ and $\Proj^1_\C$
+    by treating the north pole as the point at infinity. This yields a nice visualization of the complex projective line.
+\end{exmp}
+
+\begin{rem}
+The above examples hint at a pattern for real projective spaces: $\Proj^n_\R=\R^n\sqcup\cdots\sqcup\R^1\sqcup\{\infty\}.$
+Indeed, the reader familiar with topology will note that this is precisely the usual cell decomposition for $\Proj_\R^n$.
+Similar statements apply for the complex case.
+\end{rem}
+
+\subsection*{Automorphisms of projective space}
+
+Projective spaces will turn out to be an excellent backdrop for the classical algebraic geometry we will be discussing,
+and so, among other things, it will be useful to understand the automorphisms of projective spaces.
+
+When discussing spaces such as $\R^n$ or $\C^n$ we typically treat them as finite-dimensional vector spaces, which places us firmly
+in the realm of linear algebra: objects are vector spaces and morphisms between them are linear maps. In this category,
+automorphisms are simply invertible linear maps from a vector space to itself. This set of automorphisms in fact forms a group,
+known as the general linear group $GL_n$, i.e. the group of $n\times n$ matrices with non-zero determinant.
+%Indeed, given an automorphism of $\R^2$, say, $T:\R^2\to\R^2$, we can evaluate it on 
+
+Unfortunately,
+projective spaces $\Proj_\A^n$ do not live in the category of vector spaces, as there is no canonical way to add points. 
+There is, however, a well-defined action of $GL_{n+1}(\A)$ on $\Proj_\A^n$ given -- just as in the case of vector spaces -- by matrix multiplication.
+
+\begin{defn}
+    We define the action of $GL_{n+1}(\A)$ on $\Proj_\A^n$ by matrix multiplication,
+    \begin{align*}
+        \begin{pmatrix}
+            a_{00}&\hdots & a_{0n}\\
+            \vdots &\ddots & \vdots\\
+            a_{n0}&\hdots & a_{nn}
+        \end{pmatrix}
+        \begin{bmatrix}
+            x_0\\\vdots\\x_n
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            a_{00}x_0+\cdots+a_{0n}x_n\\
+            \vdots\\
+            a_{n0}x_0+\cdots+a_{nn}x_n
+        \end{bmatrix},
+    \end{align*}
+    for some $[x_0:\cdots:x_n]\in\Proj^n_\A$.
+\end{defn}
+
+\begin{exmp}
+    Consider the action of $GL_2(\R)$ on $\Proj^1_\R$ given by
+    \[\begin{pmatrix}
+        0&1\\
+        1&0
+    \end{pmatrix}
+    \begin{bmatrix}
+        x\\y
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        y\\x
+    \end{bmatrix}.\]
+    Geometrically, this automorphism ``inverts'' the projective line. It swaps the origin $[0:1]$ and infinity $[1:0]$ and
+    sends points on the real line $[x:1]$ to $[1:x]=[x^{-1}:1]$.
+\end{exmp}
+
+\begin{exmp}
+    Consider again the action of $GL_2(\R)$ on $\Proj^1_\R$ but this time given by 
+    \[\begin{pmatrix}
+        2&0\\
+        0&2
+    \end{pmatrix}
+    \begin{bmatrix}
+        x\\y
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        2x\\2y
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        x\\y    
+    \end{bmatrix}.\] More generally, any scalar matrix $\lambda\cdot\id$ (for $\lambda\in\A^*$) will act on $\Proj^n_\A$
+    as the identity, due to the scaling laws of projective space.
+\end{exmp}
+
+The previous example highlights a redundancy in the action of $GL_{n+1}(\A)$ on $\Proj^n_\A$: there are non-trivial elements of the group
+that act trivially on the space. In the interests of finding the group of self-maps that most accurately ``represent'' projective space, then,
+we should consider elements of $GL_{n+1}(\A)$ only up to scalar multiples. This motivates the following definition.
+
+\begin{defn}
+    Let $\lambda\cdot \id$ be the (normal) subgroup of scalar matrices in $GL_{n}(\A)$. Define the \textbf{projective general linear} group
+    of degree $n$, $PGL_n(\A)$, by the quotient
+    \[PGL_{n}(\A)=GL_n(\A)/\lambda\cdot\id.\]
+\end{defn}
+
+It is worth mentioning at this point that the notion of an automorphism of projective space has not yet been defined. Indeed, we have not
+even decided what kind of objects we should treat projective spaces as! In the context of curves in projective space however,
+it is useful to treat $\Proj^n_\A$ as a projective algebraic set. Recall that a projective algebraic set is a set of points in projective
+space cut out by the vanishing of a set of homogeneous polynomials\footnote{Convince yourself that it makes sense to think about the
+    \textit{vanishing} of homogeneous polynomials in projective coordinates, but that the \textit{value} of an arbitrary polynomial is not well-defined.};
+in particular, a projective algebraic curve is the set of points in
+$\Proj^2_\A$ satisfying $f(x_0,x_1,x_2)=0$, for some homogeneous $f$. Then it is clear that choosing $f=0$ yields the entire projective plane,
+from which it follows that projective spaces are projective algebraic sets.
+
+When one introduces objects of a category (in this case, projective algebraic sets), one also introduces maps, or morphisms, between
+them. Unfortunately, we have not yet built up enough machinery to define morphisms between projective algebraic sets.
+It should be a welcome surprise, then, that in the case of $\Proj^n_\A$ we do not \textit{need} to understand such morphisms,
+as the following theorem shows.
+
+\begin{thm}
+    Let $\Aut(\Proj^n_\A)$ be the group of automorphisms of $\Proj^n_\A$. Then
+    \[\Aut(\Proj^n_\A)=PGL_{n+1}(\A),\]
+    where the action of $PGL_{n+1}(\A)$ on $\Proj^n_\A$ is by matrix multiplication as described above.
+\end{thm}
+
+Hence we will stay away from the machinery of morphisms and instead view automorphisms of projective space simply as actions of $PGL_{n+1}(\A)$,
+which are similar to the more familiar linear transformations of vector spaces. We will not prove the above theorem, as it requires a surprising
+amount of algebraic geometry\footnote{For a proof in the scheme-theoretic case, see Hartshorne ch. II ex. 7.1.1.}; instead, we will prove it for
+the case $n=1$ in the Appendix.
+
+\subsection*{Basic examples}
+
+Let us now turn to some examples, properties, and uses of automorphisms of projective space.
+
+\begin{thm}\todo{finish}
+    Automorphisms preserve certain properties
+\end{thm}
+
+\begin{exmp}[Intersections of curves]
+\end{exmp}
+
+\begin{exmp}[Circle inversions]
+    Consider the complex projective line $\Proj^1_\C$ with homogeneous coordinates $[z_0:z_1]$ and the automorphism
+    that takes $[z_0:z_1]\mapsto[z_1:z_0]$. For $z_1,z_2\neq0$, we find that
+    \[ [z_0:z_1]=[z_0/z_1:1]\mapsto [z_1:z_0]=[z_1/z_0:1]. \]
+    For $z_2=0$, $[1:0]\mapsto[0:1]$, i.e. the origin and the point at infinity are swapped.
+
+    In terms of the geometry of the complex plane, this is a ``geometric inversion'' about the unit circle followed by complex conjugation.
+    Those familiar with Euclidean plane geometry will recall that geometric inversion is a trick that allows one to
+    invert the plane about a given circle. This inversion preserves the measure of angles (but not the direction), and hence
+    is often used to make difficult problems in geometry more tractable. The complex inversion we have defined above,
+    however, is geometric inversion followed by complex conjugation, but still preserves the non-trivial properties of
+    geometric inversion.
+\end{exmp}
+
+In the category of vector spaces, automorphisms are uniquely determined by the image of a basis. Things are not as straightforward
+for projective space, as asking the same question is analogous to asking how many one-dimensional subspaces of $\A^{n+1}$ determine
+an automorphism of $\Proj^n_\A$. Instead, one is forced to go back to the vector space $\A^{n+1}$ underlying $\Proj^n_\A$, find
+the unique linear transformation in $GL_{n+1}(\A)$, and descend to an element of $PGL_{n+1}(\A)$.
+Before we do this, however, let us make the following definition.
+
+\begin{defn}
+    Let $x_0,\ldots, x_{n+1}$ be $n+2$ points in $\Proj^n_\A$. We say that these points are in \textbf{general position}
+    if each subset of $n+1$ points has representative vectors that are linearly independent in $\A^{n+1}$.
+\end{defn}
+
+\begin{exmp}
+    Any two distinct points in $\Proj^1_\A$ are represented by linearly independent vectors; thus, any three distinct points
+    in $\Proj^1_\A$ are in general position.
+\end{exmp}
+
+This leads us to the following important theorem.
+
+\begin{thm}[First fundamental theorem of projective geometry]
+    Let $x_0,\ldots, x_{n+1}$ and $y_0,\ldots, y_{n+1}$ be in general position in $\Proj^n_\A$. Then there exists a unique
+    automorphism $\Gamma:\Proj^n_\A\to\Proj^n_\A$ such that $\Gamma(x_i)=y_i$.
+\end{thm}
+
+\begin{proof}
+    We start with existence.
+    Fix representatives $v_0,\ldots,v_{n+1}$ for $x_0,\ldots,x_{n+1}$. By construction, the first $n+1$ are independent (in $\A^{n+1}$),
+    and hence we can write
+    \[v_{n+1}=\sum_{i=0}^{n}\lambda_i v_i,\]
+    for some $\lambda_i\in\A$. Furthermore, note that $\lambda_i\neq0$ for all $i$, as otherwise, we would find a linear dependence between
+    $n+1$ of the vectors, contradicting general position. Hence if we rescale each representative $v_i$ (except for $v_{n+1}$) by $\lambda_i^{-1}$,
+    we find that
+    \[v_{n+1}=\sum_{i=0}^nv_i.\]
+    Furthermore, these $v_i$ are unique by linear independence -- if $\sum_{i=0}^nv_i=\sum_{i=0}^n\mu_i v_i,$ then $\mu_i=1$.
+    We can do the same for $y_0,\ldots,y_{n+1}$ by choosing representatives $w_i$ such that
+    \[w_{n+1}=\sum_{i=0}^nw_i,\]
+    uniquely.
+    Now, since $v_0,\ldots, v_n$ are linearly independent, they form a basis for $\A^{n+1}$, and hence
+    determine a (unique) linear transformation $T:\A^{n+1}\to\A^{n+1}$ satisfying $T(v_i)=w_i$. By independence
+    of $w_0,\cdots, w_n$, we see that $T$ is in fact invertible, i.e. $T\in GL_{n+1}(\A)$.
+    We denote by $\Gamma$ the image of $T$ under the quotient map $GL_{n+1}(\A)\twoheadrightarrow PGL_{n+1}(\A)$.
+    It is clear that $\Gamma$ is the desired automorphism.
+
+    Uniqueness is straightforward: suppose $T':\A^{n+1}\to\A^{n+1}$ provides another automorphism $\Gamma':\Proj^n_\A\to\Proj^n_\A$
+    such that $\Gamma'(x_i)=y_i$. Then $T'(v_i)=\mu_iw_i$ for some scalar multiples $w_i\in\A$, and we find that
+    \[\mu_{n+1}w_{n+1}=T'(v_{n+1})=\sum_{i=0}^nT'(v_i)=\sum_{i=0}^n\mu_iw_i.\]
+    By uniqueness of the expression $w_n=\sum_{i=0}^nw_i$, forcing $\mu_i/\mu_{n+1}=1$, i.e. $T'=\mu_i/\mu_{n+1}T$,
+    and hence $T$ and $T'$ must have the same image in $PGL_{n+1}$: $\Gamma'=\Gamma$.
+\end{proof}
+
+\begin{rem}
+    A simple corollary of this theorem is that three points in $\Proj^1_\A$ determine an automorphism. The usual choice of three points is $[0:1],[1:1],$ and $[1:0]$.
+    In other words, there is a unique automorphism of $\Proj^1_\A$ sending three distinct points to $0,1,$ and $\infty$. Note, for example, that in the case of $\A=\F_2$,
+    the finite field with two elements, these are the only three points in $\Proj^1_{F_2}$, and hence $PGL_{2}(\F_2)\cong S_3$, the symmetric group on three letters.
+\end{rem}
+
+\begin{exc}
+    Show that $n+2$ points in $\Proj^n_\A$ are in general position if and only if they are the image under the quotient
+    map $\A^{n+1}\twoheadrightarrow\Proj^n_\A$ of $\{e_0,\ldots,e_n,e_0+\cdots+e_n\}$, where $\{e_i\}$ is a basis for $\A^{n+1}$
+    (hint: see proof of theorem).
+\end{exc}
+
+
+
+\subsection*{Appendix}\todo{do this at some point}
 
 \end{document}
