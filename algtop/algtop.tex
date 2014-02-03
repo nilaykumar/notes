@@ -16,7 +16,7 @@
 
 %\setcounter{section}{-1}
 
-\section{Class 1}
+\section*{Class 1}
 \begin{rem}
     The goal of algebraic topology is to develop algebraic tools to study topological spaces. To this end, all maps are assumed
     to be continuous unless otherwise stated.
@@ -133,7 +133,7 @@ We are of course already familiar with products and quotients.
     well.
 \end{defn}
 
-\section{Class 2}
+\section*{Class 2}
 
 \begin{defn}
     We define the \textbf{wedge sum} of two topological spaces as follows. Pick $x_0\in X,y_0\in Y$, and define
@@ -296,8 +296,117 @@ continuous maps get associated to group homomorphisms. In the case of the fundam
 we will obtain a covariant functor. The fundamental group will be useful as something that can tell various
 spaces apart.
 
+\section*{Class 3}
 
+\begin{defn}
+    A \textbf{path} in a space $X$ is a continuous map $f:I\to X$.
+\end{defn}
 
+\begin{defn}
+    A \textbf{homotopy of paths} in $X$ is a family $f_t:I\to X$, $t\in I$ such that
+    \begin{enumerate}
+        \item the endpoints $f_t(0)=X_0$ and $f_t(1)=x_1$ are independent of $t$;
+        \item the associated map $F:I\times I\to X$ is continuous.
+    \end{enumerate}
+    If these conditions are satisfied, then $f_0$ and $f_1$ are \textbf{homotopic}, denoted $f_0\simeq f_1$.
+\end{defn}
 
+\begin{exmp}
+    Let $f_0,f_1$ be two paths in $\R^n$ with the same endpoints $x_0$ and $x_1$. Then $f_0\simeq f_1$
+    via the linear homotopy $f_t(s)=(1-t)f_0(s)+tf_1(s)$. Here we have used only the convexity of $\R^n$;
+    more generally, then, this is true in any convex subset of $\R^n$.
+\end{exmp}
+
+\begin{prop}
+    The relation of homotopy on paths with fixed endpoints in any space is an equivalence relation.
+    We will denote the homotopy class of a path $f$ by $[f]$.
+\end{prop}
+\begin{proof}
+    Reflexivity is clear via the constant homotopy, and symmetric by taking $f_{1-t}$ in place of $f_t$.
+    Finally, for transitivity, suppose that $f_0\simeq f_1$ via $f_t$ and $f_1=g_0$ and $g_0\simeq g_1$
+    via $g_t$. Then $f_0\simeq g_1$ by the homotopy that traverses $f_{2t}$ and then $g_{2t-1}$. Note that
+    this is well-defined at $t=1/2$ and that the associated map $H(s,t)$ is continuous because a function
+    on the union of two closed sets is continuous if the restriction to each of the closed
+    sets is continuous.
+\end{proof}
+
+\begin{defn}
+    Let $f$ and $g$ be paths such that $f(1)=g(0)$. The \textbf{composition} or \textbf{product path}
+    $f\diamond g$ is $f(2s)$ for $0\leq s\leq 1/2$ and $g(2s-1)$ for $1/2\leq s\leq 1$.
+\end{defn}
+
+\begin{rem}
+    Note that the product operation on paths respects homotopy classes. In particular, if $f_0\simeq f_1$ and
+    $g_0\simeq g_1$, via $f_t$ and $g_t$ respectively, and $f_0(1)=g_0(0)$, then $f_t\diamond g_t$ provides
+    a homotopy between $f_0\diamond g_0$ and $f_1\diamond g_1$.
+\end{rem}
+
+\begin{defn}
+    A \textbf{reparametrization} of a path $f$ is a composition $f\circ \phi$ where $\phi:I\times I$ is
+    a continuous map such that $\phi(0)=0$ and $\phi(1)=1$.
+\end{defn}
+
+\begin{rem}
+    Note that $f\circ\phi\simeq f$ via $f\circ \phi_t$ where $\phi_t(s)=(1-t)\phi(s)+ts$.
+\end{rem}
+
+\begin{defn}
+    A \textbf{loop} is a path $f:I\to X$ with $f(0)=f(1)=x_0$. The point $x_0$ is the \textbf{basepoint}.
+\end{defn}
+
+\begin{defn}
+    The set of all homotopy classes $[f]$ of loops $f:I\to X$ (or equivalently $f:S^1\to X$) at the basepoint
+    $x_0$ is $\pi_1(X,x_0)$, the \textbf{fundamental group of $X$ at basepoint $x_0$}.
+\end{defn}
+
+\begin{prop}
+    $\pi_1(X,x_0)$ is a group with respect to the product $[f][g]=[f\diamond g]$.
+\end{prop}
+\begin{proof}
+    Since we are restricted to loops with a fixed basepoint $x_0$, we can always concatenate them.
+    The product $[f][g]=[f\diamond g]$ is well-defined since we showed that the product respects
+    homotopy classes. Let us now check the group axioms. The product of two loops at $x_0$ is
+    again a loop at $x_0$, and hence the set is closed under the operation. Let $c$ be the
+    constant path at $x_0$, that is $c(s)=x_0$ for all $s\in I$. Let $\phi$ be the reparametrization
+    that traverses $f$ in the first half, and stays at the endpoint $f(1)$ for the second half.
+    Then $f\circ\phi\simeq f\diamond c$ so $f\diamond c\simeq f$. Similarly, if $\phi$ stays at $f(0)$
+    for the first half and then traverse $f$ in the second half, we find that $f\circ\phi\simeq c\diamond f$
+    and hence $c\diamond f\simeq f$. Hence $c$ is the identity of $\pi_1(X,x_0)$.
+
+    Next let us show that the group operation is associative. Given loops $f,g,h$, we want to show that
+    $f\diamond(g\diamond h)\simeq (f\diamond g)\diamond h$. But note that
+    $f\diamond(g\diamond h)\simeq (f\diamond g)\diamond h\circ\phi$
+    where $\phi$ sends $1/2$ to $1/4$ and $3/4$ to $1/2$ and is linear everywhere else, and hence
+    associativity holds.
+
+    Next let us determine inverses. Given a path $f$, define the inverse path to be $\bar f(s)=f(1-s)$.
+    Let $f$ be a loop.  First note that $f\diamond\bar f\simeq c$ via $h_t=f_t\diamond g_t$ where
+    $f_t$ is $f$ on $s\in[0,1-t]$ and $f(1-t)$ on $s\in[1-t,1]$ and $g_t=\bar f_{t}$. This gives us
+    the desired homotopy between $f\diamond\bar f$ to $c\diamond\bar c=c$. Similarly for the other direction.
+    Hence $\bar f$ is an inverse for $f$. This concludes the proof.
+\end{proof}
+
+\begin{exmp}
+    Suppose $X\subset\R^n$, $X$ convex with $x_0\in X$. Then $\pi_1(X,x_0)=0$ since any two loops
+    $f$ and $g$ are homotopic via the linear homotopy $h_t(s)=(1-t)f(s)+tg(s)$.
+\end{exmp}
+
+It is natural to ask how $\pi_1(X,x_0)$ depends on the basepoint $x_0$; of course, $\pi_1(X,x_0)$ only
+detects the path-component of $X$ that contains $x_0$. Hence let $x_1$ lie in the same path component of
+$X$ as $x_0$ and let $h:I\to X$ be a path from $x_0$ to $x_1$ with inverse $\bar h(s)=h(1-s)$. Then if $f$
+is a loop at $x_1$, then $h\diamond f\diamond \bar h$ is a loop at $x_0$.
+
+\begin{prop}
+    The map $\beta_h:\pi_1(X,x_1)\to\pi_1(X,x_0)$ given by $[f]\mapsto[h\diamond f\diamond \bar h]$
+    is an isomorphism.
+\end{prop}
+\begin{proof}
+    It $f_t$ is a homotopy of a loops based at $x_1$, then $h\diamond f_t\diamond\bar h$ is a homotopy
+    of loops at $x_0$, so the map is well-defined. Next, note that $\beta_h$ is indeed a homomorphism,
+    as $\beta_h[f\diamond g]=[h\diamond f\diamond \bar h\diamond h\diamond g\diamond \bar h]=\beta_h[f]\beta_h[g]$.
+    It now suffices to find an inverse to $\beta_h$. Let us try $\beta_{\bar h}$. Note that
+    $\beta_h\beta_{\bar h}[f]=\beta_h[\bar h\diamond f\diamond h]=[h\diamond\bar h\diamond f\diamond h\diamond\bar h]=[f]$.
+    Similarly to show that $\beta_{\bar h}$ is a right-inverse. This shows that $\beta_h$ is an isomorphism.
+\end{proof}
 
 \end{document}
