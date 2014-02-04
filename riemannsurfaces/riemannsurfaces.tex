@@ -545,10 +545,88 @@ when $p+q-n>0$.
 
 This concludes the easy part of this theory. Now we will turn to the cohomology of the $\bar\partial$ complexes.
 
+\subsection*{Cohomology}
 
+Let $E\to X$ be a holomorphic line bundle, with $H_{\bar\alpha\beta}$ a metric on $E$ and $g_{\bar kj}$ a (K\"ahler) metric on $X$.
+Recall the $\bar\partial$ complex from above. We define the \textbf{cohomology} of the $\bar\partial$ complex as
+\begin{align*}
+    H^{p,q}_{\bar\partial}(X,E\otimes\Lambda^{p,q})=\ker\bar\partial|_{\Gamma(X,E\otimes\Lambda^{p,q})}/\text{Im }\bar\partial|_{\Gamma(X,E\otimes\Lambda^{p,q-1})}.
+\end{align*}
+This makes sense because the complex is exact by construction.
+This is the analogue of de Rham cohomology, where the \textbf{de Rham cohomology}
+\begin{align*}
+    H^p_{dR}(X)=\ker d|_{\Gamma(x,\Lambda^p)}/\text{Im }d|_{\Gamma(X,\Lambda^{p-1})}
+\end{align*}
+is defined for smooth compact manifolds $X$, and carries some sort of topological data of $X$. In our case, we are dealing with complex manifolds
+and hence the cohomology of the $\bar\partial$ complex depends sensitively on the complex structure of the manifold.
+There are two approaches to computing $H^p(X)$ (or at least, to determine when it is 0), namely Hodge theory and the $L^2$ estimates
+of H\"ormander. 
+In Hodge theory, the key statment is that $H^{p}_{dR}(X)$ is isomorphic to $\ker\Delta$, where $\Delta$ is the Laplacian $\Delta=dd^\dagger+d^\dagger d$
+(having introduced a metric). What is of course remarkable is that the left-hand side of the equality is metric-independent. Then one can use certain
+vanishing theorems to show that this kernel, and hence the cohomology group, is zero.
+On the other hand, the $L^2$ estimates approach gives conditions under which the equation $d=v$ for $v\in L^2(X,\Lambda^{p+1})$ and $dv=0$, admits solutions.
+This approach has intrinsic interest also, however, because this equation involves only one derivative.
 
+The key step in the Hodge theory approach is the construction of an operator $G$ such that
+\[G\Delta=\Delta G=I-\Pi\]
+where $\Pi:L^2(X,\Lambda^p)\to\ker\Delta$ is the orthogonal projection. Furthermore, $dG=Gd$ and $d^\dagger G=Gd^\dagger$.
+Assume the existence of $G$. Then
+\begin{align*}
+    u=(\Delta g)u+\Pi u=d(d^\dagger Gu)+d^\dagger(dGu)+\Pi u
+\end{align*}
+for any smooth $u$. If $u\in\ker d$ then $du=0$ and we are left with
+\begin{align*}
+    u&=d(d^\dagger Gu)+\Pi u\\
+    [u]&=[\Pi u].
+\end{align*}
+But by definition, $\Pi u\in\ker\Delta$ and we are done.
+Moreover, suppose we want to solve the $d$ equation $du=v$. Just take $u=d^\dagger Gv$. Then
+\[du=dd^\dagger Gv=(\Delta-d^\dagger d)Gv=\Delta Gv=v-\Pi v.\]
+Hence if $v$ is of class zero, then $v$ is given by this equation. Otherwise, the equation cannot be solved.
 
+Now how does one prove the existence of $G$? This follows (with more work, of course) from the following estimate
+\begin{align*}
+    ||u||_{W^{k+2,2}}\leq c(||\Delta u||^2_{W^{k,2}}+||u||^2_{W^{k,2}})
+\end{align*}
+for all $u\in C^\infty(X,\Lambda^p)$ where we have the Sobolev norm
+\begin{align*}
+    ||u||^2_{W^{k,p}}\equiv \sum_{|\alpha|\leq k}||D^\alpha u||^2_{L^p}.
+\end{align*}
+for $p>1$. These kinds of estimates hold for elliptic operators (in this case the Laplacian).
 
+\subsection*{The $L^2$ estimates approach}
+
+Let $L\to X$ be a holomorphic line bundle over $X$ a compact complex manifold and let $h$ be a metric on $L$
+and $g_{\bar kj}$ to be K\"ahler. We will in fact work with distributions instead of functions. Consider
+$L^1_{loc}(\R^n)$. Let $f\in L^1_{loc}(\R^n).$ The derivative $\partial f/\partial x_1$ in the sense of
+distributions is the functional
+\begin{align*}
+    C^\infty_0(\R^n)\ni\phi\mapsto -\int f\frac{\partial\phi}{\partial x_1}
+\end{align*}
+If $f\in C^1_{loc}(\R^n)$ we can integrate by parts and the functional becomes
+\[C^\infty_0(\R^n)\ni\phi\mapsto \int\frac{\partial f}{\partial x_1}\phi.\]
+This gives us a generalized way of thinking about the derivative. Hence we define the domain of $\bar\partial$
+to be \[\text{Dom }\bar\partial_{p,q}=\left\{\phi\in L^2(X,L\otimes\Lambda^{p,q})\mid\exists\psi\in L^2(X,L\otimes\Lambda^{p,q+1})\text{ with }\bar\partial\phi=\psi\right\},\]
+where the equality is taken in the sense of distributions. Similarly, we must define the domain of $\bar\partial^\dagger$:
+\[\text{Dom }\bar\partial^\dagger=\left\{ \psi\in L^2(X,L\otimes\Lambda^{p,q+1})\mid \exists \phi\in L^2(X,L\otimes\Lambda^{p,q})\text{ with }\bar\partial^\dagger\psi=\phi \right\}\]
+again where the equality is taken in the sense of distributions as well as $\langle\bar\partial\lambda,\psi\rangle=\langle\lambda,\phi\rangle$ for all $\lambda\in\text{Dom }\bar\partial$.
+Restricting this extra equation to $\lambda\in C^\infty_0$, we obtain the weaker condition that $\bar\partial^\dagger\psi=\phi$ in the sense of distributions.
+
+The key lemma is as follows. Let $g_{\bar kj}$ be a K\"ahler metric on $X$ and $h$ a metric on $L$. Assume that the following
+inequality holds:
+\[||\bar\partial u||^2_{L^2}+||\bar\partial^\dagger u||^2_{L^2}\geq\int_X \langle Au,u\rangle\]
+for all $u\in\text{Dom }\bar\partial_1\cap\text{Dom }\bar\partial^\dagger_0$.
+Then, for all $f\in L^2(X,L\otimes \Lambda^{0,1})$, with $\bar\partial f=0$ in the sense of distributions, and there exists $v$
+satisfying $\bar\partial v=f$ and $\int_x|v|^2\leq\int_X\langle A^{-1}f,f\rangle$. Here we are distinguishing the two different $\bar\partial$ operators
+that are present. More explicitly, we write $u=\sum u_{\bar j}d\bar z^j$ with $u_{\bar j}$ a section of $L$ and
+\[\langle Au,u\rangle=A^{l\bar j}u_{\bar j}\overline{u_{\bar l}}h.\]
+Then
+\[\int_X \langle Au,u\rangle=\int_X A^{l\bar j}u_{\bar j}\overline{u_{\bar l}}h\frac{\omega^n}{n!}\]
+Furthermore, $v\in L^2(X,L\otimes \Lambda^{0,0})$ and hence \[\int|v|^2=\int |v|^2h\frac{\omega^n}{n^!}\]
+and
+\[\int\langle A^{-1}f,f\rangle=\int (A^{-1})^{l\bar j}f_{\bar j}\overline{f_{\bar l}}h\frac{\omega^n}{n!}.\]
+Hence we can write the restriction on $v$ more explicitly as
+\[\int |v|^2h\frac{\omega^n}{n!}\leq \int (A^{-1})^{l\bar j}f_{\bar j}\overline{f_{\bar l}}h\frac{\omega^n}{n!}.\]
 
 
 \end{document}

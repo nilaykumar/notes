@@ -1,0 +1,39 @@
+\documentclass{../../mathnotes}
+
+\usepackage{todonotes}
+
+\title{Lie Groups PSET 7}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1 (Kirillov 8.7)}
+
+\subsection*{Problem 2 (Kirillov 8.9)}
+
+Let $V_n$ be the irreducible $(n+1)$-dimensional representation of $\fr{sl}_2\C$.
+We wish to show that
+\[V_n\otimes V_m\simeq\bigoplus V_k,\]
+where the direct sum is over all $k\in\Z_+$ satisfying the \textit{Clebsh-Gordan condition}:
+\begin{align*}
+    |n-m|\leq k\leq n+m \text{ for } n+m-k\in2\Z.
+\end{align*}
+Recall first that the formal character for $V_n$ is given
+\[\text{ch}(V_n)=x^n+x^{n-2}+\cdots+x^{-n+2}+x^{-n}.\]
+Using the properties
+\begin{align*}
+    \text{ch}(V_n\otimes V_m)&=\text{ch}(V_n)\text{ch}(V_m)\\
+    \text{ch}\left( \bigoplus V_k \right)&=\sum \text{ch}(V_k)
+\end{align*}
+we find that
+\[\text{ch}(V_n)\text{ch}(V_m)=\sum\text{ch}(V_k),\]
+with the summation to be solved for. More explicitly, we have
+\[ \left( x^n+x^{n-2}+\cdots+x^{-n+2}+x^{n} \right)\left( x^{m}+x^{m-2}+\cdots+x^{-m+2}+x^{-m} \right) \]
+
+
+\end{document}
+
