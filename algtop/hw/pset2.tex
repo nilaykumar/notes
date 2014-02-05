@@ -1,0 +1,85 @@
+\documentclass{../../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\title{Introduction to Algebraic Topology PSET 2}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{prop}
+    Let $X$ be a contractible space. Then the suspension $SX$ is contractible as well.
+\end{prop}
+\begin{proof}
+    Note that it suffices to show that a product $X\times Y$ of two contractible spaces is contractible,
+    as the suspension (in this case) is simply a quotient of a product by contractible subspaces.
+    By contractibility of $X$ we have a homotopy $f_t:X\times I\to X$ from $\id_X$ to $c_X=x_0$.
+    Similarly for $Y$ we have a homotopy $g_t:Y\times I\to Y$ from $\id_Y$ to $c_Y=y_0$.
+    Consider the map $h_t:X\times Y\times I\to X\times Y$ given by $(x,y,t)\mapsto (f_t(x),g_t(y))$.
+    Clearly $h_t$ is continuous, and at $t=0$ $h_0(x,y)=(f_0(x),g_0(y))=(x,y)$, while at $t=1$
+    $h_1(x,y)=(f_1(x),g_1(y))=(x_0,y_0)$. Hence $h_t$ is a homotopy between $\id_{X\times Y}$
+    and $c_{X\times Y}=(x_0,y_0)$. The statement of the theorem holds for the product $X\times I$.
+\end{proof}
+
+\begin{prop}
+    The punctured $\RP^n$ is homotopy equivalent to $\RP^{n-1}$.
+\end{prop}
+\begin{proof}
+    Recall that we can view $\RP^n$ as the quotient $D^n/\partial D^n$ where the antipodal points
+    of $\partial D^n$ are identified. Removing the center of $D^n$, we find that the punctured
+    $\RP^n$, which we denote by $X$, is expressed $X=D^n-\{0\}/\partial D^n$. It is
+    now clear that $X$ is homotopy equivalent to $\partial D^n$ via the expression from class,
+    \[f_t(x)=\frac{x}{1-t+t|x|},\]
+    as it is a deformation retract.  But the boundary $\partial D^n$ that is left is
+    precisely $\RP^{n-1}$ (recall the cell decomposition of the real projective space). Hence
+    $X\simeq \RP^{n-1}$.
+\end{proof}
+
+\begin{prop}
+    Consider the space obtained from $S^2$ by attaching $n$ 2-cells along any collection
+    of $n$ circles in $S^2$. This space is homotopy equivalent to the wedge sum of $n+1$
+    2-spheres.
+\end{prop}
+\begin{proof}
+    Recall that any circle $S^1$ on $S^2$ is contractible to a point (simply pull it along while
+    making the radius smaller). Hence attaching a single
+    2-cell along a circle in $S^2$ and quotienting said circle to a point yields a space
+    (by the theorem from class) homotopy equivalent to the wedge sum of 2 2-spheres. Iterating this,
+    we obtain the desired result (note that we could further draw arcs between the various points
+    of attachment and quotient by those arcs and obtain homotopy equivalent spaces where the 2-spheres
+    are wedged all at the same point).
+\end{proof}
+
+\begin{prop}
+    The subspace $X\subset\R^3$ formed by a Klein bottle intersecting itself in a circle
+    is homotopy equivalent to $S^1\vee S^1\vee S^2$.
+\end{prop}
+\begin{proof}
+    Consider the circle at which the Klein bottle intersects itself (see diagrams on next page). This circle is of course
+    contractible to a point, and hence, quotienting, we find a space homotopy equivalent to the bottle
+    that now intersects itself in a pinched point. Note that we can push in the outer portion of the handle
+    into the bottle to make it more ``spherical'' and attach a line from the north pole of the sphere to
+    the point of self-intersection. Now, drawing an arc from the north pole to the point of self-intersection
+    and quotienting yields a space homotopy equivalent to the bottle; note that we have found one of the circles.
+    The next circle comes from closing up the funnel into the sphere (from the bottom) into a circle lying
+    inside the sphere. Hence we find that this subspace of the Klein bottle is homotopy equivalent to $S^1\vee S^1\vee S^2$.
+\end{proof}
+
+\begin{prop}
+    Consider a CW complex $X$ that can be written as two contractible subcomplexes whose intersection
+    is also contractible. Then $X$ is contractible.
+\end{prop}
+\begin{proof}
+    Write $X=A_1\cup A_2$ as per the proposition. As $A_1\cup A_2$ is contractible, $X/(A_1\cap A_2)$
+    is homotopic to $X$. Of course, crushing $A_1\cap A_2$ to a point means that we are left with a union
+    space which is the wedge sum $X/(A_1\cap A_2)=A_1/(A_1\cap A_2)\vee A_2/(A_1\cap A_2)$. 
+    Each of these wedge summands is contractible (as $A_1\cap A_2$ and $A_1,A_2$ are contractible).
+    Hence, quotienting by either of them yields a contractible space, and thus $X$ is contractible.
+\end{proof}
+
+\end{document}
