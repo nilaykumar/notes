@@ -612,12 +612,17 @@ where the equality is taken in the sense of distributions. Similarly, we must de
 again where the equality is taken in the sense of distributions as well as $\langle\bar\partial\lambda,\psi\rangle=\langle\lambda,\phi\rangle$ for all $\lambda\in\text{Dom }\bar\partial$.
 Restricting this extra equation to $\lambda\in C^\infty_0$, we obtain the weaker condition that $\bar\partial^\dagger\psi=\phi$ in the sense of distributions.
 
-The key lemma is as follows. Let $g_{\bar kj}$ be a K\"ahler metric on $X$ and $h$ a metric on $L$. Assume that the following
+Our main goal is to solve $\bar\partial u=f$, where $f\in L^2(X,L\otimes\Lambda^{0,1})$.
+The key lemma is as follows.
+\begin{lem}
+ Let $g_{\bar kj}$ be a K\"ahler metric on $X$ and $h$ a metric on $L$. Assume that the following
 inequality holds:
 \[||\bar\partial u||^2_{L^2}+||\bar\partial^\dagger u||^2_{L^2}\geq\int_X \langle Au,u\rangle\]
-for all $u\in\text{Dom }\bar\partial_1\cap\text{Dom }\bar\partial^\dagger_0$.
-Then, for all $f\in L^2(X,L\otimes \Lambda^{0,1})$, with $\bar\partial f=0$ in the sense of distributions, and there exists $v$
-satisfying $\bar\partial v=f$ and $\int_x|v|^2\leq\int_X\langle A^{-1}f,f\rangle$. Here we are distinguishing the two different $\bar\partial$ operators
+for all $u\in\text{Dom }\bar\partial_1\cap\text{Dom }\bar\partial^\dagger_0$ and $A$ is a positive definite matrix.
+Then, for all $f\in L^2(X,L\otimes \Lambda^{0,1})$, with $\bar\partial f=0$ in the sense of distributions, and there exists $v\in L^2(X,L)$
+satisfying $\bar\partial v=f$ and $\int_x|v|^2\leq\int_X\langle A^{-1}f,f\rangle$. 
+\end{lem}
+Here we are distinguishing the two different $\bar\partial$ operators
 that are present. More explicitly, we write $u=\sum u_{\bar j}d\bar z^j$ with $u_{\bar j}$ a section of $L$ and
 \[\langle Au,u\rangle=A^{l\bar j}u_{\bar j}\overline{u_{\bar l}}h.\]
 Then
@@ -627,6 +632,97 @@ and
 \[\int\langle A^{-1}f,f\rangle=\int (A^{-1})^{l\bar j}f_{\bar j}\overline{f_{\bar l}}h\frac{\omega^n}{n!}.\]
 Hence we can write the restriction on $v$ more explicitly as
 \[\int |v|^2h\frac{\omega^n}{n!}\leq \int (A^{-1})^{l\bar j}f_{\bar j}\overline{f_{\bar l}}h\frac{\omega^n}{n!}.\]
+
+We use the following easy fact from functional analysis.
+\begin{lem}
+    Let $\phi\in\text{Dom }\bar\partial_0^\dagger$, and let $\phi=\phi_1+\phi_2$ where $\phi_1\in\ker\bar\partial_1$
+    and $\phi_2\in(\ker\bar\partial_1)^\perp$. Then $\phi_1,\phi_2\in\text{Dom }\bar\partial_0^\dagger$.
+\end{lem}
+Note that the decomposition in the lemma makes sense because $\ker\bar\partial_1$ is a closed subspace of $L^2$.
+\begin{proof}
+    Since $\bar\partial_1\bar\partial_0=0$, it follows that the range of $\bar\partial_0$ is contained in $\ker\bar\partial_1$.
+    This implies that if $\phi_2\perp\ker\bar\partial_1$ then $\phi_2\perp(\text{Range }\bar\partial_0)^\perp$, i.e. perpendicular
+    to the space $0=\langle\bar\partial_0\psi,\phi\rangle$ for $\psi\in\text{Dom }\bar\partial_0$. This in turn means that
+    $\langle\bar\partial_0\psi,\phi_2\rangle=\langle\psi,0\rangle$ for all $\psi\in\text{Dom }\bar\partial$, and thus that
+    $\phi_2\in\text{Dom }\bar\partial_0^\dagger$ and $\bar\partial_0^\dagger\phi_2=0$.
+\end{proof}
+
+\begin{proof}[Proof of earlier lemma]
+    Consider the functional $T$ defined by: $\bar\partial_0^\dagger\phi\mapsto\langle\phi,f\rangle$ for $\phi\in\text{Dom }\bar\partial_0^\dagger$.
+    Note this is defined only on a subspace.
+    It is not \textit{a priori} obvious that this is well defined - there might be multiple such $\phi$. Decompose $\phi=\phi_1+\phi_2$
+    with $\phi_2\in\ker\bar\partial_1,\phi_2\perp\ker\bar\partial_1$. We can write 
+    \begin{align*}
+        \langle\phi,f\rangle&=\langle\phi_1,f\rangle+\langle\phi_2,f\rangle\\
+        &=\langle\phi_1,f\rangle.
+    \end{align*}
+    By the lemma just proved, we see that $\phi_1\in\text{Dom }\bar\partial_0^\dagger\cap\text{Dom }\bar\partial_1$.
+    Using Cauchy-Schwarz with respect to the $L^2$ norm determined by $A$ (it is positive definite), we find
+    \begin{align*}
+        |\langle\phi_1,f\rangle|^2&\leq\left( \int\langle A\phi_1,\phi_1\rangle \right)\left( \int\langle A^{-1}f,f\rangle\right)\\
+        &\leq\left( ||\bar\partial\phi_1||^2+||\bar\partial^\dagger\phi_1||^2 \right)\left( \int\langle A^{-1}f,f\rangle\right)\\
+        =||\bar\partial^\dagger\phi_1||^2\int\langle A^{-1}f,f\rangle.
+    \end{align*}
+    This shows that the functional defined above does indeed make sense, once in the context of the estimates of the hypothesis.
+    Now, by the Hahn-Banach theorem stated below, applied to this functional, we obtain a functional $\tilde T:L^2\to \C$
+    extending $T$ such that $||\tilde T||=||T||$. This implies that there exists a $u\in L^2$ such that $\tilde T(\psi)=\langle\psi,u\rangle$
+    and $||u||=||\tilde T||$ for any $\psi\in L^2$. In particular, take $\psi=\bar\partial_0^\dagger\phi$ with $\phi\in C_0^\infty$.
+    Then $\langle\bar\partial_0^\dagger\phi_1,u\rangle=T(\bar\partial_0^\dagger\phi)=\langle\phi,f\rangle$, which is equivalent
+    to the fact that $\bar\partial u=f$ in the sense of distributions.
+\end{proof}
+
+\begin{thm}[Hahn-Banach]
+    Let $V\subset\mathcal{B}$ a Banach space and $T$ be a linear functional $V\ni v\mapsto T(v)$
+    with $|T(v)|\leq A||v||$. Then there exists an extension $\tilde T$ of $T$ to the whole of $\mathcal{B}$,
+    such that $\tilde T$ satisfies $|T(v)|\leq A||v||$ for all $v\in\mathcal{B}$.
+\end{thm}
+\begin{proof}
+    Omitted.
+\end{proof}
+
+When do the estimates in the hypothesis of the lemma hold? Recall the Bochner-Kodaira formula on $C^\infty(X,L\otimes\Lambda^{0,1})$,
+\begin{align*}
+    \langle\Box\phi,\phi\rangle=||\bar\partial \phi||^2+||\bar\partial^\dagger \phi||^2
+\end{align*}
+where $\Box=\bar\partial\bar\partial^\dagger+\bar\partial^\dagger\bar\partial$. Acting on smooth forms, we found
+\begin{align*}
+    \langle\Box\phi,\phi\rangle=||\nabla_{\bar k}\phi_{\bar j}||^2_{L^2}+\int(F_{\bar kj}+R_{\bar kj})\phi^j\overline{\phi^k}h\frac{\omega^n}{n!}.
+\end{align*}
+Recall that $F_{\bar kj}=-\partial_j\partial_{\bar k}\log h$ and $R_{\bar kj}=R_{\bar kj}P_p=R_{\bar kp}P_j$.
+Note that the above lemma will hold if $F_{\bar kj}+R_{\bar kj}>0$ and the inequality required by the lemma extends
+from $C_0^\infty$ to $\text{Dom }\bar\partial_0\cap\text{Dom }\bar\partial_1^\dagger$.
+
+Note first that on a compact manifold $C^\infty_0$ is dense in $\text{Dom }\bar\partial_0\cap\text{Dom }\bar\partial_1^\dagger$ with respect
+to the norm $||u||_{L^2}+||\bar\partial u||_{L^2}+||\bar\partial^\dagger u||_{L^2}$.
+
+\begin{thm}
+    Let $L\to X,h,g_{\bar kj}$ be as above. Writing $h=e^{-\phi}$, assume that
+    \begin{align*}
+        -\partial_j\partial_k\phi+ R_{\bar kj}\geq\epsilon g_{\bar kj}
+    \end{align*}
+    for some $\epsilon>0$. Then for any $f\in L^2(X,L\otimes\Lambda^{0,1})$ with $\bar\partial f=0$, there exists
+    $u\in L^2(X,L)$ solving $\bar\partial u=f$ and
+    \[\int |u|^2e^{-\phi}\frac{\omega^n}{n!}\leq\frac{1}{\epsilon}\int g^{k\bar j}f_{\bar j}\overline{f_k}e^{-\phi}\frac{\omega^n}{n!}.\]
+\end{thm}
+
+Note that a useful variation of this setup is to solve the equation $\bar\partial u=f$ for $f\in L^2(X,L\otimes\Lambda^{n,1})$. Why?
+Observe that if $u\in L^2(X,L\otimes\Lambda^{n,0})$, then $\int|u|^2_h\equiv\int u\bar ue^{-\phi}$. Note that here there is no volume form
+needed, as the integrand is an $n,n$ form. Hence there is no need for a metric, and the estimates tend to be better in this case.
+Note also that $L\otimes\Lambda^{n,1}=(L\otimes\Lambda^{n,0})\otimes\Lambda^{0,1}$. But $L'=L\otimes\Lambda^{n,0}$ is simply
+another holomorphic line bundle. Hence we can apply our previous theorem with $L$ replaced by $L'$. Thus we impose
+$\varepsilon g_{\bar kj}\leq F'_{\bar k}j+R_{\bar kj}=(F_{\bar kj}-R_{\bar kj})+R_{\bar kj}=F_{\bar kj}$ (the curvature of $\Lambda^{n,0}$ is negative
+the Ricci curvature). Hence we obtain the theorem above but for this case of $f\in L^2(X,L\otimes\Lambda^{n,1})$.
+
+\begin{exc}
+    Write this theorem down carefully and supply the missing steps.
+\end{exc}
+
+Observe that this in fact extends to $X$ not compact, but complete as a metric space, i.e.
+the estimate in the hypothesis still extends from $C^\infty_0$ to $\text{Dom }\bar\partial_0^\dagger\cap\text{Dom }\bar\partial_1$.
+Even further, if $(X,g_{\bar kj})$ is not necessarily complete, but instead there exists a metric $g'_{\bar kj}$ that is K\"ahler
+and complete, then one applies the theorem to $(X,g^\delta_{\bar kj}=g_{\bar kj}+\delta g'_{\bar kj}).$ Applying the theorem
+now, we obtain a sequence $u_\delta$, uniformly bounded, which weakly converges to a solution $u$ (c.f. J.P. Demailly's online
+book).
 
 
 \end{document}
