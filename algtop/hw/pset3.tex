@@ -1,0 +1,123 @@
+\documentclass{../../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\title{Introduction to Algebraic Topology PSET 3}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{prop}
+    Let $f_0\diamond g_0\simeq f_1\diamond g_1$ and $g_0\simeq g_1$. Then $f_0\simeq f_1$.
+\end{prop}
+\begin{proof}
+    Consider the path $\bar g_1$ that traverses $g_1$ backwards. Then
+    \begin{align*}
+        f_0\diamond g_0&\simeq g_1\diamond g_1\\
+        (f_0\diamond g_0)\diamond \bar g_1&\simeq (f_1\diamond g_1)\diamond \bar g_1\\
+        f_0\diamond (g_0\diamond \bar g_1)&\simeq f_1\diamond(g_1\diamond\bar g_1)\\
+        f_0\diamond (g_0\diamond \bar g_1)&\simeq f_1\diamond c_{g_1(0)}\simeq f_1,
+    \end{align*}
+    where $c_{g_1(0)}$ is the constant path at $c_{g_1(0)}$. Using the fact that $g_0\simeq g_1$,
+    we find that $g_0\diamond \bar g_1\simeq g_1\diamond\bar g_1\simeq c_{g_1(0)}$ and thus that
+    $f_0\simeq f_1$.
+\end{proof}
+
+\begin{prop}
+    The change-of-basepoint homomorphism $\beta_h$ depends only on the homotopy class of $h$.
+\end{prop}
+\begin{proof}
+    Recall that the homomorphism is defined as $\beta_h:\pi_1(X,x_1)\to\pi_1(X,x_0)$ given
+    by $[f]\mapsto[h\diamond f\diamond \bar h]$, where $[f]$ is a loop based at $x_1$.
+    Suppose instead of $\beta_h$ we consider the map $\beta_g$ given by $[f]\mapsto[g\diamond f
+    \diamond \bar g]$, where $g\simeq h$. Of course, since $g\simeq h,$ we have that $g\diamond \bar h\simeq c$
+    and $h\diamond \bar g\simeq c$. Then $[h\diamond f\diamond \bar h]=[g\diamond\bar h\diamond h\diamond f\diamond \bar h\diamond h\diamond\bar g]=[g\diamond f\diamond\bar g]$.
+    as we can always attach constant maps and reparametrize upto homotopy.
+\end{proof}
+
+\begin{prop}
+    Let $X$ be a path-connected space. Then $\pi_1(X)$ is abelian if and only if all basepoint-change homomorphisms $\beta_h$
+    depend only on the endpoints of the path $h$.
+\end{prop}
+\begin{proof}
+    Suppose $\pi_1(X)$ is abelian. Then, for any $[f],[g]\in\pi_1(X)$, $[f\diamond g]=[g\diamond f]$. Given two distinct paths
+    $h_0,h_1$ from $x_0$ to $x_1$ we obtain a loop $\bar h_1\diamond h_0$ at $x_1$ with the property that
+    \[\bar h_1\diamond h_0\diamond f\simeq f\diamond \bar h_1\diamond h_0.\]
+    Concatenating by $h_1$ on the right and $\bar h_0$ on the right, we find that
+    \[h_0\diamond f\diamond\bar h_0\simeq h_1\diamond f\diamond \bar h_1,\]
+    and hence that the homomorphism is independent of the path chosen between the two endpoints.
+
+    Conversely, suppose that the basepoint-change homomorphisms only depend on the endpoints of the path $h$.
+    Then, given a loop $f$ at $x_1$, we can consider the basepoint homomorphism between $\pi_1(X,x_1)$ and itself,
+    with two different paths: $h_0$ constant at $x_1$ and $h_1$ a loop at $x_1$. Then we find that
+    \[h_0\diamond f\diamond \bar h_0\simeq f\simeq h_1\diamond f\diamond \bar h_1.\]
+    This shows that $f\diamond h_1\simeq h_1\diamond f$, proving that $\pi_1(X,x_1)$ is abelian.
+\end{proof}
+
+\begin{prop}
+    Given a space $X$, the following three conditions are equivalent.
+    \begin{enumerate}[(a)]
+        \item Every map $S^1\to X$ is homotopic to a constant map, with image a point;
+        \item Every map $S^1\to X$ extends to a map $D^2\to X$;
+        \item $\pi_1(X,x_0)=0$ for all $x_0\in X$.
+    \end{enumerate}
+    Furthermore, a space $X$ is simply connected if and only if all maps $S^1\to X$ are homotopic
+    (without regard to basepoints).
+\end{prop}
+\begin{proof}
+    The implication $(c)\implies (a)$ is trivial. All loops are homotopic, and in particular, all loops
+    are homotopic to the constant loop. Since the image of any map $S^1\to X$ is a loop that can be
+    contracted to a point, such maps must be homotopic to constant maps (with image being said point).
+
+    The implication $(a)\implies (b)$ is simple as well. The condition $(a)$ furnishes a homotopy 
+    $F:S^1\times I\to X$ between a loop in $X$ and the constant loop at $x\in X$. Visualizing this
+    as a shrinking circle that sweeps out a disk, we define the map $G:D^2\times I\to X$ that takes
+    $(r,\theta)\mapsto F(\theta,1-r)$. This map is continuous by virtue of continuity of the homotopy $F$,
+    and is well-defined at $r=0$, as $(0,\theta)\mapsto F(\theta,1)=x$, which is independent of $\theta$.
+
+    Let us now prove $(b)\implies (c)$. Consider a loop $f_0:S^1\to X$ thought of as an element of
+    $\pi_1(X,x)$ for $x=f_0(0)=f_0(1)$. The map $f_0$ extends to a map $G:D^2\to X$ by hypothesis
+    and hence we define a family of maps $F=f_t:S^1\times I\to X$ given by $f_t(\theta)=G(1-t,\theta)$.
+    The map $F$ is continuous by continuity of $G$, but is not a homotopy, as its endpoints vary with $t$.
+    To fix this, let $H=h_t:I\times I\to X$ be a family of maps connecting $f_t(0)$ to $x$ (inside the disk).
+    Then, defining $\bar h_t$ in the usual way, we find that $h_t\diamond f_t\diamond\bar h_t$ yields
+    a homotopy between the constant loop at $x$ and $f_0$. This shows that any loop in $\pi_1(X,x)$ is
+    homotopic to the constant loop at $x$, implying that $\pi_1(X,x)$ consists of one element, and is thus
+    the trivial group.
+
+    Finally, note that if $X$ is simply connected, it is path-connected and its fundamental group is trivial,
+    which implies that any loop $S^1\to X$ is homotopic to a constant loop. Since any two constant loops are homotopic
+    (by path-connectedness), it follows by the transitivity of homotopy that any two loops are homotopic.
+    Conversely, suppose all maps $S^1\to X$ are homotopic. This implies that all loops are homotopic to a constant loop,
+    and hence by the statements above, the fundamental group must be trivial (without regards to basepoint).
+\end{proof}
+
+\begin{prop}
+    Define $f:S^1\times I\to S^1\times I$ by $f(\theta,s)=(\theta+2\pi s,s)$, so $f$ restricts to the
+    identity on the two boundary circles of $S^1\times I$. Then $f$ is homotopic to the identity by a
+    homotopy $f_t$ that is stationary on one of the boundary circles, but not by any homotopy $f_t$ that
+    is stationary on both boundary circles. [Consider what $f$ does to the path $s\mapsto(\theta_0,s)$ for
+    fixed $\theta_0\in S^1$]
+\end{prop}
+\begin{proof}
+    The homotopy connecting the identity to $f$ is, of course, given by $f_t(\theta,s)=(\theta+2\pi st,s)$,
+    which clearly does not leave the $s=1$ boundary circle stationary. Now suppose instead that we have
+    a homotopy $g_t:S^1\times I\times I\to S^1\times I$ connecting the identity to $f$ that is stationary
+    on both boundary circles. Consider a fixed $\theta_0\in S^1$. For any $t$ we know by hypothesis
+    that $g_t(\theta_0,0)=g_t(\theta_0,1)$. The key step is now to note that for any fixed $t$,
+    $g_t(\theta_0,s)$ gives a loop in $S^1$ by simply projecting to the first factor $\rho:S^1\times I\to S^1$.
+    At $t=0$ the loop is, of course, the constant loop $\omega_0\in\pi_1(S^1,\theta_0)$. At $t=1$, however,
+    projecting the path determined by $\theta_0$ yields the loop $\omega_1$. But by the hypothesis (and
+    the fact that everything in sight is continuous), we find that $\rho\circ g_t(\theta_0,s)$ is a homotopy
+    in $S^1$ between $\omega_0$ and $\omega_1$. Of course, this contradicts what we know about the fundamental
+    group of the circle (in particular that $\omega_i\simeq \omega_j$ if and only if $i=j$), and hence no such
+    homotopy $g_t$ can exist.
+\end{proof}
+
+
+\end{document}

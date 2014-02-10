@@ -23,8 +23,8 @@ Throughout this note, $\A=k$ denotes a field and $\A^n$ denotes the affine $n$-s
 Let us start by recalling the definition of projective space $\Proj^n_\A$ from last week.
 \begin{defn}
     We denote by $\Proj_\A^n$ the space of lines passing through the origin of $\A^{n+1}$.
-    More precisely, let $\A^*$ act on $\A^{n+1}-\{0\}$ by scaling as $\lambda\cdot(x_0,\cdots,x_n)=(\lambda x_0,\cdots, \lambda x_n)$
-    and define \textbf{projective $n$-space} to be the quotient $\Proj_\A^n=\A^{n+1}-\{0\}/\A^*$ by this action.
+    More precisely, let $\A^\times$ act on $\A^{n+1}-\{0\}$ by scaling as $\lambda\cdot(x_0,\cdots,x_n)=(\lambda x_0,\cdots, \lambda x_n)$
+    and define \textbf{projective $n$-space} to be the quotient $\Proj_\A^n=\A^{n+1}-\{0\}/\A^\times$ by this action.
 \end{defn}
 
 Thinking of projective space as parametrizing a set of lines can be confusing at times, as it somewhat
@@ -36,7 +36,7 @@ of projective space in terms of its coordinates.
     of points on a line through $\A^{n+1}$. Suppose that this line passes through the point $\vec x=(x_0,\ldots, x_n)\in\A^{n+1}$.
     We write \textbf{homogeneous coordinates} for $p$ as
     \[p=[x_0:\cdots:x_n]=[\lambda x_0:\cdots:\lambda x_n],\]
-    for any $\lambda\in\A^*$. Note that these coordinates respect the action of $\A^*$ defining $\Proj_\A^n$ and hence are well-defined.
+    for any $\lambda\in\A^\times$. Note that these coordinates respect the action of $\A^\times$ defining $\Proj_\A^n$ and hence are well-defined.
     Moreover, not all $x_i$ can be zero.
 \end{defn}
 
@@ -161,12 +161,12 @@ There is, however, a well-defined action of $GL_{n+1}(\A)$ on $\Proj_\A^n$ given
     =
     \begin{bmatrix}
         x\\y    
-    \end{bmatrix}.\] More generally, any scalar matrix $\lambda\cdot\id$ (for $\lambda\in\A^*$) will act on $\Proj^n_\A$
+    \end{bmatrix}.\] More generally, any scalar matrix $\lambda\cdot\id$ (for $\lambda\in\A^\times$) will act on $\Proj^n_\A$
     as the identity, due to the scaling laws of projective space.
 \end{exmp}
 
 The previous example highlights a redundancy in the action of $GL_{n+1}(\A)$ on $\Proj^n_\A$: there are non-trivial elements of the group
-that act trivially on the space. In the interests of finding the group of self-maps that most accurately ``represent'' projective space, then,
+that act trivially on the space. In the interest of finding the group of self-maps that most accurately ``represents'' projective space, then,
 we should consider elements of $GL_{n+1}(\A)$ only up to scalar multiples. This motivates the following definition.
 
 \begin{defn}
@@ -197,18 +197,52 @@ as the following theorem shows.
 
 Hence we will stay away from the machinery of morphisms and instead view automorphisms of projective space simply as actions of $PGL_{n+1}(\A)$,
 which are similar to the more familiar linear transformations of vector spaces. We will not prove the above theorem, as it requires a surprising
-amount of algebraic geometry\footnote{For a proof in the scheme-theoretic case, see Hartshorne ch. II ex. 7.1.1.}; instead, we will prove it for
-the case $n=1$ in the Appendix.
+amount of algebraic geometry\footnote{For a proof in the scheme-theoretic case, see Hartshorne ch. II exmp. 7.1.1. For the proof for $n=1$
+in the case of varieties, see Hartshorne ch. I ex. 6.6}.
 
 \subsection*{Basic examples}
 
-Let us now turn to some examples, properties, and uses of automorphisms of projective space.
+Let us now turn to some examples, properties, and uses of automorphisms of projective space. In the context
+of projective algebraic curves, at least, automorphisms are natural in the sense that they preserve certain basic
+properties of curves.
 
-\begin{thm}\todo{finish}
-    Automorphisms preserve certain properties
-\end{thm}
+\begin{rem}
+    Automorphisms preserve the degree of curves. Furthermore, they take singular points to singular points, i.e.
+    preserve tangency, etc.\footnote{As we have not yet formally defined these terms, I will not prove these statements,
+    as this will be done later in the seminar.}
+\end{rem}
 
-\begin{exmp}[Intersections of curves]
+Indeed, automorphisms act so naturally on curves that we often make use of them without stating it. Making a change
+of variables in the polynomial equations defining a curve, for example, is a basic example of an automorphism that
+we almost never explicitly acknowledge. 
+
+\begin{exmp}[Parallel lines meet at infinity]
+    The prototypical example of two curves intersecting is, of course, that of two lines that would otherwise be parallel in
+    affine space. Consider the lines $y=0$ and $y-1=0$ in $\A^2$. Extending the affine plane by adding points at
+    infinity, we obtain the projective plane $\Proj_\A^2$. In the homogeneous coordinates $[x:y:z]$, we find that
+    the equations for the lines become $y=0$ and $y-z=0$. Solving for the intersections, we find that $z$ must be zero, while $x\in\A$ is free to vary.
+    This yields the solution $[x:0:0]=[1:0:0]$ (we are free to scale by $x$ as it cannot vanish simultaneously with
+    $y$ and $z$). In other words, two ``parallel'' lines meet at the point at infinity given by the homogeneous
+    coordinates $[1:0:0]$. Now let us apply the automorphism taking:
+    \[x\mapsto z,y\mapsto x,z\mapsto y.\]
+    I urge you to check that this is indeed an automorphism of projective space by constructing the appropriate
+    matrix in the sense described in the previous section. The equations of our line now become
+    $x=0$ and $x-y=0$, which intersect at the origin $[0:0:1]$. This automorphism has 
+    moved around the points of projective space, and in particular, taken the point at infinity to the origin.
+    This allows us to better visualize the behavior of the two lines at infinity.
+\end{exmp}
+
+\begin{exmp}[Asymptotes as tangents at infinity]
+     For a slightly less trivial example, consider the hyperbola $x^2-y^2-1=0$ in the affine plane $\R^2$. It is
+    not \textit{a priori} clear what happens to the hyperbola at infinity. Homogenizing yields $x^2-y^2-z^2=0$,
+    and we immediately see that there are two points on the hyperbola at infinity: $[1:1:0]$ and $[1:-1:0]$.
+    Is is now natural to ask how the asympotes $y=x,y=-x$ behave at these points at infinity. One can check that
+    each point is on one of the lines, but it is not clear whether this occurs as a simple intersection or as a
+    tangency. To see what is happening visually, we can apply the automorphism from the last example, which gives
+    us $z^2-x^2-y^2=0$. Dehomogenizing this (to study the affine behavior) gives us $x^2+y^2-1=0$, a circle.
+    Meanwhile, the lines $y-x=0$ and $y+x=0$ are sent to $x-z=0$ and $x+z=0$, which dehomogenize to
+    $x=1$ and $x=-1$. These two lines are clearly tangent to the circle, and hence we see, via application of an
+    automorphism, that the asymptotes are tangent to the hyperbola at infinity.
 \end{exmp}
 
 \begin{exmp}[Circle inversions]
@@ -229,26 +263,40 @@ In the category of vector spaces, automorphisms are uniquely determined by the i
 for projective space, as asking the same question is analogous to asking how many one-dimensional subspaces of $\A^{n+1}$ determine
 an automorphism of $\Proj^n_\A$. Instead, one is forced to go back to the vector space $\A^{n+1}$ underlying $\Proj^n_\A$, find
 the unique linear transformation in $GL_{n+1}(\A)$, and descend to an element of $PGL_{n+1}(\A)$.
-Before we do this, however, let us make the following definition.
+This motivates the following definition.
 
 \begin{defn}
     Let $x_0,\ldots, x_{n+1}$ be $n+2$ points in $\Proj^n_\A$. We say that these points are in \textbf{general position}
-    if each subset of $n+1$ points has representative vectors that are linearly independent in $\A^{n+1}$.
+    if no $n+1$ of them lie in a hyperplane $\Proj_\A^{n-1}$.
+    Equivalently these points are in general position if each subset of $n+1$ points has representative vectors that are
+    linearly independent in $\A^{n+1}$.
 \end{defn}
 
 \begin{exmp}
-    Any two distinct points in $\Proj^1_\A$ are represented by linearly independent vectors; thus, any three distinct points
+    Consider the projective line $\Proj^1_\A$. Hyperplanes $\Proj_\A^0$ are just points (can you see why?\footnote{We would define $\Proj_\A^0$
+    to be the space of lines in $\A^1$ -- but of course there is only one such line, and hence $\Proj_\A^0$ is, as a space, a single point.})
+    and thus it is impossible for two distinct points of $\Proj^1_\A$ to lie in the same hyperplane. Consequently, any three distinct points
     in $\Proj^1_\A$ are in general position.
+
+    On the other hand, four points in $\Proj^2_\A$, are in general position if no three of them are collinear in $\Proj^2_\A$.
+    This is because three points being collinear in the projective plane is equivalent to the corresponding lines in $\A^3$
+    lying on the same plane through the origin (any choice of vector representatives will be dependent).
 \end{exmp}
 
-This leads us to the following important theorem.
+This brings us to the main result of the note.
 
 \begin{thm}[First fundamental theorem of projective geometry]
     Let $x_0,\ldots, x_{n+1}$ and $y_0,\ldots, y_{n+1}$ be in general position in $\Proj^n_\A$. Then there exists a unique
     automorphism $\Gamma:\Proj^n_\A\to\Proj^n_\A$ such that $\Gamma(x_i)=y_i$.
 \end{thm}
 
-\begin{proof}
+\begin{rem}
+    A simple corollary of this theorem is that three points in $\Proj^1_\A$ determine an automorphism. The usual choice of three points is $[0:1],[1:1],$ and $[1:0]$.
+    In other words, there is a unique automorphism of $\Proj^1_\A$ sending three distinct points to $0,1,$ and $\infty$. Note, for example, that in the case of $\A=\F_2$,
+    the finite field with two elements, these are the only three points in $\Proj^1_{F_2}$, and hence $PGL_{2}(\F_2)\cong S_3$, the symmetric group on three letters.
+\end{rem}
+
+\begin{proof}[Proof of theorem]
     We start with existence.
     Fix representatives $v_0,\ldots,v_{n+1}$ for $x_0,\ldots,x_{n+1}$. By construction, the first $n+1$ are independent (in $\A^{n+1}$),
     and hence we can write
@@ -270,15 +318,9 @@ This leads us to the following important theorem.
     Uniqueness is straightforward: suppose $T':\A^{n+1}\to\A^{n+1}$ provides another automorphism $\Gamma':\Proj^n_\A\to\Proj^n_\A$
     such that $\Gamma'(x_i)=y_i$. Then $T'(v_i)=\mu_iw_i$ for some scalar multiples $w_i\in\A$, and we find that
     \[\mu_{n+1}w_{n+1}=T'(v_{n+1})=\sum_{i=0}^nT'(v_i)=\sum_{i=0}^n\mu_iw_i.\]
-    By uniqueness of the expression $w_n=\sum_{i=0}^nw_i$, forcing $\mu_i/\mu_{n+1}=1$, i.e. $T'=\mu_i/\mu_{n+1}T$,
+    By uniqueness of the expression $w_{n+1}=\sum_{i=0}^nw_i$, forcing $\mu_i/\mu_{n+1}=1$, i.e. $T'=\mu_i/\mu_{n+1}T$,
     and hence $T$ and $T'$ must have the same image in $PGL_{n+1}$: $\Gamma'=\Gamma$.
 \end{proof}
-
-\begin{rem}
-    A simple corollary of this theorem is that three points in $\Proj^1_\A$ determine an automorphism. The usual choice of three points is $[0:1],[1:1],$ and $[1:0]$.
-    In other words, there is a unique automorphism of $\Proj^1_\A$ sending three distinct points to $0,1,$ and $\infty$. Note, for example, that in the case of $\A=\F_2$,
-    the finite field with two elements, these are the only three points in $\Proj^1_{F_2}$, and hence $PGL_{2}(\F_2)\cong S_3$, the symmetric group on three letters.
-\end{rem}
 
 \begin{exc}
     Show that $n+2$ points in $\Proj^n_\A$ are in general position if and only if they are the image under the quotient
@@ -286,8 +328,9 @@ This leads us to the following important theorem.
     (hint: see proof of theorem).
 \end{exc}
 
+\subsection*{Acknowledgments}
 
-
-\subsection*{Appendix}\todo{do this at some point}
+I would like to thank Ian Whitehead for running the undergraduate mathematics seminar that made this study possible,
+as well as for reviewing this note and providing me with some interesting examples.
 
 \end{document}
