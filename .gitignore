@@ -3,7 +3,6 @@
 *.blg
 *.dvi
 *.fdb_latexmk
-*.fls
 *.glg
 *.glo
 *.gls
@@ -28,3 +27,4 @@
 *.mtc0
 
 *.DS_Store
+*.fls

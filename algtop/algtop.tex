@@ -419,4 +419,115 @@ is a loop at $x_1$, then $h\diamond f\diamond \bar h$ is a loop at $x_0$.
     See Hatcher p.29-31.
 \end{proof}
 
+\section*{Class 5}
+
+\begin{thm}[Brouwer's fixed point theorem]
+     Every continuous map $h:D^2\to D^2$ has a fixed point, i.e. there exists an $x\in D^2$ such taht 
+     $h(x)=x$.
+\end{thm}
+\begin{proof}
+    Suppose not, i.e. that $h(x)\neq x$ for all $x\in D^2$. Then, define a map $r:D^2\to S^1$ where
+    $r(x)$ is the point where the ray from $h(x)$ to $x$ hits $S^1=\partial D^2$. Notice that $r(x)$
+    is continuous, and that if $x\in S^1$ then $r(x)=x$. In particular, $r$ is a retraction of $D^2$
+    onto $S^1$. Let $f_0$ be any loop in $S^1$ based at $x_0$. In $D^2$, $f_0\simeq c$, where $c$ is
+    the constant loop at $x_0$, via the linear homotopy $f_t$, for example. Since $r|_{S^1}=\id|_{S^1}$,
+    $r\circ f_t$ is a homotopy in $S^1$ from $r\circ f_0=f_0$ to $c$. This is a contradiction, as
+    $\pi_1(S^1)\neq 0$.
+\end{proof}
+
+\begin{thm}[Borsuk-Ulam]
+    Let $f:S^2\to\R^2$ be a continuous map. Then there exists a pair of antipodal points -- say $x$
+    and $-x$ in $S^2$ -- such that $f(x)=f(-x)$.
+\end{thm}
+\begin{proof}
+    For sake of contradiction, assume that no such $x$ exists. Then define $g:S^2\to S^1$ by
+    \[g(x)=\frac{f(x)-f(-x)}{|f(x)-f(-x)|}.\]
+    This is well-defined, as the denominator is never zero and furthermore, $g(-x)=-g(x)$.
+    Now define $\eta:I\to S^2\subset\R^3$ given by $s\mapsto(\cos 2\pi s,\sin 2\pi s,0)$, whose
+    image sits on the equator, and let $h:I\to S^1$ be $g\circ\eta$, which yields a loop in $S^1$.
+    Since $g(-x)=-g(x)$, we can write that $h(s+1/2)=-h(s)$ for all $s\in [0,1/2]$. If we lift the loop
+    $h$ to a path $\tilde h:I\to \R$, we can write $\tilde h(s+1/2)=\tilde h(s)+q/2$ for some
+    odd $q\in \Z$. \textit{A priori}, $q$ might depend (continuously) on $s$, but integrality
+    forces it to be constant. Then we find that
+    \[\tilde h(1)=\tilde h(1/2)+q/2,\tilde h(1/2)=\tilde h(0)+q/2,\]
+    which implies that $\tilde h(1)=\tilde h(0)+q$. Hence $h$ is $q$ times a generator for $\pi_1(S^1)$.
+    As $q$ is odd, $h$ cannot be nullhomotopic. However, $h=g\circ\eta:I\to S^2\to S^1$ and $\eta$
+    is nullhomotopic in $S^2$ via, say $f_t$,then $g\circ\eta$ is nullhomotopic via $g\circ f_t$,
+    which is a contradiction.
+\end{proof}
+
+\begin{prop}
+    Suppose $X$ and $Y$ are path-connected. Then $\pi_1(X\times Y)\cong \pi_1(X)\times\pi_1(Y)$.
+\end{prop}
+\begin{proof}
+    Recall that if $X\times Y$ is endowed with the product topology, then $f:Z\to X\times Y$
+    is continuous if and only if $g:Z\to X$ and $h:Z\to Y$ are continuous, where $f(z)=(g(z),h(z))$.
+    Hence a loop in $X\times Y$ based at $(x_0,y_0)$ is equivalent to a pair of loops (under
+    the two projections) based at $x_0$ and $y_0$ respectively. Denote these loops by
+    $g:I\to X$ and $h:I\to X$. Furthermore, a homotopy $f_t:I\to X\times Y$ is equivalent
+    to a pair of homotopies $g_t,h_t$. Hence there is a bijection between $\pi_1(X\times Y,(x_0,y_0))$
+    and $\pi_1(X,x_0)\times\pi_1(Y,y_0)$. This is easily checked to be a homomorphism.
+\end{proof}
+
+\subsection*{Induced homomorphisms}
+
+Suppose $\phi:(X,x_0)\to (Y,y_0)$, i.e. $\phi:X\to Y$ with $\phi(x_0)=y_0$. Then $\phi$ induces
+a homomorphism $\phi_*:\pi_1(X,x_0)\to\pi_1(Y,y_0)$, given by $[f]\mapsto [\phi\circ f]$. Note
+that $\phi$ is indeed well-defined since a homotopy $f_t$ of loops in $X$ at $x_0$ gets sent
+by $\phi$ to a homotopy of loops in $Y$ at $y_0$. Hence
+\[\phi_*[f_0]=[\phi\circ f_0]=[\phi\circ f_1]=\phi_*[f_1].\]
+Note also that it is a homomorphism, as $\phi(f\diamond g)=(\phi\circ f)\diamond(\phi\circ g)$.
+Two important properties of these induced homomorphisms is that
+\[ (\phi\circ\psi)_*=\phi_*\circ\psi_*,\]
+i.e. it is covariant, and that
+\[(\id_{(X,x_0)})_*=\id_{\pi_1(X,x_0)}.\]
+These two properties show that $\pi_1$ is a covariant functor from pointed topological space to groups.
+One simple consequence of this is that if $\psi$ is the inverse of $\phi$ then $\psi_*$ is the inverse
+of $\phi_*$, since $\phi_*\circ\psi_*=(\phi\circ\psi)_*=\id_*=\id$ (and similarly for the other order
+of composition).
+
+\begin{prop}
+    If $X$ retracts onto a subspace $A$, then the homomorphism $\iota_*:\pi_1(A,x_0)\to\pi_1(X,x_0)$
+    induced by the inclusion $\iota:A\to X$ is injective.
+\end{prop}
+\begin{proof}
+    If $v:X\to A$ is a retraction than $r\circ i=\id_A$, so $r_*\circ \iota_*=\id$, so $\iota_*$
+    must be injective.
+\end{proof}
+
+\begin{prop}
+    If $\phi:X\to Y$ is a homotopy equivalence, then the induced homomorphism $\phi_*:\pi_1(X,x_0)\to\pi_1(Y,y_0)$
+    is an isomorphism for all $x_0\in X$.
+\end{prop}
+
+\begin{lem}
+    If $\phi_t:X\to Y$ is a homotopy and $h$ is a path $\phi_t(x_0)$ formed by images of the basepoint
+    $x_0\in X$ then the following diagram commutes.
+    \begin{equation*}
+        \begin{tikzcd}
+            \pi_1(X,x_0)\arrow{rr}{(\phi_1)_*}\arrow{rd}{(\phi_0)_*}&&\pi_1(Y,\phi_1(x_0))\arrow{ld}{\beta_h}\\
+            &\pi_1(Y,\phi_0(x_0))&
+        \end{tikzcd}
+    \end{equation*}
+\end{lem}
+\begin{proof}
+    Let $h_t(s)=h(ts)$. This is the restriction of $h$ to $[0,t]$, reparametrized so the domain is still
+    $[0,1]$. If $f$ is a loop in $X$ at $x_0$ then $h_t\diamond\phi_t\circ f\diamond \bar h_t$ is a
+    homotopy of loops at $\phi_0(x_0)$ ($h$ is a path from $\phi_0(x_0)$ to $\phi_1(x_0)$). Restricting
+    to $t=0$ and $t=1$ we have $(\phi_0)_*([f])=\beta_h\left( (\phi_1)_*[f] \right))$, homotopic.
+\end{proof}
+
+\begin{proof}[Proof of proposition]
+    Let $\psi:Y\to X$ be the homotopy inverse of $\phi$, i.e. $\phi\circ\psi\simeq\id_Y$ and $\psi\circ\phi\simeq\id_X$.
+    Consider the sequence of maps
+    \begin{equation*}
+        \begin{tikzcd}
+            \pi_1(X,x_0)\arrow{r}{\phi_*}&\pi_1(Y,\phi(x_0))\arrow{r}{\psi_*}&\pi_1(X,\psi\circ\phi(x_0))\arrow{r}&\cdots
+        \end{tikzcd}
+    \end{equation*}
+    Note that $\psi_*\circ\phi_*$ is an isomorphism since $\psi\circ\phi\simeq\id_X$ so $\psi_*\circ\phi_*=\beta_h$
+    for some $h$, by the lemma above. Thus $\phi_*$ is injective; similarly $\phi_*\circ\psi_*$ is an isomorphism
+    for $\phi_*$ is surjective.
+\end{proof}
+
 \end{document}
