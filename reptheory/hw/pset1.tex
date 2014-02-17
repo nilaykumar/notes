@@ -17,29 +17,174 @@
     between them. Show this category is additive but not abelian.
 \end{prop}
 \begin{proof}
-    
+    We first show that this category is additive, which is straightforward. Let $A,B$ be topological
+    abelian groups, and note that $\Hom(A,B)$ is an abelian group, as any two morphisms $f,g:A\to B$
+    can be added (or subtracted) pointwise to obtain another continuous homomorphism. This operation
+    obviously forms a group (with identity the zero morphism). Note that composition of two morphisms
+    is bilinear, as
+    \[f(g+h)(x)=f(g(x)+h(x))=f(g(x))+f(h(x))\]
+    and
+    \[(f+g)(h)(x)=f(h(x))+g(h(x)).\]
+    The zero object in this category is the trivial group $0$ (topologically a point); clearly
+    $\Hom(0,0)=\{0\}$, the zero morphism. Finally we wish to show the existence of a product.
+    Given topological abelian groups $A$ and $B$, we define the product as usual to be
+    $A\oplus B=\{(a,b)\mid a\in A,b\in B\}$, where the group operation is performed componentwise.
+    It is clear that $A\oplus B$ is an abelian group; it can be given the usual product topology
+    induced by the topologies of $A$ and $B$. The new group operation is continuous simply by the
+    componentwise continuity, and similarly for inversion. It is easy to check that $A\oplus B$
+    satisfies the universal property of products. Similar statements hold for $A\oplus B$ as a
+    coproduct.
+    Hence the category of topological abelian groups is additive.
+
+    This category is not abelian, as the following counterexample shows. Consider the group $(\R,+)$
+    with the usual topology and the group $(\Q,+)$ with the subspace topology. It is clear that
+    $\R$ and $\Q$, so defined, form topological abelian groups. The inclusion $\iota:\Q\to\R$
+    is a homomorphism because $\iota(q_1+q_2)=q_1+q_2=\iota(q_1)+\iota(q_2)$ and continuous by
+    construction of the subspace topology. Suppose the cokernel of $\iota$ exists.
+    By definition, the cokernel is a choice of $\coker\iota$ and $\psi$ making the diagram
+    \begin{equation*}
+        \begin{tikzcd}
+            \Q\arrow{rr}{\iota}\arrow[swap]{dr}{0}&&\R\arrow{dl}{\psi}\\
+            &\coker\iota&
+        \end{tikzcd}
+    \end{equation*}
+    commute. But this means that $\psi(q)=0$ for all $q\in\Q$. As any real number $x$ can be written as
+    $x=\lim_{i\to\infty} x_i$ for some sequence of rationals $x_i$, continuity implies that
+    $\psi(x)=\psi(\lim_{i\to\infty} x_i)=\lim_{i\to\infty}\psi(x_i)=0$. Hence $\psi$ is, in fact,
+    the zero map. Notice that if we consider $\coker\iota$ to be the trivial group $0$, it satisfies 
+    the universality condition: for any map $\tilde\psi:\R\to A$ for some topological abelian group
+    $A$, we know that $\tilde\psi$ is the zero map using the same reasoning as above, and hence
+    $\tilde\psi$ clearly factors uniquely through $\coker\iota$ via $0_{0\to A}\circ\psi$. By the
+    universal property, then, $\coker\iota=0$. Now note that
+    \[\text{Image }\iota=\ker\psi=\R,\]
+    which contradicts the fact that the image of the inclusion of $\Q$ in $\R$ is just $\Q$.
+    Hence the cokernel of $\iota$ cannot exist, and the category of topological abelian groups
+    is not abelian.
 \end{proof}
 
 
 
 \begin{prop}
     Let $S\to R$ be a homomorphism of rings. It induces the restriction and induction
-    functors between the corresponding categories of modules, $\text{Res}:\catname{R-Mod}\to\catname{S-Mod}$
-    and $\text{Ind}:\catname{S-Mod}\to\catname{R-Mod}$, where $\text{Ind }A=R\otimes_S A$ and $\text{Res }B$
+    functors between the corresponding categories of modules, $\text{Res}:\text{R-Mod}\to\text{S-Mod}$
+    and $\text{Ind}:\text{S-Mod}\to\text{R-Mod}$, where $\text{Ind }A=R\otimes_S A$ and $\text{Res }B$
     is the module $B$ viewed as an $S$-module. Show that these functors are adjoint in the
     sense that $\Hom_R(\text{Ind } A,B)=\Hom_S(A,\text{Res }B).$
 \end{prop}
+\begin{proof}
+    Recall that for the two functors $\text{Res}$ and $\text{Ind}$ to be adjoint, there must be
+    a natural bijection for all $A\in\text{S-Mod}$ and $B\in\text{R-Mod}$
+    \[\tau_{AB}:\Hom_R(\text{Ind }A',B)=\Hom_S(A,\text{Res }B).\]
+    The bijection can be constructed as follows. Given any $\psi\in\Hom_R(\text{Ind }A,B)$
+    we define a map $\tilde\psi:A\to\text{Res }B$ that takes $a\mapsto \psi(1\otimes a)$. This association
+    is injective, as it depends only on $\psi$: different $\psi$ yield distinct $\tilde\psi$. Conversely,
+    given any map $\tilde\psi:A\to\text{Res B}$, we define the map $\psi:\text{Ind }A\to B$ to take
+    $r\otimes_Sa\mapsto r\cdot\tilde\psi(a)$. This association is also injective, and hence we have a
+    bijection, call it $\tau_{AB}:\Hom_R(\text{Ind }A',B)=\Hom_S(A,\text{Res }B).$ 
+
+    For this bijection to be natural, for any $f:A\to A',g:B\to B'$ the diagrams
+    \begin{equation*}
+        \begin{tikzcd}
+            \Hom_R(\text{Ind }A',B)\arrow{r}{\text{Ind }f^*}\arrow{d}{\tau_{A'B}}&\Hom_R(\text{Ind }A,B)\arrow{d}{\tau_{AB}}\\
+            \Hom_S(A',\text{Res }B)\arrow{r}{f^*}&\Hom_S(A,\text{Res }B)
+        \end{tikzcd}
+    \end{equation*}
+    and
+    \begin{equation*}
+        \begin{tikzcd}
+            \Hom_S(A,\text{Res }B)\arrow{r}{\text{Res }g^*}\arrow{d}{\tau_{AB}^{-1}}&\Hom_S(A,\text{Res }B')\arrow{d}{\tau_{AB'}^{-1}}\\
+            \Hom_R(\text{Ind }A,B)\arrow{r}{g^*}&\Hom_R(\text{Ind }A,B')
+        \end{tikzcd}
+    \end{equation*}
+    must commute. Let us start with the first diagram, on the top left. Given a $\psi:\text{Ind }A'\to B$,
+    we want that
+    \[f^*(\tau_{A'B}(\psi))=\text{Ind }f^*(\tau_{AB}(\psi)).\]
+    It is straighforward to see that both of these are equal to a map that takes $a\mapsto\psi(1\otimes f(a))$.
+    Similarly, given a $\tilde\psi:A\to\text{Res }B$, we want that
+    \[\tau^{-1}_{AB'}(\text{Res } g^*(\psi))=g^*(\tau^{-1}_{AB}(\psi)).\]
+    Both of these yield a map that takes $r\otimes a\mapsto r\cdot g(\tilde\psi(a))$. Hence the bijection $\tau_{AB}$
+    is natural, and we find that $\text{Res}$ and $\text{Ind}$ are adjoint functors.
+\end{proof}
+
+
 
 \begin{prop}
     Show that every module in category $\mathcal{O}$ is finitely generated as a
     $\mathcal{U}\fr n_{-}$-module.
 \end{prop}
+\begin{proof}
+    Take some $M$ in $\mathcal{O}$. We know that $M$ is a finitely-generated $\mathcal{U}\fr g$-module,
+    say with generators $v_i$. Note that
+    $\mathcal{U}\fr g\cdot v_i=\mathcal{U}\fr n_-\otimes\mathcal{U}\fr h\otimes\mathcal{U}\fr n\cdot v_i$
+    generates $M$. Furthermore, $\mathcal{U}\fr n\cdot v_i$ is a finite dimensional vector space for each $i$.
+    Acting by $\mathcal{U}\fr h$ simply scales, and thus acting by $\mathcal{U}\fr n_-$ must generate $M$
+    from these finite dimensional vector spaces.
+    Hence if $e_{j_i}$ is a basis for $\mathcal{U}\fr n\cdot v_i$, the $e_{j_i}$ generate a finite-dimensional
+    $\mathcal{U}\fr b$-submodule of $M$ that generates $M$ as a $\mathcal{U}\fr n_-$-module.
+\end{proof}
+
 
 \begin{prop}
     For $V_1,V_2\in\text{Obj }\mathcal{O}$, consider the tensor product $V_1\otimes V_2$.
     Show that it is in $\mathcal{O}$ is one of the factors is finite-dimensional, but
     not in general.
 \end{prop}
+\begin{proof}
+    Let $\fr g$ semisimple have the root decomposition $\fr g=\fr n_-\oplus\fr h\oplus\fr n$.
+    Recall that the BGG category $\mathcal{O}$ is defined to be the full subcategory of
+    $\mathcal{U}\fr g$-Mod whose objects $M$ satisfy the conditions
+    \begin{enumerate}
+        \item $M$ is a finitely generated $\mathcal{U}\fr g$-module;
+        \item $M$ is $\fr h$-semisimple, that is, $M$ is a weight module: $M=\oplus_{\lambda\in\fr h^*}M_\lambda$;
+        \item $M$ is locally $\fr n$-finite: for each $v\in M$, the subspace $\mathcal{U}\fr n\cdot v$ of $M$ is
+            finite dimensional.
+    \end{enumerate}
+    Now let $V,W\in\text{Obj }\mathcal{O}$. Consider the tensor product $V\otimes W$. We
+    claim that $V\otimes W$ satisfies properties 2 and 3, but will satisfy property 1 only
+    if one of $V,W$ is finite-dimensional. Hence $V\otimes W$ is in category $\mathcal{O}$
+    if and only if one of $V,W$ is finite-dimensional.
+
+    It is fairly obvious that condition 2 is preserved: given $V=\oplus_{\lambda\in\fr h^*}V_\lambda$
+    and $W=\oplus_{\mu\in\fr h^*}W_\mu$. Then we can write:
+    \[ V\otimes W=\bigoplus_{\lambda,\mu\in\fr h^*}V_\lambda\otimes W_\mu.  \]
+    Since the Lie algebra acts on tensor products as derivations, $V_\lambda\otimes W_\mu$ is a
+    space with weight $\lambda+\mu$. We can regroup the direct sum to be over all possible $\nu=\lambda+\mu$,
+    which gives us a weight decomposition for $V\otimes W$.
+    Now let us check condition 3. Take some $v\otimes w\in V\otimes W$. The action of some $n\in\fr n$ on $v\otimes w$ is as
+    \[n\cdot (v\otimes w)=n\cdot v\otimes w+v\otimes n\cdot w.\]
+    Repeated application via the action of $\mathcal{U}\fr n$ will annihilate $v\otimes w$, as
+    repeated application of $\mathcal{U}\fr n$ annihilates by hypothesis $v$ and $w$.
+
+    Next we show that condition 1 is preserved if one of $V$ or $W$ is finite-dimensional; Let $V$
+    be finite dimensional. Denote by $\left\{ v_i \right\},\left\{ w_i \right\}$ the basis of
+    of $V$ and the generators of $W$ respectively. Let us show that $v_i\otimes w_j$ form a set of
+    generators of $V\otimes W$. Denote by $M$ the submodule of $V\otimes W$ generated by $v_i\otimes w_j$.
+    Clearly $v\otimes w_j\in M$ for any $v\in V$. If we act by some $X\in\fr g$, we find that 
+    \[X\cdot (v\otimes w_j)=X\cdot v\otimes w_j+v\otimes X\cdot w_j.\]
+    The left hand side and the first term on the right are contained in $M$ so $v\otimes X\cdot w_j\in M$.
+    Repeated application of $\fr g$ shows that $v\otimes p\cdot w_j\in M$ where $p$ is a PBW
+    monomial, but since the $w_j$ generate $W$ under the application of such monomials, we
+    find that $M$ is in fact all of $V\otimes W$.
+
+    Finally, let us show that the tensor product of two infinite-dimensional modules in $\mathcal{O}$
+    does not lie in $\mathcal{O}$. Take $\fr g=\fr{sl}_2=\C f\oplus\C h\oplus\C e$ and consider
+    the two Verma modules $M_\lambda,M_\mu$ for $\lambda\neq\mu$ both not even. The weights of $M_\lambda$
+    are $\lambda-2i$ for $i\in\Z$ and $\mu-2j$ for $j\in\Z$ because there exist vectors $v_\lambda\in M_\lambda$
+    and $v_\mu\in M_\mu$ that generate the respective modules. Consider now $M_\lambda\otimes M_\mu$.
+    Suppose that $m_i\in M_\lambda\otimes M_\mu$ are a finite set of generators. The $m_i$ can be
+    written as finite sums of fundamental tensors $v_a\otimes v_b$ (with weight, say, $a+b$). Now 
+    consider the vector $v_x\otimes v_y+\sum_i m_i$, where $x+y$ is not a weight that already appears in
+    any of the $m_i$ and whose difference from such weights is not a factor of two. This is possible
+    since the Verma modules have infinitely negative weights and $\lambda,\mu$ are not both even. For a
+    concrete example, consider $M_2\otimes M_3$. Take the vector $v_3\otimes v_2+v_1\otimes v_2$,
+    for example: it which has monomials of weights of $5$ and $3$. The claim is simply that
+    any finite set of generators $m_i$ will not be able to generate $v_x\otimes v_y+\sum_i m_i$
+    if $x$ and $y$ are suitably chosen (e.g. if our generating set is $\{v_3\otimes v_2,v_1\otimes v_2\}$
+    then $v_3\otimes v_2+v_1\otimes v_2+v_1\otimes v_0$ is not spanned by the set). Hence there
+    is no finite $\mathcal{U}\fr{g}$-generating set for $M_\lambda\otimes M_\mu$.
+\end{proof}
+
+
 
 \begin{prop}
     Consider the action of $GL(3)$ on polynomials of degree $d$ in $x_1,x_2,x_3$.

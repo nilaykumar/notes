@@ -33,6 +33,7 @@
 \DeclareMathOperator{\Mor}{Mor}
 \DeclareMathOperator{\length}{length}
 \DeclareMathOperator{\res}{Res}
+\DeclareMathOperator{\coker}{coker}
 \DeclareMathOperator{\Int}{Int}
 \DeclareMathOperator{\Ext}{Ext}
 \DeclareMathOperator{\Aut}{Aut}

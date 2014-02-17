@@ -1,0 +1,97 @@
+\documentclass{../../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\title{Introduction to Algebraic Topology PSET 4}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{prop}
+    Hatcher exercise 1.1.10
+\end{prop}
+\begin{proof}
+    Consider two loops in $X\times Y$ based at $(x_0,y_0)$. The first loop is purely in the $X$
+    direction, denoted by $f:I\to X\times\{y_0\}$, while the second is purely in the $Y$ direction,
+    denoted by $g:I\to \{x_0\}\times Y$. We wish to find a homotopy between the loops
+    $f\diamond g$ and $g\diamond f$. This can be done by continuously transporting the 
+    basepoint of $f$ along $g$ via $h_t:I\times I\to X\times Y$ given by
+    \[
+        h_t(s)=
+        \begin{cases}
+            (x_0, g(2s)) & 0\leq s \leq \frac{t}{2}\\
+            (f(2s-1), g(t)) & \frac{t}{2} \leq s \leq \frac{t+1}{2}\\
+            (x_0, g(2s-1)) & \frac{t+1}{2} \leq s \leq 1
+        \end{cases}.
+        \]
+    This homotopy is continuous by continuity of $f,g$ and it clearly takes
+    $f\diamond g$ at $t=0$ to $g\diamond f$ at $t=1$.
+\end{proof}
+
+\begin{prop}
+    Hatcher exercise 1.1.12
+\end{prop}
+\begin{proof}
+    Any morphism $\phi_*:\pi_1(S^1)\to\pi^1(S^1)$ is simply a morphism $\phi_*:\Z\to\Z$, which
+    is determined by the image of its generator. Then, if $n=\phi_*(1)$, the map $\phi$ that
+    induces $\phi_*$ is obviously the continuous map $\phi:S^1\to S^1$ given by
+    $\theta\mapsto n\theta$, as $\phi$ takes the $[\omega_1]$ to $[\omega_n]$, as required
+    by $\phi_*$.
+\end{proof}
+
+\begin{prop}
+    Hatcher exercise 1.1.16
+\end{prop}
+\begin{proof}
+    Throughout this proof, we use freely Hatcher Proposition 1.17: if a space $X$ retracts onto
+    a subspace $A$, then the homomorphism $i_*:\pi_(A,x_0)\to\pi_1(X,x_0)$ induced by the inclusion
+    $i:A\hookrightarrow X$ is injective. Further, if $A$ is a deformation retract of $X$, then
+    $i_*$ is an isomorphism. We also use the fact that the functor $\pi_1$ takes
+    products to products.
+    \begin{enumerate}[(a)]
+        \item Let $X=\R^3$ with $A$ any space homeomorphic to $S^1$. The existence of a
+            retraction $r:X\to A$ would imply an injective morphism $\Z\hookrightarrow 0$ of
+            the integers into the trivial group, which is absurd.
+        \item Let $X=S^1\times D^2$ with $A$ its boundary torus $S^1\times S^1$. The existence
+            of a retraction $r:X\to A$ would imply an injective morphism
+            $\Z\times\Z\hookrightarrow\Z$ as $D^2$ is contractible. This is of course impossible:
+            if $(1,0)\mapsto m$ for any $m,n\in\Z$ and $(0,1)\mapsto n$, we find that
+            $n(1,0)$ maps to the same element that $m(0,1)$ maps to; there are no injective group
+            morphisms $\Z\times\Z\to\Z$.
+        \item Let $X=S^1\times D^2$ and $A$ be the circle as shown in Hatcher.\todo{finish}
+        \item Let $X=D^2\vee D^2$ with $A$ its boundary $S^1\vee S^1$. Of course,
+            $\pi_1(D^2\vee D^2)$ is the trivial group: any loop in $D^2$ is contractible
+            and since any loop in $D^2\vee D^2$ can be pinched off into the composition
+            of two loops each entirely in a single copy of $D^2$, every loop in $D^2\vee D^2$
+            is contractible as well. For usch a retraction $r:X\to A$ to exist would imply
+            an injective morphism from $\pi_1(S^1\times S^1)$ to the trivial group, which is
+            possible only if all loops in $S^1\times S^1$ are contractible. This is clearly
+            not the case, as one can consider a loop in just one of the copies of $S^1$, and
+            hence no such retraction exists.
+        \item Let $X$ be a disk with two points on its boundary identified and $A$ its boundary
+            $S^1\vee S^1$. It is clear that $X$ is homotopy equivalent to $S^1$, as it deformation
+            retracts to the diameter connecting the two identified points. Hence such a retraction
+            would imply an injective morphism $\pi_1(S^1\vee S^1)\hookrightarrow \Z$. But note
+            that clearly $\pi_1(S^1\times S^1)=\Z\times\Z\hookrightarrow\pi_1(S^1\vee S^1)$
+            and hence this is impossible, as it would imply an injective morphism of $\Z\times\Z$
+            into $\Z$. Of course, this is easier to see via the fact that $\pi_1(S^1\vee S^1)=\Z*\Z$.
+        \item Let $X$ be the M\"obius band and $A$ be its boundary circle.\todo{finish}
+    \end{enumerate}
+\end{proof}
+
+\begin{prop}
+    Hatcher exercise 1.2.4
+\end{prop}
+\begin{proof}
+    Let $X\subset\R^3$ be the union of $n$ lines through the origin. It is clear that $\R^3-X$
+    deformation retracts onto a $2n$-punctured $S^2$, where the punctures are antipodal.
+    Note that in the case of $n=1$, we can deformation retract $S^1-\{N,S\}$ to the equatorial
+    $S^1$.
+\end{proof}
+
+\end{document}

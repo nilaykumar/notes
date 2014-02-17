@@ -1,0 +1,78 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\title{Hartshorne Solutions}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 3.1}
+\begin{enumerate}[(a)]
+    \item By the results of problem 1.1, we know that any conic in $\A^2$ can be written as either
+        a variety $Y$ defined by $y-x^2=0$ or a variety $Z$ defined by $xy-1=0$. We know that
+        $A(Y)=k[x]$ and $A(Z)=k[x,x^{-1}]$. Note that $A(Y)\cong A(\A^1)$, and hence by Corollary
+        3.7, $Y\cong\A^1$ as affine varieties. It remains to show that $Z$ is isomorphic to
+        $\A^1-\{0\}$.\todo{why}
+    \item Let $B$ be a proper open subset of $\A^1$. By definition of the Zariski topology, we can
+        write $B=\A^1\setminus\{p_1,\ldots, p_n\}$ where $p_i$ are a finite set of points in $\A^1$.
+        The ring of regular functions of $\A^1$ is $\mathcal{O}(\A^1)=k[x]$. In $B$, however,
+        polynomials that vanish only at any of the $p_i$ are globally invertible, and hence
+        $\mathcal{O}(B)=k[x,(x-p_1)^{-1},\ldots,(x-p_n)^{-1}]$. These two rings are
+        not isomorphic.
+    \item In the projective plane, we can write a conic as $F(x,y,z)=ax^2+2bxy+2cxz+dy^2+2eyz+fz^2$,
+        which can be rewritten under an appropriate change of variables as $x^2+y^2+z^2$. Hence every
+        conic in the projective plane is isomorphic, and it will suffice to show that there exists
+        a conic that is isomorphic to $\Proj^1$. This is done by noting that the $2$-uple of
+        $\rho_2:\Proj^1\to\Proj^2$ is an isomorphism onto its image (c.f. problem 3.4), and that
+        \[\rho_2(a_0,a_1)=(a_0^2,a_0a_1,a_1^2),\]
+        which clearly traces out a conic $xz-y^2$.
+    \item This is obvious from the cell decomposition $\Proj^2=\A^2\sqcup\A^1\sqcup\A^0$ -- one
+        cannot construct a bijection between $\A^2$ and $\Proj^2$.
+    \item If an affine variety $X$ is isomorphic to a projective variety $Y$, then we must have
+        that $\mathcal{O}(X)=\mathcal{O}(Y)=k$. But for $k[x_1,\ldots,x_n]/I(X)=k$, $I(X)$
+        must be maximal. Hence $I(X)=(x_1-a_1,\ldots,x_n-a_n)$, i.e. $X$ is just a point.
+\end{enumerate}
+
+\subsection*{Problem 3.14}
+\begin{enumerate}[(a)]
+    \item Note first that $\phi$ is continuous, as the preimage of any closed subset $V\subset \Proj^n$
+        is the projective cone $\overline{C(V)}$, which is closed in $\Proj^{n+1}$. 
+        Furthermore, the point at which the line connecting any $Q$ and $P$ to the hypersurface
+        (choose $x_0=0$ without loss of generality) is given by 
+        \[\phi(Q)=[Q_1-\frac{Q_0P_1}{P_0}:\cdots:Q_{n+1}-\frac{Q_0P_{n+1}}{P_0}],\]
+        where $P_i$ and $Q_i$, are the $i$th components of $P$ and $Q$, respectively (the coordinates
+        are written as for a point in $\Proj^n$).
+        It is easy to see that $\phi$
+        pulls back regular functions to regular functions: given $g/h:\Proj^n\to k$, $g(\phi(Q))/h(\phi(Q))$
+        is regular as well, since inserting $\phi(Q)$ (as above) will retain homogeneity as well as
+        keep the denominator non-zero (as $h$ has no zeroes).
+    \item The twisted cubic is given parametrically by $[x:y:z:w]=[t^3:t^2u:tu^2:u^3]$. We wish
+        to project from $P=[0:0:1:0]$ onto the hyperplane $z=0$. This yields the points
+        $[t^3:t^2u:u^3]\in\Proj^2$. Note that these points satisfy the equation $x_0^2x_2-x_1^3=0$.
+        But this is precisely the projective closure of the cuspidal cubic $y^3=x^2$.
+\end{enumerate}
+
+
+\subsection*{Problem 3.15}
+\begin{enumerate}[(a)]
+    \item Let $X\subset\A^n$ and $Y\subset\A^m$ be affine varieties. Consider the product
+        $X\times Y\subset\A^{n+m}$ with the induced Zariski topology. Suppose that $X\times Y$
+        is a union of two closed subsets $Z_1\cup Z_2$. Let $X_i=\left\{ x\in X\mid x\times Y\subset Z_i \right\}$
+        for $i=1,2$. The irreducibility of $Y$ guarantees that $X_1\cup X_2=X$: if there were
+        an $x$ for which $x\times Y$ were not contained in a $Z_i$, this would yield a
+        covering of $Y$ by closed sets $Z_1\cap Y,Z_2\cap Y$. Furthermore, the $X_i$ must be
+        closed\todo{why}.
+        Hence either $X_1=X$ or $X_2=X$ and thus $Z_1=X\times Y$ or
+        $Z_2=X\times Y$, i.e. $X\times Y$ is irreducible.
+    \item Consider the map $A(X)\otimes_kA(Y)\to A(X\times Y)$ given by taking $(f\otimes g)(x,y)$
+        to $f(x)g(y)$. This map is clearly onto, as it produces the coordinate functions
+        $x_1,\ldots,x_n,y_1,\cdots,y_m$.
+\end{enumerate}
+
+\end{document}
