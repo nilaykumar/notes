@@ -49,7 +49,7 @@
 \end{prop}
 \begin{proof}
     Throughout this proof, we use freely Hatcher Proposition 1.17: if a space $X$ retracts onto
-    a subspace $A$, then the homomorphism $i_*:\pi_(A,x_0)\to\pi_1(X,x_0)$ induced by the inclusion
+    a subspace $A$, then the homomorphism $i_*:\pi_1(A,x_0)\to\pi_1(X,x_0)$ induced by the inclusion
     $i:A\hookrightarrow X$ is injective. Further, if $A$ is a deformation retract of $X$, then
     $i_*$ is an isomorphism. We also use the fact that the functor $\pi_1$ takes
     products to products.
@@ -63,7 +63,12 @@
             if $(1,0)\mapsto m$ for any $m,n\in\Z$ and $(0,1)\mapsto n$, we find that
             $n(1,0)$ maps to the same element that $m(0,1)$ maps to; there are no injective group
             morphisms $\Z\times\Z\to\Z$.
-        \item Let $X=S^1\times D^2$ and $A$ be the circle as shown in Hatcher.\todo{finish}
+        \item Let $X=S^1\times D^2$ and $A$ be the circle as shown in Hatcher. The inclusion of
+            $A$ into $X$ induces a map from $\Z$ to $\Z$ (injective by the retraction) that takes
+            the generator to just the homotopy class of the knotted circle inside the solid torus.
+            Of course, the knot can be homotoped away by pulling the ends through each other, and
+            hence the map takes the generator to zero. But then the map must be the zero map, and
+            hence not injective.
         \item Let $X=D^2\vee D^2$ with $A$ its boundary $S^1\vee S^1$. Of course,
             $\pi_1(D^2\vee D^2)$ is the trivial group: any loop in $D^2$ is contractible
             and since any loop in $D^2\vee D^2$ can be pinched off into the composition
@@ -80,7 +85,15 @@
             that clearly $\pi_1(S^1\times S^1)=\Z\times\Z\hookrightarrow\pi_1(S^1\vee S^1)$
             and hence this is impossible, as it would imply an injective morphism of $\Z\times\Z$
             into $\Z$. Of course, this is easier to see via the fact that $\pi_1(S^1\vee S^1)=\Z*\Z$.
-        \item Let $X$ be the M\"obius band and $A$ be its boundary circle.\todo{finish}
+        \item Let $X$ be the M\"obius band and $A$ be its boundary circle. It is clear that $X$
+            deformation retracts onto its central circle, and thus $\pi_1(X,x_0)=\Z$ and $\pi_1(A,x_0)=\Z$
+            for $x_0\in A\subset X$. Drawing out the M\"obius band as a square with left and right
+            sides anti-identified, it is clear that the inclusion of the homotopy class of the boundary
+            circle into $\pi_1(X,x_0)$ yields twice the generator, as the boundary circle goes
+            around the core circle twice. But this would imply that the retraction induces a map
+            that takes twice the generator to the generator (as the existence of a retraction implies
+            that the inclusion composed with retraction yields the identity), which is impossible
+            from $\Z$ to $\Z$.
     \end{enumerate}
 \end{proof}
 
@@ -90,8 +103,25 @@
 \begin{proof}
     Let $X\subset\R^3$ be the union of $n$ lines through the origin. It is clear that $\R^3-X$
     deformation retracts onto a $2n$-punctured $S^2$, where the punctures are antipodal.
-    Note that in the case of $n=1$, we can deformation retract $S^1-\{N,S\}$ to the equatorial
-    $S^1$.
+    Note that in the case of $n=1$, we can deformation retract $S^1-\{N,S\}$ to a single equatorial
+    $S^1$, as each puncture is contained by a circle. Similarly, for higher $n$, we can fix
+    a basepoint on the sphere (that is not one of the punctured points) and draw loops about each
+    punctured point, hence forming the wedge sum of $2n-1$ circles (as the last point one is
+    automatically contained in the `outside' of the others). Hence the $2n$-punctured $S^2$
+    can be deformation retracted onto the $2n-1$ wedge sum $S^1\vee\cdots\vee S^1$, and we find
+    that $\pi_1(\R^3-X)=\Z*\cdots*\Z$, where the free product is taken $2n-1$ times.
+\end{proof}
+
+\begin{prop}
+    Hatcher exercise 1.2.8
+\end{prop}
+\begin{proof}
+    If we attach a circle of one of the tori to a circle of the other, the cell complex can
+    be drawn as below. The generators are clearly $a,b,c$ but due to the two attached 2-cells,
+    the loops $aba^{-1}b^{-1}$ and $aca^{-1}c^{-1}$ are contractible. Hence the fundamental
+    group, via Hatcher, has a presentation
+    \[\langle a,b,c\mid aba^{-1}b^{-1}, aca^{-1}c^{-1}\rangle.\]
+    Note that this is simply the group $\Z\times (\Z*\Z)$, as $[a,b]=1$ and $[a,c]=1$.  
 \end{proof}
 
 \end{document}
