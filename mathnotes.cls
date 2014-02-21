@@ -15,6 +15,7 @@
 \newcommand{\ra}[0]{\rightarrow}
 \newcommand{\fa}[0]{\;\forall}
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\G}{\mathbb{G}}
 \newcommand{\A}{\mathbb{A}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -46,7 +47,9 @@
 \DeclareMathOperator{\Lie}{Lie}
 \DeclareMathOperator{\id}{Id}
 \DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\pr}{pr}
 \DeclareMathOperator{\irr}{irr}
+\DeclareMathOperator{\characteristic}{char}
 \DeclareMathOperator{\supp}{supp}
 \DeclareMathOperator{\trdeg}{trdeg}
 \DeclareMathOperator{\Nm}{Nm}
