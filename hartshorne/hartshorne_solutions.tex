@@ -12,6 +12,37 @@
 
 \maketitle
 
+\subsection*{Problem I.1.1}
+\begin{enumerate}[(a)]
+    \item Let $Y$ be the plane curve $y-x^2=0$. The coordinate ring $A(Y)=k[x,y]/(y-x^2)$
+        is isomorphic to $k[x]$, as any power of $y$ is simply replaced by $x^2$.
+    \item Let $Z$ be the plane curve $xy-1=0$. The corrdinate ring $A(Z)=k[x,y]/(xy-1)$
+        is clearly not isomorphic to a polynomial ring of one variable, as there are
+        non-constant elements of $A(Z)$ (namely, powers of $y$) that are invertible.
+    \item We assume that the $\characteristic k\neq 2$.
+        Let $f$ be an irreducible quadratic polynomial in $k[x,y]$, i.e.
+        \[f(x,y)=x^2+axy+by^2+cx+dy+e,\]
+        and let $W$ be the conic defined by $f$ (we can choose $f$ to be monic without
+        loss of generality).
+        
+        Suppose the degree two terms are a perfect square.
+        Then we may change variables to obtain $z^2+bz+dy+e$ (with new coefficients).
+        Completing the square (here we use $\characteristic k\neq 2$) in $z$ and changing
+        variables again, we obtain $w^2-y=0$, which yields the curve $Y$ from part
+        (a) above.
+
+        If the degree two terms do not factor perfectly, \todo{finish}
+\end{enumerate}
+
+\subsection*{Problem I.1.2}
+Let $Y\subset \A^3$ be the set $Y=\left\{ (t,t^2,t^3)\mid t\in k\right\}$.
+Consider $\fr a=(y-x^2,z-x^3)\subset k[x,y,z]$. It is clear that $Y=I(\fr a)$\todo{why? division}.
+The coordinate ring is thus given $A(Y)=k[x,y,z]/(y-x^2,z-x^3)$. Note that
+$\dim A(Y)=1$ by dimension theory (as $z-x^3$ is not a zero divisor in $k[x,y,z]$
+and $y-x^2$ is not a zero divisor in $k[x,y,z]/(z-x^3)$), and hence $Y$
+has dimension one. Indeed, it is easy to see that $A(Y)\cong k[x]$ as $y$
+is replaced by $x^2$ and $z$ is replaced by $x^3$.
+
 \subsection*{Problem I.3.1}
 \begin{enumerate}[(a)]
     \item By the results of problem 1.1, we know that any conic in $\A^2$ can be written as either
@@ -95,6 +126,46 @@
         $x\otimes y$ with $x\in A(X),y\in A(Y)$. Hence every element in the tensor product must
         also solve some polynomial over the ring $R$, i.e. $A(X)\otimes_kA(Y)$ is module-finite
         over $R$ and $\dim A(X)\otimes_kA(Y)=d_1+d_2$, as desired.
+\end{enumerate}
+
+\subsection*{Problem I.3.17}
+\begin{enumerate}[(a)]
+    \item Any conic in $\Proj^2$ is isomorphic to $\Proj^1$ by problem I.3.1, and hence it
+        suffices to show that $\Proj^1\subset\Proj^2$ is normal. If we parametrize the
+        projective line by $x=0$, its coordinate ring becomes the graded ring $k[y,z]$.
+        Then $A(Y)$ is a UFD, and it is straightforward to check that as is the degree-zero
+        subring of any localization of $A(Y)$. Hence, by theorem I.3.4b, any conic
+        in $\Proj^1$ is normal.
+    \item 
+    \item Consider the cuspidal cubic $C$ in $\A^2$ given by $y^2-x^3=0$. The ring of regular
+        functions on $C$ is isomorphic to the coordinate ring $k[x,y]/(y^2-x^3)$. The local
+        ring at $(0,0)$ is given by the localization
+        \[\mathcal{O}_{(0,0),C}=\left( k[x,y]/(y^2-x^3) \right)_{(x,y)}=k[x,y]_{(x,y)}/(y^2-x^3).\]
+        Now notice that the quotient $y/x$ sitting in the fraction field of $\mathcal{O}_{(0,0),C}$
+        solves the monic polynomial $t^2-x\in\mathcal{O}_{(0,0),C}[t]$, but $y/x\notin\mathcal{O}_{(0,0),C}$.
+        Hence $C$ is not normal.
+    \item Let $Y$ be an affine variety with coordinate ring $A(Y)\cong\mathcal{O}(Y)$. Suppose
+        first that $\mathcal{O}(Y)$ is normal (integrally closed in its field of fractions).
+        Let us show that $Y$ is normal. It suffices to show
+        that, more generally, the localization $S^{-1}A$ of a normal domain $A$ is normal.
+        If $x$ is an element of the fraction field of $A$ integral over $S^{-1}A$, it must solve
+        a polynomial
+        \[x^n+\frac{a_{n+1}}{s_{n-1}}x^{n-1}+\cdots+\frac{a_0}{s_0}\]
+        for $a_i\in A,s_0\in S$. If we denote by $r=s_0\cdots s_{n-1}$ the product of the $s_i$,
+        and multiply by $r^n$, we obtain
+        \[(rx)^n+\frac{a_{n-1}r}{s_{n-1}}(r^{n-1}x^{n-1})+\cdots+\frac{a_0r^n}{s_0}.\]
+        This implies that $rx$ is integral over $A$, and so $rx\in A$ and $x\in S^{-1}A$.
+        Thus, as $\mathcal{O}_{P,Y}$ is a localization of $\mathcal{O}(Y)$,
+        which is normal, we find that $Y$ is normal.
+
+        Now suppose instead that $Y$ is normal (i.e. $\mathcal{O}_{P,Y}$ is normal for every
+        $P\in Y$); we wish to show that $\mathcal{O}(Y)$ is normal.\todo{finish}
+    \item Let $Y$ be an affine variety with $A(Y)\cong\mathcal{O}(Y)$ its coordinate ring.
+        The integral closure $N$ of $\mathcal{O}(Y)$ in its field of fractions
+        is of course a normal domain. By theorem I.3.9A, $N$ is a finitely generated
+        $k$-algebra, and hence by the equivalence of categories of corollary I.3.8,
+        we obtain a a variety $\tilde Y$ such that $\mathcal{O}(\tilde Y)=N$. Consider
+        now a normal variety $Z$ with a dominant morphism $\phi:Z\to Y$ 
 \end{enumerate}
 
 \subsection*{Problem I.3.21}
