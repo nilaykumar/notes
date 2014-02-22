@@ -108,13 +108,17 @@ is replaced by $x^2$ and $z$ is replaced by $x^3$.
         whose pullback to $X$ is $f_\alpha(x_1,\ldots,x_n,0,\ldots,0)$, which is by definition
         a closed set of $X$. But if $X_i$ are closed and cover $X$, either $X_1=X$ or $X_2=X$
         and thus $Z_1=X\times Y$ or $Z_2=X\times Y$, i.e. $X\times Y$ is irreducible.
-    \item Consider the map $\psi:A(X)\otimes_kA(Y)\to A(X\times Y)$ given by taking $(f\otimes g)(x,y)$
+    \item Consider the homomorphism $\psi:A(X)\otimes_kA(Y)\to A(X\times Y)$ given by taking $(f\otimes g)(x,y)$
         to $f(x)g(y)$. This map is clearly onto, as it produces the coordinate functions
         $x_1,\ldots,x_n,y_1,\cdots,y_m$.\footnote{One might worry that generators may be missing from
         $A(X)$ or $A(Y)$ and hence that $\psi$ may not produce all the generators of $A(X\times Y)$.
         This is actually not a problem: if $x_i\in I(X)$ then $x_i\in I(X\times Y)$ as well.}
-        Injectivity is less obvious.
-    \item
+        Injectivity is more tricky: we start from the fact that every element of $A(X) \otimes_k A(Y)$ is a linear combination of elements of the form $f \otimes g$, where $f$ and $g$ are monomials. Moreover, all such $f \otimes g$ are linearly independent. We claim that none of the $f \otimes g$ are in the kernel of $\psi$, since $\psi(f \otimes g) (x,y)= f(x)g(y) = 0$ for all $x,y$ iff $f(x) = 0$ for all $x$ or $g(y) = 0$ for all $y$. This would imply $f=0$ or $g=0$, and therefore $f\otimes g = 0$. Now we are in a position to compute the kernel of $\psi$:
+\[  \psi (\sum c_{ij} f_i \otimes g_j) = \sum c_{ij} f_i g_j = 0  \]
+Since monomials of the form $f_i g_j$ are linearly independent, this implies $c_{ij} = 0$ for all $i,j$, hence the kernel is trivial and $\psi$ is injective.
+
+For those more versed in category theory, there is a simpler but more indirect proof. The functor that associates to varieties their coordinate rings is contravariant, and therefore takes products to coproducts. But the coproduct in the category of rings is $\otimes$, which proves the statement.
+    \item Let $\pi_X, \pi_Y$ denote the projections on $X$ and $Y$ respectively. Using lemma 3.6, these are morphisms as long as $x_i \circ \pi_X$ and $y_i \circ \pi_Y$ are regular functions on $X \times Y$. But $x_i \circ \pi_X (x, y) = x_i (x, 0) = x_i$, which is a polynomial function, thus regular. This works analogously for $\pi_Y$. Then we just need to check the universal property of products. Assume there exist morphisms $\phi_X :Z \to X$, $\phi_Y : Z \to Y$; then we construct the morphism $\phi_{XY} : Z \to X \times Y$ defined by $\phi_{XY} (z) = (\phi_X (z) , \phi_Y(z))$. We have $\pi_X \circ \phi_{XY} = \phi_X$, $\pi_Y \circ \phi_{XY} = \phi_Y$, and $\phi_{XY}$ is clearly unique with these properties.
     \item It suffices to show that $\dim A(X)\otimes_k A(Y)=\dim A(X)+\dim A(Y)$. By Noether
         normalization, $A(X)$ is module-finite over the polynomial ring $k[t_1,\ldots,t_{d_1}]$
         and $A(Y)$ is module-finite over the polynomial ring $k[s_1,\ldots,s_{d_2}]$ with
