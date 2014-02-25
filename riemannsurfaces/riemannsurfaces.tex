@@ -724,5 +724,179 @@ and complete, then one applies the theorem to $(X,g^\delta_{\bar kj}=g_{\bar kj}
 now, we obtain a sequence $u_\delta$, uniformly bounded, which weakly converges to a solution $u$ (c.f. J.P. Demailly's online
 book).
 
+\todo[inline]{fill in missing lectures}
+
+\subsection{Kodaira embedding}
+
+\begin{thm}[Kodaira embedding]
+    Let $L\to X$ be a positive, holomorphic line bundle, over a compact, K\"ahler  manifold $(X,\omega)$. 
+    Let $H^0(X,L^k)$ denote the space of holomorphic sections of $L^k$, with $N_{k+1}\equiv\dim H^0(X,L^k)$.
+    Let $\left\{ s_\alpha(z) \right\}_{\alpha=0}^{N_{k+1}}$ be a basis for $H^0(X,L^k)$. The Kodaira map is
+    defined
+    \[\iota_k: X\ni z \mapsto [s_0(z):\cdots:s_{N_k}(z)]\in\CP^{N_k}.\]
+    Then there exists a $k_0$ such that for $k\geq k_0$, the map $\iota_k$ is an embedding of $X$
+    into $\CP^{N_k}$.
+\end{thm}
+
+Let us first sketch the idea of the proof. We claim that this theorem can be reformulated
+in terms of sheaves and \v{C}ech cohomology, which we will introduce shortly. Indeed, given $N$ points $z_1,\ldots, z_N\in X$,
+with $N$ integers $k_1,\ldots, k_N$, we can define a sheaf $\mathcal{I}_{k_1z_1+\cdots+k_nz_N}$ of functions
+vanishing at $z_i$ of order $k_i$, respectively.
+Kodaira embedding follows if we can prove that for all $k_i$, there exists a $k_0$ such that the maps
+\[\check{H}^0(X,L^k)\to\check{H}^0(X,L^k\otimes\mathcal{O}/\mathcal{I}_{k_1z_1+\cdots+k_Nz_N})\]
+are surjective, where $\mathcal{O}$ is the local ring of holomorphic germs. To do this, we will use the fact
+that this map sits inside the exact sequence induced by
+\begin{equation*}
+    \begin{tikzcd}
+        0\arrow{r}&L^k\otimes\mathcal{I}\arrow{r}&L^k\otimes\mathcal{O}\arrow{r}&L^k\otimes\mathcal{O}/\mathcal{I}\arrow{r}&0,
+    \end{tikzcd}
+\end{equation*}
+which is a long exact sequence
+\begin{equation*}
+    \begin{tikzcd}
+        0\arrow{r}&\check H^0(X,L^k\otimes\mathcal{I})\arrow{r}&\check H^0(X,L^k\otimes \mathcal{O})\arrow{r}&\check H^0(X,L^k\otimes\mathcal{O}/\mathcal{I})\arrow{d}&\\
+        &&&\check H^1(X,L^k\otimes \mathcal{I})\arrow{r}&\cdots
+    \end{tikzcd}
+\end{equation*}
+Hence it suffices to show, by exactness, that
+\[\check H^1(X,L^k\otimes\mathcal{I}_{k_1z_1+\cdots+k_Nz_N})=0.\]
+
+We shall show that there exists a $\phi$ plurisubharmonic such that for any $k_1,\ldots,k_N$, there exists a $k$ depending
+only on $k_1,\ldots,k_N$, such that $\mathcal{J}_{\phi}\subset\mathcal{I}_{k_1z_1+\cdots+k_Nz_N}$ and $e^{-\phi}$ is a singular
+metric on $L^k\otimes\Lambda^{n,0}$ with $i\partial\bar\partial\phi\geq\varepsilon\omega$.
+Note that $\mathcal{J}_\phi$ is the sheaf of holomorphic functions $f$ near $z$ such that $\int_{U_z}|f|^2e^{-\phi}<\infty$.
+This implies that
+\[H^1_{\bar\partial}(X,L^k\otimes\Lambda^{n,0}\otimes\mathcal{J}_\phi)=0,\]
+where this cohomology group is defined to be $\ker \bar\partial|_{L^k\otimes\Lambda^{n,1}\otimes\mathcal{J}_\phi}/\text{im }\bar\partial|_{L^k\otimes\Lambda^{n,0}\otimes\mathcal{J}_\phi}$.
+But this is essentially just H\"ormander's theorem. To complete the proof, we will use the fact that
+\[H^1_{\bar\partial}(X,L^k\otimes \Lambda^{n,0}\otimes\mathcal{J}_\phi)=\check H^1(X,L^k\otimes\Lambda^{n,0}\otimes\mathcal{J}_\phi),\]
+which one might think of as a version of the de Rham theorem.
+
+Let us now consider the basics of \v{C}ech cohomology. Let $X$ be a topological space with an open cover $\underline{U}=\{U_\alpha\}$.
+A \text{sheaf} $\mathcal{E}$ on $X$ is an assignment of a group $\Gamma(U_\alpha,\mathcal{E})$ to each $U_\alpha$, with restriction
+maps $\rho_{VU}:\Gamma(V,\mathcal{E})\to\Gamma(U,\mathcal{E})$ for $U\subset V$, with the obvious consistency conditions, as well as the
+extension property that for $s_1\in \Gamma(U_1,\xi),s_2\in\Gamma(U_2,\xi)$ with $\rho_{U_1,U_1\cap U_2}s_1=\rho_{U_2,U_1\cap U_2}s_2$
+then there exists a unique $t\in\Gamma(U_1\cap U_2,\xi)$ with $\rho_{(U_1\cup U_2),U_1}s_1,\rho_{U_1\cup U_2,U_2}s_2$.
+
+Let us look at some examples of sheaves. The simplest is the constant sheaf, say for example $\mathcal{S}=\underline{\Z}$,
+where $\Gamma(U,\mathcal{S})$ is the group of integer-valued continuous (constant) functions on $U$, or $\mathcal{S}=\underline{R}$
+where $\Gamma(U,\mathcal{R})$ is the group of smooth real-valued functions on $U$. A more sophisticated example is as follows.
+Take a subvariety $V\subset X$. One can define a sheaf $\mathcal{V}$ where $\Gamma(U,\mathcal{V})$ is the group of holomorphic
+functions on $U$ vanishing on $V$. Another example is $\mathcal{J}_\phi$, where $\Gamma(U,\mathcal{J}_\phi)$ is the group
+of holomorphic functions $f$ on $U$ such that $\int_U |f|^2e^{-\phi}<\infty$.
+
+Let us now turn to cohomology groups. Given a sheaf $\mathcal{E}$, we define the space of $p$-cycles as
+\[\mathcal{C}^p=\left\{ \sigma\mid U_{\alpha_0},\ldots,U_{\alpha_p}\to \sigma_{\alpha_0,\ldots,\alpha_p}\in\Gamma(U_{\alpha_0}\cap\cdots\cap U_{\alpha_p},\mathcal{E}) \right\}\]
+and the $\delta$ operator $\delta:\mathcal{C}^p\to\mathcal{C}^{p+1}$ such that
+\[(\delta\sigma)_{\alpha_0,\ldots,\alpha_{p+1}}=\sum(-1)^j\sigma_{\alpha_0,\ldots,\hat\alpha_j,\alpha_{p+1}}\in\Gamma(U_{\alpha_0}\cap\cdots\cap U_{\alpha_p},\mathcal{E})\]
+It is easy to check that $\delta^2=0$. Hence we define
+\[\check H^p(\underline{U},\mathcal{E})\equiv \ker\delta|_{\mathcal{}^p}/\text{im }\delta|_{\mathcal{C}^{p+1}}.\]
+Now let us see how these quantities depend on the choice of open covering. Let $\underline{U}=\{U_\alpha\}$ and $\underline{U}'=\{U_\beta'\}$ be
+two coverings of $X$. We say that $\underline{U}$ is a refinement of $\underline{U}'$ if there exists a $\phi:\{\alpha\}\to\{\beta\}$ with
+$U_\alpha\subset U'_{\phi(\alpha)}$. Then we have a map on cocycles
+\[(\phi\sigma)_{\alpha_0,\ldots,\alpha_p}\equiv\sigma_{\phi(\alpha_0),\ldots,\phi(\alpha_p)}\in\Gamma(\underline{U}',\mathcal{E}),\]
+and thus a map $\Gamma(\underline{U}',\mathcal{E})\ni\sigma\to \phi(\sigma)\in\Gamma(\underline{U},\mathcal{E})$. This map in turn
+induces a map on cohomology groups $\check H^p(\underline{U}',\mathcal{E})\to\check H^p(\underline{U},\mathcal{E})$.
+We can now define
+\[\check H^p(X,\mathcal{E})=\lim_{j\to\infty}\check H^p(\underline{U}_j,\mathcal{E})=\cup_j\check H^p(\underline{U}_j,\mathcal{E})/\sim\]
+where $\underline{U}_{j+1}\subset\underline{U}_j$ is a sequence of refinements, and the equivalence relation is given as $\sigma\in \check H^p(\underline{U}_j,\mathcal{E})$
+and $\tau\in \check H^p(\underline{U}_k,\mathcal{E})$ are equivalent if there exists an $m>j,k$ with $\phi_{jm}\sigma=\phi_{km}\tau$.
+
+\begin{lem}[Leray]
+    If $\underline{U}$ is a covering with $\check H^p(U_\alpha\cap\cdots\cap U_{\alpha_p},\mathcal{E})=0$ for all $p\geq 1$,
+    then $\check H^p(X,\mathcal{E})=\check H^p(\underline{U},\mathcal{E})$.
+\end{lem}
+
+This practical lemma allows us to bypass working with the complicated inductive limit defined above, and instead work
+with such coverings $\underline{U}$.
+
+Let us now turn to some examples of cohomology groups.
+\begin{exmp}
+    By definition, $\check H^0(X,\mathcal{E})=\{\sigma\in\mathcal{C}^0, \delta\sigma=0\}$. What does this condition mean?
+    Well clearly $\sigma:U_\alpha\to \Gamma(U_\alpha,\mathcal{E})$. Meanwhile,
+    \[\mathcal{C}^1\ni (\delta\sigma)_{\alpha\beta}=\sigma_\beta-\sigma_\alpha,\]
+    and hence for this to be zero means that $\sigma_\beta=\sigma_\alpha$ on $U_\alpha\cap U_\beta$.
+    Of course, by the sheaf axiom, this implies that there exists a $\sigma\in\Gamma(U_\alpha\cup U_\beta,\mathcal{E})$
+    that restricts to the $\sigma_\alpha,\sigma_\beta$ appropriately. Hence we find that
+    \[\check H^0(X,\mathcal{E})=\Gamma(X,\mathcal{E})\].
+
+    As another example, consider the Cousin problem. Fix a domain $\Sigma$ in some Riemann surface $X$.  Given a sequence
+    of points $\{p_j\}\subset\Omega$, does there exist a meromorphic function with a pole of order $n_j$
+    at $p_j$? This is certainly doable on $U_j$, where $U_j$ are small neigbhorhoods of the $p_j$, by the charts
+    that transport $U_j$ to a disk in the complex plane. Hence this problem is trivially locally, but the
+    problem of matching these $U_j$ is not so easy. It is not surprising that this problem can be rephrased
+    as a question of cohomology. Consider $\sigma\in\mathcal{C}^1(X,\mathcal{O})$, where $\mathcal{O}$ is the
+    sheaf of holomorphic functions. Indeed $\sigma_{jk}\equiv f_j-f_k$ on $U_j\cap U_k$ is now holomorphic
+    as the poles have cancelled. Observe now that if $\check H^1(X,\mathcal{O})=0$, then a global function exists
+    with the given properties because this implies that $\sigma_{jk}=(\delta\tau)$ for $\tau\in\mathcal{C}^0(X,\mathcal{O})$.
+    But this means that $\sigma_{jk}=\tau_j-\tau_k$, i.e. $f_j-f_k=\tau_j-\tau_k$ and hence $f_j-\tau_j=f_k-\tau_k$,
+    which gives us the global meromorphic function, as these match.
+
+    Consider now the second Cousin problem. Given the same setup as before, does there exist a holomorphic function
+    with the given orders of vanishing at the $p_j$? We leave it as an exercise to show that this is possible
+    if $\check H^1(X,\mathcal{O}^*)=0$, where $\Gamma(U,\mathcal{O}^*)$ are the non-vanishing holomorphic functions
+    on $U$. As another exercise, we claim that an element $\sigma\in\mathcal{C}^1(X,\mathcal{O}^*)$ gives rise
+    to a line bundle $L\to X$.\footnote{The way to see this is to note that $\sigma$ associates to $U_\alpha\cap U_\beta$
+        a section $\sigma_{\alpha\beta}\in\Gamma(U_\alpha\cap U_\beta,\mathcal{O}^*)$, which is multiplicative and hence
+        $0=\delta\sigma\iff\sigma_{\alpha\beta}=\sigma_{\alpha\gamma}\sigma_{\gamma\beta}$: the cocycle condition.
+        This implies that $\check H^1(X,\mathcal{O}^*)$ is the space of line bundles $L$ with transition functions $\sigma_{\alpha\beta}$
+        modulo $\sigma_{\alpha\beta}\sim\sigma_{\alpha\beta}'$ if $\sigma_{\alpha\beta=\sigma_{\alpha\beta}'}f_\alpha f_\beta^-1$.
+        From the point of view of line bundles, this makes sense because on one line bundle $L$, $\phi_\alpha=\sigma_{\alpha\beta}\phi_\beta$,
+        while on the other $\phi_\alpha'=\sigma_{\alpha\beta}'\phi'_\beta$, between which there is a natural correspondence because
+        we can write $(f_\alpha^{-1}\phi_\alpha)=\sigma'_{\alpha\beta}(f_\beta^{-1}\phi_\beta)$, which gives us a mapping
+        $\Gamma(X,L)\ni\phi\mapsto\phi'\equiv f_\alpha^{-1}\phi_\alpha\in\Gamma(X,L')$. This one-to-one mapping allows
+        us to think of the line bundles as equivalent, as $f_\alpha$ are holomorphic and non-vanishing.}
+\end{exmp}
+The moral of these examples is that global problems can be rephrased in terms of cohomology.
+
+Now let us turn to short exact sequences of sheaves. Suppose we have sheaves $\mathcal{E},\mathcal{F},\mathcal{G}$
+and maps
+\begin{equation*}
+    \begin{tikzcd}
+        0\arrow{r}&\mathcal{E}\arrow{r}{\Phi}&\mathcal{F}\arrow{r}{\Psi}&\mathcal{G}\arrow{r}&0
+    \end{tikzcd}
+\end{equation*}
+which are exact as maps of sheaves. By this we mean that for each $z$,
+the sequence
+\begin{equation*}
+    \begin{tikzcd}
+        0\arrow{r}&\mathcal{E}_z\arrow{r}&\mathcal{F}_z\arrow{r}&\mathcal{G}_z\arrow{r}&0
+    \end{tikzcd}
+\end{equation*}
+is exact as a sequence of groups. Then we obtain the following long exact sequence.
+\begin{equation*}
+    \begin{tikzcd}
+        0\arrow{r}&\check H^0(X,\mathcal{E})\arrow{r}&\check H^0(X,\mathcal{F})\arrow{r}&\check H^0(X,\mathcal{G})\arrow{d}{\delta*}&\\
+        &&&\check H^1(X,\mathcal{E})\arrow{r}&\cdots
+    \end{tikzcd}
+\end{equation*}
+
+Let us now try to construct $\delta^*$, the \textbf{coboundary operator}.
+Consider first some $\sigma\in\mathcal{C}^p(X,\mathcal{G})$, i.e. $\delta\sigma=0$.
+There exists, for each stalk, a $\tau\in \mathcal{C}^p(X,\mathcal{F})$ with $\Psi(\tau)=\sigma$,
+by surjectivity of $\Psi$. Note now that $\delta\tau=\Phi(\lambda)$ with $\lambda\in\mathcal{C}^{p+1}(X,\mathcal{E})$,
+because $\Psi(\delta\tau)=\delta\Psi(\tau)=\delta\sigma=0$, and hence belongs to the kernel of $\Psi$ and
+hence lies in the image of $\Phi$. Indeed, $\lambda$ is closed, as $\Phi(\delta\lambda)=\delta\Phi(\lambda)=\delta^2\tau=0$,
+which implies that $\delta\lambda=0$, as $\Phi$ is injective. Hence we obtain a map
+\[\mathcal{C}^p(X,\mathcal{G})\ni\sigma\mapsto\lambda\in\mathcal{C}^{p+1}(X,\mathcal{E}),\]
+which yields the $\delta^*$ operator.
+
+We want to equate the de Rham/Dolbeaut cohomology groups with \v{C}ech cohomology groups, as the former
+can be computed with methods discussed in previous lectures. Note the following important fact:
+if $\mathcal{E}$ is a \textbf{fine} sheaf, then $\check H^p(X,\mathcal{E})=0$ for $p\geq 1$. In particular,
+a fine sheaf is a sheaf such that if $\sum\chi_\alpha=1$ is a partition of unity (with $\supp\chi_\alpha\subset U_\alpha$),
+then there is a map
+\[\Gamma(U_\alpha,\mathcal{E})\ni s\mapsto \chi_\alpha s\in\Gamma(U_\alpha,\mathcal{E}).\]
+In other words, fineness means that there is a sensical way of using partitions of unity,
+compatible with the sheaf. As an example, consider the sheaf of smooth $p$-forms -- this is clearly fine
+as we can multiply by smooth bump functions. As a non-example, simply consider something valued in the integers,
+for which one can obviously not do the same. Similarly for sheafs of holomorphic functions, as
+bump functions will destroy holomorphicity (recall bump functions are smooth but not analytic).
+The above observation can be proved fairly simply: let $\sigma\in\mathcal{C}^p(X,\mathcal{E})$, i.e. $\delta\sigma=0$.
+Then $\sigma=\delta\tau$, and $\tau_{\alpha_0,\ldots,\alpha_{p-1}}=\sum_\gamma\chi_\gamma\sigma_{\gamma_0,\ldots,\gamma_p-1}$
+for $\tau\in\mathcal{C}^{p-1}$. We leave the explicit details as an exercise.
+As it happens, the sheaves that we will be interested in will not be fine, but we will place them in exact sequences
+with other sheaves that are fine.
+
 
 \end{document}
