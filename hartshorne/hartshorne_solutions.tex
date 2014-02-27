@@ -169,7 +169,20 @@ For those more versed in category theory, there is a simpler but more indirect p
         is of course a normal domain. By theorem I.3.9A, $N$ is a finitely generated
         $k$-algebra, and hence by the equivalence of categories of corollary I.3.8,
         we obtain a a variety $\tilde Y$ such that $\mathcal{O}(\tilde Y)=N$. Consider
-        now a normal variety $Z$ with a dominant morphism $\phi:Z\to Y$ 
+        now a normal variety $Z$ with a dominant morphism $\phi:Z\to Y$.
+        We claim that the induced map $\phi^*:\mathcal{O}(Y)\to\mathcal{O}(Z)$ is injective.
+        To see this, note that $f\in\mathcal{O}(Y)$ is pulled back to regular function
+        $f\circ \phi\in\mathcal{O}(Z)$.
+        Note that if $f(\phi(X))=0$ then since $0\in\A^1$ is Zariski-closed, so is
+        $f^{-1}(0)\supset\phi(X)$, by continuity of $f$. The density of $\phi(X)$ then implies that
+        $f^{-1}(0)=Y$, and hence $f(Y)=0$, i.e. $f=0$. This shows that $\phi^*$
+        is injective.
+        Now, as $Z$ is normal, $\mathcal{O}(Z)$ is normal as well (by the previous part). Since
+        $N$ is the ``smallest'' normal ring containing $\mathcal{O}(Y)$ (universal property
+        of the normalization as rings), there is a unique
+        injection $N\hookrightarrow\mathcal{O}(Z)$, which induces a (unique) morphism
+        $Z\to Y$, just as desired.
+
 \end{enumerate}
 
 \subsection*{Problem I.3.21}
