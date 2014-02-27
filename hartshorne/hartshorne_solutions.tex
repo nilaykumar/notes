@@ -163,7 +163,14 @@ For those more versed in category theory, there is a simpler but more indirect p
         which is normal, we find that $Y$ is normal.
 
         Now suppose instead that $Y$ is normal (i.e. $\mathcal{O}_{P,Y}$ is normal for every
-        $P\in Y$); we wish to show that $\mathcal{O}(Y)$ is normal.\todo{finish}
+        $P\in Y$). We wish to show that $\mathcal{O}(Y)$ is normal. We will actually show that
+        if the localizations of a domain $A$ at all maximal ideals are integrally closed,
+        then $A$ is integrally closed. This implies the result, since the coordinate ring
+        of an affine variety is a domain. Recall that $A = \bigcap_{\fr m} A_{\fr m},$ 
+        where $\fr m$ are all maximal ideals of $A$. Now if $r \in$ $\text{Frac }A$ is integral over
+        $A$, then it's also integral over $A_{\fr m}$ for all $\fr m$, since coefficients in $A$
+        are also in $A_{\fr m}$. But $A_{\fr m}$ is integrally closed, so $r \in A_{\fr m}$
+        for all $\fr m$. Then $r \in \bigcap_{\fr m} A_{\fr m} = A$, so $A$ is integrally closed.
     \item Let $Y$ be an affine variety with $A(Y)\cong\mathcal{O}(Y)$ its coordinate ring.
         The integral closure $N$ of $\mathcal{O}(Y)$ in its field of fractions
         is of course a normal domain. By theorem I.3.9A, $N$ is a finitely generated
