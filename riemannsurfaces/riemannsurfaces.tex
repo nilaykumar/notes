@@ -898,5 +898,130 @@ for $\tau\in\mathcal{C}^{p-1}$. We leave the explicit details as an exercise.
 As it happens, the sheaves that we will be interested in will not be fine, but we will place them in exact sequences
 with other sheaves that are fine.
 
+Let us illustrate explicitly why fine sheafs have trivial higher cohomology. Let $\sigma\in\mathcal{C}^q$ (i.e. $\delta\sigma=0$.
+We want to show that $\sigma=\delta\tau$. But one can simply take
+\[\tau_{\alpha_0,\ldots,\alpha_{q-1}}\equiv\sum\chi_\gamma\sigma_{\gamma;\alpha_0,\ldots,\alpha_{q-1}}.\]
+To see why this works, let us just look at the example where $q=1$: take $\mathcal{C}^1\ni\sigma=(\sigma_{\alpha\beta}).$
+Then $\tau_\alpha=\sum\chi_\gamma\sigma_{\gamma\alpha}$. Then
+\[(\delta\tau)_{\alpha\beta}=\tau_\beta-\tau_\alpha=\sum\chi_\gamma(\sigma_{\gamma\beta}-\sigma_{\gamma\alpha})=\sum\chi_\gamma\sigma_{\alpha\beta}=\sigma_{\alpha\beta},\]
+since $\sigma_{\gamma\beta}=\sigma_{\gamma\alpha}+\sigma_{\alpha\beta}$. This proves the claim, and for higher $q$ there
+are more indices, but the idea is the same.
+
+\begin{thm}[de Rham]
+    Let $X$ be a smooth, connected manifold. Then
+    \[\check H^q(X,\R)=H_{\rm dR}^q(X)\equiv\ker d|_{\Lambda^q}/d\Lambda^{q-1}.\]
+\end{thm}
+
+\begin{proof}
+    Consider the following exact sequence of sheaves:
+    \begin{equation}
+        \label{eq:les}
+        \begin{tikzcd}
+            0\arrow{r}&\R\arrow{r}&\Lambda^0\arrow{r}&\cdots\arrow{r}&\Lambda^{q-1}\arrow{r}{d}&\Lambda^q\arrow{r}{d}&\Lambda^{q+1}\arrow{r}&\cdots,
+        \end{tikzcd}
+    \end{equation}
+    where $\R$ is the constant sheaf (we are treating $\Lambda_z^q$ as the germs of $q$-forms at $z$, as the $d$ map descends naturally
+    to the stalks and $\R$ as the constant sheaf). Observe that exactness means that for $\sigma\in\Lambda_z^q$ and $d\sigma=0$
+    implies that there exists a $\tau\in\Lambda_z^{q-1}$ with $\sigma=d\tau$. This is of course a local condition, and hence by
+    the Poincar\'e Lemma, this sequence makes sense as locally we can always write a form as being exact.
+
+    Note now that
+    all of the $\Lambda^q$ sheaves are fine (though the constant sheaf $\R$ is not). It is useful to rewrite this in terms
+    of short exact sequences, because we can then talk about the induced long exact sequence (as mentioned earlier).
+    Introduce the sheaf $\mathcal{Z}^q$ where $\mathcal{Z}^q_z$ is the space of germs of $q$-forms $\sigma$ with $d\sigma=0$.
+    Observe that $\mathcal{Z}^q$ is not fine, as $d(\chi\sigma)\neq 0$. We claim that Eq.~(\ref{eq:les}) is equivalent to
+    \begin{equation}
+        \begin{tikzcd}
+            0\arrow{r}&\R\arrow{r}&\Lambda^0\arrow{r}{d}&\mathcal{Z}^1\arrow{r}&0\\
+            0\arrow{r}&\mathcal{Z}^q\arrow{r}&\Lambda^q\arrow{r}{d}&\mathcal{Z}^{q+1}\arrow{r}&0
+        \end{tikzcd}
+        \label{eq:2ses}
+    \end{equation}
+    We can apply the de Rham theorem to get the following exact sequences:
+    \begin{equation}
+        \begin{tikzcd}
+            0\arrow{r}&\check H^0(X,\R)\arrow{r}&\check H^0(X,\Lambda^0)\arrow{r}&\check H^0(X,\mathcal{Z}^1)\arrow{d}\\
+            &&&\check H^1(X,\R)\arrow{r}&\check H^1(X,\Lambda^1)\arrow{r}&\cdots
+        \end{tikzcd}
+        \label{eq:les2}
+    \end{equation}
+    But since $\Lambda^i$ are fine, we see that all but the first higher cohomologies vanish,
+    and hence we find that
+    \[\check H^1(X,\R)=\check H^0(X,\mathcal{Z}^1)/d\check H^0(X,\Lambda^0)=H^1_{\rm dR}(X).\]
+    This proves the theorem for $q=1$.
+    
+    It is straightforward to see that similarly,
+    \[\check H^q(X,\mathcal{Z}^1)=\check H^{q+1}(x,\R).\]
+    Next we use the second short exact sequence from Eq.~(\ref{eq:2ses}) to get
+    \begin{equation*}
+        \begin{tikzcd}
+            0\arrow{r}&\check H^0(X,\mathcal{Z}^q)\arrow{r}&\check H^0(X,\Lambda^q)\arrow{r}&\check H^0(X,\mathcal{Z}^{q+1})\arrow{d}{\delta^*}\\
+            &&&\check H^1(X,\mathcal{Z}^q)\arrow{r}&\check H^1(X,\Lambda^q)\arrow{r}&\cdots
+        \end{tikzcd}
+    \end{equation*}
+    which yields that
+    \[\check H^1(X,\mathcal{Z}^q)=\check H^0(X,\mathcal{Z}^{q+1})/d\check H^0(X,\Lambda^q)=H^{q+1}_{\rm dR}(X).\]
+    Finally, we wish to show that $\check H^1(X,\mathcal{Z}^q)=\check H^q(X,\mathcal{Z}^1)$.
+    By looking at a later piece of this second long exact sequence, we see
+    \begin{equation*}
+        \begin{tikzcd}
+            \cdots\arrow{r}&\check H^p(X,\Lambda^q)\arrow{r}&\check H^p(X,\mathcal{Z}^{q+1})\arrow{d}\\
+            &&\check H^{p+1}(X,\mathcal{Z}^q)\arrow{r}&\check H^{p+1}(X,\Lambda^p)\arrow{r}&\cdots
+        \end{tikzcd}
+    \end{equation*}
+    which implies that $\check H^p(X,\mathcal{Z}^{q+1})=\check H^{p+q}(X,\mathcal{Z}^q)$. This proves the theorem.
+\end{proof}
+
+\begin{thm}[Dolbeault]
+    Let $X$ be a complex, connected manifold. Then
+    \[\check H^q(X,\Omega^p)=H_{\bar\partial}^{p,q}(X),\]
+    where $H_{\bar\partial}^{p,q}=\ker \bar\partial|_{\Lambda^{p,q}}/\bar\partial\Lambda^{p,q-1}$ is the 
+    $(p,q)$ Dolbeault cohomology group, and $\Omega^p$ is the sheaf with stalks $\Omega^p_z$ germs of holomorphic
+    $(p,0)$ forms near $z$.
+\end{thm}
+\begin{proof}
+    The proof follows exactly as in the de Rham case, starting with the complex
+    \begin{equation*}
+        \begin{tikzcd}
+            0\arrow{r}&\Omega^p\arrow{r}&\Lambda^{p,0}\arrow{r}&\Lambda^{p,1}\arrow{r}&\cdots\arrow{r}&\Lambda^{p,q-1}\arrow{r}&\Lambda^{p,q}\arrow{r}{\bar\partial}&\Lambda^{p,q+1}\arrow{r}&\cdots
+        \end{tikzcd}
+    \end{equation*}
+    which makes sense because of the $\bar\partial$-Poincar\'e lemma. We immediately find via methods of the last proof
+    that $\check H^q(X,\Omega^p)$ is equal to the cohomology group
+    of the global sections, which is $H^{p,q}_{\bar\partial}(X)$.
+\end{proof}
+
+Let us now extend these ideas to multiplier ideal sheaves. Let $L\to X$ be a holomorphic line bundle over $(X,\omega)$ K\"ahler
+and let $h\equiv e^{-\phi}$ be a metric on $L$. Define now the \textbf{multiplier ideal sheaf} $\mathcal{I}_{\phi}$ whose stalks $\mathcal{I}_\phi(z)$ are
+the germs of holomorphic functions near $z$ satisfying $\int_U|f(z)|^2e^{-\phi}<\infty$ (recall that the weight $h$ that we have
+in mind is singular, and hence this is a nontrivial condition).
+Define $\mathcal{L}$ to the sheaf whose stalks $\mathcal{L}_z$ are the germs of sections $\alpha$ of $L\otimes \Lambda^{n,q}$
+satisfying $\int_U|\alpha|^2e^{-\phi}<\infty$ and $\bar\partial\alpha$ (in the sense of distributions) is a function satisfying
+$\int_U|\bar\partial\alpha|^2e^{-\phi}<\infty$. Note that here $n$ is fixed for techinical reasons that make it easier in respect
+to H\"ormander's theorem.
+Consider now the following sequence of sheaves (it is non-trivial to see that it is exact, as this requires H\"ormander's theorem).
+\begin{equation}
+    \begin{tikzcd}
+        0\arrow{r}&L\otimes\Lambda^{n,0}\otimes\mathcal{I}_\phi\arrow{r}&\mathcal{L}^0\arrow{r}&\cdots\arrow{r}&\mathcal{L}^{q-1}\arrow{r}{\bar\partial}&\mathcal{L}^{q}\arrow{r}{\bar\partial}&\mathcal{L}^{q+1}\arrow{r}&\cdots
+    \end{tikzcd}
+    \label{les3}
+\end{equation}
+We now apply the previous machinery, which tells us that a resolution by fine sheaves yields that the \v{C}ech cohomology
+is equal to the cohomology of global sections, i.e.
+\begin{equation}
+    \check H^q(X,L\otimes\Lambda^{n,0}\otimes\mathcal{I}_\phi)=\ker\bar\partial|_{\mathcal{L}^q}/d\mathcal{L}^{q-1}.
+    \label{eq:nadel}
+\end{equation}
+
+\begin{thm}[Nadel vanishing (1988)]
+    Let $L\to X$, $(X,\omega)$ K\"ahler as before, and assume that $h$ satisfies $i\partial\bar\partial\phi\geq\varepsilon\omega$,
+    for some $\varepsilon>0$. Then $\check H^1(X,L\otimes \Lambda^{n,0}\otimes\mathcal{I}_\phi)=0$.
+\end{thm}
+\begin{proof}
+    Apply H\"ormander's theorem twice: first to small opens in $X$ to show that the sequence above is exact
+    (it plays the role of the Poincar\'e lemma), and then again to show that the right-hand side of Eq.~(\ref{eq:nadel})
+    is zero.
+\end{proof}
+
 
 \end{document}
