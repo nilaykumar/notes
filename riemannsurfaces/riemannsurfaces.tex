@@ -1023,5 +1023,96 @@ is equal to the cohomology of global sections, i.e.
     is zero.
 \end{proof}
 
+We now have enough machinery to prove the imbedding theorem.\todo{restate it here}
+
+\begin{proof}[Proof of Kodaira imbedding]
+     It suffices to show that for all $N$, there exist $k$ and constants $a,b$ such that
+     \[H^0(X,L^k)\to H^0(X,L^k\otimes\mathcal{O}/\mathcal{I}_{k_1z_1,\cdots,k_Nz_N})\]
+     is onto for any $z_1,\ldots,z_N\in X$, as long as 
+     \[k\geq a\sum_{i=1}^Nk_i+b.\]
+
+     Let us review a bit. Note that the stalk at $w$, $\mathcal{I}_{z_1}(w)$, is the space of $f$ holomorphic in a neigbhorhood of $w$, with $f(z_1)=0$.
+     Meanwhile, the stalk $\mathcal{O}(w)$ is just the holomorphic functions near $w$. Thus the stalks at the quotient sheaf not at
+     $z_1$ are trivial (as $\mathcal{I}_{z_1}$ and $\mathcal{O}$ match up no at $z_1$), while the stalk at $z_1$ is simply 
+     the values of $f$ at $z_1$, i.e. $\C$, as we can write $f(z)=f(z_1)+(z-z_1)g(z)$. Indeed, $\mathcal{I}_{z_1}/\mathcal{O}$
+     is thus known as the skyscraper sheaf. Now, what does it mean for
+     \[H^0(X,L^k)\to H^0(X,L^k\otimes\mathcal{O}/\mathcal{I}_{z_1})\]
+     to be surjective? This simply means for any $\tau\in L^k_{z_1}$, there exists a section $s\in H^0(X,L^k)$ with
+     $s(z_1)=\tau$. More generally, if one has that
+     \[H^0(X,L^k)\to H^0(X,L^k\otimes \mathcal{O}/\mathcal{I}_{z_1,\cdots,z_N}),\]
+     is surjective, where the quotient sheaf is simply a multiple-skyscraper sheaf, then for all $\tau_1,\ldots,\tau_N$,
+     for $\tau_j\in L^k_{z_j}$, there exists a section $s\in H^0(X,L^k)$ such that $s(z_j)=t_j$.
+
+     So why does the imbedding follow from the claim above?
+     Note first that for any $z\in X$, not all $s_\alpha(z)$ can vanish. Otherwise, for all $s\in H^0(X,L^k)$,
+     $s(z)=\sum_{\alpha=0}^Nc_\alpha s_\alpha(z)$ would imply that $s(z)=0$. But this contradicts that
+     $H^0(X,L^k)\to H^0(X,L^k\otimes\mathcal{O}/\mathcal{I}_{z_1})$ is onto.
+     Furthermore, the map is injective: let $z_1,z_2\in X$ with $\iota_k(z_1)=\iota_k(z_2)$, i.e.
+     $s_\alpha(z_1)s_\beta(z_2)=s_\alpha(z_2)s_\beta(z_1)$ for any $\alpha,\beta$. Now if we take
+     $s(z)=\sum c_\alpha s_\alpha(z)$ and $t(z)=\sum d_\beta s_\beta(z)$, we find that
+     $s(z_1)s_\beta(z_2)=s(z_2)s_\beta(z_1)$, which implies that $s(z_1)t(z_2)=s(z_2)t(z_2)$.
+     This contradicts the fact that $H^0(X,L^k)\to H^0(X,L^k\otimes\mathcal{O}/\mathcal{I}_{z_1,z_2})$
+     is surjective (as we can choose sections such that the constraint above is not satisfied).
+     Let us now check that the differential is one-to-one. Note that
+     \[\delta z\mapsto \left( \sum_{j=1}^n\frac{\partial s_0}{\partial z_j}\delta z^j,\cdots,\sum_{j=1}^n\frac{\partial s_N}{\partial z_j}\partial z^j \right),\]
+     but in projective space we have to quotient by the span of the vector $(s_0(z),\ldots,s_N(z))$.
+     But the above variation gives zero after this quotient at some point $z_1$ if
+     \[\sum_{j=1}^n\frac{\partial s_\alpha(z_1)}{\partial z^j}\delta z^j=\lambda s_\alpha(z_1).\]
+     But this implies that for any $s\in H^0(X,L^k)$,
+     \[\sum_{j=1}^n\frac{\partial s(z_1)}{\partial z^j}\delta z^j=\lambda s(z_1),\]
+     which contradicts that $H^0(X,L^k)\to H^0(X,L^k\otimes \mathcal{O}/\mathcal{I}_{2z_1})$ is surjective.
+
+
+     To prove this statement, we use Nadel's vanishing theorem above, which tells us that
+     \[\check H^1(X,K_X\otimes\tilde L\otimes \mathcal{I}_{\phi})\]
+     where $\tilde L\to(X,\omega)$ is a line bundle admitting a possibly singular metric
+     such that $-\partial_j\partial_{\bar k}\log h\geq g_{\bar kj}$, and $\mathcal{I}_\phi(w)$
+     is the space of $f$ holomorphic in a neighborhood of $w$ with $\int_U|f|^2e^{-\phi}<\infty$,
+     the stalk of the multiplier ideal sheaf.
+     Note that we have the exact sequences
+     \begin{equation*}
+         \begin{tikzcd}
+             0\arrow{r}&\mathcal{I}_\phi\arrow{r}&\mathcal{O}\arrow{r}&\mathcal{O}/\mathcal{I}_{\phi}\arrow{r}&0\\
+             0\arrow{r}&L^k\otimes\mathcal{I}_\phi\arrow{r}&L^k\otimes\mathcal{O}\arrow{r}&L^k\otimes\mathcal{O}/\mathcal{I}_{\phi}\arrow{r}&0\\
+         \end{tikzcd}
+     \end{equation*}
+     This implies the long exact sequence
+     \begin{equation*}
+         \begin{tikzcd}
+             H^0(X,L^k\otimes\mathcal{O})\arrow{r}&H^0(X,L^k\otimes\mathcal{O}/\mathcal{I}_\phi\arrow{d}&&\\
+             &H^1(X,L^k\otimes \mathcal{I}_\phi)\arrow{r}&\cdots
+         \end{tikzcd}
+     \end{equation*}
+     We want to apply Nadel's theorem, with $K_X\otimes\tilde L=L^k$ with $\tilde L=K^{-1}_X\otimes L^k$
+     to show surjectivity. Hence, set $\tilde L=K_X^{-1}\otimes L^k$ -- we shall construct a metric $\tilde h$
+     on $\tilde L$ such that $-i\partial\bar\partial\log\tilde h\geq\varepsilon\omega$ and $\mathcal{I}_\phi$
+     is a subsheaf of $\mathcal{I}_{k_1z_1,\ldots,k_Nz_N}$. If this is possible, then we find that
+     $H^0(X,L^k)\to H^0(X,L^k\otimes\mathcal{O}/\mathcal{I}_\phi)$ is surjective and that
+     $\mathcal{O}/\mathcal{I}_\phi\to\mathcal{O}/\mathcal{I}_{k_1z_1,\cdots,k_Nz_N}$.
+
+     By hypothesis, $L$ is a positive line bundle, and hence there exists a smooth metric $h_0$ on $L$, whose
+     curvature $\omega_0=-i/2\partial\bar\partial\log h_0>0$. Equip $X$ with the K\"ahler metric $\omega_0$,
+     i.e. a norm on $T^{1,0}(X)$. Such a metric induces a metric on $K_X^{-1}$, which is just the maximal wedge
+     product of $T^{1,0}(X)$. Introduce a metric $h$ on $L^k$ by $h\equiv h_0^ke^{-\phi}$, where we will specify $\phi$.
+     For simplicity, let $N=1$, as the general case is similar. Let $\chi(z)$ be a cutoff function
+     near $z_1$, and then let
+     \[\phi=\gamma\chi(z)\log|z-z_1|^2,\]
+     where $\gamma$ is some large constant. We can compute the curvature of $h$ to be
+     \begin{align*}
+         -i\partial\bar\partial\log h&=-ik\partial\bar\partial\log h_0+i\partial\bar\partial\left( \gamma\chi(z)\log|z-z_1|^2 \right)\\
+         &=-ik\partial\bar\partial\log_h+\gamma\chi(z)\left( i\partial\bar\partial\log|z-z_1|^2 \right)\\
+         &\geq k\omega_0/2
+     \end{align*}
+     where the derivatives of $\chi$ vanish, as it is identically 1 on a neighborhood, and we have noted
+     that the second term in the second equation is bounded, and hence we can pick $k$ large enough to dominate.
+     Now Let $\tilde h$ be the metric on $K_X^{-1}\otimes L^k$ induced by the metric $K^{-1}_X$ and the metric
+     $h$ on $L^k$. Hence we find that
+     \begin{align*}
+        -i\partial\bar\partial\log\tilde h&=(-\partial\bar\partial\log\omega_0^n)-i\partial\bar\partial\log h\\
+        &\geq k\omega_0/4
+     \end{align*}
+     for $k\gg 1$. Finally, recall from earlier work that for $\gamma$ large enough, $\mathcal{I}_\phi$ is a subsheaf
+     of $\mathcal{I}_{k_1z_1}$. This completes the proof.
+\end{proof}
 
 \end{document}
