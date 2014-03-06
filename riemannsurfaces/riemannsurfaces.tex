@@ -1115,4 +1115,96 @@ We now have enough machinery to prove the imbedding theorem.\todo{restate it her
      of $\mathcal{I}_{k_1z_1}$. This completes the proof.
 \end{proof}
 
+\subsection{Canonical metrics and connections on vector bundles}
+
+As far as we know today, the laws of physics are, at the fundamental level, very geometric in nature.
+On the other hand, in geometry, there is an important problem of finding geometric structures on manifolds
+that are canonical in some sense. The following specific problems that we will focus on bring these
+two problems together:
+\begin{enumerate}[(a)]
+    \item Given a vector bundle $E\to X$ a smooth vector bundle over $(X,g_{ij})$ smooth, and a functional
+        \[I(A)=\int_X |F(A)|^2\sqrt{g}dx\]
+        on the (curvature of the) connections on $E$. One may attempt to, in analogy to the principal of least action,
+        attempt to find the critical points of $I(A)$. Of particular interest, are the anti-self-dual connections
+        when $\dim X=4$. For certain choices of the functional, we obtain the \textbf{Yang-Mills equations}.
+    \item In the case where $X$ as above is complex, and $\dim_\C X=2$, we find that the anti-self-dual connections
+        equip $E$ with a holomorphic vector bundle structure carrying a Hermitian-Einstein metric.
+    \item There is a theorem (Donaldson, Uhlenbeck-Yau) that states that given $E\to (X,g_{\bar k,j})$ K\"ahler,
+        there exists a Hermitian-Einstein metric if and only if $E$ is stable in the sense of Mumford-Takemoto.
+\end{enumerate}
+
+Let us start by studying the global topology of smooth vector bundles. Given an open cover $X=\cup_\alpha X_\alpha$,
+we define a vector bundle $E$ of rank $r$ to be the data of $t_{\mu\nu\beta}^\alpha(x)$ smooth functions on $X\mu\cap X_\nu$
+with $1\leq\alpha,\beta\geq r$ satisfying the standard compatibility conditions. As usual, a section $\phi\in\Gamma(X,E)$
+is a vector-valued function $\phi^\alpha_\mu(x)$ on $X_\mu$ for $1\leq\alpha\leq r$ that transforms as dictated by $E$.
+We now define a connection $\nabla_j$ as a rule of the of the form
+\[\Gamma(X,E)\ni\phi^\alpha\mapsto\nabla_j\phi^\alpha_\mu=\partial_j\phi^\alpha_\mu+(A_\mu)_{j\beta}^\alpha(x)\phi^\beta_mu\]
+on $X_\mu$ which satisfies the requirement that
+\begin{align*}
+    (\nabla_j\phi_\mu^\alpha)&=t_{\mu\nu\beta}^\alpha(\nabla_j\phi_\nu^\beta),
+\end{align*}
+which, as is easy to check, is equivalent to
+\[(\partial_jt_{\mu\nu\beta}^\alpha+(A_\mu)^\alpha_{j\gamma}t_{\mu\nu\beta}^\gamma=t_{\mu\nu\gamma}^\alpha(A_\nu)^\gamma_{j\beta}.\]
+In matrix notation, we might write this as $\partial_jt_{\mu\nu}+(A_\mu)_jt_{\mu\nu}=t_{\mu\nu}(A_\nu)_j$, i.e.
+\[(A_\mu)_j=t_{\mu\nu}(A_\nu)_jt_{\mu\nu}^{-1}-(\partial_jt_{\mu\nu})t_{\mu\nu}^{-1}.\]
+The curvature of the connection $A$ is then given
+\[ [\nabla_j,\nabla_k]\phi^\alpha=F_{kj\beta}^\alpha\phi^\beta,\]
+where we find that
+\[F_{kj\beta}^\alpha=\partial_jA_{k\beta}^\alpha-\partial_kA_{j\beta}^\alpha+A_{j\gamma}^\alpha A_{k\beta}^\gamma-A_{k\gamma}^\alpha A_{j\beta}^\gamma.\]
+It will be useful for purposes of cohomology, to introduce forms. We do this by introducing the curvature form
+\[F\equiv \frac{1}{2}\sum F_{kj}dx^j\wedge dx^k.\]
+We also define the connection form
+\[A=A_{j\beta}^\alpha dx^j,\]
+which is an $\End(E)$-valued one-form. It is easy to see that
+\[F=dA+A\wedge A.\]
+Finally, recall that connections satisfy the second Bianchi identity:
+\[dF+A\wedge F-F\wedge A=0\]
+for any connection $A$, which is also easy to see using the above expression for $F$ in terms of $A$.
+
+Let us now turn to characteristic classes of vector bundles (Chern-Weil theory). We define, given a connection $A$ with curvature $F(A)$,
+\begin{align*}
+    c_m(A)&=\tr\left( F\wedge\cdots \wedge F \right)
+\end{align*}
+where the trace is taken $m$ times. As an explicit example, note that $c_1(A)=\tr(F)$, i.e.
+\[c_1(A)=\tr(F)=\frac{1}{2}\sum F_{jk\alpha}^\alpha dx^k\wedge dx^j.\]
+For $m=2$, we see that
+\begin{align*}
+    c_2(A)=\tr\left( F\wedge F \right)=\frac{1}{4}\sum\left( F_{jk\beta}^\alpha dx^k\wedge dx^j \right)\wedge \left( F_{lm\alpha}^\beta dx^m\wedge dx^l \right).
+\end{align*}
+Doing this, we find that $c_m(A)$ is a $2m$-form on the base manifold $X$.
+\begin{thm}
+    For any connection $A$, $c_m(A)$ is closed. Furthermore, if $[c_m(A)]$ be the de Rham cohomology class of $c_m(A)$,
+    then $[c_m(A)]$ is independent of $A$. More precisely, we can write $c_m(A')-c_m(A)=dT_m$, where
+    \[T_m=m\int^1_0\tr(B\wedge F_t^{m-1}) dt,\]
+    where $A'=A+B$ and $A_t=A+tB$, and $F_t=F(A_t)$.
+\end{thm}
+\begin{proof}
+    Let us compute
+    \begin{align*}
+        dc_m&=d(\tr(F\wedge\cdots\wedge F))\\
+        &=\tr(dF\wedge\cdots\wedge F+\cdots+F\wedge\cdots\wedge dF)\\
+        &=\tr( (-A\wedge F+F\wedge A)\wedge F\wedge\cdots\wedge F+\cdots+F\wedge\cdots\wedge(-A\wedge F+F\wedge A))\\
+        &=\tr\left( -A\wedge F^{m-1} \right)+\tr\left( F^{m-1}\wedge A \right)\\
+        &=0,
+    \end{align*}
+    where we have used Bianchi identity as well as the cyclic property of the trace. Let us now check that the cohomology
+    class is independent of $A$ for $m=3$. It is straightforward to extend this for larger $m$. It is important
+    to first note that differences of connections transform precisely as forms, and hence it makes sense to
+    connect $A$ to $A'$ via a path that consists of adding forms, as adding forms does not change the transformation of a connection.
+    Hence
+    \begin{align*}
+        c_m(A')-c_m(A)&=\int_0^1\frac{d}{dt}[c_m(A_t)]dt\\
+        &=\int_0^1\frac{d}{dt}\left( \tr(F_t\wedge F_t\wedge F_t) \right)\\
+        &=3\int_0^1\tr(\dot F_t\wedge F_t\wedge F_t) dt,
+    \end{align*}
+    using the cyclic property of the trace. Compare this with
+    \begin{align*}
+        dT_3&=3d\left( \int_0^1\tr(B\wedge F_t\wedge F_t) \right)dt\\
+        &=3\left( \int_0^1\tr(dB\wedge F_t\wedge F_t-B\wedge dF_t\wedge F_t-B\wedge F_t\wedge dF_t) \right).
+    \end{align*}
+    Applying Bianchi's identity to each occurence to $dF_t$ and keeping in mind that
+    \[\dot F_t=d\dot A_t+\dot A_t\wedge A_t+A_t\wedge \dot A_t=dB+B\wedge A_t+A\wedge B,\]
+    yields precisely the expression above.
+\end{proof}
+
 \end{document}
