@@ -1163,7 +1163,7 @@ for any connection $A$, which is also easy to see using the above expression for
 
 Let us now turn to characteristic classes of vector bundles (Chern-Weil theory). We define, given a connection $A$ with curvature $F(A)$,
 \begin{align*}
-    c_m(A)&=\tr\left( F\wedge\cdots \wedge F \right)
+    c_m(A)&=\tr\left( F\wedge\cdots \wedge F \right)\in\Lambda^{2m}
 \end{align*}
 where the trace is taken $m$ times. As an explicit example, note that $c_1(A)=\tr(F)$, i.e.
 \[c_1(A)=\tr(F)=\frac{1}{2}\sum F_{jk\alpha}^\alpha dx^k\wedge dx^j.\]
@@ -1206,5 +1206,103 @@ Doing this, we find that $c_m(A)$ is a $2m$-form on the base manifold $X$.
     \[\dot F_t=d\dot A_t+\dot A_t\wedge A_t+A_t\wedge \dot A_t=dB+B\wedge A_t+A\wedge B,\]
     yields precisely the expression above.
 \end{proof}
+
+Let us now turn to the Yang-Mills functional. Let $E\to X$ be a smooth vector bundle, with $g_{ij}$ a metric on $X$
+and $H_{\alpha\beta}$ a metric on $E$. 
+The metric allows us to define a pointwise inner product $\langle\phi,\psi\rangle=\phi^\alpha\psi^\beta H_{\beta\alpha}$
+on the sections of $E$. Recall that we can differentiate our sections with respect to a connection to obtain another connection
+$\nabla^A_j\phi^\alpha=\partial_j\phi^\alpha+A_{j\beta}^\alpha\phi^\beta$. We say that $A$ is a \textbf{unitary connection}
+(with respect to $H$) if
+\[\partial_j\langle\phi,\psi\rangle=\langle\nabla_j^A\phi,\psi\rangle+\langle\phi,\nabla^A_j\psi\rangle.\]
+Recall that we have the formula
+\[F_{jk\beta}^\alpha=\partial_k A^\alpha_{j\beta}-\partial A^\alpha_{k\beta}+A^\alpha_{j\gamma}A^\gamma_{k\beta}-A^\alpha_{k\gamma}A^\gamma_{j\beta},\]
+which in matrix notation can be written
+\[F_{jk}=\partial_kA_j-\partial_jA_k+A_jA_k-A_kA_j.\]
+We then define the norm of the curvature to be
+\begin{align*}
+    |F(A)|^2&=F_{jk\beta}^\alpha F_{lm\delta}^\gamma g^{jl}g^{km}H_{\alpha\gamma}H^{\beta\delta}.
+\end{align*}
+The \textbf{Yang-Mills functional} of a given unitary connection is then defined to be
+\begin{align*}
+    I(A)=\int_X |F(A)|^2\sqrt{g}.
+\end{align*}
+
+The question of interest is as to whether there exist critical points for $I(A)$. Moreover, are
+there saddle points, etc.? Formally, we say that $A$ is a critical point of $I(A)$ if $\delta I/\delta A=0$.
+Observe that $\delta F_{jk\beta}^\alpha=\nabla_{k}\delta A^\alpha_{j\beta}-\nabla_j\delta A^{\alpha}_{k\beta}$
+via the formula for curvature above.
+Explicitly,
+\begin{align*}
+    \delta I&= \int\left( \delta F_{jk\beta}^\alpha F_{lm\delta}^{\gamma}+F_{jk\beta}^\alpha \delta F_{lm\delta}^\gamma \right)g^{jl}g^{km}H_{\alpha\gamma}H^{\beta\delta}\sqrt{g}\\
+    &=\int (\nabla_k\delta A^\alpha_{j\beta}-\nabla_j\delta A^\alpha_{k\beta})F_{lm\delta}^\gamma+\cdots\\
+    &=\int \delta A^\alpha_{j\beta}(-\nabla_k F_{lm\delta}^\gamma)g^{jl}g^{km}H_{\alpha\gamma}H^{\beta\delta}\sqrt{g}+\cdots
+\end{align*}
+which implies that
+\[\nabla^m F_{lm\delta}^\gamma=0,\]
+as (one can convince one's self that) the other terms do not matter.
+Note that we have integrated the first covariant derivative term by parts and contracted indices of the derivative.
+We call this the \textbf{Yang-Mills equation}, a second-order nonlinear PDE. Solving this equation is a hard problem
+in general. However, there is an interesting class of solutions that exist in four dimensions: the anti-self-dual connections.
+
+Let $E\to X$ be a bundle with metric $H_{\alpha\beta}$ with $\text{rk } E=r$. An
+orthonormal frame of $E$ in $\left\{ e_a \right\}^r_{a=1}$, $e_a\in\Gamma(X,E)$ such that $\langle e_a,e_b\rangle=\delta_{ab}$.
+Explicitly, $e_a$ is described by its components $e_a^\alpha$, and hence for any section $\phi\in\Gamma(X,E)$,
+we can write $\phi=\sum_{a=1}^r\phi^ae_a$, i.e. $\phi^\alpha=\sum\phi^a e^\alpha_a$.
+Note that we can relate $\phi^\alpha=e^\alpha_a\phi^a$ -- this is essentially a simple change of basis. However trivial this seems,
+we do gain something in the case of unitary connections. Set $(\nabla_j\phi)^a\equiv\partial_j\phi^a+A^a_{jb}\phi^b$.
+Note further that $\langle\phi,\psi\rangle=\sum\phi^a\psi^a$, as one can easily check.
+Then the unitarity condition on the connection $A$ 
+\begin{align*}
+    \partial_j\langle\phi,\psi\rangle&=\langle\nabla_j\phi,\psi\rangle+\langle\phi,\nabla_j\psi\rangle\
+\end{align*}
+becomes
+\begin{align*}
+    \partial(\phi^a\psi^a)&=(\nabla_j\phi)^a\psi^a+\phi^a(\nabla_j\psi^a)\\
+    &=(\partial_j\phi^a+A_{jb}^a\phi^b)\phi^a(\partial_j\psi^a+A_{jb}^a\psi^b).
+\end{align*}
+Hence the unitarity condition is equivalent to the fact that $A^a_{jb}=-A_{ja}^b$, i.e. the connection
+matrices live in the tangent space to the orthogonal group of matrices (as they govern infinitesimal behavior).
+Note that this also implies that $F_{jkb}^a=-F_{jka}^b$ by the formula for the curvature stated above.
+
+Observe now that if we have an antisymmetric matrix $M=(M^a_b)$, then (a Hilbert-Schmidt kind of norm)
+\[|M|^2=\sum_{ab}M^a_bM^a_b=-\sum M^a_bM^b_a=-\tr M^2.\]
+However, the curvature is a matrix-valued form, so we can simplify the norm of the form part of $F(A)$ via the Hodge star.
+Recall that the Hodge star operator is defined as (up to some factorials or something), for any $p$-forms $\phi,\psi$
+such that $*\psi\in\lambda^{n-p}$ and 
+\[\phi\wedge*\psi=\langle\phi,\psi\rangle\sqrt{g}dx^1\wedge\cdots\wedge dx^n.\]
+With these observations in mind, we can rewrite the Yang-Mills functional in the following way:
+\[I(A)=-\int_X\tr(F\wedge*F),\]
+where $F$ is seen as a two-form valued in the space of anti-symmetric matrices. Note that so far,
+this holds for all dimensions of $X$.
+
+When $\dim X=4$, in particular, $*:\Lambda^2\to\Lambda^2$ such that $*^2=1$ with eigenvalues $\pm 1$
+(we leave this as an exercise). We denote the eigenspace decomposition as $\Lambda\equiv\Lambda_+\oplus\Lambda_-$.
+Write now $F=F_++F_-$, which yields
+\begin{align*}
+    I(A)&=-\int\tr(F\wedge *F)=-\int\tr\left( (F_++F_-)\wedge (F_+-F_-) \right)\\
+    &=-\int\tr(F_+\wedge F_+)+\int\tr(F_-\wedge F_-)\\
+    &=||F_+||^2_{L^2}+||F_-||^2_{L^2}.
+\end{align*}
+Compare this to the invariant Chern class
+\begin{align*}
+    \int_Xc_2(A)&=\int_X\tr(F\wedge F)
+\end{align*}
+that is independent of $A$. We can compute this
+\begin{align*}
+    \int_Xc_2(A)&=\int_X\tr(F\wedge F)\\
+    &=\int_X\tr\left( (F_++F_-)\wedge(F_++F_-) \right)\\
+    &=\int_X \tr(F_+\wedge F_+)+\tr(F_-\wedge F_-)+\tr(F_+\wedge F_-)+\tr(F_-\wedge F_+)\\
+    &=\int_X \tr(F_+\wedge *F_+)+\tr(F_-\wedge -*F_-)\\
+    &=||F_-||^2_{L^2}-||F_+||^2_{L^2}.
+\end{align*}
+where we have used orthogonality of the eigenspaces. Hence we find that
+\[I(A)\geq |\int_Xc_2(E)|,\]
+i.e. we have a non-trivial lower bound for the Yang-Mills functional. Moreover, suppose $\int_X c_2(E)<0$: then
+\[I(A)=||F_+||^2_{L^2}+||F_-||^2_{L^2}\geq ||F_-||^2_{L^2}-||F_+||^2_{L^2},\]
+which shows that $A$ achieves the minimum of the Yang-Mills functional if and only if $F_+=0$.
+This is much easier than second-order PDE we obtained earlier, as we have ``integrated'' away
+one of the derivatives.
+
+
 
 \end{document}
