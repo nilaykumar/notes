@@ -1,0 +1,97 @@
+\documentclass{../../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\title{Introduction to Algebraic Topology PSET 7}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{prop}
+    Hatcher exercise 2.1.1
+\end{prop}
+\begin{proof}
+    The $\Delta$-complex obtained from the 2-simplex $[v_0,v_1,v_2]$ with edges
+    $[v_0,v_1]$ and $[v_1,v_2]$ identified with order preserved is just a cone $C(S^1)$.
+\end{proof}
+
+\begin{prop}
+    Hatcher exercise 2.1.5
+\end{prop}
+\begin{proof}
+    Let us compute the simplicial homology groups of the Klein bottle using the $\Delta$-complex 
+    structure $K$ described on page 102 of Hatcher. It's clear that there is one 0-simplex ($v$), three
+    1-simplices ($a,b,c$), and two 2-simplices ($U,L$). We obtain the chain complex
+    \begin{equation*}
+        \begin{tikzcd}
+            0\arrow{r}{\partial_3}&\Z^2\arrow{r}{\partial_2}&\Z^3\arrow{r}{\partial_1}&\Z\arrow{r}{\partial_0}&0
+        \end{tikzcd}
+    \end{equation*}
+    with $\partial_0v=0$, $\partial_1a=\partial_1b=\partial_1c=0$, and $\partial_2U=a+b-c,\partial_2L=a-b+c$.
+    The Klein bottle is path-connected and hence $H^\Delta_0(K)=\Z$. Next note that $\ker\partial_2=0$ as
+    no linear combination of $U$ and $L$ will map to 0 under $\partial_2$, and thus $H^\Delta_2(K)=0$.
+    Computing $H^\Delta_1(K)$ is a bit more tedious: $H_1^\Delta(K)=\ker \partial_1/\text{im }\partial_2
+    =\langle a,b,c\rangle/\langle a+b-c,a-b+c\rangle$. We can simplify this as follows:
+    \begin{align*}
+        \frac{\langle a,b,c\rangle}{\langle a+b-c,a-b+c\rangle}&=\frac{\langle a-b+c,b,c\rangle}{\langle a+b-c,a-b+c\rangle}\\
+        &=\frac{\langle b,c\rangle}{\langle 2b-2c\rangle}
+        =\frac{\langle b-c,c\rangle}{\langle 2(b-c)\rangle}
+        =\frac{\langle d,c\rangle}{\langle 2d\rangle}\\
+        &=\Z\oplus\Z_2.
+    \end{align*}
+    Hence the non-trivial simplicial homology groups are $H^\Delta_0(K)=\Z$ and $H^\Delta_1(K)=\Z\oplus\Z_2.$
+\end{proof}
+
+\begin{prop}
+    Find a $\Delta$-complex structure for the orientable surface of genus two and compute
+    the simplicial homology groups of this $\Delta$-complex.
+\end{prop}
+\begin{proof}
+    Consider the $\Delta$-complex $\Sigma_2$ obtained by taking an octagon (with sides identified
+    appropriately) and drawing segments from a fixed vertex to the other vertices (see figure). This
+    yields one 0-simplex ($v$), nine 1-simplices ($a,\ldots, i$), and six 2-simplices ($\alpha,\ldots,\zeta$)
+    and the chain complex
+    \begin{equation*}
+        \begin{tikzcd}
+            0\arrow{r}{\partial_3}&\Z^6\arrow{r}{\partial_2}&\Z^9\arrow{r}{\partial_1}&\Z\arrow{r}{\partial_0}&0.
+        \end{tikzcd}
+    \end{equation*}
+    Clearly $H^\Delta_0(\Sigma_2)=\Z$. More tedious is $H_1^\Delta(\Sigma_2)$:
+    \begin{align*}
+        H^\Delta_1(\Sigma_2)&=\frac{\ker\partial_1}{\text{im }\partial_2}\\
+        &=\frac{\langle a,b,c,d,e,f,g,h,i\rangle}{\langle d+c-e,f+d-e,g+c-f,g+b-h,h+a-i,a+b-i\rangle}\\
+        &=\frac{\langle b,c,d,e,f,g,h,i\rangle}{\langle c+d-e,d-e+f,c-f+g,b+g-h,h-b\rangle}\\
+        &=\frac{\langle b,c,d,e,f,g,i\rangle}{\langle c+d-e,d-e+f,c-f+g,g\rangle}
+        =\frac{\langle b,c,d,e,f,i \rangle}{\langle c+d-e,d-e+f,c-f\rangle}\\
+        &=\frac{\langle b,c,d,e,i\rangle}{\langle c+d-e,c+d-e\rangle}=\frac{\langle b,c,d,e,i\rangle}{\langle c+d-e\rangle}\\
+        &=\Z^4.
+    \end{align*}
+    Finally, $H_2^\Delta(\Sigma_2)=\ker\partial_2/\text{im }\partial_3=\ker\partial_2$. It is straightforward to check that
+    $\ker\partial_2=\langle\alpha-\beta-\gamma+\delta+\varepsilon-\zeta\rangle$ (one can read this off of the figure via the
+    the orientations of the 2-simplicies). Hence the non-trivial simplicial homology groups are $H^\Delta_0(\Sigma_2)=\Z,
+    H^\Delta_1(\Sigma_2)=\Z^4,H^\Delta_2(\Sigma_2)=\Z$.
+\end{proof}
+
+
+\begin{prop}
+    Find a $\Delta$-complex structure for $S^3$ and compute the simplicial homology groups
+    of this $\Delta$-complex.
+\end{prop}
+\begin{proof}
+    
+\end{proof}
+
+
+\begin{prop}
+    Hatcher exercise 2.1.8
+\end{prop}
+\begin{proof}
+    
+\end{proof}
+
+\end{document}
