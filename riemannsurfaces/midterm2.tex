@@ -1,0 +1,214 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{amsmath}
+\usepackage{todonotes}
+
+
+\title{Complex Geometry: Midterm}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+Let $(X,g_{\bar kj})$ be a compact complex manifold, equipped with a Hermitian metric $g_{\bar kj}$,
+which is not necessarily K\"ahler. Define the torsion tensor
+\[T^j_{lp}=g^{j\bar k}\partial_lg_{\bar kp}-g^{j\bar k}\partial_pg_{\bar kl}\]
+and let $\omega=\frac{i}{2}g_{\bar kj}dz^j\wedge d\bar z^k$.
+\begin{enumerate}[(a)]
+    \item Now let $V^j$ be a smooth vector field. We may write, via the product rule,
+        \begin{align*}
+            \int_X \nabla_j V^j\omega^n&=\int_X\left( \partial_jV^j+\Gamma^j_{jk}V^k \right)\omega^n\\
+            &=\int_X\left( \partial_jV^j+\Gamma_{jk}^jV^k \right)\det g\cdot\wedge^n_{l=1}dz^l\wedge^n_{m=1}d\bar z^m\\
+            &=\int_X\left(\partial_j(V^j\det g)-V^j(\partial_j\det g)\right)\cdot\wedge_l dz^l\wedge_m d\bar z^m
+            +\int_X \Gamma^j_{jk}V^k\omega^n.
+        \end{align*}
+        Next, note that
+        \begin{align*}
+            \partial_j\log\det g&=\sum_i \frac{\partial_j\lambda_i}{\lambda_i}=\tr\left( g^{-1}\partial_jg\right),
+        \end{align*}
+        where $\lambda_i$ are the eigenvalues of $g$ but the left side is simply $\partial_j\log\det g=\partial_j(\det g)/\det g$, which yields the formula
+        \[\partial_j\det g=(\det g)\tr\left( g^{-1}\partial_jg \right)=(\det g)g^{\bar ab}\partial_jg_{b\bar a}=(\det g)\Gamma^{b}_{jb}.\]
+        Inserting this into the integral above and noting that the first term of the first integral vanishes (as it is exact),
+        we find that
+        \begin{align*}
+            \int_X\nabla_jV^j\omega^n&=\int_X\Gamma^j_{jk}V^k\omega^n-\int_X \Gamma_{jb}^bV^j\omega^n\\
+            &=\int_X \left( \Gamma^{j}_{jk}-\Gamma^{j}_{kj} \right)V^k\omega^n\\
+            &=\int_X T^{j}_{jk}V^k\omega^n,
+        \end{align*}
+        as desired.
+    \item Let us derive the following integration by parts formula:
+        \[\int_X(\nabla_j\phi_{\bar KI})\psi^{j\bar KI}\omega^n=-\int_X\phi_{\bar KI}(\nabla_j\psi^{j\bar KI})\omega^n+\int_X\phi_{\bar KI}\psi^{j\bar KI}T^p_{jp}\omega^n,\]
+        where $\omega$ is any Hermitian metric. This follows immediately from the previous part: write
+        \[(\nabla_j\phi_{\bar KI})\psi^{j\bar KI}=\nabla_j(\phi_{\bar KI}\psi^{j\bar KI})-\phi_{\bar KI}\nabla_j\psi^{j\bar KI},\]
+        and if we denote $V^j=\phi_{\bar KI}\psi^{j\bar KI}$, the integral on the left becomes
+        \begin{align*}
+            \int_X(\nabla_j\phi_{\bar KI})\psi^{j\bar KI}\omega^n&=\int_X \nabla_jV^j\omega^n-\int_X \phi_{\bar KI}(\nabla_j\psi^{j\bar KI})\omega^n\\
+            &=\int_X T^p_{jp}V^k\omega^n-\int_X \phi_{\bar KI}(\nabla_j\psi^{j\bar KI})\omega^n\\
+            &=\int_X T^p_{jp}\phi_{\bar KI}\psi^{j\bar KI}\omega^n-\int_X \phi_{\bar KI}(\nabla_j\psi^{j\bar KI})\omega^n,
+        \end{align*}
+        as desired.
+\end{enumerate}
+
+\section*{Problem 2}
+
+Let $X$ be a complex manifold, and define the operator $\bar\partial$ on forms of type $(p,q)$ by
+\[\bar\partial\left( \frac{1}{p!q!}\sum_{\bar JI}\phi_{\bar JI}dz^I\wedge d\bar z^J \right)=\frac{1}{p!q!}\sum_{\bar JI}\frac{\partial\phi_{\bar JI}}{\partial\bar z^k}d\bar z^k\wedge dz^I\wedge d\bar z^J.\]
+Note that, as written, $(\bar\partial\phi)_{\bar k\bar JI}=(q+1)\partial_{\bar k}\phi_{\bar JI}$. If we antisymmetrize, this becomes
+\begin{align*}
+    (\bar\partial\phi)_{\bar k\bar JI}&=(\bar\partial\phi)_{\bar k\bar j_q\cdots\bar j_1 I}\\
+    &=\sum_{\sigma\in S_{q+1}}\text{sgn}(\sigma)\partial_{\sigma(\bar k)}\phi_{\sigma(j_q)\cdots\sigma(j_1)I}\\
+    &=\sum_{\sigma\in S_{q+1}}\text{sgn}(\sigma)\partial_{\sigma(\bar k)}\phi_{\sigma(J)I}\\
+    &=\sum_{\sigma\in S_{q+1}}\text{sgn}(\sigma)\left(\nabla_{\sigma(\bar k)}\phi_{\sigma(J)I}-\Gamma^{\bar L}_{\sigma(\bar k)\sigma(J)}\phi_{\bar LI}\right),
+\end{align*}
+where the multi-index $\bar L$ is being summed over. The K\"ahler condition on the metric $g$ gives us, in this case, that
+$\Gamma^{\bar L}_{\sigma(\bar k)\sigma(J)}=\Gamma^{\bar L}_{\sigma(J)\sigma(\bar k)}$. In the summation above, then,
+we can pair the terms to obtain $(q+1)!/2$ pairs in which the connection terms cancel by the K\"ahler condition. If we
+then de-antisymmetrize, we find that, as desired,
+\begin{align*}
+    \bar\partial\left( \frac{1}{p!q!}\sum_{\bar JI}\phi_{\bar JI}dz^I\wedge d\bar z^J \right)&=\frac{1}{p!q!}\sum_{\bar JI}\nabla_{\bar k}\phi_{\bar JI}d\bar z^k\wedge dz^I\wedge d\bar z^J.
+\end{align*}
+
+If $g_{\bar k j}$ were not K\"ahler, then in the $(0,1)$ case, we would find that for $\phi=\sum\phi_kd\bar z^k$,
+\begin{align*}
+    (\bar\partial\phi)_{\bar i\bar j}&=\sum(\bar\partial\phi_{\bar k})\wedge d\bar z^k=\sum(\partial_{\bar l}\phi_{\bar k}d\bar z^l)\wedge d\bar z^k\\
+    &=\frac{1}{2}\sum\left( \partial_{\bar l}\phi_{\bar k} -\partial_{\bar k}\phi_{\bar l}\right)d\bar z^l\wedge d\bar z^k\\
+    &=\frac{1}{2}\sum\left( \nabla_{\bar l}\phi_{\bar k}-\nabla_{\bar k}\phi_{\bar l} +\Gamma^{\bar m}_{\bar l\bar k} \phi_{\bar m}-\Gamma^{\bar m}_{\bar k\bar l}\phi_{\bar m}\right)d\bar z^l\wedge d\bar z^k
+\end{align*}
+and hence the formula would become
+\[\bar\partial\left( \sum_{\bar i}\phi_{\bar i} d\bar z^i \right)=\sum_{\bar i}(\nabla_{\bar l}\phi_{\bar i}+\Gamma^{\bar m}_{\bar l\bar i}\phi_{\bar m})d\bar z^l\wedge d\bar z^i.\]
+
+
+\section*{Problem 3}
+
+Let $(X,g_{\bar kj})$ be a compact K\"ahler manifold, and consider the operator $\bar\partial$ as defined on $(p,q)$-forms as in
+the previous problem. Let $L\to X$ be a holomorphic line bundle over $X$, with metric $h$.
+\begin{enumerate}[(a)]
+    \item Suppose we have $\phi,\psi\in\Gamma(X,L\otimes \Lambda^{0,2})$. We can then define an inner product (with summations supressed)
+        \[\langle\phi,\psi\rangle\equiv \frac{1}{4}\int_X\phi_{\bar j\bar i}\overline{\psi_{\bar k\bar l}}g^{k\bar j}g^{\bar i l}h\omega^n/n!.\]
+        Note that this is clearly linear in the first argument and conjugate-symmetric (moreover, the indices match up appropriately).
+        Positive-definiteness follows from the positive-definiteness of $h$ and $g$. Similarly, given $\phi,\psi\in\Gamma(X,L\otimes \Lambda^{0,3})$,
+        we can define an inner product
+        \[\langle\phi,\psi\rangle\equiv \frac{1}{36}\int_X\phi_{\bar i\bar j\bar k}\overline{\psi_{\bar l\bar m\bar p}}g^{\bar il}g^{\bar jm}g^{\bar kp}h\omega^n/n!.\]
+    \item Now consider part of the the $\bar\partial$ complex:
+        \begin{equation*}
+            \begin{tikzcd}
+                \Gamma(X,L\otimes\Lambda^{0,1})\arrow[bend right]{r}{\bar\partial}&\Gamma(X,L\otimes\Lambda^{0,2})\arrow[bend right]{r}{\bar\partial}\arrow[bend right]{l}{\bar \partial^\dagger}&\Gamma(X,L\otimes\Lambda^{0,3})\arrow[bend right]{l}{\bar \partial^\dagger}%\arrow[bend right]{r}{\bar\partial}&\Gamma(X,L\otimes\Lambda^{0,4})\arrow[bend right]{l}{\bar \partial^\dagger}
+            \end{tikzcd}
+        \end{equation*}
+        Let us compute the formal adjoints $\bar\partial^\dagger:\Gamma(X,L\otimes\Lambda^{0,2})\to\Gamma(X,L\otimes\Lambda^{0,1})$ and
+        $\bar\partial^\dagger:\Gamma(X,L\otimes\Lambda^{0,3})\to\Gamma(X,L\otimes\Lambda^{0,2})$.
+
+        For the first, take $\phi\in\Gamma(X,L\otimes \Lambda^{0,1})$ and $\psi\in\Gamma(X,L\otimes\Lambda^{0,2})$. By definition,
+        the formal adjoint is such that
+        \[\langle \bar\partial \phi,\psi\rangle=\langle\phi,\bar\partial^\dagger\psi\rangle.\]
+        We can write $\psi=\frac{1}{2}\sum\psi_{\bar l\bar m}d\bar z^l\wedge d\bar z^m$ and
+        \begin{align*}
+            \bar\partial\phi&=\sum\partial_{\bar k}\phi_{\bar j}d\bar z^k\wedge d\bar z^j\\
+            &=\frac{1}{2}\sum\left( \partial_{\bar k}\phi_{\bar j}-\partial_{\bar j}\phi_{\bar k}\right)d\bar z^k\wedge d\bar z^j.
+        \end{align*}
+        Then the above requirement thus becomes
+        \begin{align*}
+            \int_X \frac{1}{2}\left( \partial_{\bar k}\phi_{\bar j}-\partial_{\bar j}\phi_{\bar k}  \right)\overline{\psi_{\bar l\bar m}}hg^{l\bar j}g^{m\bar k}\omega^n/n!=\int_X \phi_{\bar j}\overline{(\bar\partial^\dagger\psi)_{\bar k}}hg^{k\bar j}\omega^n/n!.
+        \end{align*}
+        Note now that
+        \[\partial_{\bar k}\phi_{\bar j}-\partial_{\bar j}\phi_{\bar k}=\nabla_{\bar k}\phi_{\bar j}-\nabla_{\bar j}\phi_{\bar k}.\]
+        Now we can simplify the left-hand side by de-antisymmetrizing and integrating by parts:
+        \begin{align*}
+            \text{LHS}&=\frac{1}{2}\int_X(\nabla_{\bar k}\phi_{\bar j}-\nabla_j\phi_{\bar k})\overline{\psi_{\bar l\bar m}}hg^{l\bar j}g^{m\bar k}\omega^n/n!\\
+            &=\int_X(\nabla_{\bar k}\phi_{\bar j}) \overline{\psi_{\bar l\bar m}}hg^{l\bar j}g^{m\bar k}\omega^n/n!\\
+            &=\int_X \phi_{\bar j}\overline{(-g^{k\bar m}\nabla_k\psi_{\bar l\bar m})}g^{l\bar j}\omega^n/n!
+        \end{align*}
+        Hence we can write the formal adjoint as
+        \[(\bar\partial^\dagger\psi)_{\bar l}=-g^{k\bar m}\nabla_k\psi_{\bar l\bar m}.\]
+
+        The computation for the next formal adjoint is similar. We take $\phi\in\Gamma(X,L\otimes\Lambda^{0,2})$ and
+        $\psi\in\Gamma(X,L\otimes \Lambda^{0,3})$. We obtain the equality, as above
+        \begin{align*}
+            \int_X(\nabla_{\bar l}\phi_{\bar m\bar p})\overline{\psi_{\bar i\bar j\bar k}}hg^{\bar li}g^{\bar mj}g^{\bar pk}\omega^n/n!
+            =\int_X\phi_{\bar m\bar p}\overline{(\bar\partial^\dagger\psi)_{\bar i\bar j}}hg^{\bar mi}g^{\bar pj}\omega^n/n!.
+        \end{align*}
+        We can now integrate by parts (note that we have switched to covariant derivatives on the left, just as above, by noting
+        that the connection terms drop out in the antisymmetrized expression, vis a vis problem 2) to obtain
+        \begin{align*}
+            \text{LHS}&=-\int_X \phi_{\bar m\bar p}(\nabla_{\bar l}\overline{\psi_{\bar i\bar j\bar k}})hg^{\bar li}g^{\bar mj}g^{\bar pk}\omega^n/n!\\
+            &=\int_X \phi_{\bar m\bar p}\overline{(-\nabla_l\psi_{\bar i\bar j\bar k}g^{l\bar i})}hg^{\bar mj}g^{\bar pk}\omega^n/n!,
+        \end{align*}
+        from which we conclude that the formal adjoint can be written
+        \[(\bar\partial^\dagger\psi)_{\bar i\bar j}=-g^{l\bar k}\nabla_l\psi_{\bar k\bar i\bar j}.\]
+    \item Define $\Delta\equiv\bar\partial\bar\partial^\dagger+\bar\partial^\dagger\bar\partial$. With the expressions
+        for the formal adjoints as above, we can compute explicitly the action of $\Delta$. Take some $\phi\in\Gamma(X,L\otimes\Lambda^{0,2})$.
+        The first term becomes
+        \begin{align*}
+            \left( \bar\partial\bar\partial^{\dagger}\phi \right)_{\bar i\bar j}&=\nabla_{\bar i}(\bar\partial^\dagger\phi)_{\bar j}-\nabla_{\bar j}(\bar\partial^\dagger\phi)_{\bar i}\\
+            &=\nabla_{\bar i}(-g^{k\bar m}\nabla_k\phi_{\bar j\bar m})-\nabla_{\bar j}(-g^{k\bar m}\nabla_k\phi_{\bar i\bar m})\\
+            &=-g^{k\bar m}\nabla_{\bar i}\nabla_{k}\phi_{\bar j\bar m}+g^{k\bar m}\nabla_{\bar j}\nabla_k\phi_{\bar i\bar m}\\
+            &=-g^{l\bar k}\nabla_{\bar i}\nabla_{l}\phi_{\bar j\bar k}+g^{l\bar k}\nabla_{\bar j}\nabla_l\phi_{\bar i\bar k}.
+        \end{align*}
+        On the other hand, the second term is
+        \begin{align*}
+            \left( \bar\partial^\dagger\bar\partial\phi \right)_{\bar i\bar j}&=-g^{l\bar k}\nabla_l\left(\nabla_{\bar k}\phi_{\bar i\bar j}-\nabla_{\bar i}\phi_{\bar j\bar k}-\nabla_{\bar j}\phi_{\bar k\bar i} \right)\\
+            &=-g^{l\bar k}\nabla_l\nabla_{\bar k}\phi_{\bar i\bar j}+g^{l\bar k}\nabla_l\nabla_{\bar i}\phi_{\bar j\bar k}+g^{l\bar k}\nabla_l\nabla_{\bar j}\phi_{\bar k\bar i}.
+        \end{align*}
+        Adding the two terms, we find a Bochner-Kodaira formula for $\Delta$:
+        \begin{align*}
+            (\Delta\phi)_{\bar i\bar j}=-g^{l\bar k}\nabla_l\nabla_{\bar k}\phi_{\bar i\bar j}+g^{l\bar k}[\nabla_l,\nabla_{\bar i}]\phi_{\bar j\bar k}+g^{l\bar k}[\nabla_l,\nabla_{\bar j}]\phi_{\bar k\bar i}.
+        \end{align*}
+        Recall from class that we can rewrite the commutator as a sum of curvatures
+        \begin{align*}
+            [\nabla_l,\nabla_{\bar i}]\phi_{\bar j\bar k}&=F_{\bar il}\phi_{\bar j\bar k}+R_{\bar il\bar j}^{\bar m}\phi_{\bar m\bar k}+R_{\bar il\bar k}^{\bar m}\phi_{\bar j\bar m}\\
+            [\nabla_l,\nabla_{\bar j}]\phi_{\bar k\bar i}&=F_{\bar jl}\phi_{\bar i\bar k}+R_{\bar jl\bar i}^{\bar m}\phi_{\bar m\bar k}+R_{\bar jl\bar k}^{\bar m}\phi_{\bar i\bar m}
+        \end{align*}
+        Inserting these into the formula for the Laplacian, we find that
+        \begin{align}
+            (\Delta\phi)_{\bar i\bar j}&=-g^{l\bar k}\nabla_l\nabla_{\bar k}\phi_{\bar i\bar j}+g^{l\bar k}F_{\bar il}\phi_{\bar j\bar k}+g^{l\bar k}R^{\bar m}_{\bar il\bar j}\phi_{\bar m\bar k}+g^{l\bar k}R^{\bar m}_{\bar il\bar k}\phi_{\bar j\bar m}\notag\\
+            &+g^{l\bar k}F_{\bar jl}\phi_{\bar i\bar k}+g^{l\bar k}R^{\bar m}_{\bar jl\bar i}\phi_{\bar m\bar k}+g^{l\bar k}R^{\bar m}_{\bar jl\bar k}\phi_{\bar i\bar m}
+            \label{eq:bk}
+        \end{align}
+    \item Given the above expression for the Laplacian in terms of the appropriate curvatures, we now reach a vanishing result.
+        In particular, let $L$ be a positive line bundle (i.e. $h$ has positive curvature). Given a K\"ahler metric $\omega$ on $X$,
+        we consider the $\Delta$ operator on $\Gamma(X,L^m\otimes\Lambda^{0,2})$. If we consider the inner product
+        \begin{align*}
+            \langle \Delta\phi,\phi\rangle=\int_X (\Delta\phi)_{\bar i\bar j}\overline{\phi_{\bar k\bar l}}g^{k\bar j}g^{l\bar i}h\frac{\omega^n}{n!}.
+        \end{align*}
+        Looking at equation (\ref{eq:bk}), we see that the first term in the integrand will (after integrating by parts and thus losing the minus
+        sign) become $||\bar \nabla\phi||^2$, just as in the simpler case done in class. The rest of the integral,
+        \begin{align*}
+            \int_X g^{l\bar k}\left( mF_{\bar il}\phi_{\bar j\bar k}+R^{\bar m}_{\bar il\bar j}\phi_{\bar m\bar k}+R^{\bar m}_{\bar il\bar k}\phi_{\bar j\bar m}+mF_{\bar jl}\phi_{\bar i\bar k}+R^{\bar m}_{\bar jl\bar i}\phi_{\bar m\bar k}+R^{\bar m}_{\bar jl\bar k}\phi_{\bar i\bar m}\right)\overline{\phi_{\bar p\bar q}}g^{\bar i\bar p}g^{\bar j\bar q}h\frac{\omega^n}{n!},
+        \end{align*}
+        can be forced positive by choosing $m\gg 1$ sufficiently large, by the positivity of the line bundle (and hence $F$).
+        This forces the inner product $\langle\Delta\phi,\phi\rangle$ to be positive, and hence we find that $\Delta\phi$ has trivial
+        kernel, as the inner product is \textit{strictly} positive.
+\end{enumerate}
+
+
+\section*{Problem 4}
+
+Let $f(z)$ be a holomorphic function in a neighborhood of $0$ in $\C^n$. Consider the plurisubharmonic function
+$\phi(z)=(n+5)\log |z|^2$ (we showed in class that functions of this form are plurisubharmonic). Now suppose
+that
+\[\int_{B_\rho(0)}|f(z)|^2e^{-\phi(z)}=\int_{B_\rho(0)}|f(z)|^2|z|^{-2(n+5)}<\infty,\]
+where we have chosen $\rho$ such that $B_{\rho}(0)\subset U$. Holomorphicity of $f(z)$ allows us to express it as
+\[f(z)=\sum_{|\alpha|\leq n+5}a_{\alpha}z^{\alpha}+E(z),\]
+where $|E(z)|\leq C|z|^{n+6}$. Applying the triangle inequality, we find that
+\begin{align*}
+    \int \bigg|\sum_{|\alpha|\leq n+5}a_\alpha z^\alpha\bigg|^2|z|^{-2(n+5)}\leq \int \left( |f|^2+|E(z)|^2 \right)|z|^{-2(n+5)}<\infty.
+\end{align*}
+The left-hand side can be computed in polar coordinates to be
+\begin{align*}
+    \int^\rho_0\int_{S^{2n-1}} \bigg|\sum_{|a|\leq \gamma}a_\alpha r^{|\alpha|}\omega^\alpha\bigg|^2 r^{-2(n+5)}r^{2n-1}dr d\sigma(\omega)&<\infty\\
+    \int^\rho_0\sum_{|\alpha|\leq n+5}|a_\alpha|^2r^{2|\alpha|}r^{2n-1-2(n+5)}\left( \int_{S^{2n-1}}|\omega^\alpha|^2d\sigma(\omega) \right)dr&<\infty
+\end{align*}
+Note that the integral diverges unless $a_\alpha=0$ for $2|\alpha|+2n-1-2(n+5)\leq -1$, or equivalently $|\alpha|\leq 5$. Hence we find
+that $f(z)$ vanishes of order 5 at the origin, as $a_\alpha=0$ for $|\alpha|\leq 5$.
+
+
+
+
+%\setcounter{section}{-1}
+\end{document}

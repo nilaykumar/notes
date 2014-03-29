@@ -1,0 +1,121 @@
+\documentclass{../../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\title{Introduction to Algebraic Topology PSET 8}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{prop}
+    Hatcher exercise 2.1.11 
+\end{prop}
+\begin{proof}
+    Let $\iota:A\to X$ be the inclusion of $A$ into $X$, and $r:X\to X$ be the retract of $X$ onto $A$.
+    The composition $r\circ \iota:A\to A$ yields the identity $\id_A:A\to A$. The induced maps on the homology are
+    $(r\circ\iota)_*=r_*\circ\iota_*=\id:H_n(A)\to H_n(A)$. This map is of course injective, which implies that
+    $\iota_*:H_n(A)\to H_n(X)$ must be injective as well.
+\end{proof}
+
+\begin{prop}
+    Hatcher exercise 2.1.12
+\end{prop}
+\begin{proof}
+    Let us show that the relation of chain homotopy between chain maps is an equivalence relation.
+    Consider $f_\#,g_\#,h_\#:C_n(A)\to C_{n+1}(B)$. The relation is clearly reflexive, as $f_\#\sim f_\#$
+    by the zero morphism $0:C_n(A)\to C_{n+1}(B)$. Symmetry holds as follows: if $f_\#\sim g_\#$ via a
+    chain homotopy $h$, then $g_\#\sim f_\#$ via the chain homotopy $-h$, because then 
+    \begin{align*}
+        f_\#-g_\#&=\partial h+h\partial\\
+        g_\#-f_\#&=-(\partial h+h\partial)\\
+        &=\partial (-h)+(-h)\partial.
+    \end{align*}
+    Finally, the relation is transitive, because given $f_\#\sim g_\#$ via $H_1$ and $g_\#\sim h_\#$
+    via $H_2$, we can add the two commutation relations to obtain that
+    \begin{align*}
+        f_\#-h_\#&=\partial H_1+H_1\partial+\partial H_2+H_2\partial\\
+        &=\partial(H_1+H_2)+(H_1+H_2)\partial,
+    \end{align*}
+    as desired.
+\end{proof}
+
+\begin{prop}
+    Hatcher exercise 2.1.14
+\end{prop}
+\begin{proof}
+    
+\end{proof}
+
+\begin{prop}
+    Hatcher exercise 2.1.15
+\end{prop}
+\begin{proof}
+    Consider the exact sequence
+    \begin{equation*}
+        \begin{tikzcd}
+            A\ar{r}{\alpha}&B\ar{r}{\beta}&C\ar{r}{\gamma}&D\ar{r}{\delta}&E.
+        \end{tikzcd}
+    \end{equation*}
+
+    Exactness at $B$ requires $\ker\beta=\text{im }\alpha$, and hence $\alpha$ is surjective if and only
+    if $\ker\beta=B$. Exactness at $D$ requires $\ker\delta=\text{im }\gamma$, and hence $\delta$ is injective
+    if and only if $\text{im }\gamma=0$.
+    Hence if (and only if) $\alpha$ is surjective and $\delta$ is injective then $\gamma=0$ and $\beta=0$ and the exactness at $C$
+    (requiring that $\ker\gamma=\text{im }\beta$) forces $C=0$.
+
+    Hence for a good pair $(X,A)$, we find that $H_n(X,A)=0$ if and only if the inclusion $A\to X$ induces
+    isomorphisms on all homology groups, as the long exact sequence of theorem 2.13 splits into sequences
+    \begin{equation*}
+        \begin{tikzcd}
+            0\ar{r}&\tilde H_n(A)\ar{r}{\iota_*}&\tilde H_n(X)\ar{r}&0
+        \end{tikzcd}
+    \end{equation*}
+    for all $n$.
+\end{proof}
+
+\begin{prop}
+    Let $A$ and $B$ be chain complexes. A chain map $f:A\to B$ is a \textnormal{chain homotopy equivalence}
+    if there exists a chain map $g:B\to A$ such that $f\circ g\sim\id_B$ and $g\circ f\sim\id_A$ in the
+    sense of chain homotopies.
+    \begin{enumerate}[(a)]
+        \item Prove that if $f:A\to B$ is a chain homotopy equivalence, then $f$ induces an isomorphism on homology.
+        \item Give an example of chain complexes $A$ and $B$ with isomorphic homology but no chain homotopy equivalence
+            between them. (Hint: let $A$ be $\Z$ in two consecutive gradings and zero everywhere else.)
+    \end{enumerate}
+\end{prop}
+\begin{proof}\hfill
+    \begin{enumerate}[(a)]
+        \item Recall that chain-homotopic maps induce the same homorphism on homology. Hence $(f\circ g)_*=f_*\circ g_*=(\id_B)_*=\id_{H_n(B)}$
+            and $(g\circ f)_*=g_*\circ f_*=(\id_A)_*=\id_{H_n(A)}$. As $\id_{H_n(B)}$ is injective, $f_*:H_n(A)\to H_n(B)$ must be as well, and 
+            as $\id_{H_n(A)}$ is surjective, $f_*$ must be as well. Hence $f_*$ is an isomorphism.
+        \item Consider the map of chain complexes $f:A_\bullet\to B_\bullet$ given by
+            \begin{equation*}
+                \begin{tikzcd}
+                    \cdots\ar{r}&0\ar{r}\ar{d}{0}&\Z\ar{r}{\id_\Z}\ar{d}{0}&\Z\ar{r}\ar{d}{0}&0\ar{r}\ar{d}{0}&\cdots\\
+                    \cdots\ar{r}&0\ar{r}&0\ar{r}&0\ar{r}&0\ar{r}&\cdots
+                \end{tikzcd}
+            \end{equation*}
+            where each square clearly commutes. The homology groups of the two sequences are $H_\bullet(A)=0$ and $H_\bullet(B)=0$.
+            However, there does not exist a chain homotopy equivalence between $A_\bullet$ and $B_\bullet$, as we now show.
+            If there did exist one, there would exist a chain map $g:B_\bullet\to A_\bullet$ such that the appropriate compositions
+            of $f$ and $g$ would be chain homotopic to $\id_B$ and $\id_A$ via some chain homotopy $h$. Of course, the only possible $g$
+            is the zero morphism, and hence $g\circ f:A_\bullet\to A_\bullet$ is the zero map. Drawing the diagram
+            \begin{equation*}
+                \begin{tikzcd}
+                    \Z\ar{r}{\id_\Z}\ar{d}{0}&\Z\ar{d}{0}\ar[swap]{dl}{h}\\
+                    \Z\ar{r}{\id_\Z}&\Z
+                \end{tikzcd}
+            \end{equation*}
+            we find that $h$ must be an automorphism of $\Z$ such that $\id_\Z\circ h+h\circ\id_\Z=-\id_\Z$.
+            As the automorphisms of $\Z$ are $\id_\Z,-\id_\Z$, this equality cannot be satisfied and hence there does not exist
+            a chain homotopy.
+    \end{enumerate}
+\end{proof}
+
+
+\end{document}
