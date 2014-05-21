@@ -1,0 +1,115 @@
+\documentclass{../../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\title{Introduction to Algebraic Topology PSET 9}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{prop}
+    Problem 1
+\end{prop}
+\begin{proof}
+    \hfill
+    \begin{enumerate}[(a)]
+        \item Consider the $\Delta$-complex structure on $X$ as follows:
+            \vspace{2cm}
+        \item The chain complex associated to $X$ is
+            \begin{equation}
+                \begin{tikzcd}
+                    0\ar{r} & \Z^2\ar{r}{\partial_2} & \Z^4\ar{r}{\partial_1} & \Z^2\ar{r}{\partial_0} & 0
+                \end{tikzcd}
+                \label{cd:1}
+            \end{equation}
+            with $\partial_2U=a+d-c,\partial_2L=a+b-d,\partial_1a=\partial_1c=-\partial_1b=v_0-v_1,$ and $\partial_1d=0$.
+            Clearly $H^\Delta_0(X)=\Z$ and $H^\Delta_2(X)=\ker\partial_2=0$. Finally,
+            \begin{align*}
+                H^\Delta_1(X)&=\frac{\ker\partial_1}{\text{im }\partial_2}=\frac{\langle d,a-c,a+b\rangle}{\langle a+d-c,a+b-d\rangle}\\
+                &=\frac{\langle d,a-c,a+b-d\rangle}{a+d-c,a+b-d\rangle}=\frac{\langle a-c,d\rangle}{\langle a+d-c\rangle}\\
+                &=\Z.
+            \end{align*}
+            Next, if we consider $A=\partial X$ with the inherited $\Delta$-complex structure, we find the chain complex
+            \begin{equation}
+                \begin{tikzcd}
+                    0\ar{r} & \Z^2\ar{r}{\partial_1} & \Z^2\ar{r}{\partial_0} & 0
+                \end{tikzcd}
+                \label{cd:2}
+            \end{equation}
+            with $H_0^\Delta(A)=\Z$ and $H_1^\Delta(A)=\ker\partial_1=\Z$.
+        \item Let $i:A\to X$ be the usual inclusion. Then $i_*:H^\Delta_0(A)\to H^\Delta_0(X)$ is an
+            isomorphism, taking $v_0\in H_0^\Delta(A)$ to $v_0\in H_0^\Delta(X)$ respectively.
+            Similarly, $i_*:H^\Delta_1(A)\to H^\Delta_1(X)$ takes $b+c\mapsto 2d$, as $d$ is the generator
+            for $H^\Delta_1(X)$ and the relations $a+b-d=0,a+d-c=0$ yield $2d=b+c$.
+        \item We obtain a long exact sequence
+            \begin{equation}
+                \begin{tikzcd}
+                    0\ar{r} & H_2(X,A)\ar{r}{\partial} & \Z\ar{r}{i_*} & \Z\ar{r} & H_1(X,A)\ar{r}{\partial} & \Z\ar{r}{i_*} & \Z\ar{r} & H_0(X, A)\ar{r} &0
+                \end{tikzcd}
+                \label{cd:3}
+            \end{equation}
+            By exactness and part (c), it follows that all $H_n(X,A)=0$ except for $n=1$. In that case, since the 
+            first $i_*$ is multiplication by two (taking the generator $b+c$ to twice the generator, $d$), we find that
+            $H_1(X,A)=\Z_2$.
+    \end{enumerate}
+\end{proof}
+
+\begin{prop}
+    Hatcher 2.2.1
+\end{prop}
+\begin{proof}
+    Suppose $f:D^n\to D^n$ has no fixed points. Then, define a map $g:S^n\to S^n$ that takes the northern hemisphere to
+    the southern via reflection and then applies $f$, while on the southern hemisphere simply applies $f$. Note that
+    the southern hemisphere is homeomorphic to $D^n$, and hence $g$ has degree $(-1)^{n+1}$ as $f$ has no fixed points.
+    This contradicts that $g$ has degree zero (as it is not surjective). Hence $f$ must have at least one fixed point.
+\end{proof}
+
+\begin{prop}
+    Hatcher 2.2.2    
+\end{prop}
+\begin{proof}
+    Consider $f:S^{2n}\to S^{2n}$. If $f$ has a fixed point, we are done. Otherwise, we find that $\deg f=(-1)^{2n+1}=-1$.
+    Suppose now that $f(x)\neq -x$ for all $x$. Then the line from $f(x)$ to $x$ does not pass through the origin. The
+    map $g_t(x)=\left( (1-t)f(x)+tx \right)/|(1-t)f(x)+tx|$ thus furnishes a homotopy from $f$ to the identity. This is
+    a contradiction, as the identity has degree 1. Hence there must exist an $x$ such that $f(x)=-x$.
+
+    An easy corollary of this fact is that every map $\RP^{2n}\to\RP^{2n}$ must have a fixed point, because
+    $\RP^{2n}$ can be seen as $S^{2n}$ with antipodal points identified: hence there will always exist an $[x]$
+    such that $\tilde f([x])=[x]$ or $\tilde f([x])=[-x]=[x]$. We can construct a map $\RP^{2n-1}\to\RP^{2n-1}$
+    without fixed point by finding a linear transformation $\R^{2n}\to\R^{2n}$ with no eigenvectors. This can
+    be done by consider the transformation
+    \begin{equation*}
+        T=
+        \begin{pmatrix}
+            0 & -I_n\\
+            I_n & 0
+        \end{pmatrix},
+    \end{equation*}
+    where $I_n$ is the $n\times n$ identity matrix. The characteristic equation is given by $\lambda^{2n}+1=0$, which
+    has no real roots, as desired.
+\end{proof}
+
+\begin{prop}
+    Hatcher 2.2.4
+\end{prop}
+\begin{proof}
+    Consider the map $p:S^n\to D^n$ given by projection, and the quotient map $q:D^n\to D^n/\partial D^n=S^n$. The composition
+    $qp:S^n\to S^n$ is clearly surjective for $n\geq 1$, but has degree zero, as the induced map $q_*$ on homology is zero
+    by contractibility of $D^n$.
+\end{proof}
+
+\begin{prop}
+    Hatcher 2.2.6
+\end{prop}
+\begin{proof}
+    If $f:S^n\to S^n$ has fixed points, we are done. Otherwise, if $f$ has no fixed points, $\text{deg }f=(-1)^{n+1}$.
+    If $n$ is even, $\text{deg }f=-1$, and we can homotope $f$ to a reflection, which has fixed points. If $n$
+    is odd, $\text{deg }f=1$, and we can homotope $f$ to the identity, which fixes every point.
+\end{proof}
+
+\end{document}

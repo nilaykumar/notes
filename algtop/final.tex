@@ -1,0 +1,138 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\title{Introduction to Algebraic Topology Final: Take-Home Portion}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{prop}\hfill
+    \begin{enumerate}[(a)]
+        \item Let $X$ be a finite CW complex and $p:\tilde X\to X$ be an $n$-sheeted covering space.
+            Prove that $\chi(\tilde X)=n\chi(X)$.
+        \item Let $\Sigma_g$ denote the closed orientable surface of genus $g$. Give necessary and
+            sufficient conditions for $\Sigma_h$ to cover $\Sigma_g$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}\hfill
+    \begin{enumerate}[(a)]
+        \item Given a cell structure on $X$, it suffices to show that $\tilde X$ can be given a cell structure with
+            $n$ times the number of $i$-cells as $X$, for all $i$. We proceed by induction. For the base case,
+            it's clear that we can find $nc_0(X)$ 0-cells on $\tilde X$ by applying $p^{-1}$ to the 0-cells on $X$.
+            Now, as the induction
+            step, we assume that $\tilde X$ has $nc_{i-1}(X)$ $(i-1)$-cells. Then, any $i$-cell in $X$ is attached via
+            a map $\phi_\alpha: D^i_\alpha\to X$. Contractibility of the disk allows us to use the lifting criterion
+            (Hatcher Proposition 1.33) and thus there exists a lift $\tilde\phi_\alpha:D^i_\alpha\to \tilde X$ for each
+            starting point of the lift. Since this is an $n$-sheeted cover there are $n$ such starting points by the
+            induction step, and hence there are $n$ such lifts. This yields the desired cell structure (note that the
+            local homeomorphisms ensure that this cell structure covers the whole space). 
+        \item The necessary condition follows immediately from the previous part:
+            \begin{align*}
+                2-2h &= n(2-2g)\\
+                h &= n(g-1)+1.
+            \end{align*}
+            for some $n\in\N$, which is the number of sheets in the desired covering. Sufficiency is easy to see via
+            Hatcher's example 1.41. Let $h=n(g-1)+1$. Deform $\Sigma_h$ into an $n$-spoked star shape with one of the
+            holes at the center and the other split evenly along the spokes. Equipping $\Sigma_h$ with the action of
+            $\Z_n$ (which is clearly a covering space action) and quotienting, we obtain $\Sigma_h/\Z_n=\Sigma_g$,
+            and hence we have a covering $\Sigma_h\to \Sigma_g$, as desired.
+    \end{enumerate}
+\end{proof}
+
+\newpage
+
+\begin{prop}
+    Let $K$ be a knot in $S^3$, i.e. $K$ is the image of a smooth embedding $S^1\to S^3$.
+    \begin{enumerate}[(a)]
+        \item Compute the homology of $S^3-K$.
+        \item Compute $\pi_1(S^3-K_1)$ and $\pi_1(S^3-K_2)$ for $K_1$ the unknot and $K_2$
+            the trefoil knot and conclude that they are distinct knots.
+    \end{enumerate}
+\end{prop}
+\begin{proof}\hfill
+    \begin{enumerate}[(a)]
+        \item As $K$ is the image of a smooth embedding, we can continuously deform it to $S^1$. We then proceed by
+            using Mayer-Vietoris on the 3-sphere $X=S^3$. Let $A$ be a toroidal neighborhood of $K$, and let $B=S^3-K$.
+            Clearly $A$ is homotopic to $S^1$ and $A\cap B$ is homotopic to $T^2$. Hence we have nontrivial homologies
+            $H_0(A)=\Z,H_1(A)=\Z$, $H_0(A\cap B)=\Z,H_1(A\cap B)=\Z^2,H_2(A\cap B)=\Z$, and $H_0(X)=\Z,H_3(X)=\Z$. As the interiors of $A$ and $B$ cover $X$, we obtain
+            a long exact sequence
+            \begin{equation*}
+                \begin{tikzcd}
+                    0\ar{r} & 0 \oplus H_3(S^3-K)\ar{r} & \Z\ar[swap]{dll}{\partial}\\
+                    \Z\ar{r} & 0\oplus H_2(S^3-K)\ar{r} & 0\ar[swap]{dll}{\partial}\\
+                    \Z^2\ar{r} & \Z\oplus H_1(S^3-K)\ar{r} & 0.
+                \end{tikzcd}
+            \end{equation*}
+            Clearly $H_0(S^3-K)=\Z$ and $H_1(S^3-K)=\Z$. Next note that the map $\Z\to0\oplus H_2(S^3-K)$
+            takes $x\mapsto (x,-x)$ and hence is zero (this can also be seen by noting that the 3-cell in $S^3-K$
+            decomposes into the 3-cell of the toroidal neighborhood and the 3-cell of the complement, and hence
+            the former is taken via the boundary map to the bounding torus). This implies that $H_2(S^3-K)=0$ by exactness
+            and that the first $\partial$ map is the identity, which in turn forces $H_3(S^3-K)=0$.
+            Higher homology groups are of course zero for dimensional reasons.
+        \item Let us first compute $\pi_1(S^3-K_1)$: the complement of the unknot. We claim first that $\pi_1(S^3-K_1)\cong\pi_1(\R^3-K_1)$.
+            This follows from van Kampen's theorem: write $S^3-K_1$ as the union of $\R^3-K_1$ and the open ball $B$
+            formed by the complement in $S^3$ of a large closed ball in $\R^3$ containing $K_1$. As both $B$ and
+            $B\cap(\R^3-K_1)$ are simply-connected, van Kampen's theorem yields the desired isomorphism. Finally
+            note that $\R^3-K_1$ deformation retracts onto $S^1\vee S^2$ as drawn -- this follows by homeomorphically
+            thickening an $\epsilon$-neighborhood of $S^1\vee S^2$ until it becomes all of $\R^3-K_1$.
+            Hence $\pi_1(S^3-K_1)=\pi_1(S_1)*\pi_1(S^2)=\Z$.
+
+            Next consider $\pi_1(S^3-K_2)$: the complement of the trefoil knot. We claim, following Hatcher's Example 1.24,
+            that $S^3-K_2$ deformation retracts onto a 2-dimensional complex $X=X_{2,3}$ homeomorphic to
+            the quotient space of a cylinder $S^1\times I$ under the identifications $(z,0)\sim(e^{\pi i/2}z,0)$ and $(z,1)\sim(e^{2\pi i/3}z,1)$.
+            Assuming this for the moment, we can apply van Kampen to the top and bottom halves of this cylinder
+            (more precisely open neighborhoods deformation retracting to the halves), each of which is a mapping
+            cylinder over $S^1$ (of $z\mapsto z^2,z\mapsto z^3$) having fundamental group $\Z$. Similarly the
+            intersection has fundamental group $\Z$. Since a loop in the overlap of the two halves represents
+            twice the generator of one end and thrice the generator of the other, we find via van Kampen that
+            $\pi_1(S^3-K_2)=\langle a,b\mid a^2=b^3\rangle.$
+            
+            Let us now justify the assertion above. Consider the decomposition of $S^3$ into two solid tori
+            $S^1\times D^2$ and $D^2\times S^1$, the result of regarding $S^3$. This is a result of the equality
+            $\partial D^4=\partial(D^2\times D^2)=\partial D^2\times D^2\cup D^2\times\partial D^2$.
+            As the trefoil knot can be placed on the torus $S^1\times S^1$ (as the torus knot $K_{2,3}$), we see that visually, the first solid
+            torus can be viewed as filling said torus and the second is ``perpendicular'' to the first, representing the
+            complement of the first solid torus in $S^3$. 
+            We note that in the first solid torus, if we fix a meridian circle $\{x\}\times\partial D^2$, the
+            trefoil knot intersects it in two antipodal points. Drawing a diameter through the circle perpendicular
+            to the line connecting the two points, and following this line for every meridian circle, we obtain
+            deformation retraction onto one half of the mapping cylinder described above.
+            The second half is obtained similarly from the second torus, and the two deformation retracts can
+            be made to agree on their overlap $S^1\times S^1-K_2$.
+    \end{enumerate}
+\end{proof}
+
+\begin{prop}
+    Show that if $f:\RP^{2n}\to X$ is a covering map of a CW complex $X$ then $f$ is a homeomorphism.
+\end{prop}
+
+\begin{proof}
+    We assume $X$ is path-connected, as otherwise the statement does not necessarily hold.
+    Equip $\RP^{2n}$ with the usual CW structure with a cell in every dimension from $0$ to $2n$.
+    Since $\RP^{2n}$ is a finite CW complex, it must be compact
+    (as it is comprised of closed disks) and hence $X$ (via surjectivity of $f$ due to path-connectedness)
+    must be compact
+    as well. Applying Hatcher's Proposition A.1, which states that a compact subspace of a CW complex
+    is contained in a finite subcomplex, we find that $X$ is finite.\footnote{
+        Alternatively, one can just apply the properties of the covering space map. There
+        exists an open cover $X=\cup X_\alpha$ such that $f^{-1}(X_\alpha)$ is a disjoint union
+        of open sets in $\RP^{2n}$, each of which is mapped by $f$ homeomorphically onto $X_\alpha$.
+        Thus, since $\RP^{2n}$ is a finite CW complex, $X$ must be finite as well.
+    }
+    We can now apply
+    the results of the first problem to deduce that $\chi(\RP^{2n})=k\chi(X)$ for some $k\in\N$.
+    But recall that the Euler characteristic is given by the alternating sum of the number of cells
+    in each dimension, whence $\chi(\RP^{2n})=1$. This forces $k=\chi(X)=1$, implying that $\RP^{2n}$ is a
+    single-sheeted cover of $X$, i.e. $\RP^{2n}\cong X$.
+\end{proof}
+
+
+
+
+\end{document}

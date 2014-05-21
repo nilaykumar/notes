@@ -1,0 +1,119 @@
+\documentclass{../../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\title{Introduction to Algebraic Topology PSET 10}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{prop}
+    Hatcher exercise 2.2.9
+\end{prop}
+\begin{proof}\hfill
+    \begin{enumerate}[(a)]
+        \item Let $X$ be the quotient of $S^2$ obtained by identifying the north and south poles
+            to a point. $X$ is homotopic to $S^2\vee S^1$, and so fixing a cell complex on $X$ yields
+            the chain complex
+            \begin{equation*}
+                \begin{tikzcd}
+                    0\ar{r} & \Z\ar{r}{d_2} & \Z\ar{r}{d_1} & \Z\ar{r} & 0
+                \end{tikzcd}
+            \end{equation*}
+            where $d_1=0$ as the $S^1$ attached to the $S^2$ is a cycle, and $d_2=0$ as the degree
+            of the map sending the two-cell comprising $S^2$ to the $S^1$ is zero (the map is not
+            surjective). Hence $H_0(X)=H_1(X)=H_2(X)=\Z$.
+        \item Let $X=S^1\times (S^1\vee S^1)$. We give $X$ a cell complex in the obvious way, consisting
+            of 2 2-cells, 3 1-cells, and 1 0-cell, which yields the chain complex
+            \begin{equation*}
+                \begin{tikzcd}
+                    0\ar{r} & \Z^2\ar{r}{d_2} & \Z^3\ar{r}{d_1} & \Z\ar{r} & 0
+                \end{tikzcd}
+            \end{equation*}
+            where $d_1$ is 0, as all the 1-cells are loops. Similarly, $d_2=0$, as the boundary of
+            each of the 2-cells traverses 1-cells in the usual way for the torus (by degree-counting).
+            Hence we find that $H_0(X)=\Z,H_1(X)=\Z^3,$ and $H_2(X)=\Z^2$.
+    \end{enumerate}
+\end{proof}
+
+\begin{prop}
+    Hatcher exercise 2.2.22
+\end{prop}
+\begin{proof}
+    Given a cell structure on $X$, it suffices to show that $\tilde X$ can be given a cell structure with
+    $n$ times the number of $i$-cells as $X$, for all $i$. We proceed by induction. For the base case,
+    it's clear that we can find $nc_0(X)$ 0-cells on $\tilde X$ by applying $p^{-1}$ to the 0-cells on $X$. Moreover,
+    $\tilde X$ can have no more than those 0-cells by the locally homeomorphic property. Now, as the induction
+    step, we assume that $\tilde X$ has $nc_{i-1}(X)$ $(i-1)$-cells. Then, any $i$-cell in $X$ is attached via
+    a map $\phi_\alpha: D^i_\alpha\to X$. Contractibility of the disk allows us to use the lifting criterion
+    (Hatcher Proposition 1.33) and thus there exists a lift $\tilde\phi_\alpha:D^i_\alpha\to \tilde X$ for each
+    starting point of the lift. Since this is an $n$-sheeted cover there are $n$ such starting points by the
+    induction step, and hence there are $n$ such lifts. This yields the desired cell structure. 
+\end{proof}
+
+\begin{prop}
+    Hatcher exercise 2.2.28
+\end{prop}
+\begin{proof}\hfill
+    \begin{enumerate}[(a)]
+        \item Let $X$ be the space obtained from a torus $T$ by attaching a M\"obius band $M$
+            via a homeomorphism from the boundary circle of the M\"obius band to the circle $S^1\times \{x_0\}$
+            in the torus. Recall that $H_0(T)=H_2(T)=\Z, H_1(T)=\Z^2$, $H_0(M)=H_1(M)=\Z,$ and $H_2(M)=0$.
+            Taking $T,M\subset X$ to be the appropriate subsets for the Mayer-Vietoris sequence and noting
+            that $T\cap M=S^1$, we find the exact sequence
+            \begin{equation*}
+                \begin{tikzcd}
+                    \cdots\ar{r} & 0\ar{r} & \Z\oplus 0\ar{r} & H_2(X)\ar{r} & \Z\ar{r}{(1,0,2)} & \Z^2\oplus \Z\ar{r} & H_1(X)\ar{r} & \Z\ar{r} & \cdots
+                \end{tikzcd}
+            \end{equation*}
+            This yields the homology groups $H_2(X)=\Z, H_1(X)=\Z^2, H_0(X)=\Z$.
+        \item Similar to part (a), using the fact that $H_0(\RP^2)=H_1(\RP^2)=\Z$ and $H_2(\RP^2)=0$, we obtain
+            the exact sequence
+            \begin{equation*}
+                \begin{tikzcd}
+                    \cdots\ar{r} & 0\ar{r} & H_2(X)\ar{r} & \Z\ar{r}{(1,2)} & \Z_2\oplus \Z\ar{r} & H_1(X)\ar{r} & \Z\ar{r} & \Z^2\ar{r} & \cdots
+                \end{tikzcd}
+            \end{equation*}
+            This yields the homology groups $H_2(X)=0, H_1(X)=\Z_4, H_0(X)=\Z$.
+    \end{enumerate}
+\end{proof}
+
+\begin{prop}
+    Hatcher exercise 2.2.31
+\end{prop}
+\begin{proof}
+    Consider the space $X\vee Y$ where the basepoints that are identified are deformation retracts
+    of neighborhoods $U\subset X$ and $V\subset Y$. Then, taking $A=X\cup V$ and $B=Y\cup U$, we find
+    that the interiors of $A$ and $B$ cover $X\vee Y$ and $A\cap B\subset X\vee Y$ deformation retracts
+    to the basepoint, i.e. has trivial homology.
+    The Mayer-Vietoris sequence is then simply
+    \begin{equation*}
+        \begin{tikzcd}
+            \cdots\ar{r} & 0\ar{r} & \tilde H_n(A)\oplus \tilde H_n(B)\ar{r} & \tilde H_n(X\vee Y)\ar{r} & 0\ar{r} & \cdots
+        \end{tikzcd}
+    \end{equation*}
+    If we now note that $\tilde H_n(A)=\tilde H_n(X\cup V)=\tilde H_n(X)$ by contractibility of $V$ and similarly for $\tilde H_n(B)$,
+    we obtain isomorphisms $\tilde H_n(X)\oplus \tilde H_n(Y)\cong \tilde H_n(X\vee Y)$, as desired.
+\end{proof}
+
+\begin{prop}
+    Hatcher exercise 2.2.32
+\end{prop}
+\begin{proof}
+    Let $SX$ be the suspension of $X$, with $A,B\subset SX$ be neighborhoods of the two cones contained
+    in $SX$. Clearly $A\cap B$ deformation retracts to $X$ and $A,B$ are contractible. The Mayer-Vietoris sequence
+    is then simply
+    \begin{equation*}
+        \begin{tikzcd}
+            \cdots\ar{r} & 0\ar{r} & H_n(SX)\ar{r} & H_{n-1}(X)\ar{r} & 0\ar{r} & \cdots
+        \end{tikzcd}
+    \end{equation*}
+    which yields the isomorphisms $H_n(SX)\cong H_{n-1}(X)$, as desired.
+\end{proof}
+
+\end{document}

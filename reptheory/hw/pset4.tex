@@ -1,0 +1,55 @@
+\documentclass{../../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\title{Representation Theory PSET 4}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{exc}
+    What is the Poincar\'e series of a free commutative algebra with generators of degrees $d_1,\ldots, d_n$?
+    What if the generators anticommute?
+\end{exc}
+\begin{proof}[Solution]
+    Note that if $A$ and $B$ are two graded $k$-algebras, then clearly $p_{A\otimes_k B}(t)=p_A(t)p_B(t)$.
+    Hence we first compute the Poincar\'e series of $k[x]$ where $x$ has degree $d$. We can write
+    \[p_{k[x]}(t)=t^0+t^d+t^{2d}+\cdots=\frac{1}{1-t^d}.\]
+    Therefore we find that the Poincar\'e series of $k[x_1,\ldots, x_n]$, where $x_i$ has degree $d_i$, is given
+    by the product
+    \[p(t)=\prod_{i=1}^n \frac{1}{1-t^{d_i}}.\]
+    Now suppose, on the other hand, that the generators anticommute. Returning to the case of $k[x]$, we find
+    that the Poincar\'e series is truncated to $t^0+t^d$. Taking a tensor product, we find that
+    \[p(t)=\prod_{i=1}^n (t^0+t^{d_i}).\]
+\end{proof}
+
+\begin{exc}
+    Let $G\subset GL(\C^n)$ be a finite group and $A=\C[x_1,\ldots, x_n]^G$ its algebra of invariants graded
+    by the usual degree. Then
+    \[p_A(t)=\frac{1}{|G|}\sum_{g\in G}\det(1-tg)^{-1}.\]
+\end{exc}
+\begin{proof}
+    The algebra of invariants is simply the invariant subalgebra $(S^\bullet V)^G$ of the symmetric algebra.
+    Consider the averaging operator $T=\sum_{g\in G}g/|G|$, which projects to the invariant subalgebra.
+    Therefore, the trace $\tr T$ yields the dimension of the invariant subalgebra. Hence we find that
+    \[\dim (S^dV)^G=\tr_{S^dV} T=\frac{1}{|G|}\sum_{g\in G}\tr_{S^dV}g=\frac{1}{|G|}\sum_{g\in G}\chi_{S^dV}(g).\]
+    The Poincar\'e series is then
+    \[p_A(t)=\frac{1}{|G|}\sum_{g\in G}\sum_dt^d\chi_{S^dV}(g).\]
+    To simplify this expression, suppose $\dim V=n$ and for a given $g$, $\gamma_1,\ldots,\gamma_n$ are
+    the eigenvalues of $g$. Then
+    \[\chi_{S^dV}(g)=\sum_{k_1+\cdots+k_n=d}\gamma_1^{k_1}\cdots\gamma_n^{k_n},\]
+    which allows us to write
+    \begin{align*}
+        \sum_dt^d\chi_{S^dV}(g)&=\sum_d\sum_{k_1+\cdots+k_n=d}t^d\gamma_1^{k_1}\cdots\gamma_n^{k_n}\\
+        &=\prod_{j=1}^n\sum_{k_j}(\gamma_jt)^{k_j}\\
+        &=\prod_{j=1}^n \frac{1}{1-\gamma_jt}\\
+        &=\frac{1}{\det(1-g t)}.
+    \end{align*}
+\end{proof}
+
+\end{document}

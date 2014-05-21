@@ -1,0 +1,387 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{amsmath}
+\usepackage{todonotes}
+
+
+\title{Complex Analysis and Riemann Surfaces: Final}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+Let $L\to (X,g_{\bar kj})$ be a holomorphic line bundle over a compact K\"ahler manifold. Let $h$ be a smooth
+metric on $L$.
+\begin{enumerate}[(a)]
+    \item Given the smooth metric $h$ on $L$, we can define an $L^2$ inner product on sections $\phi,\psi\in \Gamma(X,L)$ as
+        \[\langle\phi,\psi\rangle=\int \phi\overline{\psi} h\omega^n/n!.\]
+        Similarly, for $\phi,\psi\in\Gamma(X,L\otimes\Lambda^{0,1})$, we can define the inner product to be
+        \[\langle\phi,\psi\rangle=\int\phi_{\bar j}\overline{\psi_{\bar k}}hg^{\bar j k}\frac{\omega^n}{n!},\]
+        and for $\phi,\psi\in\Gamma(X,L\otimes\Lambda^{0,2})$,
+        \[\langle\phi,\psi\rangle=\int\phi_{\bar j\bar k}\overline{\psi_{\bar l\bar m}}hg^{\bar j l}g^{\bar k m}\frac{\omega^n}{n!}.\]
+        Consider now, part of the Dolbeault complex,
+        \begin{equation*}
+            \begin{tikzcd}
+                \Gamma(X,L)\ar[bend left]{r}{\bar\partial} & \Gamma(X,L\otimes\Lambda^{0,1})\ar[bend left]{r}{\bar\partial}\ar[bend left]{l}{\bar\partial^\dagger} & \Gamma(X,L\otimes \Lambda^{0,2})\ar[bend left]{l}{\bar\partial^\dagger}
+            \end{tikzcd}
+        \end{equation*}
+        Let us compute the first formal adjoint operator. By definition,
+        \[\langle \bar\partial\phi,\psi\rangle = \langle\phi,\bar\partial^\dagger\psi\rangle,\]
+        for $\phi\in \Gamma(X,L)$ and $\psi\in \Gamma(X,L\otimes \Lambda^{0,1})$. Writing
+        $\bar\partial\phi=\partial_{\bar j}\phi d\bar z^j$ and $\psi=\psi_{\bar k}d\bar z^k$, and using
+        the inner product defined as above, we find that
+        \[\int\partial_{\bar j}\phi\overline{\psi_{\bar k}}hg^{k\bar j}\frac{\omega^n}{n!}=\int \phi\overline{\bar\partial^\dagger\psi}h\frac{\omega^n}{n!}.\]
+        Let us define $W^{\bar j}\equiv \overline{\psi_{\bar k}hg^{j\bar k}}$. Observe now that
+        \begin{align*}
+            \left( \partial_{\bar j}\phi\right)W^{\bar j}&\equiv\left( \nabla_{\bar j}\phi\right)W^{\bar j}\\
+            &=\nabla_{\bar j} \phi^{\bar j}-\phi\left( \nabla_{\bar j} W^{\bar j}\right).
+        \end{align*}
+        This will be useful when integrating by parts.  Note that the $n$th wedge power of $\omega$ simplifies to yield
+        \begin{align*}
+            \int\left( \partial_{\bar j}\phi\right)W^{\bar j}\left( \det g_{\bar qp} \right)&=\int\nabla_{\bar j}\left( \phi W^{\bar j}\right)\det g_{\bar qp}
+            -\int \phi\left( \nabla_{\bar j}W^{\bar j}\right).
+        \end{align*}
+        We claim that if the metric $g_{\bar kj}$ is K\"ahler, then $\int \nabla_{\bar j}(\phi W^{\bar j})\det g_{\bar qp}=0$. To see this, first define
+        $V^{\bar j}=\phi W^{\bar j}$. Consider
+        \begin{align*}
+            \left( \nabla_{\bar j}V^{\bar j} \right)\det g_{\bar qp}&=\left(\partial_{\bar j}V^{\bar j}+\Gamma^{\bar j}_{\bar j\bar k}V^{\bar k}\right)\det g_{\bar qp}\\
+            &=\partial_{\bar j}\left( V^{\bar j}\det g_{\bar qp} \right)-V^{\bar j}\left( \partial_{\bar j}\det g_{\bar qp} \right)+\Gamma^{\bar j}_{\bar j\bar k}V^{\bar k}\det g_{\bar qp}.
+        \end{align*}
+        Now note that
+        \begin{align*}
+            \partial_{\bar j}\det g_{\bar qp}=\left( \det g_{\bar qp}\right)g^{l\bar n}\partial_{\bar j}g_{\bar nl},
+        \end{align*}
+        which comes from the fact that
+        \begin{align*}
+            \delta\log\left( \det A \right)&=\sum\frac{\delta \lambda_j}{\lambda_j}\\
+            &=\tr\left( A^{-1}\delta A \right).
+        \end{align*}
+        But now recall that for $g_{\bar kj}$ is K\"ahler if and only if $\Gamma^{\bar j}_{\bar k\bar m}=\Gamma^{\bar j}_{\bar m\bar k}$,
+        and we see the last two terms in  the expression above cancel. Hence the term picked up by integration by parts vanishes,
+        and we are left with the equality
+        \begin{align*}
+            -\int\phi\nabla_{\bar j}\overline{\left( \psi_{\bar k}hg^{j\bar k} \right)}\frac{\omega^n}{n!}&=
+            \int\phi\overline{\left( -g^{j\bar k}\nabla_j\psi_{\bar k} \right)}h\frac{\omega^n}{n!}.
+        \end{align*}
+        This yields the desired formula:
+        \begin{align*}
+            \boxed{\bar\partial^\dagger\psi=-g^{j\bar k}\nabla_j\psi_{\bar k}.}
+        \end{align*}
+
+        A similar approach works for the other adjoint operator. Take $\phi\in\Gamma(X,L\otimes \Lambda^{0,1})$ and $\psi\in\Gamma(X,L\otimes\Lambda^{0,2})$. By definition,
+        the formal adjoint is such that
+        \[\langle \bar\partial \phi,\psi\rangle=\langle\phi,\bar\partial^\dagger\psi\rangle.\]
+        We can write $\psi=\frac{1}{2}\sum\psi_{\bar l\bar m}d\bar z^l\wedge d\bar z^m$ and
+        \begin{align*}
+            \bar\partial\phi&=\sum\partial_{\bar k}\phi_{\bar j}d\bar z^k\wedge d\bar z^j\\
+            &=\frac{1}{2}\sum\left( \partial_{\bar k}\phi_{\bar j}-\partial_{\bar j}\phi_{\bar k}\right)d\bar z^k\wedge d\bar z^j.
+        \end{align*}
+        Then the above requirement thus becomes
+        \begin{align*}
+            \int_X \frac{1}{2}\left( \partial_{\bar k}\phi_{\bar j}-\partial_{\bar j}\phi_{\bar k}  \right)\overline{\psi_{\bar l\bar m}}hg^{l\bar j}g^{m\bar k}\omega^n/n!=\int_X \phi_{\bar j}\overline{(\bar\partial^\dagger\psi)_{\bar k}}hg^{k\bar j}\omega^n/n!.
+        \end{align*}
+        Note now that
+        \[\partial_{\bar k}\phi_{\bar j}-\partial_{\bar j}\phi_{\bar k}=\nabla_{\bar k}\phi_{\bar j}-\nabla_{\bar j}\phi_{\bar k}.\]
+        Now we can simplify the left-hand side by de-antisymmetrizing and integrating by parts:
+        \begin{align*}
+            \text{LHS}&=\frac{1}{2}\int_X(\nabla_{\bar k}\phi_{\bar j}-\nabla_j\phi_{\bar k})\overline{\psi_{\bar l\bar m}}hg^{l\bar j}g^{m\bar k}\omega^n/n!\\
+            &=\int_X(\nabla_{\bar k}\phi_{\bar j}) \overline{\psi_{\bar l\bar m}}hg^{l\bar j}g^{m\bar k}\omega^n/n!\\
+            &=\int_X \phi_{\bar j}\overline{(-g^{k\bar m}\nabla_k\psi_{\bar l\bar m})}g^{l\bar j}\omega^n/n!
+        \end{align*}
+        Hence we can write the formal adjoint as
+        \[\boxed{(\bar\partial^\dagger\psi)_{\bar l}=-g^{k\bar m}\nabla_k\psi_{\bar l\bar m}.}\]
+
+    \item Let $\Delta=\bar\partial\bar\partial^\dagger+\bar\partial^\dagger\bar\partial$ on $\Gamma(X,L\otimes\Lambda^{0,1})$.
+        Set $\phi=\sum \phi_{\bar j}d\bar z^j\in\Gamma(X,L\otimes\Lambda^{0,1})$.
+        First note that
+        \begin{align*}
+            \left( \bar\partial\bar\partial^{\dagger}\phi \right)&=\bar\partial\left( -g^{j\bar k}\nabla_j\phi_{\bar k} \right)\\
+            &=\partial_{\bar l}\left( -g^{j\bar k}\nabla_j\phi_{\bar k} \right)d\bar z^l.
+        \end{align*}
+        Hence, noting that the expression in parentheses is a section of a holomorphic bundle, the $\partial_j$ is simply a covariant derviative, which
+        commutes with the metric, and we can write
+        \[\left( \bar\partial\bar\partial^{\dagger}\phi \right)_{\bar l}=-g^{j\bar k}\nabla_{\bar l}\nabla_{j}\phi_{\bar k}.\]
+        Next note that
+        \begin{align*}
+            \bar\partial\phi=\frac{1}{2}\sum\left( \nabla_{\bar k}\phi_{\bar j}-\nabla_{\bar j}\phi_{\bar k} \right)d\bar z^k\wedge d\bar z^j
+        \end{align*}
+        for $g_{\bar kj}$ K\"ahler. Hence we can write
+        \begin{align*}
+            \left( \bar\partial^\dagger\bar\partial\phi \right)_{\bar l}&=-g^{k\bar m}\nabla_{k}(\bar\partial\phi)_{\bar l\bar m}\\
+            &=-g^{k\bar m}\nabla_k\left( \nabla_{\bar m}\phi_{\bar l}-\nabla_{\bar l}\phi_{\bar m} \right)\\
+            &=-g^{k\bar m}\nabla_k\nabla_{\bar m}\phi_{\bar l}+g^{k\bar m}\nabla_k\nabla_{\bar l}\phi_{\bar m}.
+        \end{align*}
+        Summing the two terms of the Laplacian and switching appropriate dummy indices, we find that
+        \begin{align*}
+            (\Box\phi)_{\bar l}&=-g^{k\bar m}\nabla_k\nabla_{\bar m}\phi_{\bar l}+g^{k\bar m}\nabla_k\nabla_{\bar l}\phi_{\bar m}-g^{k\bar m}\nabla_{\bar l}\nabla_{\bar k}\phi_{\bar m}\\
+            &=-g^{k\bar m}\nabla_k\nabla_{\bar m}\phi_{\bar l}+g^{k\bar m}[\nabla_k,\nabla_{\bar l}]\phi_{\bar m}\\
+            &=-g^{k\bar m}\nabla_k\nabla_{\bar m}\phi_{\bar l}+g^{k\bar m}\left( F_{\bar lk}\phi_{\bar m}+R_{\bar lk\bar m}^{\bar p}\phi_{\bar p} \right)\\
+            &=-g^{k\bar m}\nabla_k\nabla_{\bar m}\phi_{\bar l}+ F_{\bar l}^{\bar m}\phi_{\bar m}+R^{\bar m}_{\bar l}\phi_{\bar m}\\
+            &=-g^{k\bar m}\nabla_k\nabla_{\bar m}\phi_{\bar l}+ (F_{\bar l}^{\bar m}+R^{\bar m}_{\bar l})\phi_{\bar m}.
+        \end{align*}
+        %where as usual $F_{\bar lk\beta}\alpha=-\partial_{\bar l}\left( J^{\alpha\bar\gamma}\partial_k H_{\bar\gamma\beta} \right)$
+        %and $R_{\bar lk\bar m}^{\bar p}=g^{\bar pq}R_{\bar lkq}^rg_{\bar mr}$ where $R_{\bar lkq}^r=-\partial_{\bar l}\left( g^{r\bar s}\partial_kg_{\bar sq} \right)$.
+        %We can simplify this a little bit more, obtaining
+        %\begin{align}
+        %    (\Box\phi)^\alpha_{\bar l}=-g^{k\bar m}\nabla_k\nabla_{\bar m}\phi^\alpha_{\bar l}+F_{\bar l\beta}^{\bar m\alpha}\phi^\beta_{\bar m}+R_{\bar l}^{\bar p}\phi^\alpha_{\bar p},
+        %\end{align}
+        %where $R_{\bar l}^{\bar p}\equiv g^{k\bar m}R_{\bar lk\bar m}^{\bar p}$ is the \textbf{Ricci curvature}.
+    \item Now suppose that $R_{\bar l}^{\bar m}+F_{\bar l}^{\bar m}\geq \epsilon\delta_{\bar l}^{\bar m}$. If we compute
+        the inner product
+        \begin{align*}
+            \langle \phi,\Delta\phi\rangle &= \int_X (\Delta\phi)_{\bar j}\overline{\phi_{\bar k}}h g^{k\bar j} \frac{\omega^n}{n!}\\
+            &= -\int_Xg^{l\bar m}\nabla_l\nabla_{\bar m}\phi_{\bar j}\overline{\phi_{\bar k}}g^{k\bar j}h\frac{\omega^n}{n!}+
+            \int_X(F_{\bar j}^{\bar m}\phi_{\bar m}+R_{\bar j}^{\bar m}\phi_{\bar m})\overline{\phi_{\bar k}}hg^{k\bar j}\frac{\omega^n}{n!}
+        \end{align*}
+        The first term can be simplified as
+        \begin{align*}
+            -\int_X g^{l\bar m}\nabla_l\nabla_{\bar m}\phi_{\bar j}\overline{\phi_{\bar k}}g^{k\bar j}h\frac{\omega^n}{n!}
+            &= -\int_X\nabla_{l}(g^{l\bar m}\nabla_{\bar m}\phi_{\bar j})\overline{\phi_{\bar k}}g^{k\bar j}h\frac{\omega^n}{n!}\\
+            &=\int_X\nabla_{\bar m}\phi_{\bar j}\overline{\nabla_{\bar l}\phi_{\bar k}}g^{l\bar m}g^{k\bar j}h\frac{\omega^n}{n!}\\
+            &=||\nabla_{\bar m}\phi_{\bar j}||^2,
+        \end{align*}
+        and the second term can be simplified as
+        \begin{align*}
+            \int_X(F_{\bar j}^{\bar m}\phi_{\bar m}+R_{\bar j}^{\bar m}\phi_{\bar m})\overline{\phi_{\bar k}}hg^{k\bar j}\frac{\omega^n}{n!}
+            &\geq\epsilon||\phi||^2
+        \end{align*}
+        Hence we find that $||\bar\partial\phi||^2+||\bar\partial^\dagger\phi||^2\geq\epsilon||\phi||^2$,
+        because $\langle\phi,\Delta\phi\rangle=\langle\phi,\bar\partial\bar\partial^\dagger\phi\rangle+\langle\phi,\bar\partial^\dagger\bar\partial\phi\rangle
+        =||\bar\partial^\dagger\phi||^2+||\bar\partial\phi||^2$ by construction of the adjoint.
+
+    \item Define the domains of the operators $\bar\partial$ and $\bar\partial^\dagger$ by
+        \[\text{Dom }\bar\partial=\{\phi\in L^2;\bar\partial\phi\in L^2\}\]
+        and
+        \[\text{Dom }\bar\partial^\dagger=\{\psi\in L^2;v\equiv \bar\partial^\dagger\psi\in L^2,\text{ and }\langle\bar\partial\phi,\psi\rangle=\langle\phi,v\rangle\text{ for }\phi\in\text{Dom }\bar\partial\},\]
+        where on the right hand side, $\bar\partial$ and $\bar\partial^\dagger$ are taken in the sense of distributions.
+        If we assume that the space of smooth sections is dense in $\text{Dom }\bar\partial\cap\text{Dom }\bar\partial^\dagger$ with
+        respect to the norm $||\phi||+||\bar\partial\phi||+||\bar\partial^\dagger\phi||$, the inequality above is preserved for the following
+        reasons. Let $\phi_n$ be a sequence of smooth sections converging to $\phi$ in the intersection of the domains.
+        Then, denoting the given norm by $||\cdot||_G$ and using the triangle inequality, we find that
+        \begin{align*}
+            ||\phi||_G^2 &\leq ||\phi-\phi_n||_G^2 + ||\phi_n||_G^2\\
+            &= ||\phi-\phi_n||_G^2 + ||\phi_n||^2+||\bar\partial\phi_n||^2+||\bar\partial^\dagger\phi_n||^2\\
+            &\leq ||\phi-\phi_n||_G^2+\left(1+\frac{1}{\sqrt{\epsilon}}\right)\left( ||\bar\partial\phi_n||^2+||\bar\partial^\dagger\phi_n||^2 \right),
+        \end{align*}
+        and taking $n\to\infty$, we find $||\phi||^2\leq 1/\sqrt{\epsilon}(||\bar\partial\phi_n||^2+||\bar\partial^\dagger\phi_n||^2)$, as desired.
+    \item Let $u\in\text{Dom }\bar\partial_0^\dagger$. We claim that if we have a decomposition $u=u_1+u_2$ for $u_1\in\ker\bar\partial_1$, $u_2\perp\ker\bar\partial_1$,
+        then $u_1\in\text{Dom }\bar\partial_1\cap\text{Dom }\bar\partial_0^\dagger$. Note first that in the Dolbeault complex,
+        $\text{range }\bar\partial_0\subset\ker \bar\partial_1$ and so if $u_2$ is orthogonal to $\ker\bar\partial_1$ then $u_2$ is
+        also orthogonal to $\text{range }\bar\partial_0$. In other words,
+        $\langle\bar\partial_0\psi,u_2\rangle=0$ for all $\psi\in\text{Dom }\bar\partial_0$, and so we find that $u_2$ falls into $\text{Dom }\bar\partial^\dagger_0$
+        as defined above. This in turn implies that $u_1\in\text{Dom }\bar\partial^\dagger_0$.
+    \item Now let $f\in L^2(X,L\otimes\Lambda^{0,1})$ satisfying $\bar\partial f=0$. Consider the linear functional
+        \[L(\bar\partial^\dagger_0u)=\langle u,f\rangle\]
+        for all $u\in\text{Dom }\bar\partial_0^\dagger$. This functional is not \textit{a priori} well-defined, but
+        turns out to be, as we will show below.
+        Decompose $u=u_1+u_2$ with $u_1\in\ker\bar\partial_1,u_2\perp\ker\bar\partial_1$. We can write
+        \[\langle u,f\rangle=\langle u_1,f\rangle+\langle u_2,f\rangle=\langle u_1,f\rangle.\]
+        Applying the Cauchy-Schwarz inequality, we find that
+        \begin{align*}
+            |L(\bar\partial^\dagger_0u)|^2&= |\langle u,f\rangle|^2 \\
+            &\leq ||u_1||^2\cdot||f||^2\\
+            &\leq \frac{1}{\epsilon}(||\bar\partial u_1||^2+||\bar\partial^\dagger u_1||^2)||f||^2\\
+            &=\frac{1}{\epsilon} ||\bar\partial^\dagger u_1||^2\cdot ||f||^2.
+        \end{align*}
+        and hence
+        \[|L(\bar\partial_0^\dagger u)|\leq \frac{1}{\sqrt{\epsilon}}||\bar\partial^\dagger u||\cdot ||f||.\]
+        Note that this implies that the functional is well-defined because if we have $u, u'$ with $\bar\partial^\dagger_0u=\bar\partial^\dagger_0u'$,
+        we find that $|\langle u-u',f\rangle|^2\leq 0$.
+
+        Now recall the Hahn-Banach theorem: let $V\subset B$ be a subspace of a Banach space and $L$ a linear functional $V\ni v\mapsto L(v)$
+        with $|L(v)|\leq A||v||$ - then there exists an extension $\tilde L$ of $L$ to all of $B$ satisfying $|\tilde Lv|\leq A||v||$ for all $v\in B$.
+        Applying the Hahn-Banach theorem in our case, and assuming that the resulting extension is represented as an inner product with
+        a section $u\in L^2(X,\Lambda)$, we find
+        \begin{align*}
+            \tilde L(\bar\partial^\dagger_0v)&=L(\bar\partial^\dagger_0v)\\
+            \langle\bar\partial_0^\dagger v,u \rangle&=\langle v,f \rangle,
+        \end{align*}
+        i.e. $\bar\partial u=f$ in the sense of distributions, and that
+        \[||u||\leq \frac{1}{\sqrt{\epsilon}}||f||,\]
+        using the fact that $||u||=||\tilde L||\leq \frac{1}{\sqrt{\epsilon}}||u||\cdot ||f||/||u||$ from the Hahn-Banach theorem.
+        
+\end{enumerate}
+
+\section*{Problem 2}
+
+Let $E\to X$ be a smooth vector bundle over a smooth compact manifold $X$. Given a connection $A$ on $E$,
+let $F=dA+A\wedge A$ be its curvature form. For each integer $m$, define the $2m$-forms $c_m(F)$ by
+\[c_m(F)=\tr(F\wedge\cdots\wedge F)\]
+with $m$ factors of $F$ on the right-hand-side.
+
+\begin{enumerate}[(a)]
+    \item Let us show that $c_m(F)$ is always closed, for any connection $A$. Recall first the Bianchi identity
+        \[dF+A\wedge F-F\wedge A = 0.\]
+        Taking the differential, we find
+        \begin{align*}
+            dc_m(F) &= d\left( \tr(F\wedge\cdots\wedge F) \right)\\
+            &=\tr\left( dF\wedge \cdots F + \cdots F\wedge \cdots\wedge dF \right)\\
+            &=m\tr\left( dF\wedge F^{m-1} \right)\\
+            &=m\tr\left( (F\wedge A-A\wedge F)\wedge F^{m-1} \right)\\
+            &=m\tr\left( F\wedge A\wedge F^{m-1} \right)-\tr\left( A\wedge F^m \right)\\
+            &=0,
+        \end{align*}
+        where we have used the Bianchi identity and the cyclic property of the trace.
+    \item Suppose $m=3$. Let $A$ and $A_0$ be any two connections. We wish to find a 5-form $T_5$ such that
+        $dT_5=c_3(F)-c_3(F_0)$. We can do this by defining $B=A-A_0$ and $A_t=A_0+tB$ with $F_t=F(A_t)$
+        and noting that
+        \begin{align*}
+            c_3(A)-c_3(A_0) &= \int_0^1\frac{d}{dt}\tr\left( F_t\wedge F_t\wedge F_t \right)dt\\
+            &=3\int_0^1\tr\left( \dot F_t\wedge F_t\wedge F_t \right) dt,
+        \end{align*}
+        where we have used the cyclic property of the trace and permuted the wedge product appropriately.
+        We can write
+        \[\dot F_t=d\dot A_t+\dot A_t\wedge A_t+A_t\wedge\dot A_t=dB+B\wedge A_t+A_t\wedge B\]
+        and
+        \begin{align*}
+            \tr(\dot F_t\wedge F_t\wedge F_t) &= \tr\left( (dB+B\wedge A_t+A_t\wedge B)\wedge F_t\wedge F_t \right)\\
+            &= \tr\left( dB\wedge F_t\wedge F_t+B\wedge A_t\wedge F_t\wedge F_t+A_t\wedge B\wedge F_t\wedge F_t \right).
+        \end{align*}
+        Consider only the first term in the trace
+        \begin{align*}
+            dB\wedge F_t\wedge F_t &= d(B\wedge F_t\wedge F_t)+B\wedge dF_t\wedge F_t+B\wedge F_t\wedge dF_t\\
+            &=d(B\wedge F_t\wedge F_t)+B\wedge F_t\wedge A_t\wedge F_t-B\wedge A_t\wedge F_t\wedge F_t\\
+            &+B\wedge F_t\wedge F_t\wedge A_t-B\wedge F_t\wedge A_t\wedge F_t\\
+            &=d(B\wedge F_t\wedge F_t)+B\wedge\left( -A_t\wedge F_t\wedge F_t+F_t\wedge F_t\wedge A_t \right).
+        \end{align*}
+        Inserting this back into the trace, we find that
+        \begin{align*}
+            c_3(A)-c_3(A_0)&=3\int_0^1 \tr\left( d(B\wedge F_t\wedge F_t \right) dt\\
+            &=d\left( \int_0^13\tr(B\wedge F_t\wedge F_t)dt \right),
+        \end{align*}
+        i.e. $T_5=3\int_0^1\tr(B\wedge F_t\wedge F_t)dt$.
+    \item Assume now that $E\to X$ is a holomorphic vector bundle over a compact complex manifold $X$. For each metric $H$ on $E$,
+        let $A$ be the corresponding Chern unitary connection and let $F(H)$ be its curvature form. Let $H$ and $H_0$ be two
+        metrics and define $h\equiv H_0^{-1}H$ and $D_{H_0}$ to be the covariant derivative with respect to $H_0$. Then we see that
+        \begin{align*}
+            F(H)&=-\bar\partial\left( H^{-1}\partial H \right)\\
+            &=-\bar\partial\left( h^{-1}H_0^{-1}\partial(H_0h) \right)\\
+            &=-\bar\partial\left( h^{-1}\partial h+h^{-1}H_0^{-1}(\partial H_0)h \right)\\
+            &=-\bar\partial\left( h^{-1}(\partial h+H_0^{-1}(\partial H_0)h-hH_0^{-1}\partial H_0)+H_0^{-1}\partial H_0 \right)\\
+            &=-\bar\partial(h^{-1}D_{H_0}h)+F(H_0)
+        \end{align*}
+        and hence
+        \[F(H)-F(H_0)=-\bar\partial(h^{-1}D_{H_0}h).\]
+    \item Let $t\mapsto H(t)$ be a one-parameter family of metrics, $h(t)=H_0^{-1}H(t)$ and $t\mapsto F(H(t))$ be
+        the corresponding family of curvature forms. The time-evolution of the curvature is given by differentiating the identity
+        above
+        \begin{align*}
+            \dot F&=\bar\partial\partial_t(h^{-1}D_{H_0}h)\\
+            &=-\bar\partial\partial_t\left( h^{-1}(\partial h+H_0^{-1}\partial H_0h-hH_0^{-1}\partial H_0) \right)\\
+            &=-\bar\partial\partial_t\left( h^{-1}\partial h+h^{-1}H_0^{-1}\partial H_0h \right)\\
+            &=-\bar\partial\partial_t\left( h^{-1}H_0^{-1}\partial(H_0h) \right)\\
+            &=-\bar\partial\partial_t(H^{-1}\partial H) \\
+            &=-\bar\partial\left( -h^{-1}\dot hh^{-1}H_0^{-1}\partial(H_0h)+h^{-1}H_0^{-1}\partial(H_0\dot h) \right)\\
+            &=-\bar\partial\left( -h^{-1}\dot h(H^{-1}\partial H)+H^{-1}\partial(Hh^{-1}\dot h) \right)\\
+            &=-\bar\partial\left( -h^{-1}\dot h(H^{-1}\partial H)+\partial(h^{-1}\dot h)+(H^{-1}\partial H)(h^{-1}\dot h) \right)\\
+            &=-\bar\partial \partial_H(-h^{-1}\dot h).
+        \end{align*}
+        This identity allows us to refine the expression above,
+        \begin{align*}
+            c_3(H)-c_3(H_0) &= \int_0^1\frac{d}{dt}\tr(F(H(t))\wedge F(H(t))\wedge F(H(t)))dt\\
+            &=3\int_0^1\tr\left( \dot F\wedge F\wedge F \right) dt\\
+            &=3\int_0^1\tr\left( (-\bar\partial D_H(h^{-1}\dot h))\wedge F\wedge F \right)dt\\
+            &=-3\bar\partial D_H\int_0^1\tr\left( (h^{-1}\dot h) F\wedge F \right)dt,
+        \end{align*}
+        where we have used the Bianchi identity and that $\bar\partial F=0$ in order to commute the partials out.
+        Defining $\mathcal{B}_2\equiv3\int_0^1\tr\left( (h^{-1}\dot h)F\wedge F \right)$,
+        we can write simply
+        \[c_3(H)-c_3(H_0)=-\bar\partial\partial \mathcal{B}_2.\]
+\end{enumerate}
+
+\section*{Problem 3}
+
+Let $E\to (X,\omega)$ be a holomorphic vector bundle over a compact K\"ahler manifold. Define the \textit{slope} $\mu(E)$
+by
+\[\mu(E)=\frac{1}{\text{rk}(E)\text{Vol}_\omega(X)}\int_X\tr F\wedge\frac{\omega^{n-1}}{(n-1)!}.\]
+\begin{enumerate}[(a)]
+    \item It is easy to see that $\mu(E)$ does not depend on the metric $H$ on $E$ defining the curvature $F$.
+        The integrand is the Chern form $c_1(F)$, which, up to cohomology is independent of the metric. As
+        exact terms do not contribute to the integral (the $\omega$ are closed, so one can use integration by parts)
+        the integrand is completely independent of the metric.
+
+        Furthermore, if $\omega$ is replaced by another K\"ahler metric $\omega'$ in the same cohomology class,
+        we can write $\omega'=\omega+d\theta$. Integrating by parts, the extra terms go to zero, as $\omega$ is closed
+        as is the Chern form that is being integrated.
+    \item Suppose $E$ admits a metric $H$ satisfying the Hermitian-Einstein equation
+        \[\Lambda F-\mu(E)I=0\]
+        and let $E'$ be a holomorphic subbundle of $E$. We wish to show that $\mu(E')\leq\mu(E)$.
+        We first choose a holomorphic frame $\{e_a\}_{a=1,\ldots,r}$ for $E$ and $\{e_a\}_{a=1,\ldots,s}$
+        a frame for $E$, where $r=\text{rk } E$ and $s=\text{rk } E'$. Now recall that
+        \begin{align*}
+            F_{\bar kj\beta}^\alpha &= -\partial_{\bar k}\left( H^{\alpha\bar\gamma}\partial_j H_{\bar \gamma\beta} \right)\\
+            &= -H^{\alpha\bar\gamma}\partial_{\bar k}\partial_j H_{\bar\gamma\beta}+H^{\alpha\bar\lambda}\partial_{\bar k}H_{\lambda\mu}H^{\mu\bar\nu}\partial_jH_{\bar\gamma\beta}.
+        \end{align*}
+        If we work at each point and assume that $H_{\bar\alpha\beta}=\delta_{\alpha\beta}$ (which can be done at a point), then 
+        we can contract to find
+        \begin{align*}
+            F_{\bar kj\beta}^\alpha &= -\partial_{\bar k}\partial_jH_{\bar\alpha\beta}+\sum_{\mu=1}^r\partial_{\bar k}H_{\bar\alpha\mu}\partial_jH_{\bar\mu\beta}\\
+            (F')_{\bar kj\beta}^{\alpha} &= -\partial_{\bar k}\partial_jH_{\bar\alpha\beta}+\sum_{\mu=1}^s\partial_{\bar k}H_{\bar\alpha\mu}\partial_jH_{\bar\mu\beta}
+        \end{align*}
+        where the $\alpha,\beta$ range from 1 to $r$ and 1 to $s$ for the first and second lines respectively.
+        Taking the difference, we find
+        \[(F')_{\bar kj\beta}^\alpha=F_{\bar kj\beta}^\alpha-\sum_{\mu=s+1}^r\partial_{\bar k}H_{\bar\alpha\mu}\partial_jH_{\bar\mu\beta},\]
+        which is positive (in the sense that contracting it with vectors appropriately will always yield a positive quantity.
+        We can now compute the slope of the subbundle as
+        \begin{align*}
+            \mu(E') &= \frac{1}{s\text{Vol}_\omega(X)}\int_X \tr_{E'}\left( g^{j\bar k}F_{\bar kj\beta}^\alpha-g^{j\bar k}\sum\partial_jH_{\bar\alpha\gamma\partial_{\bar k}H_{\gamma\bar\beta}} \right)\frac{\omega^n}{n!}\\
+            &= \frac{1}{s\text{Vol}_\omega(X)}\int_X \tr_{E'}\left( \mu(E)\delta^\alpha_\beta-g^{j\bar k}\sum\partial_jH_{\bar\alpha\gamma\partial_{\bar k}H_{\gamma\bar\beta}} \right)\frac{\omega^n}{n!}\\
+            &\leq \frac{1}{s\text{Vol}_\omega(X)}\int_X\mu(E)s\frac{\omega^n}{n!}\\
+            &=\mu(E),
+        \end{align*}
+        and hence we find the necessary condition that $\mu(E')\leq\mu(E)$ if $E$ admits a Hermitian-Einstein metric.
+\end{enumerate}
+
+\section*{Problem 4}
+
+Let $E\to (X,\omega)$ be a holomorphic vector bundle over a compact K\"ahler manifold. Let $H_0, H$ be
+metrics on $E$ and let $\{e_a\}$ be a frame of $E$ which is orthonormal with respect to $H_0$ and
+which diagonalizes the endomorphism $h=H_0^{-1}H$. Let $A^a_b$ be the connection forms of the Chern
+unitary connection with respect to $H_0$, in the frame $\{e_a\}$, i.e. $De_a=e_bA^b_a$. Let $\{e^a\}$
+be the dual frame, and let $\mu_a$ be the eigenvalues of $h$.
+\begin{enumerate}[(a)]
+    \item Since $e_a$ and $e^a$ are dual, $D_je^a=-A^a_{jb}e^b$.
+        %It is easy to check that orthonormality of the frames implies that $A^b_{ja}=-A^a_{jb}$.
+        We compute
+        \begin{align*}
+            D_jh &= D_j(\mu_ae_a\otimes e^a)\\
+            &= (\partial_j\mu_a)e_a\otimes e^a + \mu_a(D_je_a)\otimes e^a+\mu_a e_a\otimes (D_je^a)\\
+            &= (\partial_j\mu_a)e_a\otimes e^a+\mu_a(e_bA^b_{ja}\otimes e^a)-\mu_a(e_a\otimes A^a_{jb}e^b)\\
+            &= (\partial_j\mu_a)e_a\otimes e^a+(\mu_a-\mu_b)A^b_{ja}e_b\otimes e^a
+        \end{align*}
+        where we have switched dummy indices in the last term.
+    \item It follows immediately from above that
+        \begin{align*}
+            |D_jh|^2 &= \sum_a |D\mu_a|^2 + \sum_{a,b}|\mu_a-\mu_b|^2|A^b_a|^2
+        \end{align*}
+        because the metric has been chosen such that the usual basis of endomorphisms ($e_a\otimes e^b$, for all
+        pairs $a,b$ running from 1 to $\text{rk }E$) is orthonormal (which can be checked manually via the Hilbert-Schmidt
+        norm, since $e_a,e^a$ are dual orthonormal frames).
+    \item Since $h^{-1}=\mu_a^{-1}e_a\otimes e^a$, we can work out
+        \begin{align*}
+            h^{-1}Dh&=(\mu_a^{-1}e_a\otimes e^a)\left( (\partial_j\mu_a)e_a\otimes e^a+(\mu_a-\mu_b)A^b_{ja}e_b\otimes e^a \right)\\
+            &=\mu_a^{-1}(\partial_j\mu_a)e_a\otimes e^a+\mu_b^{-1}(\mu_a-\mu_b)A^{b}_{ja}e_b\otimes e^a.
+        \end{align*}
+        where we have used that $(e_a\otimes e^b)(e_c\otimes e^d)=\delta_c^be_a\otimes e^d$ (which follows from orthonormality
+        of the frames). Then, noting that $\partial_{\bar k}h=(\partial_{\bar k}\mu_a)e_a\otimes e^a+(\mu_a-\mu_b)A_{ja}^be_b\otimes e^a$,
+        we can write, using the product rule, and the identities above,
+        \begin{align*}
+            (\partial_{\bar k}h)h^{-1}D_jh &=(\partial_j\mu_a)(\partial_{\bar k}\mu_a)\mu_a^{-1}e_a\otimes e^a + (\partial_{\bar k}\mu_b)\mu_b^{-1}(\mu_a-\mu_b)A^b_{ja}e_b\otimes e^a\\
+            &+(\partial_j\mu_a)\mu_b^{-1}(\mu_a-\mu_b)A^b_{\bar ka}e_b\otimes e^a+(\mu_b-\mu_d)(\mu_a-\mu_b)\mu^{-1}_bA_{\bar kb}^dA_{ja}^b e_d\otimes e^a.
+        \end{align*}
+        If we now take the trace and contract with $g^{j\bar k}$, the expression simplifies considerably (since the middle two terms go to zero via $a=b$),
+        and we obtain:
+        \begin{align*}
+            g^{j\bar k}\tr\left( (\bar\partial_{\bar k}h)h^{-1}D_jh  \right) &= \mu_a^{-1}|D\mu_a|^2-(\mu_b-\mu_a)^2\mu_b^{-1}g^{j\bar k}A_{\bar kb}^aA^b_{ja}\\
+            &= \mu_a^{-1}|D\mu_a|^2+(\mu_b-\mu_a)^2\mu_b^{-1}|A^b_a|^2,
+        \end{align*}
+        where we have used the fact that $A_{\bar kb}^a=-\overline{A^b_{ka}}$.
+\end{enumerate}
+
+\end{document}
