@@ -1,0 +1,355 @@
+\documentclass{mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{amsmath}
+\usepackage{todonotes}
+
+
+\title{Introduction to Modern Analysis II}
+\author{Patrick X. Gallagher\footnote{Notes typeset by Nilay Kumar}}
+\date{Spring 2012}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Irrationality of $e$ and $\pi$, transcendence of $e$}
+
+We begin by repeating the proof, from last term, that $e$ is irrational.
+We define $e$ by the series \[e=\sum_{k=0}^\infty \frac{1}{k!}.\]
+Assuming $e$ is rational, i.e. $e=m/n$ for some $m,n\in\N$, we can write
+\[\frac{m}{n}=\sum_{k=0}^n\frac{1}{k!}+\sum_{k=n+1}^\infty\frac{1}{k!}.\]
+Multiplying this by $n!$ yields
+\[m(n-1)!=\sum_{k=0}^n\frac{n!}{k!}+\sum^\infty_{k=n+1}\frac{n!}{k!}.\]
+The terms in the first sum on the right are integers, so moving it to the left
+hand side, we find that
+\begin{align*}
+    m(n-1)!-\sum_{k=0}^n\frac{n!}{k!} &= \frac{1}{n+1}+\frac{1}{(n+1)(n+2)}+\cdots\\
+    &<\frac{1}{n+1}+\frac{1}{(n+1)^2}+\cdots\\
+    &=\frac{1}{n+1}\left( 1+\frac{1}{n+1}+\frac{1}{(n+1)^2}+\cdots \right)\\
+    &=\frac{1}{n+1}\cdot \frac{1}{1-\frac{1}{n+1}}=\frac{1}{n}\\
+    &\leq 1.
+\end{align*}
+The sum on the right is positive, so the left hand side must be a positive integer
+less than 1, which is a contradiction. Hence $e$ is irrational.
+
+\newpage
+\begin{thm}[Lambert, 1761]
+   $\pi$ is irrational.
+\end{thm}
+\begin{proof}[Proof (Niven, 1947).]
+    We show that $\pi^2$ is irrational, which is a slightly stronger statement,
+    since if $\pi=u/v$ with $u,v\in\N$ then $\pi^2=u^2/v^2$. For $n\in\N$, set
+    \[I_n=\int_0^1p_n(x)\sin\pi x dx\]
+    where 
+    \[p_n(x)=\frac{(x(1-x))^n}{n!}.\]
+    Since $0\leq p_n(x)\leq1/n!$ and $0\leq\sin\pi x\leq1$ for $0\leq x\leq 1$, we see that
+    \begin{equation}
+        0\leq I_n\leq\frac{1}{n!}.
+        \label{eq:niven_est}
+    \end{equation}
+
+    Next we claim that for $k=0,1,2,\ldots$, both $p_n^{(k)}(0)$ and $p_n^{(k)}(1)$ are integral:
+    clearly $p_n^{(k)}(0)=0$ for $k=0,1,\cdots,n-1$ due to the presence of the overall $x^n$. By
+    the Binomial theorem,
+    \[(u+v)^n=\sum_{k=0}^n \binom{n}{k}u^{n-k}v^k,\]
+    we get
+    \[p_n(x)=\frac{1}{n!}\sum_{k=0}^n\binom{n}{k}(-1)^kx^{n+k}\]
+    so
+    \begin{align*}
+        p_n^{(n)}(x)&=\frac{1}{n!}\sum_{k=0}^n\binom{n}{k}(-1)^k(n+k)\cdots(1+k)x^k\\
+        &=\sum_{k=0}^n\binom{n}{k}(-1)^k\binom{n+k}{n}x^k,
+    \end{align*}
+    a polynomial with integer coefficients. It follows that each $p_n^{(k)}$ with $k\geq n$
+    is a polynomial with integer coefficients and therefore each $p_n^{(k)}(0)$ is an integer.
+    Since $p_n(x)=p_n(1-x)$ we have $p_n^{(k)}(x)=(-1)^kp_n^{(k)}(1-x)$, so $p_n^{(k)}(1)=(-1)^kp_n^{(k)}(0)$.
+    Thus each $p_n^{(k)}(1)$ is an integer as well.
+
+    Furthermore, we claim that for each $n\in\N$ there are integers $c_0,c_1,\ldots,c_n$ such
+    that
+    \[I_n=\frac{c_0}{\pi}+\frac{c_1}{\pi^3}+\cdots+\frac{c_n}{\pi^{2n+1}}.\]
+    This follows by integration by parts:
+    \begin{align*}
+        \int p_n(x)\sin\pi x dx &= -p_n(x)\frac{\cos\pi x}{\pi}+\int p_n'(x)\frac{\cos\pi x}{\pi} dx\\
+        &=-p_n(x)\frac{\cos\pi x}{\pi} + p_n'(x)\frac{\sin\pi x}{\pi^2}-\int p_n''(x)\frac{\sin\pi x}{\pi^2}dx\\
+        &= -p_n(x)\frac{\cos\pi x}{\pi}+p_n'(x)\frac{\sin \pi x}{\pi^2}+p_n''(x)\frac{\cos\pi x}{\pi^3}-p_n'''(x)\frac{\sin \pi x}{\pi^4}+\cdots
+    \end{align*}
+    following the same pattern, the last term involving $p_n^{(2n+1)}(x)$. Inserting $x=1$ and $x=0$ evaluates $I_n$,
+    by the fundamental theorem of calculus. The terms with $\sin\pi x$ drop out as $\sin0=\sin\pi=0$ and the terms with
+    $\cos\pi x$ yield integers following the previous paragraph.
+
+    Finally, we suppose that $\pi^2=a/b$ for $a,b\in\N$. It follows from above that
+    \[I_n=\frac{c_0+c_1a^{2n-1}b+\cdots+c_nb^{2n}}{\pi a^{2n}}.\]
+    Since $I_n$ is positive, the numerator is a positive integer, and we can write $I_n\geq 1/(\pi a^{2n})$.
+    Combining this inequality with Eq.~(\ref{eq:niven_est}), we find that
+    \[\frac{a^{2n}}{n!}\geq \frac{1}{\pi}\]
+    for all $n\in\N$, which is false as $\sum_{n=0}^\infty a^{2n}/n!$ converges.
+\end{proof}
+
+\begin{defn}
+    A real number $\alpha$ is \textbf{algebraic} if $\alpha$ is a root of some non-zero polynomial
+    with integer coefficients. If $\alpha\in\R$ but $\alpha$ is not algebraic, then $\alpha$ is
+    \textbf{transcendental}.
+\end{defn}
+
+\begin{thm}
+    The set of all algebraic numbers is countable.
+\end{thm}
+\begin{proof}
+    The set of polynomials of degree less than or equal to $n$ with integer coefficients is countable as
+    there is a bijection between this set and $\Z^{n+1}$. Therefore the set of all polynomials with integer
+    coefficients is countable since a countable union of countable sets is countable. Each non-zero
+    polynomial of degree $n$ has at most $n$ roots. Therefore the set of all algebraic numbers, as a
+    countable union of finite sets, is countable.
+\end{proof}
+
+\begin{cor}
+    Transcendental numbers exist.
+\end{cor}
+\begin{proof}
+    If not, every real number would be algebraic. But $\R$ is uncountable by Cantor's theorem.
+\end{proof}
+
+It is much harder to exhibit a transcendental number than it is to prove that they exist. Here is a famous example.
+
+\begin{thm}[Hermite, 1873]
+   $e$ is transcendental.
+\end{thm}
+
+\begin{lem}
+    For $m=0,1,2,\ldots$,
+    \[\int_0^\infty x^me^{-x}dx = m!.\]
+\end{lem}
+\begin{proof}
+    For $m=0$ we find that
+    \[\int_0^\infty e^{-x}=1\]
+    and for $m>0$, we integrate by parts to obtain
+    \begin{align*}
+        \int_0^\infty x^m e^{-x}dx &= m\int_0^\infty x^{m-1}e^{-x} dx.
+    \end{align*}
+    The result follows by induction.
+\end{proof}
+
+\begin{cor}
+    If $p\in\N$ and $c_{p-1},c_p,\ldots,c_N\in\Z$, then
+    \[\frac{1}{(p-1)!}\int_0^\infty \left( c_{p-1}x^{p-1}+c_px^p+\cdots+c_Nx^N \right)e^{-x} dx\]
+    is an integer equivalent to $c_{p-1}\mod p$.
+\end{cor}
+
+\begin{lem}[Hermite]
+    For $n,p\in\N$ and $k=1,\ldots, n$ set
+    \[H_{n,p}=\frac{1}{(p-1)!}\int_0^\infty x^{p-1}\left( (x-1)\cdots(x-n) \right)^pe^{-x}dx\]
+    and 
+    \[H_{n,k,p}=\frac{1}{(p-1)!}\int_0^\infty (x+k)^{p-1}\left( (x+k-1)\cdots(x+k-n) \right)^pe^{-x}dx.\]
+    Then $H_{n,p}$ and $H_{n,k,p}$ are integers, with
+    \[H_{n,p}\equiv \left( (-1)^n n! \right)^p\mod p\]
+    and
+    \[H_{n,k,p}\equiv 0\mod p\]
+    for $k=1,\ldots,n$.
+\end{lem}
+\begin{proof}
+    We use the corollary above.
+    The polynomial $x^{p-1}\left( (x-1)\cdots(x-n) \right)^p$ has integer coefficients and its
+    lowest degree term is $\left( (-1)^nn! \right)^px^{p-1}$. However, for $k=1,\ldots,n$,
+    the polynomial $x^{p-1}\left( (x+k-1)\cdots(x+k-n) \right)^p$ has integer
+    coefficients and starts later than the $x^{p-1}$ term so the coefficient of $x^{p-1}$ is 0.
+\end{proof}
+
+\begin{proof}[Hilbert's proof of Hermite's theorem (1893)]
+    If $e$ is algebraic then
+    \[a_0+a_1e+\cdots+a_ne^n=0\]
+    for some integers $a_0,a_1,\ldots,a_n$ not all 0. We may suppose $a_0\neq 0$. It follows that for
+    each positive integer $p$,
+    \[0=\left( \sum_{k=0}^na_ke^k \right)H_{n,p}=\sum_{k=0}^na_k\frac{1}{(p-1)!}\int_0^\infty x^{p-1}\left( (x-1)\cdots(x-n) \right)^pe^{-x} dx.\]
+    For $k=1,\ldots,n$ we write the integral as $\int_0^k+\int_k^\infty$ and in $\int_k^\infty$ replace $x$ by $x+k$ giving
+    \begin{equation}
+        a_0H_{n,p}+\sum_{k=1}^n a_kH_{n,k,p}=-\sum_{k=1}^na_kR_{n,k,p}
+        \label{eq:hilb_e}
+    \end{equation}
+    with
+    \[R_{n,k,p}=\frac{1}{(p-1)!}\int_0^k x^{p-1}\left( (x-1)\cdots(x-n) \right)^pe^{k-x}dx.\]
+    By Hermite's lemma, the left side of Eq.~(\ref{eq:hilb_e}) is an integer equivalent to $a_0\left( (-1)^nn! \right)^p\mod p$.
+    Therefore, if $p$ is a prime greater than both $n$ and $|a_0|$, then the left side of Eq.~(\ref{eq:hilb_e}) is not
+    equivalent to $0\mod p$. In particular, the left side is a non-zero integer.
+    The right side is small for large $p$: take
+    \[A=\sum_{u=1}^n|a_u|\]
+    and
+    \[B=\max_{[0,n]}|(x-1)\cdots(x-n)|.\]
+    Then
+    \begin{align*}
+        -\sum_{k=1}^na_kR_{n,k,p}&\leq \frac{A}{(p-1)!}\int_0^nx^{p-1}|(x-1)\cdots(x-n)|^pe^{n-x}dx\\
+        &\leq \frac{Ae^n(nB)^p}{(p-1)!},
+    \end{align*}
+    since $\int_0^ne^{-x}dx<1$, which goes to zero as $p$ grows large. Since there are infinitely many primes, this yields
+    a contradiction.
+\end{proof}
+
+\section{Approximating roots}
+
+Omitted.
+
+\section{Laplace's asymptotic method}
+
+Let $a<b$ and $f:[a,b]\to\R$ be continuous and non-negative with maximum $M$. We show first that
+\[\left( \int^b_af^p \right)^{1/p}\to M\text{ for }p\to\infty\]
+and then, under stronger assumptions about $f$, we obtain Laplace's asymptotic formula for $\int^b_af^p$ for $p\to\infty$.
+
+\begin{lem}
+    For each $d>0$, $d^{1/p}\to 1$ for $p\to\infty$.
+\end{lem}
+\begin{proof}
+    For $d>0$ and $p>0$, as $p\to \infty$,
+    \[\log d^{1/p}=\frac{1}{p}\log d\to 0.\]
+    Therefore
+    \[d^{1/p}=e^{\log(d^{1/p})}\to e^0=1,\]
+    where we have used the continuity of the exponential function at zero.
+\end{proof}
+
+\begin{thm}
+For $f:[a,b]\to\R$ continuous and non-negative with $a<b$, 
+\begin{equation}
+    \left( \int^b_af^p \right)^{1/p}\to M\text{ for }p\to\infty
+    \label{eq:lap1}
+\end{equation}
+with $M=\max f$.
+\end{thm}
+\begin{proof}
+    First we obtain an upper bound:
+    \[\int_a^b f^p\leq \int_a^bM^p=(b-a)M^p,\]
+    so
+    \[\left( \int_a^bf^p \right)^{1/p}\leq (b-a)^{1/p}M.\]
+    By the lemma above with $d=b-a$ we see that the first factor on the right approaches 1 for $p\to\infty$.
+    Therefore, for each $\mu>1$, we have
+    \[\left( \int_a^bf^p \right)^{1/p}\leq\mu M\]
+    for all sufficiently large $p$.
+
+    Next we obtain a lower bound: we have $f(c)=M$ for some $c\in[a,b]$. If $a<c<b$ then by continuity
+    of $f$ there must exist a $\delta>0$ such that $f(x)>\sqrt{\lambda}M$ for $x\in[c-\delta,c+\delta]\subset[a,b]$
+    and $\lambda<1$.
+    It follows that
+    \[\int_a^bf^p\geq \int_{c-\delta}^{c+\delta}f^p\geq 2\delta(\sqrt{\lambda}M)^p,\]
+    so
+    \[\left( \int_a^bf^p \right)^{1/p}\geq (2\delta)^{1/p}\sqrt{\lambda}M.\]
+    Using the lemma above with $d=2\delta$, the first factor on the right goes to 1 for $p\to\infty$.
+    Therefore it is greater than or equal to $\sqrt{\lambda}$ for all sufficiently large $p$ giving
+    \[\left( \int_a^b f^p \right)^{1/p}\geq \lambda M\]
+    for all sufficiently large $p$. If $c=a$ or $c=b$, we consider just $[a,a+\delta]$ or $[b-\delta,b]$
+    instead of $[c-\delta,c+\delta]$ and obtain the bound above as well.
+
+    Combining the upper and lower bounds, yields the desired formula, as $\lambda<1$ and $\mu>1$ can
+    be chosen arbitrarily close to 1.
+\end{proof}
+
+\begin{thm}[Laplace, 1774]
+    For $a<b$ and $\phi:[a,b]\to\R$ continuous with continuous and negative second derivative on $(a,b)$
+    and assuming $\phi$ has a maximum at some point $c\in(a,b)$,
+    \begin{equation}
+        \int_a^be^{p\phi(x)}dx\sim\sqrt{\frac{2\pi}{-p\phi''(c)}}e^{p\phi(c)}
+        \label{eq:lap2}
+    \end{equation}
+    for $p\to \infty$.\footnote{Here for positive functions $g,h$ defined on $(0,\infty)$, $g(p)\sim h(p)$ for
+    $p\to\infty$ means that $g(p)/h(p)\to 1$ for $p\to\infty$.}
+    \label{thm:lap1}
+\end{thm}
+
+\begin{lem}
+    \begin{equation}
+        \int_{-\infty}^\infty e^{-\pi x^2}dx = 1
+        \label{eq:erf}
+    \end{equation}
+\end{lem}
+\begin{proof}
+    The square of the integral is readily evaluated:
+    \begin{align*}
+        \left( \int_{-\infty}^\infty e^{-\pi x^2}dx \right)^2 &= \int_{-\infty}^{\infty} e^{-\pi x^2}\int_{-\infty}^{\infty} e^{-\pi y^2}dy\\
+        &=\int_{-\infty}^\infty\int_{-\infty}^\infty e^{-\pi(x^2+y^2)} dxdy\\
+        &=\int_0^\infty\int_0^{2\pi}e^{-\pi r^2}rd\theta dr\\
+        &=\int_0^\infty e^{-\pi r^2}2\pi rdr\\
+        &=\int_0^\infty e^{-u}du=1.
+    \end{align*}
+    Since the integral is clearly positive and has square 1, it must be 1.
+\end{proof}
+
+We prove Laplace's theorem for the special case where $c=0$, along with the additional assumptions that
+$\phi(0)=0,\phi'(0)=0,\phi''(0)=-1$. The general case is left for the reader in Exercise \ref{exc:1}.
+
+\begin{proof}[Proof of (special case of) Laplace's theorem.]
+    We are now supposing that $\phi$ is continuous on $[a,b]$ with $a<0<b$, has a maximum at zero, and has $\phi''<0$ on $[a,b]$,
+    along with the special assumptions above. Of course, $\phi'(0)=0$ follows from the maximum assumption.
+    We wish to show that
+    \[\int_a^b e^{p\phi(x)} dx\sim\sqrt{\frac{2\pi}{p}}\]
+    for $p\to\infty$. Let's look first at an even more special case: $\phi(x)=-x^2/2$. In this case, the assumptions
+    above are satisfied, and for $a<0<b$,
+    \begin{align*}
+        \int_a^b e^{p\phi(x)} dx &= \int_a^be^{-px^2/2} dx\\
+        &=\sqrt{\frac{2\pi}{p}}\int_{a_1}^{b_1}e^{-\pi u^2}du
+    \end{align*}
+    with $a_1=\sqrt{p/2\pi}a$ and $b_1=\sqrt{p/2\pi}b$. Thus for $p\to\infty$ we have $a_1\to-\infty$ and $b_1\to\infty$ so the last
+    integral approaches 1 by the previous lemma. This proves the theorem in this case.
+    
+    We now return to the slightly more general case. Since $\phi(0)=0$ and $\phi'(0)=0$, Taylor's formula gives
+    \begin{align*}
+        \phi(x)&=\int_0^x\phi''(t)(x-t)dt\\
+        &=\int_0^x\phi''(0)(x-t)dt+\int_0^x\left( \phi''(t)-\phi''(0) \right)(x-t)dt\\
+        &=\frac{1}{2}\phi''(0)x^2+\int_0^x\left( \phi''(t)-\phi''(0) \right)(x-t)dt\\
+    \end{align*}
+    The norm of the second term on the right is clearly bounded by $\max_{0\leq t\leq x}|\phi''(t)-\phi''(0)|\cdot x^2/2$.
+    Since $\phi''$ is continuous at zero, the maximum goes to zero for $x\to 0$. Thus $\phi(x)\sim\phi''(0)x^2/2=-x^2/2$ for
+    $x\to 0$. It follows that for each pair of real numbers $\lambda,\mu$ with $\lambda<1<\mu$, there is a $\delta>0$
+    with $[-\delta,\delta]\subset[a,b]$ so that $-\mu x^2/2\leq\phi(x)\leq -\lambda x^2/2$ for $|x|\leq\delta$.
+    Therefore, for all $p>0$,
+    \[\int_{-\delta}^\delta e^{-\mu px^2/2}dx\leq \int_{-\delta}^\delta e^{p\phi(x)}dx \leq \int_{-\delta}^\delta e^{-\lambda px^2/2}dx,\]
+    which simplifies to
+    \[\sqrt{\frac{2\pi}{\mu p}}\int_{-\delta_\mu}^{\delta_\mu} e^{-\pi u^2}du\leq \int_{-\delta}^\delta e^{p\phi(x)}dx \leq \sqrt{\frac{2\pi}{\lambda p}}\int_{-\delta_\lambda}^{\delta_\lambda} e^{-\pi u^2}du,\]
+    with $\delta_\mu=\delta\sqrt{\mu p/2\pi}$ and $\delta_\lambda=\delta\sqrt{\lambda p/2\pi}$, both going to infinity as $p\to\infty$.
+    It follows that the left and right integrals approach $\sqrt{2\pi/\mu p}$ and $\sqrt{2\pi/\lambda p}$ as $p\to\infty$ and hence
+    $\int_{-\delta}^\delta e^{p\phi(x)}dx/\sqrt{2\pi/p}$ can be made arbitrarily close to 1 by first choosing $\delta$ sufficiently
+    small, then choosing $p$ sufficiently large. What about the rest of the integral?
+
+    Since $\phi$ decreases on $[0,b]$, we have $\int_\delta^b e^{p\phi(x)}dx\leq be^{p\phi(\delta)}$. For each $\delta>0$
+    we have $\phi(\delta)<0$, so 
+    \[\frac{e^{p\phi(\delta)}}{\sqrt{2\pi/p}}=\frac{\sqrt{p}e^{p\phi(\delta)}}{\sqrt{\pi}}\to 0\text{ for }p\to\infty.\]
+    Thus for each $\delta>0$,
+    \[\frac{1}{\sqrt{2\pi/p}}\int_\delta^b e^{p\phi(x)}dx\to 0\text{ for }p\to\infty.\]
+    Similarly for $[a,\delta]$. Putting it all together yields the desired result.
+\end{proof}
+
+\begin{exc}\hfill
+    \label{exc:1}
+    \begin{enumerate}
+        \item Show that the general case of Thm. \ref{thm:lap1} can be reduced to the case in which $c=0$ by making
+            the change of variables $x=c+u$, $\phi(x)=\psi(u)$.
+        \item Show that the case in (1) can be further reduced to the case in which $c=0$ and $\phi(0)=0$ by
+            writing $\phi(x)=\phi(0)+\psi(x)$.
+        \item Show that the case in (2) can be further reduced to the case in which $c=0$, $\phi(0)=0,\phi'(0)=0$,
+            and $\phi''(0)=-1$ by making a change of variables $x=\xi u$ for some positive constant $\xi$.
+    \end{enumerate}
+\end{exc}
+
+\begin{thm}[Generalizing Stirling's formula]
+    As $p\to\infty$ for $p$ real,
+    \[\int_0^\infty x^p e^{-x}dx\sim \sqrt{2\pi p}\left( \frac{p}{e} \right)^p.\]
+\end{thm}
+\begin{proof}
+    In the integral let $x=p(u+1)$, giving
+    \[\int_0^\infty x^p e^{-x}dx=p^{p+1}e^{-p}\int_{-1}^\infty\left( (u+1)e^{-u} \right)^p du.\]
+    To obtain the result, it suffices to show that
+    \[\int_{-1}^\infty e^{p\phi(u)} du\sim\sqrt{\frac{2\pi}{p}}\]
+    for $p\to\infty$, with
+    \[\phi(u)=\log(u+1)-u\]
+    for $u>-1$. This is left as the following exercise.
+\end{proof}
+
+\begin{exc}
+    Show how Laplace's theorem can be used to finish the proof above. Hint:
+    \begin{align*}
+        \phi'(u) &= \frac{1}{u+1}-1\\
+        \phi''(u) &= -\frac{1}{(u+1)^2}.
+    \end{align*}
+    There are two slight difficulties: $\phi(u)\to-\infty$ as $u\to 0,u>0$, and $b=\infty$.
+    Show how to overcome these difficulties.
+\end{exc}
+
+
+\end{document}
