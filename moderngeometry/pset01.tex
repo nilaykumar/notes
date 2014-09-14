@@ -1,0 +1,189 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Modern Geometry I: PSET 1}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+\begin{enumerate}[(a)]
+    \item We first show that $(S^n-\{N\},\pi_1)$ and $(S^n-\{S\},\pi_2)$ are charts for $S^n$.
+        To do this, we write $\pi_1$ and $\pi_2$ in coordinates. Suppose a point $p$ on $S^n$
+        is given by coordinates in $\R^{n+1}$ as $(p_1,\ldots,p_{n+1})$. The line from the north
+        pole to $p$ can be written parametrically as $(p_1,\ldots,p_{n+1}-1)t+(0,\ldots,1)$, and
+        hence intersects the hyperplane $x_{n+1}=0$ when $t=1/(1-p_{n+1})$. Then
+        \[\pi_1(p_1,\ldots,p_{n+1})=\frac{1}{1-p_{n+1}}(p_1,\ldots,p_n),\]
+        which is of course continuous  on the open $S^n-\{N\}$ (this set is open in the subspace
+        topology as it is the complement of a point). Conversely, given $(x_1,\ldots,x_n)\in\R^n$,
+        the corresponding point on the sphere can be found by solving for the $t$ for which
+        $|(x_1-x_1t,\ldots,x_n-x_nt,t)|=1$. The quadratic formula reveals that this occurs when
+        $t=(\sum_i x_i^2-1)/(\sum_i x_i^2+1)$. Denote this value of $t$ by $\tau(x)$.
+        Then the inverse is given
+        \[\pi_1^{-1}(x_1,\ldots,x_n)=(x_1-\tau(x) x_1,\ldots, x_n-\tau(x) x_n,\tau(x)),\]
+        which is continuous. Hence $\pi_1$ is a homeomorphism and $(S^n-\{N\},\pi_1)$ provides
+        a chart for $S^n$. Similarly, we find that
+        \[\pi_2(p_1,\ldots,p_{n+1})=\frac{1}{1+p_{n+1}}(p_1,\ldots,p_n),\]
+        which is continuous on the open $S^n-\{S\}$. We can compute the inverse just as above,
+        and $\pi_2$ becomes a homeomorphism, and $(S^n-\{S\},\pi_2)$ provides a chart.
+
+        It remains to show that these two stereographic charts are compatible. Consider the
+        composition $\pi_2\circ\pi_1^{-1}:\pi_1(S^n-\{N,S\})\to\pi_2(S^n-\{N,S\})$. We write
+        \begin{align*}
+            \pi_2(\pi_1^{-1}(x_1,\ldots,x_n)) &= \pi_2(x_1-\tau(x)x_1,\ldots,x_n-\tau(x)x_n,\tau(x))\\
+            &= \frac{1}{\tau(x)}(x_1-\tau(x)x_1,\ldots,x_n-\tau(x)x_n)\\
+            &=\left(\frac{x_1}{\tau(x)}-x_1,\ldots,\frac{x_n}{\tau(x)}-x_n\right).
+        \end{align*}
+        This composition is clearly smooth, as $\tau(x)$ is non-zero on the domain of definition
+        of $\pi_2\circ\pi_1^{-1}$, to wit, $x$ is not zero. For the sake of brevity, we do not describe
+        the computation of the transition function $\pi_1\circ\pi_2^{-1}$, but an identical argument shows
+        that it is differentiable. Hence the two transition functions are diffeomorphisms,
+        and the above two charts form a smooth atlas for $S^n$.
+
+    \item Consider now the inclusion map $\iota:S^n\to\R^{n+1}$. The inclusion is a homeomorphism onto
+        its image as it is a bijective continuous map (onto its image) from a compact topological
+        space to a (subset of a) Hausdorff space. Moreover, $\iota$ is a smooth map, as
+        $\pi_i^{-1}\circ\iota\circ\id_{\R^{n+1}}$ is smooth, as given in the previous part.
+        It remains to show that $\iota$ is an immersion. In coordinates, this amounts to showing that
+        the Jacobian of $i\circ\pi^{-1}$ has rank $n$. We can compute, for example, that
+        \[\frac{\partial}{\partial x_j}(x_i-\tau(x)x_i)=\delta_{ij}-\delta_{ij}\tau(x)-\frac{4x_ix_j}{(\sum_k x_k^2+1)^2},\]
+        and hence
+        \begin{align*}
+            d\iota &=
+            \frac{1}{(\sum_kx_k^2+1)^2}
+            \begin{pmatrix}
+                2(\sum_kx_k^2+1)-4x_1^2 & \cdots & - 4x_1x_n\\
+                \vdots & \ddots & \vdots\\
+                -4x_1x_n & \cdots & 2(\sum_k x_k^2+1)-4x_n^2\\
+                4x_1 & \cdots & 4x_n
+            \end{pmatrix}
+        \end{align*}
+        Suppose, now, that the columns of this matrix are linearly dependent, i.e. there exist $c_k$ (for $1<k<n+1$)
+        such that $c_1(d\iota)_{k1}+\ldots+c_n(d\iota)_{kn}=0$. Imposing this condition forces $\sum_kc_kx_k=0$
+        due to the last row, and hence the first row yields $2c_1(\sum_kx_k^2+1)=0$, forcing $c_1=0$, and similarly
+        for the following $n-1$ rows. Hence the columns are independent, and $d\iota$ has rank $n$.
+\end{enumerate}
+
+\subsection*{Problem 2}
+Let $F:\R^3\to\R^4$ be given by $F(x,y,z)=(x^2-y^2,xy,zx,yz)$ and denote by $f$ the restriction of $F$
+to $S^2\subset\R^3$. Note that $F(x,y,z)=F(-x,-y,-z)$ and thus $f$ descends to a map
+$\tilde f:\Proj_\R^2=S^2/\{\pm 1\}\to\R^4$. In other words, the diagram
+\begin{equation*}
+    \begin{tikzcd}
+        S^2\ar{rr}{f}\ar[swap]{rd}{\pi} & & \R^4\\
+        & \Proj^2_\R\ar[swap]{ur}{\tilde f} &
+    \end{tikzcd}
+\end{equation*}
+commutes, where $\pi$ is the natural quotient map. The map $\tilde f$ is smooth, as it takes, in coordinates
+(say where $x\neq0$)
+\[(\alpha,\beta)\mapsto\frac{1}{1+\alpha^2+\beta^2}\left(1-\alpha^2,\alpha,\beta,\alpha\beta\right).\]
+Moreover, to show that $\tilde f$ is injective, it suffices to show that $f$ is two-to-one (compatible
+with the quotient map). This is done as follows. Suppose $f(x,y,z)=f(\alpha,\beta,\gamma)$, i.e.
+\begin{align*}
+    x^2-y^2 &= \alpha^2-\beta^2\\
+    xy &= \alpha\beta\\
+    xz &= \alpha\gamma\\
+    yz &= \beta\gamma.
+\end{align*}
+Dividing, we find that $r\equiv x/\alpha=\beta/y=\gamma/z$ (the cases where $\alpha,y,$ or $z$ are zero
+fall out easily). The first equation yields
+\begin{align*}
+    r^2\alpha^2-\frac{\beta^2}{r^2} &= \alpha^2-\beta^2\\
+    (r^2-1)(r^2\alpha^2+\beta^2) &= 0,
+\end{align*}
+which forces $r=\pm 1$. In other words $f(x,y,z)=f(\alpha,\beta,\gamma)$ if and only if $\vec x=\pm\vec \alpha$.
+As these points are identified in projective space, we find that $\tilde f$ is indeed injective.
+Thus, as a bijective continuous map from a compact topological space to a Hausdorff topological space
+is a homeomorphism, we find that $\tilde f$ is a homeomorphism onto its image. It remains now
+to show that $\tilde f$ is an immersion. This is done using the coordinate representation
+of $\tilde f$ as
+\[\tilde f_{x\neq 0}(\alpha,\beta)=\frac{1}{1+\alpha^2+\beta^2}(1-\alpha^2,\alpha,\beta,\alpha\beta).\]
+\begin{equation*}
+    d\tilde f_{x\neq0}(\alpha,\beta)=
+    \frac{1}{(1+\alpha^2+\beta^2)^2}
+    \begin{pmatrix}
+        -2\alpha(2+\beta^2) & 2\beta(\alpha^2-1)\\
+        1-\alpha^2+\beta^2 & -2\alpha\beta\\
+        -2\alpha\beta&1-\beta^2+\alpha^2\\
+        \beta(1-\alpha^2+\beta^2) & \alpha(1-\beta^2+\alpha^2)
+    \end{pmatrix}.
+\end{equation*}
+Computing the determinant of the minor consisting of the second and third rows yields
+\begin{align*}
+    (1-\alpha^2+\beta^2)(1-\beta^2+\alpha^2)+4\alpha^2\beta^2 &=0\\
+    1-2\alpha^2\beta^2-\alpha^4-\beta^4 &= 0\\
+    \alpha^2+\beta^2 &= 1.
+\end{align*}
+This minor thus has rank 2 away from the unit circle. On the unit circle, we compute the determinant
+of the minor consisting of the second and fourth rows
+\begin{align*}
+    \alpha(1-\beta^2+\alpha^2)(1-\alpha^2+\beta^2)+2\alpha\beta^2(1-\alpha^2+\beta^2) &= 0\\
+    \alpha(1-\alpha^2+\beta^2)(1+\alpha^2+\beta^2) &= 0\\
+    4\alpha\beta^2 &= 0.
+\end{align*}
+Hence the differential is of rank 2 away from the four points $(\pm1,0)$ and $(0,\pm 1)$. Finally,
+we compute the determinant of the minor consisting of the first and the fourth rows
+\begin{align*}
+    -2\alpha^2(2+\beta^2)(1-\beta^2+\alpha^2)-2\beta^2(\alpha^2-1)(1-\alpha^2+\beta^2) &= 0\\
+    -2(1-\beta^2)(2+\beta^2)(2-2\beta^2)+4\beta^6 &= 0\\
+    -4(1-\beta^2)^2(2+\beta^2)+4\beta^6 &= 0.
+\end{align*}
+It is clear that $\beta=0,\pm 1$ are not solutions, and hence $d\tilde f$ is rank 2 everywhere.
+A similar computation in other charts reveals that $d\tilde f$ is injective everywhere. Consequently,
+$\tilde f$ is an injective immersion homeomorphic to its image, and thus a smooth embedding of $\Proj_\R^2$
+into $\R^4$.
+
+\subsection*{Problem 3}
+Let $Y_r$ be the set of points in $\R^3$ at a distance $r>0$ from the unit circle in the $xy$-plane.
+Let $A=\{r\in(0,\infty)\mid Y_r\text{ is a smooth submanifold of }\R^3\}$.
+\begin{enumerate}[(a)]
+    \item We consider three cases: $r<1, r=1,$ and $r>1$. For $r=1$, it is clear that $Y_1$ is not locally
+        Euclidean: let $U$ be an open neighborhood of $Y_1$ at the origin. Removing the point at the origin
+        yields a disconnected open neighborhood; if a homeomorphism to an open subset of $\R^n$ were to
+        exist, it would have to be disconnected after removing a point, which is clearly impossible. For
+        $r<1$, we obviously obtain a smooth submanifold by the preimage theorem stated in class; one can
+        write a level set expression ($(1-\sqrt{x^2+y^2})^2+z^2-r^2=0$) and the differential is easily
+        checked to be surjective. Finally, for $r>1$, $Y_r$ is clearly homeomorphic to the sphere, and thus
+        forms a topological manifold. However, $Y_r$ cannot be a smooth submanifold or $\R^3$, for the following
+        reason. If it were, i.e. we were to have a smooth inclusion $\iota:Y_r\to\R^3$, the rank of $d\iota$
+        would be three (as we can find three linearly independently vectors
+        $(\sqrt{r^2-1},0,1),(-\sqrt{r^2-1},0,1)$, and $(0,\sqrt{r^2-1},1)$ tangent to $Y_r$ at $(0,0,\sqrt{r^2-1})$),
+        which is absurd. In other words, the dimension of the tangent space of $Y_r$ at the points
+        $(0,0,\pm\sqrt{r^2-1})$ would not be 2. Thus, $A=(0,1)$.
+    \item Recall the stereographic charts $\pi_1$ and $\pi_2$ for the sphere. The smooth structure
+        of $S^1\times S^1$ is given by four charts, $\pi_i\times\pi_j$, for $1\leq i,j\leq2$.
+        Now define $\iota:S^1\times S^1\to\R^3$ as
+        \[\iota(x,y,\alpha,\beta)=(x+rx\alpha,y+ry\alpha,r\beta),\]
+        where $(x,y)$ are the coordinates on the first circle and $(\alpha,\beta)$ are the coordinates on
+        the second circle (as embedding in $\R^2$), and $r\in A=(0,1)$. It is clear that $\iota(S^1\times S^1)=Y_r$;
+        it suffices to check that $\iota$ is an immersion (a smooth embedding is a diffeomorphism onto its image).
+        Working in the chart given by $\pi_1\times\pi_1$, we find that
+        \[(\pi_1\times\pi_1)^{-1}(x,y)=\left( \frac{2x}{x^2+1},\frac{x^2-1}{x^2+1},\frac{2y}{y^2+1},\frac{y^2-1}{y^2+1} \right),\]
+        and hence
+        \begin{align*}
+        \iota\circ(\pi_1\times\pi_1)^{-1}(x,y)&=\left( \frac{2x}{x^2+1}+\frac{4rxy}{(x^2+1)(y^2+1)},\right.\\ &\left.\frac{x^2-1}{x^2+1}+\frac{2ry(x^2-1)}{(x^2+1)(y^2+1)},\frac{r(y^2-1)}{y^2+1} \right).
+        \end{align*}
+        Denote the differential of this map by $M$. We compute:
+        \begin{align*}
+            M=
+            \begin{pmatrix}
+                \frac{1-x^2}{(1+x^2)^2}\left( 2+\frac{4ry}{y^2+1} \right)&\frac{4rx(1-y^2)}{(x^2+1)(y^2+1)^2}\\
+                \frac{4x}{(x^2+1)^2}\left( 1+\frac{2ry}{y^2+1} \right)&\frac{2r(x^2-1)(1-y^2)}{(x^2+1)(y^2+1)^2}\\
+                0&\frac{4ry}{(y^2+1)^2}
+            \end{pmatrix}
+        \end{align*}
+        The determinant of the bottom $2\times 2$ minor vanishes when either $x$ or $y$ are zero. However,
+        we see by inspection that $(x,0),(0,y)$, and $(0,0)$ for $x\neq0,y\neq0$ all yield matrices of rank 2.
+        This proves that $S^1\times S^1\cong Y_r$.
+\end{enumerate}
+
+
+\end{document}

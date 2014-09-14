@@ -1,0 +1,175 @@
+\documentclass{../../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{amsmath}
+\usepackage{todonotes}
+\usetikzlibrary{decorations.pathmorphing}
+
+
+\title{Lecture 1: Motivating abstract nonsense}
+\author{Nilay Kumar}
+\date{May 28, 2014}
+
+
+\begin{document}
+
+\maketitle
+
+This summer, the UMS lectures will focus on the basics of category theory. Rather dry and substanceless
+on its own (at least at first), category theory is difficult to grok without proper motivation. With the proper
+motivation, however, category theory becomes a powerful language that can concisely express and abstract away
+the relationships between various mathematical ideas and idioms. This is not to say that it is purely a tool
+-- there are many who study category theory as a field of mathematics with intrinsic interest, but this is
+beyond the scope of our lectures.
+
+\subsection*{Functoriality}
+
+Let us start with some well-known mathematical examples that are unrelated in content but similar in ``form''.
+We will then make this rather vague similarity more precise using the language of categories.
+
+\begin{exmp}[Galois theory]\hfill\\
+    Recall from algebra the notion of a finite, Galois field extension $K/F$ and its associated Galois group $G=\Gal(K/F)$.
+    The fundamental theorem of Galois theory tells us that there is a bijection between subfields $E\subset K$
+    containing $F$ and the subgroups $H$ of $G$. The correspondence sends $E$ to all the elements of
+    $G$ fixing $E$, and conversely sends $H$ to the fixed field of $H$. Hence we draw the following diagram:
+    \begin{equation*}
+        \begin{tikzcd}
+            K\ar[leftrightsquigarrow]{r} & 0\ar[hook]{d}\\
+            E\ar[hook]{u}\ar[leftrightsquigarrow]{r} & H\ar[hook]{d}\\
+            F\ar[hook]{u}\ar[leftrightsquigarrow]{r} & G
+        \end{tikzcd}
+    \end{equation*}
+    I denote the Galois correspondence by squiggly arrows instead of the usual arrows. Unlike most bijections
+    we usually see between say elements of two sets (or groups, vector spaces, etc.), the fundamental theorem gives
+    us a one-to-one correspondence between two very different types of objects: fields and groups. This is
+    precisely why Galois theory is so useful; we can reduce difficult questions about, say, solvability by
+    radicals of polynomials over a field, to possibly simpler questions about the solvability of a group, \emph{without
+    losing any structure}.
+\end{exmp}
+
+\begin{exmp}[The fundamental group]\hfill\\
+    In topology it is often useful to be able to distinguish between various topological spaces. This drives
+    the study of topological invariants: data associated to homeomorphism (or homotopy) classes of spaces.
+    
+    One of the simplest examples is the fundamental group $\pi_1(X,x_0)$, the group of all ``homotopy classes of loops''
+    in $X$ based at $x_0$. A loop is a continuous map $\gamma:S^1\to X$, and two loops $\gamma,\delta$ are said to be homotopic if there
+    is a continuous map $F:S^1\times [0,1]\to X$ such that $F(x,0)=\gamma$ and $F(x,1)=\delta$. Hence, as a set,
+    $\pi_1(X,x_0)$ is the set of all loops in $X$ upto continuous deformation. Indeed, $\pi_1(X,x_0)$ can be given a 
+    group structure. The product of two loops is the loops obtained by traversing each in turn, and so the identity
+    is the loop given by $S^1\mapsto \{pt\}$. Let's look at a few examples.
+
+    Let $X=\R^n$. It's pretty clear that for any choice of basepoint $x_0\in X$ any two loops can
+    be continuously deformed to each other, i.e. there is only one homotopy class of loops. Thus,
+    $\pi_1(X,x_0)=0$, the trivial group. The first non-trivial example is the circle, $S^1$. Intuitively, one sees
+    that a loop wrapping around the circle once cannot be continuously deformed to a loop wrapping around the circle
+    twice. And indeed, it can be shown (although it takes some work) that $\pi_1(S^1,x_0)\cong\Z$.
+    With this result in hand, it is not hard to compute fundamental groups of other run-of-the-mill spaces.
+
+    This formalism is quite useful; it is easy to see that if $X\cong Y$ are homeomorphic spaces then
+    $\pi_1(X,x_0)\cong\pi_1(Y,y_0)$ (where $x_0$ is identified with $y_0$).\footnote{In fact, more is true.
+    If $X$ and $Y$ are only homotopy equivalent, i.e. there exist $f:X\to Y$ and $g:Y\to X$ such that
+    $g\circ f$ is homotopic to $\id_X$ and $f\circ g$ is homotopic to $\id_Y$, then they have the same fundamental
+    group.} 
+    Thus any two spaces with different fundamental groups cannot be homeomorphic!
+    I want to pause here for a moment and note that we have assigned to each topological space a group. This assignment
+    is in fact well-defined on homeomorphism classes of spaces, which is why the fundamental group is useful as
+    an invariant. Hence we reduce a topological problem of distinguishing two spaces to a problem of computing (and
+    comparing) their fundamental groups, a task that can often be reduced to algebra.
+    Compare this to the case of Galois theory above: the fundamental group, like the fundamental theorem
+    of Galois theory, associates objects from two very different worlds (``categories'') in some structure-preserving
+    (``functorial'') way that turns out to be quite useful.
+\end{exmp}
+
+Let us now make the similarity between the two examples above more precise. We define a \textbf{category} to consist
+of ``objects'' and ``morphisms,'' where every object has a distinguished identity morphism, and morphisms can be composed 
+in the usual way. We've already seen a few examples: there is the category $\catname{Top}$ with topological spaces as
+objects and continuous maps as morphisms, the category $\catname{Grp}$ with groups as objects and group homomorphisms
+as morphisms, and the category $\catname{Field}$ with fields as objects and ring homomorphisms (i.e. field extensions)
+as morphisms. Even simpler is the category $\catname{Set}$ with (you guessed it) sets as objects and set maps as morphisms.
+
+But the idea of a category is old hat to the point where it seems almost trivial -- we're used to restricting our domain
+of objects of interest to the objects of a single category. What's actually interesting about the above examples can be neatly
+encapsulated in the following definition. A \textbf{functor} $F:\mathcal{C}\to\mathcal{D}$ from a category $\mathcal{C}$ to a category
+$\mathcal{D}$ is a map that takes every object $c\in\mathcal{C}$ to an object $F(c)$ in $\mathcal{D}$ \emph{and} every morphism
+$\alpha:c_1\to c_2$ of objects $c_1,c_2\in\mathcal{C}$ to a morphism $F\alpha:F(c_1)\to F(c_2)$ in $\mathcal{D}$.
+
+In this sense, the fundamental theorem of Galois theory provides us with two functors: let $K/F$ be Galois.
+Let $\mathcal{L}$ be the category whose objects are intermediate fields between $F$ and $K$ and whose morphisms
+are field extensions. Let $\mathcal{G}$ be the category whose objects are subgroups of $G=\Gal(K/F)$ and morphisms
+are inclusions. Then there the fundamental theorem provides us with a functor $S:\mathcal{L}\to \mathcal{G}$ taking
+a field extension $E$ of $F$ to the Galois group $\Gal(K/E)$ and taking the inclusion $F\hookrightarrow E$ to the
+inclusion $\Gal(K/E)\hookrightarrow \Gal(K/F)$. Moreover, we have a functor $S':\mathcal{G}\to \mathcal{L}$
+taking a subgroup $H\subset G$ to the fixed field $K^H$ and the inclusion $H\hookrightarrow G$ to the inclusion
+$F\hookrightarrow K^H$. Note that these functors are inclusion-reversing -- we call such functors \textbf{contravariant}.
+The two functors $S$ and $S'$ in this case are ``inverses'' in a sense (that we will not elaborate on today), which
+gives Galois theory its power.
+
+Now consider the fundamental group. It takes a topological space $X$ together with a fixed point $x_0\in X$ to
+a group. Consider the pair $(X,x_0)$, a so-called pointed topological space. We write the category of pointed topological
+spaces (together with continuous maps $f:(X,x_0)\to(Y,y_0)$ with $f(x_0)=y_0$) cleverly as $\catname{Top.}$. We thus
+think of the fundamental group as a functor $\pi_1:\catname{Top.}\to \catname{Grp}$.\footnote{As mentioned in the previous
+    footnote, $\pi$ cannot distinguish between homotopy equivalent spaces, and hence
+    one can think of it as a functor $\pi_1:\catname{Toph.}\to\catname{Grp}$ from homotopy types of pointed topological spaces
+    to groups.}
+It is not hard to check that
+a continuous map $f:(X,x_0)\to (Y,y_0)$ induces a homomorphism $f_*:\pi_1(X,x_0)\to \pi_1(Y,y_0)$. Note that the order
+of domain/codomain is preserved, unlike in the case of Galois theory; we say that $\pi_1$ is a \textbf{covariant} functor.
+Note that unlike in the case of Galois theory, there is no functor going the other way, which is why the fundamental group
+is not a complete topological invariant: there exist non-homeomorphic spaces with isomorphic fundamental group.
+
+\subsection*{Mathematical reuse}
+
+Before I wrap up this lecture, let me briefly discuss another nice feature of categorical language. Often when one
+is learning about or working with new, unfamiliar objects, it is not clear why certain constructions deserve the name
+that they do. Ravi Vakil offers the following example:
+\begin{quote}
+    For example, we will define the notion of \emph{product} of schemes. We could just give a definition of product,
+    but then you should want to know why this precise definition deserves the name of ``product''\dots We will be creating
+    some new mathematical objects (such as schemes, and certain kinds of sheaves), and we expect them to act like objects
+    we have seen before.
+\end{quote}
+The point is that category theory allows us to say precisely what it means to ``act like'' a product object, for example.
+Indeed, one can define a product of two objects in some category $\mathcal{C}$ via the following \textbf{universal property of the product}:
+an object $X$ is the product of $X_1$ and $X_2$, denoted $X_1\times X_2$, if and only if there exist morphisms $\pi_1:X\to X_1$,
+$\pi_2:X\to X_2$ such that for every object $Y$ and pair of morphisms $f_1:Y\to X_1,f_2:Y\to X_2$, there exists a unique morphism
+such that the following diagram commutes:
+\begin{equation*}
+    \begin{tikzcd}
+        \;& Y\ar[swap]{dl}{f_1}\ar{dr}{f_2}\ar[dashed]{d}{f} &\\
+        X_1 & X_1\times X_2\ar{l}{\pi_1}\ar[swap]{r}{\pi_2} & X_2
+    \end{tikzcd}
+\end{equation*}
+In line with the usual intuition of product objects, the morphism $f$ is called the product of $f_1$ and $f_2$ and
+$\pi_1,\pi_2$ are called projection morphisms. You can check, in your favorite category, that this does indeed agree with the
+definition of product that you may be used to. The beautiful thing about such an abstract definition is that it captures
+the ``idea'' of what a product is. Because it's a definition via the ``behavior'' of an object, the universal property
+can be applied in any category.\footnote{It turns out that not all categories have products (consider, say, $\catname{Field}$),
+but in those that do, the object defined by the universal property is the unique such object up to unique isomorphism.
+In other words, the universal property guarantees uniqueness but not existence. This is a general fact about universal properties
+that follows from some rather formal manipulation.}
+
+This example of using a universal property as a definition exemplifies the type of ``reuse'' that category theory affords.
+There are several, more drastic examples of reuse. Take, for example, \textbf{abelian categories}. Such categories generalize
+the notion of the category $\catname{Ab}$ of abelian groups. Any abelian category has, among other things, a zero object, 
+products and coproducts, and kernels and cokernels. This generalization is useful because many interesting categories
+(such as the category of modules over a ring or the category of sheaves of abelian groups on a topological space) are abelian:
+one can prove general results for an arbitrary abelian category, instead of rederiving such results in isolation when working
+in any given category. This turns out to be very convenient and quite powerful in algebraic topology and geometry;
+this is the subject of homological algebra.
+
+\subsection*{Categories and beyond}
+
+There's a whole lot to category theory, as we will see in this seminar, but I hope that these examples give you
+an introductory overview of how category theory captures patterns and constructions that arise frequently in mathematics.
+
+\begin{thebibliography}{9}
+
+    \bibitem{lamport94}
+        Ravi Vakil,
+        \emph{Foundations of Algebraic Geometry}.
+        June 11, 2013 version.
+
+\end{thebibliography}
+
+
+\end{document}

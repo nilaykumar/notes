@@ -1,0 +1,290 @@
+\documentclass{../../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{amsmath}
+\usepackage{todonotes}
+\usetikzlibrary{decorations.pathmorphing}
+
+
+\title{Lecture 2: Categories, functors, and natural transformations I\footnote{This talk follows [1] I.1-4 very closely.}}
+\author{Nilay Kumar}
+\date{June 4, 2014}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{(Meta)categories}
+
+We begin, for the moment, with rather loose definitions, free from the technicalities of set theory.
+
+\begin{defn}
+    A \textbf{metagraph} consists of objects $a,b,c,\ldots$, \textbf{arrows} $f,g,h,\ldots$, and two
+    operations, as follows. The first is the \textbf{domain}, which assigns to each arrow $f$ an object $a=\text{dom }f$,
+    and the second is the \textbf{codomain}, which assigns to each arrow $f$ an object $b=\text{cod }f$.
+    This is visually indicated by $f:a\to b$.
+\end{defn}
+
+\begin{defn}
+    A \textbf{metacategory} is a metagraph with two additional operations. The first is the \textbf{identity},
+    which assigns to each object $a$ an arrow $\id_a=1_a:a\to a$. The second is the \textbf{composition},
+    which assigns to each pair $g,f$ of arrows with $\text{dom }g=\text{cod }f$ an arrow $g\circ f$ called
+    their \textbf{composition}, with $g\circ f:\text{dom }f\to\text{cod }g$. This operation may be pictured as
+    \begin{equation*}
+        \begin{tikzcd}
+            \;&b\ar{rd}{g}&\\
+            a\ar{ru}{f}\ar[swap]{rr}{g\circ f}&&c
+        \end{tikzcd}
+    \end{equation*}
+    We require further that: composition is associative,
+    \[k\circ(g\circ f)=(k\circ g)\circ f,\]
+    (whenever this composition makese sense) or diagrammatically that the diagram
+    \begin{equation*}
+        \begin{tikzcd}
+            a\ar{rr}{k\circ(g\circ f)=(k\circ g)\circ f}\ar[swap]{d}{f}\ar[swap]{drr}{g\circ f} && d\\
+            b\ar{urr}{k\circ g}\ar[swap]{rr}{g} && c\ar[swap]{u}{k}
+        \end{tikzcd}
+    \end{equation*}
+    commutes, and that for all arrows $f:a\to b$ and $g:b\to c$, we have
+    \[1_b\circ f=f \text{ and }g\circ 1_b=g,\]
+    or diagrammatically that the diagram
+    \begin{equation*}
+        \begin{tikzcd}
+            a\ar{r}{f}\ar{dr}{f} & b\ar{d}{1_b}\ar{rd}{g} &\\
+            & b\ar{r}{g} & c
+        \end{tikzcd}
+    \end{equation*}
+    commutes.
+\end{defn}
+
+Recall that a diagram is \textbf{commutative} when, for each pair of vertices $c$ and $c'$, any
+two paths formed from direct edges leading from $c$ to $c'$ yield, by composition of labels, equal arrows
+from $c$ to $c'$.
+
+\begin{exmp}
+    An example of a metacategory is that which has all sets as objects and all set-functions as arrows,
+    with composition defined in the usual way.  It is easy to check that this does indeed satisfy the axioms above.
+\end{exmp}
+
+\begin{rem}
+    Note that we could get rid of objects entirely and deal only with arrows, as objects correspond
+    exactly to identity arrows.
+\end{rem}
+
+\begin{defn}
+    A \textbf{directed graph} is a set $O$ of objects, a set $A$ of arrows (or morphisms), and two functions $\text{dom}:A\to O$,
+    $\text{cod}:A\to O$. We define the set of \textbf{composable pairs} as
+    \[A\times_OA=\{(g,f)\mid g,f\in A\text{ and }\text{dom }g=\text{cod }f\}.\]
+\end{defn}
+
+\begin{defn}
+    A \textbf{category} is a directed graph with two additional functions, $\id:O\to A$ taking an object
+    $c$ to an arrow $\id_c$ and $\circ:A\times_OA\to A$ taking a composable pair of arrows $(g,f)$ to
+    an arrow $g\circ f$, such that $\text{dom }\id_a=a=\text{cod }\id_a$, $\text{dom }(g\circ f)=\text{dom }f$,
+    and $\text{cod }(g\circ f)=\text{cod }g$. Moreover, we require that the associativity and identity law axioms
+    for the case of metacategories also hold.
+\end{defn}
+
+\begin{rem}
+    We tend to write ``$c\in C$'' and ``$f$ in $C$'' instead of $c\in O$ and $f\in A$. Furthermore, we write
+    \[\text{hom}(b,c)=\{f\mid f\text{ in }C, \text{dom }f=b,\text{cod }f=c\}.\]
+\end{rem}
+
+\begin{exmp}
+    Let us consider some basic examples of categories. The first, denoted \textbf{0}, is the empty category
+    with objects and arrows both empty sets. The next simplest category is \textbf{1}, the category with one object
+    and one arrow (the identity arrow). Less trivially, we can define \textbf{2}, the category with two objects $a,b$
+    and just one arrow $a\to b$ not the identity. We could also define the category \textbf{3}, but you get the point.
+\end{exmp}
+
+\begin{exmp}
+    A \textbf{monoid} is a category with one object. Each monoid is thus determined by the set of all its arrows, by
+    the identity arrow, and by the rule for the composition of arrows. Since any two arrows have a composition,
+    a monoid may be described as a set $M$ with a binary operation $M\times M\to M$ which is associative and has
+    an identity. Hence a monoid is precisely a semigroup with identity (e.g. a group without inverses).
+
+    In this sense, we see that a \textbf{group} is a category with one object in which every arrow has a
+    (two-sided) inverse under composition.
+\end{exmp}
+
+In many fields of mathematics, the objects of study are, at the end of the day, sets with extra structure.
+We would thus like to think about a category of sets. Unfortunately, as Russell's paradox shows, thinking about
+the set of all sets very quickly becomes troublesome. Of course, we can think about the metacategory of sets,
+but we can in fact do better.
+
+Suppose that there is some big enough set $U$, call it the ``universe''. Describe a set as \textbf{small} if it
+is a member of the universe. Now we can define the category \textbf{Set} with objects the set of small sets and arrows
+all functions between them. Note that here we do not run into set-theoretic problems, and this construction
+suffices for most purposes, as we can always choose our universe to be big enough. This definition leads to the definition
+of a number of familiar categories, where the objects are all taken to be small.
+
+\begin{exmp}
+    We can consider categories of familiar algebraic objects, such as \textbf{Mon}, \textbf{Grp}, \textbf{Ab},
+    \textbf{Rng}, and \textbf{CRng} with objects monoids, groups, abelian groups, rings, and commutative rings,
+    respectively and morphisms the appropriate homomorphisms.
+
+    Similarly, we can define categories of geometric spaces such as \textbf{Top}, \textbf{Toph}, \textbf{Man$^\text{p}$},
+    and \textbf{Var} with objects topological spaces, topological spaces, manifolds of class $C^p$,
+    and algebraic varieties respectively and morphisms continuous maps, homotopy classes of continuous maps, $C^p$ maps,
+    and regular maps, respectively.
+\end{exmp}
+
+\subsection*{Functors and natural transformations}
+
+A functor is a morphism of categories, more or less.
+
+\begin{defn}
+    Let $C$ and $B$ be categories. A \textbf{functor} $T:C\to B$ with domain $C$ and codomain $B$ consists of two functions:
+    an object function which assigns to each object $c\in C$ an object $Tc\in B$ and an arrow function which assigns
+    to each morphism $f:c\to c'$ of $C$ an arrow $Tf:Tc\to Tc'$ of $B$ in such a way that $T(\id_c)=\id_{Tc}$ and
+    $T(g\circ f)=Tg\circ Tf$ whenever the composition $g\circ f$ is defined in $C$.
+\end{defn}
+
+\begin{exmp}
+    A simple example is the power set functor $\mathcal{P}$ from \textbf{Set} to \textbf{Set}, which takes each set $X$
+    to its power set $\mathcal{P}X$ and each map $f:X\to Y$ to a map $\mathcal{P}f:\mathcal{P}X\to\mathcal{P}Y$ which
+    sends each $S\subset X$ to its image $fS\subset Y$. 
+\end{exmp}
+
+\begin{exmp}
+    Functors arise frequently in algebra. Recall, for example, the commutator subgroup $[G,G]\subset G$ of a group,
+    which captures the non-abelian behavior of $G$ as it is the smallest normal subgroup of $G$ such that the quotient of $G$
+    by the subgroup yields an abelian group. Note that given a morphism of groups $f:G\to H$, $f[G,G]\leqslant [H,H]$, and
+    so we can define a functor $G\mapsto [G,G]$ from \textbf{Grp} to \textbf{Grp}. Moreover, we have a functor from \textbf{Grp}
+    to \textbf{Ab} taking $G\mapsto G/[G,G]$.
+
+    As another example, take any two commutative rings $K$ and $K'$. We can consider the set of all non-singular
+    $n\times n$ matrices with entries in $K$ as the general linear group $GL_n(K)$. In fact, given any morphism
+    $f:K\to K'$, we obtain a morphism of groups $GL_nf:GL_n(K)\to GL_n(K')$, and hence we can think of $GL_n$ as a functor
+    from \textbf{CRng} to \textbf{Grp}.
+
+    A functor which ``forgets'' some or all of the structure of an algebraic object is commonly called a
+    \textbf{forgetful functor}. Thus the forgetful functor from \textbf{Grp} to \textbf{Set} assigns to each
+    group $G$ the set of its elements and assigns to each morphism $f:G\to G'$ the same function $f$, regarded just as
+    a function between sets. Similarly the forgetful functor from \textbf{Rng} to \textbf{Ab} assigns to each
+    ring $R$ the additive abelian group of $R$ and to each morphism $f:R\to R'$ of rings the same function,
+    regarded just as a morphism of addition.
+\end{exmp}
+
+\begin{rem}
+    Functors may be composed in the obvious manner. This composition is associative, and there is clearly an
+    identity functor. This allows us to make precise the manner in which functors are morphisms between categories:
+    we may consider the metacategory of all categories or the category \textbf{Cat} of all small categories.
+\end{rem}
+
+The following definitions will be useful later.
+
+\begin{defn}
+    An \textbf{isomorphism} of categories is a functor which has a two-sided inverse, or equivalently,
+    is a bijection both on objects and arrows.
+\end{defn}
+
+\begin{rem}
+    As we will see, the concept of an isomorphism of categories is usually stronger than we need.
+    Much more useful will be the weaker concept of an equivalence of categories.
+\end{rem}
+
+\begin{defn}
+    A functor $T:C\to B$ is \textbf{full} when to every pait $c,c'\in C$ and to every arrow $g:Tc\to Tc'$ of $B$,
+    there is an arrow $f:c\to c'$ with $g=Tf$. One can check that the composition of two full functors is a full functor.
+    
+    A functor $T:C\to B$ is \textbf{faithful} when to every pair $c,c'$ of objects of $C$ and to every pair $f_1,f_2:c\to c'$
+    of arrows of $C$, the equality $Tf_1=Tf_2:Tc\to Tc'$ implies $f_1=f_2$. One can check that the composition of
+    faithful functors is faithful.
+\end{defn}
+
+These two properties may be visualized in terms of hom-sets; given a pair of objects $c,c'\in C$, the arrow function
+of $T:C\to B$ assigns to each $f:c\to c'$ an arrow $Tf:Tc\to Tc'$ and so defines a function
+\[T_{c,c'}:\text{hom}(c,c')\to\text{hom}(Tc,Tc')\]
+taking $f\mapsto Tf$. $T$ is full when every such function is surjective and faithful when every such unction is injective.
+
+\begin{exmp}
+    The forgetful functor \textbf{Grp}$\to$\textbf{Set} is faithful but not full.
+\end{exmp}
+
+\begin{defn}
+    A \textbf{subcategory} $S$ of a category $C$ is a collection of some of the objects and some of the arrows of
+    $C$, which includes with each arrow $f$ both the domain and the codomain and with each object, its identity arrow
+    and with each pair of composable arrows, their composition. These conditions ensure that these collections of
+    objects and arrows themselves consitute a category $S$. The inclusion functor $S\to C$ is automatically
+    faithful. We say that $S$ is a \textbf{full subcategory} of $C$ when the inclusion functor is full.
+\end{defn}
+
+\begin{rem}
+    A full subcategory, given $C$, is thus determined by giving just the set of its objects, since the arrows between
+    any two of these objects $s,s'$ are all morphisms $s\to s'$ in $C$. For example, the category \textbf{Set$_f$} of
+    all finite sets is a full subcategory of \textbf{Set}.
+\end{rem}
+
+\begin{defn}
+    Given two functors $S,T:C\to B$, a \textbf{natural transformation} $\tau:S\to T$ is a function which assigns
+    to each object $c$ of $C$ an arrow $\tau_C=\tau c:Sc\to Tc$ of $B$ in such a way that every arrow $f:c\to c'$
+    in $C$ yields a diagram
+    \begin{equation*}
+        \begin{tikzcd}
+            Sc\ar{r}{\tau c}\ar[swap]{d}{Sf} & Tc\ar{d}{Tf}\\
+            Sc'\ar{r}{\tau c'} & Tc'
+        \end{tikzcd}
+    \end{equation*}
+    which is commutative. When this holds, we also say that $\tau_c:Sc\to Tc$ is \textbf{natural} in $c$
+    For any objects $a,b,c,\ldots$, we call $\tau a,\tau b,\tau c$ the \textbf{components} of the natural transformation
+    $\tau$. A natural transformation with every component $\tau c$ invertible in $B$ is called a
+    \textbf{natural isomorphism} $\tau:S\cong T$.
+\end{defn}
+
+\begin{defn}
+    We say that two categories $C$ and $D$ are \textbf{equivalent} (or that there is an \textbf{equivalence of categories}
+    between $C$ and $D$) if there exists a pair of functors $S:C\to D$, $T:D\to C$ together with
+    natural isomorphisms $I_C\cong T\circ S$, $I_D\cong S\circ T$.
+\end{defn}
+
+\begin{exmp}
+    For each group $G$ the projection $p_G:G\to G/[G,G]$ to the abelianization defines a transformation $p$
+    from the identity functor on \textbf{Grp} to the functor \textbf{Grp}$\to$\textbf{Ab}$\to$\textbf{Grp}.
+    Moreover, $p$ is natural because each group homomorphism $f:G\to H$ defines the evident homomorphism $f'$
+    for which the following diagram commutes:
+    \begin{equation*}
+        \begin{tikzcd}
+            G\ar{r}{p_G}\ar[swap]{d}{f} & G/[G,G]\ar{d}{f'}\\
+            H\ar{r}{p_H} & H/[H,H]
+        \end{tikzcd}
+    \end{equation*}
+\end{exmp}
+
+\begin{exmp}
+    Given a group $G$ one can construct the so-called ``opposite group'' $G^{op}$ where the underlying set is the same but
+    the group operation $a\cdot b$ is changed to $a\cdot^{op}b=b\cdot a$. It is clear that $G^{op}$ should be $G$
+    in some obvious way. We claim that the functor $^{op}$ (check that this is a functor) from \textbf{Grp} to \textbf{Grp} is naturally isomorphic to the
+    identity functor $\id_\text{\textbf{Grp}}$ from \textbf{Grp} to \textbf{Grp}.
+
+    To prove this we need isomorphisms $\tau_G:G\to G^{op}$ for each group $G$ such that the diagram
+    \begin{equation*}
+        \begin{tikzcd}
+            G\ar{r}{\tau_G}\ar[swap]{d}{f} & G^{op}\ar{d}{f^{op}}\\
+            H\ar{r}{\tau_H} & H^{op}
+        \end{tikzcd}
+    \end{equation*}
+    commutes for each $f:G\to H$. Define $\tau_G(g)=g^{-1}$, the inversion, which is clearly a group isomorphism
+    as it reverses the order of operation and is its own inverse. Let us check that the diagram commutes. Note first
+    that the induced homomorphism $f^{op}$ is simply $f$. We need to show that $\tau_H\circ f=f^{op}\circ\tau_G$.
+    But this is true by definition of group homomorphisms: $f(g)^{-1}=f(g^{-1})$!
+
+    This makes precise the statement that any group is ``naturally'' or ``obviously'' isomorphic to its opposite group.
+\end{exmp}
+
+\begin{exmp}
+    Every finite-dimensional vector space $V$ is isomorphic to its dual space $V^*$, but the isomorphism requires a choice of basis.
+    It turns out that there is no natural isomorphism between $V$ and $V^*$ in the sense of a natural transformation between
+    the identity functor and the dual functor. There is, however, a natural isomorphism between the identity functor and the double-dual
+    functor, and hence $V\cong V^{**}$ is a ``natural'' isomorphism.
+\end{exmp}
+
+\begin{thebibliography}{9}
+    \bibitem{lamport94}
+        Saunders MacLane. \textit{Categories for the Working Mathematician}.
+        Graduate Texts in Mathematics, Springer, 1971.
+\end{thebibliography}
+
+
+\end{document}
