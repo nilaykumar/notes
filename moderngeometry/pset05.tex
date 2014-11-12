@@ -1,0 +1,187 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Modern Geometry I: PSET 5}
+\author{Nilay Kumar\footnote{Collaborated with Matei Ionita.}}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+
+Define a smooth function $Q$ on $\R^{n+1}$ by
+\[Q(x_0,x_1,\ldots,x_n) = -x_0^2+x_1^2+\cdots+x_n^2\]
+and define a smooth $(0,2)$ symmetric tensor $q$ on $\R^{n+1}$ by
+\[q = -dx_0^2+dx_1^2+\cdots+dx_n^2.\]
+\begin{enumerate}[(a)]
+    \item Clearly $-1$ is a regular value of $Q$, and hence $H^n$ is a smooth $n$-dimensional
+        submanifold of $\R^{n+1}$. If $i:H^n\hookrightarrow\R^{n+1}$ denotes the inclusion,
+        we claim that $g\equiv i^*q$ is a Riemannan metric on $H^n$. Note that it suffices to
+        show that $g$ is positive-definite on $H^n$. To compute the pullback we first note that
+        \[x_0=\sqrt{x_1^2+\cdots+x_n^2+1}\]
+        and hence
+        \[dx_0=\frac{\sum 2x_idx_i}{2\sqrt{x_1^2+\cdots x_n^2}}.\]
+        Squaring, we note that
+        \[g = \frac{(x_1dx_1+\cdots+x_ndx_n)^2}{x_1^2+\cdots+x_n^2+1}+dx_1^2+\cdots+dx_n^2.\]
+        It suffices to check that the first term is positive-definite, but this follows because it
+        is a square.
+    \item Consider the map
+        \[(x_0,\ldots,x_n)\mapsto \frac{1}{x_0+1}(x_1,\ldots,x_n).\]
+        We compute an inverse as follows. The relation $-x_0^2+\sum x_i^2=-1$ together with
+        $x_i=y_i(x_0+1)$ (with $i\neq0$) shows
+        \begin{align*}
+            \sum x_i^2&=\sum y_i^2 (x_0+1)^2\\
+            &= x_0^2-1
+        \end{align*}
+        and hence $x_0-1=(x_0+1)\sum y_i^2$, which yields the inverse
+        \begin{align*}
+            x_0 &= \frac{1+\sum y_i^2}{1-\sum y_i^2}\\
+            x_i &= \frac{2 y_i}{1-\sum y_i^2}.
+        \end{align*}
+        This is clearly smooth in the relevant regions, and hence we obtain the desired
+        diffeomorphism. Computing differentials we find,
+        \begin{align*}
+            dx_0 &= \frac{(\sum 2y_jdy_j)(1-\sum y_j^2)+(\sum 2y_jdy_j)(1+\sum y_j^2)}{(1-\sum y_j^2)^2}\\
+            &= \frac{2\sum y_jdy_j}{(1-\sum y_j^2)^2}\\
+            dx_i &= \frac{2dy_i(1-\sum y_j^2)+2y_i\sum 2y_jdy_j}{(1-\sum y_j^2)^2}.
+        \end{align*}
+        Squaring and summing we find obtain
+        \begin{align*}
+           -dx_0^2+\sum dx_i^2 &= \frac{4\sum dy_i^2}{(1-\sum y_j^2)^2},
+        \end{align*}
+        where the sums are taken over $i\neq0$.
+    \item Consider the map $\phi:D^n\to\mathcal{H}^n$ given by
+        \begin{align*}
+            \phi(z) &= t+\frac{2(z-t)}{|z-t|^2}\\
+            &= \left( \frac{2z_i}{z_1^2+\cdots z_{n-1}^2+(z_n+1)^2}, -1+\frac{2(z_n+1)}{z_1^2+\cdots+z_{n-1}^2+(z_n+1)^2}  \right)
+        \end{align*}
+        where $t=(0,\ldots,-1)$. We wish to find an inverse to $\phi$, i.e. solve
+        \begin{align*}
+            y_i &= \frac{2z_i}{z_1^2+\cdots z_{n-1}^2+(z_n+1)^2}\\
+            y_n &= -1+\frac{2(z_n+1)}{z_1^2+\cdots+z_{n-1}^2+(z_n+1)^2}.
+        \end{align*}
+        for $y=(y_1,\ldots,y_n)\in\mathcal{H}^n$. For $1\leq i\leq n-1$, we note that
+        \begin{align*}
+            \frac{y_i}{y_n+1} = \frac{z_i}{z_n + 1}
+        \end{align*}
+        and hence
+        \begin{align*}
+            \left( \frac{y_1}{y_n+1} \right)^2+\cdots \left( \frac{y_{n-1}}{y_n+1} \right)^2+1 &= 2\left( \frac{1}{(y_n+1)(z_n+1)} \right).
+        \end{align*}
+        Hence we find that
+        \begin{align*}
+            z_n &= \frac{2(y_n+1)}{y_1^2+\cdots+y_{n-1}^2+(y_n+1)^2}-1\\
+            z_i &= \frac{z_{n}+1}{y_n+1}y_i = \frac{2y_i}{y_1^2+\cdots+y_{n-1}^2+(y_n+1)^2}
+        \end{align*}
+        and $\phi$ is a diffeomorphism. Now given the metric
+        \[h=\frac{dz_1^2+\cdots + dz_n^2}{z_n^2},\]
+        we compute $\phi^*h$. The computation is tedious, so we proceed in steps. First note that
+        \begin{align*}
+            D&\equiv y_1^2+\cdots+y_{n-1}^2+(y_n+1)^2\\
+            dz_i &= \frac{1}{D^2}\left( 2Ddy_i-2y_i\sum_{j=1}^n\frac{\partial D}{\partial y_j}dy_j \right) \\
+            dz_n &= \frac{1}{D^2}\left( 2Ddy_n-2(y_n+1)\sum_{j=1}^n\frac{\partial D}{\partial y_n}dy_j \right).
+        \end{align*}
+        Squaring, we find that
+        \begin{align*}
+            dz_i^2 &= \frac{1}{D^4}\left( 4D^2dy_i^2-8Dydy_i\sum_{j=1}^n\frac{\partial D}{\partial y_j}dy_j+4y_i^2\left( \sum_{j=1}^n\frac{\partial D}{\partial y_j}dy_j \right)^2 \right)\\
+            dz_n^2 &= \frac{1}{D^4}\left( 4D^2dy_n^2-8D(y_n+1)dy_n\sum_{j=1}^n\frac{\partial D}{\partial y_j}dy_j+4(y_n+1)^2\left( \sum_{j=1}^n\frac{\partial D}{\partial y_j}dy_j \right)^2 \right).
+        \end{align*}
+        Summing, we find that
+        \begin{align*}
+            D^4(\sum_i^ndz_i^2) &= 
+            4D\left( D\sum_{k=1}^ndy_k^2-2\left( \sum_{j=1}^n\frac{\partial D}{\partial y_j}dy_j \right)\left( \sum_{k=1}^ny_kdy_k+dy_n \right)+4\left( \sum_{j=1}^n\frac{\partial D}{\partial y_j}dy_j \right)\right)
+        \end{align*}
+        Noting now that
+        \begin{align*}
+            \sum_{j=1}^n\frac{\partial D}{\partial y_j}dy_j=2\sum_{i=1}^ny_idy_i + 2dy_n,
+        \end{align*}
+        we find that $D^4\sum_i^ndz_i^2=4D^2\sum_{k=1}^ndy_k^2$. Hence we find that
+        \begin{align*}
+            \phi^*h &= \frac{\sum_i^ndz_i^2}{z_n^2} = \frac{4}{D^2}\frac{\sum_{k=1}^ndy_k^2}{z_n^2}\\
+            &= \frac{4\sum_{k=1}^ndy_k^2}{\left( 2(y_n+1)-D \right)^2}\\
+            &= \frac{4\sum_{k=1}^ndy_k^2}{\left( 1-\sum_{k=1}^{n-1}y_k^2 \right)^2},
+        \end{align*}
+        as desired.
+\end{enumerate}
+
+\subsection*{Problem 2}
+
+Let $T^2$ be embedded in $\R^3$ as the image of $\R^2$ by the map $\Phi$ defined by
+\[\Phi(\theta,\phi) = \left( (a+b\cos\theta)\cos\phi,(a+b\cos\theta)\sin\phi,b\sin\theta \right),\]
+where $a>b>0$. Let $g$ be the Riemannian metric induced on $T^2$ by the Euclidean metric on $\R^3$.
+\begin{enumerate}[(a)]
+    \item By definition of $\Phi$,
+        \begin{align*}
+            x &= (a+b\cos\theta)\cos\phi\\
+            y &= (a+b\cos\theta)\sin\phi\\
+            z &= b\sin\theta.
+        \end{align*}
+        Taking differentials, we find
+        \begin{align*}
+            dx &= -(a+b\cos\theta)\sin\phi d\phi-b\sin\theta\cos\phi d\theta\\
+            dy &= (a+b\cos\theta)\cos\phi d\phi -b\sin\theta\sin\phi d\theta\\
+            dz &= b\cos\theta d\theta,
+        \end{align*}
+        and thus
+        \begin{align*}
+            g &= dx^2+dy^2+dz^2\\
+            &= (a+b\cos\theta)^2d\phi^2+b^2\sin^2\theta d\theta^2+b^2\cos^2\theta d\theta^2\\
+            &= (a+b\cos\theta)^2d\phi^2+b^2d\theta^2.
+        \end{align*}
+    \item  We can now compute the volume form as follows:
+        \begin{align*}
+            \text{vol}(T^2,g) &= \int_0^{2\pi}\int_0^{2\pi} \sqrt{\det g_{ij}} d\theta d\phi\\
+            &= \int_0^{2\pi}\int_0^{2\pi} b(a+b\cos\theta)d\theta d\phi\\
+            &= 2\pi b\int_0^{2\pi}a+b\cos\theta d\theta\\
+            &= 4\pi^2 ab.
+        \end{align*}
+\end{enumerate}
+
+\subsection*{Problem 3}
+
+Let $\phi:(X=\R^n,g_1)\to(Y=\R^n,g_2)$ be an isometry, i.e. a diffeomorphism such that $\phi^*g_2=g_1$.
+We claim that the distance in $\R^n$ is given by the straight-line distance. This is easy to see: set the two
+points $p,q$ along the same axis, say the $x_1$-axis. Then for any curve $\gamma(t)$ (for $t\in[0,1]$) connecting
+$p$ and $q$,
+\begin{align*}
+    \ell(\gamma) &= \int_0^1 g(\gamma'(t),\gamma'(t))\\
+    &= \sum_{i=1}^n \int_0^1 g(\gamma'_1(t), \gamma'_1(t))\\
+    &\geq \int_0^1 g(\gamma_1'(t),\gamma'_1(t)),
+\end{align*}
+where in the second line we have used the diagonality of the Euclidean metric. This shows that the length
+of any curve between $p$ and $q$ is always greater than or equal to the length of the straight line between
+$p$ and $q$ along the $x$-axis.
+Now we claim that $\phi$ must take straight lines to straight lines. To see this, let $x,y\in X$ be two points.
+Pick any $z$ on the line spanned by $x$ and $y$. Then (denoted distance by the absolute value) $|x-z|+|y-z|=|x-y|$,
+which follows by simply splitting the integral defining distance. But as isometries preserve distance, we find
+that $|\phi(x)-\phi(z)|+|\phi(y)-\phi(z)|=|\phi(x)-\phi(y)|$. This, in turn, implies that $\phi(x),\phi(y),\phi(z)$
+are collinear, as otherwise the sum would be greater than $|\phi(x)-\phi(y)|$ as the infimum of lengths is given by the
+straight-line distance.
+
+Now let us show that $\phi$ must be of the form $x\mapsto Ax+b$ for $A\in O(n)$ and $b\in\R^n$.
+Define $b\equiv\phi(0)$ and $\psi(x)\equiv \phi(x)-\phi(0)=\phi(x)-b$. Since translations are obviously
+isometries, it follows that $\psi$ is an isometry. We claim that $\psi$ is linear; writing absolute values
+to denote the distance from the origin, we find that for $\lambda>0$,
+\begin{align*}
+    |\psi(\lambda x)| &= |\phi(\lambda x)-\phi(0)|\\
+    &= |\lambda x| = \lambda |x| \\
+    &= \lambda |\phi(x)-\phi(0)|\\
+    &= \lambda |\psi(x)|.
+\end{align*}
+Scaling by $-1$, on the other hand, we find that the distance between $x$ and $-x$ is $2|x|$. But since
+$|\psi(x)|=|\psi(-x)|=|x|$ and both these points lie on a line (the image of the line from $-x$ to $x$),
+we must have that $\psi(-x)=-\psi(x)$. It suffices now to show that $\psi(x+y)=\psi(x)+\psi(y)$.
+But this follows from the fact that the isometry preserves midpoints on lines:
+\[\psi\left( \frac{1}{2}(x+y) \right)=\frac{1}{2}\left(\psi(x)+\psi(y)\right).\]
+Multiplying by two yields linearity. Now that we know that the map is linear and preserves distances,
+\[\langle\psi(x),\psi(x)\rangle=\langle x,x\rangle,\]
+we find that $\psi(x)=Ax$ for some $A\in O(n)$. Thus we find that $\phi(x)=Ax+b$, as desired.
+
+\end{document}

@@ -1,0 +1,122 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Modern Geometry I: PSET 7}
+\author{Nilay Kumar\footnote{Collaborated with Matei Ionita.}}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+\begin{enumerate}[(a)]
+    \item Let $X$ be a left-invariant vector field on $G$. Then $i_*X$ is right-invariant
+        using the fact that $R_g\circ i=i\circ L_{g^{-1}}$,
+        \begin{align*}
+            dR_g(i_*X) &= (R_g\circ i)_*X\\\
+            &= (i\circ L_{g^{-1}})_*X\\
+            &= i_*X.
+        \end{align*}
+    \item Next note that $t\mapsto\exp(t\xi)$ is a group homomorphism of $\R$ to $G$ because
+        for $t,s\in\R$,
+        \begin{align*}
+            \exp\left( (t+s)\xi \right) &= \phi_\xi^L(t+s,e)\\
+            &= \phi_\xi^L(t,\phi_\xi^L(s,e))\\
+            &= \phi_\xi^L(t,e)\cdot \phi_\xi^L(s,e)\\
+            &=\exp t\xi\cdot\exp s\xi,
+        \end{align*}
+        by definition of the exponential map.
+    \item The differential of the inversion map at the identity is given
+        \[di_e(\xi)=\frac{d}{dt}\bigg|_{t=0}i\left(\exp t\xi\right)=\frac{d}{dt}\bigg|_{t=0}\exp(-t\xi)=-\xi,\]
+        and hence $di:\fr g\to\fr g$ is the negative identity.
+    \item We compute
+        \begin{align*}
+            [d(R_g)_e\xi,d(R_g)_e\eta](e) &= [di_{g^{-1}}\circ d(L_{g^{-1}})_e\xi,di_{g^{-1}}\circ d(L_{g^{-1}})_e\eta](e)\\
+            &=[di_{g^{-1}}X^L_\xi(g^{-1}),di_{g^{-1}}X^L_\eta(g^{-1})](e)\\
+            &=di_e[X^L_\xi,X^L_\eta]_e=-[X_\xi^L,X_\eta^L],
+        \end{align*}
+        as desired.
+\end{enumerate}
+
+\subsection*{Problem 2}
+For $G$ the Lie group of proper affine functions recall that we have
+\begin{align*}
+    L_{a,b}^*dx&=b dx\\
+    L_{a,b}^*dy&=b dy\\
+    R_{a,b}^*dx&=dx+ady\\
+    R_{a,b}^*dy&=b dy.
+\end{align*}
+If we have a biinvariant metric $g(x,y)=c(x,y)dx^2+d(x,y)dxdy+e(x,y)dy^2$, it must satisfy
+\begin{align*}
+    L_{a,b}^*(g(x,y)) &= c(bx+a,by)b^2dx^2+d(bx+a,by)b^2dxdy+e(bx+a,by)b^2dy^2\\
+    &= g(x,y),
+\end{align*}
+i.e. we must have
+\begin{align*}
+    c(x,y) &= b^2c(bx+a,by)\\
+    d(x,y) &= b^2d(bx+a,by)\\
+    e(x,y) &= b^2e(bx+a,by)
+\end{align*}
+for all $a,b,x,y\in\R$ (with $b,y>0$) as well as similar constraints coming from right-invariance,
+\begin{align*}
+    c(x,y) &= c(ay+x,by)\\
+    d(x,y) &= 2ac(ay+x,by)+bd(ay+x,by)\\
+    e(x,y) &= a^2c(ay+x,by)+abd(ay+x,by)+b^2e(ay+x,by).
+\end{align*}
+Choosing $a=b=x=y$, the equations for $c(x,y)$ force $b^2=1$, which is absurd.
+
+\subsection*{Problem 3}
+We wish to show that if $g$ is left-invariant on $G$ then $G$ acts isometrically on $G/H$. In other
+words, if we denote by $\phi:G\times G/H\to G/H$ the map taking $(a,bH)\mapsto abH$, we claim that $\phi_a^*\hat g=\hat g$
+for all $a\in G$. Note first that $\pi\circ L_a=\phi_a\circ\pi$. Hence for $p\in G$
+\begin{align*}
+    \left( (\phi_a\circ\pi)^*\hat g \right)_p(u,v) &= \left((\pi\circ L_a)^*\hat g\right)_p(u,v)\\
+    &= \left(L_a^*(\pi^*\hat g)\right)_p(u,v)\\
+    &= \left(L_a^*g\right)_{ap}(\bar u,\bar v)\\
+    &= g_p(\bar u,\bar v),
+\end{align*}
+by left-invariance and the fact that $\pi$ is a Riemannian submersion. But this show that
+\[\pi^*\left( \phi_a^*\hat g-\hat g \right)=0,\]
+which by the Riemannian submersion property forces $\phi^*_a\hat g=\hat g$, as desired.
+
+\subsection*{Problem 4}
+Denote by $h$ the diffeomorphism from $SO(n+1)/SO(n)$ to $S^n$ given by taking the class of a matrix $[A]$
+to $[A]\cdot \vec v$ where $\vec v\in S^n$ is the column vector with a 1 in the first component and 0s in the others.
+We wish to show that $\hat g=\lambda h^*g_{\rm can}$. We claim that by the previous problem, since the 
+metric $g$ on $SO(n+1)$ is bi-invariant, it suffices to check the equality at the class of the identity $[I_{n+1}]$:
+if $g_0$ is the Euclidean metric on $\R^{n+1}$, $i:S^n\to\R^{n+1}$ the inclusion, and $[A]\in SO(n+1)/SO(n)$,
+\begin{align*}
+    h^*g_{\rm can}([A])(u,v) &= (i\circ h)^*g_0([A])(u,v)\\
+    &= g_0(Av)\left( d(i\circ h)u,d(i\circ h)v \right)\\
+    &= g_0(v)\left( d(i\circ h)\circ dL_{A^{-1}}u,d(i\circ h)\circ dL_{A^{-1}}v \right)\\
+    &= g_0(i\circ h([I_{n+1}]))(dL_{A^{-1}}u, dL_{A^{-1}}v)\\
+    &= h^*g_{\rm can}([I_{n+1}])(dL_{A^{-1}},dL_{A^{-1}}).
+\end{align*}
+where we have used the fact that $SO(n+1)$ acts isometrically on $\R^{n+1}$.
+
+Now note that since $\pi$ is a Riemannian submersion, $d\pi_{I_{n+1}}$ restricts to an isometry $d\pi_{I_{n+1}}:(H_{I_{n+1}},g_{n+1})\to(T_{[I_{n+1}]}(SO(n+1)/SO(n)),\hat g)$.
+Since the Lie algebra of $SO(n+1)$ is the space of $(n+1)\times(n+1)$ skew-symmetric matrices,  we find that $H_{I_{n+1}}$ is the space of $(n+1)\times(n+1)$
+skew-symmetric matrices with nonzero entries only in the first row and first column. In this way, we can write, for $A,B\in H_{I_{n+1}}$,
+$A=(0,A_1,\ldots,A_n)$ and $B=(0,A_1,\ldots,A_n)$ for their first columns (anticipating how the metric will look here).
+We can thus compute using the definition of $g_{n+1}$:
+\begin{align*}
+    \hat g([I_{n+1}])([A],[B]) &= g_{n+1}(A,B) \\
+    &= \sum_{i=1}^nA_iB_i+\sum_{i=1}^n(-A_i)(-B_i)\\
+    &= 2\sum_{i=1}^nA_iB_i.
+\end{align*}
+Now using the fact that $h([A])=A\cdot v$ is the first column vector of $A$, the differential $dh_{[I_{n+1}]}([A])$ is the 
+first column vector of $A$ for any $A\in T_{I_{n+1}}SO(n+1)$ skew-symmetric. Writing these as vectors, we find that
+\begin{align*}
+    h^*g_{\rm can}([I_{n+1}])([A],[B]) &= g_{\rm can}(v)\left( dh_{[I_{n+1}]}[A],dh_{[I_{n+1}]}[B] \right)\\
+    &= g_0(v)\left( (0,A_1,\ldots,A_n),(0,B_1,\ldots,B_n) \right)\\
+    &= \sum_{i=1}^nA_iB_i.
+\end{align*}
+Restricting to $H_{I_{n+1}}$, and comparing the two expressions, we find that $f^*\hat g=2g_{\rm can}$, i.e. $\lambda=2$.
+
+\end{document}

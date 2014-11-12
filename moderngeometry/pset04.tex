@@ -1,0 +1,238 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Modern Geometry I: PSET 4}
+\author{Nilay Kumar\footnote{Collaborated with Matei Ionita and Leonardo Abbrescia.}}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+Let $X,Y$ be smooth vector fields on a smooth manifold $M$. We wish to show
+that
+\[L_XL_Y-L_YL_X = L_{[X,Y]}\]
+where the Lie derivatives are taken for smooth $(r,s)$-tensors $T\in C^\infty(M,T^r_sM)$.
+In other words, we wish to show first that the left-hand side acts as a Lie derivative,
+and second that the Lie derivative agrees with $L_{[x,y]}$.
+
+We first show that for any tensors $S,T$ the left-hand side satisfies the product rule
+\begin{align*}
+    \text{LHS}(S\otimes T) &= L_X(L_Y(S\otimes T))-L_Y(L_X(S\otimes T))\\
+    &= L_X(L_YS\otimes T+S\otimes L_YT)-L_Y(L_XS\otimes T+S\otimes L_XT)\\
+    &= L_X(L_YS)\otimes T+L_YS\otimes L_XT +L_XS\otimes L_YT+S\otimes L_X(L_YT)\\
+    &- L_Y(L_XS)\otimes T-L_XS\otimes L_YT-L_YS\otimes L_XT-S\otimes L_Y(L_XT)\\
+    %&= L_{[X,Y]}S\otimes T+S\otimes L_{[X,Y]}T
+    &= L_X(L_YS)\otimes T+S\otimes L_X(L_YT)- L_Y(L_XS)\otimes T-S\otimes L_Y(L_XT),
+\end{align*}
+as desired. To show that the left-hand side is a Lie derivative, it now suffices to
+show that it respects contractions (c.f. GHL p.38):
+\begin{align*}
+    \text{LHS}(c(T)) &= L_X(L_Yc(T))-L_Y(L_Xc(T))\\
+    &= L_Xc(L_YT)-L_Yc(L_XT)\\
+    &= c(L_X(L_YT))-c(L_Y(L_XT))\\
+    &= c(L_X(L_YT)-L_Y(L_XT)).
+\end{align*}
+This proves that the left-hand side is a Lie derivative. Now note that it is
+clear that the above equality holds for $f\in C^\infty(M,T^0_0M)$, as
+\begin{align*}
+    L_XL_Yf-L_YL_Xf &= L_X(Y(f))-L_Y(X(f))\\
+    &= (XY-YX)f=[X,Y]f\\
+    &= L_{[X,Y]}f.
+\end{align*}
+Similarly, for $Z\in C^\infty(M,TM)$, we find
+\begin{align*}
+    L_XL_YZ-L_YL_XZ &= L_X[Y,Z]-L_Y[X,Z]\\
+    &= [X,[Y,Z]]-[Y,[X,Z]]\\
+    &= [ [X,Y], Z]\\
+    &= L_{[X,Y]}Z,
+\end{align*}
+by the Jacobi identity for the Lie derivative. It now suffices to show that the equality
+holds for tensors of higher rank. For $(r,0)$-tensors this follows from the previous
+computation via the Leibniz rule above. If we can prove the equality for $(0,1)$-tensors,
+the Leibniz rule also enforces this equality for $(0,s)$-tensors. Let $S$ be a $(1,0)$-tensor
+and $T$ be a $(0,1)$-tensor with $c(S\otimes T)=f$ some function. Then
+\begin{align*}
+    c(\text{LHS}(S\otimes T)) &= c\left( ((L_XL_Y-L_YL_X)S)\otimes T+S\otimes ((L_XL_Y-L_YL_X)T)\right).
+\end{align*}
+Note that the left hand side in this equation is simply the Lie derivative of a function;
+this implicitly defines the action of the $L_{[X,Y]}$ as the other terms in the equation
+are already well-defined as shown above.
+
+\subsection*{Problem 2}
+\begin{enumerate}[(a)]
+    \item We first show the identity for $0$- and $1$-forms. For $f\in C^\infty(M)$ we find
+        \begin{align*}
+            d(i_Xf)+i_X(df) &= 0+df(X)\\
+            &= L_Xf.
+        \end{align*}
+        Now suppose $\omega\in\Omega^1(M)$.
+        Let us prove the identity in coordinates; fix $X,Y$
+        vector fields given locally by $X=a_i\partial_i,Y=b_j\partial_j$ and take $\omega=\omega_kdx^k$.
+        Then
+        \begin{align*}
+            (L_X\omega)(Y) &= X(\omega(Y))-\omega([X,Y])\\
+            &= a_i\partial_i(\omega_jb_j)-\omega_j(a_i\partial_ib_j-b_i\partial_ia_j)\\
+            &= a_i\omega_j\partial_ib_j+a_ib_j\partial_i\omega_j-\omega_ja_i\partial_ib_j+\omega_jb_i\partial_ia_j\\
+            &= a_ib_j\partial_i\omega_j+\omega_jb_i\partial_ia_j
+        \end{align*}
+        Meanwhile, the right hand side yields
+        \begin{align*}
+            (d(i_X\omega)+i_X(d\omega))(Y)&=Y\omega(X)+d\omega(X,Y)\\
+            &=b_j\partial_j(\omega_ia_i) + \partial_i\omega_ka_ib_k-\partial_i\omega_ka_kb_i\\
+            &=b_ja_i\partial_j\omega_i+b_j\omega_i\partial_ja_i+\partial_i\omega_ka_ib_k-\partial_i\omega_ka_kb_i\\
+            &=b_j\omega_i\partial_ja_i+\partial_i\omega_ka_ib_k,
+        \end{align*}
+        which agrees with the above.
+        Let us now show that $P_X=d\circ i_X+i_X\circ d$ is a derivation; this will allow
+        us to induct to show the identity for $n$-forms. Take $\omega\in\Omega^r(M),\eta\in\Omega^s(M)$.
+        Then, using the fact that $d$ and $i_X$ both act as (up to sign) derivations,
+        \begin{align*}
+            (d\circ i_X+i_X\circ d)(\omega\wedge\eta) &=d(i_X\omega\wedge\eta+(-1)^r\omega\wedge i_X\eta)+i_X(d\omega\wedge\eta+(-1)^r\omega\wedge d\eta)\\
+            &=\left( d(i_X\omega)\wedge\eta+(-1)^{r-1}i_X\omega\wedge d\eta+(-1)^rd\omega\wedge i_X\eta+\omega\wedge d(i_X\eta) \right)\\
+            &+\left( i_X(d\omega)\wedge\eta+(-1)^{r+1}d\omega\wedge i_X\eta+(-1)^ri_X\omega\wedge d\eta+\omega\wedge i_X(d\eta) \right)\\
+            &=((d\circ i_X+i_X\circ d)\omega)\wedge\eta+\omega\wedge ( (d\circ i_X+i_X\circ d)\eta ).
+        \end{align*}
+        Using this, it is clear that the identity holds for $n$-forms, as any $n$-form can be
+        written as a (sum of) wedge products of $1$-forms. The derivation property of $P_X$ applies,
+        thus yielding a sum of Lie derivatives. Of course, since Lie derivatives also satisfy the Leibniz rule,
+        we obtain the Lie derivative of the original $n$-form.
+    \item The identity is clear for $f\in\Omega^0(M)$, as both the left and the right hand side are zero.
+        Now suppose we have $\omega\in\Omega^1(M)$. By definition, we know that
+        \begin{align*}
+            L_X\omega(Y) &= L_X(\omega(Y)) -\omega([X,Y])\\
+            i_Y(L_X\omega) &= L_X(i_Y\omega)-i_{[X,Y]}\omega,
+        \end{align*}
+        which is precisely the identity.
+        We now show that the left-hand side acts as a (kind-of) derivation over wedge products. Let
+        $\omega\in\Omega^r(M),\eta\in\Omega^s(M)$ with $r,s\geq 1$. Then
+        \begin{align*}
+            L_X(i_Y(\omega\wedge\eta))&-i_Y(L_X(\omega\wedge\eta))\\
+            &=L_X(i_Y\omega\wedge\eta+(-1)^r\omega\wedge i_X\eta)-i_Y(L_X\omega\wedge i_Y\eta+(-1)^r\omega\wedge(L_Xi_Y\eta)\\
+            &-(i_YL_X\omega)\eta-(-1)^r(L_X\omega)\wedge(i_Y\eta)-(i_Y\omega)\wedge L_X\eta-(-1)^r\omega\wedge(i_YL_X\eta)\\
+            &=(L_xi_Y\omega-i_YL_X\omega)\wedge\eta+(-1)^r\omega\wedge(L_xi_Y\eta-i_yL_X\eta),
+        \end{align*}
+        as desired. This, together with and inductive argument, completes the proof.
+    \item It's clear that since $\omega$ is multilinear $i_{fX}\omega=fi_X\omega$. Then by $(a)$,
+        \begin{align*}
+            L_{fX}\omega &= d(fi_X\omega)+fi_X(d\omega)\\
+            &= df\wedge i_X\omega+fdi_X\omega+fi_Xd\omega\\
+            &= df\wedge i_X\omega+fL_X\omega,
+        \end{align*}
+        as desired.
+\end{enumerate}
+
+\subsection*{Problem 3}
+We prove first a useful lemma where $S\in C^\infty(T^0_qM)$ and $X,X_1,\ldots,X_q$ be $(q+1)$ vector fields.
+Then by the Leibniz rule on Lie derivatives, we find that
+\begin{align*}
+    L_Xc(S\otimes X_1\otimes\cdots \otimes X_q) &= c(L_X(S\otimes X_1\otimes \cdots X_1))\\
+    &= c(L_XS\otimes X_1\otimes \cdots \otimes X_q) + c(S\otimes \sum_{i=1}^q X_1\otimes \cdots\otimes L_XX_i\otimes \cdots \otimes X_q)\\
+    &=L_XS(X_1,\ldots,X_q) + \sum_{i=1}^q S(X_1,\ldots, X_{i-1},[X,X_i], X_{i+1}, \ldots ,X_q).
+\end{align*}
+Now consider the formula we wish to prove. For $f\in\Omega^0(M)$ we find $df(X_0)=X_0f,$ which is true
+by definition. Now suppose the formula holds for $\omega\in\Omega^{s-1}(M)$; let us show it for $s$.
+Using the formula $(a)$ from Problem 2, we find that
+\begin{align*}
+    i_{X_0}(d\omega)(X_1,\ldots, X_s) &= (L_{X_0}\omega)(X_1,\ldots,X_s)-d(i_{X_0}\omega)(X_1,\ldots,X_s)\\
+    &= L_{X_0}(\omega(X_1,\ldots,X_s))-\sum_{i=1}^s\omega(X_1,\ldots,X_{i-1},[X_0,X_i],X_{i+1},\ldots,X_s)\\
+    &- \sum_{i=1}^s(-1)^{i+1}L_{X_i}(\omega(X_0,X_1,\ldots,\hat X_i,\ldots,X_s))\\
+    &-\sum_{1\leq i\leq j\leq s}(-1)^{i+j+1}(i_{X_0}\omega)([X_i,X_j],X_1,\ldots,\hat X_i,\ldots,\hat X_j,\ldots,X_s)\\
+    &=\sum_{i=0}^s(-1)^iL_{X_i}(\omega(X_0,\ldots,\hat X_i,\ldots,X_s))\\
+    &+\sum_{0\leq i\leq j\leq s}(-1)^{i+j}\omega([X_i,X_j],X_0,\ldots,\hat X_i,\ldots,\hat X_j,\ldots,X_s),
+\end{align*}
+where in the last term we have done the following: we combine the first and third terms to change the
+sign of the third term to positive and its initial index from 1 to 0 to obtain the first desired term;
+we then change the index of the second term to $j$, move the commutator term to the far left gaining
+powers of $(-1)^j$, and then combining these terms with the last term to obtain the second desired term.
+
+\subsection*{Problem 4}
+\begin{enumerate}[(a)]
+    \item The normal to the sphere at any point $(x,y,z)$ is given by $(2x,2y,2z)$; we check
+        that $\tilde X$ and $\tilde Y$ lie tangent to $S^2$ at every point in $S^2$ by
+        computing the inner products
+        \begin{align*}
+            (2x,2y,2z)\cdot (-zx,-zy,x^2+y^2) &= 0\\
+            (2x,2y,2z)\cdot (-y,x,0) &= 0.
+        \end{align*}
+    \item Note that if $\phi_t$ is the flow induced by $X$ then
+        \begin{align*}
+            L_X\omega &= \frac{d}{dt}\bigg|_{t=0}(\phi_t^*\omega)\\
+            &= \frac{d}{dt}\bigg|_{t=0}(i\circ\phi_t)^*\tilde\omega\\
+            &= \frac{d}{dt}\bigg|_{t=0}(\tilde \phi)^*\tilde\omega\\
+        \end{align*}
+        where $(\tilde \phi)^*$ is the flow induced by $\tilde X$. The last equality above follows
+        from the fact that $i_*X=\tilde X$ and hence the inclusion of the flow of $X$ is the flow
+        of $\tilde X$. To compute $L_X\omega$, then, it suffices to compute $L_{\tilde X}\tilde\omega$.
+        We do this using the formula proved in Problem 2:
+        \begin{align*}
+            L_X\omega &= d(i_X\omega)+i_X(d\omega)\\
+            &= d( (x^2+y^2+z^2)(ydx-xdy)) +i_X(3dx\wedge dy\wedge dz)\\
+            &= -(x^2+y^2)dx\wedge dy+xzdx\wedge dy+yzdx\wedge dz-2z^2dx\wedge dy,\\
+            L_Y\omega &= d(i_Y\omega)+i_Y(d\omega)\\
+            &= d(x^2dz+y^2dz-yzdy-xzdx)+i_Y(3dx\wedge dy\wedge dz)\\
+            &= 3xdx\wedge dz+3ydy\wedge dz-3ydy\wedge dz-3xdx\wedge dz\\
+            &=0.
+        \end{align*}
+
+        Similarly, we can compute
+        \begin{align*}
+            L_X\eta &= d(i_X\eta)+i_X(d\eta)\\
+            &= 0 + i_X(2dx\wedge dy)\\
+            &= -2zx dy + 2zy dx,\\
+            L_Y\eta &= d(i_Y\eta)+i_Y(d\eta)\\
+            &= d(x^2+y^2)+i_Y(2dx\wedge dy)\\
+            &= 2xdx+2ydy-2ydy-2xdx\\
+            &= 0.
+        \end{align*}
+
+        Finally, we compute the Lie bracket (again using the logic as above),
+        \begin{align*}
+            L_XY &= [X,Y]\\
+            &=-xz\frac{\partial}{\partial y}+zy\frac{\partial}{\partial x}-\left( zy\frac{\partial}{\partial x}-xz\frac{\partial}{\partial y}-2xy\frac{\partial}{\partial z}+2xy\frac{\partial}{\partial z} \right)\\
+            &=0.
+        \end{align*}
+    \item We compute
+        \begin{align*}
+            d\eta &= di^*\tilde\eta = i^*(d\tilde\eta)\\
+            &=i^*(2dx\wedge dy).
+        \end{align*}
+        On the other hand,
+        \begin{align*}
+            \lambda\omega &= \lambda i^*(\tilde\omega)\\
+            &= \lambda\left(\frac{x^2}{z}dx\wedge dy + \frac{y^2}{z}dx\wedge dy+zdx\wedge dy\right)\\
+            &= \frac{\lambda}{z} dx\wedge dy,
+        \end{align*}
+        where we have used the relation $xdx+ydy+zdz=0$. For $z\neq 0$, then, we find that $\lambda(x,y,z)=2z$.
+        When $z=0$, we obtain the relation $xdx+ydy=0$, i.e. that $dx$ and $dy$ are proportional.
+        Thus $d\eta=0$ for $z=0$ and hence $\lambda(x,y,z)=2z$ everywhere.
+    \item Note that 
+        \begin{align*}
+            i_X\omega(Y) &= \omega(X,Y)=\tilde\omega(i_*X,i_*Y)=\tilde\omega(\tilde X,\tilde Y)\\
+            &=i_{\tilde X}\tilde\omega(\tilde Y)
+        \end{align*}
+        and so we compute
+        \begin{align*}
+            i_X\omega\wedge i_Y\omega &= \left( (x^2+y^2+z^2)(ydx-xdy) \right)\wedge\left( (x^2+y^2)dz-yzdy-xzdx \right)\\
+            &=-(x^2+y^2+z^2)(x^2+y^2)\tilde\omega
+        \end{align*}
+        and hence we find that $\phi(x,y,z)=-(x^2+y^2)$.
+    \item Suppose there exists an $\bar\omega\in\Omega^2(P_2(\R))$ such that $\omega=\pi^*\bar\omega$.
+        By definition, for $p\in S^2$,
+        \[\omega_p(X,Y)=\bar\omega_{\pi(p)}(\pi_*X,\pi_*Y).\]
+        Since $\pi$ is a local diffeomorphism, any nonzero tangent vector $X\in T_pS^2$ is sent to a nonzero
+        tangent vector $\pi_*X\in T_{\pi(p)}P_2(\R)$.
+        Now since $\omega$ vanishes nowhere on $S^2$, we find that at any $p\in S^2$, there exist $X,Y\in T_pS^2$
+        such that $\bar\omega(\pi_*X,\pi_*Y)\neq0$. Hence, by the surjectivity of $\pi$, we find that $\bar\omega$
+        is a nonvanishing two-form on $P_2(\R)$, which contradicts nonorientability.
+\end{enumerate}
+
+
+
+\end{document}

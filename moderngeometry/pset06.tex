@@ -1,0 +1,127 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Modern Geometry I: PSET 6}
+\author{Nilay Kumar\footnote{Collaborated with Matei Ionita.}}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+\begin{enumerate}[(a)]
+    \item Recall the construction of of the smooth structure on $M/G$ from do Carmo (p.23): we take
+        charts of $M$ small enough to fit into opens $U$ dictated by the properly discontinuous
+        action. In other words, for each $p\in M$, we choose a chart $x:V\to M$ at $p$ such that
+        $x(V)\subset U$ where $U\subset M$ is a neighborhood of $p$ such that $U\cap gU)=\phi, g\neq e$.
+        Since $\pi|_U$ is injective, so is $y=\pi\circ x:V\to M/G$. Now we obtain a cover $(V,y)$ of $M/G$,
+        and we claim that it forms a smooth atlas. To check this, we let $\pi_i$ be the restriction
+        of $\pi$ to $x_i(V_i)$ for $i=1,2$ and let $q\in y_1(V_1)\cap y_2(V_2)$ 
+        with $W$ a neighborhood of $x_2^{-1}\circ\pi_2^{-1}(q)$ such that $(\pi_2\circ x_2)(W)\subset y_1(V_1)\cap y_2(V_2)$.
+        Then we find that
+        \begin{align*}
+            y_1^{-1}\circ y_2|_W &= x_1^{-1}\circ \pi_1^{-1}\circ \pi_2\circ x_2\\
+            &= x_1^{-1}\circ \phi_g|_{x_2(W)}\circ x_2
+        \end{align*}
+        and since $\phi_g$ is a diffeomorphism for each $g$, the atlas is smooth. Moreover, suppose $M$
+        is oriented in a manner compatible with the charts $x_i$ (which we can always change our charts to do).
+        Then it is clear that $\phi_g$ is orientation preserving for all $g\in G$ if and only if the left-hand side of
+        the above is orientation-preserving as well.
+    \item We have a smooth embedding $S^n\hookrightarrow \R^{n+1}$. Let us fix an orientation on $S^n$ in
+        the following manner. Pick an orientation for $\R^{n+1}$ and thus $T_x\R^{n+1}\cong\R^{n+1}$;
+        now for each $x\in S^n$, define an orientation on $T_xS^n$ such that the induced orientation on
+        $T_xS^n\oplus\R n_x=T_x\R^{n+1}$ agrees with the orientation on $T_x\R^{n+1}$ (here $n$ denotes the
+        normal to $S^n$ at $x$). Note now that we have a $\Z_2$ action on $\R^{n+1}$ and thus $S^n$ given
+        by the antipodal map $f:x\mapsto -x$. The differential $df_x$ clearly has determinant $(-1)^{n+1}$
+        since each row of the matrix $df_x$ gains a negative sign. Consider $df_x:T_x\R^{n+1}\to T_{-x}\R^{n+1}$.
+        This map breaks up into a direct sum $df^1_x\oplus df^2_x:T_xS^n\oplus \R n_x\to T_{-x}S^n\oplus \R n_{-x}$.
+        Since the unit normals satisfy $n_{-x}=-n_x$, we find that $df^2_x$ preserves orientation (as it takes
+        the unit normal to its negative) and hence $df^1_x$ has determinant $(-1)^{n+1}$. This is
+        precisely the statement that the antipodal map on the sphere is orientable only for $n$ odd.
+
+        Now recall that the $\Z_2$ antipodal action on $S^n$ is properly discontinuous and the quotient
+        $S^n/\Z_2$ yields the projective space $\Proj^n$. By the previous part of this problem, we find that
+        since the $\Z_2$ action is compatible with the orientation on $S^n$ only for $n$ odd,
+        the projective space $\Proj^n$ is orientable only for $n$ odd.
+\end{enumerate}
+
+\subsection*{Problem 2}
+Let $f:G_1\to G_2$ be a Lie group homomorphism. We claim that $df_{e_1}:T_{e_1}G_1\to T_{e_2}G_2$
+is a Lie algebra homomorphism. Take any $X\in T_eG_1$ and let $Y=df_eX\in T_eG_2$. Consider the
+associated left-invariant vector fields $X^L_p\equiv dL_p(X)$ and $Y^L_q\equiv dL_q(Y)$. We claim
+that $X^L$ is $f$ related to $Y^L$; $df_p(X^L_p)=Y^L_{f(p)}$ if and only if $df_p(dL_p(X))=dL_{f(p)}(df_eX)$,
+but since $f$ is a homomorphism, $f\circ L_p=L_{f(p)}\circ f$, and taking the differential yields
+the equality above. Now take two vectors $X_1,X_2\in T_{e_1}G_1$ and denote their images under the differential
+by $Y_1,Y_2\in T_{e_2}G_2$. By the above argument, $X_1^L$ is $f$-related to $Y_1^L$ and $X_2^L$
+is $f$-related to $Y_2^L$. But now, by a theorem proved in class, $[X_1^L,X_2^L]$ and $[Y_1^L,Y_2^L]$ are
+$f$-related, i.e. $df_p([X_1^L,X_2^L])=[Y_1^L,Y_2^L]_{f(p)}$ for all $p\in G_1$. Restricting to the identity $p=e$,
+in particular, we find that $df_{e_1}([X_1,X_2])=[Y_1,Y_2]=[df_eX_1,df_eX_2]$, as desired.
+
+\subsection*{Problem 3}
+Let $\tilde g_n=\sum_{i,j}^n da_{ij}^2$ be a Riemannian metric on $GL(n,\R)$ and $i:SO(n)\to GL(n,\R)$ be
+the inclusion. We first show that $g_n=i^*\tilde g_n$ is a left-invariant Riemannian metric on $SO(n)$, i.e.
+\[(i^*\tilde g)_x(u,v)=(i^*\tilde g)_e(d(L_{x^{-1}})_xu,d(L_{x^{-1}})_xv)\]
+for $x\in SO(n)$ and $u,v\in T_x(SO_n)$. If we take $\tilde u=d(L_{x^{-1}})_xu,\tilde v=d(L_{x^{-1}})_xv$,
+then it suffices to show that
+\[\tilde g_x(d(L_x)_e\tilde u,d(L_x)_e\tilde v)=\tilde g_e(\tilde u,\tilde v).\]
+Now note that $\tilde u,\tilde v\in T_e(SO(n))$. Moreover,
+it is easy to check that the action of $d(L_x)_e$ is given by left matrix multiplication by $x$ (simply
+parameterize by a curve and differentiate at $t=0$), and so we find that
+\begin{align*}
+    \tilde g_x(d(L_x)_e\tilde u,d(L_x)_e\tilde v) &= \tilde g_x(x\tilde u,x\tilde v)\\
+    &=\sum_{i,j}^n(x\tilde u)_{ij}(x\tilde v)_{ij}\\
+    &=\sum_{i,j,k,l}^nx_{ik}x_{il}\tilde u_{kj}\tilde v_{lj}\\
+    &=\sum_{i,j,k,l}^n(x^\intercal)_{ki}x_{il}\tilde u_{kj}\tilde v_{lj}\\
+    &=\sum_{j,k,l}^n\delta_{kl}\tilde u_{kj}\tilde v_{lj}\\
+    &=\sum_{j,k}^n\tilde u_{kj}\tilde v_{kj},
+\end{align*}
+where we have used the fact that $x\in SO(n)$. But this is precisely the right-hand side of above
+\begin{align*}
+    \tilde g_e(\tilde u,\tilde v) = \sum_{i,j}^n \tilde u_{ij}\tilde v_{ij},
+\end{align*}
+as desired. Right-invariance follows exactly as above, except $R_x$ now acts by right matrix multiplication
+by $x$.
+
+\subsection*{Problem 4}
+\begin{enumerate}[(a)]
+    \item We claim that for any $a\in G$, $R_a^*\omega$ is left-invariant. Indeed, this is because
+        $L_b^*(R_a^*\omega)=R_a^*(L_b^*\omega)=R_a^*\omega$. Here we have used the fact that left
+        and right actions commute, which follows in turn from the obvious fact that
+        \[(L_b)_*(R_b)_*v=\frac{d}{dt}\bigg|_{t=0}\left( b\gamma(t)a \right)=(R_b)_*(L_b)_*v\]
+        for any tangent vector $v\in T_pG$ with local integral curve $\gamma(t)$. Now since we have
+        two $n$-forms at any point $a$, $R^*_a\omega$ and $\omega_a$, they must be multiples of each
+        other, i.e. $R^*_a\omega=f(a)\omega$. Note that $f$ is a homomorphism, as
+        $f(a)f(b)\omega=R_b^*(R_a^*\omega)=R_{ab}^*\omega=f(ab)\omega$. Thus we obtain a continuous
+        homomorphism from a compact connected group $G$ to the multiplicative group of real numbers.
+        The image $f(G)$ must be compact and connected; it clearly contains $1$, but if it contains
+        anything else, it will not be compact (as repeated multiplication will show). Hence $f(G)=1$
+        and thus $R_a^*\omega=\omega$. Hence $\omega$ is right-invariant.
+    \item There is an obvious $C^\infty$ left-invariant $n$-form on $G$. Simply take the unique
+        (up to constant) $n$-form $\eta$ at the identity and define $\omega_g=L_{g^{-1}}^*\eta$. This form is
+        smooth as $\omega_g(X_1(g),\ldots,X_n(g))=\eta( dL_{g^{-1}}(X_1(g)),\ldots,dL_{g^{-1}}(X_n))$ but $\eta$ clearly varies
+        smoothly on its arguments, and $L_{g^{-1}}$ is a diffeomorphism.
+    \item The new metric is clearly left-invariant as
+        \begin{align*}
+            \langle\langle dL_gu,dL_gv \rangle\rangle_{gy} &= \int_G \langle (dR_x)_{gy}(dL_g)_yu,(dR_x)_{gy}(dL_g)_yv\rangle_{gyx}\omega(x)\\
+            &= \int_G \langle (dL_g)_{yx}(dR_x)_yu, (dL_g)_{yx}(dR_x)_yv\rangle_{gyx}\omega(x)\\
+            &= \int_G \langle (dR_x)_yu, (dR_x)_yv\rangle_{yx}\omega(x)\\
+            &= \langle\langle u,v\rangle\rangle_y.
+        \end{align*}
+        For right-invariance, we find
+        \begin{align*}
+            \langle\langle dR_gu,dR_gv\rangle\rangle_{yg} &= \int_G \langle (dR_x)_{yg}(dR_g)_yu,(dR_x)_{yg}(dR_g)_yv\rangle_{ygx}\omega(x)\\
+            &=\int_G\langle (dR_{gx})_yu, (dR_{gx})_yv\rangle_{ygx}\omega(x)\\
+            &=\int_G\langle (dR_z)_yu, (dR_z)_yv\rangle_{zx}\omega(g^{-1}z)\\
+            &=\int_G\langle (dR_z)_yu, (dR_z)_yv\rangle_{zx}\omega(z)\\
+            &=\langle\langle u,v\rangle\rangle_y,
+        \end{align*}
+        where we have changed variables and used the left-invariance of $\omega$.
+\end{enumerate}
+
+\end{document}

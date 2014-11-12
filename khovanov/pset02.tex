@@ -1,0 +1,146 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Algebraic Topology I: PSET 2}
+\author{Nilay Kumar\footnote{Collaborated with Matei Ionita.}}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Hatcher 0.24}
+Let $X$ and $Y$ be CW complexes with 0-cells $x_0$ and $y_0$ repsectively. Consider the quotient
+$X*Y/(X*\{y_0\}\cup Y*\{x_0\})$. This space can be represented as a product $X\times Y\times I$
+with the usual relations
+\begin{align*}
+    (x_1,y,0)&\sim (x_2,y,0)\\
+    (x,y_1,1)&\sim (x,y_2,1)
+\end{align*}
+as well as those induced by the quotient
+\begin{align*}
+    (x_0,y,t)&\sim(x_0,y_0,0)\\
+    (x,y_0,t)&\sim(x_0,y_0,0),
+\end{align*}
+which in turn induce the relations (from the ones above)
+\begin{align*}
+    (x,y,0)\sim(x_0,y,0)\sim(x_0,y_0,0)\\
+    (x,y,1)\sim(x,y_0,1)\sim(x_0,y_0,0)
+\end{align*}
+
+On the other hand, the space $S(X\wedge Y)$ can be represented by a product $X\times Y\times I$
+with the relations
+\begin{align*}
+    (x,y_0,t) &\sim(x_0,y_0,t)\\
+    (x_0,y,t) &\sim(x_0,y_0,t)\\
+    (x,y,1) &\sim(x_0,y_0,1)\\
+    (x,y,0) &\sim (x_0,y_0,0)
+\end{align*}
+while quotienting by $S(x_0\wedge y_0)$ adds the relation
+\begin{align*}
+    (x_0,y_0,t)\sim (x_0,y_0,0).
+\end{align*}
+Inspecting the above relations, it becomes clear that the relations are identical, and
+hence the spaces are homeomorphic, being the same quotients of $X\times Y\times I$.
+
+Since $S(x_0\wedge y_0)$ is contractible in $S(X\wedge Y)$ and $X*y_0$ and $Y*x_0$ are both contractible
+in $X*Y$, we find that $S(X\wedge Y)\simeq S(X\wedge Y)/S(x_0\wedge y_0)\cong X*Y/(X*y_0\cup Y*x_0)\simeq X*Y$,
+as desired.
+
+
+\subsection*{Hatcher 0.25}
+Let $X$ be a CW complex with connected components $X_\alpha$. Consider the wedge sum of suspensions
+$\bigvee_\alpha X_\alpha$. Denoting the number of connected components by $n$, attach to this wedge sum
+a further wedge of $n-1$ copies of $S^1$. We wish to show that $\bigvee^{n-1} S^1\bigvee_\alpha SX_\alpha$
+is homotopy equivalent to $SX$. This is done as follows: consider the wedge sum $S^1\vee SX_\alpha\vee SX_{\alpha+1}$.
+We can homotope the loop down the suspension of a zero cell in each suspension until the loop connects the
+unconnected vertices of the two suspensions; quotienting by this contractible loop yields a homotopy equivalent
+shape which is precisely $S(X_\alpha\cup X_{\alpha+1})$. Repeating this for each of the $n-1$ copies of $S^1$
+shows that the space is homotopy equivalent to $SX$.
+
+Suppose, in particular, that $X$ is a finite graph. In this case, the suspension of each connected component
+$X_\alpha$ is homotopy equivalent to a wedge sum of spheres (suspensions of loops in the graph) as unlooped
+edges yield contractible sheets. Hence by the result above, we find that $SX$ is homotopy equivalent to a wedge
+sum of circles and spheres.
+
+
+\subsection*{Hatcher 1.1.16}
+In this problem we invoke Hatcher's Proposition 1.17, which states that a retraction of $X$ to $A$
+induces, at the level of fundamental groups, an injection from $\pi_1(A)\to\pi_1(X)$.
+\begin{enumerate}[(a)]
+    \item There is no injection from $\Z=\pi_1(S^1)$ to the trivial group.
+    \item Clearly $\pi_1(S^1\times S^1)=\Z^2$, and $\pi_1(S^1\times D^2)=\pi(S^1)=\Z$. However,
+        there is no injection from $\Z\times\Z$ because if $(1,0)\mapsto a$ and $(0,1)\mapsto b$,
+        then $(b,0)$ and $(0,a)$ both map to $ab$.
+    \stepcounter{enumi}
+    \item The wedge sum of two disks, $D^2\vee D^2$, is clearly contractible, as one can explicity
+        construct a nullhomotopy of any loop (treating the spaces as two separate convex regions),
+        or alternatively using van Kampen's theorem. On the other hand, the fundamental group of $S^1\vee S^1$
+        is nontrivial (the free product $\Z*\Z$).
+    \stepcounter{enumi}
+    \item The M\"obius band deformation retracts onto its core circle, and hence has fundamental group $\Z$,
+        as does the boundary circle. It is clear, however, that twice the homotopy class of the core circle is
+        sent to that of the boundary circle. This would imply the existence of a map, namely the morphism on
+        fundamental groups induced by the retraction, $\Z\to\Z$, taking twice the generator to the generator
+        which is impossible.
+\end{enumerate}
+
+\subsection*{Hatcher 1.1.17}
+We wish to construct infinitely many nonhomotopic retractions $S^1\vee S^1\to S^1$.
+There is an obvious one taking all points in one of the circles to the mirrored points in the others,
+and keeping the points of the other circle fixed. The induced morphism $r_*$ on fundamental groups
+has image the generator of the fundamental group of $S^1$. However, we can also take
+force the points of the first circle to loop around the second circle twice, which yields
+at the level of fundamental groups twice the generator of the fundamental group of $S^1$.
+Clearly we can extend this to $\Z$ (the negatives are obtained by reversing the direction of the
+circle. These maps are clearly nonhomotopic, as the maps they induce on the fundamental groups are
+not the same.
+
+\subsection*{Hatcher 1.2.4}
+Let $X\subset\R^3$ be the union of $n$ lines through the origin and consider the space $Y=\R^3-X$.
+$Y$ clearly deformation retracts onto the sphere punctured at $2n$ points. By a simple stereographic
+projection based at one of these punctures, then, we find that $Y$ is homeomorphic to $\R^2$ punctured
+at $2n-1$. This, in turn, deformation retracts to the $2n-1$ wedge product of circles, and hence $Y$
+has fundamental group $\Z^{*(2n-1)}$.
+
+\subsection*{Hatcher 1.2.8}
+Consider two tori $S^1\times S^1$ where the first circle of one is identified with the second circle of
+the other. If we apply the van Kampen theorem to open neighborhoods of the tori, we find that the fundamental
+group of the identification is given by the free product of two copies of $\Z\times\Z$ quotiented by
+the relation that one of the generators in the first is identified with one in the second. In other
+words, we can write $\pi_1(X)=\langle a,b,c,d\mid aba^{-1}b^{-1}, cdc^{-1}d^{-1}, bc^{-1}\rangle$. In other words,
+$b=c$ which commutes with both $a$ and $d$, and we find that $\pi(X)=\Z*\Z\times\Z$.
+
+\subsection*{Hatcher 1.2.11}
+Let $X=S^1\vee S^1$ and $f:X\to X$ be a basepoint-preserving map. The mapping torus $T_f$ can be viewed
+at the result of attaching two cells to the wedge sum $X\vee S^1$; as a result, by Hatcher's Proposition
+1.26, we find that $\pi_1(T_f,x_0)=\Z^{*3}/\langle acf_*(a)^{-1}c^{-1}, bcf_*(b)^{-1}c^{-1}\rangle$, where
+$a,b$ are the generators of the fundamental group of $X$ and $c$ is the generator of the additional $S^1$.
+
+Next let $X=S^1\times S^1$. Again, we can view the mapping torus $T_f$ as the result of attaching cells to
+the sum $X\vee S^1$. This time, however, as the torus is a two-dimensional cell complex composed of two
+one-cells and one two-cell (not counting the basepoint), we must attach two two-cells and one three-cell.
+The three-cell is irrelevant for the purposes of computing $\pi_1$ (c.f. Hatcher Problem 1.2.6) so it suffices
+to examine how the two-cells are attached. Note, however, that what we obtain is essentially the same as
+for the case of $S^1\vee S^1$ (due to the cell structure of $S^1\times S^1$) except that there is an extra
+2-cell making $a$ and $b$ commute, where $a$ and $b$ are the generators of the fundamental group of the torus.
+Hence we find that $\pi_1(T_f,x_0)=\Z^{*3}/\langle [a,b],acf_*(a)^{-1}c^{-1}, bcf_*(b)^{-1}c^{-1}\rangle$
+
+\subsection*{Hatcher 1.3.4}
+See diagrams below.
+
+\subsection*{Hatcher 1.3.9}
+Let $X$ have finite fundamental group and $f:X\to S^1$ be a continuous map. Then $f_*=0$, as $\pi_1(S^1)=\Z$,
+which has no finite subgroups. In view of the universal cover $p:\R\to S^1$, then, we find that the map $f$
+lifts to a map $\tilde f:X\to\R$. Clearly $\tilde f$ is nullhomotopic and so projecting down by $p$ we find
+that $f$ is nullhomotopic.
+
+\subsection*{Hatcher 1.3.10}
+See diagrams below.
+
+\end{document}

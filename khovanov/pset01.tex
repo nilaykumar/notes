@@ -1,0 +1,111 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Algebraic Topology I: PSET 1}
+\author{Nilay Kumar\footnote{Collaborated with Matei Ionita.}}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+\begin{enumerate}[(a)]
+    \item We construct a CW complex for $\R^2$ as follows. Let $X^0$ contain a point for
+        every pair of integers. Then, for every pair of horizontally or vertically neighboring
+        0-cells, attach a line segment with endpoints identified to said 0-cells. Finally,
+        for every square of side length 1 line segment, attach a 2-cell such that the boundary
+        of the 2-cell is identified with the square.
+    \item The CW complex for the punctured plane, $\R^2-\{(0,0)\}$ is similar to that of $\R^2$.
+        Start with the CW complex from $(a)$ except remove all cells in the square of side length
+        one in the first quadrant with bottom-left corner $(0,0)$. In this square, line the
+        borders with a square annulus of some size (adding 0,1, and 2-cells as necessary). Repeat
+        this process with smaller and smaller square annuli such that we obtain a countable number
+        of annuli (each with radius, say, $1/n$). Note that this complex does not ``contain the
+        origin.''
+\end{enumerate}
+
+\subsection*{Hatcher 0.5}
+The space $X$ deformation retracts to $x\in X$. Let $U\subset X$ is an open containing $x$.
+We wish to find an open $V\subset U$ containing $x$ such that the inclusion $V\hookrightarrow U$
+is nullhomotopic. We are provided with a homotopy $F=f_t:X\times I\to X$ taking $\id_X$ to $\{x\}$;
+hence it suffices to find a neighborhood $V$ which, under $f_t$, is contained in $U$ for all time $t$.
+To do so, consider the open set $F^{-1}(U)\subset X\times I$ containing the slice $\{x\}\times I$. 
+We can find an open neighborhood $V\ni x$ such that the cylinder $V\times I$ is contained $F^{-1}(U)$:
+take an open cover of $\{x\}\times I$ (by basis opens of the product topology). Compactness of $I$ yields
+a finite subcover, from which the intersection of the opens in the second components yields an open
+$V\subset U$ containing $x$ such that $V\times I\subset F^{-1}(U)$. This implies that, for all $t$,
+$f_t(V)$ is contained in $U$, and hence $V$ is the desired open.
+
+\subsection*{Hatcher 0.6a}
+Suppose $x_0$ is a point in the segment $[0,1]\times\{0\}$; then there exists a deformation retract
+taking $X$ to $x_0$ as follows. For $t\in[0,1/2]$ we collapse the teeth of the comb via
+$(x,y)\mapsto (x,y(1-2t))$. Then, for $t\in[1/2,1]$, we collapse the remaining line segment onto
+the chosen point $x_0$ via $(x,0)\mapsto(x+2(x-x_0)(t-1/2),0)$. Note that $x_0$ is fixed throughout,
+and hence this provides a deformation retraction.
+
+There is no deformation retraction taking $X$ to a point not on the segment $\{0,1\}\times\{0\}$.
+We show this by contradiction. If there is, and $U$ is an open about said point, there must
+exist an open $V\subset U$ such that the inclusion $V\hookrightarrow U$ is nullhomotopic,
+i.e. contractible in $U$. In this case, $U$ is the disjoint union of countably many line segments;
+any open subset will be the disjoint union of countably many intervals, which is clearly
+not contractible (this can be shown by noting that no map $X\times I\to X$ could continuously
+move disconnected components to a single component).
+
+\subsection*{Hatcher 0.8}
+Suppose $n=2m$ for $m>1$. Then the construction of the house with $n$ rooms is simply $m$ copies of
+the house with 2 rooms glued in the obvious way. The case of $n=2m+1$ is a little subtler.
+Take the house with $2m$ rooms and add another ``roof'' as shown in my diagram and add
+a tunnel that traverses the top 2 rooms (with vertical support walls as necessary), connecting
+the outside to the third room from the top. In both cases, these structures are clearly
+contractible, as one can imagine ``unscooping'' the space created in the rooms backwards
+along the tunnels to obtain a space homeomorphic to a ball.
+
+\subsection*{Hatcher 0.9}
+Let $X$ be a contractible space and $r:X\to A$ be a retract of $X$ to the subspace $A$.
+There exists a homotopy $F=f_t:X\times I\to X$ from the identity map on $X$ to the map that
+takes $X$ to a point $x\in X$. The composition $r\circ f_t$, when restricted to $A$ provides
+a homotopy from $\id_A$ to the map that takes $A$ to $r(x)\in A$, and hence $A$ is
+contractible.
+
+\subsection*{Hatcher 0.17}
+\begin{enumerate}[(a)]
+    \item Let $f:S^1\to S^1$ be a continuous map and consider the associated mapping cylinder $M_f$.
+        We can give $M_f$ a CW structure as follows. The zero-skeleton consists of two points, $x$
+        and $f(x)$. The one-skeleton consists of three lines, one forming a circle at $x$ and another
+        forming a circle at $f(x)$, and the last, snaking down to connect $x$ to $f(x)$ as the ``graph''
+        of $x$. Finally, we attach a single two cell to this one-skeleton, completing the cylinder.
+    \item Denote the M\"obius strip by $M$ and the annulus by $A$. Consider the retractions
+        $f:M\to S^1$ and $g:A\to S^1$. We can construct the mapping cylinders $X_1=S^1\coprod_fM$
+        and $X_2=S^1\coprod_gA$. These spaces clearly deformation retract onto $M$ and $A$ respectively.
+        Gluing these spaces together via the identity map on $S^1$ in each of these spaces, we
+        obtain a space that deformation retracts onto $M$ and $A$. Note that this is a CW complex
+        as we can give the M\"obius strip and the annulus CW structures.
+\end{enumerate}
+
+\subsection*{Hatcher 0.20}
+Consider the disk at which the Klein bottle intersects itself. As it is a subcomplex, we can contract
+it to a point without changing the homotopy type of the Klein bottle. We can deform the Klein bottle
+into a sphere-like shape and replace both the inward and outward flutes with the north and south pole
+of this sphere and extend the pinched point into inward and outward line segments. Shifting the endpoints
+of these line segments yields $S^1\vee S^1\vee S^2$ (see diagram).
+
+
+\subsection*{Hatcher 0.23}
+Let $X=A\cup B$ be a union of two contractible subcomplexes with contractible intersection
+$A\cap B$. We use Hatcher Proposition 0.17 repeatedly to show that $X$ is contractible:
+\begin{align*}
+    A\cup B &\approx (A\cup B)/(A\cap B)\\
+    &=A/(A\cap B)\vee B/(A\cap B)\\
+    &\approx A\vee B\\
+    &\approx A\\
+    &\approx\{\rm pt\},
+\end{align*}
+as every CW pair satisfies the HEP.
+
+\end{document}

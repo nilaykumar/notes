@@ -1,0 +1,139 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Modern Geometry I: PSET 3}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+Let $M$ be a smooth submanifold of $N$ and let $X,Y$ be smooth vector fields
+on $M$. Let $p\in M$ and $U$ be an open neighborhood of $p$ in $N$.
+\begin{enumerate}[(a)]
+    \item Suppose that $\tilde X,\tilde Y\in C^\infty(U,TU)$ are smooth vector fields
+        on $U$ such that for all $q\in U\cap M$ we have that
+        \begin{align*}
+            \tilde X|_q &= X|_q\in T_qM\\
+            \tilde Y|_q &= Y|_q\in T_qM.
+        \end{align*}
+        As $M$ is a submanifold of $N$ we may find a coordinate chart $(V,\vec x)$
+        for $N$ about $p$ (with $V\subset U$ open) such that $\vec x(V\cap M)=\vec x(V)\cap(\R^m\times\{0\})$.
+        Hence we can write $\tilde X,X,\tilde Y,$ and $Y$ in terms of the first $m$
+        coordinates; it follows from the coordinate expression for the Lie bracket,
+        \[ [\tilde X,\tilde Y] = \sum_{i,j}^m\left( a_i\frac{\partial b_j}{\partial x_i}-b_i\frac{\partial a_j}{\partial x_i} \right)\frac{\partial}{\partial x_j}\]
+        that $[\tilde X,\tilde Y]$ depends only on the first $m$ coordinates as well, as they
+        are equal to $X$ and $Y$, which have this property. Hence we conclude that
+        $[\tilde X,\tilde Y]|_q\in T_qM$ for all $q\in V\cap M$. As we can cover $U$ by such
+        opens $V$ by varying $p$, we find that this is true in $U$.
+    \item Let $f$ be a smooth function on $M$ and let $\tilde f$ be a smooth function
+        on $U$ such that $\tilde f(q)=f(q)$ for all $q\in U\cap M$. Let $g=[X,Y]f\in C^\infty(M)$
+        and $\tilde g=[\tilde X,\tilde Y]\tilde f\in C^\infty(U).$ Using the exact same reasoning
+        as above, we note that the Lie brackets, when written in coordinates $x_i$ ($i=1,\ldots, m$),
+        agree on some open $V\subset U$ and hence, since $f$ and $\tilde f$ are equal on $V$,
+        the two Lie derivatives act identically.
+\end{enumerate}
+
+\subsection*{Problem 2}
+Let $X$ be a smooth vector field on a smooth manifold $M$ and let $\gamma:I\to M$ be a nonconstant
+integral curve of $X$ where $I$ is an open interval in $\R$.
+\begin{enumerate}[(a)]
+    \item Note that $\gamma$ is nonconstant and hence $d\gamma$ is nonzero everywhere on $I$.
+        In particular $d\gamma$ has rank 1 and $\gamma$ is thus an immersion.
+    \item Suppose $\gamma$ is not injective. Then, without loss of generality, there exists some
+        $\tau$ such that $\gamma(0)=\gamma(\tau)$. There exists a minimum such $\tau>0$, as
+        otherwise $\gamma$ would not be nonconstant; we further assume, without loss of generality,
+        that $\gamma$ is injective on $(0,\tau)$. Now since $\gamma(0)=\gamma(\tau)$,
+        we must have that $\gamma'(0)=\gamma'(\tau)$, which implies a periodicity of the integral
+        curve $\gamma(x)=\gamma(x+\tau)$. In other words, $\gamma$ can be extended uniquely
+        to an integral curve $\R\to M$ periodic with period $\tau$. We thus obtain a map
+        $\eta:S^1=\R/\tau\Z\to M$ which is smooth by the characteristic property of the quotient.
+        This map is clearly a bijection onto the integral $\gamma([0,\tau])$ and hence a
+        homeomorphism (as $S^1$ is compact and $M$ is Hausdorff). Moreover, it is an
+        immersion, as the derivative cannot vanish anywhere, due to $\gamma'(t)\neq0$.
+        Hence we obtain a smooth embedding $\eta:S^1\to M$ such that $\eta(S^1)=\gamma(I)$.
+\end{enumerate}
+
+
+\subsection*{Problem 3}
+Let $X$ be the vector field on $\R$ defined by $X(x)=x^2\partial/\partial x$. Let $\phi_x:I_x\to\R$
+be the unique integral curve of $X$ such that $\phi_x(0)=x$ for some $x\in\R$. To find $\phi_x$ we
+solve
+\begin{align*}
+    \phi_x'(t) &= \phi_x(t)^2\\
+    \frac{d\phi_x}{\phi_x^2} &= dt\\
+    \phi_x &= -\frac{1}{t+C}.
+\end{align*}
+The initial condition $\phi_x(0)=x$ yields
+\[\phi_x(t) = \frac{x}{1-tx}.\]
+We immediately find that $I_{x=0}=\R, I_{x<0}=(1/x,\infty), I_{x>0}=(-\infty,1/x)$.
+
+\subsection*{Problem 4}
+Let $X,Y,Z$ be the vector fields defined on $\R^3$ defined by
+\begin{align*}
+    X &= z\frac{\partial}{\partial y}-y\frac{\partial}{\partial z}\\
+    Y &= x\frac{\partial}{\partial z}-z\frac{\partial}{\partial x}\\
+    Z &= y\frac{\partial}{\partial x}-x\frac{\partial}{\partial y}.
+\end{align*}
+\begin{enumerate}[(a)]
+    \item Consider the map $f:(a,b,c)\mapsto aX+bY+cZ$. As this map is clearly linear, showing
+        that it is injective will prove that it is an isomorphism from $\R^3$ onto a subspace of
+        the space of smooth vector fields on $\R^3$. But $X,Y,Z$ are clearly linearly independent
+        vector fields: if they weren't, there would exist $a,b,c$ such that
+        \[cy-bz=az-cx=bx-ay=0\]
+        for all $(x,y,z)$, which is absurd. To prove that the cross product on $\R^3$ corresponds
+        to the Lie bracket of vector fields on $\R^3$, i.e. that this map is a morphism of Lie
+        algebras, it suffices to show it on the basis, due to linearity and skew-symmetry. We find
+        that, using the Leibniz rule,
+        \begin{align*}
+            [X,Y] &= \left( z\partial_y-y\partial_z \right)(x\partial_z-z\partial_x) - (x\partial z-z\partial x)(z\partial_y-y\partial_z)\\
+            &= y\partial_x - x \partial_y\\
+            &= Z
+        \end{align*}
+        and analogously, that $[Y,Z]=X$ and $[Z,X]=Y$, as desired.
+    \item Consider the vector field $aX+bY+cZ$ for $a,b,c\in\R$. Fix $(x_0,y_0,z_0)\in\R^3$
+        as the initial point for the flow.
+        Its flow $\phi(t)$ is clearly the sum of the flows of $aX,bY,$ and $cZ$,
+        \[\phi(t)=\phi^X(t)+\phi^Y(t)+\phi^Z(t).\]
+        Consider the first term, $\phi^X(t)$, which can be computing by solving
+        \begin{align*}
+            \frac{d\phi^X_x}{dt} &= 0\\
+            \frac{d\phi^X_y}{dt} &= a\phi^X_z\\
+            \frac{d\phi^X_z}{dt} &= -a\phi^X_y.
+        \end{align*}
+        Decoupling these differential equations and solving, we find that
+        \[\phi^X(t)=(x_0,y_0\cos at-z_0\sin at,y_0\sin at+z_0\cos at).\]
+        The second term, $\phi^Y(t)$ is computed by solving
+        \begin{align*}
+            \frac{d\phi_x^Y}{dt}&=-b\phi^Y_z\\
+            \frac{d\phi_y^Y}{dt}&=0\\
+            \frac{d\phi_z^Y}{dt}&=b\phi^Y_x.
+        \end{align*}
+        Decoupling and solving, we find 
+        \[\phi^Y(t)=(x_0\cos bt-z_0\sin bt,y_0,x_0\sin by+z_0\cos bt).\]
+        The third term, $\phi^Z(t)$ is computed by solving
+        \begin{align*}
+            \frac{d\phi_x^Z}{dt} &= c\phi_y^Z\\
+            \frac{d\phi_y^Z}{dt} &= -c\phi_x^Z\\
+            \frac{d\phi_z^Z}{dt} &= 0.
+        \end{align*}
+        Decoupling and solving, we find
+        \[\phi^Z(t)=(y_0\sin ct+x_0\cos ct,y_0\cos ct-x_0\sin ct,z_0).\]
+        Summing, we find that
+        \begin{align*}
+            \phi(t)=(&x_0+x_0\cos bt+x_0\cos ct+y_0\sin ct-z_0\sin bt,\\
+            &y_0+y_0\cos at+y_0\cos ct-z_0\sin at-x_0\sin ct,\\
+            &z_0+z_0\cos bt+z_0\cos at+y_0\sin at+x_0\sin bt).
+        \end{align*}
+        This flow is cleary defined for all $t$.
+\end{enumerate}
+
+
+\end{document}

@@ -1,0 +1,88 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Analysis I: Solutions to PSET 6}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+\begin{enumerate}[(a)]
+    \item Recall from Rudin Theorem 3.3 that the limit of a product is the product of the limits
+        if the individual limits exist and hence
+        \[\lim_{n\to\infty}\sqrt[n]{2n}=\left( \lim_{n\to\infty}\sqrt[n]{2} \right)\left( \lim_{n\to\infty}\sqrt[n]{n} \right).\]
+        From Rudin Theorem 3.20, we find that $\lim_{n\to\infty}\sqrt[n]{2}=1$ and $\lim_{n\to\infty}\sqrt[n]{n}=1$.
+        Thus $\lim_{n\to\infty}\sqrt[n]{2n}=1$.
+    \item Invoking Rudin Theorem 3.20(d) for $p=1$ and $\alpha=2$, we find that
+        \[\lim_{n\to\infty}\frac{n^2}{2^n}=0.\]
+\end{enumerate}
+
+\subsection*{Problem 2}
+\begin{enumerate}[(a)]
+    \item Fix $\varepsilon>0$. We wish to find some $N\in\N$ such that for $n>N$ we have $|a_n-a|<\varepsilon$ given
+        that $\lim_{n\to\infty} x_n=a$. The sequence $x_n$ must be bounded, and hence $|x_n-a|<M$ for some $M\in\R$ for
+        all $n\in\N$. Moreover, convergence implies that there exists an $N'\in\N$ such that $|x_n-a|<\varepsilon/2$
+        for all $n>N'$. Note that (for $N'<n)$
+        \begin{align*}
+            |a_n-a| &= \left\lvert \frac{(x_0-a)+\cdots+(x_n-a)}{n+1} \right\rvert\\
+            &\leq \frac{1}{n+1}\sum_{k=0}^{N'}|x_k-a|+\frac{1}{n+1}\sum_{k=N'+1}^n|x_k-a|\\
+            &\leq \frac{M(N'+1)}{n+1}+\frac{\varepsilon(n-N')}{2(n+1)}.
+        \end{align*}
+        To have $|a_n-a|<\varepsilon$,
+        \begin{align*}
+            2\varepsilon(n+1) &> 2M(N'+1)+\varepsilon(n-N')\\
+            \varepsilon n&>2M(N'+1)-\varepsilon N'-2\varepsilon\\
+            n &> 2M(N'+1)/\varepsilon -(N'+2)
+        \end{align*}
+        Indeed, for $n>2M(N'+1)/\varepsilon-(N'+2)$ (assuming $N'$ is smaller than this quantity),
+        \begin{align*}
+            |a_n-a| &= \left\lvert \frac{(x_0-a)+\cdots+(x_n-a)}{n+1} \right\rvert\\
+            &\leq \frac{1}{n+1}\sum_{k=0}^{N'}|x_k-a|+\frac{1}{n+1}\sum_{k=N'+1}^n|x_k-a|\\
+            &\leq \frac{M(N'+1)}{n+1}+\frac{\varepsilon(n-N')}{2(n+1)}\\
+            &< \frac{\varepsilon/2}{2M(N'+1)-\varepsilon(N'+1)}\left(2M(N'+1)+\varepsilon(n-N') \right)\\
+            &<\frac{\varepsilon/2}{2M(N'+1)-\varepsilon(N'+1)}\left(2M(N'+1)+2M(N'+1)-2\varepsilon(N'+1) \right)\\
+            &< \varepsilon,
+        \end{align*}
+        as desired. Thus we take $N\equiv\max\{N',2M(N'+1)/\varepsilon-(N'+2)\}$.
+    \item Consider the sequence $x_n=(-1)^n$. The average $a_n$ is 0 if $n$ is odd and $1/(n+1)$ if $n$ is even.
+        The sequence $a_n$ converges (use the Archimedean property) but the sequence $x_n$ clearly does not.
+\end{enumerate}
+
+\subsection*{Rudin 3.16(a)}
+By the arithmetic-geometric mean inequality,
+\[x_{n+1}=\frac{1}{2}\left( x_n+\frac{\alpha}{x_n} \right)\geq\sqrt{\alpha},\]
+and hence $x_{n+1}^2\geq \alpha$. Now
+\[x_n-x_{n+1}=\frac{1}{2}\left( x_n-\frac{\alpha}{x_n} \right)=\frac{1}{2}\left( \frac{x_n^2-\alpha}{x_n} \right)\geq0,\]
+which implies that $x_n\geq x_{n+1}$, i.e. the sequence decreases monotonically. Now by Rudin Theorem 3.14,
+$x_n$ converges, as it is bounded below (by $\sqrt{\alpha}$ as above). Taking $x=\lim_{n\to\infty}x_n$,
+the recurrence relation becomes
+\[x=\frac{1}{2}\left( x+\frac{\alpha}{x} \right),\]
+and $x=\sqrt{\alpha}$ (as the negative solution is absurd).
+
+\subsection*{Rudin 3.7}
+It suffices to show, by Rudin's theorem 3.22, that for any $\varepsilon>0$, there is an $N\in\N$ such
+that for $m\geq n\geq N$,
+\[\left|\sum_{k=n}^ma_k\right|\leq\varepsilon.\]
+Fix $\varepsilon>0$. Since both $\sum a_n$ and $\sum n^{-2}$ are convergent series (c.f. Rudin theorem 3.28)
+there exists an $N\in\N$ such that for $m\geq n\geq N$,
+\begin{align*}
+    \sum_{k=n}^m a_k &\leq\varepsilon\\
+    \sum_{k=n}^m \frac{1}{k^2} &\leq\varepsilon.
+\end{align*}
+Using the Cauchy-Schwarz inequality (Rudin theorem 1.35),
+\begin{align*}
+    \left|\sum_{k=n}^m\frac{\sqrt{\alpha_k}}{k}\right|^2 &\leq \left(\sum_{k=n}^ma_k^2\right)\cdot\left(\sum_{k=n}^m\frac{1}{k^2}\right)\leq\varepsilon^2
+\end{align*}
+and hence
+\[ \left|\sum_{k=n}^m\frac{\sqrt{\alpha_k}}{k}\right|\leq\varepsilon\]
+for $m\geq n\geq N$ as desired.
+
+
+\end{document}

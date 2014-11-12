@@ -1,0 +1,102 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Analysis I: Solutions to PSET 2}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Rudin 1.17}
+Take two vectors $x,y\in\R^k$. We claim that
+\[|x+y|^2+|x-y|^2=2|x|^2+2|y|^2,\]
+which follows by the commutativity and distributivity of the dot product,
+\begin{align*}
+    |x+y|^2+|x-y|^2 &= (x+y)\cdot(x+y) + (x-y)\cdot (x-y)\\
+    &= x\cdot x+2x\cdot y+y\cdot y+x\cdot x-2x\cdot y+y\cdot y\\
+    &= 2x\cdot x+2y\cdot y\\
+    &=|x|^2+|y|^2.
+\end{align*}
+Interpreted geometrically, we find that the sum of the length-squareds
+of the diagonals of a parallelogram is equal to the sum of the squares of the side lengths.
+
+\subsection*{Rudin 2.2}
+We claim that the set of all algebraic numbers $A$ is countable. Consider the first the set
+of all polynomials $P$ with integer coefficients. The set $P$ admits a natural decomposition
+$P=\cup_n P_n$ where $P_n$ is the subset of polynomials with degree $n$.
+Any polynomial of degree $n$ is uniquely determined by its $n+1$ coefficients and hence is
+equivalent to the set of $(n+1)$-tuples of integers.
+This set is countable (c.f. Rudin Theorem 2.13) and hence $P_n$ is countable.
+
+Given any polynomial $p\in P_n$, the set of its roots $R_p$ is finite (by the fundamental theorem of algebra)
+and hence we can write
+\[A=\bigcup_{p\in P}R_p=\bigcup_{n\in\N}\left(\bigcup_{p\in P_n}R_p\right),\]
+i.e. a countable union of a countable union of finite sets, which is countable (c.f. Rudin Theorem 2.12).
+
+\subsection*{Problem 3}
+We claim that the sets $(0,1)\subset\R,[0,1]\subset\R,$ and $\R$ are equivalent. We show only two equivalences,
+using the fact that equivalence is an equivalence relation to obtain the third.
+
+We know from precalculus that the function $\tan x:\R\to\R$, when restricted to $(-\pi/2,\pi/2)$ is bijective,
+with inverse $\tan^{-1} x$. This gives an equivalence between $(-\pi/2,\pi/2)\subset\R$ and $\R$.
+Moreover, $(-\pi/2,\pi/2)$ is equivalent to $(0,1)$ by the map $x\mapsto (x+\pi/2)/\pi$, which is
+obviously bijective. This establishes the equivalence of $(0,1)$ and $\R$.
+
+Consider now the function $g:[0,1]\to(0,1)$ given piecewise as
+\begin{align*}
+    g(x) = \left\{
+        \begin{array}{lr}
+            1/2, &  x=0\\
+            1/4, &  x=1\\
+            1/2^{n+2}, &  x=1/2^n\text{ for }n\in\N\\
+            x, & \text{otherwise}.
+        \end{array}
+        \right.
+\end{align*}
+Intuitively, this function takes advantage of the ``space'' available in the infinite sequence $1/2^n$ by sending
+the ``extra'' points $0$ and $1$ to $1/2$ and $1/4$, respectively, and then pushing down what
+normally would have been sent to powers of $1/2$ by a factor of $1/4$.
+Note that this trick can be done with any sequence tending to zero, not just $1/2^n$.
+Let us show that $g$ is bijective; it will take some case work, due to the piecewise definition.
+
+First surjectivity; suppose $y\in(0,1)$. If $y$ is $1/2$ or $1/4$ we note that $y$ must be $g(0)$ or $g(1)$. If
+$y$ is more generally $1/2^n$ (for $n\in\N$ greater than 2), we find that $y=g(1/2^{n-2})$. Otherwise, $g(y)=y$.
+
+Injectivity is clear, but a little tedious; suppose $x,y\in[0,1]$ with $g(x)=g(y)$.
+If either of $x$ or $y$ is zero, it is clear that $g(x)=g(y)$ forces $x=y=0$, as only $0$ is sent to $1/2$.
+Now suppose neither $x$ nor $y$ is zero. Note that $x$ and $y$ must both either be a power of $1/2$
+or not, as otherwise $g(x)$ could not possibly be equal to $g(y)$.
+If neither $x$ nor $y$ are powers of $1/2$, it follows from the definition of $g$ that $x=y$.
+If both $x$ and $y$ are powers of $1/2$, say $x=1/2^n$ and $y=1/2^m$, then $g(x)=g(y)$ implies that $n=m$,
+i.e. $x=y$.
+
+This proves the equivalence of $[0,1]$ and $(0,1)$. As $(0,1)$ is equivalent to $\R$ as shown above,
+all three sets are equivalent.
+
+\subsection*{Problem 4}
+Let $\{E_n\}$ be a sequence of countable sets, and $S=\prod_n E_n$ be their Cartesian product. 
+Suppose $S$ is countable; then there exists a bijection $f:\N\to S$. Note that each $i\in\N$ is taken
+to an infinite sequence of elements $\{e_{ij}\}$, i.e.
+\begin{align*}
+    f(1) &= (e_{11}, e_{12}, \ldots)\\
+    f(2) &= (e_{21}, e_{22}, \ldots)\\
+    &\vdots\\
+    f(i) &= (e_{i1}, e_{i2}, \ldots)\\
+    &\vdots
+\end{align*}
+Now choose $a=(a_1,a_2,\ldots)\in S$ such that for each $k\in\N$, $a_k\neq e_{kk}$. Surjectivity
+of $f$ implies that there exists some $\ell\in\N$ such that $f(\ell)=a$. This is, of course, a contradiction,
+as $a_k\neq e_{kk}$ for each $k$. Hence $S$ must be uncountable (as $S$ is clearly not finite).
+
+Similarly, if each $E_n=\{0,1\}$, we assume that there exists a bijection $f:\N\to S=\prod_nE_n$. Surjectivity of
+$f$ implies the existence of some $\ell\in\N$ mapped to $a=(a_1,a_2,\ldots)\in S$ where $a_k=0$ if $e_{kk}=1$
+and $a_k=1$ if $e_{kk}=0$. This is again a contradiction, and hence $S$ must be uncountable (as $S$ is
+clearly not finite).
+
+\end{document}

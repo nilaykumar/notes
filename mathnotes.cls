@@ -35,6 +35,7 @@
 \DeclareMathOperator{\length}{length}
 \DeclareMathOperator{\res}{Res}
 \DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\img}{im}
 \DeclareMathOperator{\Int}{Int}
 \DeclareMathOperator{\Ext}{Ext}
 \DeclareMathOperator{\Aut}{Aut}

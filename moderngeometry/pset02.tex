@@ -1,0 +1,116 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Modern Geometry I: PSET 2}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+Let $M$ be a smooth manifold, not necessarily orientable. We claim that the tangent bundle $TM$
+is orientable. Recall that a smooth manifold is said to be orientable if it admits an atlas
+$\Phi=\{(U_\alpha,\phi_\alpha)\mid\alpha\in I\}$ such that for all $\alpha,\beta\in I$ with
+$U_\alpha\cap U_\beta\neq\varnothing$, the transition function $\phi_\beta\circ\phi_\alpha^{-1}$
+satisfies
+\[\det d(\phi_\beta\circ\phi_\alpha^{-1})>0\]
+for all $x\in\phi_\alpha(U_\alpha\cap U_\beta)$. Recall that $TM$ can be given an atlas according
+to its local trivializations so that its transition functions are given by
+\[\tilde\psi\circ\tilde\phi^{-1}(x,u)=\left( (\psi\circ\phi^{-1})(x),d(\psi\circ\phi^{-1})_xu \right),\]
+where $(U,\phi)$ and $(V,\psi)$ are charts for $M$. Taking the differential of this map yields the
+block matrix
+\begin{equation*}
+    d(\tilde\psi\circ\tilde\phi^{-1})=
+    \begin{pmatrix}
+        d(\psi\circ\phi^{-1}) & 0\\
+        * & d(\psi\circ\phi^{-1}) 
+    \end{pmatrix}
+\end{equation*}
+whose determinant is a square and hence positive. Thus $TM$ is orientable.
+
+\subsection*{Problem 2}
+Let $p(x_1,\ldots,x_k)\in\R[x_1,\ldots,x_k]$ be a homogeneous polynomial of degree $m$, with
+$m\geq 2$.
+\begin{enumerate}[(a)]
+    \item Fix a nonzero $x\in\R$. Then the subset $X_a=\{x\in\R^k\mid p(x)=a\}\subset\R^k$
+        is a $k-1$ dimensional submanifold by the preimage theorem. Indeed, the differential
+        of the map $p(x):\R^k\to\R$ is the row vector
+        \begin{equation*}
+            dp(x)=
+            \begin{pmatrix}
+                \frac{\partial p}{\partial x_1} & \cdots & \frac{\partial p}{\partial x_k}
+            \end{pmatrix}.
+        \end{equation*}
+        To invoke the preimage theorem, we must show that $\partial p/\partial x_i\neq 0$ for
+        some $1\leq i\leq k$ wherever $p(x)=a$. But this is clear; if this were not true, then by
+        Euler's identity,
+        \begin{equation*}
+            \sum_{i=1}^kx_i\frac{\partial p}{\partial x_i}=mp,
+        \end{equation*}
+        we find that $p(x)=0$. Hence $p$ has surjective differential on the fiber above $a$ and
+        we may apply the preimage theorem as above.
+    \item The submanifold $X_a$ consists of the set of points in $\R^k$ for which $p(x)=a$.
+        As $p(x)$ is homogeneous of degree $m$, it is clear that the diffeomorphism of $\R^k$ that dilates
+        by $\sqrt[m]{|a|}$ restricts to a diffeomorphism $X_1\to X_a$ if $a>0$ and $X_{-1}\to X_a$
+        if $a<0$.
+\end{enumerate}
+
+\subsection*{Problem 3}
+Let $M_n(\R)$ be the space of $n\times n$ matrices with real entries. We assume that $n\geq 2$.
+Let $SL(n,\R)=\{A\in M_n(\R)\mid\det A=1\}$.
+\begin{enumerate}[(a)]
+    \item Consider the smooth function $\det:M_n(\R)\to\R$; the preimage of $1\in\R$ by the determinant
+        is precisely $SL_n(\R)\subset M_n(\R)$. As the determinant is clearly a homogeneous polynomial
+        (of degree $n$), by the previous problem we find that under the identification $M_n(\R)=\R^{n^2}$,
+        $SL_n(\R)$ is an $(n^2-1)$-dimensional submanifold of $M_n(\R)$.
+    \item We claim that the Lie algebra $T_{I_n}SL_n(\R)$ is precisely the subspace
+        $\fr{sl}_n(\R)\equiv\{A\in M_n(\R)\mid \tr A=0\}\subset M_n(\R)$. We have a short exact sequence
+        of vector spaces
+        \begin{equation*}
+            \begin{tikzcd}
+                0\ar{r} & T_{I_n}SL_n(\R)\ar{r}{d\iota_{I_n}} & T_{I_n}M_n(\R)\ar{r}{d(\det)_{I_n}} & T_1\R\ar{r} & 0
+            \end{tikzcd}
+        \end{equation*}
+        where the exactness follows from the facts that $\iota$ is an embedding, $\det$ is a submersion at $I_n$, and
+        that $SL_n(\R)\subset M_n(\R)$ is taken by $\det$ to a single point. Hence $\fr{sl}_n(\R)=\ker d(\det)_{I_n}$.
+        We find these vectors by considering curves $\gamma(t)=I_n+tA$ on $SL_n(\R)$ with $A\in T_{I_n}M_n(\R)\cong\R^{n^2}$
+        and computing
+        \[\frac{d}{dt}\bigg|_{t=0}\det(I_n+tA)=\tr A,\]
+        and enforcing $\tr A=0$ (this identity follows by inspecting the terms of the determinant first order in $t$).
+    \item More generally, we consider the tangent bundle $TSL_n\R$. Explicitly, viewed as a subset of $\R^{n^2}\times\R^{n^2}$,
+        the tangent bundle is the set of all pairs of matrices $(A,B)$ such that $B\in SL_n(\R)$ and $A\in T_ASL_n(\R)$.
+        Of course, since
+        \[\frac{d}{dt}\bigg|_{t=0}\det(B+tA)= \frac{d}{dt}\bigg|_{t=0}\det B\det(I_n+tB^{-1}A)=\tr B^{-1}A,\]
+        where we have used the fact that $B$ is invertible with unit determinant, we find that
+        \[TSL_n(\R)=\{(B,A)\in M_n(\R)\times M_n(\R)\mid \det B=1, \tr B^{-1}A=0\}.\]
+\end{enumerate}
+
+\subsection*{Problem 4}
+Define
+\[E=\{(\ell,v)\in P_n(\R)\times\R^{n+1}\mid v\in\ell\}.\]
+We claim that $\pi:E\to P_n(\R)$ is a $C^\infty$ vector bundle of rank 1 over $P_n(\R)$.
+We construct local trivializations $\Psi_i$ over the standard charts $(U_i,\phi_i)$ for $P_n(\R)$;
+note that $\pi^{-1}(U_i)$ is precisely the set $\{(\ell,v)\mid \ell\in P_n(\R),v\in\ell\subset\R^{n+1},\ell_i\neq0,v_i\neq 0\}$.
+As $\ell$ is one-dimensional, we can write 
+\[v=\lambda(\ell_0/\ell_i,\ldots,\ell_n/\ell_i)\]
+for some $\lambda\in\R$. Hence we construct local trivializations $\psi_i:\pi^{-1}(U_i)\to U_i\times\R$ for $E$ taking
+\[\psi_i:(\ell,v)\mapsto (\ell,\lambda).\]
+It is clear that the $\psi_i$ are diffeomorphisms. Any transition function
+$\psi_j\circ\psi_i^{-1}:\pi^{-1}(U_i\cap U_j)\to (U_i\cap U_j)\times\R$ is then of the form
+\begin{align*}
+    \psi_j(\psi_i^{-1}((\ell,\lambda))) &= \psi_j(\ell,\lambda/\ell_i)\\
+    &= (\ell,\ell_j/\ell_i\cdot\lambda).
+\end{align*}
+We find a map $(U_i\cap U_j)\to GL_1(\R)$ given by multiplication by $\ell_j/\ell_i$, and hence we
+obtain a rank one vector bundle.
+
+
+
+\end{document}

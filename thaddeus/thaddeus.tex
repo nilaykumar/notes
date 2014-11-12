@@ -1,0 +1,247 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+%\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{tikz-cd}
+
+\newcommand{\nm}[1]{\;\textnormal{#1}\;}
+\newcommand{\ra}[0]{\rightarrow}
+\newcommand{\fa}[0]{\;\forall}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\CP}{\mathbb{C}\mathbb{P}}
+\newcommand{\RP}{\mathbb{R}\mathbb{P}}
+\newcommand{\Proj}{\mathbb{P}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\p}{\partial}
+\newcommand{\fr}{\mathfrak}
+\newcommand{\OO}{\mathcal{O}}
+
+
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\length}{length}
+\DeclareMathOperator{\res}{Res}
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Lie}{Lie}
+\DeclareMathOperator{\Pro}{Proj}
+\DeclareMathOperator{\id}{Id}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\irr}{irr}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\trdeg}{trdeg}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Nm}{Nm}
+\DeclareMathOperator{\hgt}{ht}
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem*{thm*}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{lem*}{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem*{cor*}{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem*{prop*}{Proposition}
+\newtheorem{exc}{Exercise}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{exmp}{Example}
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+
+\title{Commutative Algebra \`a la M.~Thaddeus}
+\author{Notes by Nilay Kumar}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+The following result will be quoted extensively.
+
+\begin{lem}[Nakayama, Azumaya, Krull]
+     Let $A$ be a ring, $M$ a finitely generated $A$-module, and $I$ an ideal of $A$.
+     Suppose that $IM=M$. Then there exists an element $a\in A$ of the form $a=1+x$,
+     $x\in I$ such that $aM=0$. If, moreover, if $I$ is contained in the Jacobson radical
+     $\mathcal{J}(A),$ then $M=0$.
+\end{lem}
+\begin{proof}
+    We follow Matsumura.
+    Let $M=Aw_1+\cdots+Aw_s$. We induct on $s$. Let $M'=M/Aw_s$. By the induction
+    hypothesis there exist $x\in I$ such that $(1+x)M'=0$, i.e. $(1+x)M\subset Aw_s$.
+    Note that for the base case $s=1$, the module is trivial, so we can take $x=0$.
+    Since $M=IM$, we have that
+    $(1+x)M=I(1+x)M\subset I(Aw_s)=Iw_s$, and hence we can write $(1+x)w_s=yw_s$ for some
+    $y\in I$. Then $(1+x-y)(1+x)M=0$, and $(1+x-y)(1+x)\equiv 1\mod I$ proving the
+    first assertion. If in particular $I\subset\mathcal{J}(A)$ then $1+x$ is not contained
+    in any maximal, and thus a unit. This implies that $M=0$.
+\end{proof}
+
+The following corollary is often useful.
+\begin{cor}
+    Let $A$ be a ring, $M$ an $A$-module, $N$ and $N'$ submodules of $M$, and $I$ an
+    ideal of $A$. Suppose that $M=N+IN'$, and that either (a) $I$ is nilpotent or (b)
+    $I\subset\mathcal{J}(A)$ and $N'$ is finite. Then $M=N$.
+\end{cor}
+\begin{proof}
+    In case (a) we have $M/N=I(M/N)=I^2(M/N)=\cdots=0.$ In case (b), apply Nakayama's
+    Lemma to $M/N$.
+\end{proof}
+
+\subsection*{November 11, 2014}
+
+Recall the following theorem from last time.
+\begin{thm}
+    A ring $R$ is Artinian if and only if $R$ is Noetherian of Krull dimension 0.
+\end{thm}
+
+\begin{exmp}
+    An algebra $R$ over $k$ a field is Artinian if and only if $R$ is a finite-dimensional
+    vector space, e.g.
+    \[R=k[x,y]/(x^m,y^n,f(x,y),g(x,y)).\]
+    Note, incidentally, if we have $f,g$ monomials (i.e.~a monomial ideal), we can draw a lattice to represent
+    this ring, and we obtain Young diagrams.
+\end{exmp}
+
+\begin{exc}
+    A ring $R$ is Artinian if and only if $\Spec R$ is finite and discrete.
+\end{exc}
+
+\begin{exc}
+    $\Spec R=\Spec R_1\sqcup \Spec R_2$ as a ringed space if and only if $R\cong R_1\times R_2$.
+\end{exc}
+
+\begin{thm}[Structure theorem for Artinian rings]
+    Any Artinian ring $R$ is a product of finitely many Artinian local rings.
+\end{thm}
+\begin{proof}
+    C.f. Atiyah-MacDonald. However, there may be a proof through thinking geometrically
+    via the above exercises.
+\end{proof}
+
+\begin{cor}
+    If $(R,\fr m)$ is Artinian local then $\fr m$ is nilpotent.    
+\end{cor}
+\begin{proof}
+    Apply Nakayama's lemma to the chain of $R$-modules
+    \[\fr m\supset \fr m^2\supset \fr m^3\supset \cdots\]
+    which stabilizes.
+\end{proof}
+
+\begin{cor}
+    For $R$ Noetherian, $\fr p$ is a prime minimal among those containing some ideal $\mathcal{I}\leq R$,
+    if and only if $R_{\fr p}/\mathcal{I}_{\fr p}$ is Artinian.
+\end{cor}
+\begin{proof}
+    The ring $R_{\fr p}/\mathcal{I}_{\fr p}$ is Noetherian, and the primes in this ring correspond
+    to the primes $\mathcal{I}\subset\fr q\subset\fr p$. So $\fr p$ is the only one if and only if $R_{\fr p}/\mathcal{I}_{\fr p}$
+    is Artinian.
+\end{proof}
+
+\begin{prop}
+    Suppose $R$ is Noetherian and $\fr p$ is a prime containing a nonzerodivisor $x$. Then $\hgt\fr p\geq 1$.
+\end{prop}
+\begin{proof}
+    The nilradical $\sqrt{0}\leq R$ is, in general, the intersection of all primes in $R$. Consider the
+    chain
+    \[\sqrt{0}=\bigcap_{\fr q\in R}\fr q\subset \bigcap_{\substack{\fr q\in R\\\fr q\neq\fr q_1}}\fr q
+        \subset \bigcap_{\substack{\fr q\in R\\\fr q\neq\fr q_1,\fr q_2}}\fr q\subset\cdots\]
+    for fixed primes $\fr q_i$. Since $R$ is Noetherian, this chain must stabilize (in this case, to some prime), and hence $\sqrt{0}$
+    can be written as the intersection of finitely many primes in $R$.
+    Thus
+    \[\fr p\supset \sqrt{0}=\fr p_1\cap\cdots\cap\fr p_n\]
+    for some primes $\fr p_i$. Now, $\fr p$ must contain some
+    $\fr p_i$. Suppose it didn't: taking $x_i\in \fr p_i\setminus \fr p$, we find that $x_1\cdots x_n\in\sqrt{0}\setminus\fr p$,
+    a contradiction. To establish that the height is one, now, it suffices to show that each of these minimal primes
+    consist entirely of zerodivisors, so as not to be equal to $\fr p_i$. So let $\fr q$ be any minimal prime.
+    Suppose $\fr q$ contains a nonzerodivisor $x$. Since $R_{\fr q}$ is Artinian, for $x=x/1\in R_{\fr q}$,
+    the chain
+    \[(x)\supset (x)^2\supset (x)^3\supset\cdots\]
+    stabilises, i.e. $(x)^{n+1}=(x)^n$ and $x^n=yx^{n+1}$ for $y\in R_{\fr q}$.
+    Then $x^n(1-xy)=0$ which implies that $1-xy=0$ and hence $x$ is a unit, i.e. $x\notin \fr q_{\fr q}$. This
+    shows that $x\notin\fr q$.\footnote{We have used the following easy fact: if $x$ is a
+        nonzerodivisor in $R$ then $x$ is a nonzerodivisor in $R_{\fr q}$. Show this!}
+\end{proof}
+
+Now we prove an estimate in the opposite direction. But first we introduce the following notion.
+
+\begin{defn}
+    The $n^\text{th}$ \textbf{symbolic power} of $\fr p\subset R$ is defined to be
+    \[\fr p^{(n)}=\{x\in R\mid sx\in\fr p^n\text{ for some }s\in R\setminus\fr p\},\]
+    i.e. $\fr p^{(n)}$ is the inverse image of $\fr p_{\fr p}^n\leq R_{\fr p}$.
+    In particular $(\fr p^{(n)})_{\fr p}=(\fr p_{\fr p})^{n}$.
+\end{defn}
+
+\begin{rem}
+    The geometric inuition behind this definition is unclear, though the algebraic value lies in
+    the following results.
+\end{rem}
+
+\begin{lem}
+    If $xy\in \fr p^{(n)}$ and $x\notin\fr p$ then $y\in\fr p^{(n)}$.
+\end{lem}
+\begin{proof}
+    If $xy\in\fr p^{(n)}$ then $(xy)/1\in(\fr p_{\fr p})^n$, which implies that $y/1\in(\fr p_{\fr p})^n$
+    since $x/1$ is a unit. This shows that $y\in\fr p^{(n)}$.
+\end{proof}
+
+\begin{thm}[Krull's Hauptidealsatz]
+    If $R$ is Noetherian and $\fr p$ is minimal among primes containing an element $x\in R$ then
+    $\hgt\fr p\geq 1$.
+\end{thm}
+
+\begin{rem}
+    Consider the example of a variety. If we consider the subvariety cut out
+    by an irreducible element $f$ in the coordinate ring, the ideal $(f)$ is obviously minimal
+    containing $f$. This, together with the two estimates above, force the codimension of this
+    subvariety to be exactly 1.
+\end{rem}
+
+\begin{proof}
+    Fix a prime $\fr q\subsetneq\fr p$. By construction, $x\notin\fr q$. It is sufficient to
+    show, now, that $\hgt\fr q=0$, which is the same as showing that $\dim R_{\fr q}=0$.
+    Replacing $R$ with $R_{\fr p}$, we assume without loss of generality that $(R,\fr p)$ is local.\footnote{In
+    other words, a counterexample remains a counterexample after localization.}
+    Since $\fr p$ is minimal among primes containing $(x)$, we find, by
+    the above Corollary, that $R/(x)$ is Artinian. We have a descending chain $\fr q^{(n)}$ in $R$
+    whose image in $R/(x)$ is a descending chain of ideals in $R/(x)$.
+    This chain stabilizes, and hence the corresponding chain $(x)+\fr q^{(n)}$ in $R$ must stabilize:
+    \[(x)+\fr q^{(n+1)}=(x)+\fr q^{(n)}\supset\fr q^{(n)}.\]
+    Thus, for all $f\in\fr q^{(n)}$, \[f=rx+g,\] for $r\in R,g\in\fr q^{(n+1)}$.
+    In particular, $rx\in\fr q^{(n)}$, $x\notin\fr q$, so by the above Lemma, $r\in\fr q^{(n)}$.
+    Now $\fr q^{(n)}=(x)\fr q^{(n)}+\fr q^{(n+1)}$, and $\fr q^{(n)}/\fr q^{(n+1)}=(x)\fr q^{(n)}/\fr q^{(n+1)}$,
+    so by Nakayama's lemma (everything in sight is finitely generated) we find that $\fr q^{(n)}=\fr q^{(n+1)}$
+    since $(x)$ is in the Jacobson radical of $R$. Hence
+    \[(\fr q_{\fr q})^n=(\fr q^{(n)})_{\fr q}=(\fr q^{(n+1)})_{\fr q}=(\fr q_{\fr q})^{n+1}\]
+    and applying Nakayama's lemma again, we find that $(\fr q_{\fr q})^n=0$.
+    So if $0\subset\mathcal{I}\subset\fr q$, for $\mathcal{I}$ prime, then 
+    \[\fr q_{\fr q}\subset \sqrt{0_{\fr q}}\subset\sqrt{\mathcal{I}_{\fr q}}\subset \sqrt{\fr q_{\fr q}}.\]
+    It follows that $\mathcal{I}_{\fr q}=\fr q_{\fr q}$, and hence $\mathcal{I}=\fr q$ and $\dim R_{\fr q}=0$.
+\end{proof}
+
+\begin{cor}
+    If $R$ is Noetherian and $\fr p$ is a minimal prime over a nonzerodivisor $x$ then $\hgt\fr p=1$.
+\end{cor}
+
+\subsection*{November 12, 2014}
+
+
+
+\end{document}
+

@@ -1,0 +1,248 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Algebraic Topology I: PSET 5}
+\author{Nilay Kumar\footnote{Collaborated with Matei Ionita.}}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+Recall that $\pi_0(X)=[*,X]$ is a set with cardinality the number of path-components of $X$.
+Thus if we wish to define a $X=K(G,0)$ space, i.e. a space with $\pi_0(X)=G$ (as sets) and all
+higher homotopy groups zero, $X$ must be a space with $|G|$ path components. The obvious
+choice is to take the group $G$ itself, with the discrete topology.
+
+\subsection*{Problem 2}
+\begin{enumerate}[(a)]
+    \item Let $f:A\to B$ be a morphism of complexes. We define $k:\ker f$ to be a morphism of complexes
+        $k:K\to A$ satisfying the usual universal property for kernels. More explicitly, we take
+        $K_i=\ker f_i$ and $d_i^K:K_i\to K_{i-1}$ to take $a\in K_i$ to the unique element in $K_{i-1}$
+        that is sent to $d_i^Ak(a)$. This is well-defined as each map $k_i:K_i\to A_i$ is injective.
+        Let us show that $K$ is universal with respect to the property that $K\to A\to B$ is the zero
+        morphism. Suppose we have another map $h:H\to A$ such that $H\to A\to B$ is zero. Then the
+        universal property of each $K_i$ with respect to $H_i,A_i,$ and $B_i$ yields unique maps
+        $l_i:H_i\to K_i$. Pictorially, we have
+        \begin{equation*}
+            \begin{tikzcd}
+                \cdots\ar{r} & H_{i+1}\ar{r}\ar[dashed]{d}\ar[bend left = 50]{dd} & H_i\ar{r}\ar[dashed]{d}\ar[bend left = 50]{dd} & H_{i-1}\ar{r}\ar[dashed]{d}\ar[bend left = 50]{dd} & \cdots\\
+                \cdots\ar{r} & K_{i+1}\ar{r}\ar{d} & K_i\ar{r}\ar{d} & K_{i-1}\ar{r}\ar{d} & \cdots\\
+                \cdots\ar{r} & A_{i+1}\ar{r}\ar{d} & A_i\ar{r}\ar{d} & A_{i-1}\ar{r}\ar{d} & \cdots\\
+                \cdots\ar{r} & B_{i+1}\ar{r} & B_i\ar{r} & B_{i-1}\ar{r} & \cdots
+            \end{tikzcd}
+        \end{equation*}
+        and it now suffices to show that the $l_i$ form a morphism $l:H\to K$ of complexes. This
+        is done by checking that the squares in the top row commute. By injectivity of $k_{i-1}$,
+        it suffices to show that $k_{i-1}d_i^Kl_i=k_{i-1}l_{i-1}d_i^H$. By the commutativity of the 
+        squares in the second row, we find that $k_{i-1}d_i^Kl_i=d_i^Ak_il_i$, but using the fact that
+        $H\to A$ is a morphism of complexes, $k_{i-1}l_{i-1}d_i^H=d_i^Ak_il_i$ and hence we find that
+        $k_{i-1}d_i^Kl_i=k_{i-1}l_{i-1}d_i^H$, as desired.
+
+        Similarly, we define $q:\coker f$ to be a morphism of complexes $q:B\to Q$ satisfying the
+        usual universal property for cokernels. Its construction is exactly dual to above, using the
+        cokernels of each $f_i$ as the groups in each degree, and with differentials chosen analogously.
+    \item Let $h:A\to B$ be a homotopy of complexes. We claim that $f=dh+hd:A\to B$ is a morphism of complexes.
+        Each $f_i$,  as a sum of compositions of homomorphisms, is a group homomorphism $f_i:A_i\to B_i$.
+        It now suffices to show that the relevant squares commute:
+        \begin{align*}
+            d_i^Bf_i &= d_i^B(d_{i+1}^Bh_i+h_{i+1}d_i^A)\\
+            &= d_i^Bh_{i-1}d_i^A\\
+            f_{i-1}d_i^A &= (d_i^Bh_{i-1}+h_{i-2}d_{i-1}^A)d_i^A\\
+            &= d_i^Bh_{i-1}d_i^A,
+        \end{align*}
+        where we have used the fact that $d^2=0$, and hence $d_i^Bf_i=f_{i-1}d_i^A$, as desired.
+    \item The commutativity of squares guaranteed by any morphism of complexes ensures an induced
+        morphism of homology groups. Suppose $f=dh+hd$ is nullhomotopic via a homotopy $h$. Then $f$
+        induces the zero map $HA\to HB$ if and only if the $f$ maps $\ker d_i^A$ into $\img d_{i+1}^B$
+        for all $i$. But $f=h_{i-1}d_i^A+d_{i+1}^Bh_i$, and the first term annihilates $\ker d_i^A$.
+        Clearly, then $f$ maps $\ker d_i^A$ into $\img d_{i+1}^Bh_i$, as desired. More generally,
+        homotopic morphisms induce the same map on homology, as if $f\sim g$ then $f-g\sim 0$, and thus
+        $(f-g)_*=f_*-g_*=0$, implying that $f_*=g_*$.
+    \item Suppose we have maps of complexes $A\xrightarrow{f} B\xrightarrow{g}C$ with $f$ nullhomotopic.
+        Then the composition $gf$ must be nullhomotopic as well, since
+        \begin{align*}
+            (gf)_i &= g_i(d_{i+1}^Bh_i+h_{i-1}d_i^A)\\
+            &= g_id_{i+1}^B+g_ih_{i-1}d_i^A\\
+            &= d_{i+1}^Cg_{i+1}h_i+g_ih_{i-1}d_i^A\\
+            &= d_{i+1}^Ck_i+k_{i-1}d_i^A,
+        \end{align*}
+        where we take $k_i=g_{i+1}h_i$ as our homotopy. An analogous argument follows for if instead of $f$,
+        we take $g$ to be nullhomotopic.
+    \item Let $f,g:A\to B$ be nullhomotopic. Then
+        \begin{align*}
+            f &= dh+hd\\
+            g &= dh'+h'd\\
+            f\pm g &= (dh+hd)\pm(dh'+h'd)\\
+            &=d(h\pm h')+(h\pm h')d,
+        \end{align*}
+        using the homomorphism property, and hence $f\pm g$ is nullhomotopic as well. Putting these
+        properties together, we find that the set of nullhomotopic maps constitutes an ideal
+        in $\text{Kom}(\Z)$, as left- and right-composition preserve nullhomotopy.
+\end{enumerate}
+
+\subsection*{Problem 3}
+Suppose a complex $A\in\text{Kom}(\Z)$ is contractible, i.e. its identity map is nullhomotopic.
+Then, in $\text{Com}(\Z)$, its identity map is equal to the zero map; as the identity map must
+be bijective, this implies that $A$ must be isomorphic to the zero complex in $\text{Com}(\Z)$.
+Conversely, if it is isomorphic in $\text{Com}(\Z)$ to the zero complex, its identity map is
+homotopic to the zero map in $\text{Kom}(\Z)$, thus making it nullhomotopic.
+
+Now consider the short exact sequence
+\begin{equation*}
+    \begin{tikzcd}
+        0\ar{r} & \Z_2\ar{r} & \Z_4\ar{r} & \Z_2\ar{r} & 0
+    \end{tikzcd}
+\end{equation*}
+as a complex of abelian groups. As it is exact, it is clearly acyclic. It is easy to see, however,
+that it is not contractible; indeed, suppose it is. Then there must exist a homotopy $h$
+\begin{equation*}
+    \begin{tikzcd}
+        0\ar{r} & \Z_2\ar{r}\ar{d}\ar{dl}{h_2} & \Z_4\ar{r}\ar{d}\ar{dl}{h_1} & \Z_2\ar{r}\ar{d}\ar{dl}{h_0} & 0\\
+        0\ar{r} & \Z_2\ar{r} & \Z_4\ar{r} & \Z_2\ar{r} & 0
+    \end{tikzcd}
+\end{equation*}
+such that $\id_i=d_{i+1}h_i+h_{i-1}d_i$. Applying this here for $i=2$, we find that $\id_{\Z_2}=0+d_2h_1$.
+This is clearly impossible, as the only possible map $h_1:\Z_4\to\Z_2$ is the quotient, and hence the map on
+the right-hand side is not bijective. Hence this complex is not contractible.
+
+\subsection*{Problem 4}
+We know that any contractible complex of vector spaces is acyclic, so it suffices to prove that an
+acyclic complex is contractible.
+Recall from class that a complex of free abelian groups with finitely generated homology groups decomposes
+into direct sum of complexes $0\to W\xrightarrow{\id} W\to 0,0\to\Z\to0,0\to\Z\xrightarrow{m}\Z\to 0$.
+Since in our case the complex is acyclic, we find that the complex decomposes into complexes of the form
+$0\to W\xrightarrow{\id}W\to 0$, as otherwise it would have non-zero homology. But each of these is
+obviously contractible as the identity map can be written as $\id = dh+hd$ where $h$ is the homotopy
+shown in the diagram below:
+\begin{equation*}
+    \begin{tikzcd}
+        0\ar{r} & W\ar{r}{\id}\ar{dl}{0} & W\ar{r}\ar{dl}{\id} & 0\ar{dl}{0}\\
+        0\ar{r} & W\ar{r}{\id} & W\ar{r} & 0.
+    \end{tikzcd}
+\end{equation*}
+
+
+\subsection*{Hatcher 2.1.1}
+The quotient of the 2-simplex $[v_0,v_1,v_2]$ obtained by identifying the edges $[v_0,v_1]$ and $[v_1,v_2]$,
+preserving the ordering of vertices yields a M\"obius strip.
+
+\subsection*{Hatcher 2.1.4}
+The given space $X$ is composed of one 0-simplex $v$, three 1-simplicies $a,b,c$, and one 2-simplex $T$.
+This yields the chain complex
+\begin{equation*}
+    \begin{tikzcd}
+        \cdots\ar{r} & 0\ar{r} & \Z^1\ar{r} & \Z^3\ar{r} & \Z^1\ar{r} & 0\ar{r} & \cdots
+    \end{tikzcd}
+\end{equation*}
+whose homology we compute:
+\begin{align*}
+    H^0(X) &= \Z/\langle v-v \rangle=\Z\\
+    H^1(X) &= \Z^3/\langle a+b-c\rangle =\Z^2\\
+    H^2(X) &= 0,
+\end{align*}
+since $dT=a+b-c,da=db=dc=v-v=0$.
+
+\subsection*{Hatcher 2.1.5}
+The Klein bottle, with the given simplicial structure, has one 0-simplex $v$, three 1-simplices $a,b,c$,
+and two 2-simplices $U,L$. This yields the chain complex
+\begin{equation*}
+    \begin{tikzcd}
+        \cdots\ar{r} & 0\ar{r} & \Z^2\ar{r} & \Z^3\ar{r} & \Z^1\ar{r} & 0\ar{r} & \cdots
+    \end{tikzcd}
+\end{equation*}
+whose homology we compute
+\begin{align*}
+    H^0(X) &= \Z\\
+    H^1(X) &= \Z^3/\langle a+b-c,a-b+c\rangle=\Z^3/\langle2a,a-b+c\rangle\\
+    &=\Z\oplus\Z_2\\
+    H^2(X) &= 0,
+\end{align*}
+since $dU=a+b-c,dL=a-b+c,da=db=dc=v-v=0.$
+
+\subsection*{Hatcher 2.1.15}
+Let $A\to B\to C\to D\to E$ be an exact sequence. If $C=0$ then exactness at $B$ implies surjectivity
+of $A\to B$ and exactness at $D$ implies injectivity of $D\to E$. Conversely, suppose $A\to B$ is surjective
+and $D\to E$ is injective. The first implies that $B\to C$ is the zero map and the latter implies
+that the map $C\to D$ is the zero map. But now exactness at $C$ implies that $C=0$.
+
+\subsection*{Hatcher 2.1.16}
+\begin{enumerate}[(a)]
+    \item Suppose $A$ meets every path-component of $X$. Any map $\sigma:\Delta^0\to X$ lands in a path-component
+        $X^i$. By hypothesis there exists a path connecting the point $\img \sigma$ to a point in $A$. This
+        path is a map $\Delta^1\to X^i$ (a relative 1-chain in $X$) whose boundary is the map $\sigma$ above.
+        Hence we have an exact sequence
+        \begin{equation*}
+            \begin{tikzcd}
+                C_1(X,A)\ar{r} & C_0(X,A)\ar{r} & 0,
+            \end{tikzcd}
+        \end{equation*}
+        and $H_0(X,A)=0$. Conversely, if $H_0(X,A)=0$, every map $\sigma:\Delta^0\to X^i$ is the boundary of
+        a map $\Delta^1\to X^i$ which provides a path from $\img\sigma$ to $A$. Thus $A$ meets every path-component
+        $X^i$ of $X$.
+    \item We have the long exact sequence
+        \begin{equation*}
+            \begin{tikzcd}
+                \cdots\ar{r} & H_1(A)\ar{r} & H_1(X)\ar{r} & H_1(X,A)\ar{dll}\\
+                & H_0(A)\ar{r} & H_0(X)\ar{r} & H_0(X,A)\ar{r} & 0.
+            \end{tikzcd}
+        \end{equation*}
+        Recall that $H_0(A)$ and $H_0(X)$ are sets whose elements correspond to the path-components
+        of $A$ and $X$ respectively and the map $H_0(A)\to H_0(X)$ takes path-components of $A$ to
+        the path-component of $X$ in which $A$ sits. Hence $H_0(A)\to H_0(X)$ is injective if and only if
+        there is at most one path-component of $A$ in each path-component of $X$. Now by Hatcher 2.1.15,
+        $H_1(A)\to H_1(X)$ is surjective and there is at most one path-component of $A$ in each path-component
+        of $X$ if and only if $H_1(X,A)=0$.
+\end{enumerate}
+
+\subsection*{Hatcher 2.1.17}
+\begin{enumerate}[(a)]
+    \item Let $X=S^2$ and $A$ be a finite subset of points. Then we obtain a long exact sequence
+        \begin{equation*}
+            \begin{tikzcd}
+                \cdots\ar{r} & 0\ar{r} & \Z\ar{r} & H_2(X,A)\ar{dll}\\
+                & 0\ar{r} & 0\ar{r} & H_1(X,A)\ar{dll}\\
+                & \Z^{|A|}\ar{r} & \Z\ar{r} & H_0(X,A)\ar{r} & 0.
+            \end{tikzcd}
+        \end{equation*}
+        From this, it is evident that $H_2(X,A)=\Z$, $H_1(X,A)$ injects into $\Z^{|A|}$, and via the previous
+        problem, since $A$ meets the path-components of $X$, $H_0(X,A)=0$. But then we must have that
+        $H_1(X,A)=\Z^{|A|-1}$.
+
+        Now let $X=S^1\times S^1$ and $A$ be a finite subset of points. Then we obtain a long exact sequence
+        \begin{equation*}
+            \begin{tikzcd}
+                \cdots\ar{r} & 0\ar{r} & \Z\ar{r} & H_2(X,A)\ar{dll}\\
+                & 0\ar{r} & \Z^2\ar{r} & H_1(X,A)\ar{dll}\\
+                & \Z^{|A|}\ar{r} & \Z\ar{r} & H_0(X,A)\ar{r} & 0
+            \end{tikzcd}
+        \end{equation*}
+        Again we can conclude that $H_2(X,A)=\Z$ and $H_0(X,A)=0$. Now $H_1(X,A)$ must be of the form $\Z^n\oplus\Z_m$,
+        but it is clear that there is no torsion term, as it must map to zero under $\partial$, placing it in $\ker\partial$
+        and hence $\img j_*$. This is impossible since $\Z^2$ has no torsion, and hence $H_1(X,A)$ is free, i.e.
+        $H_1(X,A)=\Z^2\oplus\img\partial=\Z^2\oplus\Z^{|A|-1}=\Z^{|A|+1}$.
+    \item Recall that $H_n(X,A)\cong \tilde H_n(X/A)$. Clearly $X/A\cong T^2\vee T^2$ and hence
+        \[H_n(X,A)=\tilde H_n(T^2\vee T^2)=\tilde H_n(T^2)\oplus\tilde H_n(T^2).\]
+        Thus
+        \begin{align*}
+            H_0(X,A) &= 0\\
+            H_1(X,A) &= \Z^4\\
+            H_2(X,A) &= \Z^2.
+        \end{align*}
+        Similarly, since $X/B\sim T^2\vee S^1$, we find that
+        \[H_n(X,B)=\tilde H_n(T^2\vee S^1)=\tilde H_n(T^2)\oplus\tilde H_n(S^1).\]
+        Thus
+        \begin{align*}
+            H_0(X,B) &= 0\\
+            H_1(X,B) &= \Z^3\\
+            H_2(X,B) &= \Z.
+        \end{align*}
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,95 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Algebraic Topology I: PSET 4}
+\author{Nilay Kumar\footnote{Collaborated with Matei Ionita, Sander Mack-Crane, and Kendric Schefers.}}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+Let $X=S^2$ and $Y=S^3\times\CP^\infty$. Recall that $\pi_n(S^2)\cong\pi_n(S^3)$ for $n\geq 3$.
+Moreover, $\CP^\infty=K(\Z,2)$, and hence $\pi_n(Y)=\pi_n(S^3)$ for $n\geq 3$.
+Hence $\pi_n(X)\cong\pi_n(Y)$ for $n\geq 3$. Clearly $\pi_2(X)\cong\pi_2(Y)\cong\Z$ and
+$\pi_1(X)\cong\pi_1(Y)\cong1$. We claim that even though $X$ and $Y$ have isomorphic homotopy groups,
+they are not homotopy equivalent. Indeed, suppose $f:X\to Y$ is a homotopy equivalence; then
+there exists some $g:Y\to X$ such that $g\circ f\simeq \id_{S^2}$. Note, however, that $f$ can
+be made cellular up to homotopy $f\simeq\tilde f$, and hence $g\circ f\simeq g\circ\tilde f\simeq \id_{S^2}$,
+where now $\img\tilde f\cap S^3=*$. But this means that $\tilde f$ is (equal to a) map into only
+$\CP^\infty$; injectivity of $\tilde f_*$ for $\pi_3$ yields an injective map $\Z\to 0$, which
+is a contradiction.
+
+\subsection*{Problem 2}
+Suppose $X$ and $Y$ are two weakly homotopy equivalent spaces. Recall that for any space $X$, there
+exists a CW complex $Z$ such that $Z\to X$ is weak homotopy equivalence. We claim that moreover the
+composition $Z\to X\to Y$ is a weak homotopy equivalence. This is clear because $X\to Y$ induces an
+isomorphism on homotopy groups, as does $Z\to X$, and hence $Z\to X\to Y$ induces isomorphisms on
+homotopy groups as well. Thus $Z\to X\to Y$ must be a weak homotopy equivalence as well.
+
+\subsection*{Problem 3}
+Let $X$ be a topological space and $\alpha,\beta\in\pi_1(X)$. We claim that the Whitehead product
+$[\alpha,\beta]=\alpha\beta\alpha^{-1}\beta^{-1}\in\pi_1(X)$, i.e. that the product yields the
+commutator of the loops. To see this, it suffices to examine carefully the map $S^1\to S^1\wedge S^1$
+defining the product. We view
+\begin{align*}
+    S^1 &= \partial(D^2) = \partial(D^1\times D^1)\\
+    &= (\partial D^1\times D^1) \cup_{S^0\times S^0} (D^1\times \partial D^1)\\
+    &= (S^0\times D^1) \cup_{S^0\times S^0} (D^1\times S^0),
+\end{align*}
+and then map
+\begin{align*}
+    (D^1\times S^0)&\twoheadrightarrow D^1\twoheadrightarrow S^1\overset{i_1}{\hookrightarrow} S^1\vee S^1\\
+    (S^0\times D^1)&\twoheadrightarrow D^1\twoheadrightarrow S^1\overset{i_2}{\hookrightarrow} S^1\vee S^1.
+\end{align*}
+Graphically, we can view $S^1$ as a square; this union decomposes the square into two pairs of parallel
+lines and glues them together at the four corners. We note that the map $S^1\to S^1\vee S^1$ maps the
+generating loop of $S^1$ to $aba^{-1}b^{-1}$ by way of this decomposition and these maps, where $a$ and $b$
+are the generators of the loops in $S^1\vee S^1$. Hence the Whitehead product of $\alpha$ and $\beta$
+yields a loop performing $\alpha\beta\alpha^{-1}\beta^{-1}$, as desired.
+
+\subsection*{Problem 4}
+Let $X$ be a topological space and $\alpha\in\pi_n(X),\beta\in\pi_k(X)$, with the
+Whitehead product $[\alpha,\beta]\in\pi_{n+k-1}(X)$. Let us see what happens when we instead
+take $[\beta,\alpha]$. Since the product is given by first treating
+\[S^{n+k-1}=\partial(D^n\times D^k)=(S^{n-1}\times D^k)\cup_{S^{n-1}\times S^{k-1}}(D^n\times S^{k-1}),\]
+and mapping this into $S^n\vee S^k$ before mapping into the space via $\alpha,\beta$, we find
+that swapping $\alpha$ and $\beta$ is equivalent to swapping the order of the $D^n$ and $D^k$
+in the expression $\partial(D^n\times D^k)$ above. This swap, we note, moves the first $n$ coordinates
+to the right, which i.e. a composition of $nk$ transpositions. Viewing $D^n$ as the product of intervals $I^n$,
+each of these transpositions swaps two adjacent copies of $I$, and so restricting to the case of $\partial D^2=S^1$,
+we find that the swap interchanges the two axes hence inverting the orientation on $S^1$. Thus
+each transposition yields an factor of $-1$ after composing with $\alpha$ or $\beta$ and hence
+$[\beta,\alpha]=(-1)^{nk}[\alpha,\beta]$.
+
+\subsection*{Problem 5}
+If we think about the sphere $S^{n+k-1}$ as a boundary of the unit disk $D^{n+k}\subset\R^{n+k}$,
+we write
+\begin{align*}
+    U &= \{(x_1,\ldots,x_{n+k})\in S^{n+k-1}\mid x_1^2+\cdots+x_n^2\leq 1/2\}\\
+    V &= \{(x_1,\ldots,x_{n+k})\in S^{n+k-1}\mid x_{n+1}^2+\cdots+x_{n+k}^2\leq 1/2\}.
+\end{align*}
+It is clear that $U\cong D^n\times S^{k-1}$: we force the square of the sums of the first $n$ coordinates
+to be less than or equal to $1/2$, which is $D^n$ with a radius of $1/2$, which in turn forces
+the sum of the squares of the rest of the coordinates to be $1-x_1^2-\cdots-x_n^2$, a sphere of
+radius square root of said quantity. A similar argument works for $V\cong S^{n-1}\times D^k$.
+Now, it is clear that $U\cup V$ covers $S^{n+k-1}$; it suffices to show that $U\cap V=S^{n-1}\times S^{k-1}$.
+But the overlap is precisely when $x_1^2+\cdots+x_n^2=1/2$ and $x_{n+1}^2+\cdots+x_{n+k}^2=1/2$ (as
+the coordinates must sum to 1), which gives exactly the product of two spheres.
+
+\subsection*{Problem 6}
+Recall that the Whitehead product $w:S^{n+k-1}\to S^n\vee S^k$ can be viewed as the attaching map for
+the cell $e^{n+k}$ in the product $S^n\times S^k$. If we now suspend the product to obtain $\Sigma(S^n\times S^k)$,
+the attaching map for the $e^{n+k+1}$ in $\Sigma(S^n\times S^k)$ is $\Sigma w$. By Botvinnik's Claim 10.2, however,
+we know that this map is nullhomotopic, and hence, up to homotopy, the $e^{n+k+1}$ cell's boundary is attached
+to the basepoint in $\Sigma(S^n\times S^k)$. But then it is clear that $\Sigma(S^n\times S^k)$ is (homotopic to)
+$\Sigma(S^n\vee S^k)$ together with a $(n+k+1)$-cell attached to the basepoint. But this is simply
+$S^{n+1}\vee S^{k+1}\vee S^{n+k+1}$, as desired.
+
+\end{document}

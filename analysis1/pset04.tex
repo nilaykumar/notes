@@ -1,0 +1,76 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Analysis I: Solutions to PSET 4}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+Suppose for the sake of contradiction that $E\cup F$ is disconnected, i.e. there exist opens
+$A,B\subset M$ such that $A\cup B=E\cup F$ and $A\cap B=\varnothing$. Then $(A \cap E)$ and
+$(B\cap E)$ provide a separation for $E$. Since $E$ is connected, we find, say, that $A\cap E=E$
+and $B\cap E=\varnothing$. Since $B$ is nonempty, $B\cap F\neq\varnothing$, but since $(A\cap F)$
+and $(B\cap F)$ provide a separation for $F$, we find that $B\cap F=F$ and $A\cap F=\varnothing$.
+But note now that since $E\cap F$ is nonempty, any element in $E\cap F$ is neither in $A$ nor in $B$
+and hence not in $A\cup B$. But this contradicts that $A\cup B=E\cup F$, whence such a separation
+cannot exist.
+
+\subsection*{Rudin 2.16}
+We show that $E^c$ is open in $\Q$, i.e. that it can be written as the intersection of $\Q$ and an
+open in $\R$. Since $\sqrt{2}$ and $\sqrt{3}$ are irrational, we find that
+\[E^c=\{p\in\Q \mid p^2<2 \text{ or }p^2>3\}.\]
+But clearly
+\begin{align*}
+    E^c &= \Q\cap\{x\in\R\mid x^2<2\text{ or }x^2>3\}\\
+    &=\Q \cap (-\infty,-\sqrt{3})\cup(-\sqrt{2},\sqrt{2})\cup(\sqrt{3},\infty),
+\end{align*}
+and hence $E^c$ is open. This proves that $E$ is closed in $\Q$. Moreover, $E$ is
+obviously bounded by, say -2 below and 2 above. However, $E$ cannot be compact in $\Q$, as otherwise
+Rudin theorem 2.33 would imply that $E$ is compact in $\R$, but $E$ is clearly open in $\R$
+as $E=\Q\cap \{x\in\R\mid 2<x^2<3\}$ is an intersection of two opens.
+Finally, note that $E$ is open in $\Q$ as, again, it is the intersection of two opens.
+
+\subsection*{Problem 3}
+Since $K$ is compact, it must be closed and bounded. Rudin's theorem 2.28 implies that $\sup K\in K$.
+The analogous argument holds for $\inf K$: let $y=\inf K$. If $y\notin K$ then for every $h>0$
+there exists a point $x\in K$ such that $y<x<y+h$ otherwise $y+h$ would be a lower bound of $K$. This
+implies that $y$ is a limit point of $K$. Since $K$ is closed, $y\in K$.
+
+\subsection*{Problem 4}
+We present two proofs. The first proof is as follows. Let $\{(a_n,b_n)\}\subset A\times B$ be any infinite
+sequence. The sequence $\{a_n\}\subset A$ is an infinite subsequence of $A$ and hence by compactness of $A$ we
+can find a convergent subsequence $a_{n_k}\to a_0$. Now consider the sequence $\{b_{n_k}\}\subset B$;
+the compactness of $B$ implies the existence of a convergent subsequence $b_{n_{k_j}}\to b_0$. Now it is
+straightforward to see that the subsequence $\{(a_{n_{k_j}},b_{n_{k_j}})\}$ of our original sequence must
+converge to $(a_0,b_0)$. Hence $A\times B$ is compact in $M\times N$.
+
+
+The second proof is as follows.
+Let $\{U_a\}_{\alpha\in I}$ be any open cover of $A\times B$.
+Every point $(a,b)\in A\times B$ is contained in some open $U_\alpha$ and hence we can find a $\delta(a,b)>0$
+such that $B_\delta(a)\times B_\delta(b)\subset U_\alpha$. We will use the compactness of $A$ and $B$
+to eliminate all but finitely many of these.
+
+Fix $b_0\in B$ and consider the union $\cup_{a\in A\times \{b_0\}}B_\delta(a)$ with $\delta$ as above,
+which forms an open cover of $A$.
+Compactness yields a finite subcover $\{B_{\delta_1}(a_1),\ldots,B_{\delta_k}(a_k)\}$ of $A\times\{b_0\}$;
+denote this set by $V_{b_0}$. Repeating this process to obtain $V_b$ for all $b\in B$, we obtain open covers
+of $A\times \{b\}$. For each of these open covers $V_b$, denote by $\varepsilon_{b}=\min(\delta_1,\ldots,\delta_k)$.
+
+Now, the union $\cup_{b\in B}B_{\varepsilon_b}(b)$ is an open cover of $\{a\}\times B$ for each $a$,
+and compactness of $B$ yields a finite subcover $\{B_{\varepsilon_{b_0}},\ldots, B_{\varepsilon_{b_n}}(b_n)\}$. Then
+we find that $\{B_{\varepsilon_i}(a_i)\times B_{\varepsilon_{b_j}}(b_j)\}_{i,j=1,\cdots, n}$
+is a finite open cover of $A\times B$. By our choice of $\varepsilon_i$
+each of these opens is contained in an open $U_\alpha$ of our given open cover.
+Hence we find a finite subcover of $\{U_\alpha\}$ by choosing only such $U_\alpha$.
+
+
+\end{document}

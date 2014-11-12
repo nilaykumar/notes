@@ -1,0 +1,189 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Algebraic Topology I: PSET 3}
+\author{Nilay Kumar\footnote{Collaborated with Matei Ionita.}}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+Recall we have a sequence of abelian groups,
+\begin{equation*}
+    \begin{tikzcd}
+        \cdots\ar{r} & \pi_n(A,x_0)\ar{r}{i_*} & \pi_n(X,x_0)\ar{r}{j_*} & \pi_n(X,A,x_0)\ar{r}{\partial} & \pi_{n-1}(A,x_0)\ar{r} & \cdots
+    \end{tikzcd}
+\end{equation*}
+where $i_*$ and $j_*$ are the homomorphisms induced by the inclusions $(A,x_0)\to(X,x_0)$ and
+$j:(X,x_0,x_0)\to(X,A,x_0)$ and $\partial:\pi_n(X,A,x_0)\to \pi_{n-1}(A,x_0)$ is the boundary
+homomorphism. We show that this sequence is exact.
+
+First we show that $\img\partial=\ker i_*$.
+Suppose we have a $(n-1)$-spheroid in $\img\partial\subset \pi_{n-1}(A,x_0)$, i.e. the bottom
+face of relative spheroid $I^{n-1}\times I\to(X,A,x_0)$. Note that this map can in fact be viewed
+as a homotopy of $I^{n-1}$ sent to $A$ with boundaries to $x_0$ to $I^{n-1}$ sent to $x_0$, as
+the upper face of the relative spheroid is sent to $x_0$. Hence the $(n-1)$-spheroid is contractible
+to $x_0$ and its image in $\pi_{n-1}(X,x_0)$ is zero. Conversely, any $(n-1)$-spheroid in $\pi_{n-1}(A,x_0)$
+sent to 0 in $\pi_{n-1}(X,x_0)$ yields a homotopy $I^{n-1}\times I$ which can be viewed as a relative
+spheroid in $\pi_n(X,A,x_0)$ whose lower face is sent to the $(n-1)$-spheroid.
+
+Showing that $\img i_*=\ker j_*$ is a little easier. Suppose we have a $n$-spheroid in $\pi_n(X,x_0)$ in $\img i_*$.
+As it sits entirely inside $A$, $j_*$ sends it to 0 in $\pi_n(X,A,x_0)$. Conversely, if a $n$-spheroid
+in $\pi_n(X,x_0)$ is sent to 0 under $j_*$, there is a homotopy contracting the spheroid to live entirely
+inside $A$, i.e. in $\img i_*$.
+
+Finally we show that $\ker\partial=\img j_*$. Suppose we have a relative $n$-spheroid in $\img j_*$, i.e.
+a cube whose boundary is sent to $x_0$; the boundary map clearly sends this to 0 in $\pi_{n-1}(A,x_0)$.
+Conversely, given a relative $n$-spheroid in $\pi_n(X,A,x_0)$ sent to 0 by the boundary map, there must
+exist a homotopy of the bottom face $I^{n-1}\to A$ of the spheroid to $I^{n-1}\to \{x_0\}$. Viewing this
+homotopy as a cube, we can attach it to the bottom of the spheroid, thus obtaining an $n$ spheroid whose
+boundary is now completely sent to $x_0$, i.e. an element in $\pi_n(X,x_0)$. Applying $j_*$ to this element
+yields a relative spheroid homotopic to the one we started with.
+
+
+\subsection*{Problem 2}
+Consider pullback $q^*M$ of the M\"obius bundle $M$ over $S^1$ by the quotient map $q:I\to S^1$,
+i.e. the bundle making the diagram
+\begin{equation*}
+    \begin{tikzcd}
+        q^*M\ar{r}\ar{d} & M\ar{d}{p}\\
+        I\ar{r}{q} & S^1.
+    \end{tikzcd}
+\end{equation*}
+The bundle, by virtue of local trivality, exists (c.f. FFG p.55); by Feldbau's theorem, however,
+$E$ is trivial.
+
+\subsection*{Problem 3}
+Consider the commutative diagram of abelian groups,
+\begin{equation*}
+    \begin{tikzcd}
+        A_1\ar{r}\ar{d}{\phi_1} & A_2\ar{r}\ar{d}{\phi_2} & A_3\ar{r}\ar{d}{\phi_3} & A_4\ar{r}\ar{d}{\phi_4} & A_5\ar{d}{\phi_5}\\
+        B_1\ar{r} & B_2\ar{r} & B_3\ar{r} & B_4\ar{r} & B_5
+    \end{tikzcd}
+\end{equation*}
+where $\phi_2$ and $\phi_4$ are isomorphisms, $\phi_1$ is surjective, and $\phi_5$ is injective.
+
+We show first that $\phi_3$ is surjective. Fix $b\in B_3$. It is mapped to $b_4\in B_4$, and
+subsequently to $0\in B_5$. Injectivity of $\phi_5$ forces the preimage under $\phi_5$ to be 0,
+while using the bijectivity of $\phi_4$ we obtain $a_4$ mapping to $b_4\in B_4$ as well as
+$0\in A_5$ by the commutativity of the fourth square. Exactness at $A_4$ now yields an $a_3\in A$
+mapping to $a_4\in A_4$. Commutativity of the third square shows that $b-\phi_3(a)\in\text{im}(B_2\to B_3)$.
+This yields $b_2\in B_2$ mapping to $b-\phi_3(a)$ which corresponds isomorphically to $a_2\in A_2$.
+Commutativity of the second square now requires that if $a_2$ maps to $a\in A_3$, then
+$\phi_3(a_3)=b-\phi_3(a)$. We thus find that $\phi_3(a+a_3)=b$, as desired.
+
+Injectivity is a bit easier. Suppose we have an $a\in A_3$ such that $\phi_3(a)=0\in B_3$.
+We obtain 0 again via the map $B_3\to B_4$ which corresponds isomorphically to $0\in A_4$.
+Commutativity of the third square requires $a$ to map to $0$ in $A_4$ and hence the existence of
+$a_2\in A_2$ mapping to $a\in A_3$. The element $\phi_2(a_2)$ is mapped to $0\in B_3$ by
+the commutativity of the second square, and hence there exists $b_1\in B_1$ mapping to $\phi_2(a_2)$.
+Surjectivity of $\phi_1$ implies the existence of $a_1$ such that $\phi_1(a_1)=b_1$, and the 
+commutativity of the first square requires that $a_1$ is mapped to $a_2\in A_2$. Exactness then
+forces $a_2$ to be mapped to $0\in A_3$. However, we showed earlier that $a_2$ is mapped to $a\in A_3$,
+and hence $a=0$.
+
+\subsection*{FFG p.65 Exercise 7}
+Suppose that $A$ is a retract of $X$. Recall that a retract $r$ satisfies $r\circ i=\id_A$
+and hence since $r_*\circ i_*=\id$, we find that $i_*$ must be injective. For $n\geq 2$, this
+fact together with the long exact sequence yields the short exact sequence
+\begin{equation*}
+    \begin{tikzcd}
+        0\ar{r} &\pi_n(A,x_0)\ar{r}{i_*} & \pi_n(X,x_0)\ar{r}{j_*} & \pi_n(X,A,x_0)\ar{r} & 0
+    \end{tikzcd}
+\end{equation*}
+Notice that given a spheroid $f\in\pi_n(A,x_0)$, we can compose $r_*(i_*(f))=\id(f)$. This provides,
+via the usual splitting lemma, a splitting $\pi_n(X,x_0)\cong \pi_n(A,x_0)\oplus\pi_n(X,A,x_0)$.
+
+\subsection*{FFG p.65 Exercise 8}
+Suppose $A$ is contractible in $X$ to a point $x_0\in A$. It is not immediately obvious that the
+inclusion $\iota:(A,x_0)\to(X,x_0)$ is trivial, as the basepoint may move during the contraction of
+$A$ to $x_0$. However, this is remedied by composing with the change of basepoint isomorphism $\beta_h$,
+and thus $\iota_*=\beta_h\circ\text{const}_*(x_0)=0$. The long exact sequence now yields short exact
+sequences
+\begin{equation*}
+    \begin{tikzcd}
+        0\ar{r} & \pi_n(X,x_0)\ar{r} & \pi_n(X,A,x_0)\ar{r} & \pi_{n-1}(A,x_0)\ar{r} & 0.
+    \end{tikzcd}
+\end{equation*}
+Note that given an element $f\in\pi_{n-1}(A,x_0)$, a $(n-1)$-spheroid mapping into $A$, we
+can construct a relative $n$-spheroid in $\pi_n(X,A,x_0)$ with ``bottom face'' given by $f$, sitting in
+$A$, which under the boundary homomorphism clearly maps back to $f$. Applying the splitting lemma
+to this section, we find that
+\[\pi_n(X,A,x_0)\cong \pi_n(X,x_0)\oplus\pi_{n-1}(A,x_0).\]
+
+\subsection*{FFG p.68 Exercise 1}
+Recall the Hopf fibration $S^3\to S^2$ with fiber $S^1$. The long exact sequence associated to the
+fibration splits via the identity $\pi_n(S^1)=0$ (for $n\geq 2$, found via a covering space argument)
+to yield
+\begin{equation*}
+    \begin{tikzcd}
+        0\ar{r} & \pi_n(S^3)\ar{r} & \pi_n(S^2)\ar{r} & 0,
+    \end{tikzcd}
+\end{equation*}
+giving isomorphisms $\pi_n(S^3)\cong\pi_n(S^2)$ for $n\geq 3$. For $n<3$, we find the short
+exact sequence
+\begin{equation*}
+    \begin{tikzcd}
+        0\ar{r} & \pi_2(S^3)\ar{r} & \pi_2(S^2)\ar{r} & \pi_1(S^1)=\Z\ar{r} & 0
+    \end{tikzcd}
+\end{equation*}
+The group $\pi_2(S^3)$ is trivial by an application of cellular approximation: as $S^3$ contains
+no two cells, any map $S^2\to S^3$ is homotopic to the constant map at the zero cell of $S^3$ - this
+homotopy fixes basepoint, as cellular approximation guarantees that the zero cell is sent to the zero cell.
+Hence $\pi_2(S^3)=0$ and $\pi_2(S^2)=\Z$.
+
+\subsection*{FFG p.68 Exercise 3}
+Suppose we are given a fibration $E\to B$ with fiber $F$ with the base contractible. Then $\pi_n(B)=0$
+for all $n$ and the long exact sequence of the fibration splits into
+\begin{equation*}
+    \begin{tikzcd}
+        0\ar{r}&\pi_n(F)\ar{r} & \pi_n(E)\ar{r} & 0,
+    \end{tikzcd}
+\end{equation*}
+which yields isomorphisms $\pi_n(F)\cong\pi_n(E)$ for all $n$.
+
+Similarly, if the fiber is contractible then $\pi_n(F)=0$
+for all $n$ and the long exact sequence splits into
+\begin{equation*}
+    \begin{tikzcd}
+        0\ar{r}&\pi_n(E)\ar{r} & \pi_n(B)\ar{r} & 0,
+    \end{tikzcd}
+\end{equation*}
+providing isomorphisms $\pi_n(E)\cong\pi_n(B)$ for all $n$ (even for $n=1$, as the sequence extends
+to the zeroth homotopy groups, which happen to be zero).
+
+\subsection*{FFG p.68 Exercise 4}
+Suppose the homotopy groups of the base as well as those of the fiber are finite. Then
+the long exact sequence can be spliced to yield short exact sequences
+\begin{equation*}
+    \begin{tikzcd}
+        0\ar{r} & \ker p_*\ar{r} & \pi_n(E)\ar{r} & \img p_*\ar{r} & 0
+    \end{tikzcd}
+\end{equation*}
+where $p$ is the projection $E\to B$. As $\ker p_*=\img i_*$, where $i$ is the inclusion $F\to E$, we find that
+$\ker p_*$ is finite as it is the homomorphic image of a finite group, and $\img p_*$ is finite as it is a subgroup
+of $\pi_n(B)$, a finite group. In particular, as $\pi_n(E)/\ker p_*=\img p_*$, we find that $|E|=|\ker p_*||\img p_*|$,
+but $|\img p_*|\leq |\pi_n(B)|$ and $|\ker p_*|=|\img i_*|\leq|\pi_n(F)|$.
+
+\subsection*{FFG p.68 Exercise 5}
+Suppose the homotopy groups of the base and fiber are finitely generated (for each $n$). Then, as
+in the previous problem, the long exact sequence yields short exact sequences 
+\begin{equation*}
+    \begin{tikzcd}
+        0\ar{r} & \ker p_*\ar{r} & \pi_n(E)\ar{r} & \img p_*\ar{r} & 0.
+    \end{tikzcd}
+\end{equation*}
+For $n>1$, we find that $\ker p_*=\img i_*$ and $\img p_*$ are finitely generated (as subgroups of abelian groups
+are finitely generated. Hence $\pi_n(E)$ is finitely generated, with generators the union of the generators of these
+two groups (inside $\pi_n(E)$). The bound on ranks follows similarly to that of the bound in the last problem.
+For $n=1$, it suffices to show that $\img p_*$ is finitely generated: we note that it is a subgroup of finite index
+in $\pi_1(B)$ as long as $F$ has a finite number of path-components, and hence in this case is finitely generated.
+
+\end{document}

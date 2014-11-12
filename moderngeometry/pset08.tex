@@ -1,0 +1,106 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Modern Geometry I: PSET 8}
+\author{Nilay Kumar\footnote{Collaborated with Matei Ionita.}}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+Throughout this problem, the indices $i,j,k,m$ range from 1 to 2. In this notation, the given metric
+can be written $g_{ij}=\delta_{ij}y_2^{-2}$ and its inverse is $g^{km}=\delta_{km}y_2^2$.
+\begin{enumerate}[(a)]
+    \item Recall we have the following formula for the Christoffel symbols
+        \[\Gamma_{ij}^m=\frac{1}{2}\sum_{k}\left(g_{jk,i}+g_{ki,j}-g_{ij,k}\right)g^{km}.\]
+        By symmetry of the Levi-Civita connection, we can compute:
+        \begin{align*}
+            \Gamma_{11}^1 &= 0\\
+            \Gamma_{11}^2 &= \frac{1}{y_2}\\
+            \Gamma_{22}^1 &= 0\\
+            \Gamma_{22}^2 &= -\frac{1}{y_2}\\
+            \Gamma_{12}^1 = \Gamma_{21}^1 &= -\frac{1}{y_2}\\
+            \Gamma_{12}^2 =\Gamma_{21}^2 &= 0.
+        \end{align*}
+    \item The requirement that $V(t)$ be parallel is given by
+        \[0 = \frac{dV^k}{dt}+\sum_{ij}\Gamma_{ij}^kV^j\frac{d\gamma_i}{dt}.\]
+        Since $\gamma(t)=(t,1)$, we obtain
+        \begin{align*}
+            \frac{da}{dt} &= -\Gamma_{11}^1a-\Gamma_{12}^1b=b\\
+            \frac{db}{dt} &= -\Gamma_{11}^2a-\Gamma_{12}^2b=a,
+        \end{align*}
+        and solving this system, we find that
+        \begin{align*}
+            a(t)&=A\cos t+B\sin t\\
+            b(t)&=B\cos t-A\sin t.
+        \end{align*}
+        The given initial conditions enforce $a(0)=0$ and $b(0)=1$, and hence $A=0$ and $B=1$:
+        \[V(t)=\sin t \frac{\partial}{\partial y_1}\bigg|_{\gamma(t)}+\cos t \frac{\partial}{\partial y_2}\bigg|_{\gamma(t)}.\]
+\end{enumerate}
+
+\subsection*{Problem 2}
+We prove the identity
+\[dF_p\left( (\nabla_XY)(p) \right)=\pi_p\left( (\tilde \nabla_{\tilde X}\tilde Y)(q) \right)\]
+in coordinates, where $q=F(p)$.
+%Let $U\ni p$ be a coordinate neighborhood on $M$ with coordinates $x_i$ for $i=1\ldots m$, say centered
+%at 0. Since $F$ provides an immersion of $M$ into $N$, we can choose coordinates $y_i$ for $i=1\ldots n$
+%near $q$ such that $F(x_1,\ldots,x_m)=(x_1,\ldots,x_m)$. In these coordinates, we find that $dF_p(\partial/\partial x_i)=\partial/\partial y_i$
+%for $i\leq m$.
+Let $U\ni p$ be a coordinate neighborhood on $M$ with coordinates $x_i$ for $i=1\ldots m$ and $V\supset F(U)$
+a coordinate neighborhood on $N$ with coordinates $y_i$ for $i=1\ldots n$. Taking an orthonormal basis
+$\partial/\partial x_i$ for $i=1\ldots m$ on $T_pM$, we fix an orthonormal basis $\partial/\partial y_i$ for $i=1\ldots n$ such
+that $dF_p(\partial/\partial x_i)=\partial/\partial y_i$.
+Now, writing $X=\sum_{i=1}^m X_i\partial/\partial x_i,Y=\sum_{i=1}^mY_i\partial/\partial x_i$ and
+$\tilde X=\sum_{i=1}^n\tilde X_i\partial/\partial y_i,\tilde Y=\sum_{i=1}^n\tilde Y_i\partial/\partial y_i$,
+we find that if $X$ is $F$-related to $\tilde X$ and $Y$ is $F$-related to $\tilde Y$ then
+(writing $p$ and $q$ instead of their coordinates for clarity)
+\begin{align*}
+    dF_p\left(\sum_{i=1}^mX_i(p)\frac{\partial}{\partial x_i}(p)\right) &= \sum_{i=1}^n\tilde X_i(q)\frac{\partial}{\partial y_i}(q)\\
+    dF_p\left(\sum_{i=1}^mY_i(p)\frac{\partial}{\partial x_i}(p)\right) &= \sum_{i=1}^n\tilde Y_i(q)\frac{\partial}{\partial y_i}(q),
+\end{align*}
+which implies that $X_i(p)=\tilde X_i(q)$ and $Y_i(p)=\tilde Y_i(q)$ for $i\leq m$ and $\tilde X_i(q)=0$
+and $\tilde Y_i(q)=0$ for $i>m$ (for all $p\in U$). We first compute the left-hand side of the identity:
+\begin{align*}
+    dF_p\left( (\nabla_X)Y(p) \right) &= dF_p\left( \sum_{ij}^mX_i(p)\frac{\partial Y_j}{\partial x_i}(p)\frac{\partial}{\partial x_j}(p)
+    +\sum_{ijk}^mX_i(p)Y_j(p)\Gamma_{ij}^k(p)\frac{\partial}{\partial x_k}(p)\right)\\
+    &= \sum_{ij}^mX_i(p)\frac{\partial Y_j}{\partial x_i}(p)\frac{\partial}{\partial y_j}(q)+\sum_{ijk}^mX_i(p)Y_j(p)\Gamma_{ij}^k(p)\frac{\partial}{\partial y_k}(q).
+\end{align*}
+The right-hand side is quite similar, as the orthogonal projection $\pi_p$ simply projects out $\partial/\partial y_i$ for $i>m$:
+\begin{align*}
+    \pi_p\left( (\tilde\nabla_{\tilde X}\tilde Y \right)(q)) &= \pi_p\left( \sum_{ij}^n\tilde X_i(q)\frac{\partial \tilde Y_j}{\partial y_i}(q)\frac{\partial}{\partial y_j}(q)
+    +\sum_{ijk}^n\tilde X_i(q)\tilde Y_j(q)\tilde\Gamma_{ij}^k(q)\frac{\partial}{\partial y_k}(q)\right)\\
+    &= \sum_{ij}^mX_i(p)\frac{\partial Y_j}{\partial y_i}(p)\frac{\partial}{\partial y_j}(q) + \sum_{ijk}^m X_i(p)Y_j(p)\tilde\Gamma_{ij}^k(q)\frac{\partial}{\partial y_k}(q).
+\end{align*}
+Finally, note that $\Gamma_{ij}^k(p)=\tilde \Gamma_{ij}^k(q)$ for $i,j,k\leq m$ since we have an equality
+of matrix elements $h_{ij}=g_{ij}$ for $i,j,k\leq m$ since $F$ is a isometric immersion, i.e. $F^*h=g$, so the
+coordinate expressions for the two different Christoffel symbols are identical. This proves the identity.
+
+\subsection*{Problem 3}
+We can find a vector field $X$ on $M$ such that $X(\gamma(t))=d\gamma/dt(t)$, and similarly a vector field
+$\tilde X$ on $\R^N$ such that $\tilde X( (i\circ\gamma)(t))=d\gamma/dt(t)$. Then, by definition of the covariant
+derivatve on $M$,
+\[\frac{D}{dt}\frac{d\gamma}{dt} = \nabla_XX.\]
+Note that we are in the setup of the previous problem, and hence we obtain the identity
+\[di_{\gamma(t)}\left( (\nabla_XX)(\gamma(t)) \right)=\pi_{\gamma(t)}\left( (\tilde\nabla_{\tilde X}\tilde X)((i\circ\gamma)(t)) \right),\]
+where $\tilde\nabla$ is the covariant derivative associated to the usual metric on $\R^N$. The argument of the right-hand side becomes
+\begin{align*}
+    (\tilde\nabla_{\tilde X}\tilde X)((i\circ\gamma)(t)) &= \sum_{i=1}^N\frac{dx_i}{dt}\tilde\nabla_{\partial/\partial x_i}\left( \sum_k^N\frac{dx_k}{dt}\frac{\partial}{\partial x_k} \right)( (i\circ \gamma)(t) )\\
+    &= \left( \sum_{ik}^N\frac{dx_i}{dt}\frac{\partial}{\partial x_i}\left(\frac{dx_k}{dt}\right)\frac{\partial}{\partial x_k} \right)( (i\circ \gamma)(t))\\
+    &=\left( \sum_k^N\frac{d^2x_k}{dt^2}\frac{\partial}{\partial x_k} \right)( (i\circ\gamma)(t)),
+\end{align*}
+and thus
+\[di_{\gamma(t)}\left( \frac{D}{dt}\frac{d\gamma}{dt}(t) \right)=\pi_{\gamma(t)}\left( \left( \frac{d^2\gamma}{dt^2}\right)( (i\circ\gamma)(t))\right).\]
+Noting now that $T_{\gamma(t)}M$ is a subspace of $T_{\gamma(t)}\R^N$, we find that
+\[\frac{D}{dt}\frac{d\gamma}{dt} = \pi_{\gamma(t)}\left( \frac{d^2\gamma}{dt^2} \right).\]
+
+
+
+
+\end{document}
