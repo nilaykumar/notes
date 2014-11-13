@@ -23,9 +23,11 @@
 \newcommand{\p}{\partial}
 \newcommand{\fr}{\mathfrak}
 \newcommand{\OO}{\mathcal{O}}
+\newcommand{\A}{\mathbb{A}}
 
 
 \DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\codim}{codim}
 \DeclareMathOperator{\Tr}{Tr}
 \DeclareMathOperator{\Res}{Res}
 \DeclareMathOperator{\ord}{ord}
@@ -239,8 +241,129 @@ Now we prove an estimate in the opposite direction. But first we introduce the f
     If $R$ is Noetherian and $\fr p$ is a minimal prime over a nonzerodivisor $x$ then $\hgt\fr p=1$.
 \end{cor}
 
-\subsection*{November 12, 2014}
+\subsection*{November 13, 2014}
 
+\begin{thm}[Generalized Hauptidealsatz]
+    If $R$ is Noetherian and we have $x_1,\ldots,x_k\in R$ with $\fr p$ a minimal
+    prime over $(x_1,\ldots,x_k)$ then $\hgt\fr p\leq k$.
+\end{thm}
+
+\begin{rem}
+    Geometrically, we think of the following. If $V\subset\A^n$ (or more generally any affine
+    variety) is one irreducible component of the zero set of $k$ equations, then
+    $\codim V\leq k$.
+\end{rem}
+
+\begin{proof}
+    We proceed by induction on $k$. The previous Hauptidealsatz proves $k=1$.
+    Again, we can assume, without loss of generality, that $R$ is local and $\fr p$ is maximal.
+    Consider $\fr q$ such that $\fr q\subsetneq \fr p$ maximal among primes satisfying
+    this condition (there exists a maximal such prime due to the Noetherian hypothesis).
+    Since $\fr p$ is minimal containing $(x_1,\ldots,x_k)$, we assume that $x_1\notin\fr q$.
+    It suffices to show that $\fr q$ is the minimal prime over $k-1$ elements, by induction.
+    Now since $x_1\notin\fr q$, $\fr p$ is minimal over $(x_1)+\fr q$. By two Corollaries above,
+    we find that $\fr p$ is nilpotent mod $(x_1)+\fr q$ and hence
+    \[x_i^n=a_ix_1+y_i,\]
+    for $a_i\in R$ and $y_i\in\fr q$. We claim that $\fr q$ is minimal over $(y_2,\ldots,y_k)$.
+    Indeed, $\fr p$ is minimal (among primes) over $(x_1,y_2,\ldots,y_k)$ so if $(x_1,y_2,\ldots,y_k)\subset\ell$
+    for a prime $\ell$, we find that $x_i^n\in\fr l$ and hence $x_i\in\ell$. Now, by the
+    ordinary Hauptidealsatz, we note that
+    \[\frac{\fr p}{(y_2,\ldots,y_k)}\leq \frac{R}{(y_2,\ldots,y_k)}\]
+    has height less than or equal to 1. Moreover,
+    \[\frac{\fr q}{(y_2,\ldots,y_k)}\subsetneq\frac{\fr p}{(y_2,\ldots,y_k)}\]
+    must have height 0, and hence $\fr q$ is minimal over $(y_2,\ldots,y_k)$.
+\end{proof}
+
+\begin{cor}
+    For $k=\bar k$, $\dim k[x_1,\ldots,x_n]=n$.
+\end{cor}
+\begin{proof}
+    A maximal increasing chain of primes ideals must end with a maximal ideal, which
+    by the Nullstellensatz, is the ideal of a point in $\A^n$, call it, up to a change of
+    coordinates, $\fr m=(x_1,\ldots,x_n)$. By the generalized Hauptidealsatz, we find that
+    $\hgt\fr m\leq n$. But $\hgt\geq n$ due to the presence of the chain
+    \[(0)\subset (x_1)\subset \cdots\subset (x_1,\ldots,x_n).\]
+\end{proof}
+
+\begin{rem}
+    This holds true even for $k\neq\bar k$, but we will prove this later.
+\end{rem}
+
+\begin{defn}
+    We define the \textbf{dimension} of an affine algebraic set $X$ to be the Krull dimension
+    of the coordinate ring $\mathcal{O}_X$.
+\end{defn}
+
+\begin{rem}
+    It is clear that the dimension of an affine variety is the maximal length $m$ of
+    chains of irreducible subvarieties
+    \[V_0\subset V_1\subset\cdots\subset V_m\subset V.\]
+\end{rem}
+
+\begin{exc}
+    \begin{enumerate}
+        \item Show using the Hauptidealsatz that for a hypersurface $V(f)\subset\A^n$,
+            we have that $\dim V(f)=n-1$ if $f$ is not constant.
+        \item Let $f,g\in k[x_1,\ldots,x_n]$ be irreducible, with $f\neq \lambda g$,
+            and let $V$ be any irreducible component of $V(f)\cap V(g)$. Then
+            $\fr p_V\leq k[x_1,\ldots,x_n]/(f)$ is minimal over $(g)$ and hence $\hgt\fr p_V=1$
+            in $\mathcal{O}_{V(f)}$. Then $\hgt \pi^{-1}\fr p_V=2$ in $k[x_1,\ldots,x_n]$
+            and thus $\dim V=n-2$.
+        \item Find hypotheses on $f,g,h$ such that each irreducible component of $V(f)\cap V(g)\cap V(h)$
+            has codimension 3.
+    \end{enumerate}
+\end{exc}
+
+\begin{rem}
+    The following result is, in some sense, a converse to the generalized Hauptidealsatz.
+\end{rem}
+
+\begin{thm}
+    If $R$ is Noetherian, then every prime of height $n$ is minimal over some ideal generated
+    by $n$ elements.
+\end{thm}
+
+\begin{rem}
+    Geometrically, we see that every irreducible variety of $\codim n$ is an irreducible component
+    of an intersection of $n$ hypersurfaces. In general, however, it need not be precisely
+    the intersection of $n$ hypersurfaces.
+\end{rem}
+
+\begin{lem}[Prime avoidance]
+    Let $I$ be an ideal in $R$ such that $I\not\subset\fr p_1,\ldots,\fr p_n$ prime. Then
+    $I\not\subset\fr p_1\cup\cdots\cup\fr p_n$.
+\end{lem}
+\begin{proof}
+    Suppose $I\subset \fr p_1\cup\cdots\cup\fr p_n$ but $I$ is not contained in any $\fr p_i$.
+    Discarding some of the $\fr p_i$, we may assume that $I$ is not contained in any smaller union.
+    Then there exist $x_i\in I\setminus (\fr{p_1}\cup\cdots\cup\hat{\fr{p_i}}\cup\cdots\cup\fr{p_n})$.
+    In particular, $x_i\in\fr p_i$. Then $x_1+x_2x_3\cdots x_n\in I\setminus(\fr p_1\cup\cdots\fr p_n)$,
+    which is a contradiction.
+\end{proof}
+
+\begin{rem}
+    What is the geometric intuition here?
+\end{rem}
+
+\begin{proof}[Proof of theorem]
+    We proceed by induction on $m$. The case of $n=0$ is trivial (consider the ideal $(0)$).
+    For $n=1$, $\sqrt{0}=\fr p_1\cap\cdots\cap\fr p_n$ by the Noetherian condition, where $\fr p_i$
+    are all the primes of height 1.
+    If $\hgt\fr p=1$,
+    $\fr p\not\subset\fr p_i$ and hence by prime avoidance, $\not\subset \fr p_1\cup\cdots\cup\fr p_n$.
+    Then there exists an $x\in\fr p\setminus(\fr p_1\cup\cdots\cup\fr p_n)$ with $\fr p$ minimal
+    over $(x)$.
+
+    Now consider $n>1$. There is a decreasing chain
+    \[\fr p=\fr p_n\supsetneq\fr p_{n-1}\supsetneq\cdots\supsetneq \fr p_1\]
+    with $\hgt\fr p_1=1$. The $n=1$ case tells us that $\fr p_1$ is minimal over
+    $x_1$, where $x_1$ is not in any prime of height 0. Now we claim that in $R/(x_1)$
+    $\hgt\bar{\fr p}=n-1$. Clearly $n-1\leq\hgt\bar{\fr p}\leq n$, but if 
+    \[\bar{\fr p}=\bar{\fr q}_n\supsetneq\bar{\fr q}_{n-1}\supset\cdots\supset\bar{\fr q}_0\leq R/(x_1),\]
+    then $\fr q_0\leq R$ is a prime of height 0 containing $x_1$, which is a contradiction.
+    The induction hypothesis tells us that $\bar{\fr p}$ is minimal over $(\bar{x_2},\ldots,\bar{x_n})\leq R/(x_1)$,
+    which shows that $\fr p$ is minimal over $(x_1,\ldots, x_n)$ for any lifts $x_i$.
+\end{proof}
 
 
 \end{document}
