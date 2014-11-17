@@ -205,7 +205,7 @@ Now we prove an estimate in the opposite direction. But first we introduce the f
 
 \begin{thm}[Krull's Hauptidealsatz]
     If $R$ is Noetherian and $\fr p$ is minimal among primes containing an element $x\in R$ then
-    $\hgt\fr p\geq 1$.
+    $\hgt\fr p\leq 1$.
 \end{thm}
 
 \begin{rem}
@@ -257,7 +257,7 @@ Now we prove an estimate in the opposite direction. But first we introduce the f
 \begin{proof}
     We proceed by induction on $k$. The previous Hauptidealsatz proves $k=1$.
     Again, we can assume, without loss of generality, that $R$ is local and $\fr p$ is maximal.
-    Consider $\fr q$ such that $\fr q\subsetneq \fr p$ maximal among primes satisfying
+    Consider $\fr q$ such that $\fr q\subsetneq \fr p$ and is maximal among primes satisfying
     this condition (there exists a maximal such prime due to the Noetherian hypothesis).
     Since $\fr p$ is minimal containing $(x_1,\ldots,x_k)$, we assume that $x_1\notin\fr q$.
     It suffices to show that $\fr q$ is the minimal prime over $k-1$ elements, by induction.
@@ -281,7 +281,7 @@ Now we prove an estimate in the opposite direction. But first we introduce the f
     A maximal increasing chain of primes ideals must end with a maximal ideal, which
     by the Nullstellensatz, is the ideal of a point in $\A^n$, call it, up to a change of
     coordinates, $\fr m=(x_1,\ldots,x_n)$. By the generalized Hauptidealsatz, we find that
-    $\hgt\fr m\leq n$. But $\hgt\geq n$ due to the presence of the chain
+    $\hgt\fr m\leq n$. But $\hgt\fr m\geq n$ due to the presence of the chain
     \[(0)\subset (x_1)\subset \cdots\subset (x_1,\ldots,x_n).\]
 \end{proof}
 
@@ -291,7 +291,7 @@ Now we prove an estimate in the opposite direction. But first we introduce the f
 
 \begin{defn}
     We define the \textbf{dimension} of an affine algebraic set $X$ to be the Krull dimension
-    of the coordinate ring $\mathcal{O}_X$.
+    of the coordinate ring $\mathcal{O}_X(X)$.
 \end{defn}
 
 \begin{rem}
@@ -364,6 +364,140 @@ Now we prove an estimate in the opposite direction. But first we introduce the f
     The induction hypothesis tells us that $\bar{\fr p}$ is minimal over $(\bar{x_2},\ldots,\bar{x_n})\leq R/(x_1)$,
     which shows that $\fr p$ is minimal over $(x_1,\ldots, x_n)$ for any lifts $x_i$.
 \end{proof}
+
+
+
+\subsection*{November 17, 2014}
+
+Recall our wishlist for dimension:
+\begin{enumerate}
+    \item $\dim \A^n=n$;
+    \item if $X\subset Y$ then $\dim X=\dim Y$;
+    \item $\dim X\times Y=\dim X+\dim Y$;
+    \item $X\subset Y$ closed implies $\dim X\leq\dim Y$ with equality if and only if $X=Y$;
+    \item For $f\neq0\in k[x]$, $V(f)\neq\varnothing\subset X$, $\dim V(f)=\dim X-1$;
+    \item if $X\cong Y$ then $\dim X=\dim Y$.
+\end{enumerate}
+Recall, we have shown $1,4,5,6$ for Krull dimension.
+
+We return, for now, to integrality and localization. The following proposition
+shows that localization commutes with integral closure.
+
+\begin{prop}
+    $A\subset B$ rings with $C$ the integral closure of $A$ in $B$, and with $S\subset A$ multiplicatively
+    closed. Then $S^{-1}C$ is the integral closure of $S^{-1}A$ in $S^{-1}B$.
+\end{prop}
+
+\begin{proof}
+    Take $s\in S,x\in C$, i.e.
+    \[x^n+a_1x^{n-1}+\cdots+a_n=0\]
+    for $a_i\in A$.  Dividing through by $s^{n}$, we find that $x/s$ lives in the integral
+    closure of $S^{-1}A$.
+
+    Conversely, if $x/s$ lives in the integral closure, i.e.
+    \[\left(\frac{x}{s}\right)^n+\frac{\alpha_1}{s_1}\left( \frac{x}{s} \right)^{n-1}+\cdots+\frac{\alpha_n}{s_n}=0\]
+    for $\alpha_i\in A$. Let $t=s_1\cdots s_n$ and multiply by $(st)^n$. Then we must have that $tx\in C$,
+    i.e. $x=tx/t\in S^{-1}C$.
+\end{proof}
+
+\begin{cor}
+    For $R$ a domain, the following are equivalent:
+    \begin{enumerate}[(a)]
+        \item $R$ is normal;
+        \item $R_{\fr p}$ is normal for all prime $\fr p\subset R$
+        \item $R_{\fr m}$ is normal for all maximals $\fr m\subset R$
+    \end{enumerate}
+    \begin{proof}
+        (a) implies (b) via the above proposition, and (b) trivially implies (c).
+        Moreover, (c) implies (a): let $C$ be the integral closure of $R$ in its
+        field of fractions $F$. Then $C_{\fr m}$ is the integral closure of $R_{\fr m}$
+        by the previous proposition, and $R_m\hookrightarrow C_{\fr m}$ is surjective
+        by hypothesis. This implies that $R\hookrightarrow C$ is surjective.\footnote{This was shown earlier.}
+    \end{proof}
+\end{cor}
+
+\begin{lem}
+    If $S\subset R$ are normal domains, with $R$ integral over $S$, $R$ is
+    a field if and only if $S$ is a field.
+\end{lem}
+\begin{proof}
+    If $R$ is a field, then every $0\neq s\in S$ is a unit in $R$, and hence
+    every $s\neq 0$ is a unit in $S$\footnote{See midterm.} and thus $S$ is a field.
+    Conversely, if $S$ is a field, it suffices to find an inverse for $0\neq x\in R$.
+    By integrality, we have
+    \[x^n+s_1x^{n-1}+\cdots+s_n=0,\]
+    for $n$ minimal (i.e. $s_n\neq 0$, as we could cancel $x$). If $n=1$, we are done, so we assume $n>1$.
+    Multiplying through by $1/s_n$, we find that 
+    \[1=0x(x^{n-1}+\cdots+s_{n-1}),\]
+    which completes the proof.
+\end{proof}
+
+\begin{lem}
+    Let $S\subset R$ be rings with $R$ integral over $S$. Let $I\subset R$ be an ideal
+    and $J=I\cap S\subset S$ be the ideal intersected with $X$. Then:
+    \begin{enumerate}[(a)]
+        \item $S/J$ is a subring of $R/I$;
+        \item $R/I$ is integral over $S/J$;
+        \item If $I$ is prime, then $J$ is prime;
+        \item If $I$ is prime, then $I$ is maximal if and only if $J$ is maximal.
+    \end{enumerate}
+\end{lem}
+\begin{proof}
+    (a), (b), and (c) are trivial. (d) follows from the previous lemma and (b).
+\end{proof}
+
+\begin{thm}
+    Let $S\subset R$ be rings with $R$ integral over $S$. Let $\fr p\subset S$ be a prime.
+    Then there exists a $\fr P\subset R$ prime such that $\fr P\cap S=\fr p$.
+\end{thm} 
+
+\begin{exmp}
+    Consider $R=k[x]$ and $S=k[x^2]$. This yields a double-sheeted cover $\A^1\to\A^1$ sending $x\mapsto x^2$,
+    i.e. $\fr p=(x^2-1)\subset S$ and $\fr P=(x-1)$ or $\fr P=(x+1)$. Thus the lift of a prime
+    via the above theorem is not necessarily unique.
+\end{exmp}
+
+\begin{proof}
+    Consider the localizations $S_{\fr p}$ and $R_{\fr p}=(S\setminus\fr p)^{-1}R$.
+    Note that $R_{\fr p}$ need not be local in general, but by the earlier proposition
+    is integral over $S_{\fr p}$. Let $\fr M\subset R_{\fr p}$ be a maximal ideal.\footnote{Use Zorn's lemma.}
+    Then $\fr m=\fr M\cap S_{\fr p}$ is maximal by (d) of the lemma above. Of course, $\fr m$
+    is the unique maximal of $S_{\fr p}$, i.e.
+    \[\fr m=\{\frac{a}{b}\mid a\in\fr p,b\in S\setminus\fr p\}.\]
+    Take the inverse image of $\fr M$ under $R\to R_{\fr p}$,
+    \[\fr P\equiv\{x\in R\mid \frac{x}{1}\in\fr M\},\]
+    which need not be maximal, but is certainly prime. We claim that $\fr P\cap S=\fr p$.
+    First, if $x\in\fr p$, then $x\in S$ and $x/1\in\fr m\subset\fr M$ so $x\in\fr P$.
+    Conversely, if $x\in \fr P\cap S$, then $x/1\in\fr M\cap S_{\fr p}=\fr m$ and hence
+    $(bx-a)u=0$ in $S$, for some $b,u\in S\setminus\fr P$. But then $bxu=au\in\fr P$ so
+    $x\in\fr P$ (since $b,u\in S\setminus\fr P$).
+\end{proof}
+
+\begin{lem}
+    If $S\subset R$ are rings with $R$ integral over $S$, and $I\subset R$ is an ideal
+    with $S\cap I=0$, then all $x\in I$ are zerodivisors.
+\end{lem}
+\begin{proof}
+    For $0\neq x\in I$, let
+    \[x^n+s_1x^{n-1}+\cdots + s_n=0,\]
+    with $s_i\in S$, $n$ minimal. Then
+    \[s_n=-x(x^{n-1}+s_1x^{n-2}+\cdots+s_{n-1}),\]
+    but the right hand side is in $I$ and hence $s_n=0$. But minimality requires that
+    the second term cannot be zero, and hence $x$ must be a zerodivisor.
+\end{proof}
+
+\begin{prop}
+    If $S\subset R$ are rings and $R$ is integral over $S$, with $\fr P\subset Q\subset R$
+    are ideals with $\fr P$ prime, if $\fr P\cap S=Q\cap S$, then $\fr P=\fr Q$.
+\end{prop}
+\begin{proof}
+    Let $\fr p=\fr P\cap S$. Then $S/\fr p\subset R/\fr P$ and indeed, $R/\fr P$ is integral
+    over $S/\fr p$ by a lemma above. By the ideal correspondence, we have an ideal
+    $Q/\fr P\subset R/\fr p$ and since $\fr P\cap S=Q\cap S$, we find that $Q/\fr P\cap S/\fr p=0$.
+    By the previous lemma, we find that all elements of $Q/\fr P$ are zerodivisors. Since
+    $R/\fr P$ is an integral domain, $Q/\fr P=0$ and hence $Q=\fr P$.
+\end{proof}
+
 
 
 \end{document}
