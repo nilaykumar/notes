@@ -38,6 +38,7 @@
 \DeclareMathOperator{\img}{im}
 \DeclareMathOperator{\Int}{Int}
 \DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
 \DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\Diff}{Diff}

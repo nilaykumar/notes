@@ -1,0 +1,128 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Analysis I: Solutions to PSET 10}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Rudin 6.4}
+For $a<b\in\R$ let $f:[a,b]\to\R$ be 0 for all irrationals and 1 for all rationals.
+The density of $\Q$ and $\R\setminus\Q$ in $\R$ force
+\begin{align*}
+    U(P,f) &= \sum_{i=1}^n \left(\sup_{x_{i-1}\leq x\leq x_i} f(x)\right)\Delta x_i=\sum_{i=1}^n \Delta x_i=b-a\\
+    L(P,f) &= \sum_{i=1}^n \left( \inf_{x_{i-1}\leq x\leq x_i} f(x) \right)\Delta x_i=\sum_{i=1}^n 0\cdot \Delta x_i=0
+\end{align*}
+for any partition $P$ of $[a,b]$. This implies that
+\[\overline{\int_a^b}fdx=\inf_P U(P,f)\neq\sup_P L(P,f)=\underline{\int_a^b}fdx,\]
+and hence $f\notin\mathcal{R}$.
+
+\subsection*{Rudin 6.7\footnote{Solution due to Theodore Coyne}}
+\begin{enumerate}[(a)]
+    \item If $f$ is Riemann integrable on $[0,1]$, we can find an upper bound $M$
+        of $|f|$ on $[0,1]$. Then
+        \begin{align*}
+            \left|\int_0^c f(x)dx\right| \leq \int_0^c|f(x)|dx\leq cM.
+        \end{align*}
+        Now fix $\varepsilon>0$. Choosing $\delta=\varepsilon/M$, we find that for
+        all $0<c<\delta$
+        \[\left|\int_0^1f(x)dx-\int_c^1f(x)dx\right|=\left|\int_0^cf(x)dx\right|\leq cM<\varepsilon,\]
+        which implies that
+        \[\lim_{c\to 0}\int_c^1f(x)dx=\int_0^1f(x)dx,\]
+        as desired.
+    \item Define the function $f(x)$ on the interval $(1/(n+1), 1/n]$ for any $n\in \N$
+        to be given by $(n+1)(-1)^n$. We choose this function for the following reason:
+        for any $N\in\N$ with $N>1$, we have
+        \begin{align*}
+            \int_{1/N}^1 f(x)dx &= \sum_{n=1}^{N-1}\int_{1/(n+1)}^{1/n} f(x) dx\\
+            &= \sum_{n=1}^{N-1}\left( \frac{1}{n}-\frac{1}{n+1} \right)(-1)^n(n+1)\\
+            &=\sum_{n=1}^{N-1}\frac{(-1)^n}{n}.
+        \end{align*}
+        Then it is clear that as a sequence (i.e. $N$ natural),
+        \[\lim_{N\to\infty}\int_{1/N}^1 f(x)dx=\lim_{N\to\infty}\sum_{n=1}^{N-1}\frac{(-1)^n}{n}\]
+        exists. Now, for $0<c<1$ and $N$ the unique positive integer satisfying $1/(N+1)<c\leq 1/N$,
+        we compute
+        \begin{align*}
+            \left|\int_c^1f(x)dx - \int_{1/N}^1f(x)dx\right| &= \left|\int_c^{1/N}f(x)dx\right|\\
+            &=\frac{1}{N+1}\left( \frac{1}{N}-c \right)\\
+            &\leq \frac{1}{N+1}\left( \frac{1}{N}-\frac{1}{N+1} \right)\\
+            &=\frac{1}{N(N+1)^2},
+        \end{align*}
+        which approaches zero as $c$ approaches zero. Hence $\lim_{c\to 0}\int_c^1f(x)dx$ exists
+        and is equal to $\lim_{n\to\infty}\int_{1/n}^1f(x)dx$ above.
+
+        On the other hand,
+        \[\int_{1/N}^1|f(x)|dx=\sum_{n=1}^{N-1}\frac{1}{n}\]
+        diverges as $N$ increases without bound. Now, for any $c\in(0,1]$, let $M$ be the
+        unique positive integer such that $1/(M+1)<c\leq 1/M$. Then, since
+        \[\int_c^1|f(x)|dx\geq\int_{1/M}^1|f(x)|dx,\]
+        we find that $\lim_{c\to0}\int_c^1f(x)dx$ does not exist.
+\end{enumerate}
+
+\subsection*{Rudin 6.8\footnote{Solution due to Theodore Coyne}}
+Suppose $\int_1^\infty f(x)dx$ converges. Then there must exist an $M\in\R$ such
+that $\int_1^Nf(x)dx\leq M$ for all $N\in\N$. Moreover, since $f$ is monotonically
+decreasing,
+\begin{align*}
+    \int_1^N f(x) dx - \sum_{n=1}^{N-1}f(n+1)=\sum_{n=1}^{N-1}\left( \int_n^{n+1}f(x)dx-f(n+1) \right)\geq 0.
+\end{align*}
+This implies that
+\begin{align*}
+    \sum_{n=1}^Nf(n+1)\leq \int_1^Nf(x)dx\leq M
+\end{align*}
+for all $N\in\N$. Since $f(x)\geq 0$ for all $x$, the partial sums of of the sum on the
+left hand side are monotonically increasing, and hence since monotonic and bounded
+sequences converge, we find that $\sum_{n=1}^\infty f(n)$ exists.
+
+Conversely, suppose that $\sum_{n=1}^\infty f(n)$ exists. By the argument above, we
+find that
+\begin{align*}
+    \sum_{n=1}^Nf(n+1)\leq \int_1^Nf(x)dx&\\
+    \int_1^Nf(x)dx&\leq \sum_{n=1}^{N-1} f(n).
+\end{align*}
+Thus, for any natural $N>1$, since $f$ is decreasing, we find that
+\begin{align*}
+    \sum_{n=1}^{N-1}f(n+1)\leq \int_1^n f(x)dx\leq \sum_{n=1}^{N-1}f(n)
+\end{align*}
+and hence the sequence $\lim_{N\to\infty}\int_1^N f(x)dx$ exists. We extend
+this to real $b$ by taking $m\leq b\leq m+1$ and noting that the non-negativity
+of $f$ yields
+\begin{align*}
+    \int_1^m f(x)dx\leq \int_1^b f(x)dx\leq \int_1^{m+1} f(x)dx,
+\end{align*}
+and so $\lim_{N\to\infty}\int_{1}^bf(x)dx$ exists.
+
+
+\subsection*{Rudin 6.10abc\footnote{Solution due to Ellen Vitercik}}
+\begin{enumerate}[(a)]
+    \item Note that $\log x$ is strictly concave, as its second derivative is
+        everywhere negative. Thus
+        \[\log\left( \frac{u^p}{p} + \frac{v^q}{q} \right)\geq \frac{\log u^p}{p}+\frac{\log v^q}{q}=\log (uv),\]
+        with equality acheived only if $u^p=v^q$. Hence
+        \[uv\leq \frac{u^p}{p}+\frac{v^q}{q}.\]
+    \item Using part (a) we see that
+        \begin{align*}
+            \int_a^b fg d\alpha\leq\int_a^b\left(\frac{f^p}{p}+\frac{g^q}{q}  \right)d\alpha=\frac{1}{p}\int_a^b f^pd\alpha+\frac{1}{q}\int_a^bg^pd\alpha=1.
+        \end{align*}
+    \item Suppose that
+        \[\left\{ \int_a^b|f|^pd\alpha \right\}^{1/p}>0\text{ and }\left\{ \int_a^b|g|^qd\alpha \right\}>0,\]
+        for if not, the result follows trivially. Now we use part (b): since
+        \begin{align*}
+            \int_a^b\left|\frac{f}{ \left\{ \int_a^b|f|^pd\alpha \right\}^{1/p} }\right|^p&=1\\
+            \int_a^b\left|\frac{g}{ \left\{ \int_a^b|g|^qd\alpha \right\}^{1/q} }\right|^q&=1,
+        \end{align*}
+        we find by (b) that
+        \[\int_a^b|f||g|d\alpha\leq \left\{ \int_a^b|f|^pd\alpha \right\}^{1/p}\left\{ \int_a^b|g|^qd\alpha \right\}^{1/q}.\]
+        But recall that Rudin 6.13 yields
+        \[\left|\int_a^b fgd\alpha\right|\leq\int_a^b|f||g|d\alpha.\]
+        Combining this with the inequality above yields the desired result.
+\end{enumerate}
+
+\end{document}

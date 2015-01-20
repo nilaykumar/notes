@@ -498,6 +498,75 @@ shows that localization commutes with integral closure.
     $R/\fr P$ is an integral domain, $Q/\fr P=0$ and hence $Q=\fr P$.
 \end{proof}
 
+\section*{January 20, 2015}
+
+The following is a course outline, not necessarily in any order:
+\begin{itemize}
+    \item Smooth curves via valuations (Hartshorne I.6)
+    \item Properness \& the valuative criterion
+    \item Graded rings, homogeneous ideals, projective varieties, saturation
+    \item Rudiments of intersection theory (Hartshorne I.7, Kempf, Shafarevich)
+    \item Smoothness criteria \& Bertini's theorem (Kempf)
+    \item Normality \& Zariski's Main Theorem (Mumford)
+    \item Differentials (Kempf)
+    \item Coherent sheaves, divisors, line bundles, Riemann-Roch (Kempf, Hartshorne IV), cohomology
+\end{itemize}
+
+\subsection{Smooth \& normal varieties}
+
+Henceforth we assume that all algebraic varieties are irreducible over an
+algebraically closed field $k$.
+
+Recall that a variety is a separated ringed space covered by finitely
+many affine varieties. ``Schemes may occasionally be invoked, but mostly
+only for comic relief.''
+
+\begin{defn}
+    For $x\in X$, the local ring $\mathcal{O}_{X,x}$ is the ring of 
+    germs of rational functions on $X$ which are regular at $X$.
+    In fact, $\mathcal{O}_{X,x}\cong k[U]_{\fr m}$, $U$ any affine neighborhood
+    of $x$, $\fr m$ maximal ideal of $x$.
+\end{defn}
+
+\begin{exmp}
+    The Zariski cotangent space $\fr m/\fr m^2$ is the same (naturally isomorphic)
+    in $U$ as in $\mathcal{O}_{X,x}$. We know that $\dim X=\dim \mathcal{O}_{X,x}$
+    (coordinate rings of affine varieties are catenary).
+\end{exmp}
+
+\begin{defn}
+    A variety $X$ is \textbf{smooth} at $x\in X$ if $\mathcal{O}_{X,x}$ is
+    \textbf{regular}, i.e. $\dim_k\fr m/\fr m^2=\dim X$.
+\end{defn}
+
+\begin{prop}
+    For $X$ closed in $\A^n$, $X$ is smooth if and only if the Jacobian
+    criterion is satisfied, i.e. there exist polynomials$f_1,\ldots,f_{n-\dim X}\in I(X)$
+    whose derivatives are linearly independent at $x$.
+\end{prop}
+\begin{proof}
+    Without loss of generality, assume we are working at the origin. Let $I=I(X)$ and
+    $(x_i)=\fr m\subset k[x_i]/I$ the ideal of $x$. Then
+    \[\fr m=\frac{(x_i)}{I} \text{ for }(x_i)\subset k[x_i]\]
+    so
+    \[\frac{\fr m}{\fr m^2}=\frac{(x_i)}{I+(x_ix_j)}=\frac{k\langle x_i\rangle}{\text{linear terms of elts of }I},\]
+    where the angle brackets represent linear span. If $X$ is smooth of $\dim d$,
+    there exist $n-d$ independent linear terms. Conversely, if there exist $n-d$ independent linear terms,
+    $\dim X\leq \dim\fr m/\fr m^2\leq d$.
+\end{proof}
+
+\begin{rem}
+    If the field is not algebraically closed of positive characteristic,
+    a closed point of a (affine) scheme does not satisfy the Jacobian condition
+    but local ring may be regular. Suppose, for example,
+    we have $a\in k\setminus k^p$, i.e. $x^p-a$ has no root (e.g. $x\in\F_p(x)$).
+    Then consider $f(x,y)=y^2-x^p+a$ and $V(f)\subset\A^2=\Spec k[x,y]$ (note $\A^2\neq k^2$).
+    One checks that $f$ is an irreducible polynomial and so $V(f)$ is indeed a variety.
+    But note that $\partial f/\partial x=0$ and $\partial f/\partial y=0$. So at
+    the maximal ideal $(y,x^p-a)=(y)$ the Jacobian criterion is not satisfied.
+    But if $\fr m=(y)$ then $\dim\fr m/\fr m^2=1$. Hence the concepts of smoothness
+    and regular are not equivalent in general for schemes.
+\end{rem}
 
 
 \end{document}

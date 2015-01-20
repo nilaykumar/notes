@@ -1,0 +1,186 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Algebraic Topology I: PSET 9}
+\author{Nilay Kumar\footnote{Collaborated with Matei Ionita.}}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Hatcher 3.2.1}
+
+Denote by $X$ the closed orientable surface $M_g$ of genus $g$, by $Y$
+the wedge sum $\bigvee_{i=1}^g T^2_i$ of $g$ tori, and by $f:X\to Y$ the given
+quotient map. Note that it suffices to compute the cup product structure on
+$H^1(X;\Z)$, as $H^n(X;\Z)=0$ for $n\geqslant 3$.
+Note first that the naturality of the cup product yields the following
+commutative diagram
+\begin{equation*}
+    \begin{tikzcd}
+        H^1\left( Y\right)\times H^1\left(Y\right)\ar{r}{\smile}\ar{d} & H^2(Y)\ar{d}\\
+        H^1(X)\times H^1(X)\ar{r}{\smile} & H^2(X)
+    \end{tikzcd}
+\end{equation*}
+Now, the ring structure on the (reduced) cohomology of $Y$ is given as the direct product
+(equivalently, direct sum, as $g$ is finite) of the (reduced) cohomologies.
+Hence the cup product on the cohomology of $Y$ is given by
+\begin{align*}
+    a_i^*\smile b_j^* &= \delta_{ij}c_i^*\\
+    a_i^*\smile a_j^* &= 0\\
+    b_i^*\smile b_j^* &= 0,
+\end{align*}
+where $a_i^*,b_i^*$ represent the generators of the first cohomology of the $i^\text{th}$
+torus and $c_i^*$ represents the generator of the second cohomology of the $i^\text{th}$
+torus. Now let $a_i,b_i,c_i$ represent the corresponding cycles. If $\gamma$ represents
+the 2-cycle of $X$, it is clear that $f_*\gamma=\sum_{i=1}^gc_i$. Dualizing, we find that
+$f^*(c_i^*)=c_i^*\circ f_*=\gamma^*$, for all $i$. Now, since pullbacks commute
+with the cup product, we find that, $\alpha_i^*=f^*a_i,\beta_i^*=f^*b_i$, the representatives
+for the cohomology of $X$, satisfy 
+\begin{align*}
+    \alpha_i^*\smile \beta_j^* &= \delta_{ij}\gamma^*\\
+    \alpha_i^*\smile \alpha_j^* &= 0\\
+    \beta_i^*\smile \beta_j^* &= 0.
+\end{align*}
+
+\subsection*{Hatcher 3.2.3}
+\begin{enumerate}[(a)]
+    \item The cohomology ring of $\RP^n$ (with $\Z_2$ coefficients) is the graded ring
+        $\Z_2[\alpha]/(\alpha^{n+1})$, where $|\alpha|=1$. Suppose we have a map $f:\RP^n\to\RP^m$
+        for $m<n$ inducing a nontrivial map on the first cohomologies, i.e.
+        $f^*:\Z_2[\beta]/(\beta^{m+1})\to\Z_2[\alpha]/(\alpha^{n+1})$ pulls back $\beta$
+        to $\alpha$. But this contradicts the ring homomorphism structure of $f$, as
+        \[0=f^*(\beta^{m+1})=f^*(\beta)^{m+1}=\alpha^{m+1},\]
+        but $\alpha^{m+1}\notin(\alpha^{n+1})$ as $n+1>m+1$.
+        The complex case, for maps $\CP^n\to\CP^m$ follows analogously (except with $\Z$
+        coefficients instead). The degree of the generators is doubled, however, so the
+        appropriate statement is one about second cohomologies.
+    \item Suppose $f:S^n\to\R^n$ satisfies $f(x)\neq f(-x)$ for all $x$ and define
+        $g:S^n\to S^{n-1}$ by 
+        \[g(x)=\frac{f(x)-f(-x)}{|f(x)-f(-x)|},\]
+        so $g(-x)=-g(x)$, inducing a map $\tilde g:\RP^n\to\RP^{n-1}$. By part (a), we
+        find that $\tilde g$ induces a trivial map on first cohomologies $\tilde g^1:\Z_2\to\Z_2$.
+        On the other hand, the induced group homomorphism $\pi_1(g):\Z_2\to\Z_2$ is
+        nontrivial, as $\tilde g$ takes nonconstant loops to nonconstant loops. Abelianization
+        yields the corresponding nontrivial map on first homologies $g_1:H_1(\RP^{n})\to H_1(\RP^{n-1})$.
+        The corresponding map on first cohomologies is obtained by the naturality of the
+        universal coefficient theorem, which yields a commutative diagram:
+        \begin{equation*}
+            \begin{tikzcd}
+                0\ar{r}& H^1(\RP^n;\Z_2)\ar{r}& \Hom(H_1(\RP^n;\Z),\Z_2)\ar{r} & 0\\
+                0\ar{r}& H^1(\RP^{n-1};\Z_2)\ar{r}\ar{u}& \Hom(H_1(\RP^{n-1};\Z),\Z_2)\ar{r}\ar{u} & 0
+            \end{tikzcd}
+        \end{equation*}
+        Thus the map on first cohomologies must also be nontrivial, which is a contradiction.
+\end{enumerate}
+
+\subsection*{Hatcher 3.2.5}
+
+\subsection*{Hatcher 3.2.6}
+
+Let $f:\C^{n+1}\to\C^{n+1}$ be the map raising each coordinate to the $d^\text{th}$ power,
+\[(z_0,\ldots,z_n)\mapsto (z_0^d,\ldots,z_n^d),\]
+where $d>0$ is a fixed integer. It is easy to see that $f$ descends to a map
+$\tilde f:\CP^n\to\CP^n$. We wish to compute the induced map
+$\tilde f^*:H^\bullet(\CP^n;\Z)\to H^\bullet(\CP^n;\Z)$. Note that the cohomology ring
+$H^\bullet(\CP^n;\Z)$ is isomorphic to $\Z[\alpha]/(\alpha^{n+1})$ and hence
+$\tilde f^*$ is determined by its action on the generator on the left, call it $\alpha$,
+where $|\alpha|=2$. The map of interest, then, is the restriction
+$\tilde f^*:H^2(\CP^n;\Z)\to H^2(\CP^n;\Z)$. A simple computation in cellular cohomology
+shows, however, that it suffices to treat the case of $\CP^1$, as the cohomologies of
+$\CP^r$ are isomorphic to the $r^{\text{th}}$ and lower cohomologies of $\CP^n$, for $n\geqslant r$
+via the usual inclusion. Hence we reduce to the case of $\C^2$ and $\CP^1$.
+
+It suffices
+now to compute the the map $\tilde f^*$ restricted to the second cohomology. The map
+$\tilde f$ is in fact a local homeomorphism by an elementary fact about Riemann surfaces,
+since each point has precisely $d$ preimages. We can now compute the degree of 
+$\tilde f$ by appealing to local degrees. Fix some $y\in\CP^n$, which under $\tilde f$
+has $d$ preimages $x_1,\ldots, x_d\in\CP^n$. Define neighbhorhoods $U_i$ of $x_i$ mapping
+homeorphically to some $V$ around $y$, provided by $\tilde f$. Thus we obtain isomorphisms
+$H_2(U_i,U_i-x_i)\cong H_2(V,V-y)$, so the local degree of $\tilde f$ at each $x_i$
+is 1. Summing these, we find that the degree of $\tilde f$ is $d$. The naturality of
+the universal coefficient theorem now yields a commutative diagram
+\begin{equation*}
+    \begin{tikzcd}
+        0\ar{r} & H^2(\CP^1;\Z)\ar{r}{\sim} & \Hom(H_2(\CP^1;\Z),\Z)\ar{r} & 0\\
+        0\ar{r} & H^2(\CP^1;\Z)\ar{r}{\sim}\ar{u}{\tilde f^*} & \Hom(H_2(\CP^1;\Z),\Z)\ar{r}\ar{u}{d} & 0,
+    \end{tikzcd}
+\end{equation*}
+and hence $\tilde f^*:H^\bullet(\CP^n;\Z)\to H^\bullet(\CP^n;\Z)$ takes $\alpha$ to $d\cdot \alpha$.
+
+\subsection*{Hatcher 3.2.7}
+
+The reduced cohomology ring of $\RP^2\vee S^3$ is given by the direct product of the
+reduced rings of $\RP^2$ and $S^3$. We know that $\tilde H^\bullet(\RP^2;\Z_2)$ is 
+the subring $R=(\alpha)$ of $\Z_2[\alpha]/(\alpha^3)$ (with $|\alpha|=1$) generated by $\alpha$
+and $\tilde H^\bullet(S^3;\Z_2)$ is the subring $S=(\beta)$ of $\Z_2[\beta]/(\beta^2)$ (with
+$|\beta|=3$) generated by $\beta$. Hence $\tilde H^\bullet(\RP^2\vee S^3;\Z_2)=R\times S$.
+On the other hand, $\tilde H^\bullet(\RP^3;\Z_2)$ is the subring $T=(\gamma)$ of $\Z_2[\gamma]/(\gamma^4)$
+(with $|\gamma|=1$) generated by $\gamma$. The two rings $R\times S$ and $T$ are
+clearly not isomorphic, as $T$ contains an element $\gamma$ which is zero only when raised to
+the fourth power, whereas $R\times S$ does not.
+
+\subsection*{Hatcher 3.2.8}
+
+Let $X$ be $\CP^2$ with a cell $e^3$ attached by the a map $S^2\to\CP^1\subset\CP^2$ of
+degree $p$, and $Y=M(\Z_p,2)\vee S^4$. By construction, both $X$ and $Y$ have associated
+cellular chain complexes (with $\Z$ coefficients) given by
+\begin{equation*}
+    \begin{tikzcd}
+        0\ar{r} & \Z\ar{r}{0} & \Z\ar{r}{p} & \Z\ar{r}& 0\ar{r}& \Z\ar{r} & 0.
+    \end{tikzcd}
+\end{equation*}
+Dualizing, we obtain the cochain complex
+\begin{equation*}
+    \begin{tikzcd}
+        0 & \Z\ar{l} & \Z\ar[swap]{l}{0} & \Z\ar[swap]{l}{p}& 0\ar{l}& \Z\ar{l} & 0\ar{l},
+    \end{tikzcd}
+\end{equation*}
+which has cohomology $\Z$ in degrees 0 and 4 and cohomology $\Z_p$ in degree 3. It is easy
+to see that, for degree reasons, the cup product structure on this cohomology ring must be
+trivial, and hence $X$ and $Y$ have exactly the same cohomology ring when computed with $\Z$
+coefficients.
+
+Computing with $\Z_p$ coefficients, on the other hand, we find that $X$ and $Y$ have
+cochain complexes
+\begin{equation*}
+    \begin{tikzcd}
+        0 & \Z_p\ar{l} & \Z_p\ar[swap]{l}{0} & \Z_p\ar[swap]{l}{0}& 0\ar{l}& \Z_p\ar{l} & 0\ar{l},
+    \end{tikzcd}
+\end{equation*}
+and hence cohomologies $\Z_p$ in degrees 0, 2, 3, and 4. Here we have the possibility of a
+nontrivial cup product, in particular in the second cohomology. We claim that the cup products,
+computed on the generators of the second cohomology, on $X$ and $Y$ are different. The space $Y$,
+in particular, is a wedge of two spaces, and hence its (reduced) cohomology ring is the product
+of the (reduced) cohomologies of the Moore space and the sphere,
+\[\tilde H^\bullet(Y;\Z_p)=\tilde H^\bullet(M(\Z_p,2);\Z_p)\times \tilde H^\bullet(S^4;\Z_p)=\frac{(\alpha,\beta)}{(\alpha^2,\beta^2,\alpha\beta)}\times \frac{(\gamma)}{(\gamma^2)}.\]
+where $|\alpha|=2,|\beta|=3,|\gamma|=4$ (here we have used the easy fact that $M(\Z_p,2)$
+has cohomology $\Z_p$ in degrees 2 and 3). The cup product on $X$ is nontrivial only
+on the second cohomology, and hence the problem reduces to the cup product on $\CP^2$, as
+the extra 3-cell $e^3$ does not change anything. Thus the cup product of the generators
+of the second cohomology is the generator for the fourth cohomology of $X$, which is clearly
+not the case for $Y$, as seen by the product structure written above.
+
+\subsection*{Hatcher 3.2.10}
+We claim that the cross product 
+\[H^\bullet(X;\Z)\otimes H^\bullet(Y;\Z)\xrightarrow{\times} H^\bullet(X\times Y;\Z)\]
+is not an isomorphism if $X$ and $Y$ are infinite discrete sets. As $X$ and $Y$
+have no higher cells this amounts to showing that
+\[H^0(X;\Z)\otimes H^0(Y;\Z)\xrightarrow{\times} H^0(X\times Y;\Z),\]
+is not an isomorphism. We claim, in particular, that the map is not surjective,
+i.e. there are functions on $X\times Y$ not in the image of $\times$. Note that
+if $f\in H^0(X;\Z), g\in H^0(Y;\Z)$, then
+\[\times(f\otimes g)(x,y)=(p_1^*f\smile p_2^*g)(x,y)=f(x)g(y).\]
+But if we take a lattice $\Z^2$, i.e. $X=Y=\Z$, and the function $\phi(x,y)=(-1)^{x+y}$,
+it is clear that $\phi$ cannot be written as some $\psi=\times\left( \sum_i f_i\otimes g_i\right)$ where
+$f_i\in H^0(X;\Z),g_i\in H^0(Y;\Z)$, as $\psi$ is a \textit{finite} sum of products of functions
+that are constant along one axis or the other.
+
+\end{document}

@@ -1,0 +1,73 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+
+\newgeometry{margin=1.75in}
+
+\title{Commutative Algebra: PSET 10}
+\author{Nilay Kumar}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+    \item[Q1.] Let $R$ be a subring of $S$ such that $S\setminus R$ is closed under multiplication.
+        Show that $R$ is integrally closed in $S$.
+    \item[A1.] Let $s\in S$ solve a monic polynomial $p(x)\in R[x]$ with $n$ minimal:
+        \[p(s)=s^n+r_{n-1}s^{n-1}+\cdots+r_1s+r_0=0.\]
+        We can write
+        \[s(s^{n-1}+r_{n-1}s^{n-2}+\cdots+r_1)=-r_0,\]
+        If $s\in S\setminus R$ then the expression in parentheses must be in $R$. But then
+        there exists an $r$ such that
+        \[s^{n-1}+r_{n-1}s^{n-2}+\cdots+(r_1+r)=0,\]
+        contradicting the minimality of $n$.
+    \item[Q2.] If $R\subset S\subset T$ are rings with $R$ integrally closed in $S$ and $S$ integrally
+        closed in $T$, show that $R$ is integrally closed in $T$.
+    \item[A2.] Let $t\in T$ solve a monic polynomial $p(x)\in R[x]$:
+        \[p(t)=t^n+r_{n-1}t^{n-1}+\cdots+r_1t+r_0=0.\]
+        Since $R\subset S$ and $S$ is integrally closed in $T$, $t\in S$. Now, since $R$ is integrally
+        closed in $S$, $t\in R$.
+    \item[Q3.] Let $A$ be a subring of a domain $B$, and let $C$ be the integral closure of $A$ in $B$.
+        If $f,g\in B[x]$ are monic polynomials such that $fg\in C[x]$, show that $f,g\in C[x]$. Hint:
+        factor them in the algebraic closure of the fraction field of $B$.
+    \item[A3.]
+    \item[Q4.] Let $G$ be a finite group of automorphisms of a ring $R$, and let $R^G\subset R$ be the
+        ring of invariants, that is, the set of $r\in R$ such that $\sigma(r)=r$ for all $\sigma\in G$.
+        Prove that $R$ is integral over $R^G$. Hint: consider $\prod_{\sigma\in G}(x-\sigma(r))$.
+    \item[A4.] Fix any $r\in R$. It is clear that $r$ satisfies the polynomial
+        \[p_r(x)=\prod_{\sigma\in G}(x-\sigma(r))\in R[x],\]
+        as $\id_R\in G$. If we now extend every $\sigma:R\to R$ to a map $\sigma':R[x]\to R[x]$ to act
+        trivially on $x$, it is clear that $p(x)\in R[x]$ is in $R^G[x]$ if and only if $\sigma'(p(x))=p(x)$
+        for every $\sigma'$. Hence it suffices to show that $\sigma'(p_r(x))=p_r(x)$ for every $\sigma'$.
+        This is straightforward:
+        \[\sigma'\left( p_r(x) \right)=\sigma'\left( \prod_{\sigma\in G}(x-\sigma(r)) \right)=\prod_{\substack{\tilde\sigma\in G\\\tilde\sigma=\sigma'\circ\sigma}}(x-\tilde\sigma(r))=p_r(x).\]
+    \item[Q8.] Let $K$ be any field, $X$ any scheme. Show that a morphism $\Spec K\to X$ determines,
+        and is determined by, a point $x\in X$ and an extension of the residue field $k(x)\to K$.
+    \item[A8.] Such a morphism $\phi$ uniquely determines a point $x=\phi(\Spec K)\in X$. The associated
+        map $\phi^\#$ on sheaves $\mathcal{O}_X\to\phi_*\mathcal{O}_{\Spec K}$ is equivalent to a collection
+        of maps of rings $\mathcal{O}_X(U)\to K$ for $U$ open containing $x$ commuting with restriction maps.
+        By the universal property of colimits, this is equivalent to a local homomorphism $\mathcal{O}_{X,x}\to K$,
+        which is in turn equivalent to a map $k(x)=\mathcal{O}_{X,x}/\fr m_x\to K$.
+    \item[Q10.] For $K$ a field, the ring of \text{dual numbers} is $D_K\equiv K[\varepsilon]/(\varepsilon^2)$.
+        If $X$ is a scheme over $K$, show that a morphism $\Spec D_K\to X$ determines, and is determined by,
+        a $K$-rational point of $X$ (that is, a point with residue field $K$) and an element of the Zariski
+        tangent space $T_xX=(\fr m_x/\fr m_x^2)^*$.
+    \item[A10.] Such a morphism $\phi:\Spec D_K\to X$ determines a point $x=\phi(\Spec D_K)\in X$.
+        The associated map on sheaves $\phi^\#:\mathcal{O}_X\to\phi_*\mathcal{O}_{\Spec D_K}$ is equivalent
+        to a collection of maps of rings $\mathcal{O}_X(U)$ for $U$ open containing $x$ commuting with
+        restriction maps. By the universal property of colimits, this is equivalent to a local homomorphism
+        $\mathcal{O}_{X,x}\to D_K$, which is in turn equivalent to a map $k(x)=\mathcal{O}_{X,x}/\fr m_x\to K$.
+        Since $X$ is a scheme over $K$, $k(x)$ is a $K$-algebra and $K\to k(x)\to K$ is the identity,\footnote{
+            Consider the composition $\Spec D_K\to\Spec K$: the induced map on sheaves yields a map $K\to D_K$
+            sending $K\to K\leq D_K$.}
+        we find that $k(x)\cong K$.
+        Moreover, the restriction of the local homomorphism $\mathcal{O}_{X,x}\to D_K$ to the vector space $\fr m_x$
+        is equivalent to a $K$-linear map $\fr m_x/\fr m_x^2\to K\langle\varepsilon\rangle$, i.e. equivalent
+        to a map $(K\langle\varepsilon\rangle)^*\to(\fr m_x/\fr m_x^2)^*$, which is equivalent to a choice
+        of tangent vector at $x$.
+\end{enumerate}
+
+\end{document}

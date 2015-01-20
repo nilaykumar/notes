@@ -1,0 +1,207 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Modern Geometry I: PSET 9}
+\author{Nilay Kumar\footnote{Collaborated with Matei Ionita.}}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+Consider the curve $\gamma:\R\to S^n$ given by
+\[t\mapsto \cos\left( |b|t \right)a + \sin\left( |b|t \right)\frac{b}{|b|}\]
+where $a,b\in\R^{n+1}$. We claim that this is the unique geodesic on $(S^n,g_{\rm can})$
+such that $\gamma(0)=a$ and $\gamma'(0)=b$. Uniqueness follows from the uniqueness
+theorem proven in class, so it suffices to show that $\gamma$ satisfies the
+geodesic equations,
+%\[\frac{d^2x_k}{dt^2}+\sum_{ij}\Gamma_{ij}^k\frac{dx_i}{dt}\frac{dx_j}{dt}=0,\]
+\[\frac{D}{dt}\frac{d\gamma}{dt}=\pi_{\gamma(t)}\left( \frac{d^2\gamma}{dt^2} \right)=0\]
+where $\pi_{\gamma}(t)$ is the orthogonal projection $T_{\gamma(t)}\R^{n+1}$ to
+$T_{\gamma(t)}S^n$. By definition,
+\[\frac{d^2\gamma}{dt^2}=\sum_{k=1}^{n+1}\frac{d^2x_k}{dt^2}\frac{\partial}{\partial x_k},\]
+which, after taking second derivatives, yields that
+\[\frac{d^2\gamma}{dt^2}=-|b|^2\sum_{k=1}^{n+1}x_k\frac{\partial}{\partial x_k}.\]
+But this is clearly orthogonal to the sphere, and hence 
+\[\frac{D}{dt}\frac{d\gamma}{dt}=0.\]
+
+\subsection*{Problem 2}
+We first show that $\phi$ is an immersion. We compute the differential,
+\begin{equation*}
+    d\phi =
+    \begin{pmatrix}
+        -f(v)\sin u & f(v)\cos u & 0\\
+        f(v)\cos u & f(v)\sin u & g'(v)
+    \end{pmatrix},
+\end{equation*}
+and if no $2\times 2$ minor is full rank, then we must have
+\begin{align*}
+    0=f(v)f'(v)=f(v)g'(v)\sin u=f(v)g'(v)\cos u.
+\end{align*}
+Since $f(v)\neq 0$, $f'$ and $g'$ are never simultaneously zero,
+and $\cos$ and $\sin$ are never simultaneously zero, this is not possible.
+Hence $\phi$ is an immersion.
+\begin{enumerate}[(a)]
+    \item We compute the induced metric as follows:
+        \begin{align*}
+            \phi^*g_0 &= \left( f'(v)\cos u dv-f(v)\sin u du \right)^2\\
+            &+(f'(v)\sin u dv + f(v)\cos u du)^2 + g'(v)^2 dv^2\\
+            &= f'(v)^2dv^2+f(v)^2du^2+g'(v)^2dv^2\\
+            &= f(v)^2 du^2 + \left( f'(v)^2+g'(v)^2 \right)dv^2.
+        \end{align*}
+    \item We compute the Christoffel symbols
+        \begin{align*}
+            \Gamma_{11}^1&=\Gamma_{22}^1 = 0\\
+            \Gamma_{12}^2&=\Gamma_{21}^2 = 0\\
+            \Gamma_{12}^1&=\Gamma_{21}^1 =\frac{f'}{f}\\
+            \Gamma_{11}^2 &= -\frac{ff'}{f'^2+g'^2}\\
+            \Gamma_{22}^2 &= \frac{f'f''+g'g''}{f'^2+g'^2}.
+        \end{align*}
+        which immediately yield the local equations for a geodesic $\gamma$:
+        \begin{align*}
+            \frac{d^2u}{dt^2}&+2\frac{f'}{f}\frac{du}{dt}\frac{dv}{dt} = 0\\
+            \frac{d^2v}{dt^2}-\frac{ff'}{f'^2+g'^2}\left(\frac{du}{dt}\right)^2&+\frac{f'f''+g'g''}{f'^2+g'^2}\left( \frac{dv}{dt} \right)^2=0.
+        \end{align*}
+    \item The energy is given
+        \begin{align*}
+            |\gamma'(t)|^2=f^2\dot u^2+(f'^2+g'^2)\dot v^2.
+        \end{align*}
+        Differentiating with respect to time, assuming that the energy is constant, we find that
+        \begin{align*}
+            ff'\dot u^2\dot v+(f'f''+g'g'')\dot v^3+(f'^2+g'^2)\dot v\ddot v+f^2\dot u\ddot u=0,
+        \end{align*}
+        and using the first geodesic equation the last term becomes $-2f'\dot u\dot v/f$,
+        and we find that
+        \[\left(-ff'\dot u^2+(f'f''+g'g'') \dot v^2\right)\dot v+(f'^2+g'^2)\dot v\ddot v=0,\]
+        as desired (since the geodesic is neither a meridian or a parallel).
+
+        Now suppose $r\cos\beta=f\cos\beta$ is constant. Then, in $\R^{n+1}$, we find that
+        \[\langle u',v'\rangle\cdot_g\langle 1,0\rangle = |\langle u',v'\rangle|_g|\langle 0,1\rangle|_g\cos\beta.\]
+        This gives us the relation
+        \begin{align*}
+            f^2\dot u &= f\sqrt{f^2\dot u^2+(f'^2+g'^2)\dot v^2}\cos\beta\\
+            f\cos\beta &= \frac{f^2\dot u}{\sqrt{f^2\dot u^2+(f'^2+g'^2)\dot v^2}}.
+        \end{align*}
+        Taking a time derivative using the quotient rule, the first term in the numerator is
+        \begin{align*}
+            (2ff'\dot v\dot u + f^2\ddot u)\sqrt{f^2\dot u^2+(f'^2+g'^2)\dot v^2},
+        \end{align*}
+        which by the first geodesic equation goes to zero. The second term is more complicated,
+        \begin{align*}
+            \frac{f^2\dot u\left(2ff'\dot v\dot u^2+2f^2\dot u\ddot u+(2f'f''+2g'g'')\dot v^3+2(f'^2+g'^2)\dot v\ddot v\right)}{\sqrt{f^2\dot u^2+(f'^2+g'^2)\dot v^2}}
+        \end{align*}
+        %The first geodesic equation yields
+        %\begin{align*}
+        %    2ff'\dot v\dot u^2+2f^2\dot u\ddot u = \dot u\ddot u/f^2=-\frac{2ff'}{f^4}\dot u^2\dot v,
+        %\end{align*}
+        %while the second yields
+        %\begin{align*}
+        %    2(f'f''+2g'g'')\dot v^3+2(f'^2+g'^2)\dot v\ddot v &= -2ff'\dot v\dot u^2%-2(f'f''+g'g'')\dot v^2
+        %\end{align*}
+        Invoking the first geodesic equation on the first two terms and the second on the last two,
+        and noting that the leftover terms cancel, we find that the derivative vanishes and hence
+        \[r\cos\beta=\text{const}.\]
+    \item The geodesic equations for the paraboloid yield
+        \[\frac{d^2u}{dt^2}+\frac{2}{v}\frac{du}{dt}\frac{dv}{dt}=0\]
+        We solve this by separating,
+        \[\left( \frac{du}{dt} \right)^{-1}\frac{d^2u}{dt^2}=\frac{2}{v}\frac{dv}{dt},\]
+        which yields
+        \[\frac{du}{dt}=\frac{c}{v^2},\]
+        for some constant $c$. Now, it is clear that $r(t)=v$ must have a minimum by Clairaut's relation,
+        otherwise $\cos\beta\to\infty$, which is absurd. Suppose the minimum occurs at $t=0$ with value $v_0$.
+        The geodesic is clearly tangent to the parallel at this point, and $\beta(0)=0$. For
+        both $t<0$ and $t>0$, we must have that $v$ is increasing, and hence, as long as
+        $u\to\infty$ as $t\to\infty$, the geodesic will keep circling the paraboloid and hence intersect
+        itself infinitely many times. Then, since the geodesic is parameterized by the arc length,
+        $v(t)^2-v_0^2\leq t$, and so
+        \[\frac{du}{dt}=\frac{c}{v^2}\geq\frac{c}{t+v_0^2}\]
+        and \[u(t)\geq c\log|t+v_0^2|+\text{const},\]
+        as desired.
+\end{enumerate}
+
+\subsection*{Problem 3}
+
+Suppose, without loss of generality, that the integral curve $\gamma$ starts at $e$.
+By the uniqueness of geodesics for a given point $e\in G$ and velocity $X_e\in T_eG=\fr g$,
+it suffices to show that the one-parameter subgroup $\eta:t\mapsto \exp(tX_e)$ is a geodesic,
+i.e. $\nabla_XX=0$. But applying the Koszul formula for $Y$ any left-invariant vector field
+(with $Z=X$), we find that 
+\[\langle Y,\nabla_XX\rangle = \langle X,[Y,X]\rangle,\]
+as the first three terms vanish due to the (left-invariant) inner products of left-invariant vector fields being
+constant, and the last two terms obviously cancel. Moreover, we claim that the bi-invariance of the inner
+product yields the identity
+\[\langle [U,V],W\rangle = -\langle U,[V,W]\rangle.\]
+Before we prove this, note that the identity yields
+\begin{align*}
+    \langle Y,\nabla_XX\rangle &= \langle X,[Y,X]\rangle \\
+    &= -\langle [Y,X],X\rangle\\
+    &=-\langle Y,[X,X]\rangle\\
+    &=0
+\end{align*}
+for all $X$. Hence one-parameter subgroups are geodesics, and by the uniqueness
+theorem, geodesics must be one-parameter subgroups.
+
+Let us now prove the above identity for bi-invariant metrics. Recall first that
+if $A,B\in T_eG$ and $\phi^A_t$ is the flow of $A$, then
+\[ [B,A] = \lim_{t\to 0}\frac{d\phi^A_tB-B}{t}.\]
+The left-invariance of the vector field generated by $X$ yields $L_g\circ \phi^A_t=\phi^A_t\circ L_g$,
+and hence
+\[\phi^A_tg=\phi_t^A(L_ge)=L_g(\phi_t^Ae)=g\phi_t^Ae=R_{\phi_t^Ae}g.\]
+Taking the differential, we find that $d\phi_t^A=dR_{\phi_t^Ae}$ and so we can write
+\[ [B,A] = \lim_{t\to 0}\frac{dR_{\phi_t^Ae}B-B}{t}=\lim_{t\to 0}\frac{Ad(\phi_{-t}^Ae)B-B}{t}\]
+since $Ad(g)B=dR_{g^{-1}}dL_gB=dR_{g^{-1}}B$ by left-invariance of the vector field generated by $Y$.
+Now, returning to the metric, we write for $U,V\in T_eG$,
+\begin{align*}
+    \langle U,V\rangle &= \langle dR_{\phi^A_te}\circ dL_{\phi^A_{-t}e}U, dR_{\phi^A_te}\circ dL_{\phi^A_{-t}e}V\rangle\\
+    &= \langle dR_{\phi^A_te} U,dR_{\phi_t^Ae} V\rangle,
+\end{align*}
+via bi-invariance.
+Denoting by $\tilde U=dR_{\phi^A_te}U$ and $\tilde V=dR_{\phi^A_te}V$ and the metric by $g$,
+and taking a $t$-derivative, we obtain
+\begin{align*}
+    0 &= \frac{d}{dt}\bigg|_{t=0} \langle \tilde U,\tilde V\rangle
+    = \frac{d}{dt}\bigg|_{t=0}\sum_{ij}g_{ij}\tilde U_i\tilde V_j\\
+    &= \sum_{ij}g_{ij}\left( \frac{d\tilde U_i}{dt}\bigg|_{t=0}\tilde V_j|_{t=0}+\tilde U_i|_{t=0}\frac{d\tilde V_j}{dt}\bigg|_{t=0} \right)\\
+    &= \sum_{ij}g_{ij}\left( \lim_{t\to 0}\frac{1}{t}(dR_{\phi^A_te}U_i-U_i)\tilde V_j|_{t=0}+\tilde U_i|_{t=0}\lim_{t\to 0}\frac{1}{t}(dR_{\phi_t^Ae}V_j-V_j) \right)\\
+    &= \sum_{ij}g_{ij}\left( [U_i,A]V_j+U_i[V_j,A] \right)\\
+    &= \langle [U,A],V\rangle + \langle U, [V,A]\rangle,
+\end{align*}
+as desired.
+
+\subsection*{Problem 4}
+\begin{enumerate}[(a)]
+    \item For all $X,Y\in C^\infty(M,TM)$, the pushforwards $F_*X,F_*Y$ are sections of
+        the pullback bundle $C^\infty(M,F^*TN)$. By construction of the pullback bundle,
+        we can find $\tilde X,\tilde Y\in C^\infty(N,TN)$ such that
+        \begin{align*}
+            F_*X &= F^*\tilde X\\
+            F_*Y &= F^*\tilde Y.
+        \end{align*}
+        Then, since the pullback connection satisfies $D_{F_*X}(F^*\tilde Y)=F^*(\nabla_{\tilde X}\tilde Y)$,
+        we find that
+        \begin{align*}
+            D_{F_*X}(F_*Y)-D_{F_*Y}(F_*X) &= D_{F_*X}(F^*\tilde Y)-D_{F_*Y}(F^*\tilde X)\\
+            &= F^*(\nabla_{\tilde X}\tilde Y-\nabla_{\tilde Y}\tilde X)\\
+            &= F^*([\tilde X,\tilde Y]).
+        \end{align*}
+        Now, since $X$ is $F$-related to $\tilde X$ and $Y$ is $F$-related to $\tilde Y$,
+        $[X,Y]$ must be $F$-related to $[\tilde X,\tilde Y]$ and hence
+        \[F^*([\tilde X,\tilde Y])=F_*([X,Y]),\]
+        as desired.
+    \item Similar to above, we write
+        \begin{align*}
+            \langle D_XV,W\rangle + \langle V,D_XW\rangle &= \langle D_XF^*\tilde V,F^*\tilde W\rangle + \langle F^*\tilde V,D_XF^*\tilde W\rangle\\
+            &= F^*\left(\langle \nabla_{\tilde X}\tilde V,\tilde W\rangle + \langle \tilde V, \nabla_{\tilde X}\tilde W\rangle\right)\\
+            &= F^*\left( \tilde X\langle\tilde V,\tilde W\rangle \right)\\
+            &= X\langle V, W\rangle,
+        \end{align*}
+        where we have used the fact that $V,W$ are $F$-related to $\tilde V,\tilde W$.
+\end{enumerate}
+
+\end{document}

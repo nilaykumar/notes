@@ -1,0 +1,130 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Modern Geometry I: PSET 12}
+\author{Nilay Kumar\footnote{Collaborated with Matei Ionita.}}
+\date{Last updated: \today}
+
+
+\DeclareMathOperator{\grad}{grad}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+
+We prove the identity in coordinates, for the coordinate
+vector fields $\partial_i$. The result then follows by linearity.
+\begin{align*}
+    \tilde\nabla_{\partial_i}\partial_j &= \sum_m\tilde\Gamma_{ij}^m\partial_m\\
+    &= \sum_m\left( \frac{1}{2}\sum_k \left( \tilde g_{jk,i}+\tilde g_{ki,j}+\tilde g_{ij,k} \right)\tilde g^{km}\right)\partial_m\\
+    &= \sum_m\left( \Gamma_{ij}^m+\sum_k\left((\partial_if)g_{jk}+(\partial_jf)g_{ki}-(\partial_kf)g_{ij}\right)g^{km} \right)\partial_m\\
+    &=\nabla_{\partial_i}\partial_j + \sum_{k,m}\left((\partial_if)g_{jk}g^{km}+(\partial_jf)g_{ki}g^{mk}-(\partial_kf)g_{ij}g^{km}\right)\partial_m\\
+    &= \nabla_{\partial_i}\partial_j+(\partial_if)\partial_j+(\partial_jf)\partial_i-\sum_{k,m}(\partial_kf)g_{ij}g^{km}\partial_m\\
+    &= \nabla_{\partial_i}\partial_j+(\partial_if)\partial_j+(\partial_jf)\partial_i-g_{ij}\grad f,
+\end{align*}
+where $\grad f=\sum_{k,m}(\partial_kf)g^{km}\partial_m$, as desired.
+
+\subsection*{Problem 2}
+
+Recall the Taylor expansion for the metric in normal coordinates,
+\begin{align*}
+    g_{ij} &= \delta_{ij} + \frac{1}{3}R_{kijl}x^kx^l+\frac{1}{6}\left( \nabla_mR_{kijl} \right)x^mx^kx^l\\
+    &+\left(\frac{1}{20}\nabla_p\nabla_qR_{kijl}+\frac{2}{45}{R_{kil}}^r{R_{pjq}}^s\delta_{rs}  \right)x^kx^lx^px^q + O(|x|^5).
+\end{align*}
+We claim first that there exists a tensor $C$ such that $g=\exp C$. Once we
+show this, it will suffice to compute $\det g=\det\exp C=\exp\tr C$. To find $C$, write
+degreewise,
+\[C = C_2 + C_3 + C_4 + O(|x|^5)\]
+and note that
+\begin{align*}
+    \exp C &= I + C + \frac{1}{2}C^2 + O(|x|^5)\\
+    &= I + C_2 + C_3 + C_4 + \frac{1}{2}C_2^2.
+\end{align*}
+Comparing this to the expansion for $g$ above, we find that
+\begin{align*}
+    C &= \frac{1}{3}R_{kijl}x^kx^l+\frac{1}{6}(\nabla_mR_{kijl})x^mx^kx^l\\
+    &+ \left( \frac{1}{20}\nabla_p\nabla_qR_{kijl} - \frac{1}{90}{R_{kil}}^r{R_{pjq}}^s\delta_{rs}\right)x^kx^lx^px^q+O(|x|^5).
+\end{align*}
+Next we compute the trace and simplify, using $R_{ij}=\delta^{pq}R_{piqj}$ (up to relevant orders),
+\begin{align*}
+    \tr C &= -\frac{1}{3} R_{ij}x^ix^j - \frac{1}{6}(\nabla_m R_{kl})x^mx^kx^l\\
+    &-\left( \frac{1}{20}\nabla_p\nabla_qR_{kl} +\frac{1}{90}{R_{kil}}^r{R_{pjq}}^s\delta_{rs}\delta^{ij}\right)x^kx^lx^px^q+O(|x|^5).
+\end{align*}
+If we now exponentiate, we find that
+\begin{align*}
+    (\det g)(x) &= 1-\frac{1}{3}R_{ij}x^ix^j-\frac{1}{6}R_{kl,m}x^mx^kx^l\\
+    &-\left( \frac{1}{20}R_{kl,pq}+\frac{1}{90}{R_{kilr}}{R_{piqr}}-\frac{1}{18}R_{kl}R_{pq}\right)x^kx^lx^px^q+O(|x|^5),
+\end{align*}
+as desired.
+
+\subsection*{Problem 3}
+\begin{enumerate}[(a)]
+    \item As we are working in a normal ball about $p$, $\exp_p$ furnishes a diffeomorphism
+        from a disc about the origin in $T_pM$ to $B_\delta(p)$. Moreover, the coordinates
+        $(\rho,\theta)$ are given by the composition of the inverse of $\exp_p$ with
+        $\psi_x^2+\psi_y^2$ and $\tan^{-1}\left( \psi_y/\psi_x \right)$, where $\psi_x$ and
+        $\psi_y$ are the coordinates on $T_pM$. These are diffeomorphisms away
+        from the ray $\exp_p(\rho v(0))$ for $0<\rho<\delta$.
+    \item Let us compute the components $g_{ij}$ of the metric in polar
+        coordinates $(\rho,\theta)$. First, we have, by Gauss' lemma, 
+        \begin{align*}
+            g_{11}&=g\left( \frac{\partial}{\partial \rho},\frac{\partial}{\partial\rho}\right)
+            = g\left( \frac{\partial f}{\partial \rho},\frac{\partial  f}{\partial\rho} \right)
+            =\left|\frac{\partial f}{\partial\rho}\right|^2
+        \end{align*}
+        since, by definition, $\partial f/\partial\rho=f_*(\partial/\partial\rho)$. Moreover,
+        \begin{align*}
+            \left|(f_*)_{\rho v(\theta)}\left( \frac{\partial}{\partial\rho} \right)\right|^2&=\left|\frac{d}{dt}\bigg|_{t=0}\left( \exp_p\left( (\rho +t)v(\theta) \right) \right)\right|^2\\
+            &=\left|\frac{d}{dt}\bigg|_{t=0}\gamma_p(\rho+t,v(\theta))\right|^2\\
+            &=\left|\frac{d}{dt}\bigg|_{t=0}\gamma_p(t,v(\theta))\right|^2\\
+            &=\left|v(\theta)\right|^2=1,
+        \end{align*}
+        where we have used the fact that $\gamma$ is a geodesic, and hence the
+        magnitude of its tangent vectors is constant. Next, again by Gauss' lemma,
+        we find that
+        \begin{align*}
+            g_{22} &= g\left( \frac{\partial}{\partial\theta}, \frac{\partial}{\partial\theta} \right)
+            =g\left( \frac{\partial f}{\partial\theta},\frac{\partial f}{\partial\theta} \right)
+            =\left|\frac{\partial f}{\partial\theta}\right|^2
+        \end{align*}
+        Finally, it follows from the proof of Gauss' lemma (c.f. do Carmo p.70) that
+        \[g_{12}=g_{21}=g\left( \frac{\partial}{\partial\rho},\frac{\partial}{\partial\theta} \right)=0.\]
+    \item Along the geodesic $f(\rho,0)$ it is clear that $\partial f/\partial\theta$ is a Jacobi field
+        and so we obtain via a Taylor expansion (do Carmo p. 115) that
+        \[\sqrt{g_{22}}=\left|\frac{\partial f}{\partial \theta}\right|=\rho-\frac{1}{6}K(p,\sigma)\rho^3+\tilde R(\rho)\]
+        where $\lim_{\rho\to 0}\tilde R(\rho)/\rho^3=0$. If we differentiate twice with respect
+        to $\rho$, we obtain
+        \[(\sqrt{g_{22}})_{\rho\rho}=-K(p,\sigma)\rho+R(\rho),\]
+        where $\lim_{\rho\to 0}R(\rho)/\rho=0$, as desired.
+    \item Finally, note that
+        \begin{align*}
+            \lim_{\rho\to0}\frac{(\sqrt{g_{22}})_{\rho\rho}}{\sqrt{g_{22}}} &= \lim_{\rho\to 0}\frac{-K(p,\sigma)\rho+R(\rho)}{\rho-K(p,\sigma)\rho^3/6+\tilde R(\rho)}\\
+            &=-K(p,\sigma)
+        \end{align*}
+\end{enumerate}
+
+\subsection*{Problem 4}
+Recall that the arc length of the curve $exp_p(S_r)$ is given by the integral
+\[L_r=\int_{-\pi}^\pi\sqrt{g\left( \frac{\partial}{\partial\theta},\frac{\partial}{\partial\theta} \right)}d\theta=\int_{-\pi}^\pi\sqrt{g_22}d\theta.\]
+The previous problem showed that along $\exp_p(rv(0))$, we have the identity
+\[\sqrt{g_{22}} = r-\frac{1}{6}K(p,\sigma)r^3+\tilde R(r).\]
+This in fact holds for all $\theta$, as $\sqrt{g_{22}}$ is independent of $\theta$. To
+see this, we can simply change coordinates to $(r,\theta-\theta_0)$, and the computation
+above yields the same expression for $\sqrt{g_{22}}(r,0)$, which is now actually
+along $\exp_p(rv(\theta_0))$. Hence we obtain
+\begin{align*}
+    L_r &= \int_{-\pi}^{\pi} r-\frac{1}{6}K(p,\sigma)r^3+\tilde R(r) d\theta\\
+    &= 2\pi r-\frac{\pi}{3}K(p,\sigma)r^3+2\pi\tilde R(r).
+\end{align*}
+Dividing both sides by $r^3$ and taking the limit as $r\to 0$, we find that
+\begin{align*}
+    K(p,\sigma) &= \lim_{r\to 0}\frac{3}{\pi}\frac{2\pi r-L_r}{r^3}.
+\end{align*}
+\end{document}

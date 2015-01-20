@@ -1,0 +1,134 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Modern Geometry I: PSET 11}
+\author{Nilay Kumar\footnote{Collaborated with Matei Ionita.}}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+Since we are proving an identity involving tensors, if suffices to prove it
+at a point $p\in M$. Fix a geodesic frame $\{e_i\}$ based at $p$, i.e. an
+orthonormal local frame on a neighborhood $U\ni p$ such that at $p$, the
+Christoffel symbols vanish with respect to this frame. Thus we find that
+\begin{align*}
+    \nabla R\left( e_i,e_j,e_k,e_l,e_h \right) &= e_h\langle R(e_i,e_j)e_k,e_l\rangle\\
+    &= e_h\langle R(e_k,e_l)e_i,e_j\rangle\\
+    &= \langle \nabla_{e_h}\nabla_{e_l}\nabla_{e_k}e_i-\nabla_{e_h}\nabla_{e_k}\nabla_{e_l}e_i+\nabla_{e_h}\nabla_{[e_k,e_l]}e_i,e_j\rangle
+\end{align*}
+where we have used the fact that $\nabla$ is compatible with the metric and
+that $\nabla_{e_h}e_j=0$.
+Summing, we find
+\begin{align*}
+    &\nabla R(e_i,e_j,e_k,e_l,e_h)+\nabla R(e_i,e_j,e_l,e_h,e_k)+\nabla R(e_i,e_j,e_h,e_k,e_l)\\
+    &= \langle\nabla_{e_h}\nabla_{e_l}\nabla_{e_k}e_i-\nabla_{e_h}\nabla_{e_k}\nabla_{e_l}e_i+\nabla_{e_h}\nabla_{[e_k,e_l]}e_i,e_j\rangle\\
+    &+ \langle\nabla_{e_k}\nabla_{e_h}\nabla_{e_l}e_i-\nabla_{e_k}\nabla_{e_l}\nabla_{e_h}e_i+\nabla_{e_k}\nabla_{[e_l,e_h]}e_i,e_j\rangle\\
+    &+ \langle\nabla_{e_l}\nabla_{e_k}\nabla_{e_h}e_i-\nabla_{e_l}\nabla_{e_h}\nabla_{e_k}e_i+\nabla_{e_l}\nabla_{[e_h,e_k]}e_i,e_j\rangle.
+\end{align*}
+Next note that, by definition of $R$,
+\begin{align*}
+    \nabla_{e_k}\nabla_{[e_l,e_h]}e_i&=R([e_l,e_h],e_k)e_i+\nabla_{[e_l,e_h]}\nabla_{e_k}e_i-\nabla_{[ [e_l,e_h],e_k ]}e_i\\
+    \nabla_{e_l}\nabla_{[e_h,e_k]}e_i&=R([e_h,e_k],e_l)e_i+\nabla_{[e_h,e_k]}\nabla_{e_l}e_i-\nabla_{[  [e_h,e_k],e_l]}e_i\\
+    \nabla_{e_h}\nabla_{[e_k,e_l]}e_i&=R([e_k,e_l],e_h)e_i+\nabla_{[e_k,e_l]}\nabla_{e_h}e_i-\nabla_{[  [e_k,e_l],e_h]}e_i
+\end{align*}
+This leaves us with
+\begin{align*}
+    \nabla R(\cdots)+\nabla R(\cdots) + \nabla R(\cdots) &= \langle R([e_l,e_h],e_k)e_i+R([e_h,e_k],e_l)e_i+R([e_k,e_l],e_h)e_i\\
+    &-\nabla_{[ [e_l,e_h],e_k ]}e_i-\nabla_{[  [e_h,e_k],e_l]}e_i-\nabla_{[  [e_k,e_l],e_h]}e_i, e_j\rangle=0.
+\end{align*}
+
+\subsection*{Problem 2}
+\begin{enumerate}[(a)]
+    \item Let $n=\dim M\geq 3$. Fix a geodesic frame in a neighborhood of $p$.
+        The second Bianchi identity (see the expressions above) is written
+        \[e_s( R_{hijk})+e_j(R_{hiks})+e_k(R_{hish})=0.\]
+        Multiplying by $\delta_{ik}\delta_{hj}$ and summing, we find, for the
+        first term,
+        \begin{align*}
+            \sum \delta_{hj}\delta_{ik}e_s(R_{hijk})&=e_s\left( \sum\delta_{hj}\delta_{ik}R_{hijk} \right)\\
+            &=e_s\left( \sum\delta_{hj}R_{hj} \right)\\
+            &=e_s\left( \sum\delta_{hj}(\lambda\delta_{hj}) \right)\\
+            &=ne_s(\lambda),
+        \end{align*}
+        for the second term,
+        \begin{align*}
+            \sum \delta_{hj}\delta_{ik}e_j(R_{hiks}) &= -\sum\delta_{hj}e_j\left( \sum\delta_{ik}R_{hisk} \right)\\
+            &=\sum\delta_{hj}e_j(\lambda\delta_{hs})\\
+            &=-e_s(\lambda),
+        \end{align*}
+        and for the third term,
+        \begin{align*}
+            \sum\delta_{hj}\delta_{ik}e_k(R_{hisj}) &= -\sum\delta_{ik}\delta_{hj}e_k(R_{ihsj})\\
+            &= -\sum\delta_{ik}\delta_{is}e_k(\lambda)\\
+            &= -e_s(\lambda).
+        \end{align*}
+        Hence we find that for all $s$, $(n-2)e_s(\lambda)=0$. Since this holds for all $p$
+        and $M$ is connected, we find that $\lambda$ is constant on $M$.
+    \item Note that since
+        \[\text{Ric}_{ij}=\sum R_{ikjl}\delta^{lk}=\lambda\delta_{ij},\]
+        we find that
+        \begin{align*}
+            \text{Ric}_{11} &= R_{1212}+R_{1313}=\lambda\\
+            \text{Ric}_{22} &= R_{1212}+R_{2323}=\lambda\\
+            \text{Ric}_{33} &= R_{1313}+R_{2323}=\lambda,
+        \end{align*}
+        and so
+        \begin{align*}
+            K(\sigma) &= R_{1212}\\
+            &= \frac{1}{2}\left( \text{Ric}_{11}+\text{Ric}_{22}-\text{Ric}_{33} \right)\\
+            &=\frac{1}{2}\lambda,
+        \end{align*}
+        as desired.
+\end{enumerate}
+
+\subsection*{Problem 3}
+Take $\tilde g=r^2g$ for $r>0$ is a constant. Recall that the Christoffel symbols
+are given
+\[\tilde \Gamma_{ij}^m=\frac{1}{2}\sum_k\left( \tilde g_{jk,i}+\tilde g_{ki,j}-\tilde g_{ij,k} \right)\tilde g^{km}.\]
+Clearly multiplying $g$ by a constant $r^2$ yields $\tilde\Gamma^m_{ij}=\Gamma^m_{ij}$.
+Moreover, since
+\[{\tilde R_{ijk}}^s=\sum_l\tilde\Gamma_{ik}^l\tilde\Gamma_{jl}^s-\sum_l\tilde\Gamma_{jk}^l\tilde\Gamma_{il}^s+\tilde\Gamma_{ik,j}^s-\tilde\Gamma_{jk,i}^s,\]
+we find that ${\tilde{R}_{ijk}}^l=R_{ijk}^l.$
+Now, using the formula
+\[\tilde R_{ijks}=\sum_l\tilde R_{ijk}^l\tilde g_{ls},\]
+it follows immediately that $\tilde R_{ijkl}=r^2R_{ijkl}$. The sectional curvature,
+on the other hand, is given by
+\begin{align*}
+    \tilde K(\sigma) &= \frac{r^2(x,y,x,y)}{r^4\cdot|x|^2|y|^2-r^4\cdot \langle x, y\rangle^2}\\
+    &= \frac{K(\sigma)}{r^2}.
+\end{align*}
+Next, note that since
+\[\tilde R_{ij}=\sum_{sk}\tilde R_{ikjs}\tilde g^{sk}=\sum_{sk}R_{ikjs}g^{sk},\]
+we find that $\tilde R_{ij}=R_{ij}$. Finally, using the formula for
+scalar curvature,
+\[\tilde S=\frac{1}{n(n-1)}\sum \tilde R_{ik}\tilde g^{ik},\]
+and by the result just proved about $\tilde R_{ik}$, we find that
+$\tilde S=r^{-2} S$.
+
+\subsection*{Problem 4}
+Recall that in local coordinates, we can write
+\begin{align*}
+    \nabla_{X_i}X_j &= \Gamma_{ij}^kX_k\\
+    \nabla_{X_i}dx^j &= -\Gamma_{ik}^jdx^k.
+\end{align*}
+Hence, applying the product rule, we find that
+\begin{align*}
+    \nabla_{X_k}T &= \nabla_{X_k}\left( T^{i_1\cdots i_r}_{j_1\cdots j_s} X_{i_1}\otimes\cdots\otimes X_{i_r}\otimes dx^{j_1}\otimes\cdots\otimes dx^{j_s}\right)\\
+    &= X_k(T^{i_1\cdots i_r}_{j_1\cdots j_s}) X_{i_1}\otimes\cdots\otimes X_{i_r}\otimes dx^{j_1}\otimes\cdots\otimes dx^{j_s}\\
+    &+ \sum_{m\in I}^r\sum_{l=1}^n T^{i_1\cdots i_r}_{j_1\cdots j_s} \Gamma_{ki_m}^lX_{i_1}\otimes\cdots\otimes X_l\otimes \cdots\otimes X_{i_r}\otimes dx^{j_1}\otimes\cdots\otimes dx^{j_s}\\
+    &- \sum_{m\in J}^s\sum_{l=1}^n T^{i_1\cdots i_r}_{j_1\cdots j_s} \Gamma_{kl}^{j_m}X_{i_1}\otimes\cdots\otimes X_{i_r}\otimes dx^{j_1}\otimes\cdots\otimes dx^l\otimes\cdots\otimes dx^{j_s}.
+\end{align*}
+Writing
+\[\nabla_{X_k}T=T_{j_1\cdots j_s,k}^{i_1\cdots i_r}X_{i_1}\otimes\cdots\otimes X_{i_r}\otimes dx^{j_1}\otimes\cdots\otimes dx^{j_s},\]
+we find using the above sum that
+\[T_{j_1\cdots j_s,k}^{i_1\cdots i_r} = X_k(T_{j_1\cdots j_s}^{i_1\cdots i_r})+\sum_{m=1}^r\Gamma_{kl}^{i_m}T_{j_1\cdots j_s}^{i_1\cdots i_{\alpha-1}li_{\alpha+1}\cdots i_r}
+    +\sum_{m=1}^s\Gamma^l_{kj_m}T^{i_1\cdots i_r}_{j_1\cdots j_{m-1}lj_{m+1}\cdots j_s}.\]
+\end{document}

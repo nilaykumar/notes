@@ -1,0 +1,95 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Analysis I: Solutions to PSET 8}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Rudin 4.7}
+
+The arithmetic/geometric mean inequality shows that $f$ is bounded:
+\begin{align*}
+    |f(x,y)| &= \frac{|xy^2|}{x^2+y^4} = \frac{|xy^2|/2}{(x^2+y^4)/2}\\
+    &\leq \frac{|xy^2|/2}{\sqrt{x^2y^4}}=\frac{1}{2}.
+\end{align*}
+However, $f$ is not continuous -- the limit of $f$ along $x=y^2$ at $(0,0)$ is
+1/2, while $f(0,0)=0$.
+The function $g$, on the other hand, is unbounded in every neighborhood of zero.
+This is because for any $(x,y)\in\R^2$, $g\left( x/8,y/2 \right)=2g\left( x,y \right)$
+and if $(x,y)$ is contained in some neighborhood of zero, so is $(x/8,y/2)$.
+Finally, let us show that the restrictions of $f$ and $g$ to any straight line
+in $\R^2$ yields continuous functions. Any line can be written either as $y=c$ or
+$x=my+b$. In the first case, we find that
+\[f(x,c) = \frac{c^2x}{x^2+c^4},\]
+which is the quotient of continuous functions with nonvanishing denominator if $c\neq 0$ and is
+hence continuous. If $c=0$, $f(x,0)$ is identically zero and hence continuous.
+Similarly,
+\[g(x,c) = \frac{c^2x}{x^2+c^6},\]
+is continuous if $c\neq0$ and identically zero if $c=0$, hence continuous.
+Now consider the line $x=my+b$. We compute
+\begin{align*}
+    f(my+b,y) &= \frac{my^3+by^2}{y^4+m^2y^2+2bmy+b^2},
+\end{align*}
+which is continuous if either of $m$ or $b$ is nonzero, and is identically zero
+if $m=b=0$ and hence continuous. Similarly,
+\begin{align*}
+    g(my+b,y) &= \frac{my^3+by^2}{y^6+m^2y^2+2bmy+b^2},
+\end{align*}
+which is continuous by the same argument.
+
+
+
+\subsection*{Rudin 4.8}
+
+The lub property of $\R$ together with the boundedness of $E$ yields
+$\alpha=\sup E$ and $\beta=\inf E$. Uniform continuity of $f$ implies that for any
+$\varepsilon>0$, there exists a $\delta>0$ such that if $|p-q|<\delta$ for
+$p,q\in E$ then $|f(p)-f(q)|<\varepsilon$. Fix $\varepsilon=1$, for example.
+Cover $[\alpha,\beta]$ with finitely many intervals $(x_i,y_i)$ such that
+$|x_i-y_i|<\delta$. From each of these intervals, pick $z_i$ where $f$ is defined
+(if $f$ is not defined on a given interval, we may discard it). Any $p\in E$ falls
+into one of these intervals, and $|f(p)-f(z_i)|<1$ for an appropriate $i$.
+But if we now define
+\[L\equiv\min_i f(z_i)\text{ and } U\equiv\max_i f(z_i),\]
+we find that
+\[-1+L \leq -1+f(z_i)< f(p) < 1+f(z_i)\leq 1+U,\]
+and hence $f$ is bounded.
+
+Without the condition that $E$ is bounded, this is simply not true. Consider,
+for example, $E=\R$ with the uniformly continuous function $f(x)=x:\R\to\R$.
+The image of $f$ is all of $\R$.
+
+\subsection*{Rudin 4.14}
+
+Suppose there is no $x\in I=[0,1]$ such that $f(x)=x$. Then $f(0)>0$ and $f(1)<1$.
+Now define $g:I\to\R$ by $g(x)=f(x)-x$, which is continuous by Rudin 4.9. Clearly
+$g(0)>0$ and $g(1)<0$. Applying the Intermediate Value Theorem, we find that there
+exists a $c\in[0,1]$ such that $g(c)=0$, i.e. $f(c)-c=0$, contradicting the above
+assumption. Thus $f$ must have a fixed point.
+
+\subsection*{Rudin 4.18}
+
+We first show that $f$ is continuous at every irrational $p$, i.e. for any $\varepsilon>0$,
+there exists a $\delta>0$ such that if $|p-q|<\delta$ for $q\in\R$ then
+$|f(p)-f(q)|=|f(q)|<\varepsilon$. If $q$ is irrational, this is automatically true, so it
+suffices to consider $q\in\Q$. Let $N\in\N$ be such that
+$1/N<\varepsilon$. We wish to find a $\delta>0$ such that if $|p-q|<\delta$ then
+$q$ must have denominator greater than or equal to $N$. But there are only finitely
+many rationals in $(p-1,p+1)$ with denominator less than $N$ so there exists $\delta>0$
+such that $(p-\delta,p+\delta)$ has none such rationals, and we are done.
+
+Now we show that $f$ has a simple discontinuity at every rational $p$. First note
+that $\lim_{x\to p}f(x)=0$, because, by the same argument as above, for any $\varepsilon>0$,
+we can find a $\delta>0$ such that $|f(x)|<\varepsilon$ for $|x-p|<\delta$. This implies that
+$f(p-)=f(p+)=0$. On the other hand, since $p\in\Q$, $f(p)\neq 0$, and thus $f$ has a simple
+discontinuity at $p$.
+
+\end{document}

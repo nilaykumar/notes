@@ -1,0 +1,228 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Algebraic Topology I: PSET 7}
+\author{Nilay Kumar\footnote{Collaborated with Matei Ionita.}}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Hatcher 2.2.14}
+
+Suppose $f:S^n\to S^n$ is even. Then, by the universal property of quotients, we find
+that $f$ factors as
+\begin{equation*}
+    \begin{tikzcd}
+        S^n\ar{dr}{q}\ar{rr}{f} && S^n\\
+        &\RP^n\ar[dashed]{ur}{\tilde f}&
+    \end{tikzcd}
+\end{equation*}
+If $n$ is even, the induced map $H_n(\RP^n)\to H^n(S^n)$ is zero, as $H_n(\RP^n)=0$ for
+$n$ even.  If $n$ is odd, we find (via Hatcher Example 2.42) that $q_*:H_n(S^n)\to H_n(\RP^n)$
+is multiplication by 2, and so $f_*:S^n\to S^n$ must have even degree. Recall that we can
+construct a map $f':S^2\to S^2$ of any degree, in particular of even degree $2d$. Composing
+$f'\circ q'\circ q$ where $q':\RP^n\to \RP^n/\RP^{n-1}=S^n$ is the usual quotient,
+we obtain an even map of degree $2d$, as desired.
+
+\subsection*{Hatcher 2.2.23}
+
+The Euler characteristic for $M_g$ is $2-2g$, as found either by computing homologies
+or by noting that the CW cell structure consists of 1 0-cell, 1 2-cell, and $2g$ 1-cells.
+Now, assuming for the moment that if $p:\tilde X\to X$ is an $n$-sheeted covering space
+then $\chi(\tilde X)=n\chi(X)$, we find that if $M_g$ covers $M_h$ then
+\begin{align*}
+    2g-2 &= n(2h-2)\\
+    g &= hn-n+1\\
+    &= n(h-1)+1
+\end{align*}
+for some $n$. Hence it suffices to prove the above fact about coverings. In particular,
+if we can show that $\tilde X$ has a cell structure with $n$ times the number of $i$-cells
+as $X$ for all $i$, we will be done. We proceed by induction. We can define $n|X^0|$ 0-cells 
+on $\tilde X$ simply by taking preimages of the 0-cells of $X$ by $p$. Now suppose we have
+given $\tilde X$ a CW structure up to the $(i-1)$-skeleton. Any $i$-cell in $X$ is attached via
+a map $\phi_\alpha:D^i_\alpha\to X$. The contractibility of the disk allows us to use the
+lifting criterion (Hatcher Proposition 1.33) to find a lift $\tilde\phi_\alpha:D^i_\alpha\to\tilde X$
+for each starting point of the lift in $\tilde X$. This gives us $n|X^i|$ $i$-cells, as
+Proposition 1.34 in Hatcher shows that two lifts agree everywhere if and only if they agree
+at one point. This completes the induction. Note that we have covered all of $\tilde X$ as we
+have ranged over the preimages of all of $X$.
+
+\subsection*{Hatcher 2.2.28}
+\begin{enumerate}[(a)]
+    \item Let $X$ be the space obtained from a torus $T$ by attaching a M\"obius band $M$
+        via a homeomorphism from the boundary circle of the M\"obius band to the circle $S^1\times \{x_0\}$
+        in the torus. Recall that $H_0(T)=H_2(T)=\Z, H_1(T)=\Z^2$, $H_0(M)=H_1(M)=\Z,$ and $H_2(M)=0$.
+        Taking $T,M\subset X$ to be the appropriately thickened subsets for the Mayer-Vietoris sequence and noting
+        that $T\cap M=S^1$, we find the exact sequence
+        \begin{equation*}
+            \begin{tikzcd}
+                0\ar{r} & \Z\oplus 0\ar{r} & H_2(X)\ar{lld}\\
+                \Z\ar[swap]{r}{(1,0,2)} & \Z^2\oplus \Z\ar{r} & H_1(X)\ar{lld}\\
+                \Z\ar{r} & \Z\oplus\Z\ar{r} & \Z\ar{r} & 0
+            \end{tikzcd}
+        \end{equation*}
+        Note that the map $\Z\to\Z^2\oplus\Z$ has no kernel, and hence $H_2(X)\to\Z$ is the zero map, which
+        implies that the image of $\Z\to H_2(X)$ is surjective. Thus $H_2(X)=\Z$. Next, note that the map
+        $\Z\to\Z\oplus\Z$ is injective as it takes $1\mapsto (1,-1)$, and hence $H_1(X)=\img(\Z^2\oplus\Z\to H_1(X))
+        =\Z\oplus\Z_2$. Finally, since $X$ is path-connected, $H_0(X)=\Z$.
+    \item Similar to part (a), using the fact that $H_0(\RP^2)=H_1(\RP^2)=\Z$ and $H_2(\RP^2)=0$, we obtain
+        the exact sequence
+        \begin{equation*}
+            \begin{tikzcd}
+                0\ar{r} & H_2(X)\ar{r} & \Z\ar{r}{(1,2)} & \Z_2\oplus \Z\ar{r} & H_1(X)\ar{r} & \Z\ar{r} & \Z^2
+            \end{tikzcd}
+        \end{equation*}
+        Since $\Z\to\Z_2\oplus\Z$ is injective, we find that $H_2(X)=0$. Moreover, the map
+        $\Z\to\Z^2$ is injective and so $H_1(X)=\Z_2\oplus\Z/\ker(\Z\to\Z_2\oplus\Z)=\Z_4$.
+        Finally, $H_0(X)=\Z$ by path-connectedness.
+\end{enumerate}
+
+\subsection*{Hatcher 2.2.30}
+\begin{enumerate}[(a)]
+    \item[(b)] If $S^2\to S^2$ is a map of degree 2, we obtain the long exact sequence
+        \begin{equation*}
+            \begin{tikzcd}
+                \;&0\ar{r} & H_3(T_f)\ar{dll}\\
+                \Z\ar[swap]{r}{-1} & \Z\ar{r} & H_2(T_f)\ar{dll}\\
+                0\ar{r} & 0\ar{r} & H_1(T_f)\ar{dll}\\
+                \Z\ar[swap]{r}{0} & \Z\ar{r} & H_0(T_f)\ar{r} & 0.
+            \end{tikzcd}
+        \end{equation*}
+        Clearly we have $H_0(T_f)=\Z,H_1(T_f)=0$. Moreover, exactness at the second $\Z$ yields
+        $\ker\left( \Z\to H_2(T_f) \right)=\Z$ and hence $H_2(T_f)=0.$ Similarly $H_3(T_f)=0$.
+    \item[(d)] If $S^1\times S^1\to S^1\times S^1$ reflects each factor of $S^1$, we obtain the
+        long exact sequence
+        \begin{equation*}
+            \begin{tikzcd}
+                \;&0\ar{r} & H_3(T_f)\ar{dll}\\
+                \Z\ar[swap]{r}{0} & \Z\ar{r} & H_2(T_f)\ar{dll}\\
+                \Z\oplus\Z\ar[swap]{r}{(2a,2b)} & \Z\oplus\Z\ar{r} & H_1(T_f)\ar{dll}\\
+                \Z\ar[swap]{r}{0} & \Z\ar{r} & H_0(T_f)\ar{r} & 0.
+            \end{tikzcd}
+        \end{equation*}
+        Clearly we have $H_0(T_f)=\Z$. Now by the first isomorphism theorem the image of $\Z\oplus\Z\to H_1(T_f)$
+        is isomorphic to $\Z_2\oplus\Z$. Hence we obtain a short exact sequence
+        \begin{equation*}
+            \begin{tikzcd}
+                0\ar{r} & \Z_2\oplus\Z_2\ar{r} & H_1(T_f)\ar{r} & \Z\ar{r} & 0.
+            \end{tikzcd}
+        \end{equation*}
+        There is only one such $H_1(T_f)$, namely the direct sum $\Z_2\oplus\Z_2\oplus\Z$, as
+        the group $\Ext^1_\Z(\Z,\Z_2\oplus\Z_2)$ is in one to one correspondence with isomorphism
+        classes of such extensions. In this case, since the first argument is $\Z$, the Ext group
+        vanishes. Thus $H_1(T_f)=\Z\oplus\Z_2\oplus\Z_2$. The first map $\Z\to\Z$ is $1-1=0$
+        because reflecting both components yields the identity on the 2-simplex. Then $H_2(T_f)=H_3(T_f)=\Z$.
+    \item[(e)] If $S^1\times S^1\to S^1\times S^1$ swaps the two factors of $S^1$ and
+        then reflects one, we obtain the long exact sequence
+        \begin{equation*}
+            \begin{tikzcd}
+                \;&0\ar{r} & H_3(T_f)\ar{dll}\\
+                \Z\ar[swap]{r}{0} & \Z\ar{r} & H_2(T_f)\ar{dll}\\
+                \Z\oplus\Z\ar[swap]{r}{(a-b,a+b)} & \Z\oplus\Z\ar{r} & H_1(T_f)\ar{dll}\\
+                \Z\ar[swap]{r}{0} & \Z\ar{r} & H_0(T_f)\ar{r} & 0.
+            \end{tikzcd}
+        \end{equation*}
+        Clearly $H_0(T_f)=H_2(T_f)=H_3(T_f)=\Z$, by similar reasons to the previous part.
+        By the first isomorphism theorem we find that the image of $\Z\oplus\Z\to H_1(T_f)$
+        is isomorphic to $\Z_2$, and we obtain the short exact sequence
+        \begin{equation*}
+            \begin{tikzcd}
+                0\ar{r} & \Z_2\ar{r} & H_1(T_f)\ar{r} & \Z\ar{r} & 0,
+            \end{tikzcd}
+        \end{equation*}
+        whose unique solution is $H_1(T_f)=\Z\oplus\Z_2$, as before.
+\end{enumerate}
+
+\subsection*{Hatcher 2.C.2}
+
+Let $f:S^n\to S^n$ with degree $d$. Recall that the antipodal map is composed of $n+1$
+reflections, and hence has degree $(-1)^{n+1}$. It suffices to show that the Lefshetz
+number $\tau(f)\neq0$ when $d\neq(-1)^{n+1}$. The homology groups of the sphere zero
+except for $H_0(S^n)=\Z$ and $H_n(S^n)=\Z$, and so we find that
+\begin{align*}
+    \tau(f) &= \tr\left( f_*:H_0(S^n)\to H_0(S^n) \right)+\tr\left( f_*:H_n(S^n)\to H_n(S^n)\right)\\
+    &= 1 + (-1)^nd
+\end{align*}
+But clearly if $\tau(f)=0$ then $d=(-1)^{n+1}$.
+
+\subsection*{Hatcher 2.C.4}
+
+\subsection*{Hatcher 2.C.7}
+
+\subsection*{Hatcher 3.A.2}
+
+The short exact sequence
+\begin{equation*}
+    \begin{tikzcd}
+        0\ar{r} & \Z\ar{r} & \Q\ar{r} & \Q/\Z\ar{r} & 0
+    \end{tikzcd}
+\end{equation*}
+induces a long exact sequence
+\begin{equation*}
+    \begin{tikzcd}
+        0\ar{r}&\Tor(A,\Z)\ar{r} & \Tor(A,\Q)\ar{r} & \Tor(A,\Q/\Z)\ar{lld}\\
+        & A\ar{r} & A\otimes\Q\ar{r} & A\otimes\Q/\Z\ar{r} & 0.
+    \end{tikzcd}
+\end{equation*}
+Since $\Z$ and $\Q$ are torsion free, we find that $\Tor(A,\Z)=\Tor(A,\Q)=0$.
+Furthermore, since the map $A\to A\otimes\Q$ is induced by the inclusion $\Z\to\Q$,
+any element of finite order in $A$ is taken to zero under the map $A\to A\otimes\Q$.
+Indeed, this is precisely the kernel of $A\to A\otimes\Q$ and hence exactness at $A$ 
+implies that the image of the injection $\Tor(A,\Q/\Z)\to A$ is the subgroup of
+torsion elements in $A$, as desired.
+
+Moreover, if $\Tor(A,B)=0$ for all $B$, choosing $B=\Q/\Z$ requires that $A$ be torsionfree.
+The converse follows from Hatcher Proposition 3A.5.
+
+\subsection*{Hatcher 3.A.3}
+
+We assume that $X$ has finitely generated homology.
+Suppose $\tilde H^n(X;\Q)=\tilde H^n(X,\Z_p)=0$ for all $n$ and all primes $p$. The
+universal coefficient theorem for cohomology yields splittings
+\begin{align*}
+    \tilde H^n(X;\Q) &= \Hom(\tilde H_n(X),\Q)\oplus \Ext(H_{n-1}(X),\Q)\\
+    \tilde H^n(X;\Z_p) &= \Hom(\tilde H_n(X),\Z_p)\oplus \Ext(H_{n-1}(X),\Z_p),
+\end{align*}
+and hence each of the above groups must be zero. The short exact sequence
+\begin{equation*}
+    \begin{tikzcd}
+        0\ar{r} & \Z\ar{r} & \Q\ar{r} & \Q/\Z\ar{r} & 0
+    \end{tikzcd}
+\end{equation*}
+induces a long exact sequence
+\begin{equation*}
+    \begin{tikzcd}
+        0\ar{r} & \Hom(\tilde H_n(X),\Z)\ar{r} & 0\ar{r} & \Hom(\tilde H_n(X),\Q/\Z)\ar{dll}\\
+        &\Ext(H_n(X),\Z)\ar{r} & 0\ar{r} & \Ext(H_n(X),\Q/\Z)\ar{r} & 0.
+    \end{tikzcd}
+\end{equation*}
+Since $\Hom(\tilde H_n(X),\Z)=0$, $\tilde H_n(X)$ must be torsion. On the other hand we know that
+$\Hom(\tilde H_n(X), \Z_p)$ for all $p$ and hence $\tilde H_n(X)$ must be zero.
+
+\subsection*{Hatcher 3.A.6}
+
+Suppose for now that $B$ is finitely generated. Then $\Tor(A,B)=\Tor(A,C)$ where $C$ is the torsion
+subgroup of $B$, so we may assume that $B$ is torsion. We can compute $\Tor(A,B)$ by finding
+a free resolution
+\begin{equation*}
+    \begin{tikzcd}
+        0\ar{r} & F\ar{r} & G\ar{r} & A\ar{r} & 0,
+    \end{tikzcd}
+\end{equation*}
+and computing $\ker\left(F\otimes B\to G\otimes B\right)$. For any element $x=\sum f_i\otimes b_i$ in
+the kernel, $f_i\otimes b_i$ has finite order since $B$ is torsion, and hence so does $x$. Since
+$\Tor(A,B)$ is precisely this kernel, we find that $\Tor(A,B)$ is torsion.
+
+Now suppose $B$ is not necessarily finitely generated. Nevertheless, we may write it as the direct
+limit of its finitely generated submodules, and hence 
+\[\Tor(A,B)=\Tor(A,\varinjlim B_i)=\varinjlim\Tor(A,B_i),\]
+which is torsion because each $\Tor(A,B_i)$ is, by the above argument.
+
+\end{document}

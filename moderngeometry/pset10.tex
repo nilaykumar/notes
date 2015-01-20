@@ -1,0 +1,128 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Modern Geometry I: PSET 10}
+\author{Nilay Kumar\footnote{Collaborated with Matei Ionita.}}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 1}
+
+Recall that we can find a neighborhood $U\ni p$ such that the exponential
+$\exp_p$ is a diffeomorphism from a neighorhood of 0 in $T_pM$ to $U$.
+Let $\{e_1,\ldots,e_n\}$ be an orthonormal basis of $T_pM$. Define vector
+fields $E_i(p)$ by assigning to the point $q\in U$ the value of the parallel
+transport of $e_i$ along the unique geodesic from $p$ to $q$. It is clear
+that $E_i|_q$ yields an orthonomal basis for $T_qM$ since parallel transport
+preserves inner products. Now it suffices to show that $\nabla_{E_i}E_j=0$.
+Indeed, since $E_i$ are defined as parallel transports, we find that
+\[0=\frac{DE_i}{dt}=\nabla_{d\gamma/dt}E_i(q).\]
+In particular, at $t=0$, $d\gamma/dt=e_j$ and hence we find that
+\[\nabla_{E_j}E_i(p)=0.\]
+
+\subsection*{Problem 2}
+
+Recall that we can find a neighborhood $U\ni p$ such that the exponential
+$\exp_p$ is a diffeomorphism from a neighborhood of 0 in $T_pM$ to $U$. If
+we fix an orthonormal basis $\{e_1,\ldots,e_n\}$ for $T_pM$, we obtain via
+this diffeomorphism coordinates for $U$ by taking 
+\[u_i(q) = \langle (\exp_p)^{-1} q, e_i\rangle\]
+for $q\in U$. Denote by $\phi$ the function $U\to \R^n$ taking $q\in U$ to
+$(u_1(q),\ldots,u_n(q))$. Next, note that the coordinate vector fields are
+computed, for any $f$ smooth near $p$
+\begin{align*}
+    \frac{\partial f}{\partial u_i}\bigg|_p &= \frac{\partial \left(f\circ\phi^{-1}\right)}{\partial u_i}\bigg|_p\\
+    &= \frac{d}{dt}\bigg|_{t=0}\left( f\circ \phi^{-1} \right)\left( 0,\ldots,t,\ldots,0 \right)\\
+    &= \frac{d}{dt}\bigg|_{t=0}\left( f\circ \gamma\right)(1,p,te_1)\\
+    &= \frac{d}{dt}\bigg|_{t=0}\left( f\circ \gamma \right)(t,p,e_1)\\
+    &= e_1(f),
+\end{align*}
+where $\gamma$ is the unique geodesic, so we conclude that
+\[\frac{\partial}{\partial u_i}\bigg|_{p}=e_i.\]
+This immediately demonstrates that
+\[g_{ij}\bigg|_p=g\left(\frac{\partial}{\partial u_i},\frac{\partial}{\partial u_j}\right)\bigg|_p=\delta_{ij}.\]
+
+To compute the Christoffel symbols we note that for any $q\in U$, we 
+obtain a vector $v=\phi(q)=(u_1(q),\ldots,u_n(q))\in T_pM$. In other words,
+$\gamma(t,p,v)=\gamma(1,p,tv)=(tu_1(q),\ldots,tu_n(q))$. Now, for
+$\gamma(\cdot, p, v)$ to be a geodesic, the geodesic equation yields
+\[\sum_{ij}\Gamma_{ij}^k(p)u_i(p)u_j(p)=0\]
+for all $k$, and hence by symmetry, $\Gamma_{ij}^k(p)=0$.
+
+\subsection*{Problem 3}
+\begin{enumerate}[(a)]
+    \item The symmetry of the Levi-Civita connection gives
+        \[\nabla_XY-\nabla_YX=[X,Y].\]
+        But recall from the previous problem set that for a bi-invariant
+        metric on a Lie group $G$, we have that $\nabla_XX=0$ for any
+        left-invariant vector field $X$. Then
+        \begin{align*}
+            0&=\nabla_{X+Y}(X+Y)\\
+            &= \nabla_{X+Y}X+\nabla_{X+Y}Y\\
+            &= \nabla_YX+\nabla_XY,
+        \end{align*}
+        and hence we find that
+        \[\nabla_XY=\frac{1}{2}[X,Y].\]
+    \item Now we compute
+        \begin{align*}
+            R(X,Y)Z &= \nabla_Y\nabla_XZ-\nabla_X\nabla_YZ+\nabla_{[X,Y]}Z\\
+            &= \frac{1}{4}\left[ Y, [X,Z] \right] - \frac{1}{4}\left[ X, [Y,Z] \right]+ \frac{1}{2}\left[ [X,Y],Z \right]\\
+            &= -\frac{1}{4}\left[ Y, [Z,Y] \right] - \frac{1}{4}\left[ X, [Y,Z] \right]- \frac{1}{2}\left[ Z,[X,Y] \right]\\
+            &= \frac{1}{4}\left[ Z,[X,Y] \right] - \frac{1}{2}\left[ Z,[X,Y] \right]\\
+            &= \frac{1}{4}\left[ [X,Y],Z \right],
+        \end{align*}
+        where we have used the Jacobi identity.
+    \item Finally, let $X$ and $Y$ be orthonormal and $\sigma$ be the plane spanned by them.
+        We compute the sectional curvature
+        \begin{align*}
+            K(\sigma) &= \langle R(X,Y)X,Y\rangle\\
+            &= \frac{1}{4}\langle \left[ [X,Y],X \right],Y\rangle\\
+            &=\frac{1}{4}\langle [X,Y],[X,Y]\rangle\\
+            &= \frac{1}{4}|[X,Y]|^2,
+        \end{align*}
+        where we have used the fact that on $G$ for a bi-invariant metric,
+        \[\langle [U,X],V\rangle = -\langle U,[V,X]\rangle\]
+        for $X,U,V$ left-invariant.
+\end{enumerate}
+
+\subsection*{Problem 4}
+We computed the Christoffel symbols for $\mathcal{H}$ on a previous problem
+set as
+\begin{align*}
+    \Gamma_{11}^1 &= 0\\
+    \Gamma_{11}^2 &= \frac{1}{y_2}\\
+    \Gamma_{22}^1 &= 0\\
+    \Gamma_{22}^2 &= -\frac{1}{y_2}\\
+    \Gamma_{12}^1 = \Gamma_{21}^1 &= -\frac{1}{y_2}\\
+    \Gamma_{12}^2 =\Gamma_{21}^2 &= 0.
+\end{align*}
+To compute the sectional curvature we compute
+\begin{align*}
+    K\left(\frac{\partial}{\partial x},\frac{\partial}{\partial y}\right) &= \frac{R_{1212}}{g_{11}g_{22}-g_{12}^2}.
+\end{align*}
+Recall that
+\begin{align*}
+    R_{1212} &= {R_{121}}^1g_{12}+{R_{121}}^2g_{22}\\
+    &= {R_{121}}^2/y^2
+\end{align*}
+and
+\begin{align*}
+    {R_{121}}^2 &= \Gamma_{11}^2\Gamma_{22}^2-\Gamma_{21}^1\Gamma_{11}^2+\frac{\partial}{\partial y}\Gamma_{11}^2\\
+    &= -\frac{1}{y^2}.
+\end{align*}
+The sectional curvature now becomes
+\begin{align*}
+    K &= \frac{-1/y^4}{1/y^4-0}\\
+    &= -1.
+\end{align*}
+
+
+\end{document}

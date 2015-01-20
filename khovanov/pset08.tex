@@ -1,0 +1,205 @@
+\documentclass{../mathnotes}
+
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+\newgeometry{margin=1.75in}
+
+\title{Algebraic Topology I: PSET 8}
+\author{Nilay Kumar\footnote{Collaborated with Matei Ionita.}}
+\date{Last updated: \today}
+
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Hatcher 3.1.3}
+The following constitutes a free resolution of $\Z_2$ as a $\Z_4$-module:
+\begin{equation*}
+    \begin{tikzcd}
+        \cdots\ar{r} & \Z_4\ar{r}{2} & \Z_4\ar{r}{2} & \Z_4\ar{r}{1} & \Z_2\ar{r} & 0.
+    \end{tikzcd}
+\end{equation*}
+Applying $\Hom_{\Z_4}(-,\Z_2)$ to the resolution, we obtain
+\begin{equation*}
+    \begin{tikzcd}
+        \Hom(\Z_4,\Z_2)\ar{r}=\Z_2 & \Hom(\Z_4,\Z_2)=\Z_2\ar{r} & \cdots
+    \end{tikzcd}
+\end{equation*}
+where the arrows denote composition by multiplcation by 2. Taking cohomology,
+we find that $\Ext^n_{\Z_4}(\Z_2,\Z_2)=\Z_2$.
+
+\subsection*{Hatcher 3.1.4}
+Suppose we define $h_n(X;G)$ as the homology groups of the chain complex
+\begin{equation*}
+    \begin{tikzcd}
+        \cdots\ar{r} & \Hom(G,C_n(X))\ar{r} & \Hom(G,C_{n-1}(X))\ar{r} & \cdots
+    \end{tikzcd}
+\end{equation*}
+For $G=\Z$, we obtain the usual chain complex, as $\Hom(\Z,A)=A$ for any $A$.
+On the other hand, for $G=\Z$, the chain complex is identically zero, as $C_n(X)$
+is free for every $n$ and there are no morphisms from torsion groups into free groups.
+Finally, for $G=\Q$, if a morphism $\Q\to C_n(X)$ takes 1 to some ordered pair whose
+components must be divisible by every integer, due to the presence of $1/n\in\Q$.
+This is clearly impossible, and thus the resulting chain complex is identically
+zero.
+
+\subsection*{Hatcher 3.1.5}
+\begin{enumerate}[(a)]
+    \item If $f$ is a path $I\to X$, denote by by $f^\Delta$ the corresponding singular cycle
+        in $C_1(X;G)$. If $\phi\in C^1(X;G)$ is a cocycle, we wish to show that
+        \[\phi\left( (f\cdot g)^\Delta \right)=\phi(f^\Delta)+\phi(g^\Delta).\]
+        Since $\phi$ is a cocycle, we know that
+        \[0=d\phi(\sigma)=\phi(\partial\sigma)\]
+        for any 2-chain $\sigma$. Hence it suffices to show that there exists
+        a 2-chain $\sigma$ such that
+        \[\partial\sigma=f^\Delta+g^\Delta-(f\cdot g)^\Delta.\]
+        Hence one takes $\sigma:\Delta^2\to X$ continuous such that the boundaries
+        of the $\Delta^2$ traverse $f$, $g$, and then $f\cdot g$, which completes
+        the proof.
+    \item Let $f$ be any path and $c$ be the constant path at a point. Then, applying
+        the previous part of the problem to $f$ and $a$ shows that $\phi$ takes the
+        value 0 on constant paths.
+    \item Denote by $h:I\times I\to X$ from $f$ to $g$. The homotopy yields the singular 2-simplices
+        $\sigma=h|_{[(0,0),(1,0),(1,1)]}$ and $\sigma'=h|_{[(0,0),(1,0),(1,1)]}$. It
+        follows then that
+        \begin{align*}
+            0&=d\phi(\sigma+\sigma')=\phi(\partial\sigma+\partial\sigma')=\phi(f)-\phi(g).
+        \end{align*}
+    \item If $\phi$ is a coboundary, we can write $\phi=d\psi$ for some 1-cochain $\psi$ and
+        \[\phi(f)=d\psi(f)=\psi(\partial f)=\psi\left( f(1)-f(0) \right),\]
+        as desired.
+
+        Conversely, suppose $\phi$ depends only on the endpoints of $f$, for any path $f$.
+        Fix basepoints $x$ in each path-component of $X$, and for any $y$ in a given
+        path-component, define $\psi(y)=\phi(f)$ for a path $f$ from $x$ to $y$. This
+        is well-defined, due to the hypothesis on $\phi$. We claim that $\phi=d\psi$.
+        Indeed, if $g\in C_1(X;G)$ is a path from $y$ to $y'$, in a path-connected component,
+        and $f,f'$ are paths from $x$ to $y$ and $x$ to $y'$, we find that
+        \[d\psi(g)=\psi(\partial g)=\psi(y')-\psi(y)=\phi(f')-\phi(f).\]
+        But now $\phi(\bar f)=-\phi(f)$, and so
+        \[d\psi(g)=\phi(f')-\phi(f)=\phi(\bar f)+\phi(f')=\phi(\bar f\cdot f')=\phi(g),\]
+        and hence $\phi=d\psi$ is a coboundary.
+\end{enumerate}
+
+\subsection*{Hatcher 3.1.6b}
+Consider the usual simplicial structure for $\RP^2$ (Hatcher p. 102) consisting
+of 2 0-simplices $v,w$, 3 1-simplices $a,b,c$, and 2 2-simplices $U,L$. We obtain the chain
+complex
+\begin{equation*}
+    \begin{tikzcd}
+        0\ar{r} & \Z^2\ar{r} & \Z^3\ar{r} & \Z^2\ar{r} & 0
+    \end{tikzcd}
+\end{equation*}
+where $\partial_1a=\partial_1b=w-v, \partial_1c=0$, $\partial_2U=-a+b+c,\partial_2L=a-b+c$.
+The homology is given $H_0(\RP^2)=\Z, H_1(\RP^2)=\Z_2, H_2(\RP^2)=0$. The associated
+cochain complex is
+\begin{equation*}
+    \begin{tikzcd}
+        0 & \Z^2\ar[swap]{l}{\delta_2} & \Z^3\ar[swap]{l}{\delta_1} & \Z^2\ar[swap]{l}{\delta_0} & 0\ar{l}.
+    \end{tikzcd}
+\end{equation*}
+By definition, $H^0(\RP^2)=\ker\delta_0=\ker\partial_1^*$. Note that $\partial_1^*\nu$ is a morphism that maps
+$a\mapsto -1,b\mapsto -1,c\mapsto 0$ and $\partial_1^*\omega$ is a morphism that maps $a\mapsto1,b\mapsto1,c\mapsto0$
+and hence $H^0(\RP^2)=\langle \nu+\omega\rangle=\Z$. Next, $H^1(\RP^2)=\ker\delta_1/\text{im }\delta_0=\ker\delta_1/\Z$.
+Note that $\partial_2^*\alpha$ is a morphism that maps $U\mapsto -1,L\mapsto 1$, $\partial_2^*\beta$ is a morphism
+that maps $U\mapsto 1,L\mapsto -1$, and $\partial_2^*\gamma$ is a morphism that maps $U\mapsto 1,L\mapsto 1$. Thus
+$H^1(\RP^2)=\Z/\langle\alpha+\beta\rangle=0$. Finally, $H^2(\RP^2)=\langle\mu,\lambda\rangle/\text{im }\delta_1$.
+By above, we find that $H^2(\RP^2)=\langle\mu,\lambda\rangle/\langle\mu-\lambda,\mu+\lambda\rangle=
+\langle \mu-\lambda,\lambda\rangle/\langle\mu-\lambda,\mu+\lambda\rangle=\Z_2$.
+
+Now consider the case of $\Z_2$ coefficients. We obtain the chain complex
+\begin{equation*}
+    \begin{tikzcd}
+        0\ar{r} & \Z_2^2\ar{r} & \Z_2^3\ar{r} & \Z_2^2\ar{r} & 0
+    \end{tikzcd}
+\end{equation*}
+where $\partial_1a=\partial_1b=v+w,\partial_1c=0$ and $\partial_2U=\partial_2L=a+b+c$. The homology is easily
+found $H_0(\RP^2;\Z_2)=H_1(\RP^2;\Z_2)=H_2(\RP^2;\Z_2)=\Z_2$. The associated cochain complex is
+\begin{equation*}
+    \begin{tikzcd}
+        0 & \Z_2^2\ar[swap]{l}{\delta_2} & \Z_2^3\ar[swap]{l}{\delta_1} & \Z_2^2\ar[swap]{l}{\delta_0} & 0\ar{l}.
+    \end{tikzcd}
+\end{equation*}
+By definition, $H^0(\RP^2;\Z_2)=\ker\partial_1^*$. The morphisms $\partial_1^*\nu=\partial_1^*\omega$ map
+$a\mapsto 1,b\mapsto 1,c\mapsto 0$ and thus $H^0(\RP^2;\Z_2)=\langle\nu+\omega\rangle=\Z_2$. Next,
+$H^1(\RP^2;\Z_2)=\ker\delta_1/\text{im }\delta_0=\ker\delta_1/\Z_2$. Since $\delta_1\alpha=\delta_1\beta=\delta_1\gamma$
+take $U\mapsto 1,L\mapsto 1$, $\ker\delta_1=\langle\alpha+\beta,\beta+\gamma\rangle=\Z_2^2$, and hence
+$H^1(\RP^2;\Z_2)=\Z_2$. Finally, $H^2(\RP^2;\Z_2)=\ker\delta_2/\text{im }\delta_1=\Z_2^2/\Z_2=\Z_2$.
+
+Consider the usual simplicial structure for the Klein bottle $K$ (Hatcher p.~ 102) consisting
+of 1 0-simplex, 3 1-simplices, and 2 2-simplices. We obtain the chain complex
+\begin{equation*}
+    \begin{tikzcd}
+        0\ar{r} & \Z^2\ar{r} & \Z^3\ar{r} & \Z\ar{r} & 0
+    \end{tikzcd}
+\end{equation*}
+where $\partial_1=0,\partial_2U=a+b-c,\partial_2L=-a+b+c$. Clearly $H^0(K)=\Z$. Next, $H^1(K)=\ker\delta_1$ and since
+$\delta_1\alpha$ maps $U\mapsto 1,L\mapsto -1$, $\delta_1\beta$ maps $U\mapsto 1,L\mapsto 1$, and $\delta_1\gamma$ maps
+$\mapsto -1,L\mapsto 1$, we find that $H^1(K)=\langle \alpha+\gamma\rangle=\Z$. Finally, $H^2(K)=\ker\delta_2/\text{im }\delta_1=\Z^2/\Z^2=0$.
+
+Now consider the case of $\Z_2$ coefficients. We obtain the chain complex
+\begin{equation*}
+    \begin{tikzcd}
+        0\ar{r} & \Z_2^2\ar{r} & \Z_2^3\ar{r} & \Z\ar{r} & 0.
+    \end{tikzcd}
+\end{equation*}
+The associated cochain complex is given
+\begin{equation*}
+    \begin{tikzcd}
+        0 & \Z_2^2\ar[swap]{l}{\delta_2} & \Z_2^3\ar[swap]{l}{\delta_1} & \Z_2\ar[swap]{l}{\delta_0} & 0\ar{l}.
+    \end{tikzcd}
+\end{equation*}
+Again, $H^0(K;\Z_2)=\Z_2$, but now $H^1(K;\Z_2)=\Z_2^2$ as $\ker\delta_1=\langle\alpha+\beta,\beta+\gamma\rangle$.
+Finally, $H^2(K;\Z_2)=\Z_2$.
+
+
+\subsection*{Hatcher 3.1.7}
+Define the functors $h^n(X)=\Hom(H_n(X),\Z)$. We claim that these functors do not
+define a cohomology theory on the category of CW complexes. Indeed, consider the
+pair $(\RP^2,\RP^1)$. The associated long exact sequence of homology is simply
+\begin{equation*}
+    \begin{tikzcd}
+        0\ar{r} & \Z\ar{r}{\times 2} & \Z\ar{r} & \Z_2\ar{r} & 0
+    \end{tikzcd}
+\end{equation*}
+since $\RP^2/\RP^1=S^2$. Dualizing in our cohomology theory, we obtain
+\begin{equation*}
+    \begin{tikzcd}
+        0\ar{r} & \Z\ar{r}{\circ (\times 2)}\ar{r} & \Z\ar{r} & 0,
+    \end{tikzcd}
+\end{equation*}
+which is clearly not exact.
+
+\subsection*{Hatcher 3.1.8}
+\begin{enumerate}[(a)]
+    \item Consider the pair $(X,A)=(D^n,S^{n-1})$, so $X/A=S^n$. The long exact sequence of cohomology
+        groups for the pair $(X,A)$ has every third term $\tilde H^i(D^n)$ zero since $D^n$ is contractible
+        and the chain and cochain groups are zero. Hence we find that $\tilde H^{i-1}(S^{n-1})\cong \tilde H^i(S^n)$.
+        The result follows by induction as usual.
+        Similarly, using the Mayer-Vietoris sequence for reduced cohomology with $X=S^n$ and $A,B$ the
+        northern and southern hemispheres, we obtain $\tilde H^i(S^{n-1};G)\cong \tilde H^{i+1}(S^n;G)$,
+        as the split term goes to zero by contractibility.
+    \item Let $A$ be a closed subspace of $X$ that is a deformation retract of some neighborhood $V$.
+        We obtain a commutative diagram
+        \begin{equation*}
+            \begin{tikzcd}
+                H^n(X,A;G) & H^n(X,V;G)\ar{l}\ar{r} & H^n(X-A,V-A;G)\\
+                H^n(X/A,A/A;G)\ar{u}{q^*} & H^n(X/A,V/A;G)\ar{l}\ar{u}{q^*}\ar{r} & H_n(X/A-A/A, V/A-A/A;G)\ar{u}{q^*}
+            \end{tikzcd}
+        \end{equation*}
+        Note that in the long exact sequence of the triple $(X,V,A)$, the groups $H^n(V,A;G)$ are zero for all $n$
+        because a deformation retraction of $V$ onto $A$ gives a homotopy equivalence of pairs $(V,A)\cong (A,A)$
+        and $H^n(A,A;G)=0$. Hence the upper left map is an isomorphism. The deformation retraction of $V$ onto $A$
+        induces a deformation retraction of $V/A$ onto $A/A$, and hence the same argument shows that the lower left
+        map is an isomorphism. The remainder of the horizontal maps are isomorphisms via excision for cohomology.
+        Finally, the right-hand vertical map $q^*$ is an isomorphism since $q$ restricts to a homeomorphism on the
+        complement of $A$. It follows by the commutativity of the diagram, now, that $H^n(X,A;G)\cong H^n(X/A,A/A;G)\cong\tilde H^n(X/A;G)$.
+\end{enumerate}
+
+\subsection*{Hatcher 3.1.10}
+
+
+
+\end{document}
