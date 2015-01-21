@@ -47,6 +47,7 @@
 \DeclareMathOperator{\supp}{supp}
 \DeclareMathOperator{\trdeg}{trdeg}
 \DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Specm}{Specm}
 \DeclareMathOperator{\Nm}{Nm}
 \DeclareMathOperator{\hgt}{ht}
 \theoremstyle{plain}
@@ -518,12 +519,12 @@ Henceforth we assume that all algebraic varieties are irreducible over an
 algebraically closed field $k$.
 
 Recall that a variety is a separated ringed space covered by finitely
-many affine varieties. ``Schemes may occasionally be invoked, but mostly
-only for comic relief.''
+many affine varieties.\footnote{Schemes may occasionally be invoked, but mostly
+only for comic relief.}
 
 \begin{defn}
     For $x\in X$, the local ring $\mathcal{O}_{X,x}$ is the ring of 
-    germs of rational functions on $X$ which are regular at $X$.
+    germs of rational functions on $X$ which are regular at $x$.
     In fact, $\mathcal{O}_{X,x}\cong k[U]_{\fr m}$, $U$ any affine neighborhood
     of $x$, $\fr m$ maximal ideal of $x$.
 \end{defn}
@@ -567,6 +568,130 @@ only for comic relief.''
     But if $\fr m=(y)$ then $\dim\fr m/\fr m^2=1$. Hence the concepts of smoothness
     and regular are not equivalent in general for schemes.
 \end{rem}
+
+\begin{defn}
+    A variety $X$ is \textbf{normal at $x$} if $\mathcal{O}_{X,x}$ is integrally closed.
+    We say $X$ is normal if it is normal at every $x\in X$.
+\end{defn}
+
+\begin{prop}
+    If $X$ is affine, $X$ is normal if and only if $\mathcal{O}_X(X)$ is integrally closed.
+\end{prop}
+\begin{proof}
+    $\mathcal{O}_X(X)$ is integrally closed if and only if for all maximals $\fr m\subset\mathcal{O}_X(X)$
+    we have that $\mathcal{O}_X(X)_{\fr m}$ is integrally closed.
+\end{proof}
+
+\begin{thm}
+    Smooth varieties are normal, i.e. regular local rings are integrally closed.
+\end{thm}
+\begin{proof}
+    A sketch of the proof can be found in Shafarevich for algebraically closed fields,
+    which uses completions.
+\end{proof}
+
+On the other hand, the result also follows immediately from the
+following non-trivial theorem.
+
+\begin{thm}[Auslander-Buchsbaum]
+    Regular local rings are UFDs.
+\end{thm}
+
+\begin{exc}
+    We say that a monoid $S\subset\Z^n$ is \textbf{saturated} if for $v\in\Z^n$
+    and $m\in\N$, if $mv\in S$ then $v\in S$. Suppose $S$ is finitely generated.
+    Prove that the toric variety $\Specm k[S]$ is normal if and only if $S$ is
+    saturated.
+\end{exc}
+
+Recall from last semester:
+
+\begin{lem}
+    If $R$ is Noetherian and integrally closed in its fraction field $F$,
+    $E/F$ is a finite separable extension, $\bar R$ is the integral closure
+    of $R$ in $E$, then $\bar R$ is finitely generated as an $R$-module.
+\end{lem}
+\begin{proof}
+    See Eisenbud 13.14.
+\end{proof}
+
+\begin{cor}
+    In the situation of the lemma above, the integral closure is also
+    Noetherian.
+\end{cor}
+\begin{proof}
+    Clearly $\bar R$ is finitely generated as an algebra over $R$, so the
+    result follows from the Hilbert basis theorem.
+\end{proof}
+
+Note that if $R$ is not integrally closed, both the lemma and
+its corollary are false.
+
+\begin{cor}
+    In the situation of the lemma above, if $R$ is finitely generated
+    over $k$, so is $\bar R$.
+\end{cor}
+\begin{proof}
+    $\bar R$ is finitely generated as an algebra over $R$ and thus $k$.
+\end{proof}
+
+It turns out that this second corollary does not require the integrally
+closed hypothesis.
+
+\begin{thm}
+    If $R$ is a domain finitely generated over an infinite field $k$,
+    $F$ is its fraction field, $E/F$ is a finite extension, then $\bar R$
+    is finitely generated as an $R$-module.
+\end{thm}
+\begin{proof}
+    We postpone this proof.
+\end{proof}
+
+\begin{cor}
+    If $R$ is a domain finitely generated over $k$ and $F$ is its fraction
+    field, then the integral closure of $R$ in $F$ is finitely generated over $k$.
+\end{cor}
+\begin{proof}
+    Take $E=F$.
+\end{proof}
+
+\begin{defn}
+    Let $X$ be an affine variety. Its normalization $\hat X$ is the affine
+    variety whose coordinate ring is $\overline{k[X]}$ (the integral
+    closure in $k(X)$.
+\end{defn}
+
+\begin{rem}
+    More generally, for an algebraic set, we can define normalization as the
+    disjoint union of the normalization of irreducible components.
+\end{rem}
+
+Note that there is a canonical inclusion $k[X]\hookrightarrow\overline{k[X]}$,
+which implies that there exists a canonical birational morphism $\pi:\hat X\to X$.
+
+\begin{exc}
+    Let $R$ be a domain with fraction field $F$ and a nonzero element $f\in R$
+    then $\overline{R_f}=\bar R_{f}$. Geometrically, this yields a commutative diagram
+    \begin{equation*}
+        \begin{tikzcd}
+            \hat X\ar{r} & X\\
+            \hat{X_f}\ar{r}\ar[hook]{u} & X_f\ar[hook]{u}
+        \end{tikzcd}
+    \end{equation*}
+    This implies that the normalization of an arbitrary (non-affine) variety
+    is well-defined and there is a canonical morphism from the normalization to
+    the variety.
+\end{exc}
+
+\begin{prop}
+    The normalization morphism $\pi:\hat X\to X$ is surjective and proper.
+\end{prop}
+\begin{proof}
+    It suffices to prove the statement for every open affine subvariety and
+    so we assume that $X$ is affine. Then $\hat X$ is affine as well and the
+    result follows from a statement next time.
+\end{proof}
+
 
 
 \end{document}
